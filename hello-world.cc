@@ -1,3 +1,3 @@
-#include <iostream>
+#include "hello-world.h"
 
-int main() { std::cout << "HELLO WORLD!" << std::endl; }
+std::string GetHelloString() { return "HELLO WORLD!"; }
