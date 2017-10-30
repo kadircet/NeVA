@@ -1,6 +1,11 @@
 stages:
   - build
+  - test
 
 job1:
   stage: build
   script: "bazel build :hello-world"
+
+job2:
+  stage: test
+  script: "bazel test :hello-world-test"
