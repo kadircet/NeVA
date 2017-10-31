@@ -5,6 +5,14 @@ stages:
 job1:
   stage: build
   script: "bazel build :hello-world"
+  
+jobdeneme:
+  stage: build
+  script: "echo iosrunner"
+  only:
+    - /^ios*$/
+  tags:
+    - ios
 
 job2:
   stage: test
