@@ -1,19 +1,21 @@
 stages:
   - build
   - test
-
+  
 job1:
   stage: build
   script: "bazel build :hello-world"
   
-jobdeneme:
-  stage: build
-  script: "echo iosrunner"
-  only:
-    - /^ios*$/
-  tags:
-    - ios
-
 job2:
   stage: test
   script: "bazel test :hello-world-test"
+  
+iostest:
+  stage: test
+  script:
+    - xcodebuild clean -project ios/NeVA/NeVA.xcodeproj -scheme NeVA | xcpretty 
+    - set -o pipefail && xcodebuild test -project ios/NeVA/NeVA.xcodeproj -scheme NeVA -destination 'platform=iOS Simulator,OS=11.1,name=iPhone 8' | xcpretty -s
+  tags:
+    - ios
+  only:
+    - /^ios-.*$/
