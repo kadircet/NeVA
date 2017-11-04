@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NeVA\nMeal Recommender</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="login_app_name">NeVA \n Meal Recommender</string>
+    <string name="login_description">To access all features of the NeVa app, You need to login first.</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_pass">Forgot Password?</string>
+    <string name="register">Register</string>
+</resources>
