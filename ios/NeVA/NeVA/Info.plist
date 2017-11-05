@@ -41,5 +41,28 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <!-- Facebook SDK-->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb169031667015286</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>169031667015286</string>
+    <key>FacebookDisplayName</key>
+    <string>NeVA­-­M­e­a­l­R­e­c­o­m­m­e­nder</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>NeVA wants to access your photo library</string>
 </dict>
 </plist>
