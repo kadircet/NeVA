@@ -19,6 +19,7 @@
 		AC259AFB1FAF392E0094A5F1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC259AF11FAF392E0094A5F1 /* FBSDKLoginKit.framework */; };
 		AC259AFC1FAF392E0094A5F1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC259AF11FAF392E0094A5F1 /* FBSDKLoginKit.framework */; };
 		AC259AFD1FAF392E0094A5F1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC259AF11FAF392E0094A5F1 /* FBSDKLoginKit.framework */; };
+		AC65D4C71FB1233300753B94 /* TempViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC65D4C61FB1233300753B94 /* TempViewController.swift */; };
 		AC8F91791FA9366800D6AB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F91781FA9366800D6AB8F /* AppDelegate.swift */; };
 		AC8F917B1FA9366800D6AB8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F917A1FA9366800D6AB8F /* ViewController.swift */; };
 		AC8F917E1FA9366800D6AB8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8F917C1FA9366800D6AB8F /* Main.storyboard */; };
@@ -27,6 +28,9 @@
 		AC8F91861FA9366800D6AB8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8F91841FA9366800D6AB8F /* LaunchScreen.storyboard */; };
 		AC8F91911FA9366800D6AB8F /* NeVATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F91901FA9366800D6AB8F /* NeVATests.swift */; };
 		AC8F919C1FA9366800D6AB8F /* NeVAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F919B1FA9366800D6AB8F /* NeVAUITests.swift */; };
+		AC9B9C061FB0EB0100507F20 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C051FB0EB0100507F20 /* LoginRegisterViewController.swift */; };
+		AC9B9C081FB0F34900507F20 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C071FB0F34900507F20 /* LoginButton.swift */; };
+		AC9B9C0A1FB104E100507F20 /* LoginRegisterInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C091FB104E100507F20 /* LoginRegisterInputField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,7 @@
 		AC259AEF1FAF392E0094A5F1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../dependencies/ios/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		AC259AF01FAF392E0094A5F1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../dependencies/ios/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		AC259AF11FAF392E0094A5F1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../dependencies/ios/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		AC65D4C61FB1233300753B94 /* TempViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempViewController.swift; sourceTree = "<group>"; };
 		AC8F91751FA9366800D6AB8F /* NeVA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeVA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8F91781FA9366800D6AB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC8F917A1FA9366800D6AB8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +70,9 @@
 		AC8F91971FA9366800D6AB8F /* NeVAUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeVAUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8F919B1FA9366800D6AB8F /* NeVAUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeVAUITests.swift; sourceTree = "<group>"; };
 		AC8F919D1FA9366800D6AB8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC9B9C051FB0EB0100507F20 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
+		AC9B9C071FB0F34900507F20 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		AC9B9C091FB104E100507F20 /* LoginRegisterInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterInputField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +146,9 @@
 		AC8F91771FA9366800D6AB8F /* NeVA */ = {
 			isa = PBXGroup;
 			children = (
+				AC9B9C021FB0EA2200507F20 /* Model */,
+				AC9B9C031FB0EA6300507F20 /* View */,
+				AC9B9C041FB0EA6800507F20 /* Controller */,
 				AC1DD66D1FAF36C9003246E5 /* Frameworks */,
 				AC8F91781FA9366800D6AB8F /* AppDelegate.swift */,
 				AC8F917A1FA9366800D6AB8F /* ViewController.swift */,
@@ -166,6 +177,31 @@
 				AC8F919D1FA9366800D6AB8F /* Info.plist */,
 			);
 			path = NeVAUITests;
+			sourceTree = "<group>";
+		};
+		AC9B9C021FB0EA2200507F20 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AC9B9C031FB0EA6300507F20 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AC9B9C071FB0F34900507F20 /* LoginButton.swift */,
+				AC9B9C091FB104E100507F20 /* LoginRegisterInputField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC9B9C041FB0EA6800507F20 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AC9B9C051FB0EB0100507F20 /* LoginRegisterViewController.swift */,
+				AC65D4C61FB1233300753B94 /* TempViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,9 +338,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC9B9C081FB0F34900507F20 /* LoginButton.swift in Sources */,
 				AC8F917B1FA9366800D6AB8F /* ViewController.swift in Sources */,
+				AC65D4C71FB1233300753B94 /* TempViewController.swift in Sources */,
+				AC9B9C0A1FB104E100507F20 /* LoginRegisterInputField.swift in Sources */,
 				AC8F91791FA9366800D6AB8F /* AppDelegate.swift in Sources */,
 				AC8F91811FA9366800D6AB8F /* NeVA.xcdatamodeld in Sources */,
+				AC9B9C061FB0EB0100507F20 /* LoginRegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
 				ENABLE_BITCODE = NO;
@@ -478,6 +519,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bilemiyorumaltan.NeVA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -487,6 +529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
 				ENABLE_BITCODE = NO;
@@ -495,6 +538,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bilemiyorumaltan.NeVA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
