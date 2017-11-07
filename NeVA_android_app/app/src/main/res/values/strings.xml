@@ -10,5 +10,8 @@
     <string name="register">Register</string>
     <string name="facebook_app_id">169031667015286</string>
     <string name="fb_login_protocol_scheme">fb169031667015286</string>
-
+    <string name="signup">Sign Up</string>
+    <string name="signup_description">To complete the process please provide following info.</string>
+    <string name="email">e-mail</string>
+    <string name="already_member">Already a member? Login.</string>
 </resources>
