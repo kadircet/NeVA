@@ -1,5 +1,6 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -53,7 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onMemberButton(View view){
-
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     public boolean validate() {
