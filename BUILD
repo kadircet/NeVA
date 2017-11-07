@@ -1,3 +1,7 @@
+licenses(["notice"])
+
+package(default_visibility = ["//visibility:public"])
+
 cc_binary(
     name = "hello-world-run",
     srcs = ["hello-world-run.cc"],
@@ -17,4 +21,10 @@ cc_test(
         ":hello-world",
         "@googletest//:gtest_main",
     ],
+)
+
+cc_binary(
+    name = "backend",
+    srcs = ["backend.cc"],
+    deps = ["//protos:backend_proto"],
 )
