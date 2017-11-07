@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     LoginButton facebook_login_button;
     ProgressBar pb;
     TextView registerButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
