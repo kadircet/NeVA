@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -24,6 +26,7 @@ import java.util.regex.Pattern;
 
 
 public class LoginActivity extends AppCompatActivity {
+    public static final String MESSAGE_CLASS = "com.neva.mealrecommender.MESSAGE";
 
     CallbackManager callbackManager;
     EditText username_field;
@@ -31,9 +34,11 @@ public class LoginActivity extends AppCompatActivity {
     Button login_button;
     LoginButton facebook_login_button;
     ProgressBar pb;
+    TextView registerButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
         username_field = findViewById(R.id.username);
         password_field = findViewById(R.id.password);
@@ -41,11 +46,16 @@ public class LoginActivity extends AppCompatActivity {
         login_button = findViewById(R.id.login_button);
         facebook_login_button = findViewById(R.id.facebook_login_button);
         callbackManager = CallbackManager.Factory.create();
-
+        registerButton = findViewById(R.id.register);
         facebook_login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getBaseContext(), "Facebook Login Success" + loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getBaseContext(),LoginResultActivity.class);
+                //TODO: Get username from facebook.
+                intent.putExtra(MESSAGE_CLASS, "Succesfully logged");
+                startActivity(intent);
             }
 
             @Override
@@ -55,18 +65,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onError(FacebookException error) {
-
+                Toast.makeText(getBaseContext(), "Facebook Login Error.", Toast.LENGTH_LONG).show();
             }
         });
-
-        login_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                login();
-            }
-        });
-
-
 
     }
 
@@ -76,7 +77,15 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void login() {
+    public void onRegisterButton(View view){
+        Intent intent = new Intent(getBaseContext(),RegisterActivity.class);
+        startActivity(intent);
+    }
+
+
+
+    //Process login request on login button press
+    public void onLoginButton(View view) {
         Log.d("LoginActivity", "Login pressed!");
 
         EditText username_field = findViewById(R.id.username);
@@ -89,22 +98,26 @@ public class LoginActivity extends AppCompatActivity {
 
         Button login_button = (Button) findViewById(R.id.login_button);
         if (!validate()) {
-            Toast.makeText(getBaseContext(), "Login Failed.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Check your credentials.", Toast.LENGTH_LONG).show();
             login_button.setEnabled(true);
-            //finish();
-        } else {
-            login_button.setEnabled(false);
-
-            pb.setVisibility(View.VISIBLE);
-
-            // SEND REQUEST
-            // GET ANSWER
-            //pb.setVisibility(View.GONE);
+            return;
         }
+        login_button.setEnabled(false);
+
+        pb.setVisibility(View.VISIBLE);
+
+        // SEND REQUEST
+        // GET ANSWER
+        Intent intent = new Intent(this, LoginResultActivity.class);
+        String login_res = "Successfully Logged in as: " + username;
+        intent.putExtra(MESSAGE_CLASS, login_res);
+        pb.setVisibility(View.GONE);
+        startActivity(intent);
     }
 
 
-
+    // Validate username and password data
+    //TODO: ADD INPUT SANITATION
     public boolean validate() {
         String username = username_field.getText().toString();
         String password = password_field.getText().toString();
@@ -129,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
         return val;
     }
 
+    // Check password with RegEx to see if it fits the qualifications
     private static boolean isValidPassword(final String password) {
 
         Pattern pattern;

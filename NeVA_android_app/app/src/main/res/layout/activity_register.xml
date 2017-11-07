@@ -22,27 +22,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/WelcomeText"
+            android:id="@+id/signup_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lanear"
             android:gravity="center"
-            android:text="@string/welcome_text"
+            android:text="@string/signup"
             android:textColor="@android:color/white"
             android:textSize="45sp" />
 
         <TextView
-            android:id="@+id/LoginAppName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lanear"
-            android:gravity="center"
-            android:text="@string/login_app_name"
-            android:textColor="@android:color/white"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/LoginDescription"
+            android:id="@+id/SignupDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -51,7 +41,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/lanear"
             android:gravity="center"
-            android:text="@string/login_description"
+            android:text="@string/signup_description"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
 
@@ -69,6 +59,19 @@
             android:textColorHint="#a2a3a5" />
 
         <EditText
+            android:id="@+id/email"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_text_box"
+            android:gravity="center"
+            android:hint="@string/email"
+            android:inputType="text"
+            android:singleLine="false"
+            android:textColor="@android:color/white"
+            android:textColorHint="#a2a3a5"/>
+
+        <EditText
             android:id="@+id/password"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -82,23 +85,14 @@
 
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/signup_button"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_button"
-            android:onClick="onLoginButton"
-            android:text="@string/login"
+            android:onClick="onSignupButton"
+            android:text="@string/signup"
             android:textColor="#FFFFFF" />
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/facebook_login_button"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="80dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,27 +101,14 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/already_member"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/forgot_pass"
+                android:onClick="onMemberButton"
+                android:text="@string/already_member"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" | "
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onRegisterButton"
-                android:text="@string/register"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>
