@@ -12,3 +12,6 @@ then
 fi
 /var/NeVA/neva_backend >> $LOGFILE &
 echo -n $! > $PIDFILE
+disown %1
+
+exit 0

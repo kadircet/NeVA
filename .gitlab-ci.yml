@@ -14,6 +14,8 @@ test_job:
 deploy_job:
   stage: deploy
   script: "/bin/bash deploy.sh"
+  only:
+    - master
 
 iostest:
   stage: test
