@@ -1,15 +1,20 @@
 stages:
   - build
   - test
+  - deploy
   
-job1:
+build_job:
   stage: build
-  script: "bazel build :hello-world"
+  script: "bazel build :all"
   
-job2:
+test_job:
   stage: test
-  script: "bazel test :hello-world-test"
-  
+  script: "bazel test :all"
+
+deploy_job:
+  stage: deploy
+  script: "/bin/bash deploy.sh"
+
 iostest:
   stage: test
   script:
