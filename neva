@@ -1,40 +1,49 @@
-#!/bin/bash
-#
+#!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          neva
-# Required-Start:    $remote_fs $syslog
-# Required-Stop:     $remote_fs $syslog
-# Should-Start:      $network $time
-# Should-Stop:       $network $time
+# Required-Start:    $remote_fs $syslog $network $local_fs $time
+# Required-Stop:    $remote_fs $syslog $network $local_fs $time
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: Start and stop the NeVA backend server.
 # Description:       Controls the NeVA backend server.
+#   This script will manage NeVA backend server.
 ### END INIT INFO
-#
+
+PIDFILE="/var/run/neva_backend.pid"
+LOGFILE="/var/log/neva_backend.log"
+
+if [ -f /etc/default/rcS ]; then
+  . /etc/default/rcS
+fi
+. /lib/lsb/init-functions
 
 case "${1:-''}" in
   'start')
-    killall neva_backend
-    /var/NeVA/neva_backend >> /var/log/neva_backend.log &
-        ;;
+    /var/NeVA/neva_backend >> $LOGFILE &
+    echo -n $! > $PIDFILE
+    log_daemon_msg "Started server."
+    ;;
 
   'stop')
-    killall neva_backend
-        ;;
+    if [ -f $PIDFILE ];
+    then
+      pid=$(cat $PIDFILE)
+      kill -0 $pid && kill -9 $pid && echo "Stopped server."
+    fi
+    ;;
 
   'restart')
-    killall neva_backend
-    /var/NeVA/neva_backend >> /var/log/neva_backend.log &
-        ;;
-
-  'setup')
-    mkdir /var/NeVA
-    touch /var/log/neva_backend.log
-    touch /var/run/neva_backend.pid
-    chown gitlab-runner:gitlab-runner /var/NeVA
-    chown gitlab-runner:gitlab-runner /var/log/neva_backend.log
-    chown gitlab-runner:gitlab-runner /var/run/neva_backend.pid
+    if [ -f $PIDFILE ];
+    then
+      pid=$(cat $PIDFILE)
+      kill -0 $pid && kill -9 $pid && echo "Killed server."
+    fi
+    /var/NeVA/neva_backend >> $LOGFILE &
+    echo -n $! > $PIDFILE
+    log_daemon_msg "Restarted server."
+    ;;
 esac
 
 exit 0
+
