@@ -24,7 +24,7 @@ cc_test(
 )
 
 cc_binary(
-    name = "backend",
+    name = "neva_backend",
     srcs = ["backend.cc"],
     deps = ["//protos:backend_proto"],
 )
