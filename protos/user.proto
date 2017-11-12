@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "protos/util.proto";
+
+package neva.backend;
+
+message User {
+  enum Gender {
+    INVALID = 0;
+    MALE = 1;
+    FEMALE = 2;
+  };
+
+  uint32 user_id = 1;
+  string email = 2;
+  string password = 3;
+  string name = 4;
+  util.Timestamp date_of_birth = 5;
+  Gender gender = 6;
+  float weight = 7;
+
+  // Keeps url to the photo of the user.
+  string photo = 8;
+}
