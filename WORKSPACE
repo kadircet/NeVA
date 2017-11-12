@@ -1,3 +1,16 @@
+http_archive(
+    name = "com_github_gflags_gflags",
+    strip_prefix = "gflags-2.2.1",
+    url = "https://github.com/gflags/gflags/archive/v2.2.1.tar.gz",
+)
+
+new_http_archive(
+    name = "glog",
+    build_file = "glog.BUILD",
+    strip_prefix = "glog-0.3.5",
+    url = "https://github.com/google/glog/archive/v0.3.5.tar.gz",
+)
+
 new_http_archive(
     name = "googletest",
     build_file = "gunit.BUILD",
