@@ -5,17 +5,14 @@
 #include <grpc++/grpc++.h>
 #include "protos/backend.grpc.pb.h"
 
+namespace neva {
+namespace backend {
 namespace {
+
 using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
-
-using backend::Backend;
-using backend::LoginReply;
-using backend::LoginRequest;
-using backend::RegisterReply;
-using backend::RegisterRequest;
 
 class BackendServiceImpl final : public Backend::Service {
   Status Register(ServerContext* context, const RegisterRequest* request,
@@ -42,9 +39,12 @@ void RunServer() {
 
   server->Wait();
 }
+
 }  // namespace
+}  // namespace backend
+}  // namespace neva
 
 int main(int argc, char** argv) {
-  RunServer();
+  neva::backend::RunServer();
   return 0;
 }
