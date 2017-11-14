@@ -68,11 +68,11 @@ fastlane/test_output
 # Created by https://www.gitignore.io/api/carthage
 
 ### Carthage ###
-# Carthage
+Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-Carthage/Checkouts
 
+Carthage/Checkouts
 Carthage/Build
 
 # End of https://www.gitignore.io/api/carthage
