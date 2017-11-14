@@ -115,12 +115,14 @@ public class LoginActivity extends AppCompatActivity {
         // SEND REQUEST
         ManagedChannel mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com",50051).build();
         BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
-        BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder().setEmail("hakantest@test.com").setPassword("somePassword").build();
-        BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
-        String a = loginReply.getToken();
+        BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder().setEmail(username).setPassword(password).build();
+
         // GET ANSWER
+        BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
+        String loginToken = loginReply.getToken();
+
         Intent intent = new Intent(this, LoginResultActivity.class);
-        String login_res = "Successfully Logged in as: " + username + " with grpc token: " + a;
+        String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken;
         intent.putExtra(MESSAGE_CLASS, login_res);
         pb.setVisibility(View.GONE);
         startActivity(intent);
