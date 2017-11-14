@@ -19,6 +19,8 @@ deploy_job:
 
 iostest:
   stage: test
+  before_script:
+    - (cd dependencies/ios/grpc-swift && swift package resolve && swift package update)
   script:
     - xcodebuild clean -project ios/NeVA/NeVA.xcodeproj -scheme NeVA | xcpretty 
     - set -o pipefail && xcodebuild test -project ios/NeVA/NeVA.xcodeproj -scheme NeVA -destination 'platform=iOS Simulator,OS=11.1,name=iPhone 8' | xcpretty -s
