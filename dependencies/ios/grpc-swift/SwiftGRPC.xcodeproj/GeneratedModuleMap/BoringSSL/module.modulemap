@@ -1,0 +1,4 @@
+module BoringSSL {
+    umbrella "/Users/bilaly/Documents/bilal/NeVA/dependencies/ios/grpc-swift/Sources/BoringSSL/include"
+    export *
+}
