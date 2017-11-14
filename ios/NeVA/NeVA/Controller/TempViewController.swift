@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import gRPC
 
 class TempViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
@@ -50,6 +51,18 @@ class TempViewController: UIViewController, FBSDKLoginButtonDelegate {
         view.addSubview(facebookLogoutButton)
         facebookLogoutButton.delegate = self
         facebookLogoutButton.center = view.center
+        
+        //Checking if requests are working
+        let requestMessage = Backend_RegisterRequest()
+        let service = Backend_BackendService.init(address: "0xdeffbeef.com:50051");
+        do {
+            _ = try service.register(requestMessage)
+        } catch(let error){
+            print("ERROROROROR")
+            print(error)
+        }
+        
+
         // Do any additional setup after loading the view.
     }
 
