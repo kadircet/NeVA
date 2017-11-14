@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC3852871FBB07B10085DB27 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852831FBB07B10085DB27 /* FBSDKLoginKit.framework */; };
+		AC3852881FBB07B10085DB27 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852841FBB07B10085DB27 /* Bolts.framework */; };
+		AC3852891FBB07B10085DB27 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852851FBB07B10085DB27 /* FBSDKShareKit.framework */; };
+		AC38528A1FBB07B10085DB27 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852861FBB07B10085DB27 /* FBSDKCoreKit.framework */; };
+		AC38528C1FBB08C70085DB27 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC38528B1FBB08C70085DB27 /* SwiftProtobuf.framework */; };
+		AC3852AE1FBB0AAA0085DB27 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852AD1FBB0AAA0085DB27 /* libz.tbd */; };
+		AC3852B31FBB0AD90085DB27 /* swiftgrpc.log in Resources */ = {isa = PBXBuildFile; fileRef = AC3852AF1FBB0AD90085DB27 /* swiftgrpc.log */; };
+		AC3852B41FBB0AD90085DB27 /* backend.server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3852B01FBB0AD90085DB27 /* backend.server.pb.swift */; };
+		AC3852B51FBB0AD90085DB27 /* backend.client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3852B11FBB0AD90085DB27 /* backend.client.pb.swift */; };
+		AC3852B61FBB0AD90085DB27 /* backend.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3852B21FBB0AD90085DB27 /* backend.pb.swift */; };
+		AC3852B71FBB0DED0085DB27 /* gRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC38529C1FBB0A450085DB27 /* gRPC.framework */; };
+		AC3852B81FBB0DED0085DB27 /* gRPC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC38529C1FBB0A450085DB27 /* gRPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AC3852BB1FBB0DED0085DB27 /* CgRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A01FBB0A450085DB27 /* CgRPC.framework */; };
+		AC3852BC1FBB0DED0085DB27 /* CgRPC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A01FBB0A450085DB27 /* CgRPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AC3852BF1FBB0DED0085DB27 /* BoringSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC38529E1FBB0A450085DB27 /* BoringSSL.framework */; };
+		AC3852C01FBB0DED0085DB27 /* BoringSSL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC38529E1FBB0A450085DB27 /* BoringSSL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AC3852C31FBB0DED0085DB27 /* Czlib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A21FBB0A450085DB27 /* Czlib.framework */; };
+		AC3852C41FBB0DED0085DB27 /* Czlib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A21FBB0A450085DB27 /* Czlib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AC65D4C71FB1233300753B94 /* TempViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC65D4C61FB1233300753B94 /* TempViewController.swift */; };
 		AC8F91791FA9366800D6AB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F91781FA9366800D6AB8F /* AppDelegate.swift */; };
 		AC8F917B1FA9366800D6AB8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F917A1FA9366800D6AB8F /* ViewController.swift */; };
@@ -19,25 +37,107 @@
 		AC9B9C061FB0EB0100507F20 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C051FB0EB0100507F20 /* LoginRegisterViewController.swift */; };
 		AC9B9C081FB0F34900507F20 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C071FB0F34900507F20 /* LoginButton.swift */; };
 		AC9B9C0A1FB104E100507F20 /* LoginRegisterInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C091FB104E100507F20 /* LoginRegisterInputField.swift */; };
-		ACBC4C491FBA67F600E8D61F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBC4C481FBA67E600E8D61F /* libz.tbd */; };
-		ACBC4C4A1FBA67FE00E8D61F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBC4C481FBA67E600E8D61F /* libz.tbd */; };
-		ACBC4C4B1FBA680400E8D61F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBC4C481FBA67E600E8D61F /* libz.tbd */; };
-		ACE030161FBA90B90067A96A /* swiftgrpc.log in Resources */ = {isa = PBXBuildFile; fileRef = ACE030121FBA90B90067A96A /* swiftgrpc.log */; };
-		ACE030171FBA90B90067A96A /* backend.client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE030131FBA90B90067A96A /* backend.client.pb.swift */; };
-		ACE030181FBA90B90067A96A /* backend.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE030141FBA90B90067A96A /* backend.pb.swift */; };
-		ACE030191FBA90B90067A96A /* backend.server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE030151FBA90B90067A96A /* backend.server.pb.swift */; };
-		ACF859231FBA81D40088F996 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF859221FBA81D40088F996 /* SwiftProtobuf.framework */; };
-		ACF859301FBA82450088F996 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF8592C1FBA82450088F996 /* FBSDKLoginKit.framework */; };
-		ACF859311FBA82450088F996 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF8592D1FBA82450088F996 /* Bolts.framework */; };
-		ACF859321FBA82450088F996 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF8592E1FBA82450088F996 /* FBSDKShareKit.framework */; };
-		ACF859331FBA82450088F996 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF8592F1FBA82450088F996 /* FBSDKCoreKit.framework */; };
-		ACF859361FBA85E00088F996 /* BoringSSL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACF859251FBA82310088F996 /* BoringSSL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ACF859381FBA85E00088F996 /* CgRPC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACF859241FBA82310088F996 /* CgRPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ACF8593A1FBA85E00088F996 /* Czlib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACF859261FBA82310088F996 /* Czlib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		ACF8593C1FBA85E00088F996 /* gRPC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ACF859271FBA82310088F996 /* gRPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AC3852991FBB0A450085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SwiftGRPC::gRPCTests::Product";
+			remoteInfo = gRPCTests;
+		};
+		AC38529B1FBB0A450085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SwiftGRPC::gRPC::Product";
+			remoteInfo = gRPC;
+		};
+		AC38529D1FBB0A450085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SwiftGRPC::BoringSSL::Product";
+			remoteInfo = BoringSSL;
+		};
+		AC38529F1FBB0A450085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "SwiftGRPC::CgRPC::Product";
+			remoteInfo = CgRPC;
+		};
+		AC3852A11FBB0A450085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "zlib::Czlib::Product";
+			remoteInfo = Czlib;
+		};
+		AC3852A31FBB0A720085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftGRPC::gRPCTests";
+			remoteInfo = gRPCTests;
+		};
+		AC3852A51FBB0A720085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftGRPC::gRPC";
+			remoteInfo = gRPC;
+		};
+		AC3852A71FBB0A720085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftGRPC::BoringSSL";
+			remoteInfo = BoringSSL;
+		};
+		AC3852A91FBB0A720085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftGRPC::CgRPC";
+			remoteInfo = CgRPC;
+		};
+		AC3852AB1FBB0A720085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "zlib::Czlib";
+			remoteInfo = Czlib;
+		};
+		AC3852B91FBB0DED0085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftGRPC::gRPC";
+			remoteInfo = gRPC;
+		};
+		AC3852BD1FBB0DED0085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftGRPC::CgRPC";
+			remoteInfo = CgRPC;
+		};
+		AC3852C11FBB0DED0085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "SwiftGRPC::BoringSSL";
+			remoteInfo = BoringSSL;
+		};
+		AC3852C51FBB0DED0085DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "zlib::Czlib";
+			remoteInfo = Czlib;
+		};
 		AC8F918D1FA9366800D6AB8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AC8F916D1FA9366800D6AB8F /* Project object */;
@@ -55,16 +155,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AC38274E1FBA6DBF00D818E8 /* Embed Frameworks */ = {
+		AC3852C71FBB0DED0085DB27 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				ACF8593A1FBA85E00088F996 /* Czlib.framework in Embed Frameworks */,
-				ACF859381FBA85E00088F996 /* CgRPC.framework in Embed Frameworks */,
-				ACF8593C1FBA85E00088F996 /* gRPC.framework in Embed Frameworks */,
-				ACF859361FBA85E00088F996 /* BoringSSL.framework in Embed Frameworks */,
+				AC3852C01FBB0DED0085DB27 /* BoringSSL.framework in Embed Frameworks */,
+				AC3852BC1FBB0DED0085DB27 /* CgRPC.framework in Embed Frameworks */,
+				AC3852B81FBB0DED0085DB27 /* gRPC.framework in Embed Frameworks */,
+				AC3852C41FBB0DED0085DB27 /* Czlib.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,6 +172,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC3852831FBB07B10085DB27 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../dependencies/ios/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		AC3852841FBB07B10085DB27 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../dependencies/ios/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
+		AC3852851FBB07B10085DB27 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../dependencies/ios/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		AC3852861FBB07B10085DB27 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../dependencies/ios/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		AC38528B1FBB08C70085DB27 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
+		AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftGRPC.xcodeproj; path = "../../dependencies/ios/grpc-swift/SwiftGRPC.xcodeproj"; sourceTree = "<group>"; };
+		AC3852AD1FBB0AAA0085DB27 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		AC3852AF1FBB0AD90085DB27 /* swiftgrpc.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swiftgrpc.log; sourceTree = "<group>"; };
+		AC3852B01FBB0AD90085DB27 /* backend.server.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.server.pb.swift; sourceTree = "<group>"; };
+		AC3852B11FBB0AD90085DB27 /* backend.client.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.client.pb.swift; sourceTree = "<group>"; };
+		AC3852B21FBB0AD90085DB27 /* backend.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.pb.swift; sourceTree = "<group>"; };
 		AC65D4C61FB1233300753B94 /* TempViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempViewController.swift; sourceTree = "<group>"; };
 		AC8F91751FA9366800D6AB8F /* NeVA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeVA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8F91781FA9366800D6AB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,20 +201,6 @@
 		AC9B9C051FB0EB0100507F20 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		AC9B9C071FB0F34900507F20 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		AC9B9C091FB104E100507F20 /* LoginRegisterInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterInputField.swift; sourceTree = "<group>"; };
-		ACBC4C481FBA67E600E8D61F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		ACE030121FBA90B90067A96A /* swiftgrpc.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swiftgrpc.log; sourceTree = "<group>"; };
-		ACE030131FBA90B90067A96A /* backend.client.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.client.pb.swift; sourceTree = "<group>"; };
-		ACE030141FBA90B90067A96A /* backend.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.pb.swift; sourceTree = "<group>"; };
-		ACE030151FBA90B90067A96A /* backend.server.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.server.pb.swift; sourceTree = "<group>"; };
-		ACF859221FBA81D40088F996 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
-		ACF859241FBA82310088F996 /* CgRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CgRPC.framework; path = "../../dependencies/ios/grpc-swift/Release-iphoneos/CgRPC.framework"; sourceTree = "<group>"; };
-		ACF859251FBA82310088F996 /* BoringSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoringSSL.framework; path = "../../dependencies/ios/grpc-swift/Release-iphoneos/BoringSSL.framework"; sourceTree = "<group>"; };
-		ACF859261FBA82310088F996 /* Czlib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Czlib.framework; path = "../../dependencies/ios/grpc-swift/Release-iphoneos/Czlib.framework"; sourceTree = "<group>"; };
-		ACF859271FBA82310088F996 /* gRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gRPC.framework; path = "../../dependencies/ios/grpc-swift/Release-iphoneos/gRPC.framework"; sourceTree = "<group>"; };
-		ACF8592C1FBA82450088F996 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../dependencies/ios/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		ACF8592D1FBA82450088F996 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../dependencies/ios/FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
-		ACF8592E1FBA82450088F996 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../dependencies/ios/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		ACF8592F1FBA82450088F996 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../dependencies/ios/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,12 +208,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACF859301FBA82450088F996 /* FBSDKLoginKit.framework in Frameworks */,
-				ACF859311FBA82450088F996 /* Bolts.framework in Frameworks */,
-				ACF859321FBA82450088F996 /* FBSDKShareKit.framework in Frameworks */,
-				ACF859331FBA82450088F996 /* FBSDKCoreKit.framework in Frameworks */,
-				ACF859231FBA81D40088F996 /* SwiftProtobuf.framework in Frameworks */,
-				ACBC4C491FBA67F600E8D61F /* libz.tbd in Frameworks */,
+				AC3852BF1FBB0DED0085DB27 /* BoringSSL.framework in Frameworks */,
+				AC3852C31FBB0DED0085DB27 /* Czlib.framework in Frameworks */,
+				AC38528C1FBB08C70085DB27 /* SwiftProtobuf.framework in Frameworks */,
+				AC3852AE1FBB0AAA0085DB27 /* libz.tbd in Frameworks */,
+				AC3852BB1FBB0DED0085DB27 /* CgRPC.framework in Frameworks */,
+				AC3852871FBB07B10085DB27 /* FBSDKLoginKit.framework in Frameworks */,
+				AC3852881FBB07B10085DB27 /* Bolts.framework in Frameworks */,
+				AC3852B71FBB0DED0085DB27 /* gRPC.framework in Frameworks */,
+				AC3852891FBB07B10085DB27 /* FBSDKShareKit.framework in Frameworks */,
+				AC38528A1FBB07B10085DB27 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +225,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACBC4C4A1FBA67FE00E8D61F /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,13 +232,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACBC4C4B1FBA680400E8D61F /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC38528E1FBB0A440085DB27 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC38529A1FBB0A450085DB27 /* gRPCTests.xctest */,
+				AC38529C1FBB0A450085DB27 /* gRPC.framework */,
+				AC38529E1FBB0A450085DB27 /* BoringSSL.framework */,
+				AC3852A01FBB0A450085DB27 /* CgRPC.framework */,
+				AC3852A21FBB0A450085DB27 /* Czlib.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AC8F916C1FA9366800D6AB8F = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +257,7 @@
 				AC8F918F1FA9366800D6AB8F /* NeVATests */,
 				AC8F919A1FA9366800D6AB8F /* NeVAUITests */,
 				AC8F91761FA9366800D6AB8F /* Products */,
+				AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */,
 				ACBC4C471FBA67E600E8D61F /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -224,16 +336,12 @@
 		ACBC4C471FBA67E600E8D61F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ACF8592D1FBA82450088F996 /* Bolts.framework */,
-				ACF8592F1FBA82450088F996 /* FBSDKCoreKit.framework */,
-				ACF8592C1FBA82450088F996 /* FBSDKLoginKit.framework */,
-				ACF8592E1FBA82450088F996 /* FBSDKShareKit.framework */,
-				ACF859251FBA82310088F996 /* BoringSSL.framework */,
-				ACF859241FBA82310088F996 /* CgRPC.framework */,
-				ACF859261FBA82310088F996 /* Czlib.framework */,
-				ACF859271FBA82310088F996 /* gRPC.framework */,
-				ACF859221FBA81D40088F996 /* SwiftProtobuf.framework */,
-				ACBC4C481FBA67E600E8D61F /* libz.tbd */,
+				AC3852AD1FBB0AAA0085DB27 /* libz.tbd */,
+				AC38528B1FBB08C70085DB27 /* SwiftProtobuf.framework */,
+				AC3852841FBB07B10085DB27 /* Bolts.framework */,
+				AC3852861FBB07B10085DB27 /* FBSDKCoreKit.framework */,
+				AC3852831FBB07B10085DB27 /* FBSDKLoginKit.framework */,
+				AC3852851FBB07B10085DB27 /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,10 +349,10 @@
 		ACE030111FBA90B90067A96A /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				ACE030121FBA90B90067A96A /* swiftgrpc.log */,
-				ACE030131FBA90B90067A96A /* backend.client.pb.swift */,
-				ACE030141FBA90B90067A96A /* backend.pb.swift */,
-				ACE030151FBA90B90067A96A /* backend.server.pb.swift */,
+				AC3852B11FBB0AD90085DB27 /* backend.client.pb.swift */,
+				AC3852B21FBB0AD90085DB27 /* backend.pb.swift */,
+				AC3852B01FBB0AD90085DB27 /* backend.server.pb.swift */,
+				AC3852AF1FBB0AD90085DB27 /* swiftgrpc.log */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -260,11 +368,20 @@
 				AC8F91711FA9366800D6AB8F /* Sources */,
 				AC8F91721FA9366800D6AB8F /* Frameworks */,
 				AC8F91731FA9366800D6AB8F /* Resources */,
-				AC38274E1FBA6DBF00D818E8 /* Embed Frameworks */,
+				AC3852C71FBB0DED0085DB27 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AC3852A41FBB0A720085DB27 /* PBXTargetDependency */,
+				AC3852A61FBB0A720085DB27 /* PBXTargetDependency */,
+				AC3852A81FBB0A720085DB27 /* PBXTargetDependency */,
+				AC3852AA1FBB0A720085DB27 /* PBXTargetDependency */,
+				AC3852AC1FBB0A720085DB27 /* PBXTargetDependency */,
+				AC3852BA1FBB0DED0085DB27 /* PBXTargetDependency */,
+				AC3852BE1FBB0DED0085DB27 /* PBXTargetDependency */,
+				AC3852C21FBB0DED0085DB27 /* PBXTargetDependency */,
+				AC3852C61FBB0DED0085DB27 /* PBXTargetDependency */,
 			);
 			name = NeVA;
 			productName = NeVA;
@@ -344,6 +461,12 @@
 			mainGroup = AC8F916C1FA9366800D6AB8F;
 			productRefGroup = AC8F91761FA9366800D6AB8F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AC38528E1FBB0A440085DB27 /* Products */;
+					ProjectRef = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				AC8F91741FA9366800D6AB8F /* NeVA */,
@@ -353,6 +476,44 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		AC38529A1FBB0A450085DB27 /* gRPCTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = gRPCTests.xctest;
+			remoteRef = AC3852991FBB0A450085DB27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AC38529C1FBB0A450085DB27 /* gRPC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = gRPC.framework;
+			remoteRef = AC38529B1FBB0A450085DB27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AC38529E1FBB0A450085DB27 /* BoringSSL.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BoringSSL.framework;
+			remoteRef = AC38529D1FBB0A450085DB27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AC3852A01FBB0A450085DB27 /* CgRPC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CgRPC.framework;
+			remoteRef = AC38529F1FBB0A450085DB27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AC3852A21FBB0A450085DB27 /* Czlib.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Czlib.framework;
+			remoteRef = AC3852A11FBB0A450085DB27 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		AC8F91731FA9366800D6AB8F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -360,7 +521,7 @@
 			files = (
 				AC8F91861FA9366800D6AB8F /* LaunchScreen.storyboard in Resources */,
 				AC8F91831FA9366800D6AB8F /* Assets.xcassets in Resources */,
-				ACE030161FBA90B90067A96A /* swiftgrpc.log in Resources */,
+				AC3852B31FBB0AD90085DB27 /* swiftgrpc.log in Resources */,
 				AC8F917E1FA9366800D6AB8F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,16 +566,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACE030181FBA90B90067A96A /* backend.pb.swift in Sources */,
 				AC9B9C081FB0F34900507F20 /* LoginButton.swift in Sources */,
 				AC8F917B1FA9366800D6AB8F /* ViewController.swift in Sources */,
+				AC3852B51FBB0AD90085DB27 /* backend.client.pb.swift in Sources */,
 				AC65D4C71FB1233300753B94 /* TempViewController.swift in Sources */,
 				AC9B9C0A1FB104E100507F20 /* LoginRegisterInputField.swift in Sources */,
-				ACE030191FBA90B90067A96A /* backend.server.pb.swift in Sources */,
 				AC8F91791FA9366800D6AB8F /* AppDelegate.swift in Sources */,
 				AC8F91811FA9366800D6AB8F /* NeVA.xcdatamodeld in Sources */,
+				AC3852B61FBB0AD90085DB27 /* backend.pb.swift in Sources */,
 				AC9B9C061FB0EB0100507F20 /* LoginRegisterViewController.swift in Sources */,
-				ACE030171FBA90B90067A96A /* backend.client.pb.swift in Sources */,
+				AC3852B41FBB0AD90085DB27 /* backend.server.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +598,51 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AC3852A41FBB0A720085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = gRPCTests;
+			targetProxy = AC3852A31FBB0A720085DB27 /* PBXContainerItemProxy */;
+		};
+		AC3852A61FBB0A720085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = gRPC;
+			targetProxy = AC3852A51FBB0A720085DB27 /* PBXContainerItemProxy */;
+		};
+		AC3852A81FBB0A720085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BoringSSL;
+			targetProxy = AC3852A71FBB0A720085DB27 /* PBXContainerItemProxy */;
+		};
+		AC3852AA1FBB0A720085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CgRPC;
+			targetProxy = AC3852A91FBB0A720085DB27 /* PBXContainerItemProxy */;
+		};
+		AC3852AC1FBB0A720085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Czlib;
+			targetProxy = AC3852AB1FBB0A720085DB27 /* PBXContainerItemProxy */;
+		};
+		AC3852BA1FBB0DED0085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = gRPC;
+			targetProxy = AC3852B91FBB0DED0085DB27 /* PBXContainerItemProxy */;
+		};
+		AC3852BE1FBB0DED0085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CgRPC;
+			targetProxy = AC3852BD1FBB0DED0085DB27 /* PBXContainerItemProxy */;
+		};
+		AC3852C21FBB0DED0085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BoringSSL;
+			targetProxy = AC3852C11FBB0DED0085DB27 /* PBXContainerItemProxy */;
+		};
+		AC3852C61FBB0DED0085DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Czlib;
+			targetProxy = AC3852C51FBB0DED0085DB27 /* PBXContainerItemProxy */;
+		};
 		AC8F918E1FA9366800D6AB8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AC8F91741FA9366800D6AB8F /* NeVA */;
@@ -579,17 +785,17 @@
 		AC8F91A11FA9366800D6AB8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(SRCROOT)/Carthage/Build/iOS",
-					"../../dependencies/ios/**",
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					../../dependencies/ios/FacebookSDK,
 				);
-				"HEADER_SEARCH_PATHS[arch=*]" = "../../dependencies/ios/**";
+				HEADER_SEARCH_PATHS = "../../dependencies/ios/grpc-swift/Sources/CgRPC/include";
 				INFOPLIST_FILE = NeVA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
@@ -604,18 +810,17 @@
 		AC8F91A21FA9366800D6AB8F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"../../dependencies/ios/**",
-					"$(SRCROOT)/Carthage/Build/iOS",
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					../../dependencies/ios/FacebookSDK,
 				);
-				HEADER_SEARCH_PATHS = "";
-				"HEADER_SEARCH_PATHS[arch=*]" = "../../dependencies/ios/**";
+				HEADER_SEARCH_PATHS = "../../dependencies/ios/grpc-swift/Sources/CgRPC/include";
 				INFOPLIST_FILE = NeVA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
