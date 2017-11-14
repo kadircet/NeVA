@@ -25,6 +25,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import backend.BackendOuterClass;
+import backend.BackendGrpc;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+
 public class LoginActivity extends AppCompatActivity {
     public static final String MESSAGE_CLASS = "com.neva.mealrecommender.MESSAGE";
 
@@ -108,9 +113,14 @@ public class LoginActivity extends AppCompatActivity {
         pb.setVisibility(View.VISIBLE);
 
         // SEND REQUEST
+        ManagedChannel mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com",50051).build();
+        BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
+        BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder().setEmail("hakantest@test.com").setPassword("somePassword").build();
+        BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
+        String a = loginReply.getToken();
         // GET ANSWER
         Intent intent = new Intent(this, LoginResultActivity.class);
-        String login_res = "Successfully Logged in as: " + username;
+        String login_res = "Successfully Logged in as: " + username + " with grpc token: " + a;
         intent.putExtra(MESSAGE_CLASS, login_res);
         pb.setVisibility(View.GONE);
         startActivity(intent);
