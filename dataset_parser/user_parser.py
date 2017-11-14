@@ -1,39 +1,45 @@
-import json
-import os
-import sys
 
-rootdir = sys.argv[1]
-food_related_reviews = {}
-businesses = []
+foods = {}
 
-with open("food_related_businesses.txt") as business_file:
-    for line in business_file:
-        businesses.append(line)
+with open("items.tsv") as items_file:
+    for line in items_file:
+        if(line.startswith("id")):
+            continue
+        line = line.split()
+        food_id = line[0]
+        foods[food_id] = []
 
-for root, subFolders, files in os.walk(rootdir):
-        for file in files:
-            with open(os.path.join(root, file)) as review_file:
-                for line in review_file:
-                    data_loaded = json.loads(line)
-                    business_id = data_loaded["business_id"]
-                    if business_id in businesses:
-                        user = data_loaded["user_id"]
-                        review = data_loaded["review_id"]
-                        if(user not in food_related_reviews):
-                            food_related_reviews[user] = []
+        items = line[1].split(",")
+        for item in items:
+            tags = item.split("__")
 
-                        food_related_reviews[user].append(review)
+            food = tags[2].replace("_"," ")
 
-user_file = open("users.txt", "w")
+            foods[food_id].append(food)
 
-for key, value in food_related_reviews:
-    user_file.write(key)
-    user_file.write(" --> ")
+last_user = "-1"
+user_file = open("users/user_0.txt", "w")
 
-    for review in value:
-        user_file.write(review)
-        user_file.write(" ")
+with open("data.tsv") as data_file:
+    for line in data_file:
+        if(line.startswith("meal_id")):
+            continue
 
-    user_file.write("\n")
+        line = line.split()
+        cur_user = line[1]
+
+        if(cur_user != last_user):
+            user_file.close()
+            user_file = open("users/user_" + cur_user + ".txt", "w")
+            last_user = cur_user
+
+        user_file.write("|| ")
+
+        meals = line[4].split(",")
+        for meal in meals:
+            for food in foods[meal]:
+                user_file.write(food + " || ")
+
+        user_file.write("\n")
 
 user_file.close()
