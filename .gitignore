@@ -64,3 +64,15 @@ fastlane/screenshots
 fastlane/test_output
 
 # End of https://www.gitignore.io/api/swift
+
+# Created by https://www.gitignore.io/api/carthage
+
+### Carthage ###
+# Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+Carthage/Checkouts
+
+Carthage/Build
+
+# End of https://www.gitignore.io/api/carthage
