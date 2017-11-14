@@ -75,13 +75,6 @@
 			remoteGlobalIDString = "zlib::Czlib::Product";
 			remoteInfo = Czlib;
 		};
-		AC3852A31FBB0A720085DB27 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = "SwiftGRPC::gRPCTests";
-			remoteInfo = gRPCTests;
-		};
 		AC3852A51FBB0A720085DB27 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */;
@@ -373,7 +366,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				AC3852A41FBB0A720085DB27 /* PBXTargetDependency */,
 				AC3852A61FBB0A720085DB27 /* PBXTargetDependency */,
 				AC3852A81FBB0A720085DB27 /* PBXTargetDependency */,
 				AC3852AA1FBB0A720085DB27 /* PBXTargetDependency */,
@@ -598,11 +590,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AC3852A41FBB0A720085DB27 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = gRPCTests;
-			targetProxy = AC3852A31FBB0A720085DB27 /* PBXContainerItemProxy */;
-		};
 		AC3852A61FBB0A720085DB27 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = gRPC;
