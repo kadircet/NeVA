@@ -4,11 +4,27 @@ import "protos/util.proto";
 
 package neva.backend;
 
+message LinkedAccount {
+  enum SocialMediaType {
+    INVALID = 0;
+    FACEBOOK = 1;
+  };
+
+  string token = 1;
+  SocialMediaType social_media_type = 2;
+}
+
 message User {
   enum Gender {
     INVALID = 0;
     MALE = 1;
     FEMALE = 2;
+  };
+
+  enum Status {
+    INVALID = 0;
+    INACTIVE = 1;
+    ACTIVE = 2;
   };
 
   uint32 user_id = 1;
@@ -21,4 +37,7 @@ message User {
 
   // Keeps url to the photo of the user.
   string photo = 8;
+  Status status = 9;
+
+  repeated LinkedAccount linked_accounts = 10;
 }
