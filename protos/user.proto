@@ -6,7 +6,7 @@ package neva.backend;
 
 message LinkedAccount {
   enum SocialMediaType {
-    INVALID = 0;
+    INVALID_SOCIAL_MEDIA_TYPE = 0;
     FACEBOOK = 1;
   };
 
@@ -16,13 +16,13 @@ message LinkedAccount {
 
 message User {
   enum Gender {
-    INVALID = 0;
+    INVALID_GENDER = 0;
     MALE = 1;
     FEMALE = 2;
   };
 
   enum Status {
-    INVALID = 0;
+    INVALID_STATUS = 0;
     INACTIVE = 1;
     ACTIVE = 2;
   };
