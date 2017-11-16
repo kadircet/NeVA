@@ -3,6 +3,6 @@ syntax = "proto3";
 package neva.backend.util;
 
 message Timestamp {
-  int64 seconds = 1;
-  int32 nanos = 2;
+  uint64 seconds = 1;
+  uint32 nanos = 2;
 }
