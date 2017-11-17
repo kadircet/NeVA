@@ -12,18 +12,19 @@ FLUSH PRIVILEGES;
  * email is the primary credential used for identification.
  * salt is the randomness associated with the user that will be used throughout
  *      all authentication system.
+ * status is account status of user as defined in neva.backend.User.Status.
  */
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL UNIQUE,
   `salt` VARCHAR(255) NOT NULL,
+  `status` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY(id)
 );
 
 /* Contains profile information for each user.
  * id is the unique identifier of a user.
  * date_of_birth is the timestamp for user's birthday in seconds.
- * status is account status of user as defined in neva.backend.User.Status.
  * name is the real name of the user.
  * gender is the gender of a user as defined in neva.backend.User.Gender.
  * weight is the weight of the user in kg's.
@@ -32,7 +33,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 CREATE TABLE IF NOT EXISTS `user_info` (
   `id` INTEGER NOT NULL,
   `date_of_birth` INTEGER UNSIGNED,
-  `status` TINYINT UNSIGNED NOT NULL DEFAULT 0,
   `name` VARCHAR(255),
   `gender` TINYINT UNSIGNED,
   `weight` FLOAT,
