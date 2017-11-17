@@ -83,3 +83,18 @@ CREATE TABLE IF NOT EXISTS `user_social_media` (
   FOREIGN KEY(`id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
   PRIMARY KEY(`id`, `social_media`)
 );
+
+
+/* Contains the salted hash of verification tokens for user accounts.
+ * It might be any request that uses user's email address to verify integrity.
+ * id is the unique identifier of the user.
+ * token is the salted verification token of a user generated with each request.
+ * expire is the expire date of the token in seconds.
+ */
+CREATE TABLE IF NOT EXISTS `user_verification` (
+  `id` INTEGER NOT NULL,
+  `token` VARCHAR(255) NOT NULL,
+  `expire` INTEGER UNSIGNED NOT NULL,
+  FOREIGN KEY(`id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+  PRIMARY KEY(`id`)
+);
