@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `user` (
  * gender is the gender of a user as defined in neva.backend.User.Gender.
  * weight is the weight of the user in kg's.
  * photo is the url to a users profile photo.
+ * register_data is the timestamp for user's account creation in seconds.
  */
 CREATE TABLE IF NOT EXISTS `user_info` (
   `id` INTEGER NOT NULL,
@@ -37,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `user_info` (
   `gender` TINYINT UNSIGNED,
   `weight` FLOAT,
   `photo` VARCHAR(255),
+  `register_date` INTEGER UNSIGNED,
   FOREIGN KEY(`id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
   PRIMARY KEY(`id`)
 );
