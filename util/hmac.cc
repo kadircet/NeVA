@@ -11,23 +11,26 @@ namespace backend {
 namespace util {
 namespace {
 
-constexpr const size_t kQwordSize = 64;
+constexpr const size_t kQwordSizeInBits = 64;
+constexpr const size_t kQwordSizeInBytes = 8;
 constexpr const size_t kSHA512OutputSize = 512 / 8;
+constexpr const int kMaxLength = 128;
 
 }  // namespace
 
-const std::string GenerateRandomKey(const int length = 128) {
-  CHECK_LE(length, 128) << "Key length cannot be more than 128 bits. Length: "
-                        << length;
-  CHECK_EQ(length % kQwordSize, 0) << "Key length must be a multiple of "
-                                   << kQwordSize << ". Length: " << length;
+const std::string GenerateRandomKey(const unsigned seed, const int length) {
+  CHECK_LE(length, kMaxLength) << "Key length cannot be more than "
+                               << kMaxLength << " bytes. Length: " << length;
+  CHECK_EQ(length % kQwordSizeInBytes, 0)
+      << "Key length must be a multiple of " << kQwordSizeInBytes
+      << ". Length: " << length;
 
-  std::independent_bits_engine<std::mt19937, kQwordSize, uint64_t> random_qword;
+  std::independent_bits_engine<std::mt19937, kQwordSizeInBits, uint64_t>
+      random_qword(seed);
   std::string random_bytes;
-  const size_t number_of_bytes = length / kQwordSize;
 
-  random_bytes.reserve(number_of_bytes);
-  std::generate(random_bytes.begin(), random_bytes.begin() + number_of_bytes,
+  random_bytes.resize(length);
+  std::generate(random_bytes.begin(), random_bytes.end(),
                 std::ref(random_qword));
 
   return random_bytes;
