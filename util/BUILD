@@ -6,7 +6,16 @@ cc_library(
     hdrs = ["hmac.h"],
     copts = [
         "-I/usr/include/openssl/hmac.h",
-        "-lcrypto",
     ],
+    linkopts = ["-lcrypto"],
     deps = ["@glog//:glog"],
+)
+
+cc_test(
+    name = "hmac_test",
+    srcs = ["hmac_test.cc"],
+    deps = [
+        ":hmac",
+        "@googletest//:gtest_main",
+    ],
 )
