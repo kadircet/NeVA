@@ -19,13 +19,30 @@ constexpr const char* kExpectedRandomKey =
     "F\x1F";
 constexpr const size_t kExpectedRandomKeySize = 128;
 
+constexpr const char* kExpectedHmac =
+    "\x9B\xA1\xF6"
+    "3e\xA6\xCA\xF6nF4\x8F"
+    "C\xCD\xEF\x95`\x15\xBE\xA9\x97\xAD\xEB\x6\xE6\x90\a\xEE?"
+    "\xF5\x17\xDF\x10\xFC^\xB8`\xDA=C\xB8,*"
+    "\x4\f\x93\x11\x19\xD2\xDF\xC6\xD0\x8E%7B):\x86\x8C\xC2\xD8 "
+    "\x15";
+constexpr const size_t kExpectedHMacOutputSize = 512 / 8;
+
 TEST(GenerateRandomKey, SanityTest) {
   const std::string random_key = GenerateRandomKey(0, kExpectedRandomKeySize);
+
   EXPECT_EQ(random_key.size(), kExpectedRandomKeySize);
   EXPECT_EQ(random_key, kExpectedRandomKey);
 }
 
-TEST(HMac, SanityTest) {}
+TEST(HMac, SanityTest) {
+  const std::string key = "test";
+  const std::string message = "test";
+  const std::string hmac = HMac(key, message);
+
+  EXPECT_EQ(hmac.size(), kExpectedHMacOutputSize);
+  EXPECT_EQ(hmac, kExpectedHmac);
+}
 
 }  // namespace
 }  // namespace util
