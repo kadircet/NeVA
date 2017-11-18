@@ -6,23 +6,52 @@ namespace backend {
 namespace orm {
 namespace user {
 
-User UserOrm::GetUserById(const uint32_t user_id) {
-  CHECK(conn_.get() != nullptr) << "Connection was null";
-  mysqlpp::Query query = conn_->query("SELECT * FROM `users` WHERE `id`=:%0");
+namespace {
+using grpc::Status;
+using grpc::StatusCode;
+}  // namespace
+
+Status UserOrm::GetUserById(const uint32_t user_id, User* user) {
+  if (conn_.get() == nullptr) {
+    return Status(StatusCode::UNKNOWN, "Connection was null.");
+  }
+  mysqlpp::Query query =
+      conn_->query("SELECT `email`, `status` FROM `user` WHERE `id`=:%0");
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(user_id);
-  CHECK(!res.empty()) << "User not found";
-  CHECK_EQ(res.num_rows(), 1) << "Returned more than one user.";
+  if (res.empty()) return Status(StatusCode::UNKNOWN, "User not found.");
+  if (res.num_rows() != 1) {
+    return Status(StatusCode::UNKNOWN, "More than one user matches this id.");
+  }
 
-  User user;
-  user.set_user_id(user_id);
-  user.set_email(res[0]["email"]);
-  user.set_name(res[0]["name"]);
-  user.set_gender(
-      static_cast<User::Gender>(static_cast<int>(res[0]["gender"])));
-  user.set_weight(res[0]["weight"]);
-  return user;
+  user->set_user_id(user_id);
+  user->set_email(res[0]["email"]);
+  user->set_status(
+      static_cast<User::Status>(static_cast<int>(res[0]["status"])));
+  return Status::OK;
+}
+
+Status UserOrm::GetUserByEmail(const std::string& email, User* user) {
+  if (conn_.get() == nullptr) {
+    return Status(StatusCode::UNKNOWN, "Connection was null.");
+  }
+  mysqlpp::Query query =
+      conn_->query("SELECT `id`, `status` FROM `user` WHERE `email`=:%0");
+  query.parse();
+
+  mysqlpp::StoreQueryResult res = query.store(email);
+  if (res.empty()) return Status(StatusCode::UNKNOWN, "User not found.");
+  if (res.num_rows() != 1) {
+    return Status(StatusCode::UNKNOWN,
+                  "More than one user matches this email.");
+  }
+
+  user->set_user_id(res[0]["id"]);
+  user->set_email(email);
+  user->set_status(
+      static_cast<User::Status>(static_cast<int>(res[0]["status"])));
+  return Status::OK;
 }
 
 }  // namespace user

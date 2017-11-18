@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` VARCHAR(255) NOT NULL UNIQUE,
   `salt` VARCHAR(255) NOT NULL,
   `status` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  `password` VARCHAR(255) NOT NULL,
   PRIMARY KEY(id)
 );
 
@@ -54,19 +55,6 @@ CREATE TABLE IF NOT EXISTS `user_session` (
   `id` INTEGER NOT NULL,
   `token` VARCHAR(255) NOT NULL UNIQUE,
   `expire` INTEGER UNSIGNED NOT NULL,
-  FOREIGN KEY(`id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
-  PRIMARY KEY(`id`)
-);
-
-/* Contains default user_credentials that will be used for login.
- * id is the unique identifier of the user.
- * password field contains the hash of login key and salt.
- *          No matter what type of authentication mechanism has been used this
- *          field will hold the authentication key.
- */
-CREATE TABLE IF NOT EXISTS `user_credential` (
-  `id` INTEGER NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
   FOREIGN KEY(`id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
   PRIMARY KEY(`id`)
 );
