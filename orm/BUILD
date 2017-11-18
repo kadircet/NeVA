@@ -5,8 +5,8 @@ cc_library(
     copts = [
         "-I/usr/include/mysql++/",
         "-I/usr/include/mysql",
-        "-lmysqlpp",
     ],
+    linkopts = ["-lmysqlpp"],
     deps = [
         "//protos:user_proto",
         "//util:hmac",
