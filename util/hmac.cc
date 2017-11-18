@@ -38,7 +38,7 @@ const std::string GenerateRandomKey(const unsigned seed, const int length) {
 
 const std::string HMac(const std::string& key, const std::string& message) {
   std::string hmac;
-  hmac.reserve(kSHA512OutputSize);
+  hmac.resize(kSHA512OutputSize);
   HMAC(EVP_sha512(), key.data(), key.size(),
        reinterpret_cast<const unsigned char*>(message.data()), message.size(),
        reinterpret_cast<unsigned char*>(&*hmac.begin()), nullptr);
