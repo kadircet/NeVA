@@ -1,3 +1,5 @@
+package(default_visibility = ["//visibility:public"])
+
 cc_library(
     name = "user_orm",
     srcs = ["user_orm.cc"],

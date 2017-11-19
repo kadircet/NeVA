@@ -3,6 +3,10 @@
 #include <string>
 
 #include <grpc++/grpc++.h>
+#include <mysql++.h>
+
+#include "glog/logging.h"
+#include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
 
 namespace neva {
@@ -13,8 +17,15 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
+using orm::user::UserOrm;
+
+constexpr const char* const kNevaDatabaseName = "neva";
+constexpr const char* const kNevaDatabaseServer = "localhost";
+constexpr const char* const kNevaDatabaseUser = "neva";
+constexpr const char* const kNevaDatabasePassword = "";
 
 class BackendServiceImpl final : public Backend::Service {
+ public:
   Status Register(ServerContext* context, const RegisterRequest* request,
                   RegisterReply* reply) override {
     return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
@@ -24,6 +35,19 @@ class BackendServiceImpl final : public Backend::Service {
                LoginReply* reply) override {
     return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
   }
+
+  BackendServiceImpl() {
+    conn_ = std::make_shared<mysqlpp::Connection>(false);
+    conn_->connect(kNevaDatabaseName, kNevaDatabaseServer, kNevaDatabaseUser,
+                   kNevaDatabasePassword);
+    CHECK(conn_->connected()) << "Database connection failed.";
+
+    user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
+  }
+
+ private:
+  std::shared_ptr<mysqlpp::Connection> conn_;
+  std::unique_ptr<UserOrm> user_orm_;
 };
 
 void RunServer() {
