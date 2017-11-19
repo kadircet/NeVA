@@ -1,17 +1,6 @@
-File backend.proto
-Service Backend
- Method Register
-  input .backend.RegisterRequest
-  output .backend.RegisterReply
-  client_streaming false
-  server_streaming false
- Method Login
-  input .backend.LoginRequest
-  output .backend.LoginReply
-  client_streaming false
-  server_streaming false
+File protos/util.proto
 PluginLibrary.Google_Protobuf_Compiler_CodeGeneratorRequest:
-file_to_generate: "backend.proto"
+file_to_generate: "protos/util.proto"
 compiler_version {
   major: 3
   minor: 4
@@ -19,144 +8,28 @@ compiler_version {
   suffix: ""
 }
 proto_file {
-  name: "backend.proto"
-  package: "backend"
+  name: "protos/util.proto"
+  package: "neva.backend.util"
   message_type {
     name: "Timestamp"
     field {
       name: "seconds"
       number: 1
       label: LABEL_OPTIONAL
-      type: TYPE_INT64
+      type: TYPE_UINT64
       json_name: "seconds"
     }
     field {
       name: "nanos"
       number: 2
       label: LABEL_OPTIONAL
-      type: TYPE_INT32
+      type: TYPE_UINT32
       json_name: "nanos"
-    }
-  }
-  message_type {
-    name: "RegisterRequest"
-    field {
-      name: "email"
-      number: 1
-      label: LABEL_OPTIONAL
-      type: TYPE_STRING
-      json_name: "email"
-    }
-    field {
-      name: "password"
-      number: 2
-      label: LABEL_OPTIONAL
-      type: TYPE_STRING
-      json_name: "password"
-    }
-    field {
-      name: "name"
-      number: 3
-      label: LABEL_OPTIONAL
-      type: TYPE_STRING
-      json_name: "name"
-    }
-    field {
-      name: "date_of_birth"
-      number: 4
-      label: LABEL_OPTIONAL
-      type: TYPE_MESSAGE
-      type_name: ".backend.Timestamp"
-      json_name: "dateOfBirth"
-    }
-    field {
-      name: "gender"
-      number: 5
-      label: LABEL_OPTIONAL
-      type: TYPE_ENUM
-      type_name: ".backend.RegisterRequest.Gender"
-      json_name: "gender"
-    }
-    field {
-      name: "weight"
-      number: 6
-      label: LABEL_OPTIONAL
-      type: TYPE_FLOAT
-      json_name: "weight"
-    }
-    field {
-      name: "photo"
-      number: 7
-      label: LABEL_OPTIONAL
-      type: TYPE_STRING
-      json_name: "photo"
-    }
-    enum_type {
-      name: "Gender"
-      value {
-        name: "INVALID"
-        number: 0
-      }
-      value {
-        name: "MALE"
-        number: 1
-      }
-      value {
-        name: "FEMALE"
-        number: 2
-      }
-    }
-  }
-  message_type {
-    name: "RegisterReply"
-  }
-  message_type {
-    name: "LoginRequest"
-    field {
-      name: "email"
-      number: 1
-      label: LABEL_OPTIONAL
-      type: TYPE_STRING
-      json_name: "email"
-    }
-    field {
-      name: "password"
-      number: 2
-      label: LABEL_OPTIONAL
-      type: TYPE_STRING
-      json_name: "password"
-    }
-  }
-  message_type {
-    name: "LoginReply"
-    field {
-      name: "token"
-      number: 1
-      label: LABEL_OPTIONAL
-      type: TYPE_STRING
-      json_name: "token"
-    }
-  }
-  service {
-    name: "Backend"
-    method {
-      name: "Register"
-      input_type: ".backend.RegisterRequest"
-      output_type: ".backend.RegisterReply"
-      options {
-      }
-    }
-    method {
-      name: "Login"
-      input_type: ".backend.LoginRequest"
-      output_type: ".backend.LoginReply"
-      options {
-      }
     }
   }
   source_code_info {
     location {
-      span: [0, 0, 45, 1]
+      span: [0, 0, 7, 1]
     }
     location {
       path: [12]
@@ -164,373 +37,55 @@ proto_file {
     }
     location {
       path: [2]
-      span: [2, 8, 15]
-    }
-    location {
-      path: [6, 0]
-      span: [4, 0, 9, 1]
-    }
-    location {
-      path: [6, 0, 1]
-      span: [4, 8, 15]
-    }
-    location {
-      path: [6, 0, 2, 0]
-      span: [5, 2, 6, 3]
-    }
-    location {
-      path: [6, 0, 2, 0, 1]
-      span: [5, 6, 14]
-    }
-    location {
-      path: [6, 0, 2, 0, 2]
-      span: [5, 15, 30]
-    }
-    location {
-      path: [6, 0, 2, 0, 3]
-      span: [5, 41, 54]
-    }
-    location {
-      path: [6, 0, 2, 1]
-      span: [7, 2, 8, 3]
-    }
-    location {
-      path: [6, 0, 2, 1, 1]
-      span: [7, 6, 11]
-    }
-    location {
-      path: [6, 0, 2, 1, 2]
-      span: [7, 12, 24]
-    }
-    location {
-      path: [6, 0, 2, 1, 3]
-      span: [7, 35, 45]
+      span: [2, 8, 25]
     }
     location {
       path: [4, 0]
-      span: [11, 0, 14, 1]
+      span: [4, 0, 7, 1]
     }
     location {
       path: [4, 0, 1]
-      span: [11, 8, 17]
+      span: [4, 8, 17]
     }
     location {
       path: [4, 0, 2, 0]
-      span: [12, 2, 20]
+      span: [5, 2, 21]
     }
     location {
       path: [4, 0, 2, 0, 4]
-      span: [12, 2, 11, 19]
+      span: [5, 2, 4, 19]
     }
     location {
       path: [4, 0, 2, 0, 5]
-      span: [12, 2, 7]
+      span: [5, 2, 8]
     }
     location {
       path: [4, 0, 2, 0, 1]
-      span: [12, 8, 15]
+      span: [5, 9, 16]
     }
     location {
       path: [4, 0, 2, 0, 3]
-      span: [12, 18, 19]
+      span: [5, 19, 20]
     }
     location {
       path: [4, 0, 2, 1]
-      span: [13, 2, 18]
+      span: [6, 2, 19]
     }
     location {
       path: [4, 0, 2, 1, 4]
-      span: [13, 2, 12, 20]
+      span: [6, 2, 5, 21]
     }
     location {
       path: [4, 0, 2, 1, 5]
-      span: [13, 2, 7]
+      span: [6, 2, 8]
     }
     location {
       path: [4, 0, 2, 1, 1]
-      span: [13, 8, 13]
+      span: [6, 9, 14]
     }
     location {
       path: [4, 0, 2, 1, 3]
-      span: [13, 16, 17]
-    }
-    location {
-      path: [4, 1]
-      span: [16, 0, 32, 1]
-    }
-    location {
-      path: [4, 1, 1]
-      span: [16, 8, 23]
-    }
-    location {
-      path: [4, 1, 4, 0]
-      span: [17, 2, 21, 3]
-    }
-    location {
-      path: [4, 1, 4, 0, 1]
-      span: [17, 7, 13]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 0]
-      span: [18, 4, 16]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 0, 1]
-      span: [18, 4, 11]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 0, 2]
-      span: [18, 14, 15]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 1]
-      span: [19, 4, 13]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 1, 1]
-      span: [19, 4, 8]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 1, 2]
-      span: [19, 11, 12]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 2]
-      span: [20, 4, 15]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 2, 1]
-      span: [20, 4, 10]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 2, 2]
-      span: [20, 13, 14]
-    }
-    location {
-      path: [4, 1, 2, 0]
-      span: [23, 2, 19]
-    }
-    location {
-      path: [4, 1, 2, 0, 4]
-      span: [23, 2, 21, 4]
-    }
-    location {
-      path: [4, 1, 2, 0, 5]
-      span: [23, 2, 8]
-    }
-    location {
-      path: [4, 1, 2, 0, 1]
-      span: [23, 9, 14]
-    }
-    location {
-      path: [4, 1, 2, 0, 3]
-      span: [23, 17, 18]
-    }
-    location {
-      path: [4, 1, 2, 1]
-      span: [24, 2, 22]
-    }
-    location {
-      path: [4, 1, 2, 1, 4]
-      span: [24, 2, 23, 19]
-    }
-    location {
-      path: [4, 1, 2, 1, 5]
-      span: [24, 2, 8]
-    }
-    location {
-      path: [4, 1, 2, 1, 1]
-      span: [24, 9, 17]
-    }
-    location {
-      path: [4, 1, 2, 1, 3]
-      span: [24, 20, 21]
-    }
-    location {
-      path: [4, 1, 2, 2]
-      span: [25, 2, 18]
-    }
-    location {
-      path: [4, 1, 2, 2, 4]
-      span: [25, 2, 24, 22]
-    }
-    location {
-      path: [4, 1, 2, 2, 5]
-      span: [25, 2, 8]
-    }
-    location {
-      path: [4, 1, 2, 2, 1]
-      span: [25, 9, 13]
-    }
-    location {
-      path: [4, 1, 2, 2, 3]
-      span: [25, 16, 17]
-    }
-    location {
-      path: [4, 1, 2, 3]
-      span: [26, 2, 30]
-    }
-    location {
-      path: [4, 1, 2, 3, 4]
-      span: [26, 2, 25, 18]
-    }
-    location {
-      path: [4, 1, 2, 3, 6]
-      span: [26, 2, 11]
-    }
-    location {
-      path: [4, 1, 2, 3, 1]
-      span: [26, 12, 25]
-    }
-    location {
-      path: [4, 1, 2, 3, 3]
-      span: [26, 28, 29]
-    }
-    location {
-      path: [4, 1, 2, 4]
-      span: [27, 2, 20]
-    }
-    location {
-      path: [4, 1, 2, 4, 4]
-      span: [27, 2, 26, 30]
-    }
-    location {
-      path: [4, 1, 2, 4, 6]
-      span: [27, 2, 8]
-    }
-    location {
-      path: [4, 1, 2, 4, 1]
-      span: [27, 9, 15]
-    }
-    location {
-      path: [4, 1, 2, 4, 3]
-      span: [27, 18, 19]
-    }
-    location {
-      path: [4, 1, 2, 5]
-      span: [28, 2, 19]
-    }
-    location {
-      path: [4, 1, 2, 5, 4]
-      span: [28, 2, 27, 20]
-    }
-    location {
-      path: [4, 1, 2, 5, 5]
-      span: [28, 2, 7]
-    }
-    location {
-      path: [4, 1, 2, 5, 1]
-      span: [28, 8, 14]
-    }
-    location {
-      path: [4, 1, 2, 5, 3]
-      span: [28, 17, 18]
-    }
-    location {
-      path: [4, 1, 2, 6]
-      span: [31, 2, 19]
-      leading_comments: " Keeps url to the photo of the user.\n"
-    }
-    location {
-      path: [4, 1, 2, 6, 4]
-      span: [31, 2, 28, 19]
-    }
-    location {
-      path: [4, 1, 2, 6, 5]
-      span: [31, 2, 8]
-    }
-    location {
-      path: [4, 1, 2, 6, 1]
-      span: [31, 9, 14]
-    }
-    location {
-      path: [4, 1, 2, 6, 3]
-      span: [31, 17, 18]
-    }
-    location {
-      path: [4, 2]
-      span: [34, 0, 35, 1]
-    }
-    location {
-      path: [4, 2, 1]
-      span: [34, 8, 21]
-    }
-    location {
-      path: [4, 3]
-      span: [37, 0, 40, 1]
-    }
-    location {
-      path: [4, 3, 1]
-      span: [37, 8, 20]
-    }
-    location {
-      path: [4, 3, 2, 0]
-      span: [38, 2, 19]
-    }
-    location {
-      path: [4, 3, 2, 0, 4]
-      span: [38, 2, 37, 22]
-    }
-    location {
-      path: [4, 3, 2, 0, 5]
-      span: [38, 2, 8]
-    }
-    location {
-      path: [4, 3, 2, 0, 1]
-      span: [38, 9, 14]
-    }
-    location {
-      path: [4, 3, 2, 0, 3]
-      span: [38, 17, 18]
-    }
-    location {
-      path: [4, 3, 2, 1]
-      span: [39, 2, 22]
-    }
-    location {
-      path: [4, 3, 2, 1, 4]
-      span: [39, 2, 38, 19]
-    }
-    location {
-      path: [4, 3, 2, 1, 5]
-      span: [39, 2, 8]
-    }
-    location {
-      path: [4, 3, 2, 1, 1]
-      span: [39, 9, 17]
-    }
-    location {
-      path: [4, 3, 2, 1, 3]
-      span: [39, 20, 21]
-    }
-    location {
-      path: [4, 4]
-      span: [42, 0, 45, 1]
-    }
-    location {
-      path: [4, 4, 1]
-      span: [42, 8, 18]
-    }
-    location {
-      path: [4, 4, 2, 0]
-      span: [44, 2, 19]
-      leading_comments: " Authentication token to be used in upcoming requests.\n"
-    }
-    location {
-      path: [4, 4, 2, 0, 4]
-      span: [44, 2, 42, 20]
-    }
-    location {
-      path: [4, 4, 2, 0, 5]
-      span: [44, 2, 8]
-    }
-    location {
-      path: [4, 4, 2, 0, 1]
-      span: [44, 9, 14]
-    }
-    location {
-      path: [4, 4, 2, 0, 3]
-      span: [44, 17, 18]
+      span: [6, 17, 18]
     }
   }
   syntax: "proto3"

@@ -13,10 +13,6 @@
 		AC38528A1FBB07B10085DB27 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852861FBB07B10085DB27 /* FBSDKCoreKit.framework */; };
 		AC38528C1FBB08C70085DB27 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC38528B1FBB08C70085DB27 /* SwiftProtobuf.framework */; };
 		AC3852AE1FBB0AAA0085DB27 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852AD1FBB0AAA0085DB27 /* libz.tbd */; };
-		AC3852B31FBB0AD90085DB27 /* swiftgrpc.log in Resources */ = {isa = PBXBuildFile; fileRef = AC3852AF1FBB0AD90085DB27 /* swiftgrpc.log */; };
-		AC3852B41FBB0AD90085DB27 /* backend.server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3852B01FBB0AD90085DB27 /* backend.server.pb.swift */; };
-		AC3852B51FBB0AD90085DB27 /* backend.client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3852B11FBB0AD90085DB27 /* backend.client.pb.swift */; };
-		AC3852B61FBB0AD90085DB27 /* backend.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3852B21FBB0AD90085DB27 /* backend.pb.swift */; };
 		AC3852B71FBB0DED0085DB27 /* gRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC38529C1FBB0A450085DB27 /* gRPC.framework */; };
 		AC3852B81FBB0DED0085DB27 /* gRPC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC38529C1FBB0A450085DB27 /* gRPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AC3852BB1FBB0DED0085DB27 /* CgRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A01FBB0A450085DB27 /* CgRPC.framework */; };
@@ -26,6 +22,12 @@
 		AC3852C31FBB0DED0085DB27 /* Czlib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A21FBB0A450085DB27 /* Czlib.framework */; };
 		AC3852C41FBB0DED0085DB27 /* Czlib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A21FBB0A450085DB27 /* Czlib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AC65D4C71FB1233300753B94 /* TempViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC65D4C61FB1233300753B94 /* TempViewController.swift */; };
+		AC8EF6301FC211C900CFABBE /* backend.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8EF62A1FC211C800CFABBE /* backend.pb.swift */; };
+		AC8EF6311FC211C900CFABBE /* util.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8EF62B1FC211C800CFABBE /* util.pb.swift */; };
+		AC8EF6321FC211C900CFABBE /* user.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8EF62C1FC211C800CFABBE /* user.pb.swift */; };
+		AC8EF6331FC211C900CFABBE /* neva.backend.client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8EF62D1FC211C800CFABBE /* neva.backend.client.pb.swift */; };
+		AC8EF6341FC211C900CFABBE /* neva.backend.server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8EF62E1FC211C900CFABBE /* neva.backend.server.pb.swift */; };
+		AC8EF6351FC211C900CFABBE /* swiftgrpc.log in Resources */ = {isa = PBXBuildFile; fileRef = AC8EF62F1FC211C900CFABBE /* swiftgrpc.log */; };
 		AC8F91791FA9366800D6AB8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F91781FA9366800D6AB8F /* AppDelegate.swift */; };
 		AC8F917B1FA9366800D6AB8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F917A1FA9366800D6AB8F /* ViewController.swift */; };
 		AC8F917E1FA9366800D6AB8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC8F917C1FA9366800D6AB8F /* Main.storyboard */; };
@@ -172,11 +174,13 @@
 		AC38528B1FBB08C70085DB27 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
 		AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftGRPC.xcodeproj; path = "../../dependencies/ios/grpc-swift/SwiftGRPC.xcodeproj"; sourceTree = "<group>"; };
 		AC3852AD1FBB0AAA0085DB27 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		AC3852AF1FBB0AD90085DB27 /* swiftgrpc.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swiftgrpc.log; sourceTree = "<group>"; };
-		AC3852B01FBB0AD90085DB27 /* backend.server.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.server.pb.swift; sourceTree = "<group>"; };
-		AC3852B11FBB0AD90085DB27 /* backend.client.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.client.pb.swift; sourceTree = "<group>"; };
-		AC3852B21FBB0AD90085DB27 /* backend.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.pb.swift; sourceTree = "<group>"; };
 		AC65D4C61FB1233300753B94 /* TempViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempViewController.swift; sourceTree = "<group>"; };
+		AC8EF62A1FC211C800CFABBE /* backend.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.pb.swift; sourceTree = "<group>"; };
+		AC8EF62B1FC211C800CFABBE /* util.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = util.pb.swift; sourceTree = "<group>"; };
+		AC8EF62C1FC211C800CFABBE /* user.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.pb.swift; sourceTree = "<group>"; };
+		AC8EF62D1FC211C800CFABBE /* neva.backend.client.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = neva.backend.client.pb.swift; sourceTree = "<group>"; };
+		AC8EF62E1FC211C900CFABBE /* neva.backend.server.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = neva.backend.server.pb.swift; sourceTree = "<group>"; };
+		AC8EF62F1FC211C900CFABBE /* swiftgrpc.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swiftgrpc.log; sourceTree = "<group>"; };
 		AC8F91751FA9366800D6AB8F /* NeVA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeVA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8F91781FA9366800D6AB8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC8F917A1FA9366800D6AB8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +245,16 @@
 				AC3852A21FBB0A450085DB27 /* Czlib.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AC8EF6291FC211C800CFABBE /* protos */ = {
+			isa = PBXGroup;
+			children = (
+				AC8EF62A1FC211C800CFABBE /* backend.pb.swift */,
+				AC8EF62B1FC211C800CFABBE /* util.pb.swift */,
+				AC8EF62C1FC211C800CFABBE /* user.pb.swift */,
+			);
+			path = protos;
 			sourceTree = "<group>";
 		};
 		AC8F916C1FA9366800D6AB8F = {
@@ -342,10 +356,10 @@
 		ACE030111FBA90B90067A96A /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				AC3852B11FBB0AD90085DB27 /* backend.client.pb.swift */,
-				AC3852B21FBB0AD90085DB27 /* backend.pb.swift */,
-				AC3852B01FBB0AD90085DB27 /* backend.server.pb.swift */,
-				AC3852AF1FBB0AD90085DB27 /* swiftgrpc.log */,
+				AC8EF62D1FC211C800CFABBE /* neva.backend.client.pb.swift */,
+				AC8EF62E1FC211C900CFABBE /* neva.backend.server.pb.swift */,
+				AC8EF6291FC211C800CFABBE /* protos */,
+				AC8EF62F1FC211C900CFABBE /* swiftgrpc.log */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -513,7 +527,7 @@
 			files = (
 				AC8F91861FA9366800D6AB8F /* LaunchScreen.storyboard in Resources */,
 				AC8F91831FA9366800D6AB8F /* Assets.xcassets in Resources */,
-				AC3852B31FBB0AD90085DB27 /* swiftgrpc.log in Resources */,
+				AC8EF6351FC211C900CFABBE /* swiftgrpc.log in Resources */,
 				AC8F917E1FA9366800D6AB8F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,14 +574,16 @@
 			files = (
 				AC9B9C081FB0F34900507F20 /* LoginButton.swift in Sources */,
 				AC8F917B1FA9366800D6AB8F /* ViewController.swift in Sources */,
-				AC3852B51FBB0AD90085DB27 /* backend.client.pb.swift in Sources */,
 				AC65D4C71FB1233300753B94 /* TempViewController.swift in Sources */,
+				AC8EF6321FC211C900CFABBE /* user.pb.swift in Sources */,
+				AC8EF6311FC211C900CFABBE /* util.pb.swift in Sources */,
+				AC8EF6301FC211C900CFABBE /* backend.pb.swift in Sources */,
 				AC9B9C0A1FB104E100507F20 /* LoginRegisterInputField.swift in Sources */,
 				AC8F91791FA9366800D6AB8F /* AppDelegate.swift in Sources */,
+				AC8EF6341FC211C900CFABBE /* neva.backend.server.pb.swift in Sources */,
 				AC8F91811FA9366800D6AB8F /* NeVA.xcdatamodeld in Sources */,
-				AC3852B61FBB0AD90085DB27 /* backend.pb.swift in Sources */,
 				AC9B9C061FB0EB0100507F20 /* LoginRegisterViewController.swift in Sources */,
-				AC3852B41FBB0AD90085DB27 /* backend.server.pb.swift in Sources */,
+				AC8EF6331FC211C900CFABBE /* neva.backend.client.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

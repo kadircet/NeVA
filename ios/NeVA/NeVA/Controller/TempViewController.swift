@@ -53,8 +53,8 @@ class TempViewController: UIViewController, FBSDKLoginButtonDelegate {
         facebookLogoutButton.center = view.center
         
         //Checking if requests are working
-        let requestMessage = Backend_RegisterRequest()
-        let service = Backend_BackendService.init(address: "0xdeffbeef.com:50051");
+        let requestMessage = Neva_Backend_RegisterRequest()
+        let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051");
         do {
             _ = try service.register(requestMessage)
         } catch(let error){
