@@ -71,8 +71,7 @@ Status UserOrm::CheckCredentials(const std::string& email,
     return Status(StatusCode::UNKNOWN, "Connection was null.");
   }
   mysqlpp::Query query = conn_->query(
-      "SELECT `id`, `salt`, `status`, `password` FROM `user` WHERE "
-      "`email`=:%0");
+      "SELECT `id`, `salt`, `status`, `password` FROM `user` WHERE `email`=%0");
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(email);
@@ -125,6 +124,7 @@ Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
              "(%0, %1q, %2)";
     query.execute(user_id, util::HMac(salt, *verification_token),
                   util::GetTimestamp() + kVerficationTokenExpireTime);
+    query.reset();
 
     // TODO(kadircet): Insert remaining fields into user_info.
   }
