@@ -28,12 +28,17 @@ class BackendServiceImpl final : public Backend::Service {
  public:
   Status Register(ServerContext* context, const RegisterRequest* request,
                   RegisterReply* reply) override {
-    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
+    std::string verification_token;
+    // TODO(kadircet): Implement input sanity checking.
+    const Status status =
+        user_orm_->InsertUser(request->user(), &verification_token);
+    // TODO(kadircet): Implement sending of verification_token with email.
+    return status;
   }
 
   Status Login(ServerContext* context, const LoginRequest* request,
                LoginReply* reply) override {
-    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
+    return user_orm_->CheckCredentials(request->email(), request->password());
   }
 
   BackendServiceImpl() {
