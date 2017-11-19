@@ -29,10 +29,14 @@ class UserOrm {
   // database. email and password fields of the user object must be filled.
   grpc::Status CheckCredentials(const User& user);
 
- private:
-  // Returns salt used for the user specified by the email parameter.
-  const std::string GetSaltByEmail(const std::string& email);
+  // Inserts given user into database. On success puts verification token
+  // generated for user into verification_token.
+  // - email and password fields of the user must be filled.
+  // - Everything except user_id, status, register_date and linked_accounts are
+  //   optional. These mentioned fields are not used by this function.
+  grpc::Status InsertUser(const User& user, std::string* verification_token);
 
+ private:
   std::shared_ptr<mysqlpp::Connection> conn_;
 };
 

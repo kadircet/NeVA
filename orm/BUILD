@@ -10,6 +10,7 @@ cc_library(
     deps = [
         "//protos:user_proto",
         "//util:hmac",
+        "//util:time",
         "@glog//:glog",
     ],
 )
