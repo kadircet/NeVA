@@ -28,6 +28,8 @@ class UserOrm {
   // Checks whether credentials given in the user matches with the ones in
   // database. email and password fields of the user object must be filled.
   grpc::Status CheckCredentials(const User& user);
+  grpc::Status CheckCredentials(const std::string& email,
+                                const std::string& password);
 
   // Inserts given user into database. On success puts verification token
   // generated for user into verification_token.

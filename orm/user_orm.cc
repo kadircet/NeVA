@@ -62,6 +62,11 @@ Status UserOrm::GetUserByEmail(const std::string& email, User* user) {
 }
 
 Status UserOrm::CheckCredentials(const User& user) {
+  return CheckCredentials(user.email(), user.password());
+}
+
+Status UserOrm::CheckCredentials(const std::string& email,
+                                 const std::string& password) {
   if (conn_.get() == nullptr) {
     return Status(StatusCode::UNKNOWN, "Connection was null.");
   }
@@ -70,7 +75,7 @@ Status UserOrm::CheckCredentials(const User& user) {
       "`email`=:%0");
   query.parse();
 
-  mysqlpp::StoreQueryResult res = query.store(user.email());
+  mysqlpp::StoreQueryResult res = query.store(email);
   if (res.empty()) return Status(StatusCode::UNKNOWN, "Wrong credentials.");
   if (res.num_rows() != 1) {
     return Status(StatusCode::UNKNOWN,
@@ -78,8 +83,7 @@ Status UserOrm::CheckCredentials(const User& user) {
   }
 
   if (res[0]["password"] ==
-      util::HMac(static_cast<const std::string>(res[0]["salt"]),
-                 user.password())) {
+      util::HMac(static_cast<const std::string>(res[0]["salt"]), password)) {
     return Status::OK;
   }
 
