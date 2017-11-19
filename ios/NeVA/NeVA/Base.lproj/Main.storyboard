@@ -70,6 +70,9 @@ Meal Recommender</string>
                                 <state key="normal" title="LOGIN">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QuM-0w-KQO"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-Jf-qin" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="60" y="224.66666666666666" width="294" height="30"/>
@@ -155,6 +158,8 @@ Meal Recommender</string>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="emailField" destination="eQE-Jf-qin" id="40G-0f-oL1"/>
+                        <outlet property="passwordField" destination="KrZ-iS-wvb" id="3xx-t3-4fa"/>
                         <segue destination="r55-hj-NSC" kind="show" identifier="loggedIn" animates="NO" action="showDetailViewController:sender:" id="KwW-un-7cE"/>
                     </connections>
                 </viewController>

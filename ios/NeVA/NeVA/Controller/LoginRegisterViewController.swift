@@ -8,8 +8,19 @@
 
 import UIKit
 import FBSDKLoginKit
-class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate {
+class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
+    //UITextFieldDelegate functions Start
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == emailField {
+            loginEmail = textField.text
+        } else if textField == passwordField {
+            loginPassword = textField.text
+        }
+    }
+    //UITextFieldDelegate functions End
+    
+    //FBDKLoginButtonDelegate Functions Start
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if ((error) != nil) {
             print("Error: \(error!)")
@@ -23,18 +34,60 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
     }
+    
     func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
         return true
     }
+    //FBDKLoginButtonDelegate Functions End
+    @IBAction func loginButtonPressed(_ sender: Any) {
+        var willLogin = true
+        
+        if let email = loginEmail as String!, !email.isEmpty{
+            //TODO_BILAL: input sanitization
+        } else {
+            emailField.shake()
+            willLogin = false
+        }
+        
+        if let password = loginPassword as String!, !password.isEmpty {
+            //TODO_BILAL: input sanitization
+        } else {
+            passwordField.shake()
+            willLogin = false
+        }
+        
+        if !willLogin {
+            return
+        }
     
+        var loginRequestMessage = Neva_Backend_LoginRequest()
+        loginRequestMessage.email = loginEmail!
+        loginRequestMessage.password = loginPassword!
+        print(loginRequestMessage)
+        let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+        do {
+            let responseMessage = try service.login(loginRequestMessage)
+            print(responseMessage)
+            performSegue(withIdentifier: "loggedIn", sender: self)
+        } catch (let error) {
+            print(error)
+            emailField.shake()
+            passwordField.shake()
+        }
+    }
+    
+    //MARK: Properties
     let facebookLoginButton : FBSDKLoginButton = {
         let button = FBSDKLoginButton()
         button.readPermissions = ["email"]
         return button
     }()
     
-    var email: String?
     
+    @IBOutlet weak var emailField: LoginRegisterInputField!
+    @IBOutlet weak var passwordField: LoginRegisterInputField!
+    var loginEmail: String?
+    var loginPassword: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -55,13 +108,19 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate {
                 NSLayoutConstraint.activate([leadingConstraint,trailingConstraint,topConstraint])
             }
         }
+        
+        emailField.delegate = self
+        passwordField.delegate = self
+        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if FBSDKAccessToken.current() != nil {
             performSegue(withIdentifier: "loggedIn", sender: self)
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
