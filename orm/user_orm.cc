@@ -125,7 +125,7 @@ Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
                   util::GetTimestamp() + kVerficationTokenExpireTime);
   }
 
-  return Status(StatusCode::INVALID_ARGUMENT, "Wrong credentials.");
+  return Status::OK;
 }
 
 }  // namespace user
