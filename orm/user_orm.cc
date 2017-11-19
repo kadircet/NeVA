@@ -82,6 +82,8 @@ Status UserOrm::CheckCredentials(const std::string& email,
                   "More than one user matches this email.");
   }
 
+  // TODO(kadircet): Implement Status::ACTIVE check after sending verification
+  // emails.
   if (res[0]["password"] ==
       util::HMac(static_cast<const std::string>(res[0]["salt"]), password)) {
     return Status::OK;
@@ -123,6 +125,8 @@ Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
              "(%0, %1q, %2)";
     query.execute(user_id, util::HMac(salt, *verification_token),
                   util::GetTimestamp() + kVerficationTokenExpireTime);
+
+    // TODO(kadircet): Insert remaining fields into user_info.
   }
 
   return Status::OK;
