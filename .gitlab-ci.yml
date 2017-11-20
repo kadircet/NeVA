@@ -5,11 +5,11 @@ stages:
   
 build_job:
   stage: build
-  script: "bazel build :all"
+  script: "bazel build ..."
   
 test_job:
   stage: test
-  script: "bazel test :all"
+  script: "bazel test ..."
 
 deploy_job:
   stage: deploy

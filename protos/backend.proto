@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package backend;
+import "protos/user.proto";
+
+package neva.backend;
 
 service Backend {
   rpc Register(RegisterRequest) returns (RegisterReply) {
@@ -9,27 +11,8 @@ service Backend {
   }
 }
 
-message Timestamp {
-  int64 seconds = 1;
-  int32 nanos = 2;
-}
-
 message RegisterRequest {
-  enum Gender {
-    INVALID = 0;
-    MALE = 1;
-    FEMALE = 2;
-  };
-
-  string email = 1;
-  string password = 2;
-  string name = 3;
-  Timestamp date_of_birth = 4;
-  Gender gender = 5;
-  float weight = 6;
-
-  // Keeps url to the photo of the user.
-  string photo = 7;
+  User user = 1;
 }
 
 message RegisterReply {

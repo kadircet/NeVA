@@ -1,18 +1,18 @@
-licenses(["notice"])
-
 package(default_visibility = ["//visibility:public"])
 
-cc_binary(
-    name = "neva_backend",
-    srcs = ["backend.cc"],
+cc_library(
+    name = "user_orm",
+    srcs = ["user_orm.cc"],
+    hdrs = ["user_orm.h"],
     copts = [
         "-I/usr/include/mysql++/",
         "-I/usr/include/mysql",
     ],
     linkopts = ["-lmysqlpp"],
     deps = [
-        "//orm:user_orm",
-        "//protos:backend_proto",
+        "//protos:user_proto",
+        "//util:hmac",
+        "//util:time",
         "@glog//:glog",
     ],
 )

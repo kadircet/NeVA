@@ -3,30 +3,56 @@
 #include <string>
 
 #include <grpc++/grpc++.h>
+#include <mysql++.h>
+
+#include "glog/logging.h"
+#include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
 
+namespace neva {
+namespace backend {
 namespace {
+
 using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
+using orm::user::UserOrm;
 
-using backend::Backend;
-using backend::LoginReply;
-using backend::LoginRequest;
-using backend::RegisterReply;
-using backend::RegisterRequest;
+constexpr const char* const kNevaDatabaseName = "neva";
+constexpr const char* const kNevaDatabaseServer = "localhost";
+constexpr const char* const kNevaDatabaseUser = "neva";
+constexpr const char* const kNevaDatabasePassword = "";
 
 class BackendServiceImpl final : public Backend::Service {
+ public:
   Status Register(ServerContext* context, const RegisterRequest* request,
                   RegisterReply* reply) override {
-    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
+    std::string verification_token;
+    // TODO(kadircet): Implement input sanity checking.
+    const Status status =
+        user_orm_->InsertUser(request->user(), &verification_token);
+    // TODO(kadircet): Implement sending of verification_token with email.
+    return status;
   }
 
   Status Login(ServerContext* context, const LoginRequest* request,
                LoginReply* reply) override {
-    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
+    return user_orm_->CheckCredentials(request->email(), request->password());
   }
+
+  BackendServiceImpl() {
+    conn_ = std::make_shared<mysqlpp::Connection>(false);
+    conn_->connect(kNevaDatabaseName, kNevaDatabaseServer, kNevaDatabaseUser,
+                   kNevaDatabasePassword);
+    CHECK(conn_->connected()) << "Database connection failed.";
+
+    user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
+  }
+
+ private:
+  std::shared_ptr<mysqlpp::Connection> conn_;
+  std::unique_ptr<UserOrm> user_orm_;
 };
 
 void RunServer() {
@@ -42,9 +68,12 @@ void RunServer() {
 
   server->Wait();
 }
+
 }  // namespace
+}  // namespace backend
+}  // namespace neva
 
 int main(int argc, char** argv) {
-  RunServer();
+  neva::backend::RunServer();
   return 0;
 }
