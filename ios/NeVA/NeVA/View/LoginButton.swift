@@ -12,14 +12,12 @@ class LoginButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setTitle("LOGIN", for: .normal)
         setTitleColor(UIColor.white, for: .normal)
         layer.backgroundColor = UIColor(red: 104.0/255.0, green: 159.0/255.0, blue: 56.0/255.0, alpha: 1.0).cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setTitle("LOGIN", for: .normal)
         setTitleColor(UIColor.white, for: .normal)
         layer.backgroundColor = UIColor(red: 104.0/255.0, green: 159.0/255.0, blue: 56.0/255.0, alpha: 1.0).cgColor
     }

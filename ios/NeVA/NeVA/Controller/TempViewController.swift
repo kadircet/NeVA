@@ -23,7 +23,7 @@ class TempViewController: UIViewController, FBSDKLoginButtonDelegate {
         return false
     }
     
-    var emailText: String?;
+    var emailText: String?
     let facebookLogoutButton : FBSDKLoginButton = {
         let button = FBSDKLoginButton()
         button.readPermissions = ["email"]
