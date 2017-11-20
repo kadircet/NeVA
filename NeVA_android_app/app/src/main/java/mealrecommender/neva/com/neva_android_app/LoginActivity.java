@@ -25,8 +25,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import backend.BackendOuterClass;
-import backend.BackendGrpc;
+import neva.backend.BackendOuterClass;
+import neva.backend.BackendGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 

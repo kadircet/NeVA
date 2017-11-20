@@ -6,7 +6,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "mealrecommender.neva.com.neva_android_app"
-        minSdkVersion 15
+        minSdkVersion 20
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -19,21 +19,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'io.grpc:grpc-okhttp:1.7.0'
-    compile 'io.grpc:grpc-protobuf-lite:1.7.0'
-    compile 'io.grpc:grpc-stub:1.7.0'
-    compile 'com.google.protobuf:protobuf-java:3.4.0'
-    compile 'javax.annotation:jsr250-api:1.0'
 }
 
 protobuf {
@@ -51,22 +36,28 @@ protobuf {
         }
     }
     generateProtoTasks {
-        all()*.plugins {
-            javalite {}
-            grpc{
-                option 'lite'
+        all().each { task ->
+            task.plugins {
+                javalite {}
+                grpc {
+                    // Options added to --grpc_out
+                    option 'lite'
+                }
             }
         }
     }
-    generatedFilesBaseDir = "${projectDir}/src/generated"
 }
 
-apply plugin: 'idea'
 
-idea {
-    module {
-        sourceDirs += file("${projectDir}/src/generated/**");
-        sourceDirs += file("${projectDir}/src/generated/**");
-        sourceDirs += file("${projectDir}/src/main/proto/**");
-    }
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'io.grpc:grpc-okhttp:1.7.0'
+    compile 'io.grpc:grpc-protobuf-lite:1.7.0'
+    compile 'io.grpc:grpc-stub:1.7.0'
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'org.conscrypt:conscrypt-android:1.0.0.RC10'
 }

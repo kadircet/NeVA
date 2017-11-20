@@ -2,10 +2,12 @@ package mealrecommender.neva.com.neva_android_app;
 
 import org.junit.Test;
 
-import backend.BackendGrpc;
-import backend.BackendOuterClass;
+import neva.backend.BackendGrpc;
+import neva.backend.BackendOuterClass;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import neva.backend.UserOuterClass;
+import neva.backend.util.Util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,18 +20,47 @@ public class LoginRequestTest {
     @Test
     public void login_test(){
         try {
-            ManagedChannel mChannel = ManagedChannelBuilder.forAddress("0xdeffbeef.com",50051).build();
-            System.out.println(mChannel.getState(true));
-            BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
-            BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder().setEmail("test_email").setPassword("test_passwd").build();
+            //ManagedChannel mChannel = ManagedChannelBuilder.forAddress("0xdeffbeef.com",50051).build();
+            ManagedChannel ch = ManagedChannelBuilder.forAddress("0xdeffbeef.com", 50051).usePlaintext(true).build();
+            System.out.println(ch.getState(true));
+            BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(ch);
+            BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
+                                                            .setEmail("asdf").setPassword("test")
+                                                            .build();
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
+            System.out.println(loginReply.getToken());
         }
         catch (Exception e)
         {
             System.out.println("ERROR-Login Req.");
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
+    }
+
+    @Test
+    public void register_test(){
+        try{
+
+            ManagedChannel ch = ManagedChannelBuilder.forAddress("0xdeffbeef.com", 50051).usePlaintext(true).build();
+            System.out.println(ch.getState(true));
+            BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(ch);
+            UserOuterClass.User user = UserOuterClass.User.newBuilder().setUserId(5)
+                                        .setEmail("deneme@bilemiyorumaltan.com").setPassword("asdf123!")
+                                        .setName("testUser").build();
+            BackendOuterClass.RegisterRequest registerRequest = BackendOuterClass.RegisterRequest
+                                                                .newBuilder()
+                                                                .setUser(user).build();
+            System.out.println("Sending Register Req");
+            BackendOuterClass.RegisterReply registerReply = blockingStub.register(registerRequest);
+            System.out.println("Sent.");
+            System.out.println(registerReply.toString());
+        }
+        catch (Exception e)
+        {
+            System.out.println("ERROR-Register Req.");
+            System.out.println(e.getMessage());
+        }
     }
 }
 
