@@ -19,9 +19,8 @@ constexpr const uint64_t kVerficationTokenExpireTime = 24 * 60 * 60;
 }  // namespace
 
 Status UserOrm::GetUserById(const uint32_t user_id, User* user) {
-  if (conn_.get() == nullptr) {
-    return Status(StatusCode::UNKNOWN, "Connection was null.");
-  }
+  conn_->ping();
+
   mysqlpp::Query query =
       conn_->query("SELECT `email`, `status` FROM `user` WHERE `id`=:%0");
   query.parse();
@@ -40,11 +39,10 @@ Status UserOrm::GetUserById(const uint32_t user_id, User* user) {
 }
 
 Status UserOrm::GetUserByEmail(const std::string& email, User* user) {
-  if (conn_.get() == nullptr) {
-    return Status(StatusCode::UNKNOWN, "Connection was null.");
-  }
+  conn_->ping();
+
   mysqlpp::Query query =
-      conn_->query("SELECT `id`, `status` FROM `user` WHERE `email`=:%0");
+      conn_->query("SELECT `id`, `status` FROM `user` WHERE `email`=:%0q");
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(email);
@@ -67,11 +65,10 @@ Status UserOrm::CheckCredentials(const User& user) {
 
 Status UserOrm::CheckCredentials(const std::string& email,
                                  const std::string& password) {
-  if (conn_.get() == nullptr) {
-    return Status(StatusCode::UNKNOWN, "Connection was null.");
-  }
+  conn_->ping();
+  
   mysqlpp::Query query = conn_->query(
-      "SELECT `id`, `salt`, `status`, `password` FROM `user` WHERE `email`=%0");
+      "SELECT `id`, `salt`, `status`, `password` FROM `user` WHERE `email`=%0q");
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(email);
@@ -92,9 +89,7 @@ Status UserOrm::CheckCredentials(const std::string& email,
 }
 
 Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
-  if (conn_.get() == nullptr) {
-    return Status(StatusCode::UNKNOWN, "Connection was null.");
-  }
+  conn_->ping();
 
   mysqlpp::Query query = conn_->query();
 
