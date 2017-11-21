@@ -108,51 +108,67 @@ public class LoginActivity extends AppCompatActivity {
             login_button.setEnabled(true);
             return;
         }
-        login_button.setEnabled(false);
 
-        pb.setVisibility(View.VISIBLE);
 
-        // SEND REQUEST
-        ManagedChannel mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com",50051).build();
-        BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
-        BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder().setEmail(username).setPassword(password).build();
+        try {
+            // SEND REQUEST
+            login_button.setEnabled(false);
 
-        // GET ANSWER
-        BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
-        String loginToken = loginReply.getToken();
+            pb.setVisibility(View.VISIBLE);
 
-        Intent intent = new Intent(this, LoginResultActivity.class);
-        String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken;
-        intent.putExtra(MESSAGE_CLASS, login_res);
-        pb.setVisibility(View.GONE);
-        startActivity(intent);
+            ManagedChannel mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
+            BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
+            BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder().setEmail(username).setPassword(password).build();
+
+            // GET ANSWER
+            BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
+            String loginToken = loginReply.getToken();
+
+            Intent intent = new Intent(this, LoginResultActivity.class);
+            String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken;
+            intent.putExtra(MESSAGE_CLASS, login_res);
+            login_button.setEnabled(true);
+            pb.setVisibility(View.GONE);
+            startActivity(intent);
+
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            pb.setVisibility(View.GONE);
+            login_button.setEnabled(true);
+        }
     }
-
-
-    // Validate username and password data
-    //TODO: ADD INPUT SANITATION
-    public boolean validate() {
+    public boolean validateUsername() {
         String username = username_field.getText().toString();
-        String password = password_field.getText().toString();
-        boolean val = true;
         if(username.isEmpty())
         {
-            username_field.setError("Please enter a valid username");
-            val=false;
+            username_field.setError("Enter a valid username");
+            return false;
         }
         else
         {
             username_field.setError(null);
+            return true;
         }
+    }
+    public boolean validatePassword() {
+        String password = password_field.getText().toString();
         if(!isValidPassword(password))
         {
-            val=false;
+            return false;
         }
         else
         {
             password_field.setError(null);
         }
-        return val;
+        return true;
+    }
+
+    // Validate username and password data
+    //TODO: ADD INPUT SANITATION
+    public boolean validate() {
+        return validateUsername() && validateUsername();
     }
 
     // Check password with RegEx to see if it fits the qualifications

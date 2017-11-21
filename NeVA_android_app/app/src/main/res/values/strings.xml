@@ -14,4 +14,7 @@
     <string name="signup_description">To complete the process please provide following info.</string>
     <string name="email">e-mail</string>
     <string name="already_member">Already a member? Login.</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
 </resources>
