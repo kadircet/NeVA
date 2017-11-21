@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-
+        String loginToken = null;
         try {
             // SEND REQUEST
             login_button.setEnabled(false);
@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
             // GET ANSWER
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
-            String loginToken = loginReply.getToken();
+            loginToken = loginReply.getToken();
 
             Intent intent = new Intent(this, LoginResultActivity.class);
             String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken;
@@ -138,6 +138,8 @@ public class LoginActivity extends AppCompatActivity {
             pb.setVisibility(View.GONE);
             login_button.setEnabled(true);
         }
+
+
     }
     public boolean validateUsername() {
         String username = username_field.getText().toString();

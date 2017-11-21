@@ -138,7 +138,12 @@ public class RegisterActivity extends AppCompatActivity {
             BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
 
             BackendOuterClass.RegisterReply registerReply = blockingStub.register(registerRequest);
-
+            Intent intent = new Intent(this, LoginResultActivity.class);
+            String login_res = "Successfully Signed Up!";
+            intent.putExtra(MESSAGE_CLASS, login_res);
+            signup_button.setEnabled(true);
+            pb.setVisibility(View.GONE);
+            startActivity(intent);
 
         }
         catch (Exception e)
@@ -148,12 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
             signup_button.setEnabled(true);
         }
 
-        Intent intent = new Intent(this, LoginResultActivity.class);
-        String login_res = "Successfully Signed Up!";
-        intent.putExtra(MESSAGE_CLASS, login_res);
-        signup_button.setEnabled(true);
-        pb.setVisibility(View.GONE);
-        startActivity(intent);
+
 
     }
 
