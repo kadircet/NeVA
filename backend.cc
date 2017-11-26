@@ -8,6 +8,7 @@
 #include "glog/logging.h"
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
+#include "social_media/facebook.h"
 
 namespace neva {
 namespace backend {
@@ -30,8 +31,15 @@ class BackendServiceImpl final : public Backend::Service {
                   RegisterReply* reply) override {
     std::string verification_token;
     // TODO(kadircet): Implement input sanity checking.
-    const Status status =
-        user_orm_->InsertUser(request->user(), &verification_token);
+
+    const User user = request->user();
+    if (request->authentication_type() == RegisterRequest::FACEBOOK) {
+      if (!FacebookValidator::Validate(user.email(), user.password())) {
+        return Status(grpc::StatusCode::INVALID_ARGUMENT,
+                      "Authentication token cannot be validated.");
+      }
+    }
+    const Status status = user_orm_->InsertUser(user, &verification_token);
     // TODO(kadircet): Implement sending of verification_token with email.
     return status;
   }
