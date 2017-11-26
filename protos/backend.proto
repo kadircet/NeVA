@@ -12,7 +12,14 @@ service Backend {
 }
 
 message RegisterRequest {
+  enum AuthenticationType {
+    INVALID = 0;
+    DEFAULT = 1;
+    FACEBOOK = 2;
+  };
+
   User user = 1;
+  AuthenticationType authentication_type = 2;
 }
 
 message RegisterReply {
