@@ -24,6 +24,21 @@ http_archive(
     url = "https://github.com/pubref/rules_protobuf/archive/v0.8.1.tar.gz",
 )
 
+new_http_archive(
+    name = "cpr",
+    build_file = "cpr.BUILD",
+    strip_prefix = "cpr-1.3.0",
+    url = "https://github.com/whoshuu/cpr/archive/1.3.0.tar.gz",
+)
+
+new_http_archive(
+    name = "json",
+    build_file = "json.BUILD",
+    strip_prefix = "json-2.1.1",
+    #url = "https://github.com/nlohmann/json/archive/v2.1.1.tar.gz",
+    url = "file:///home/kadircet/Downloads/json-2.1.1.tar.gz",
+)
+
 load("@org_pubref_rules_protobuf//cpp:rules.bzl", "cpp_proto_repositories")
 
 cpp_proto_repositories()

@@ -13,6 +13,7 @@ cc_binary(
     deps = [
         "//orm:user_orm",
         "//protos:backend_proto",
+        "//social_media:facebook_validator",
         "@glog//:glog",
     ],
 )
