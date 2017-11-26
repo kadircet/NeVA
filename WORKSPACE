@@ -35,8 +35,7 @@ new_http_archive(
     name = "json",
     build_file = "json.BUILD",
     strip_prefix = "json-2.1.1",
-    #url = "https://github.com/nlohmann/json/archive/v2.1.1.tar.gz",
-    url = "file:///home/kadircet/Downloads/json-2.1.1.tar.gz",
+    url = "https://github.com/nlohmann/json/archive/v2.1.1.tar.gz",
 )
 
 load("@org_pubref_rules_protobuf//cpp:rules.bzl", "cpp_proto_repositories")
