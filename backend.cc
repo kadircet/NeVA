@@ -28,7 +28,7 @@ constexpr const char* const kNevaDatabasePassword = "";
 class BackendServiceImpl final : public Backend::Service {
  public:
   Status Register(ServerContext* context, const RegisterRequest* request,
-                  RegisterReply* reply) override {
+                  GenericReply* reply) override {
     std::string verification_token;
     // TODO(kadircet): Implement input sanity checking.
 
@@ -47,6 +47,12 @@ class BackendServiceImpl final : public Backend::Service {
   Status Login(ServerContext* context, const LoginRequest* request,
                LoginReply* reply) override {
     return user_orm_->CheckCredentials(request->email(), request->password());
+  }
+
+  Status SuggestionItemProposition(
+      ServerContext* context, const SuggestionItemPropositionRequest* request,
+      GenericReply* reply) override {
+    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
   }
 
   BackendServiceImpl() {

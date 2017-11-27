@@ -16,6 +16,7 @@ cc_proto_library(
 cc_proto_library(
     name = "backend_proto",
     proto_deps = [
+        ":suggestion_proto",
         ":user_proto",
         ":util_proto",
     ],

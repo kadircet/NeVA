@@ -1,14 +1,23 @@
 syntax = "proto3";
 
 import "protos/user.proto";
+import "protos/suggestion.proto";
 
 package neva.backend;
 
 service Backend {
-  rpc Register(RegisterRequest) returns (RegisterReply) {
+  rpc Register(RegisterRequest) returns (GenericReply) {
   }
+
   rpc Login(LoginRequest) returns (LoginReply) {
   }
+
+  rpc SuggestionItemProposition(SuggestionItemPropositionRequest)
+      returns (GenericReply) {
+  }
+}
+
+message GenericReply {
 }
 
 message RegisterRequest {
@@ -22,9 +31,6 @@ message RegisterRequest {
   AuthenticationType authentication_type = 2;
 }
 
-message RegisterReply {
-}
-
 message LoginRequest {
   string email = 1;
   string password = 2;
@@ -32,5 +38,13 @@ message LoginRequest {
 
 message LoginReply {
   // Authentication token to be used in upcoming requests.
-  string token = 1;
+  bytes token = 1;
+}
+
+message SuggestionItemPropositionRequest {
+  // Session key for the user proposing the item.
+  bytes token = 1;
+
+  // Holds information on propositions category and name.
+  Suggestion suggestion = 2;
 }
