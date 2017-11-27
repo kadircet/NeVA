@@ -74,6 +74,18 @@ class BackendServiceImpl final : public Backend::Service {
         std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_));
   }
 
+  Status GetMealSuggestion(ServerContext* context,
+                           const GetMealSuggestionRequest* request,
+                           GetMealSuggestionReply* reply) override {
+    int user_id;
+    const Status status = user_orm_->CheckToken(request->token(), &user_id);
+    if (!status.ok()) {
+      return status;
+    }
+
+    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet.");
+  }
+
  private:
   std::shared_ptr<mysqlpp::Connection> conn_;
   std::unique_ptr<UserOrm> user_orm_;

@@ -15,6 +15,10 @@ service Backend {
   rpc SuggestionItemProposition(SuggestionItemPropositionRequest)
       returns (GenericReply) {
   }
+
+  rpc GetMealSuggestion(GetMealSuggestionRequest)
+      returns (GetMealSuggestionReply) {
+  }
 }
 
 message GenericReply {
@@ -47,4 +51,17 @@ message SuggestionItemPropositionRequest {
 
   // Holds information on propositions category and name.
   Suggestion suggestion = 2;
+}
+
+message GetMealSuggestionRequest {
+  // Session key for the user requesting a suggestion.
+  bytes token = 1;
+
+  // Category for which the user requests a suggestion.
+  Suggestion.SuggestionCategory suggestion_category = 2;
+}
+
+message GetMealSuggestionReply {
+  // Name of the suggested item.
+  string name = 1;
 }
