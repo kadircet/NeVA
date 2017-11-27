@@ -59,16 +59,20 @@ Status UserOrm::GetUserByEmail(const std::string& email, User* user) {
   return Status::OK;
 }
 
-Status UserOrm::CheckCredentials(const User& user) {
-  return CheckCredentials(user.email(), user.password());
+Status UserOrm::CheckCredentials(const User& user, std::string* session_token) {
+  return CheckCredentials(user.email(), user.password(), session_token);
 }
 
 Status UserOrm::CheckCredentials(const std::string& email,
-                                 const std::string& password) {
-  conn_->ping();
-  
+                                 const std::string& password,
+                                 std::string* session_token) {
+  if (!conn_->ping()) {
+    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
+  }
+
   mysqlpp::Query query = conn_->query(
-      "SELECT `id`, `salt`, `status`, `password` FROM `user` WHERE `email`=%0q");
+      "SELECT `id`, `salt`, `status`, `password` FROM `user` WHERE "
+      "`email`=%0q");
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(email);
@@ -82,6 +86,13 @@ Status UserOrm::CheckCredentials(const std::string& email,
   // emails.
   if (res[0]["password"] ==
       util::HMac(static_cast<const std::string>(res[0]["salt"]), password)) {
+    query.reset();
+    *session_token = util::GenerateRandomKey();
+    query << "INSERT INTO `user_session` (`id`, `token`, `expire`) VALUES "
+             "(%0, %1q, %2) ON DUPLICATE KEY UPDATE `token`=%1q, `expire`=%2";
+    query.parse();
+    // TODO(kadircet): Implement token expiration.
+    query.execute(res[0]["id"], *session_token, 0);
     return Status::OK;
   }
 
@@ -89,7 +100,9 @@ Status UserOrm::CheckCredentials(const std::string& email,
 }
 
 Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
-  conn_->ping();
+  if (!conn_->ping()) {
+    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
+  }
 
   mysqlpp::Query query = conn_->query();
 
@@ -125,6 +138,28 @@ Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
   }
 
   return Status::OK;
+}
+
+Status UserOrm::CheckToken(const std::string& token, int* user_id) {
+  if (!conn_->ping()) {
+    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
+  }
+
+  mysqlpp::Query query = conn_->query();
+  {
+    query << "SELECT `id`, `expire` FROM `user_session` WHERE `token`=%0q";
+    query.parse();
+
+    const mysqlpp::StoreQueryResult res = query.store(token);
+    if (res.empty()) {
+      return Status(StatusCode::INVALID_ARGUMENT,
+                    "No such session token exists.");
+    }
+    // TODO(kadircet): Implement session expire check.
+    *user_id = res[0]["id"];
+
+    return Status::OK;
+  }
 }
 
 }  // namespace user

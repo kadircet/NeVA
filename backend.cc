@@ -46,7 +46,8 @@ class BackendServiceImpl final : public Backend::Service {
 
   Status Login(ServerContext* context, const LoginRequest* request,
                LoginReply* reply) override {
-    return user_orm_->CheckCredentials(request->email(), request->password());
+    return user_orm_->CheckCredentials(request->email(), request->password(),
+                                       reply->mutable_token());
   }
 
   Status SuggestionItemProposition(
