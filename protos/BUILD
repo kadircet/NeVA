@@ -22,3 +22,8 @@ cc_proto_library(
     protos = ["backend.proto"],
     with_grpc = True,
 )
+
+cc_proto_library(
+    name = "suggestion_proto",
+    protos = ["suggestion.proto"],
+)
