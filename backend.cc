@@ -53,6 +53,11 @@ class BackendServiceImpl final : public Backend::Service {
   Status SuggestionItemProposition(
       ServerContext* context, const SuggestionItemPropositionRequest* request,
       GenericReply* reply) override {
+    int user_id;
+    const Status status = user_orm_->CheckToken(request->token, &user_id);
+    if (!status.Ok()) {
+      return status;
+    }
     return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
   }
 
