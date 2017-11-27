@@ -6,6 +6,7 @@
 #include <mysql++.h>
 
 #include "glog/logging.h"
+#include "orm/proposition_orm.h"
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
 #include "social_media/facebook.h"
@@ -18,6 +19,7 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
+using orm::PropositionOrm;
 using orm::user::UserOrm;
 
 constexpr const char* const kNevaDatabaseName = "neva";
@@ -58,7 +60,7 @@ class BackendServiceImpl final : public Backend::Service {
     if (!status.ok()) {
       return status;
     }
-    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
+    return proposition_orm_->InsertProposition(user_id, request->suggestion());
   }
 
   BackendServiceImpl() {
@@ -68,11 +70,14 @@ class BackendServiceImpl final : public Backend::Service {
     CHECK(conn_->connected()) << "Database connection failed.";
 
     user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
+    proposition_orm_ =
+        std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_));
   }
 
  private:
   std::shared_ptr<mysqlpp::Connection> conn_;
   std::unique_ptr<UserOrm> user_orm_;
+  std::unique_ptr<PropositionOrm> proposition_orm_;
 };
 
 void RunServer() {
