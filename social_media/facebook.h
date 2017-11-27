@@ -7,9 +7,12 @@ namespace neva {
 namespace backend {
 namespace FacebookValidator {
 
+// Checks whether a given authentication token is associated with the specified
+// email address using Facebook Graph API.
 bool Validate(const std::string& email,
               const std::string& authentication_token);
-}
+
+}  // namespace FacebookValidator
 }  // namespace backend
 }  // namespace neva
 
