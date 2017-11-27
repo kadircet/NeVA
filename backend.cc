@@ -54,7 +54,7 @@ class BackendServiceImpl final : public Backend::Service {
       ServerContext* context, const SuggestionItemPropositionRequest* request,
       GenericReply* reply) override {
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token, &user_id);
+    const Status status = user_orm_->CheckToken(request->token(), &user_id);
     if (!status.ok()) {
       return status;
     }
