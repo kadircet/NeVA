@@ -16,3 +16,18 @@ cc_library(
         "@glog//:glog",
     ],
 )
+
+cc_library(
+    name = "proposition_orm",
+    srcs = ["proposition_orm.cc"],
+    hdrs = ["proposition_orm.h"],
+    copts = [
+        "-I/usr/include/mysql++/",
+        "-I/usr/include/mysql",
+    ],
+    linkopts = ["-lmysqlpp"],
+    deps = [
+        "//protos:suggestion_proto",
+        "@glog//:glog",
+    ],
+)
