@@ -55,7 +55,7 @@ class BackendServiceImpl final : public Backend::Service {
       GenericReply* reply) override {
     int user_id;
     const Status status = user_orm_->CheckToken(request->token, &user_id);
-    if (!status.Ok()) {
+    if (!status.ok()) {
       return status;
     }
     return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet");
