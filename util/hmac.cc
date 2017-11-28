@@ -25,13 +25,14 @@ const std::string GenerateRandomKey(const unsigned seed, const int length) {
       << "Key length must be a multiple of " << kQwordSizeInBytes
       << ". Length: " << length;
 
-  std::independent_bits_engine<std::mt19937, kQwordSizeInBits, uint64_t>
-      random_qword(seed);
+  static std::independent_bits_engine<std::mt19937, kQwordSizeInBits, uint64_t>*
+      random_qword =
+          new std::independent_bits_engine<std::mt19937, kQwordSizeInBits,
+                                           uint64_t>(seed);
   std::string random_bytes;
-
   random_bytes.resize(length);
   std::generate(random_bytes.begin(), random_bytes.end(),
-                std::ref(random_qword));
+                std::ref(*random_qword));
 
   return random_bytes;
 }

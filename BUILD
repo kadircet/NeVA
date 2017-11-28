@@ -11,8 +11,10 @@ cc_binary(
     ],
     linkopts = ["-lmysqlpp"],
     deps = [
+        "//orm:proposition_orm",
         "//orm:user_orm",
         "//protos:backend_proto",
+        "//social_media:facebook_validator",
         "@glog//:glog",
     ],
 )

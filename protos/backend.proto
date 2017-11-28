@@ -1,29 +1,95 @@
 syntax = "proto3";
 
 import "protos/user.proto";
+import "protos/suggestion.proto";
 
 package neva.backend;
 
 service Backend {
-  rpc Register(RegisterRequest) returns (RegisterReply) {
+  rpc Register(RegisterRequest) returns (GenericReply) {
   }
+
   rpc Login(LoginRequest) returns (LoginReply) {
   }
+
+  rpc SuggestionItemProposition(SuggestionItemPropositionRequest)
+      returns (GenericReply) {
+  }
+
+  rpc GetMealSuggestion(GetMealSuggestionRequest)
+      returns (GetMealSuggestionReply) {
+  }
+
+  rpc TagProposition(TagPropositionRequest) returns (GenericReply) {
+  }
+
+  rpc TagValueProposition(TagValuePropositionRequest) returns (GenericReply) {
+  }
+}
+
+message GenericReply {
 }
 
 message RegisterRequest {
   User user = 1;
 }
 
-message RegisterReply {
-}
-
 message LoginRequest {
+  enum AuthenticationType {
+    INVALID = 0;
+    DEFAULT = 1;
+    FACEBOOK = 2;
+  };
+
   string email = 1;
   string password = 2;
+  AuthenticationType authentication_type = 3;
 }
 
 message LoginReply {
   // Authentication token to be used in upcoming requests.
-  string token = 1;
+  bytes token = 1;
+}
+
+message SuggestionItemPropositionRequest {
+  // Session key for the user proposing the item.
+  bytes token = 1;
+
+  // Holds information on propositions category and name.
+  Suggestion suggestion = 2;
+}
+
+message GetMealSuggestionRequest {
+  // Session key for the user requesting a suggestion.
+  bytes token = 1;
+
+  // Category for which the user requests a suggestion.
+  Suggestion.SuggestionCategory suggestion_category = 2;
+}
+
+message GetMealSuggestionReply {
+  // Name of the suggested item.
+  string name = 1;
+}
+
+message TagPropositionRequest {
+  // Session key for the user proposing the tag.
+  bytes token = 1;
+
+  // Holds name for proposed tag.
+  string tag = 2;
+}
+
+message TagValuePropositionRequest {
+  // Session key for the user proposing the tag.
+  bytes token = 1;
+
+  // Holds id of the tag.
+  uint32 tag_id = 2;
+
+  // Holds id of the suggestion item.
+  uint32 suggestee_id = 3;
+
+  // Holds value for the tag if appropriate.
+  string value = 4;
 }

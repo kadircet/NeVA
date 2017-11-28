@@ -35,6 +35,15 @@ TEST(GenerateRandomKey, SanityTest) {
   EXPECT_EQ(random_key, kExpectedRandomKey);
 }
 
+TEST(GenerateRandomKey, DifferentTest) {
+  const std::string random_key = GenerateRandomKey(0, kExpectedRandomKeySize);
+  const std::string random_key2 = GenerateRandomKey(0, kExpectedRandomKeySize);
+
+  EXPECT_EQ(random_key.size(), kExpectedRandomKeySize);
+  EXPECT_EQ(random_key2.size(), kExpectedRandomKeySize);
+  EXPECT_NE(random_key, random_key2);
+}
+
 TEST(HMac, SanityTest) {
   const std::string key = "test";
   const std::string message = "test";

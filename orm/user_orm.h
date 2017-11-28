@@ -27,9 +27,10 @@ class UserOrm {
 
   // Checks whether credentials given in the user matches with the ones in
   // database. email and password fields of the user object must be filled.
-  grpc::Status CheckCredentials(const User& user);
+  grpc::Status CheckCredentials(const User& user, std::string* session_token);
   grpc::Status CheckCredentials(const std::string& email,
-                                const std::string& password);
+                                const std::string& password,
+                                std::string* session_token);
 
   // Inserts given user into database. On success puts verification token
   // generated for user into verification_token.
@@ -37,6 +38,10 @@ class UserOrm {
   // - Everything except user_id, status, register_date and linked_accounts are
   //   optional. These mentioned fields are not used by this function.
   grpc::Status InsertUser(const User& user, std::string* verification_token);
+
+  // Verifies a given authentication token and sets user_id to id of the user
+  // bearing the token.
+  grpc::Status CheckToken(const std::string& token, int* user_id);
 
  private:
   std::shared_ptr<mysqlpp::Connection> conn_;
