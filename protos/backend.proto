@@ -19,6 +19,12 @@ service Backend {
   rpc GetMealSuggestion(GetMealSuggestionRequest)
       returns (GetMealSuggestionReply) {
   }
+
+  rpc TagProposition(TagPropositionRequest) returns (GenericReply) {
+  }
+
+  rpc TagValueProposition(TagValuePropositionRequest) returns (GenericReply) {
+  }
 }
 
 message GenericReply {
@@ -64,4 +70,26 @@ message GetMealSuggestionRequest {
 message GetMealSuggestionReply {
   // Name of the suggested item.
   string name = 1;
+}
+
+message TagPropositionRequest {
+  // Session key for the user proposing the tag.
+  bytes token = 1;
+
+  // Holds name for proposed tag.
+  string tag = 2;
+}
+
+message TagValuePropositionRequest {
+  // Session key for the user proposing the tag.
+  bytes token = 1;
+
+  // Holds id of the tag.
+  uint32 tag_id = 2;
+
+  // Holds id of the suggestion item.
+  uint32 suggestee_id = 3;
+
+  // Holds value for the tag if appropriate.
+  string value = 4;
 }
