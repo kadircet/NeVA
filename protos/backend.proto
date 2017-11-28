@@ -31,19 +31,19 @@ message GenericReply {
 }
 
 message RegisterRequest {
+  User user = 1;
+}
+
+message LoginRequest {
   enum AuthenticationType {
     INVALID = 0;
     DEFAULT = 1;
     FACEBOOK = 2;
   };
 
-  User user = 1;
-  AuthenticationType authentication_type = 2;
-}
-
-message LoginRequest {
   string email = 1;
   string password = 2;
+  AuthenticationType authentication_type = 3;
 }
 
 message LoginReply {
