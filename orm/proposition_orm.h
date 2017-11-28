@@ -20,6 +20,14 @@ class PropositionOrm {
   grpc::Status InsertProposition(const int user_id,
                                  const Suggestion& suggestion);
 
+  // Inserts given tag proposition to database.
+  grpc::Status InsertProposition(const int user_id, const std::string& tag);
+
+  // Inserts given tag_value proposition to database.
+  grpc::Status InsertProposition(const int user_id, const int tag_id,
+                                 const int suggestee_id,
+                                 const std::string& value);
+
  private:
   std::shared_ptr<mysqlpp::Connection> conn_;
 };
