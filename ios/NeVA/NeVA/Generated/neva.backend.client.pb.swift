@@ -44,10 +44,10 @@ internal class Neva_Backend_BackendRegisterCall {
 
   /// Run the call. Blocks until the reply is received.
   fileprivate func run(request: Neva_Backend_RegisterRequest,
-                       metadata: Metadata) throws -> Neva_Backend_RegisterReply {
+                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
     let sem = DispatchSemaphore(value: 0)
     var returnCallResult : CallResult!
-    var returnResponse : Neva_Backend_RegisterReply?
+    var returnResponse : Neva_Backend_GenericReply?
     _ = try start(request:request, metadata:metadata) {response, callResult in
       returnResponse = response
       returnCallResult = callResult
@@ -64,7 +64,7 @@ internal class Neva_Backend_BackendRegisterCall {
   /// Start the call. Nonblocking.
   fileprivate func start(request: Neva_Backend_RegisterRequest,
                          metadata: Metadata,
-                         completion: @escaping (Neva_Backend_RegisterReply?, CallResult)->())
+                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
     throws -> Neva_Backend_BackendRegisterCall {
 
       let requestData = try request.serializedData()
@@ -73,7 +73,7 @@ internal class Neva_Backend_BackendRegisterCall {
                      message:requestData)
       {(callResult) in
         if let responseData = callResult.resultData,
-          let response = try? Neva_Backend_RegisterReply(serializedData:responseData) {
+          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
           completion(response, callResult)
         } else {
           completion(nil, callResult)
@@ -143,6 +143,226 @@ internal class Neva_Backend_BackendLoginCall {
   }
 }
 
+/// SuggestionItemProposition (Unary)
+internal class Neva_Backend_BackendSuggestionItemPropositionCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/SuggestionItemProposition")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_SuggestionItemPropositionRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GenericReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_SuggestionItemPropositionRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws -> Neva_Backend_BackendSuggestionItemPropositionCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
+/// GetMealSuggestion (Unary)
+internal class Neva_Backend_BackendGetMealSuggestionCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/GetMealSuggestion")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_GetMealSuggestionRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GetMealSuggestionReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GetMealSuggestionReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_GetMealSuggestionRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GetMealSuggestionReply?, CallResult)->())
+    throws -> Neva_Backend_BackendGetMealSuggestionCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GetMealSuggestionReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
+/// TagProposition (Unary)
+internal class Neva_Backend_BackendTagPropositionCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/TagProposition")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_TagPropositionRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GenericReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_TagPropositionRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws -> Neva_Backend_BackendTagPropositionCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
+/// TagValueProposition (Unary)
+internal class Neva_Backend_BackendTagValuePropositionCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/TagValueProposition")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_TagValuePropositionRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GenericReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_TagValuePropositionRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws -> Neva_Backend_BackendTagValuePropositionCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
 /// Call methods of this class to make API calls.
 internal class Neva_Backend_BackendService {
   private var channel: Channel
@@ -179,12 +399,12 @@ internal class Neva_Backend_BackendService {
   /// Synchronous. Unary.
   internal func register(_ request: Neva_Backend_RegisterRequest)
     throws
-    -> Neva_Backend_RegisterReply {
+    -> Neva_Backend_GenericReply {
       return try Neva_Backend_BackendRegisterCall(channel).run(request:request, metadata:metadata)
   }
   /// Asynchronous. Unary.
   internal func register(_ request: Neva_Backend_RegisterRequest,
-                  completion: @escaping (Neva_Backend_RegisterReply?, CallResult)->())
+                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
     throws
     -> Neva_Backend_BackendRegisterCall {
       return try Neva_Backend_BackendRegisterCall(channel).start(request:request,
@@ -203,6 +423,66 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendLoginCall {
       return try Neva_Backend_BackendLoginCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func suggestionitemproposition(_ request: Neva_Backend_SuggestionItemPropositionRequest)
+    throws
+    -> Neva_Backend_GenericReply {
+      return try Neva_Backend_BackendSuggestionItemPropositionCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func suggestionitemproposition(_ request: Neva_Backend_SuggestionItemPropositionRequest,
+                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendSuggestionItemPropositionCall {
+      return try Neva_Backend_BackendSuggestionItemPropositionCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func getmealsuggestion(_ request: Neva_Backend_GetMealSuggestionRequest)
+    throws
+    -> Neva_Backend_GetMealSuggestionReply {
+      return try Neva_Backend_BackendGetMealSuggestionCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func getmealsuggestion(_ request: Neva_Backend_GetMealSuggestionRequest,
+                  completion: @escaping (Neva_Backend_GetMealSuggestionReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendGetMealSuggestionCall {
+      return try Neva_Backend_BackendGetMealSuggestionCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func tagproposition(_ request: Neva_Backend_TagPropositionRequest)
+    throws
+    -> Neva_Backend_GenericReply {
+      return try Neva_Backend_BackendTagPropositionCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func tagproposition(_ request: Neva_Backend_TagPropositionRequest,
+                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendTagPropositionCall {
+      return try Neva_Backend_BackendTagPropositionCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func tagvalueproposition(_ request: Neva_Backend_TagValuePropositionRequest)
+    throws
+    -> Neva_Backend_GenericReply {
+      return try Neva_Backend_BackendTagValuePropositionCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func tagvalueproposition(_ request: Neva_Backend_TagValuePropositionRequest,
+                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendTagValuePropositionCall {
+      return try Neva_Backend_BackendTagValuePropositionCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }

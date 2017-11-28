@@ -1,5 +1,42 @@
 File protos/util.proto
+File protos/user.proto
+File protos/suggestion.proto
+File protos/backend.proto
+Service Backend
+ Method Register
+  input .neva.backend.RegisterRequest
+  output .neva.backend.GenericReply
+  client_streaming false
+  server_streaming false
+ Method Login
+  input .neva.backend.LoginRequest
+  output .neva.backend.LoginReply
+  client_streaming false
+  server_streaming false
+ Method SuggestionItemProposition
+  input .neva.backend.SuggestionItemPropositionRequest
+  output .neva.backend.GenericReply
+  client_streaming false
+  server_streaming false
+ Method GetMealSuggestion
+  input .neva.backend.GetMealSuggestionRequest
+  output .neva.backend.GetMealSuggestionReply
+  client_streaming false
+  server_streaming false
+ Method TagProposition
+  input .neva.backend.TagPropositionRequest
+  output .neva.backend.GenericReply
+  client_streaming false
+  server_streaming false
+ Method TagValueProposition
+  input .neva.backend.TagValuePropositionRequest
+  output .neva.backend.GenericReply
+  client_streaming false
+  server_streaming false
 PluginLibrary.Google_Protobuf_Compiler_CodeGeneratorRequest:
+file_to_generate: "protos/backend.proto"
+file_to_generate: "protos/suggestion.proto"
+file_to_generate: "protos/user.proto"
 file_to_generate: "protos/util.proto"
 compiler_version {
   major: 3
@@ -86,6 +123,1482 @@ proto_file {
     location {
       path: [4, 0, 2, 1, 3]
       span: [6, 17, 18]
+    }
+  }
+  syntax: "proto3"
+}
+proto_file {
+  name: "protos/user.proto"
+  package: "neva.backend"
+  dependency: "protos/util.proto"
+  message_type {
+    name: "LinkedAccount"
+    field {
+      name: "token"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "token"
+    }
+    field {
+      name: "social_media_type"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_ENUM
+      type_name: ".neva.backend.LinkedAccount.SocialMediaType"
+      json_name: "socialMediaType"
+    }
+    enum_type {
+      name: "SocialMediaType"
+      value {
+        name: "INVALID_SOCIAL_MEDIA_TYPE"
+        number: 0
+      }
+      value {
+        name: "FACEBOOK"
+        number: 1
+      }
+    }
+  }
+  message_type {
+    name: "User"
+    field {
+      name: "user_id"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_UINT32
+      json_name: "userId"
+    }
+    field {
+      name: "email"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "email"
+    }
+    field {
+      name: "password"
+      number: 3
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "password"
+    }
+    field {
+      name: "name"
+      number: 4
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "name"
+    }
+    field {
+      name: "date_of_birth"
+      number: 5
+      label: LABEL_OPTIONAL
+      type: TYPE_MESSAGE
+      type_name: ".neva.backend.util.Timestamp"
+      json_name: "dateOfBirth"
+    }
+    field {
+      name: "gender"
+      number: 6
+      label: LABEL_OPTIONAL
+      type: TYPE_ENUM
+      type_name: ".neva.backend.User.Gender"
+      json_name: "gender"
+    }
+    field {
+      name: "weight"
+      number: 7
+      label: LABEL_OPTIONAL
+      type: TYPE_FLOAT
+      json_name: "weight"
+    }
+    field {
+      name: "photo"
+      number: 8
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "photo"
+    }
+    field {
+      name: "status"
+      number: 9
+      label: LABEL_OPTIONAL
+      type: TYPE_ENUM
+      type_name: ".neva.backend.User.Status"
+      json_name: "status"
+    }
+    field {
+      name: "register_date"
+      number: 10
+      label: LABEL_OPTIONAL
+      type: TYPE_MESSAGE
+      type_name: ".neva.backend.util.Timestamp"
+      json_name: "registerDate"
+    }
+    field {
+      name: "linked_accounts"
+      number: 11
+      label: LABEL_REPEATED
+      type: TYPE_MESSAGE
+      type_name: ".neva.backend.LinkedAccount"
+      json_name: "linkedAccounts"
+    }
+    enum_type {
+      name: "Gender"
+      value {
+        name: "INVALID_GENDER"
+        number: 0
+      }
+      value {
+        name: "MALE"
+        number: 1
+      }
+      value {
+        name: "FEMALE"
+        number: 2
+      }
+    }
+    enum_type {
+      name: "Status"
+      value {
+        name: "INVALID_STATUS"
+        number: 0
+      }
+      value {
+        name: "INACTIVE"
+        number: 1
+      }
+      value {
+        name: "ACTIVE"
+        number: 2
+      }
+    }
+  }
+  source_code_info {
+    location {
+      span: [0, 0, 43, 1]
+    }
+    location {
+      path: [12]
+      span: [0, 0, 18]
+    }
+    location {
+      path: [3, 0]
+      span: [2, 7, 26]
+    }
+    location {
+      path: [2]
+      span: [4, 8, 20]
+    }
+    location {
+      path: [4, 0]
+      span: [6, 0, 14, 1]
+    }
+    location {
+      path: [4, 0, 1]
+      span: [6, 8, 21]
+    }
+    location {
+      path: [4, 0, 4, 0]
+      span: [7, 2, 10, 3]
+    }
+    location {
+      path: [4, 0, 4, 0, 1]
+      span: [7, 7, 22]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 0]
+      span: [8, 4, 34]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 0, 1]
+      span: [8, 4, 29]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 0, 2]
+      span: [8, 32, 33]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 1]
+      span: [9, 4, 17]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 1, 1]
+      span: [9, 4, 12]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 1, 2]
+      span: [9, 15, 16]
+    }
+    location {
+      path: [4, 0, 2, 0]
+      span: [12, 2, 19]
+    }
+    location {
+      path: [4, 0, 2, 0, 4]
+      span: [12, 2, 10, 4]
+    }
+    location {
+      path: [4, 0, 2, 0, 5]
+      span: [12, 2, 8]
+    }
+    location {
+      path: [4, 0, 2, 0, 1]
+      span: [12, 9, 14]
+    }
+    location {
+      path: [4, 0, 2, 0, 3]
+      span: [12, 17, 18]
+    }
+    location {
+      path: [4, 0, 2, 1]
+      span: [13, 2, 40]
+    }
+    location {
+      path: [4, 0, 2, 1, 4]
+      span: [13, 2, 12, 19]
+    }
+    location {
+      path: [4, 0, 2, 1, 6]
+      span: [13, 2, 17]
+    }
+    location {
+      path: [4, 0, 2, 1, 1]
+      span: [13, 18, 35]
+    }
+    location {
+      path: [4, 0, 2, 1, 3]
+      span: [13, 38, 39]
+    }
+    location {
+      path: [4, 1]
+      span: [16, 0, 43, 1]
+    }
+    location {
+      path: [4, 1, 1]
+      span: [16, 8, 12]
+    }
+    location {
+      path: [4, 1, 4, 0]
+      span: [17, 2, 21, 3]
+    }
+    location {
+      path: [4, 1, 4, 0, 1]
+      span: [17, 7, 13]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 0]
+      span: [18, 4, 23]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 0, 1]
+      span: [18, 4, 18]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 0, 2]
+      span: [18, 21, 22]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 1]
+      span: [19, 4, 13]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 1, 1]
+      span: [19, 4, 8]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 1, 2]
+      span: [19, 11, 12]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 2]
+      span: [20, 4, 15]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 2, 1]
+      span: [20, 4, 10]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 2, 2]
+      span: [20, 13, 14]
+    }
+    location {
+      path: [4, 1, 4, 1]
+      span: [23, 2, 27, 3]
+    }
+    location {
+      path: [4, 1, 4, 1, 1]
+      span: [23, 7, 13]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 0]
+      span: [24, 4, 23]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 0, 1]
+      span: [24, 4, 18]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 0, 2]
+      span: [24, 21, 22]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 1]
+      span: [25, 4, 17]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 1, 1]
+      span: [25, 4, 12]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 1, 2]
+      span: [25, 15, 16]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 2]
+      span: [26, 4, 15]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 2, 1]
+      span: [26, 4, 10]
+    }
+    location {
+      path: [4, 1, 4, 1, 2, 2, 2]
+      span: [26, 13, 14]
+    }
+    location {
+      path: [4, 1, 2, 0]
+      span: [29, 2, 21]
+    }
+    location {
+      path: [4, 1, 2, 0, 4]
+      span: [29, 2, 27, 4]
+    }
+    location {
+      path: [4, 1, 2, 0, 5]
+      span: [29, 2, 8]
+    }
+    location {
+      path: [4, 1, 2, 0, 1]
+      span: [29, 9, 16]
+    }
+    location {
+      path: [4, 1, 2, 0, 3]
+      span: [29, 19, 20]
+    }
+    location {
+      path: [4, 1, 2, 1]
+      span: [30, 2, 19]
+    }
+    location {
+      path: [4, 1, 2, 1, 4]
+      span: [30, 2, 29, 21]
+    }
+    location {
+      path: [4, 1, 2, 1, 5]
+      span: [30, 2, 8]
+    }
+    location {
+      path: [4, 1, 2, 1, 1]
+      span: [30, 9, 14]
+    }
+    location {
+      path: [4, 1, 2, 1, 3]
+      span: [30, 17, 18]
+    }
+    location {
+      path: [4, 1, 2, 2]
+      span: [31, 2, 22]
+    }
+    location {
+      path: [4, 1, 2, 2, 4]
+      span: [31, 2, 30, 19]
+    }
+    location {
+      path: [4, 1, 2, 2, 5]
+      span: [31, 2, 8]
+    }
+    location {
+      path: [4, 1, 2, 2, 1]
+      span: [31, 9, 17]
+    }
+    location {
+      path: [4, 1, 2, 2, 3]
+      span: [31, 20, 21]
+    }
+    location {
+      path: [4, 1, 2, 3]
+      span: [32, 2, 18]
+    }
+    location {
+      path: [4, 1, 2, 3, 4]
+      span: [32, 2, 31, 22]
+    }
+    location {
+      path: [4, 1, 2, 3, 5]
+      span: [32, 2, 8]
+    }
+    location {
+      path: [4, 1, 2, 3, 1]
+      span: [32, 9, 13]
+    }
+    location {
+      path: [4, 1, 2, 3, 3]
+      span: [32, 16, 17]
+    }
+    location {
+      path: [4, 1, 2, 4]
+      span: [33, 2, 35]
+    }
+    location {
+      path: [4, 1, 2, 4, 4]
+      span: [33, 2, 32, 18]
+    }
+    location {
+      path: [4, 1, 2, 4, 6]
+      span: [33, 2, 16]
+    }
+    location {
+      path: [4, 1, 2, 4, 1]
+      span: [33, 17, 30]
+    }
+    location {
+      path: [4, 1, 2, 4, 3]
+      span: [33, 33, 34]
+    }
+    location {
+      path: [4, 1, 2, 5]
+      span: [34, 2, 20]
+    }
+    location {
+      path: [4, 1, 2, 5, 4]
+      span: [34, 2, 33, 35]
+    }
+    location {
+      path: [4, 1, 2, 5, 6]
+      span: [34, 2, 8]
+    }
+    location {
+      path: [4, 1, 2, 5, 1]
+      span: [34, 9, 15]
+    }
+    location {
+      path: [4, 1, 2, 5, 3]
+      span: [34, 18, 19]
+    }
+    location {
+      path: [4, 1, 2, 6]
+      span: [35, 2, 19]
+    }
+    location {
+      path: [4, 1, 2, 6, 4]
+      span: [35, 2, 34, 20]
+    }
+    location {
+      path: [4, 1, 2, 6, 5]
+      span: [35, 2, 7]
+    }
+    location {
+      path: [4, 1, 2, 6, 1]
+      span: [35, 8, 14]
+    }
+    location {
+      path: [4, 1, 2, 6, 3]
+      span: [35, 17, 18]
+    }
+    location {
+      path: [4, 1, 2, 7]
+      span: [38, 2, 19]
+      leading_comments: " Keeps url to the photo of the user.\n"
+    }
+    location {
+      path: [4, 1, 2, 7, 4]
+      span: [38, 2, 35, 19]
+    }
+    location {
+      path: [4, 1, 2, 7, 5]
+      span: [38, 2, 8]
+    }
+    location {
+      path: [4, 1, 2, 7, 1]
+      span: [38, 9, 14]
+    }
+    location {
+      path: [4, 1, 2, 7, 3]
+      span: [38, 17, 18]
+    }
+    location {
+      path: [4, 1, 2, 8]
+      span: [39, 2, 20]
+    }
+    location {
+      path: [4, 1, 2, 8, 4]
+      span: [39, 2, 38, 19]
+    }
+    location {
+      path: [4, 1, 2, 8, 6]
+      span: [39, 2, 8]
+    }
+    location {
+      path: [4, 1, 2, 8, 1]
+      span: [39, 9, 15]
+    }
+    location {
+      path: [4, 1, 2, 8, 3]
+      span: [39, 18, 19]
+    }
+    location {
+      path: [4, 1, 2, 9]
+      span: [40, 2, 36]
+    }
+    location {
+      path: [4, 1, 2, 9, 4]
+      span: [40, 2, 39, 20]
+    }
+    location {
+      path: [4, 1, 2, 9, 6]
+      span: [40, 2, 16]
+    }
+    location {
+      path: [4, 1, 2, 9, 1]
+      span: [40, 17, 30]
+    }
+    location {
+      path: [4, 1, 2, 9, 3]
+      span: [40, 33, 35]
+    }
+    location {
+      path: [4, 1, 2, 10]
+      span: [42, 2, 46]
+    }
+    location {
+      path: [4, 1, 2, 10, 4]
+      span: [42, 2, 10]
+    }
+    location {
+      path: [4, 1, 2, 10, 6]
+      span: [42, 11, 24]
+    }
+    location {
+      path: [4, 1, 2, 10, 1]
+      span: [42, 25, 40]
+    }
+    location {
+      path: [4, 1, 2, 10, 3]
+      span: [42, 43, 45]
+    }
+  }
+  syntax: "proto3"
+}
+proto_file {
+  name: "protos/suggestion.proto"
+  package: "neva.backend"
+  message_type {
+    name: "Suggestion"
+    field {
+      name: "suggestion_category"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_ENUM
+      type_name: ".neva.backend.Suggestion.SuggestionCategory"
+      json_name: "suggestionCategory"
+    }
+    field {
+      name: "name"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "name"
+    }
+    enum_type {
+      name: "SuggestionCategory"
+      value {
+        name: "INVALID_SUGGESTION_CATEGORY"
+        number: 0
+      }
+      value {
+        name: "MEAL"
+        number: 1
+      }
+    }
+  }
+  source_code_info {
+    location {
+      span: [0, 0, 15, 2]
+    }
+    location {
+      path: [12]
+      span: [0, 0, 18]
+    }
+    location {
+      path: [2]
+      span: [2, 8, 20]
+    }
+    location {
+      path: [4, 0]
+      span: [4, 0, 15, 1]
+    }
+    location {
+      path: [4, 0, 1]
+      span: [4, 8, 18]
+    }
+    location {
+      path: [4, 0, 4, 0]
+      span: [5, 2, 8, 3]
+    }
+    location {
+      path: [4, 0, 4, 0, 1]
+      span: [5, 7, 25]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 0]
+      span: [6, 4, 36]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 0, 1]
+      span: [6, 4, 31]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 0, 2]
+      span: [6, 34, 35]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 1]
+      span: [7, 4, 13]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 1, 1]
+      span: [7, 4, 8]
+    }
+    location {
+      path: [4, 0, 4, 0, 2, 1, 2]
+      span: [7, 11, 12]
+    }
+    location {
+      path: [4, 0, 2, 0]
+      span: [11, 2, 45]
+      leading_comments: " Shows the category to which suggestion belongs.\n"
+    }
+    location {
+      path: [4, 0, 2, 0, 4]
+      span: [11, 2, 8, 4]
+    }
+    location {
+      path: [4, 0, 2, 0, 6]
+      span: [11, 2, 20]
+    }
+    location {
+      path: [4, 0, 2, 0, 1]
+      span: [11, 21, 40]
+    }
+    location {
+      path: [4, 0, 2, 0, 3]
+      span: [11, 43, 44]
+    }
+    location {
+      path: [4, 0, 2, 1]
+      span: [14, 2, 18]
+      leading_comments: " Name of the suggestion item, like \"lahmacun\".\n"
+    }
+    location {
+      path: [4, 0, 2, 1, 4]
+      span: [14, 2, 11, 45]
+    }
+    location {
+      path: [4, 0, 2, 1, 5]
+      span: [14, 2, 8]
+    }
+    location {
+      path: [4, 0, 2, 1, 1]
+      span: [14, 9, 13]
+    }
+    location {
+      path: [4, 0, 2, 1, 3]
+      span: [14, 16, 17]
+    }
+  }
+  syntax: "proto3"
+}
+proto_file {
+  name: "protos/backend.proto"
+  package: "neva.backend"
+  dependency: "protos/user.proto"
+  dependency: "protos/suggestion.proto"
+  message_type {
+    name: "GenericReply"
+  }
+  message_type {
+    name: "RegisterRequest"
+    field {
+      name: "user"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_MESSAGE
+      type_name: ".neva.backend.User"
+      json_name: "user"
+    }
+    field {
+      name: "authentication_type"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_ENUM
+      type_name: ".neva.backend.RegisterRequest.AuthenticationType"
+      json_name: "authenticationType"
+    }
+    enum_type {
+      name: "AuthenticationType"
+      value {
+        name: "INVALID"
+        number: 0
+      }
+      value {
+        name: "DEFAULT"
+        number: 1
+      }
+      value {
+        name: "FACEBOOK"
+        number: 2
+      }
+    }
+  }
+  message_type {
+    name: "LoginRequest"
+    field {
+      name: "email"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "email"
+    }
+    field {
+      name: "password"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "password"
+    }
+  }
+  message_type {
+    name: "LoginReply"
+    field {
+      name: "token"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_BYTES
+      json_name: "token"
+    }
+  }
+  message_type {
+    name: "SuggestionItemPropositionRequest"
+    field {
+      name: "token"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_BYTES
+      json_name: "token"
+    }
+    field {
+      name: "suggestion"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_MESSAGE
+      type_name: ".neva.backend.Suggestion"
+      json_name: "suggestion"
+    }
+  }
+  message_type {
+    name: "GetMealSuggestionRequest"
+    field {
+      name: "token"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_BYTES
+      json_name: "token"
+    }
+    field {
+      name: "suggestion_category"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_ENUM
+      type_name: ".neva.backend.Suggestion.SuggestionCategory"
+      json_name: "suggestionCategory"
+    }
+  }
+  message_type {
+    name: "GetMealSuggestionReply"
+    field {
+      name: "name"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "name"
+    }
+  }
+  message_type {
+    name: "TagPropositionRequest"
+    field {
+      name: "token"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_BYTES
+      json_name: "token"
+    }
+    field {
+      name: "tag"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "tag"
+    }
+  }
+  message_type {
+    name: "TagValuePropositionRequest"
+    field {
+      name: "token"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_BYTES
+      json_name: "token"
+    }
+    field {
+      name: "tag_id"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_UINT32
+      json_name: "tagId"
+    }
+    field {
+      name: "suggestee_id"
+      number: 3
+      label: LABEL_OPTIONAL
+      type: TYPE_UINT32
+      json_name: "suggesteeId"
+    }
+    field {
+      name: "value"
+      number: 4
+      label: LABEL_OPTIONAL
+      type: TYPE_STRING
+      json_name: "value"
+    }
+  }
+  service {
+    name: "Backend"
+    method {
+      name: "Register"
+      input_type: ".neva.backend.RegisterRequest"
+      output_type: ".neva.backend.GenericReply"
+      options {
+      }
+    }
+    method {
+      name: "Login"
+      input_type: ".neva.backend.LoginRequest"
+      output_type: ".neva.backend.LoginReply"
+      options {
+      }
+    }
+    method {
+      name: "SuggestionItemProposition"
+      input_type: ".neva.backend.SuggestionItemPropositionRequest"
+      output_type: ".neva.backend.GenericReply"
+      options {
+      }
+    }
+    method {
+      name: "GetMealSuggestion"
+      input_type: ".neva.backend.GetMealSuggestionRequest"
+      output_type: ".neva.backend.GetMealSuggestionReply"
+      options {
+      }
+    }
+    method {
+      name: "TagProposition"
+      input_type: ".neva.backend.TagPropositionRequest"
+      output_type: ".neva.backend.GenericReply"
+      options {
+      }
+    }
+    method {
+      name: "TagValueProposition"
+      input_type: ".neva.backend.TagValuePropositionRequest"
+      output_type: ".neva.backend.GenericReply"
+      options {
+      }
+    }
+  }
+  source_code_info {
+    location {
+      span: [0, 0, 94, 1]
+    }
+    location {
+      path: [12]
+      span: [0, 0, 18]
+    }
+    location {
+      path: [3, 0]
+      span: [2, 7, 26]
+    }
+    location {
+      path: [3, 1]
+      span: [3, 7, 32]
+    }
+    location {
+      path: [2]
+      span: [5, 8, 20]
+    }
+    location {
+      path: [6, 0]
+      span: [7, 0, 27, 1]
+    }
+    location {
+      path: [6, 0, 1]
+      span: [7, 8, 15]
+    }
+    location {
+      path: [6, 0, 2, 0]
+      span: [8, 2, 9, 3]
+    }
+    location {
+      path: [6, 0, 2, 0, 1]
+      span: [8, 6, 14]
+    }
+    location {
+      path: [6, 0, 2, 0, 2]
+      span: [8, 15, 30]
+    }
+    location {
+      path: [6, 0, 2, 0, 3]
+      span: [8, 41, 53]
+    }
+    location {
+      path: [6, 0, 2, 1]
+      span: [11, 2, 12, 3]
+    }
+    location {
+      path: [6, 0, 2, 1, 1]
+      span: [11, 6, 11]
+    }
+    location {
+      path: [6, 0, 2, 1, 2]
+      span: [11, 12, 24]
+    }
+    location {
+      path: [6, 0, 2, 1, 3]
+      span: [11, 35, 45]
+    }
+    location {
+      path: [6, 0, 2, 2]
+      span: [14, 2, 16, 3]
+    }
+    location {
+      path: [6, 0, 2, 2, 1]
+      span: [14, 6, 31]
+    }
+    location {
+      path: [6, 0, 2, 2, 2]
+      span: [14, 32, 64]
+    }
+    location {
+      path: [6, 0, 2, 2, 3]
+      span: [15, 15, 27]
+    }
+    location {
+      path: [6, 0, 2, 3]
+      span: [18, 2, 20, 3]
+    }
+    location {
+      path: [6, 0, 2, 3, 1]
+      span: [18, 6, 23]
+    }
+    location {
+      path: [6, 0, 2, 3, 2]
+      span: [18, 24, 48]
+    }
+    location {
+      path: [6, 0, 2, 3, 3]
+      span: [19, 15, 37]
+    }
+    location {
+      path: [6, 0, 2, 4]
+      span: [22, 2, 23, 3]
+    }
+    location {
+      path: [6, 0, 2, 4, 1]
+      span: [22, 6, 20]
+    }
+    location {
+      path: [6, 0, 2, 4, 2]
+      span: [22, 21, 42]
+    }
+    location {
+      path: [6, 0, 2, 4, 3]
+      span: [22, 53, 65]
+    }
+    location {
+      path: [6, 0, 2, 5]
+      span: [25, 2, 26, 3]
+    }
+    location {
+      path: [6, 0, 2, 5, 1]
+      span: [25, 6, 25]
+    }
+    location {
+      path: [6, 0, 2, 5, 2]
+      span: [25, 26, 52]
+    }
+    location {
+      path: [6, 0, 2, 5, 3]
+      span: [25, 63, 75]
+    }
+    location {
+      path: [4, 0]
+      span: [29, 0, 30, 1]
+    }
+    location {
+      path: [4, 0, 1]
+      span: [29, 8, 20]
+    }
+    location {
+      path: [4, 1]
+      span: [32, 0, 41, 1]
+    }
+    location {
+      path: [4, 1, 1]
+      span: [32, 8, 23]
+    }
+    location {
+      path: [4, 1, 4, 0]
+      span: [33, 2, 37, 3]
+    }
+    location {
+      path: [4, 1, 4, 0, 1]
+      span: [33, 7, 25]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 0]
+      span: [34, 4, 16]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 0, 1]
+      span: [34, 4, 11]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 0, 2]
+      span: [34, 14, 15]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 1]
+      span: [35, 4, 16]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 1, 1]
+      span: [35, 4, 11]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 1, 2]
+      span: [35, 14, 15]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 2]
+      span: [36, 4, 17]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 2, 1]
+      span: [36, 4, 12]
+    }
+    location {
+      path: [4, 1, 4, 0, 2, 2, 2]
+      span: [36, 15, 16]
+    }
+    location {
+      path: [4, 1, 2, 0]
+      span: [39, 2, 16]
+    }
+    location {
+      path: [4, 1, 2, 0, 4]
+      span: [39, 2, 37, 4]
+    }
+    location {
+      path: [4, 1, 2, 0, 6]
+      span: [39, 2, 6]
+    }
+    location {
+      path: [4, 1, 2, 0, 1]
+      span: [39, 7, 11]
+    }
+    location {
+      path: [4, 1, 2, 0, 3]
+      span: [39, 14, 15]
+    }
+    location {
+      path: [4, 1, 2, 1]
+      span: [40, 2, 45]
+    }
+    location {
+      path: [4, 1, 2, 1, 4]
+      span: [40, 2, 39, 16]
+    }
+    location {
+      path: [4, 1, 2, 1, 6]
+      span: [40, 2, 20]
+    }
+    location {
+      path: [4, 1, 2, 1, 1]
+      span: [40, 21, 40]
+    }
+    location {
+      path: [4, 1, 2, 1, 3]
+      span: [40, 43, 44]
+    }
+    location {
+      path: [4, 2]
+      span: [43, 0, 46, 1]
+    }
+    location {
+      path: [4, 2, 1]
+      span: [43, 8, 20]
+    }
+    location {
+      path: [4, 2, 2, 0]
+      span: [44, 2, 19]
+    }
+    location {
+      path: [4, 2, 2, 0, 4]
+      span: [44, 2, 43, 22]
+    }
+    location {
+      path: [4, 2, 2, 0, 5]
+      span: [44, 2, 8]
+    }
+    location {
+      path: [4, 2, 2, 0, 1]
+      span: [44, 9, 14]
+    }
+    location {
+      path: [4, 2, 2, 0, 3]
+      span: [44, 17, 18]
+    }
+    location {
+      path: [4, 2, 2, 1]
+      span: [45, 2, 22]
+    }
+    location {
+      path: [4, 2, 2, 1, 4]
+      span: [45, 2, 44, 19]
+    }
+    location {
+      path: [4, 2, 2, 1, 5]
+      span: [45, 2, 8]
+    }
+    location {
+      path: [4, 2, 2, 1, 1]
+      span: [45, 9, 17]
+    }
+    location {
+      path: [4, 2, 2, 1, 3]
+      span: [45, 20, 21]
+    }
+    location {
+      path: [4, 3]
+      span: [48, 0, 51, 1]
+    }
+    location {
+      path: [4, 3, 1]
+      span: [48, 8, 18]
+    }
+    location {
+      path: [4, 3, 2, 0]
+      span: [50, 2, 18]
+      leading_comments: " Authentication token to be used in upcoming requests.\n"
+    }
+    location {
+      path: [4, 3, 2, 0, 4]
+      span: [50, 2, 48, 20]
+    }
+    location {
+      path: [4, 3, 2, 0, 5]
+      span: [50, 2, 7]
+    }
+    location {
+      path: [4, 3, 2, 0, 1]
+      span: [50, 8, 13]
+    }
+    location {
+      path: [4, 3, 2, 0, 3]
+      span: [50, 16, 17]
+    }
+    location {
+      path: [4, 4]
+      span: [53, 0, 59, 1]
+    }
+    location {
+      path: [4, 4, 1]
+      span: [53, 8, 40]
+    }
+    location {
+      path: [4, 4, 2, 0]
+      span: [55, 2, 18]
+      leading_comments: " Session key for the user proposing the item.\n"
+    }
+    location {
+      path: [4, 4, 2, 0, 4]
+      span: [55, 2, 53, 42]
+    }
+    location {
+      path: [4, 4, 2, 0, 5]
+      span: [55, 2, 7]
+    }
+    location {
+      path: [4, 4, 2, 0, 1]
+      span: [55, 8, 13]
+    }
+    location {
+      path: [4, 4, 2, 0, 3]
+      span: [55, 16, 17]
+    }
+    location {
+      path: [4, 4, 2, 1]
+      span: [58, 2, 28]
+      leading_comments: " Holds information on propositions category and name.\n"
+    }
+    location {
+      path: [4, 4, 2, 1, 4]
+      span: [58, 2, 55, 18]
+    }
+    location {
+      path: [4, 4, 2, 1, 6]
+      span: [58, 2, 12]
+    }
+    location {
+      path: [4, 4, 2, 1, 1]
+      span: [58, 13, 23]
+    }
+    location {
+      path: [4, 4, 2, 1, 3]
+      span: [58, 26, 27]
+    }
+    location {
+      path: [4, 5]
+      span: [61, 0, 67, 1]
+    }
+    location {
+      path: [4, 5, 1]
+      span: [61, 8, 32]
+    }
+    location {
+      path: [4, 5, 2, 0]
+      span: [63, 2, 18]
+      leading_comments: " Session key for the user requesting a suggestion.\n"
+    }
+    location {
+      path: [4, 5, 2, 0, 4]
+      span: [63, 2, 61, 34]
+    }
+    location {
+      path: [4, 5, 2, 0, 5]
+      span: [63, 2, 7]
+    }
+    location {
+      path: [4, 5, 2, 0, 1]
+      span: [63, 8, 13]
+    }
+    location {
+      path: [4, 5, 2, 0, 3]
+      span: [63, 16, 17]
+    }
+    location {
+      path: [4, 5, 2, 1]
+      span: [66, 2, 56]
+      leading_comments: " Category for which the user requests a suggestion.\n"
+    }
+    location {
+      path: [4, 5, 2, 1, 4]
+      span: [66, 2, 63, 18]
+    }
+    location {
+      path: [4, 5, 2, 1, 6]
+      span: [66, 2, 31]
+    }
+    location {
+      path: [4, 5, 2, 1, 1]
+      span: [66, 32, 51]
+    }
+    location {
+      path: [4, 5, 2, 1, 3]
+      span: [66, 54, 55]
+    }
+    location {
+      path: [4, 6]
+      span: [69, 0, 72, 1]
+    }
+    location {
+      path: [4, 6, 1]
+      span: [69, 8, 30]
+    }
+    location {
+      path: [4, 6, 2, 0]
+      span: [71, 2, 18]
+      leading_comments: " Name of the suggested item.\n"
+    }
+    location {
+      path: [4, 6, 2, 0, 4]
+      span: [71, 2, 69, 32]
+    }
+    location {
+      path: [4, 6, 2, 0, 5]
+      span: [71, 2, 8]
+    }
+    location {
+      path: [4, 6, 2, 0, 1]
+      span: [71, 9, 13]
+    }
+    location {
+      path: [4, 6, 2, 0, 3]
+      span: [71, 16, 17]
+    }
+    location {
+      path: [4, 7]
+      span: [74, 0, 80, 1]
+    }
+    location {
+      path: [4, 7, 1]
+      span: [74, 8, 29]
+    }
+    location {
+      path: [4, 7, 2, 0]
+      span: [76, 2, 18]
+      leading_comments: " Session key for the user proposing the tag.\n"
+    }
+    location {
+      path: [4, 7, 2, 0, 4]
+      span: [76, 2, 74, 31]
+    }
+    location {
+      path: [4, 7, 2, 0, 5]
+      span: [76, 2, 7]
+    }
+    location {
+      path: [4, 7, 2, 0, 1]
+      span: [76, 8, 13]
+    }
+    location {
+      path: [4, 7, 2, 0, 3]
+      span: [76, 16, 17]
+    }
+    location {
+      path: [4, 7, 2, 1]
+      span: [79, 2, 17]
+      leading_comments: " Holds name for proposed tag.\n"
+    }
+    location {
+      path: [4, 7, 2, 1, 4]
+      span: [79, 2, 76, 18]
+    }
+    location {
+      path: [4, 7, 2, 1, 5]
+      span: [79, 2, 8]
+    }
+    location {
+      path: [4, 7, 2, 1, 1]
+      span: [79, 9, 12]
+    }
+    location {
+      path: [4, 7, 2, 1, 3]
+      span: [79, 15, 16]
+    }
+    location {
+      path: [4, 8]
+      span: [82, 0, 94, 1]
+    }
+    location {
+      path: [4, 8, 1]
+      span: [82, 8, 34]
+    }
+    location {
+      path: [4, 8, 2, 0]
+      span: [84, 2, 18]
+      leading_comments: " Session key for the user proposing the tag.\n"
+    }
+    location {
+      path: [4, 8, 2, 0, 4]
+      span: [84, 2, 82, 36]
+    }
+    location {
+      path: [4, 8, 2, 0, 5]
+      span: [84, 2, 7]
+    }
+    location {
+      path: [4, 8, 2, 0, 1]
+      span: [84, 8, 13]
+    }
+    location {
+      path: [4, 8, 2, 0, 3]
+      span: [84, 16, 17]
+    }
+    location {
+      path: [4, 8, 2, 1]
+      span: [87, 2, 20]
+      leading_comments: " Holds id of the tag.\n"
+    }
+    location {
+      path: [4, 8, 2, 1, 4]
+      span: [87, 2, 84, 18]
+    }
+    location {
+      path: [4, 8, 2, 1, 5]
+      span: [87, 2, 8]
+    }
+    location {
+      path: [4, 8, 2, 1, 1]
+      span: [87, 9, 15]
+    }
+    location {
+      path: [4, 8, 2, 1, 3]
+      span: [87, 18, 19]
+    }
+    location {
+      path: [4, 8, 2, 2]
+      span: [90, 2, 26]
+      leading_comments: " Holds id of the suggestion item.\n"
+    }
+    location {
+      path: [4, 8, 2, 2, 4]
+      span: [90, 2, 87, 20]
+    }
+    location {
+      path: [4, 8, 2, 2, 5]
+      span: [90, 2, 8]
+    }
+    location {
+      path: [4, 8, 2, 2, 1]
+      span: [90, 9, 21]
+    }
+    location {
+      path: [4, 8, 2, 2, 3]
+      span: [90, 24, 25]
+    }
+    location {
+      path: [4, 8, 2, 3]
+      span: [93, 2, 19]
+      leading_comments: " Holds value for the tag if appropriate.\n"
+    }
+    location {
+      path: [4, 8, 2, 3, 4]
+      span: [93, 2, 90, 26]
+    }
+    location {
+      path: [4, 8, 2, 3, 5]
+      span: [93, 2, 8]
+    }
+    location {
+      path: [4, 8, 2, 3, 1]
+      span: [93, 9, 14]
+    }
+    location {
+      path: [4, 8, 2, 3, 3]
+      span: [93, 17, 18]
     }
   }
   syntax: "proto3"

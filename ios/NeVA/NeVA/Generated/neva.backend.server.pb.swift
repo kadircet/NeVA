@@ -33,8 +33,12 @@ internal enum Neva_Backend_BackendServerError : Error {
 
 /// To build a server, implement a class that conforms to this protocol.
 internal protocol Neva_Backend_BackendProvider {
-  func register(request : Neva_Backend_RegisterRequest, session : Neva_Backend_BackendRegisterSession) throws -> Neva_Backend_RegisterReply
+  func register(request : Neva_Backend_RegisterRequest, session : Neva_Backend_BackendRegisterSession) throws -> Neva_Backend_GenericReply
   func login(request : Neva_Backend_LoginRequest, session : Neva_Backend_BackendLoginSession) throws -> Neva_Backend_LoginReply
+  func suggestionitemproposition(request : Neva_Backend_SuggestionItemPropositionRequest, session : Neva_Backend_BackendSuggestionItemPropositionSession) throws -> Neva_Backend_GenericReply
+  func getmealsuggestion(request : Neva_Backend_GetMealSuggestionRequest, session : Neva_Backend_BackendGetMealSuggestionSession) throws -> Neva_Backend_GetMealSuggestionReply
+  func tagproposition(request : Neva_Backend_TagPropositionRequest, session : Neva_Backend_BackendTagPropositionSession) throws -> Neva_Backend_GenericReply
+  func tagvalueproposition(request : Neva_Backend_TagValuePropositionRequest, session : Neva_Backend_BackendTagValuePropositionSession) throws -> Neva_Backend_GenericReply
 }
 
 /// Common properties available in each service session.
@@ -102,6 +106,106 @@ internal class Neva_Backend_BackendLoginSession : Neva_Backend_BackendSession {
   }
 }
 
+// SuggestionItemProposition (Unary)
+internal class Neva_Backend_BackendSuggestionItemPropositionSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_SuggestionItemPropositionRequest(serializedData:requestData)
+        let replyMessage = try self.provider.suggestionitemproposition(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// GetMealSuggestion (Unary)
+internal class Neva_Backend_BackendGetMealSuggestionSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_GetMealSuggestionRequest(serializedData:requestData)
+        let replyMessage = try self.provider.getmealsuggestion(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// TagProposition (Unary)
+internal class Neva_Backend_BackendTagPropositionSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_TagPropositionRequest(serializedData:requestData)
+        let replyMessage = try self.provider.tagproposition(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// TagValueProposition (Unary)
+internal class Neva_Backend_BackendTagValuePropositionSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_TagValuePropositionRequest(serializedData:requestData)
+        let replyMessage = try self.provider.tagvalueproposition(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
 
 /// Main server for generated service
 internal class Neva_Backend_BackendServer {
@@ -152,6 +256,14 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendRegisterSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/Login":
           try Neva_Backend_BackendLoginSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/SuggestionItemProposition":
+          try Neva_Backend_BackendSuggestionItemPropositionSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/GetMealSuggestion":
+          try Neva_Backend_BackendGetMealSuggestionSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/TagProposition":
+          try Neva_Backend_BackendTagPropositionSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/TagValueProposition":
+          try Neva_Backend_BackendTagValuePropositionSession(handler:handler, provider:provider).run(queue:queue)
         default:
           break // handle unknown requests
         }
