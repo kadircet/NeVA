@@ -111,6 +111,17 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        /*
+         */
+        Intent intent = new Intent(this, LoginResultActivity.class);
+        String login_res = "Successfully Logged in as: " + username + " with grpc token: ";
+        intent.putExtra(MESSAGE_CLASS, login_res);
+        login_button.setEnabled(true);
+        pb.setVisibility(View.GONE);
+        startActivity(intent);
+        /*
+        */
+
         //String loginToken = null;
         ByteString loginToken;
         try {
@@ -131,8 +142,8 @@ public class LoginActivity extends AppCompatActivity {
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
             loginToken = loginReply.getToken();
 
-            Intent intent = new Intent(this, LoginResultActivity.class);
-            String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken.toString();
+            //Intent intent = new Intent(this, LoginResultActivity.class);
+            //String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken.toString();
             intent.putExtra(MESSAGE_CLASS, login_res);
             login_button.setEnabled(true);
             pb.setVisibility(View.GONE);

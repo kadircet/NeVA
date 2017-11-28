@@ -17,4 +17,9 @@
     <string name="birthdate">Birthdate</string>
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
