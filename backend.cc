@@ -63,17 +63,6 @@ class BackendServiceImpl final : public Backend::Service {
     return proposition_orm_->InsertProposition(user_id, request->suggestion());
   }
 
-  BackendServiceImpl() {
-    conn_ = std::make_shared<mysqlpp::Connection>(false);
-    conn_->connect(kNevaDatabaseName, kNevaDatabaseServer, kNevaDatabaseUser,
-                   kNevaDatabasePassword);
-    CHECK(conn_->connected()) << "Database connection failed.";
-
-    user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
-    proposition_orm_ =
-        std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_));
-  }
-
   Status GetMealSuggestion(ServerContext* context,
                            const GetMealSuggestionRequest* request,
                            GetMealSuggestionReply* reply) override {
@@ -84,6 +73,40 @@ class BackendServiceImpl final : public Backend::Service {
     }
 
     return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet.");
+  }
+
+  Status TagProposition(ServerContext* context,
+                        const TagPropositionRequest* request,
+                        GenericReply* reply) override {
+    int user_id;
+    const Status status = user_orm_->CheckToken(request->token(), &user_id);
+    if (!status.ok()) {
+      return status;
+    }
+    return proposition_orm_->InsertProposition(user_id, request->tag());
+  }
+
+  Status TagValueProposition(ServerContext* context,
+                             const TagValuePropositionRequest* request,
+                             GenericReply* reply) override {
+    int user_id;
+    const Status status = user_orm_->CheckToken(request->token(), &user_id);
+    if (!status.ok()) {
+      return status;
+    }
+    return proposition_orm_->InsertProposition(
+        user_id, request->tag_id(), request->suggestee_id(), request->value());
+  }
+
+  BackendServiceImpl() {
+    conn_ = std::make_shared<mysqlpp::Connection>(false);
+    conn_->connect(kNevaDatabaseName, kNevaDatabaseServer, kNevaDatabaseUser,
+                   kNevaDatabasePassword);
+    CHECK(conn_->connected()) << "Database connection failed.";
+
+    user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
+    proposition_orm_ =
+        std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_));
   }
 
  private:
