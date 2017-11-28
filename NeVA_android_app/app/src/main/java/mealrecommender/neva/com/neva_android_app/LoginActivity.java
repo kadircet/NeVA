@@ -19,6 +19,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.common.io.ByteArrayDataInput;
+import com.google.protobuf.ByteString;
 
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -102,14 +104,15 @@ public class LoginActivity extends AppCompatActivity {
         String password = password_field.getText().toString();
 
 
-        Button login_button = (Button) findViewById(R.id.login_button);
+        Button login_button = findViewById(R.id.login_button);
         if (!validate()) {
             Toast.makeText(getBaseContext(), "Check your credentials.", Toast.LENGTH_LONG).show();
             login_button.setEnabled(true);
             return;
         }
 
-        String loginToken = null;
+        //String loginToken = null;
+        ByteString loginToken;
         try {
             // SEND REQUEST
             login_button.setEnabled(false);
@@ -118,14 +121,18 @@ public class LoginActivity extends AppCompatActivity {
 
             ManagedChannel mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
             BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
-            BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder().setEmail(username).setPassword(password).build();
+            BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
+                                                            .setEmail(username)
+                                                            .setPassword(password)
+                                                            .setAuthenticationType(BackendOuterClass.LoginRequest.AuthenticationType.DEFAULT)
+                                                            .build();
 
             // GET ANSWER
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
             loginToken = loginReply.getToken();
 
             Intent intent = new Intent(this, LoginResultActivity.class);
-            String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken;
+            String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken.toString();
             intent.putExtra(MESSAGE_CLASS, login_res);
             login_button.setEnabled(true);
             pb.setVisibility(View.GONE);
@@ -170,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
     // Validate username and password data
     //TODO: ADD INPUT SANITATION
     public boolean validate() {
-        return validateUsername() && validateUsername();
+        return validateUsername() && validatePassword();
     }
 
     // Check password with RegEx to see if it fits the qualifications
@@ -178,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*[a-z]).{4,}$"; // <---SIMPLIFIED  "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
 

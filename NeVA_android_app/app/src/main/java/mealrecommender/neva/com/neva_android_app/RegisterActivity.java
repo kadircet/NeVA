@@ -137,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
                     50051).usePlaintext(true).build();
             BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
 
-            BackendOuterClass.RegisterReply registerReply = blockingStub.register(registerRequest);
+            BackendOuterClass.GenericReply registerReply = blockingStub.register(registerRequest);
             Intent intent = new Intent(this, LoginResultActivity.class);
             String login_res = "Successfully Signed Up!";
             intent.putExtra(MESSAGE_CLASS, login_res);
@@ -152,9 +152,6 @@ public class RegisterActivity extends AppCompatActivity {
             pb.setVisibility(View.GONE);
             signup_button.setEnabled(true);
         }
-
-
-
     }
 
     public void onMemberButton(View view){
@@ -220,7 +217,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
+        final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*[a-z]).{4,}$"; // <---SIMPLIFIED  "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
 

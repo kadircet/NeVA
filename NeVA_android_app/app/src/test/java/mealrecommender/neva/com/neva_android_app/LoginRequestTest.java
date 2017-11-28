@@ -1,6 +1,10 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import com.google.protobuf.ByteString;
+
 import org.junit.Test;
+
+import java.nio.charset.Charset;
 
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
@@ -28,7 +32,8 @@ public class LoginRequestTest {
                                                             .setEmail("asdf").setPassword("test")
                                                             .build();
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
-            System.out.println(loginReply.getToken());
+            ByteString loginToken = loginReply.getToken();
+            System.out.println(loginToken.toString(Charset.defaultCharset()));
         }
         catch (Exception e)
         {
@@ -52,7 +57,7 @@ public class LoginRequestTest {
                                                                 .newBuilder()
                                                                 .setUser(user).build();
             System.out.println("Sending Register Req");
-            BackendOuterClass.RegisterReply registerReply = blockingStub.register(registerRequest);
+            BackendOuterClass.GenericReply registerReply = blockingStub.register(registerRequest);
             System.out.println("Sent.");
             System.out.println(registerReply.toString());
         }

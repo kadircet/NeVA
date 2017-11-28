@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package neva.backend;
+
+message Suggestion {
+  enum SuggestionCategory {
+    INVALID_SUGGESTION_CATEGORY = 0;
+    MEAL = 1;
+  };
+
+  // Shows the category to which suggestion belongs.
+  SuggestionCategory suggestion_category = 1;
+
+  // Name of the suggestion item, like "lahmacun".
+  string name = 2;
+};
