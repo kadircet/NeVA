@@ -57,8 +57,7 @@ class BackendServiceImpl final : public Backend::Service {
       std::string verification_token;
       user_orm_->InsertUser(user, &verification_token);
     }
-    return user_orm_->CheckCredentials(request->email(), request->password(),
-                                       reply->mutable_token());
+    return user_orm_->CheckCredentials(email, password, reply->mutable_token());
   }
 
   Status SuggestionItemProposition(
