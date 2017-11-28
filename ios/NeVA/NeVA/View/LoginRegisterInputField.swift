@@ -39,6 +39,8 @@ class LoginRegisterInputField: UITextField {
         // Drawing code
         layer.cornerRadius = rect.height/2
     }
+    
+    
 }
 
 extension UIView {
