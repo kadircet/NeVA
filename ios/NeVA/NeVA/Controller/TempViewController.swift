@@ -52,22 +52,6 @@ class TempViewController: UIViewController, FBSDKLoginButtonDelegate {
         facebookLogoutButton.delegate = self
         facebookLogoutButton.center = view.center
         
-        //Checking if requests are working
-        /*var user = Neva_Backend_User()
-        user.email = "deneme@bilemiyorumaltan.com"
-        user.password = "denemeUserPassword123."
-        var requestMessage = Neva_Backend_RegisterRequest()
-        requestMessage.user = user
-        let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
-        do {
-            let responseMessage = try service.register(requestMessage)
-            print(responseMessage)
-        } catch(let error){
-            print("ERROROROROR")
-            print(error)
-        }*/
-        
-
         // Do any additional setup after loading the view.
     }
 

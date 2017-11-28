@@ -168,7 +168,8 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
         do {
             let responseMessage = try service.login(loginRequestMessage)
-            print(responseMessage)
+            //print(responseMessage)
+            UserToken.token = responseMessage.token
             performSegue(withIdentifier: "loggedIn", sender: self)
         } catch (let error) {
             print(error)

@@ -398,49 +398,158 @@ Meal Recommender</string>
                         <outlet property="registerNameField" destination="PSe-zv-2IS" id="tIm-fF-1L4"/>
                         <outlet property="registerPasswordField" destination="V6N-oj-Gad" id="aA0-FD-Kxt"/>
                         <outlet property="registerView" destination="tmP-Bo-ZbU" id="MyH-hk-xF3"/>
-                        <segue destination="r55-hj-NSC" kind="show" identifier="loggedIn" animates="NO" action="showDetailViewController:sender:" id="KwW-un-7cE"/>
+                        <segue destination="Aml-VC-jh1" kind="show" identifier="loggedIn" id="8yv-Ni-HlR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="36" y="95.802098950524751"/>
+            <point key="canvasLocation" x="22" y="113"/>
         </scene>
-        <!--Temp View Controller-->
-        <scene sceneID="IZ4-Hr-JkW">
+        <!--Settings-->
+        <scene sceneID="xTk-if-Su6">
             <objects>
-                <viewController id="r55-hj-NSC" customClass="TempViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Q5L-bI-yMl">
+                <viewController id="x5X-eu-dXy" customClass="SettingsViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cou-pC-S7N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2VG-Cs-Ujt">
-                                <rect key="frame" x="0.0" y="95" width="375" height="72"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="72" id="gES-Bh-3ry"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="r5x-YD-Ebc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2VG-Cs-Ujt" firstAttribute="trailing" secondItem="pnG-LX-Iwj" secondAttribute="trailing" id="O2u-4C-Fq0"/>
-                            <constraint firstItem="2VG-Cs-Ujt" firstAttribute="top" secondItem="pnG-LX-Iwj" secondAttribute="top" constant="75" id="Zwa-fc-yZQ"/>
-                            <constraint firstItem="2VG-Cs-Ujt" firstAttribute="leading" secondItem="pnG-LX-Iwj" secondAttribute="leading" id="hyK-ZS-csZ"/>
+                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="top" secondItem="cou-pC-S7N" secondAttribute="top" id="0ut-Jd-wsp"/>
+                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="trailing" secondItem="xd1-md-MXd" secondAttribute="trailing" id="3BP-UG-ydh"/>
+                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" id="7Zt-Bo-NtP"/>
+                            <constraint firstAttribute="bottom" secondItem="r5x-YD-Ebc" secondAttribute="bottom" id="bNj-xB-495"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="pnG-LX-Iwj"/>
+                        <viewLayoutGuide key="safeArea" id="xd1-md-MXd"/>
                     </view>
-                    <connections>
-                        <outlet property="emailLabel" destination="2VG-Cs-Ujt" id="nfa-LO-Vti"/>
-                    </connections>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" landscapeImage="settings" largeContentSizeImage="settings" id="b9k-SH-x1T"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Fq-s9-sVi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1hq-rR-qqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="966.66666666666674" y="96.195652173913047"/>
+            <point key="canvasLocation" x="1796" y="1105"/>
+        </scene>
+        <!--Recommendation-->
+        <scene sceneID="qC6-4D-FYo">
+            <objects>
+                <viewController id="BWU-M1-OCj" customClass="RecommendationViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IXI-21-wmd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-LC-iDH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zK2-HZ-mWp" customClass="LoginButton" customModule="NeVA" customModuleProvider="target">
+                                <rect key="frame" x="146" y="560" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7n5-TT-nE1">
+                                <rect key="frame" x="169" y="515" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="C1k-Td-gqd" firstAttribute="trailing" secondItem="CiU-LC-iDH" secondAttribute="trailing" id="5aD-tr-OUg"/>
+                            <constraint firstAttribute="bottom" secondItem="CiU-LC-iDH" secondAttribute="bottom" id="Iph-eh-n28"/>
+                            <constraint firstItem="CiU-LC-iDH" firstAttribute="leading" secondItem="C1k-Td-gqd" secondAttribute="leading" id="Lb6-qg-PP8"/>
+                            <constraint firstItem="CiU-LC-iDH" firstAttribute="top" secondItem="IXI-21-wmd" secondAttribute="top" id="kjg-b9-Eok"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="C1k-Td-gqd"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Recommendation" image="gift" landscapeImage="gift" largeContentSizeImage="gift" id="e6s-K5-ojo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Fr-eU-g0U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1796" y="-221.73913043478262"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="ms9-P8-3aD">
+            <objects>
+                <tabBarController id="Aml-VC-jh1" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="hRR-nH-hkN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BWU-M1-OCj" kind="relationship" relationship="viewControllers" id="c5K-w6-aqv"/>
+                        <segue destination="yCT-6y-ngv" kind="relationship" relationship="viewControllers" id="TAa-KS-HKl"/>
+                        <segue destination="J0b-vb-epx" kind="relationship" relationship="viewControllers" id="BBM-SC-ki4"/>
+                        <segue destination="x5X-eu-dXy" kind="relationship" relationship="viewControllers" id="5YH-mh-trI"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s2k-GM-fkZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="863" y="113"/>
+        </scene>
+        <!--Suggestion-->
+        <scene sceneID="m9C-pA-met">
+            <objects>
+                <viewController id="J0b-vb-epx" userLabel="Suggestion" customClass="SuggestionViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lk8-8d-a9j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="ifM-Er-Xqk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ifM-Er-Xqk" firstAttribute="trailing" secondItem="rdJ-HX-9i7" secondAttribute="trailing" id="7O1-1Y-BSi"/>
+                            <constraint firstItem="ifM-Er-Xqk" firstAttribute="top" secondItem="lk8-8d-a9j" secondAttribute="top" id="NPf-Zc-5rB"/>
+                            <constraint firstItem="ifM-Er-Xqk" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" id="aOw-hs-kVi"/>
+                            <constraint firstAttribute="bottom" secondItem="ifM-Er-Xqk" secondAttribute="bottom" id="pZO-dA-FSy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rdJ-HX-9i7"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Suggest Food" image="idea" landscapeImage="idea" largeContentSizeImage="idea" id="AqW-IW-sQO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xRZ-z0-VyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3153" y="333"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="kYe-5v-x9x">
+            <objects>
+                <viewController id="yCT-6y-ngv" userLabel="History" customClass="HistoryViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4ax-la-zAI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="qXV-ek-0JQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="qXV-ek-0JQ" secondAttribute="bottom" id="9jN-dd-XZD"/>
+                            <constraint firstItem="qXV-ek-0JQ" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" id="DR6-8l-qts"/>
+                            <constraint firstItem="qXV-ek-0JQ" firstAttribute="top" secondItem="4ax-la-zAI" secondAttribute="top" id="deJ-nJ-BD4"/>
+                            <constraint firstItem="qXV-ek-0JQ" firstAttribute="trailing" secondItem="jmg-Mf-3fN" secondAttribute="trailing" id="eJI-LY-GDH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jmg-Mf-3fN"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="History" image="clock" landscapeImage="clock" largeContentSizeImage="clock" id="Io0-fs-PDY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O11-vV-DZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2436" y="481"/>
         </scene>
     </scenes>
     <resources>
+        <image name="clock" width="30" height="30"/>
+        <image name="gift" width="30" height="30"/>
+        <image name="gray-background-texture-2" width="810" height="1440"/>
+        <image name="idea" width="30" height="30"/>
         <image name="loginRegisterViewBackground" width="1070" height="1902"/>
+        <image name="settings" width="30" height="30"/>
     </resources>
 </document>
