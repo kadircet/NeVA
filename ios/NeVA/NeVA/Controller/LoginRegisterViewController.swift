@@ -48,7 +48,32 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         } else {
             if(!result.isCancelled || result.token != nil)
             {
-                performSegue(withIdentifier: "loggedIn", sender: self)
+                let parameters = ["fields": "email"]
+                FBSDKGraphRequest(graphPath: "me", parameters: parameters).start(completionHandler: { (connection, graphresult, error) -> Void in
+                    if ((error) != nil) {
+                        print("Error: \(error!)")
+                    } else {
+                        if let data = graphresult as? [String:Any] {
+                            if let email = data["email"] as? String {
+                                var loginRequestMessage = Neva_Backend_LoginRequest()
+                                loginRequestMessage.email = email
+                                loginRequestMessage.password = result.token.tokenString
+                                loginRequestMessage.authenticationType = .facebook
+                                print(loginRequestMessage)
+                                let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+                                do {
+                                    let responseMessage = try service.login(loginRequestMessage)
+                                    //print(responseMessage)
+                                    UserToken.token = responseMessage.token
+                                    UserToken.type = .facebook
+                                    self.performSegue(withIdentifier: "loggedIn", sender: self)
+                                } catch (let error) {
+                                    print(error)
+                                }
+                            }
+                        }
+                    }
+                })
             }
         }
     }
@@ -110,6 +135,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         user.gender = registerGender
         var requestMessage = Neva_Backend_RegisterRequest()
         requestMessage.user = user
+    
         print(user)
         print(requestMessage)
         let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
@@ -164,12 +190,18 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         var loginRequestMessage = Neva_Backend_LoginRequest()
         loginRequestMessage.email = loginEmail!
         loginRequestMessage.password = loginPassword!
+        loginRequestMessage.authenticationType = .default
         print(loginRequestMessage)
         let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
         do {
             let responseMessage = try service.login(loginRequestMessage)
             //print(responseMessage)
             UserToken.token = responseMessage.token
+            UserToken.type = .default_type
+            loginEmail = ""
+            loginEmailField.text = ""
+            loginPassword = ""
+            loginPasswordField.text = ""
             performSegue(withIdentifier: "loggedIn", sender: self)
         } catch (let error) {
             print(error)
@@ -282,7 +314,32 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if FBSDKAccessToken.current() != nil {
-            performSegue(withIdentifier: "loggedIn", sender: self)
+            let parameters = ["fields": "email"]
+                FBSDKGraphRequest(graphPath: "me", parameters: parameters).start(completionHandler: { (connection, result, error) -> Void in
+                    if ((error) != nil) {
+                        print("Error: \(error!)")
+                    } else {
+                        if let data = result as? [String:Any] {
+                            if let email = data["email"] as? String {
+                                var loginRequestMessage = Neva_Backend_LoginRequest()
+                                loginRequestMessage.email = email
+                                loginRequestMessage.password = FBSDKAccessToken.current().tokenString
+                                loginRequestMessage.authenticationType = .facebook
+                                print(loginRequestMessage)
+                                let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+                                do {
+                                    let responseMessage = try service.login(loginRequestMessage)
+                                    //print(responseMessage)
+                                    UserToken.token = responseMessage.token
+                                    UserToken.type = .facebook
+                                    self.performSegue(withIdentifier: "loggedIn", sender: self)
+                                } catch (let error) {
+                                    print(error)
+                                }
+                            }
+                        }
+                    }
+                })
         }
     }
     

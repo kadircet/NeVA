@@ -838,29 +838,6 @@ proto_file {
       type_name: ".neva.backend.User"
       json_name: "user"
     }
-    field {
-      name: "authentication_type"
-      number: 2
-      label: LABEL_OPTIONAL
-      type: TYPE_ENUM
-      type_name: ".neva.backend.RegisterRequest.AuthenticationType"
-      json_name: "authenticationType"
-    }
-    enum_type {
-      name: "AuthenticationType"
-      value {
-        name: "INVALID"
-        number: 0
-      }
-      value {
-        name: "DEFAULT"
-        number: 1
-      }
-      value {
-        name: "FACEBOOK"
-        number: 2
-      }
-    }
   }
   message_type {
     name: "LoginRequest"
@@ -877,6 +854,29 @@ proto_file {
       label: LABEL_OPTIONAL
       type: TYPE_STRING
       json_name: "password"
+    }
+    field {
+      name: "authentication_type"
+      number: 3
+      label: LABEL_OPTIONAL
+      type: TYPE_ENUM
+      type_name: ".neva.backend.LoginRequest.AuthenticationType"
+      json_name: "authenticationType"
+    }
+    enum_type {
+      name: "AuthenticationType"
+      value {
+        name: "INVALID"
+        number: 0
+      }
+      value {
+        name: "DEFAULT"
+        number: 1
+      }
+      value {
+        name: "FACEBOOK"
+        number: 2
+      }
     }
   }
   message_type {
@@ -1162,143 +1162,143 @@ proto_file {
     }
     location {
       path: [4, 1]
-      span: [32, 0, 41, 1]
+      span: [32, 0, 34, 1]
     }
     location {
       path: [4, 1, 1]
       span: [32, 8, 23]
     }
     location {
-      path: [4, 1, 4, 0]
-      span: [33, 2, 37, 3]
-    }
-    location {
-      path: [4, 1, 4, 0, 1]
-      span: [33, 7, 25]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 0]
-      span: [34, 4, 16]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 0, 1]
-      span: [34, 4, 11]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 0, 2]
-      span: [34, 14, 15]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 1]
-      span: [35, 4, 16]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 1, 1]
-      span: [35, 4, 11]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 1, 2]
-      span: [35, 14, 15]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 2]
-      span: [36, 4, 17]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 2, 1]
-      span: [36, 4, 12]
-    }
-    location {
-      path: [4, 1, 4, 0, 2, 2, 2]
-      span: [36, 15, 16]
-    }
-    location {
       path: [4, 1, 2, 0]
-      span: [39, 2, 16]
+      span: [33, 2, 16]
     }
     location {
       path: [4, 1, 2, 0, 4]
-      span: [39, 2, 37, 4]
+      span: [33, 2, 32, 25]
     }
     location {
       path: [4, 1, 2, 0, 6]
-      span: [39, 2, 6]
+      span: [33, 2, 6]
     }
     location {
       path: [4, 1, 2, 0, 1]
-      span: [39, 7, 11]
+      span: [33, 7, 11]
     }
     location {
       path: [4, 1, 2, 0, 3]
-      span: [39, 14, 15]
-    }
-    location {
-      path: [4, 1, 2, 1]
-      span: [40, 2, 45]
-    }
-    location {
-      path: [4, 1, 2, 1, 4]
-      span: [40, 2, 39, 16]
-    }
-    location {
-      path: [4, 1, 2, 1, 6]
-      span: [40, 2, 20]
-    }
-    location {
-      path: [4, 1, 2, 1, 1]
-      span: [40, 21, 40]
-    }
-    location {
-      path: [4, 1, 2, 1, 3]
-      span: [40, 43, 44]
+      span: [33, 14, 15]
     }
     location {
       path: [4, 2]
-      span: [43, 0, 46, 1]
+      span: [36, 0, 46, 1]
     }
     location {
       path: [4, 2, 1]
-      span: [43, 8, 20]
+      span: [36, 8, 20]
+    }
+    location {
+      path: [4, 2, 4, 0]
+      span: [37, 2, 41, 3]
+    }
+    location {
+      path: [4, 2, 4, 0, 1]
+      span: [37, 7, 25]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 0]
+      span: [38, 4, 16]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 0, 1]
+      span: [38, 4, 11]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 0, 2]
+      span: [38, 14, 15]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 1]
+      span: [39, 4, 16]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 1, 1]
+      span: [39, 4, 11]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 1, 2]
+      span: [39, 14, 15]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 2]
+      span: [40, 4, 17]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 2, 1]
+      span: [40, 4, 12]
+    }
+    location {
+      path: [4, 2, 4, 0, 2, 2, 2]
+      span: [40, 15, 16]
     }
     location {
       path: [4, 2, 2, 0]
-      span: [44, 2, 19]
+      span: [43, 2, 19]
     }
     location {
       path: [4, 2, 2, 0, 4]
-      span: [44, 2, 43, 22]
+      span: [43, 2, 41, 4]
     }
     location {
       path: [4, 2, 2, 0, 5]
-      span: [44, 2, 8]
+      span: [43, 2, 8]
     }
     location {
       path: [4, 2, 2, 0, 1]
-      span: [44, 9, 14]
+      span: [43, 9, 14]
     }
     location {
       path: [4, 2, 2, 0, 3]
-      span: [44, 17, 18]
+      span: [43, 17, 18]
     }
     location {
       path: [4, 2, 2, 1]
-      span: [45, 2, 22]
+      span: [44, 2, 22]
     }
     location {
       path: [4, 2, 2, 1, 4]
-      span: [45, 2, 44, 19]
+      span: [44, 2, 43, 19]
     }
     location {
       path: [4, 2, 2, 1, 5]
-      span: [45, 2, 8]
+      span: [44, 2, 8]
     }
     location {
       path: [4, 2, 2, 1, 1]
-      span: [45, 9, 17]
+      span: [44, 9, 17]
     }
     location {
       path: [4, 2, 2, 1, 3]
-      span: [45, 20, 21]
+      span: [44, 20, 21]
+    }
+    location {
+      path: [4, 2, 2, 2]
+      span: [45, 2, 45]
+    }
+    location {
+      path: [4, 2, 2, 2, 4]
+      span: [45, 2, 44, 22]
+    }
+    location {
+      path: [4, 2, 2, 2, 6]
+      span: [45, 2, 20]
+    }
+    location {
+      path: [4, 2, 2, 2, 1]
+      span: [45, 21, 40]
+    }
+    location {
+      path: [4, 2, 2, 2, 3]
+      span: [45, 43, 44]
     }
     location {
       path: [4, 3]

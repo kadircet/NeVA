@@ -10,6 +10,11 @@ import Foundation
 
 class UserToken {
     static var token: Data?
-    
+    static var type: AuthenticationType?
+    enum AuthenticationType
+    {
+        case default_type
+        case facebook
+    }
     //Other information about user may be contained in this class in the future
 }

@@ -18,13 +18,14 @@ class RecommendationViewController: UIViewController {
     
     @IBAction func getRecommendation(_ sender: Any) {
         activityIndicator.startAnimating()
-        recommendationView.isHidden = false
+        //recommendationView.isHidden = false
         if let button = sender as? UIButton {
             button.isHidden = true
         }
         
         var request = Neva_Backend_GetMealSuggestionRequest()
         request.token = UserToken.token!
+        print(request)
         let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
         do {
             _ = try service.getmealsuggestion(request, completion: { reply, result in

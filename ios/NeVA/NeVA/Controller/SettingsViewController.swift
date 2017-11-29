@@ -7,12 +7,48 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
-class SettingsViewController: UIViewController {
-
+class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
+   
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        if let tabBarVC = tabBarController
+        {
+            UserToken.token = nil
+            tabBarVC.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
+        return false
+    }
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        if let tabBarVC = tabBarController
+        {
+            UserToken.token = nil
+            tabBarVC.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    let facebookLogoutButton : FBSDKLoginButton = {
+        let button = FBSDKLoginButton()
+        button.readPermissions = ["email"]
+        return button
+    }()
+    @IBOutlet weak var logoutButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if let user_token_type = UserToken.type, user_token_type == .facebook {
+            view.addSubview(facebookLogoutButton)
+            facebookLogoutButton.delegate = self
+            facebookLogoutButton.center = view.center
+            logoutButton.isHidden = true
+        } 
         // Do any additional setup after loading the view.
     }
 

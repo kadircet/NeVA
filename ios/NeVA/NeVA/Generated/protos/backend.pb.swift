@@ -56,10 +56,50 @@ struct Neva_Backend_RegisterRequest: SwiftProtobuf.Message {
   /// Clears the value of `user`. Subsequent reads from it will return its default value.
   mutating func clearUser() {_storage._user = nil}
 
-  var authenticationType: Neva_Backend_RegisterRequest.AuthenticationType {
-    get {return _storage._authenticationType}
-    set {_uniqueStorage()._authenticationType = newValue}
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._user)
+        default: break
+        }
+      }
+    }
   }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._user {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+struct Neva_Backend_LoginRequest: SwiftProtobuf.Message {
+  static let protoMessageName: String = _protobuf_package + ".LoginRequest"
+
+  var email: String = String()
+
+  var password: String = String()
+
+  var authenticationType: Neva_Backend_LoginRequest.AuthenticationType = .invalid
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -101,57 +141,11 @@ struct Neva_Backend_RegisterRequest: SwiftProtobuf.Message {
   /// initializers are defined in the SwiftProtobuf library. See the Message and
   /// Message+*Additions` files.
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularMessageField(value: &_storage._user)
-        case 2: try decoder.decodeSingularEnumField(value: &_storage._authenticationType)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._user {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
-      if _storage._authenticationType != .invalid {
-        try visitor.visitSingularEnumField(value: _storage._authenticationType, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  fileprivate var _storage = _StorageClass.defaultInstance
-}
-
-struct Neva_Backend_LoginRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".LoginRequest"
-
-  var email: String = String()
-
-  var password: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularStringField(value: &self.email)
       case 2: try decoder.decodeSingularStringField(value: &self.password)
+      case 3: try decoder.decodeSingularEnumField(value: &self.authenticationType)
       default: break
       }
     }
@@ -167,6 +161,9 @@ struct Neva_Backend_LoginRequest: SwiftProtobuf.Message {
     }
     if !self.password.isEmpty {
       try visitor.visitSingularStringField(value: self.password, fieldNumber: 2)
+    }
+    if self.authenticationType != .invalid {
+      try visitor.visitSingularEnumField(value: self.authenticationType, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -457,12 +454,10 @@ extension Neva_Backend_GenericReply: SwiftProtobuf._MessageImplementationBase, S
 extension Neva_Backend_RegisterRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "user"),
-    2: .standard(proto: "authentication_type"),
   ]
 
   fileprivate class _StorageClass {
     var _user: Neva_Backend_User? = nil
-    var _authenticationType: Neva_Backend_RegisterRequest.AuthenticationType = .invalid
 
     static let defaultInstance = _StorageClass()
 
@@ -470,7 +465,6 @@ extension Neva_Backend_RegisterRequest: SwiftProtobuf._MessageImplementationBase
 
     init(copying source: _StorageClass) {
       _user = source._user
-      _authenticationType = source._authenticationType
     }
   }
 
@@ -487,7 +481,6 @@ extension Neva_Backend_RegisterRequest: SwiftProtobuf._MessageImplementationBase
         let _storage = _args.0
         let other_storage = _args.1
         if _storage._user != other_storage._user {return false}
-        if _storage._authenticationType != other_storage._authenticationType {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -497,26 +490,28 @@ extension Neva_Backend_RegisterRequest: SwiftProtobuf._MessageImplementationBase
   }
 }
 
-extension Neva_Backend_RegisterRequest.AuthenticationType: SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    0: .same(proto: "INVALID"),
-    1: .same(proto: "DEFAULT"),
-    2: .same(proto: "FACEBOOK"),
-  ]
-}
-
 extension Neva_Backend_LoginRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "email"),
     2: .same(proto: "password"),
+    3: .standard(proto: "authentication_type"),
   ]
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_LoginRequest) -> Bool {
     if self.email != other.email {return false}
     if self.password != other.password {return false}
+    if self.authenticationType != other.authenticationType {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
+}
+
+extension Neva_Backend_LoginRequest.AuthenticationType: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "INVALID"),
+    1: .same(proto: "DEFAULT"),
+    2: .same(proto: "FACEBOOK"),
+  ]
 }
 
 extension Neva_Backend_LoginReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
