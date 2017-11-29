@@ -77,13 +77,21 @@ class BackendServiceImpl final : public Backend::Service {
                            const GetMealSuggestionRequest* request,
                            GetMealSuggestionReply* reply) override {
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
+    {
+      const Status status = user_orm_->CheckToken(request->token(), &user_id);
+      if (!status.ok()) {
+        return status;
+      }
     }
-    Suggestion suggestion;
-    suggestion_orm_->GetSuggestion(request->suggestion_category(), &suggestion);
-    reply->set_name(suggestion.name());
+    {
+      Suggestion suggestion;
+      const Status status = suggestion_orm_->GetSuggestion(
+          request->suggestion_category(), &suggestion);
+      if (!status.ok()) {
+        return status;
+      }
+      reply->set_name(suggestion.name());
+    }
     return Status::OK;
   }
 
