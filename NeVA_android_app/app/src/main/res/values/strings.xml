@@ -22,4 +22,7 @@
     <string name="logout">Logout</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="recommendation">Recommendation</string>
+    <string name="suggest">Suggestion</string>
 </resources>
+

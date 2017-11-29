@@ -138,13 +138,12 @@ public class RegisterActivity extends AppCompatActivity {
             BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
 
             BackendOuterClass.GenericReply registerReply = blockingStub.register(registerRequest);
-            Intent intent = new Intent(this, LoginResultActivity.class);
-            String login_res = "Successfully Signed Up!";
-            intent.putExtra(MESSAGE_CLASS, login_res);
+            Intent intent = new Intent(this, LoginActivity.class);
+            Toast.makeText(this, "Succesfully Signed Up!", Toast.LENGTH_LONG).show();
             signup_button.setEnabled(true);
             pb.setVisibility(View.GONE);
             startActivity(intent);
-
+            finish();
         }
         catch (Exception e)
         {

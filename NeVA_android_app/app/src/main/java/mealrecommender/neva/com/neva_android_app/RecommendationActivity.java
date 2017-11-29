@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class LoginResultActivity extends AppCompatActivity {
+public class RecommendationActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle burgerButton;
@@ -16,7 +16,7 @@ public class LoginResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_result);
+        setContentView(R.layout.activity_recommendation);
 
         drawerLayout = findViewById(R.id.drawer_layout);
         burgerButton = new ActionBarDrawerToggle(this,drawerLayout, R.string.open, R.string.close);
@@ -38,7 +38,22 @@ public class LoginResultActivity extends AppCompatActivity {
         if(burgerButton.onOptionsItemSelected(item)) {
             return true;
         }
+        switch (item.getItemId())
+        {
+            case R.id.nav_profile:
+                return true;
 
-        return super.onOptionsItemSelected(item);
+            case R.id.nav_settings:
+
+                return true;
+            case R.id.nav_logout:
+
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }

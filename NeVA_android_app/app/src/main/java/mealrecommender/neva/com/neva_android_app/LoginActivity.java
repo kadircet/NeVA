@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -19,10 +17,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.common.io.ByteArrayDataInput;
 import com.google.protobuf.ByteString;
 
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getBaseContext(), "Facebook Login Success" + loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getBaseContext(),LoginResultActivity.class);
+                Intent intent = new Intent(getBaseContext(),RecommendationActivity.class);
                 //TODO: Get username from facebook.
                 intent.putExtra(MESSAGE_CLASS, "Succesfully logged");
                 startActivity(intent);
@@ -113,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
 
         /*
          */
-        Intent intent = new Intent(this, LoginResultActivity.class);
+        Intent intent = new Intent(this, RecommendationActivity.class);
         String login_res = "Successfully Logged in as: " + username + " with grpc token: ";
         intent.putExtra(MESSAGE_CLASS, login_res);
         login_button.setEnabled(true);
@@ -142,12 +138,13 @@ public class LoginActivity extends AppCompatActivity {
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
             loginToken = loginReply.getToken();
 
-            //Intent intent = new Intent(this, LoginResultActivity.class);
+            //Intent intent = new Intent(this, RecommendationActivity.class);
             //String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken.toString();
             intent.putExtra(MESSAGE_CLASS, login_res);
             login_button.setEnabled(true);
             pb.setVisibility(View.GONE);
             startActivity(intent);
+            finish();
 
         }
         catch (Exception e)

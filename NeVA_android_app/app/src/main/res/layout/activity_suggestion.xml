@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mealrecommender.neva.com.neva_android_app.SuggestionActivity"
+    android:background="@drawable/background"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/suggest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/lanear"
+        android:text="Button"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="290dp" />
+
+    <EditText
+        android:id="@+id/sugesstion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_text_box"
+        android:ems="10"
+        android:fontFamily="@font/lanear"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="193dp" />
+</android.support.constraint.ConstraintLayout>
