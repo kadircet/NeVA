@@ -31,3 +31,18 @@ cc_library(
         "@glog//:glog",
     ],
 )
+
+cc_library(
+    name = "suggestion_orm",
+    srcs = ["suggestion_orm.cc"],
+    hdrs = ["suggestion_orm.h"],
+    copts = [
+        "-I/usr/include/mysql++/",
+        "-I/usr/include/mysql",
+    ],
+    linkopts = ["-lmysqlpp"],
+    deps = [
+        "//protos:suggestion_proto",
+        "@glog//:glog",
+    ],
+)

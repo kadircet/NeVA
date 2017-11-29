@@ -7,6 +7,7 @@
 
 #include "glog/logging.h"
 #include "orm/proposition_orm.h"
+#include "orm/suggestion_orm.h"
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
 #include "social_media/facebook.h"
@@ -20,6 +21,7 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
 using orm::PropositionOrm;
+using orm::SuggestionOrm;
 using orm::user::UserOrm;
 
 constexpr const char* const kNevaDatabaseName = "neva";
@@ -79,8 +81,10 @@ class BackendServiceImpl final : public Backend::Service {
     if (!status.ok()) {
       return status;
     }
-
-    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet.");
+    Suggestion suggestion;
+    suggestion_orm_->GetSuggestion(request->suggestion_category(), &suggestion);
+    reply->set_name(suggestion.name());
+    return Status::OK;
   }
 
   Status TagProposition(ServerContext* context,
@@ -121,6 +125,7 @@ class BackendServiceImpl final : public Backend::Service {
   std::shared_ptr<mysqlpp::Connection> conn_;
   std::unique_ptr<UserOrm> user_orm_;
   std::unique_ptr<PropositionOrm> proposition_orm_;
+  std::unique_ptr<SuggestionOrm> suggestion_orm_;
 };
 
 void RunServer() {
