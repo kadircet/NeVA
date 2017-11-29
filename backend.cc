@@ -119,6 +119,7 @@ class BackendServiceImpl final : public Backend::Service {
     user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
     proposition_orm_ =
         std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_));
+    suggestion_orm_ = std::unique_ptr<SuggestionOrm>(new SuggestionOrm(conn_));
   }
 
  private:
