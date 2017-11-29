@@ -49,7 +49,9 @@
         <activity
             android:name=".RecommendationActivity"
             android:parentActivityName=".LoginActivity" />
-        <activity android:name=".SuggestionActivity"></activity>
+        <activity android:name=".SuggestionActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

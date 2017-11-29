@@ -73,22 +73,36 @@ public class RecommendationActivity extends AppCompatActivity implements Navigat
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
         switch (item.getItemId()){
             case R.id.nav_profile:
+                intent = new Intent(this, ProfileActivity.class);
+                intent.putExtra(LoginActivity.TOKEN_EXTRA, loginToken.toByteArray());
+                startActivity(intent);
+                break;
+            case R.id.nav_recommendation:
                 break;
             case R.id.nav_suggest:
-                Intent intent = new Intent(this, SuggestionActivity.class);
+                intent = new Intent(this, SuggestionActivity.class);
                 intent.putExtra(LoginActivity.TOKEN_EXTRA, loginToken.toByteArray());
                 startActivity(intent);
                 break;
             case R.id.nav_settings:
-
+                intent = new Intent(this, SettingsActivity.class);
+                intent.putExtra(LoginActivity.TOKEN_EXTRA, loginToken.toByteArray());
+                startActivity(intent);
                 break;
             case R.id.nav_logout:
-
+                logout();
+                break;
+            default:
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void logout() {
+
     }
 }
