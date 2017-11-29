@@ -25,6 +25,7 @@ class RecommendationViewController: UIViewController {
         
         var request = Neva_Backend_GetMealSuggestionRequest()
         request.token = UserToken.token!
+        request.suggestionCategory = .meal
         print(request)
         let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
         do {
