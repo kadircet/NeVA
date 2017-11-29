@@ -28,7 +28,7 @@ class RecommendationViewController: UIViewController {
         print(request)
         let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
         do {
-            _ = try service.getmealsuggestion(request, completion: { reply, result in
+            /*_ = try service.getmealsuggestion(request, completion: { reply, result in
                     print(result)
                     self.activityIndicator.stopAnimating()
                     if let button = sender as? UIButton {
@@ -38,7 +38,16 @@ class RecommendationViewController: UIViewController {
                         self.recommendationView.isHidden = false
                         self.recommendationName.text = reply!.name
                     }
-                } )
+                } )*/
+            //TODO: DO IT ASYNC
+            let reply = try service.getmealsuggestion(request)
+            print(reply)
+            self.activityIndicator.stopAnimating()
+            if let button = sender as? UIButton {
+                button.isHidden = false
+            }
+            self.recommendationView.isHidden = false
+            self.recommendationName.text = reply.name
         } catch (let error){
             print(error)
             self.recommendationView.isHidden = false
