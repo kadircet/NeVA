@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:gravity="center"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context="mealrecommender.neva.com.neva_android_app.SuggestionActivity">
-
+    <LinearLayout     android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
     <EditText
         android:id="@+id/suggestion"
         android:layout_width="250sp"
@@ -17,11 +19,11 @@
         android:background="@drawable/rounded_text_box"
         android:ems="10"
         android:fontFamily="@font/lanear"
+        android:hint="Meal Name"
         android:inputType="textPersonName"
-        android:hint="Name"
-        android:textColorHint="@android:color/white"
         android:textAlignment="center"
         android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         android:textSize="24sp" />
 
     <Button
@@ -37,5 +39,39 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="245dp" />
+</LinearLayout>
+<LinearLayout     android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="20dp">
+    <EditText
+        android:id="@+id/tag_suggestion"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/rounded_text_box"
+        android:ems="10"
+        android:fontFamily="@font/lanear"
+        android:hint="Tag Name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="24sp" />
 
+    <Button
+        android:id="@+id/suggest_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/lanear"
+        android:onClick="onSuggestClick"
+        android:text="Button"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="245dp" />
+
+    </LinearLayout>
 </LinearLayout>
