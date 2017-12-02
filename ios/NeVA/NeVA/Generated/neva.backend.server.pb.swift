@@ -36,7 +36,7 @@ internal protocol Neva_Backend_BackendProvider {
   func register(request : Neva_Backend_RegisterRequest, session : Neva_Backend_BackendRegisterSession) throws -> Neva_Backend_GenericReply
   func login(request : Neva_Backend_LoginRequest, session : Neva_Backend_BackendLoginSession) throws -> Neva_Backend_LoginReply
   func suggestionitemproposition(request : Neva_Backend_SuggestionItemPropositionRequest, session : Neva_Backend_BackendSuggestionItemPropositionSession) throws -> Neva_Backend_GenericReply
-  func getmealsuggestion(request : Neva_Backend_GetMealSuggestionRequest, session : Neva_Backend_BackendGetMealSuggestionSession) throws -> Neva_Backend_GetMealSuggestionReply
+  func getsuggestion(request : Neva_Backend_GetSuggestionRequest, session : Neva_Backend_BackendGetSuggestionSession) throws -> Neva_Backend_GetSuggestionReply
   func tagproposition(request : Neva_Backend_TagPropositionRequest, session : Neva_Backend_BackendTagPropositionSession) throws -> Neva_Backend_GenericReply
   func tagvalueproposition(request : Neva_Backend_TagValuePropositionRequest, session : Neva_Backend_BackendTagValuePropositionSession) throws -> Neva_Backend_GenericReply
 }
@@ -131,8 +131,8 @@ internal class Neva_Backend_BackendSuggestionItemPropositionSession : Neva_Backe
   }
 }
 
-// GetMealSuggestion (Unary)
-internal class Neva_Backend_BackendGetMealSuggestionSession : Neva_Backend_BackendSession {
+// GetSuggestion (Unary)
+internal class Neva_Backend_BackendGetSuggestionSession : Neva_Backend_BackendSession {
   private var provider : Neva_Backend_BackendProvider
 
   /// Create a session.
@@ -145,8 +145,8 @@ internal class Neva_Backend_BackendGetMealSuggestionSession : Neva_Backend_Backe
   fileprivate func run(queue:DispatchQueue) throws {
     try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
       if let requestData = requestData {
-        let requestMessage = try Neva_Backend_GetMealSuggestionRequest(serializedData:requestData)
-        let replyMessage = try self.provider.getmealsuggestion(request:requestMessage, session: self)
+        let requestMessage = try Neva_Backend_GetSuggestionRequest(serializedData:requestData)
+        let replyMessage = try self.provider.getsuggestion(request:requestMessage, session: self)
         try self.handler.sendResponse(message:replyMessage.serializedData(),
                                       statusCode:self.statusCode,
                                       statusMessage:self.statusMessage,
@@ -258,8 +258,8 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendLoginSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/SuggestionItemProposition":
           try Neva_Backend_BackendSuggestionItemPropositionSession(handler:handler, provider:provider).run(queue:queue)
-        case "/neva.backend.Backend/GetMealSuggestion":
-          try Neva_Backend_BackendGetMealSuggestionSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/GetSuggestion":
+          try Neva_Backend_BackendGetSuggestionSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/TagProposition":
           try Neva_Backend_BackendTagPropositionSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/TagValueProposition":

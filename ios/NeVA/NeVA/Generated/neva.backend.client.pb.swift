@@ -198,21 +198,21 @@ internal class Neva_Backend_BackendSuggestionItemPropositionCall {
   }
 }
 
-/// GetMealSuggestion (Unary)
-internal class Neva_Backend_BackendGetMealSuggestionCall {
+/// GetSuggestion (Unary)
+internal class Neva_Backend_BackendGetSuggestionCall {
   private var call : Call
 
   /// Create a call.
   fileprivate init(_ channel: Channel) {
-    self.call = channel.makeCall("/neva.backend.Backend/GetMealSuggestion")
+    self.call = channel.makeCall("/neva.backend.Backend/GetSuggestion")
   }
 
   /// Run the call. Blocks until the reply is received.
-  fileprivate func run(request: Neva_Backend_GetMealSuggestionRequest,
-                       metadata: Metadata) throws -> Neva_Backend_GetMealSuggestionReply {
+  fileprivate func run(request: Neva_Backend_GetSuggestionRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GetSuggestionReply {
     let sem = DispatchSemaphore(value: 0)
     var returnCallResult : CallResult!
-    var returnResponse : Neva_Backend_GetMealSuggestionReply?
+    var returnResponse : Neva_Backend_GetSuggestionReply?
     _ = try start(request:request, metadata:metadata) {response, callResult in
       returnResponse = response
       returnCallResult = callResult
@@ -227,10 +227,10 @@ internal class Neva_Backend_BackendGetMealSuggestionCall {
   }
 
   /// Start the call. Nonblocking.
-  fileprivate func start(request: Neva_Backend_GetMealSuggestionRequest,
+  fileprivate func start(request: Neva_Backend_GetSuggestionRequest,
                          metadata: Metadata,
-                         completion: @escaping (Neva_Backend_GetMealSuggestionReply?, CallResult)->())
-    throws -> Neva_Backend_BackendGetMealSuggestionCall {
+                         completion: @escaping (Neva_Backend_GetSuggestionReply?, CallResult)->())
+    throws -> Neva_Backend_BackendGetSuggestionCall {
 
       let requestData = try request.serializedData()
       try call.start(.unary,
@@ -238,7 +238,7 @@ internal class Neva_Backend_BackendGetMealSuggestionCall {
                      message:requestData)
       {(callResult) in
         if let responseData = callResult.resultData,
-          let response = try? Neva_Backend_GetMealSuggestionReply(serializedData:responseData) {
+          let response = try? Neva_Backend_GetSuggestionReply(serializedData:responseData) {
           completion(response, callResult)
         } else {
           completion(nil, callResult)
@@ -442,17 +442,17 @@ internal class Neva_Backend_BackendService {
                                                  completion:completion)
   }
   /// Synchronous. Unary.
-  internal func getmealsuggestion(_ request: Neva_Backend_GetMealSuggestionRequest)
+  internal func getsuggestion(_ request: Neva_Backend_GetSuggestionRequest)
     throws
-    -> Neva_Backend_GetMealSuggestionReply {
-      return try Neva_Backend_BackendGetMealSuggestionCall(channel).run(request:request, metadata:metadata)
+    -> Neva_Backend_GetSuggestionReply {
+      return try Neva_Backend_BackendGetSuggestionCall(channel).run(request:request, metadata:metadata)
   }
   /// Asynchronous. Unary.
-  internal func getmealsuggestion(_ request: Neva_Backend_GetMealSuggestionRequest,
-                  completion: @escaping (Neva_Backend_GetMealSuggestionReply?, CallResult)->())
+  internal func getsuggestion(_ request: Neva_Backend_GetSuggestionRequest,
+                  completion: @escaping (Neva_Backend_GetSuggestionReply?, CallResult)->())
     throws
-    -> Neva_Backend_BackendGetMealSuggestionCall {
-      return try Neva_Backend_BackendGetMealSuggestionCall(channel).start(request:request,
+    -> Neva_Backend_BackendGetSuggestionCall {
+      return try Neva_Backend_BackendGetSuggestionCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }

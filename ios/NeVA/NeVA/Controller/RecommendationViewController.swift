@@ -23,7 +23,7 @@ class RecommendationViewController: UIViewController {
             button.isHidden = true
         }
         
-        var request = Neva_Backend_GetMealSuggestionRequest()
+        var request = Neva_Backend_GetSuggestionRequest()
         request.token = UserToken.token!
         request.suggestionCategory = .meal
         print(request)
@@ -41,7 +41,7 @@ class RecommendationViewController: UIViewController {
                     }
                 } )*/
             //TODO: DO IT ASYNC
-            let reply = try service.getmealsuggestion(request)
+            let reply = try service.getsuggestion(request)
             print(reply)
             self.activityIndicator.stopAnimating()
             if let button = sender as? UIButton {

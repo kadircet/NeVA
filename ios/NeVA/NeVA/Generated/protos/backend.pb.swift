@@ -263,8 +263,8 @@ struct Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf.Message {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_GetMealSuggestionRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetMealSuggestionRequest"
+struct Neva_Backend_GetSuggestionRequest: SwiftProtobuf.Message {
+  static let protoMessageName: String = _protobuf_package + ".GetSuggestionRequest"
 
   /// Session key for the user requesting a suggestion.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -305,8 +305,8 @@ struct Neva_Backend_GetMealSuggestionRequest: SwiftProtobuf.Message {
   }
 }
 
-struct Neva_Backend_GetMealSuggestionReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetMealSuggestionReply"
+struct Neva_Backend_GetSuggestionReply: SwiftProtobuf.Message {
+  static let protoMessageName: String = _protobuf_package + ".GetSuggestionReply"
 
   /// Name of the suggested item.
   var name: String = String()
@@ -569,13 +569,13 @@ extension Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf._MessageI
   }
 }
 
-extension Neva_Backend_GetMealSuggestionRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetSuggestionRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .standard(proto: "suggestion_category"),
   ]
 
-  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetMealSuggestionRequest) -> Bool {
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetSuggestionRequest) -> Bool {
     if self.token != other.token {return false}
     if self.suggestionCategory != other.suggestionCategory {return false}
     if unknownFields != other.unknownFields {return false}
@@ -583,12 +583,12 @@ extension Neva_Backend_GetMealSuggestionRequest: SwiftProtobuf._MessageImplement
   }
 }
 
-extension Neva_Backend_GetMealSuggestionReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetSuggestionReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
   ]
 
-  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetMealSuggestionReply) -> Bool {
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetSuggestionReply) -> Bool {
     if self.name != other.name {return false}
     if unknownFields != other.unknownFields {return false}
     return true
