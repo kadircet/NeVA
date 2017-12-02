@@ -7,6 +7,7 @@
 
 #include "glog/logging.h"
 #include "orm/proposition_orm.h"
+#include "orm/suggestion_orm.h"
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
 #include "social_media/facebook.h"
@@ -20,6 +21,7 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
 using orm::PropositionOrm;
+using orm::SuggestionOrm;
 using orm::user::UserOrm;
 
 constexpr const char* const kNevaDatabaseName = "neva";
@@ -71,16 +73,26 @@ class BackendServiceImpl final : public Backend::Service {
     return proposition_orm_->InsertProposition(user_id, request->suggestion());
   }
 
-  Status GetMealSuggestion(ServerContext* context,
-                           const GetMealSuggestionRequest* request,
-                           GetMealSuggestionReply* reply) override {
+  Status GetSuggestion(ServerContext* context,
+                       const GetSuggestionRequest* request,
+                       GetSuggestionReply* reply) override {
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
+    {
+      const Status status = user_orm_->CheckToken(request->token(), &user_id);
+      if (!status.ok()) {
+        return status;
+      }
     }
-
-    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet.");
+    {
+      Suggestion suggestion;
+      const Status status = suggestion_orm_->GetSuggestion(
+          request->suggestion_category(), &suggestion);
+      if (!status.ok()) {
+        return status;
+      }
+      reply->set_name(suggestion.name());
+    }
+    return Status::OK;
   }
 
   Status TagProposition(ServerContext* context,
@@ -115,12 +127,14 @@ class BackendServiceImpl final : public Backend::Service {
     user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
     proposition_orm_ =
         std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_));
+    suggestion_orm_ = std::unique_ptr<SuggestionOrm>(new SuggestionOrm(conn_));
   }
 
  private:
   std::shared_ptr<mysqlpp::Connection> conn_;
   std::unique_ptr<UserOrm> user_orm_;
   std::unique_ptr<PropositionOrm> proposition_orm_;
+  std::unique_ptr<SuggestionOrm> suggestion_orm_;
 };
 
 void RunServer() {
