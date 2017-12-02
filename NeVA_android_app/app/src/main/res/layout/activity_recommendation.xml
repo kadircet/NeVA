@@ -42,6 +42,7 @@
             android:background="@drawable/rounded_button"
             android:fontFamily="@font/lanear"
             android:text="Button"
+            android:onClick="onGetRecommendationClick"
             android:textColor="@android:color/white"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

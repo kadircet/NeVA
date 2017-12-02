@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/lanear"
-        android:onClick="onSuggestClick"
+        android:onClick="onTagSuggestClick"
         android:text="Button"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"

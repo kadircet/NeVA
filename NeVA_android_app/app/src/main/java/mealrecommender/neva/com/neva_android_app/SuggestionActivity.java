@@ -20,7 +20,9 @@ import neva.backend.SuggestionOuterClass;
 public class SuggestionActivity extends AppCompatActivity {
 
     EditText suggestion_box;
+    EditText tag_suggestion;
     Button suggest_button;
+    Button suggest_tag;
     ByteString loginToken;
     ManagedChannel mChannel;
     BackendGrpc.BackendBlockingStub blockingStub;
@@ -33,6 +35,9 @@ public class SuggestionActivity extends AppCompatActivity {
         suggest_button = findViewById(R.id.suggest);
         suggestion_box = findViewById(R.id.suggestion);
 
+        tag_suggestion=findViewById(R.id.tag_suggestion);
+        suggest_tag = findViewById(R.id.suggest_tag);
+
         Intent intent = getIntent();
         byte[] loginTokenArray = intent.getByteArrayExtra(LoginActivity.TOKEN_EXTRA);
         loginToken = ByteString.copyFrom(loginTokenArray);
@@ -43,35 +48,55 @@ public class SuggestionActivity extends AppCompatActivity {
 
     public void onSuggestClick(View view)
     {
-        Log.d("SUGG_Click", "Enter");
+
         String suggestionText = suggestion_box.getText().toString();
-        Log.d("SUGG_Click", "Get Text");
         suggest_button.setEnabled(false);
-        Log.d("SUGG_Click", "ButtonDisabled");
+
         SuggestionOuterClass.Suggestion suggestion;
         suggestion = SuggestionOuterClass.Suggestion.newBuilder()
                     .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
                     .setName(suggestionText)
                     .build();
-        Log.d("SUGG_Click", "SuggestionCreated");
+
         BackendOuterClass.SuggestionItemPropositionRequest suggestionRequest;
         suggestionRequest = BackendOuterClass.SuggestionItemPropositionRequest.newBuilder()
                             .setToken(loginToken)
                             .setSuggestion(suggestion)
                             .build();
-        Log.d("SUGG_Click", "SuggestionRequestCreated");
-        try {
-            Log.d("SUGG_Click", "Ask");
+        try
+        {
             BackendOuterClass.GenericReply genRep = blockingStub.suggestionItemProposition(suggestionRequest);
-            Log.d("SUGG_Click", "Rec");
             Toast.makeText(getBaseContext(), "Suggested", Toast.LENGTH_SHORT).show();
-            Log.d("SUGG_Click", "Toast");
+            suggestion_box.setEnabled(true);
         }
         catch (Exception e)
         {
             Log.d("SUGG_Click", "Exception");
             Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             suggestion_box.setEnabled(true);
+        }
+
+    }
+
+    public void onTagSuggestClick(View view)
+    {
+        String tagString = tag_suggestion.getText().toString();
+        suggest_tag.setEnabled(false);
+
+        BackendOuterClass.TagPropositionRequest tagProp;
+        tagProp = BackendOuterClass.TagPropositionRequest.newBuilder()
+                    .setTag(tagString).setToken(loginToken).build();
+
+        try
+        {
+            BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagProp);
+            Toast.makeText(getBaseContext(), "Tag Suggested", Toast.LENGTH_SHORT).show();
+            suggest_tag.setEnabled(true);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            suggest_tag.setEnabled(true);
         }
 
     }

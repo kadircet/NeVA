@@ -9,17 +9,29 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import neva.backend.BackendGrpc;
+import neva.backend.BackendOuterClass;
+import neva.backend.SuggestionOuterClass;
 
 public class RecommendationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle burgerButton;
     TextView recommendedMeal;
+    Button recommendButton;
     ByteString loginToken;
     NavigationView navigationView;
+    ManagedChannel mChannel;
+    BackendGrpc.BackendBlockingStub blockingStub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +53,35 @@ public class RecommendationActivity extends AppCompatActivity implements Navigat
         loginToken = ByteString.copyFrom(loginTokenArray);
 
         recommendedMeal = findViewById(R.id.recommendation_field);
+        recommendButton = findViewById(R.id.recommend_button);
         //TODO: Request Recommendation
         recommendedMeal.setText("Recommended Meal Name");
+
+        mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
+        blockingStub = BackendGrpc.newBlockingStub(mChannel);
+    }
+
+    public void onGetRecommendationClick(View view) {
+        recommendButton.setEnabled(false);
+        BackendOuterClass.GetSuggestionRequest recommendationReq;
+        recommendationReq = BackendOuterClass.GetSuggestionRequest.newBuilder()
+                            .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+                            .setToken(loginToken).build();
+
+        BackendOuterClass.GetSuggestionReply recommendationRep;
+        try {
+            recommendationRep = blockingStub.getSuggestion(recommendationReq);
+            recommendedMeal.setText(recommendationRep.getName());
+
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this, "YARRAK!", Toast.LENGTH_SHORT).show();
+
+        }
+
+        recommendButton.setEnabled(true);
+
     }
 
     @Override
@@ -98,7 +137,7 @@ public class RecommendationActivity extends AppCompatActivity implements Navigat
             default:
                 break;
         }
-        drawerLayout.closeDrawer(GravityCompat.START);
+        drawerLayout.closeDrawer(GravityCompat.START, true);
         return true;
     }
 
