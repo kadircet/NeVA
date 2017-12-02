@@ -142,6 +142,9 @@ class BackendServiceImpl final : public Backend::Service {
                    kNevaDatabasePassword);
     CHECK(conn_->connected()) << "Database connection failed.";
 
+    mysqlpp::Query query = conn_->query("SET NAMES utf8;");
+    query.execute();
+
     user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
     proposition_orm_ =
         std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_));
