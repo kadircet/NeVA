@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "protos/user.proto";
 import "protos/suggestion.proto";
+import "protos/user_history.proto";
 
 package neva.backend;
 
@@ -27,6 +28,9 @@ service Backend {
 
   rpc GetSuggestionItemList(GetSuggestionItemListRequest)
       returns (GetSuggestionItemListReply) {
+  }
+
+  rpc InformUserChoice(InformUserChoiceRequest) returns (GenericReply) {
   }
 }
 
@@ -111,4 +115,12 @@ message GetSuggestionItemListRequest {
 message GetSuggestionItemListReply {
   // Item names in the database.
   repeated Suggestion items = 1;
+}
+
+message InformUserChoiceRequest {
+  // Session key for the user informing about request.
+  bytes token = 1;
+
+  // Choice of the user.
+  Choice choice = 2;
 }
