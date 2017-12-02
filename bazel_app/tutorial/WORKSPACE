@@ -1,6 +1,0 @@
-android_sdk_repository(
-    name ="androidsdk",
-    path = "/home/hakan/Android/Sdk/",
-    api_level = 27,
-    build_tools_version = "26.0.2"
-)
