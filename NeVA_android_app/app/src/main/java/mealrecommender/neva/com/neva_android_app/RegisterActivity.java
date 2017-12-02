@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                 cal.set(Calendar.HOUR,0);
                 cal.set(Calendar.SECOND,0);
                 String monthName = cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH);
-                String date = cal.get(Calendar.YEAR) + " " + cal.get(Calendar.MONTH) + " " + cal.get(Calendar.DAY_OF_MONTH);
+                String date = cal.get(Calendar.DAY_OF_MONTH)+ " / " + monthName +" / "+ cal.get(Calendar.YEAR);
                 birthdate_field.setText(date);
                 birthday_time = (int) (cal.getTimeInMillis()/1000);
                 Log.d("BDay: ", Integer.toString(birthday_time));
