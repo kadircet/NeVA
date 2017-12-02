@@ -5,6 +5,7 @@
 #include <grpc++/grpc++.h>
 #include <mysql++.h>
 
+#include "gflags/gflags.h"
 #include "glog/logging.h"
 #include "orm/proposition_orm.h"
 #include "orm/suggestion_orm.h"
@@ -156,6 +157,8 @@ void RunServer() {
 }  // namespace neva
 
 int main(int argc, char** argv) {
+  gflags::ParseCommandLineFlags(&argc, &argv, true);
+  google::InitGoogleLogging(argv[0]);
   neva::backend::RunServer();
   return 0;
 }
