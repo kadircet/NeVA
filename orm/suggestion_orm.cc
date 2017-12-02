@@ -14,16 +14,16 @@ using grpc::StatusCode;
 
 Status SuggestionOrm::GetSuggestees(
     const Suggestion::SuggestionCategory suggestion_category,
-    std::vector<Suggestion>* suggestees) {
+    const uint32_t start_index, std::vector<Suggestion>* suggestees) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
 
-  mysqlpp::Query query =
-      conn_->query("SELECT `name` FROM `suggestee` WHERE `category_id`=%0");
+  mysqlpp::Query query = conn_->query(
+      "SELECT `name` FROM `suggestee` WHERE `category_id`=%0 AND `id`>%1");
   query.parse();
 
-  mysqlpp::StoreQueryResult res = query.store(suggestion_category);
+  mysqlpp::StoreQueryResult res = query.store(suggestion_category, start_index);
   for (const auto row : res) {
     Suggestion suggestion;
     suggestion.set_name(row["name"]);

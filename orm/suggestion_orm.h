@@ -19,7 +19,7 @@ class SuggestionOrm {
 
   grpc::Status GetSuggestees(
       const Suggestion::SuggestionCategory suggestion_category,
-      std::vector<Suggestion>* suggestees);
+      const uint32_t start_index, std::vector<Suggestion>* suggestees);
 
   grpc::Status GetSuggestion(
       const Suggestion::SuggestionCategory suggestion_category,

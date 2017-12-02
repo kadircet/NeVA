@@ -119,6 +119,23 @@ class BackendServiceImpl final : public Backend::Service {
         user_id, request->tag_id(), request->suggestee_id(), request->value());
   }
 
+  Status GetSuggestionItemList(ServerContext* context,
+                               const GetSuggestionItemListRequest* request,
+                               GetSuggestionItemListReply* reply) override {
+    int user_id;
+    const Status status = user_orm_->CheckToken(request->token(), &user_id);
+    if (!status.ok()) {
+      return status;
+    }
+    std::vector<Suggestion> suggestees;
+    suggestion_orm_->GetSuggestees(request->suggestion_category(),
+                                   request->start_index(), &suggestees);
+    for (const Suggestion& suggestion : suggestees) {
+      reply->add_items(suggestion.name());
+    }
+    return Status::OK;
+  }
+
   BackendServiceImpl() {
     conn_ = std::make_shared<mysqlpp::Connection>(false);
     conn_->connect(kNevaDatabaseName, kNevaDatabaseServer, kNevaDatabaseUser,
