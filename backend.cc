@@ -73,9 +73,9 @@ class BackendServiceImpl final : public Backend::Service {
     return proposition_orm_->InsertProposition(user_id, request->suggestion());
   }
 
-  Status GetMealSuggestion(ServerContext* context,
-                           const GetMealSuggestionRequest* request,
-                           GetMealSuggestionReply* reply) override {
+  Status GetSuggestion(ServerContext* context,
+                       const GetSuggestionRequest* request,
+                       GetSuggestionReply* reply) override {
     int user_id;
     {
       const Status status = user_orm_->CheckToken(request->token(), &user_id);
