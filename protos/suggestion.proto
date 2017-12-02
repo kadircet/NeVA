@@ -11,6 +11,9 @@ message Suggestion {
   // Shows the category to which suggestion belongs.
   SuggestionCategory suggestion_category = 1;
 
+  // id of the suggestee in the database.
+  uint32 suggestee_id = 2;
+
   // Name of the suggestion item, like "lahmacun".
-  string name = 2;
+  string name = 3;
 };

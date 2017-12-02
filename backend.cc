@@ -131,7 +131,7 @@ class BackendServiceImpl final : public Backend::Service {
     suggestion_orm_->GetSuggestees(request->suggestion_category(),
                                    request->start_index(), &suggestees);
     for (const Suggestion& suggestion : suggestees) {
-      reply->add_items(suggestion.name());
+      *reply->add_items() = suggestion;
     }
     return Status::OK;
   }

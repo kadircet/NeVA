@@ -20,12 +20,14 @@ Status SuggestionOrm::GetSuggestees(
   }
 
   mysqlpp::Query query = conn_->query(
-      "SELECT `name` FROM `suggestee` WHERE `category_id`=%0 AND `id`>%1");
+      "SELECT `id`, `name` FROM `suggestee` WHERE `category_id`=%0 AND "
+      "`id`>%1");
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(suggestion_category, start_index);
   for (const auto row : res) {
     Suggestion suggestion;
+    suggestion.set_suggestee_id(row["id"]);
     suggestion.set_name(row["name"]);
     suggestees->push_back(suggestion);
   }

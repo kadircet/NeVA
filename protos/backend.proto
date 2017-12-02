@@ -110,5 +110,5 @@ message GetSuggestionItemListRequest {
 
 message GetSuggestionItemListReply {
   // Item names in the database.
-  repeated string items = 1;
+  repeated Suggestion items = 1;
 }
