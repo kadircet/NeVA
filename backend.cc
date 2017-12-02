@@ -136,6 +136,17 @@ class BackendServiceImpl final : public Backend::Service {
     return Status::OK;
   }
 
+  Status InformUserChoice(ServerContext* context,
+                          const InformUserChoiceRequest* request,
+                          GenericReply* reply) override {
+    int user_id;
+    const Status status = user_orm_->CheckToken(request->token(), &user_id);
+    if (!status.ok()) {
+      return status;
+    }
+    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet.");
+  }
+
   BackendServiceImpl() {
     conn_ = std::make_shared<mysqlpp::Connection>(false);
     conn_->connect(kNevaDatabaseName, kNevaDatabaseServer, kNevaDatabaseUser,
