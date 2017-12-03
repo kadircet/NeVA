@@ -84,8 +84,11 @@ Status UserOrm::CheckCredentials(const std::string& email,
 
   // TODO(kadircet): Implement Status::ACTIVE check after sending verification
   // emails.
-  if (res[0]["password"] ==
-      util::HMac(static_cast<const std::string>(res[0]["salt"]), password)) {
+  const mysqlpp::String sql_password = res[0]["password"];
+  const mysqlpp::String sql_salt = res[0]["salt"];
+  const std::string hash(sql_password.data(), sql_password.size());
+  const std::string salt(sql_salt.data(), sql_salt.size());
+  if (hash == util::HMac(salt, password)) {
     query.reset();
     *session_token = util::GenerateRandomKey();
     query << "INSERT INTO `user_session` (`id`, `token`, `expire`) VALUES "
