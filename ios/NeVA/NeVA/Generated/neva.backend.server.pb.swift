@@ -39,6 +39,8 @@ internal protocol Neva_Backend_BackendProvider {
   func getsuggestion(request : Neva_Backend_GetSuggestionRequest, session : Neva_Backend_BackendGetSuggestionSession) throws -> Neva_Backend_GetSuggestionReply
   func tagproposition(request : Neva_Backend_TagPropositionRequest, session : Neva_Backend_BackendTagPropositionSession) throws -> Neva_Backend_GenericReply
   func tagvalueproposition(request : Neva_Backend_TagValuePropositionRequest, session : Neva_Backend_BackendTagValuePropositionSession) throws -> Neva_Backend_GenericReply
+  func getsuggestionitemlist(request : Neva_Backend_GetSuggestionItemListRequest, session : Neva_Backend_BackendGetSuggestionItemListSession) throws -> Neva_Backend_GetSuggestionItemListReply
+  func informuserchoice(request : Neva_Backend_InformUserChoiceRequest, session : Neva_Backend_BackendInformUserChoiceSession) throws -> Neva_Backend_GenericReply
 }
 
 /// Common properties available in each service session.
@@ -206,6 +208,56 @@ internal class Neva_Backend_BackendTagValuePropositionSession : Neva_Backend_Bac
   }
 }
 
+// GetSuggestionItemList (Unary)
+internal class Neva_Backend_BackendGetSuggestionItemListSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_GetSuggestionItemListRequest(serializedData:requestData)
+        let replyMessage = try self.provider.getsuggestionitemlist(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// InformUserChoice (Unary)
+internal class Neva_Backend_BackendInformUserChoiceSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_InformUserChoiceRequest(serializedData:requestData)
+        let replyMessage = try self.provider.informuserchoice(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
 
 /// Main server for generated service
 internal class Neva_Backend_BackendServer {
@@ -264,6 +316,10 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendTagPropositionSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/TagValueProposition":
           try Neva_Backend_BackendTagValuePropositionSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/GetSuggestionItemList":
+          try Neva_Backend_BackendGetSuggestionItemListSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/InformUserChoice":
+          try Neva_Backend_BackendInformUserChoiceSession(handler:handler, provider:provider).run(queue:queue)
         default:
           break // handle unknown requests
         }

@@ -22,6 +22,7 @@
 		AC3852C31FBB0DED0085DB27 /* Czlib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A21FBB0A450085DB27 /* Czlib.framework */; };
 		AC3852C41FBB0DED0085DB27 /* Czlib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852A21FBB0A450085DB27 /* Czlib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AC65D4C71FB1233300753B94 /* TempViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC65D4C61FB1233300753B94 /* TempViewController.swift */; };
+		AC6F2D231FD429F50001F269 /* user_history.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6F2D1D1FD429F50001F269 /* user_history.pb.swift */; };
 		AC8AC8421FCDC5C300D68FB6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AC8411FCDC5C300D68FB6 /* SettingsViewController.swift */; };
 		AC8AC8441FCDDE6D00D68FB6 /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AC8431FCDDE6D00D68FB6 /* UserToken.swift */; };
 		AC8EF6301FC211C900CFABBE /* backend.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8EF62A1FC211C800CFABBE /* backend.pb.swift */; };
@@ -184,6 +185,7 @@
 		AC38528D1FBB0A440085DB27 /* SwiftGRPC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftGRPC.xcodeproj; path = "../../dependencies/ios/grpc-swift/SwiftGRPC.xcodeproj"; sourceTree = "<group>"; };
 		AC3852AD1FBB0AAA0085DB27 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AC65D4C61FB1233300753B94 /* TempViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempViewController.swift; sourceTree = "<group>"; };
+		AC6F2D1D1FD429F50001F269 /* user_history.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user_history.pb.swift; sourceTree = "<group>"; };
 		AC8AC8411FCDC5C300D68FB6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		AC8AC8431FCDDE6D00D68FB6 /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		AC8EF62A1FC211C800CFABBE /* backend.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backend.pb.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 		AC8EF6291FC211C800CFABBE /* protos */ = {
 			isa = PBXGroup;
 			children = (
+				AC6F2D1D1FD429F50001F269 /* user_history.pb.swift */,
 				AC8EF62A1FC211C800CFABBE /* backend.pb.swift */,
 				ACCE1CFA1FCDB31700D04579 /* suggestion.pb.swift */,
 				AC8EF62B1FC211C800CFABBE /* util.pb.swift */,
@@ -599,6 +602,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC6F2D231FD429F50001F269 /* user_history.pb.swift in Sources */,
 				AC9B9C081FB0F34900507F20 /* LoginButton.swift in Sources */,
 				AC8F917B1FA9366800D6AB8F /* ViewController.swift in Sources */,
 				AC65D4C71FB1233300753B94 /* TempViewController.swift in Sources */,

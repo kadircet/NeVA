@@ -25,6 +25,9 @@ struct Neva_Backend_Suggestion: SwiftProtobuf.Message {
   /// Shows the category to which suggestion belongs.
   var suggestionCategory: Neva_Backend_Suggestion.SuggestionCategory = .invalidSuggestionCategory
 
+  /// id of the suggestee in the database.
+  var suggesteeID: UInt32 = 0
+
   /// Name of the suggestion item, like "lahmacun".
   var name: String = String()
 
@@ -68,7 +71,8 @@ struct Neva_Backend_Suggestion: SwiftProtobuf.Message {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularEnumField(value: &self.suggestionCategory)
-      case 2: try decoder.decodeSingularStringField(value: &self.name)
+      case 2: try decoder.decodeSingularUInt32Field(value: &self.suggesteeID)
+      case 3: try decoder.decodeSingularStringField(value: &self.name)
       default: break
       }
     }
@@ -82,8 +86,11 @@ struct Neva_Backend_Suggestion: SwiftProtobuf.Message {
     if self.suggestionCategory != .invalidSuggestionCategory {
       try visitor.visitSingularEnumField(value: self.suggestionCategory, fieldNumber: 1)
     }
+    if self.suggesteeID != 0 {
+      try visitor.visitSingularUInt32Field(value: self.suggesteeID, fieldNumber: 2)
+    }
     if !self.name.isEmpty {
-      try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -96,11 +103,13 @@ fileprivate let _protobuf_package = "neva.backend"
 extension Neva_Backend_Suggestion: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "suggestion_category"),
-    2: .same(proto: "name"),
+    2: .standard(proto: "suggestee_id"),
+    3: .same(proto: "name"),
   ]
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_Suggestion) -> Bool {
     if self.suggestionCategory != other.suggestionCategory {return false}
+    if self.suggesteeID != other.suggesteeID {return false}
     if self.name != other.name {return false}
     if unknownFields != other.unknownFields {return false}
     return true
