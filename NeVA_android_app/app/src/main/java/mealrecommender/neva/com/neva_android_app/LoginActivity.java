@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 BackendOuterClass.LoginReply loginReply = blockingStub.login(loginReq);
                                 ByteString loginToken = loginReply.getToken();
-                                Intent intent = new Intent(getBaseContext(), RecommendationActivity.class);
+                                Intent intent = new Intent(getBaseContext(), MainActivity.class);
                                 Toast.makeText(getBaseContext(), "Successfully FB logged in!", Toast.LENGTH_LONG).show();
                                 byte[] loginTokenArray = loginToken.toByteArray();
                                 intent.putExtra(TOKEN_EXTRA, loginTokenArray);
@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
             loginToken = loginReply.getToken();
 
-            Intent intent = new Intent(this, RecommendationActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             //String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken.toString();
             Toast.makeText(this, "Successfully logged in!", Toast.LENGTH_LONG).show();
             byte[] loginTokenArray = loginToken.toByteArray();
