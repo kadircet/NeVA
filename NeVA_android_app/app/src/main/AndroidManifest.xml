@@ -47,11 +47,9 @@
             android:parentActivityName=".LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".RecommendationActivity"
-            android:parentActivityName=".LoginActivity" />
-        <activity android:name=".SuggestionActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
