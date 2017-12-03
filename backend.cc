@@ -149,6 +149,7 @@ class BackendServiceImpl final : public Backend::Service {
 
   BackendServiceImpl() {
     conn_ = std::make_shared<mysqlpp::Connection>(false);
+    conn_->set_option(new mysqlpp::ReconnectOption(true));
     conn_->connect(kNevaDatabaseName, kNevaDatabaseServer, kNevaDatabaseUser,
                    kNevaDatabasePassword);
     CHECK(conn_->connected()) << "Database connection failed.";
