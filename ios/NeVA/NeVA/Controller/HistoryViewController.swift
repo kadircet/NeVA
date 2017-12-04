@@ -14,7 +14,18 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     var historyEntries: [HistoryEntry] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historyEntries.count + 1
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        let date = Date()
+        let today = calendar.startOfDay(for: date)
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: today)
+        components.day! += 1
+        let tomorrow = calendar.date(from: components)!
+        if datePickerOfDateField_.date < tomorrow {
+            return historyEntries.count + 1
+        } else {
+            return historyEntries.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,12 +57,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private var datePickerOfDateField_: UIDatePicker = UIDatePicker()
-    func handleDatePicker(sender: UIDatePicker) {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .long
-        timeFormatter.timeStyle = .none
-        dateField.text = timeFormatter.string(from: sender.date)
-    }
     
     @IBAction func orderTypeChanged(_ sender: Any) {
         sortHistoryEntries()
@@ -81,9 +86,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
+    
     @objc func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        dateFormatter.timeZone = TimeZone.current
         dateField.text = dateFormatter.string(from: datePickerOfDateField_.date)
         reloadEntries()
         sortHistoryEntries()
@@ -101,7 +108,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         calendar.timeZone = TimeZone.current
         let date = datePickerOfDateField_.date
         let dateFrom = calendar.startOfDay(for: date)
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: dateFrom)
         components.day! += 1
         let dateTo = calendar.date(from: components)!
         let predicate = NSPredicate(format: "(userMail == %@) AND (%@ <= date) AND (date < %@)",
@@ -131,6 +138,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         datePickerOfDateField_.addTarget(self, action: #selector(HistoryViewController.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        dateFormatter.timeZone = TimeZone.current
         dateField.text = dateFormatter.string(from: datePickerOfDateField_.date)
         
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .reloadHistoryTable, object: nil)
