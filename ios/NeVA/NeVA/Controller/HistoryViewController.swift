@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    //TODO: Use local time instead of universal time to satisfy backend side
     
     var historyEntries: [HistoryEntry] = []
     @IBAction func addHistoryEntry(_ sender: UIButton) {
