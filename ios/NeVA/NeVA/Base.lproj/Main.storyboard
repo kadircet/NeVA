@@ -462,7 +462,7 @@ Meal Recommender</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hq-rR-qqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1796" y="1105"/>
+            <point key="canvasLocation" x="862" y="1010"/>
         </scene>
         <!--Recommendation-->
         <scene sceneID="qC6-4D-FYo">
@@ -814,7 +814,7 @@ Meal Recommender</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRZ-z0-VyU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3152.8000000000002" y="332.38380809595208"/>
+            <point key="canvasLocation" x="1796" y="-1041"/>
         </scene>
         <!--History-->
         <scene sceneID="kYe-5v-x9x">
@@ -925,6 +925,48 @@ Meal Recommender</string>
                                             <outlet property="time" destination="Nwq-Ob-gn4" id="RjK-bd-aRY"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addHistoryEntryCell" rowHeight="128" id="6lj-Yn-fuM">
+                                        <rect key="frame" x="0.0" y="156" width="345" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6lj-Yn-fuM" id="RHh-4k-ZHv">
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="127.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lez-FE-wdk">
+                                                    <rect key="frame" x="15" y="13" width="100" height="100"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="HG9-nP-8Rm"/>
+                                                        <constraint firstAttribute="width" constant="100" id="YxS-3Z-fmf"/>
+                                                    </constraints>
+                                                    <state key="normal" image="add-button"/>
+                                                    <state key="selected" image="add-button-highlighted"/>
+                                                    <state key="highlighted" image="add-button-highlighted"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="bHw-eG-WuN">
+                                                    <rect key="frame" x="120" y="32" width="210" height="62"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="62" id="93X-6N-1J4"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <size key="shadowOffset" width="2" height="2"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="Lez-FE-wdk" firstAttribute="centerY" secondItem="RHh-4k-ZHv" secondAttribute="centerY" id="7bz-oz-gin"/>
+                                                <constraint firstItem="Lez-FE-wdk" firstAttribute="leading" secondItem="RHh-4k-ZHv" secondAttribute="leadingMargin" id="Zad-ks-oe1"/>
+                                                <constraint firstItem="bHw-eG-WuN" firstAttribute="leading" secondItem="Lez-FE-wdk" secondAttribute="trailing" constant="5" id="gP3-oo-YcO"/>
+                                                <constraint firstItem="bHw-eG-WuN" firstAttribute="centerY" secondItem="Lez-FE-wdk" secondAttribute="centerY" id="gQc-nG-XSq"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bHw-eG-WuN" secondAttribute="trailing" id="i76-zv-t9b"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
                                 </prototypes>
                                 <sections/>
                             </tableView>
@@ -957,10 +999,12 @@ Meal Recommender</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O11-vV-DZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2436" y="480.80959520239884"/>
+            <point key="canvasLocation" x="1796" y="556"/>
         </scene>
     </scenes>
     <resources>
+        <image name="add-button" width="100" height="100"/>
+        <image name="add-button-highlighted" width="100" height="100"/>
         <image name="clock" width="30" height="30"/>
         <image name="gift" width="30" height="30"/>
         <image name="gray-background-texture-2" width="810" height="1440"/>

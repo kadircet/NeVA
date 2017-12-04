@@ -14,21 +14,30 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     var historyEntries: [HistoryEntry] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return historyEntries.count
+        return historyEntries.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ("historyCell")) as? HistoryTableViewCell {
-            let meal = historyEntries[indexPath.row].meal!
-            if let picture = meal.picture as? UIImage {
-                cell.setFoodPicture(picture: picture )
+        let index = indexPath.row
+        if index < historyEntries.count
+        {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ("historyCell")) as? HistoryTableViewCell {
+                let meal = historyEntries[index].meal!
+                if let picture = meal.picture as? UIImage {
+                    cell.setFoodPicture(picture: picture )
+                }
+                cell.setName(name: meal.name!)
+                cell.setTime(time: historyEntries[indexPath.row].date!)
+                return cell
             }
-            cell.setName(name: meal.name!)
-            cell.setTime(time: historyEntries[indexPath.row].date!)
-            return cell
-        } else {
-            return UITableViewCell()
         }
+        else if index == historyEntries.count {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "addHistoryEntryCell") {
+                return cell
+            }
+        }
+        return UITableViewCell()
+        
     }
     
 
@@ -81,6 +90,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         historyTable.reloadData()
     }
     
+    @objc func reload() {
+        reloadEntries()
+        sortHistoryEntries()
+        historyTable.reloadData()
+    }
     func reloadEntries() {
         let email = UserToken.email!
         var calendar = Calendar.current
@@ -109,6 +123,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         dateField.inputView = datePickerOfDateField_
         datePickerOfDateField_.date = Date()
         datePickerOfDateField_.datePickerMode = .date
@@ -116,6 +132,10 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         dateField.text = dateFormatter.string(from: datePickerOfDateField_.date)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .reloadHistoryTable, object: nil)
+
+        
         reloadEntries()
         sortHistoryEntries()
         
@@ -132,4 +152,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+extension Notification.Name {
+    static let reloadHistoryTable = Notification.Name("reloadHistoryTable")
 }
