@@ -46,3 +46,19 @@ cc_library(
         "@glog//:glog",
     ],
 )
+
+cc_library(
+    name = "user_history_orm",
+    srcs = ["user_history_orm.cc"],
+    hdrs = ["user_history_orm.h"],
+    copts = [
+        "-I/usr/include/mysql++/",
+        "-I/usr/include/mysql",
+    ],
+    linkopts = ["-lmysqlpp"],
+    deps = [
+        "//protos:user_history_proto",
+        "//protos:user_proto",
+        "@glog//:glog",
+    ],
+)
