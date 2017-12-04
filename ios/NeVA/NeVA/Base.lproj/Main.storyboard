@@ -6,12 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
         </array>
     </customFonts>
     <scenes>
@@ -525,6 +527,8 @@ Meal Recommender</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <size key="shadowOffset" width="2" height="2"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -609,6 +613,8 @@ Meal Recommender</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggest Tag For Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4Va-nc-hYG">
                                 <rect key="frame" x="10" y="205" width="355" height="30"/>
@@ -618,6 +624,8 @@ Meal Recommender</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-4b-aYh" userLabel="Tag Name" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="69.5" width="225" height="35"/>
@@ -665,6 +673,8 @@ Meal Recommender</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N5N-aB-X7z" userLabel="Food Name" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="160" width="225" height="35"/>
@@ -817,21 +827,137 @@ Meal Recommender</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="qXV-ek-0JQ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pq0-op-EH7" userLabel="Date Field" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                                <rect key="frame" x="15" y="35" width="345" height="40"/>
+                                <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="lTF-mH-rSM"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-8c-PwU">
+                                <rect key="frame" x="15" y="83" width="345" height="29"/>
+                                <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <segments>
+                                    <segment title="Name"/>
+                                    <segment title="Time"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="orderTypeChanged:" destination="yCT-6y-ngv" eventType="valueChanged" id="uPR-C1-1v9"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="128" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aqk-R3-vFh" userLabel="History Table">
+                                <rect key="frame" x="15" y="119" width="345" height="484"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" rowHeight="128" id="nnd-eO-QB7" customClass="HistoryTableViewCell" customModule="NeVA" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="345" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nnd-eO-QB7" id="sPG-7b-Zh2">
+                                            <rect key="frame" x="0.0" y="0.0" width="345" height="127.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginRegisterViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="mq2-Xr-r59" userLabel="foodPicture" customClass="RoundedImage" customModule="NeVA" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="13" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="NX9-wB-YQe"/>
+                                                        <constraint firstAttribute="height" constant="100" id="aBU-J9-R9Z"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwq-Ob-gn4">
+                                                    <rect key="frame" x="120" y="75" width="210" height="38"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="38" id="3u6-ae-Qyn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <size key="shadowOffset" width="2" height="2"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="2FG-zD-pif">
+                                                    <rect key="frame" x="120" y="13" width="210" height="62"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="62" id="84b-sn-rCN"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <size key="shadowOffset" width="2" height="2"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2FG-zD-pif" firstAttribute="trailing" secondItem="sPG-7b-Zh2" secondAttribute="trailingMargin" id="3W9-6s-vMA"/>
+                                                <constraint firstItem="Nwq-Ob-gn4" firstAttribute="trailing" secondItem="sPG-7b-Zh2" secondAttribute="trailingMargin" id="6Gq-TM-REa"/>
+                                                <constraint firstItem="mq2-Xr-r59" firstAttribute="leading" secondItem="sPG-7b-Zh2" secondAttribute="leadingMargin" id="8az-4t-a6i"/>
+                                                <constraint firstItem="2FG-zD-pif" firstAttribute="leading" secondItem="mq2-Xr-r59" secondAttribute="trailing" constant="5" id="Ds6-wu-3j7"/>
+                                                <constraint firstItem="2FG-zD-pif" firstAttribute="centerY" secondItem="mq2-Xr-r59" secondAttribute="centerY" constant="-19" id="GdA-9F-zQG"/>
+                                                <constraint firstItem="Nwq-Ob-gn4" firstAttribute="leading" secondItem="mq2-Xr-r59" secondAttribute="trailing" constant="5" id="Xt0-v7-F9M"/>
+                                                <constraint firstItem="mq2-Xr-r59" firstAttribute="centerY" secondItem="sPG-7b-Zh2" secondAttribute="centerY" id="mCK-fo-jZe"/>
+                                                <constraint firstItem="Nwq-Ob-gn4" firstAttribute="centerY" secondItem="mq2-Xr-r59" secondAttribute="centerY" constant="31" id="oJh-9K-88g"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="foodPicture" destination="mq2-Xr-r59" id="UjQ-eh-vOU"/>
+                                            <outlet property="mealName" destination="2FG-zD-pif" id="7yu-IK-Bfl"/>
+                                            <outlet property="time" destination="Nwq-Ob-gn4" id="RjK-bd-aRY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Mte-8c-PwU" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" constant="15" id="5xS-MB-NTd"/>
                             <constraint firstAttribute="bottom" secondItem="qXV-ek-0JQ" secondAttribute="bottom" id="9jN-dd-XZD"/>
+                            <constraint firstItem="jmg-Mf-3fN" firstAttribute="bottom" secondItem="aqk-R3-vFh" secondAttribute="bottom" constant="15" id="CMV-IQ-Apz"/>
+                            <constraint firstItem="Pq0-op-EH7" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" constant="15" id="DG3-Wf-mQQ"/>
                             <constraint firstItem="qXV-ek-0JQ" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" id="DR6-8l-qts"/>
+                            <constraint firstItem="jmg-Mf-3fN" firstAttribute="trailing" secondItem="Mte-8c-PwU" secondAttribute="trailing" constant="15" id="JAd-hn-gUg"/>
+                            <constraint firstItem="aqk-R3-vFh" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" constant="15" id="PBo-dj-8N0"/>
                             <constraint firstItem="qXV-ek-0JQ" firstAttribute="top" secondItem="4ax-la-zAI" secondAttribute="top" id="deJ-nJ-BD4"/>
                             <constraint firstItem="qXV-ek-0JQ" firstAttribute="trailing" secondItem="jmg-Mf-3fN" secondAttribute="trailing" id="eJI-LY-GDH"/>
+                            <constraint firstItem="jmg-Mf-3fN" firstAttribute="trailing" secondItem="Pq0-op-EH7" secondAttribute="trailing" constant="15" id="flQ-sc-cVJ"/>
+                            <constraint firstItem="aqk-R3-vFh" firstAttribute="top" secondItem="Mte-8c-PwU" secondAttribute="bottom" constant="8" id="lJE-jo-neU"/>
+                            <constraint firstItem="Mte-8c-PwU" firstAttribute="top" secondItem="Pq0-op-EH7" secondAttribute="bottom" constant="8" id="lS4-ZU-xbm"/>
+                            <constraint firstItem="Pq0-op-EH7" firstAttribute="top" secondItem="jmg-Mf-3fN" secondAttribute="top" constant="15" id="nfH-As-jzc"/>
+                            <constraint firstItem="jmg-Mf-3fN" firstAttribute="trailing" secondItem="aqk-R3-vFh" secondAttribute="trailing" constant="15" id="ssu-GS-Iml"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jmg-Mf-3fN"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" image="clock" landscapeImage="clock" largeContentSizeImage="clock" id="Io0-fs-PDY"/>
+                    <connections>
+                        <outlet property="dateField" destination="Pq0-op-EH7" id="A7g-5a-mI6"/>
+                        <outlet property="historyTable" destination="aqk-R3-vFh" id="3nK-1h-5Zi"/>
+                        <outlet property="segmentControl" destination="Mte-8c-PwU" id="la8-c8-vZu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O11-vV-DZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2436" y="481"/>
+            <point key="canvasLocation" x="2436" y="480.80959520239884"/>
         </scene>
     </scenes>
     <resources>

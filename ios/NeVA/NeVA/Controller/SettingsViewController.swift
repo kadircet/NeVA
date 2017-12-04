@@ -19,6 +19,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         if let tabBarVC = tabBarController
         {
             UserToken.token = nil
+            UserToken.email = nil
             tabBarVC.dismiss(animated: true, completion: nil)
         }
     }

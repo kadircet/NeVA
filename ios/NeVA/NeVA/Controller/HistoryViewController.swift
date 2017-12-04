@@ -7,12 +7,123 @@
 //
 
 import UIKit
+import CoreData
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    var historyEntries: [HistoryEntry] = []
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return historyEntries.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ("historyCell")) as? HistoryTableViewCell {
+            let meal = historyEntries[indexPath.row].meal!
+            if let picture = meal.picture as? UIImage {
+                cell.setFoodPicture(picture: picture )
+            }
+            cell.setName(name: meal.name!)
+            cell.setTime(time: historyEntries[indexPath.row].date!)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    
 
+    @IBOutlet weak var dateField: UITextField!
+    @IBOutlet weak var historyTable: UITableView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
+    private var datePickerOfDateField_: UIDatePicker = UIDatePicker()
+    func handleDatePicker(sender: UIDatePicker) {
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateStyle = .long
+        timeFormatter.timeStyle = .none
+        dateField.text = timeFormatter.string(from: sender.date)
+    }
+    
+    @IBAction func orderTypeChanged(_ sender: Any) {
+        sortHistoryEntries()
+        historyTable.reloadData()
+    }
+    
+    func sortHistoryEntries() {
+        if segmentControl.selectedSegmentIndex == 0 {
+            //Name ordered
+            historyEntries.sort{
+                he1, he2 in
+                if he1.meal!.name! != he2.meal!.name! {
+                    return he1.meal!.name! < he2.meal!.name!
+                } else {
+                    return he1.date! < he2.date!
+                }
+            }
+        } else if segmentControl.selectedSegmentIndex == 1 {
+            //Time ordered
+            historyEntries.sort{
+                he1, he2 in
+                if he1.date! != he2.date! {
+                    return he1.date! < he2.date!
+                } else {
+                    return he1.meal!.name! < he2.meal!.name!
+                }
+            }
+        }
+    }
+    @objc func datePickerValueChanged(sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        dateField.text = dateFormatter.string(from: datePickerOfDateField_.date)
+        reloadEntries()
+        sortHistoryEntries()
+        historyTable.reloadData()
+    }
+    
+    func reloadEntries() {
+        let email = UserToken.email!
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        let date = datePickerOfDateField_.date
+        let dateFrom = calendar.startOfDay(for: date)
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: dateFrom)
+        components.day! += 1
+        let dateTo = calendar.date(from: components)!
+        let predicate = NSPredicate(format: "(userMail == %@) AND (%@ <= date) AND (date < %@)",
+                                    argumentArray: [email, dateFrom, dateTo])
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        let managedObjectContext =
+            appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "HistoryEntry")
+        fetchRequest.predicate = predicate
+        do {
+            let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as! [HistoryEntry]
+            historyEntries = fetchedEntries
+        } catch (let error) {
+            fatalError("Failed to fetch: \(error)")
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        dateField.inputView = datePickerOfDateField_
+        datePickerOfDateField_.date = Date()
+        datePickerOfDateField_.datePickerMode = .date
+        datePickerOfDateField_.addTarget(self, action: #selector(HistoryViewController.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        dateField.text = dateFormatter.string(from: datePickerOfDateField_.date)
+        reloadEntries()
+        sortHistoryEntries()
+        
+        historyTable.dataSource = self
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
 
@@ -21,15 +132,4 @@ class HistoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

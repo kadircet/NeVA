@@ -10,7 +10,9 @@ import Foundation
 
 class UserToken {
     static var token: Data?
+    static var email: String?
     static var type: AuthenticationType?
+    
     enum AuthenticationType
     {
         case default_type

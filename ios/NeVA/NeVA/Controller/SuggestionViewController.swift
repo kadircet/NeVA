@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -30,7 +31,7 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
             return tagList[row]
         }
         else if pickerView == foodPickerView {
-            return foodList[row]
+            return foodList[row].name
         }
         else {
             return ""
@@ -41,7 +42,7 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
             tagPickerField.text = tagList[row]
         }
         else if pickerView == foodPickerView {
-            foodPickerField.text = foodList[row]
+            foodPickerField.text = foodList[row].name
         }
     }
     
@@ -114,7 +115,7 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
     let foodPickerView = UIPickerView()
     
     var tagList = ["Fast Food", "Healthy", "Vegan"]
-    var foodList = ["Lahmacun", "Brokoli Salatası", "Hamburger", "Kebap"]
+    var foodList: [Meal] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +127,24 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        let managedObjectContext =
+            appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        do {
+            let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Meal]
+            if let meals = fetchedEntries, !meals.isEmpty {
+                foodList = meals
+            }
+        } catch (let error){
+            fatalError("Failed to fetch: \(error)")
+        }
     }
 
     override func didReceiveMemoryWarning() {

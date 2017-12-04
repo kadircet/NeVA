@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class RecommendationViewController: UIViewController {
     
@@ -64,12 +65,87 @@ class RecommendationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         recommendationView.isHidden = true
+        getMealsFromServer()
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getMealsFromServer() {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let managedObjectContext =
+            appDelegate.persistentContainer.viewContext
+        
+        var startIndex = 0
+        
+        //Finding maximum id in database
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
+        fetchRequest.predicate = NSPredicate(format: "id==max(id)", argumentArray: nil)
+        do {
+            let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Meal]
+            if let maximumMeal = fetchedEntries, !maximumMeal.isEmpty {
+                startIndex = Int(maximumMeal[0].id)
+            }
+        } catch {
+            fatalError("Failed to fetch: \(error)")
+        }
+        //
+        
+        //Get meals from server
+        let service = NevaConstants.service
+        var request = Neva_Backend_GetSuggestionItemListRequest()
+        request.startIndex = UInt32(startIndex)
+        request.token = UserToken.token!
+        request.suggestionCategory = .meal
+        var itemsAcquired: [Neva_Backend_Suggestion] = []
+        do {
+            let responseMessage = try service.getsuggestionitemlist(request)
+            print(responseMessage)
+            itemsAcquired = responseMessage.items
+        } catch (let error) {
+            print(error)
+        }
+        //
+        
+        //Update or add items
+        for item in itemsAcquired {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
+            fetchRequest.predicate = NSPredicate(format: "id==%@", argumentArray: [item.suggesteeID])
+            do {
+                let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Meal]
+                //TODO: update tags and pictures too
+                if let meals = fetchedEntries, !meals.isEmpty {
+                    print("Updating meal \(item.suggesteeID)")
+                    let meal = meals[0]
+                    meal.name = item.name
+                } else {
+                    print("Creating meal \(item.suggesteeID)")
+                    let meal = NSEntityDescription.insertNewObject(forEntityName: "Meal", into: managedObjectContext) as! Meal
+                    meal.id = Int32(item.suggesteeID)
+                    meal.name = item.name
+                }
+            } catch (let error){
+                fatalError("Failed to fetch: \(error)")
+            }
+        }
+        //
+        
+        //Commit changes
+        do {
+            try managedObjectContext.save()
+        } catch (let error){
+            fatalError("Failed to fetch: \(error)")
+        }
+        //
+        
     }
     
 

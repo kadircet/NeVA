@@ -65,10 +65,12 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                                     let responseMessage = try service.login(loginRequestMessage)
                                     //print(responseMessage)
                                     UserToken.token = responseMessage.token
+                                    UserToken.email = email
                                     UserToken.type = .facebook
                                     self.performSegue(withIdentifier: "loggedIn", sender: self)
                                 } catch (let error) {
                                     print(error)
+                                    FBSDKLoginManager().logOut()
                                 }
                             }
                         }
@@ -197,6 +199,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
             let responseMessage = try service.login(loginRequestMessage)
             print(responseMessage)
             UserToken.token = responseMessage.token
+            UserToken.email = loginRequestMessage.email
             UserToken.type = .default_type
             loginEmail = ""
             loginEmailField.text = ""
@@ -331,10 +334,12 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                                     let responseMessage = try service.login(loginRequestMessage)
                                     //print(responseMessage)
                                     UserToken.token = responseMessage.token
+                                    UserToken.email = email
                                     UserToken.type = .facebook
                                     self.performSegue(withIdentifier: "loggedIn", sender: self)
                                 } catch (let error) {
                                     print(error)
+                                    FBSDKLoginManager().logOut()
                                 }
                             }
                         }
