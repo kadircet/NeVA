@@ -13,6 +13,7 @@ cc_binary(
     deps = [
         "//orm:proposition_orm",
         "//orm:suggestion_orm",
+        "//orm:user_history_orm",
         "//orm:user_orm",
         "//protos:backend_proto",
         "//social_media:facebook_validator",

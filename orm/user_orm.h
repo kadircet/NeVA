@@ -10,7 +10,6 @@
 namespace neva {
 namespace backend {
 namespace orm {
-namespace user {
 
 class UserOrm {
  public:
@@ -47,7 +46,6 @@ class UserOrm {
   std::shared_ptr<mysqlpp::Connection> conn_;
 };
 
-}  // namespace user
 }  // namespace orm
 }  // namespace backend
 }  // namespace neva

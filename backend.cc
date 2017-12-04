@@ -9,6 +9,7 @@
 #include "glog/logging.h"
 #include "orm/proposition_orm.h"
 #include "orm/suggestion_orm.h"
+#include "orm/user_history_orm.h"
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
 #include "social_media/facebook.h"
@@ -23,7 +24,8 @@ using grpc::ServerContext;
 using grpc::Status;
 using orm::PropositionOrm;
 using orm::SuggestionOrm;
-using orm::user::UserOrm;
+using orm::UserHistoryOrm;
+using orm::UserOrm;
 
 constexpr const char* const kNevaDatabaseName = "neva";
 constexpr const char* const kNevaDatabaseServer = "localhost";
@@ -155,7 +157,7 @@ class BackendServiceImpl final : public Backend::Service {
     if (!status.ok()) {
       return status;
     }
-    return Status(grpc::StatusCode::UNIMPLEMENTED, "Not implemented yet.");
+    return user_history_orm_->InsertChoice(user_id, request->choice());
   }
 
   BackendServiceImpl() {
@@ -179,6 +181,7 @@ class BackendServiceImpl final : public Backend::Service {
   std::unique_ptr<UserOrm> user_orm_;
   std::unique_ptr<PropositionOrm> proposition_orm_;
   std::unique_ptr<SuggestionOrm> suggestion_orm_;
+  std::unique_ptr<UserHistoryOrm> user_history_orm_;
 };
 
 void RunServer() {

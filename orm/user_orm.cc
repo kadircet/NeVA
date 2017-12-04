@@ -6,7 +6,6 @@
 namespace neva {
 namespace backend {
 namespace orm {
-namespace user {
 
 namespace {
 
@@ -177,7 +176,6 @@ Status UserOrm::CheckToken(const std::string& token, int* user_id) {
   }
 }
 
-}  // namespace user
 }  // namespace orm
 }  // namespace backend
 }  // namespace neva

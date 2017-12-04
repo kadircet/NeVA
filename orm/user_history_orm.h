@@ -1,5 +1,5 @@
-#ifndef _NEVA_ORM_USERS_H_
-#define _NEVA_ORM_USERS_H_
+#ifndef _NEVA_ORM_USER_HISTORY_H_
+#define _NEVA_ORM_USER_HISTORY_H_
 
 #include <grpc++/impl/codegen/status.h>
 #include <mysql++.h>
