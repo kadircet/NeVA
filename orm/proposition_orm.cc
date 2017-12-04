@@ -1,4 +1,5 @@
 #include "proposition_orm.h"
+#include "glog/logging.h"
 
 namespace neva {
 namespace backend {
@@ -23,7 +24,11 @@ Status PropositionOrm::InsertProposition(const int user_id,
 
   const mysqlpp::SimpleResult result = query.execute(
       user_id, suggestion.suggestion_category(), suggestion.name());
-  if (result) return Status::OK;
+  if (result) {
+    VLOG(1) << suggestion.DebugString() << " has been successfully inserted.";
+    return Status::OK;
+  }
+  VLOG(1) << "Something went wrong during the insertion.";
   return Status(StatusCode::UNKNOWN, "Internal error.");
 }
 
@@ -39,7 +44,11 @@ Status PropositionOrm::InsertProposition(const int user_id,
   query.parse();
 
   const mysqlpp::SimpleResult result = query.execute(user_id, tag);
-  if (result) return Status::OK;
+  if (result) {
+    VLOG(1) << tag << " has been successfully inserted.";
+    return Status::OK;
+  }
+  VLOG(1) << "Something went wrong during the insertion.";
   return Status(StatusCode::UNKNOWN, "Internal error.");
 }
 
@@ -57,7 +66,12 @@ Status PropositionOrm::InsertProposition(const int user_id, const int tag_id,
 
   const mysqlpp::SimpleResult result =
       query.execute(user_id, tag_id, suggestee_id, value);
-  if (result) return Status::OK;
+  if (result) {
+    VLOG(1) << tag_id << " has been successfully associated with "
+            << suggestee_id << " with value " << value;
+    return Status::OK;
+  }
+  VLOG(1) << "Something went wrong during the insertion.";
   return Status(StatusCode::UNKNOWN, "Internal error.");
 }
 

@@ -2,6 +2,7 @@
 
 #include <cpr/cpr.h>
 #include <json.hpp>
+#include "glog/logging.h"
 
 #include "facebook.h"
 
@@ -15,7 +16,14 @@ bool Validate(const std::string& email,
                     cpr::Parameters{{"fields", "email"},
                                     {"access_token", authentication_token}});
   auto json = nlohmann::json::parse(r.text);
-  return json["email"] == email;
+  auto iterator = json.find("email");
+  if (iterator == json.end()) {
+    VLOG(1) << "Something went wrong got response:\n" << r.text;
+    return false;
+  }
+  const bool status = json["email"] == email;
+  VLOG(1) << json["email"] << "==" << email;
+  return status;
 }
 
 }  // namespace FacebookValidator

@@ -34,6 +34,7 @@ class BackendServiceImpl final : public Backend::Service {
  public:
   Status Register(ServerContext* context, const RegisterRequest* request,
                   GenericReply* reply) override {
+    VLOG(1) << "Received Register Request:" << request->user().email();
     std::string verification_token;
     // TODO(kadircet): Implement input sanity checking.
 
@@ -47,6 +48,7 @@ class BackendServiceImpl final : public Backend::Service {
                LoginReply* reply) override {
     const std::string email = request->email();
     const std::string password = request->password();
+    VLOG(1) << "Received Login Request for: " << email;
     if (request->authentication_type() == LoginRequest::FACEBOOK) {
       if (!FacebookValidator::Validate(email, password)) {
         return Status(grpc::StatusCode::INVALID_ARGUMENT,
@@ -66,6 +68,9 @@ class BackendServiceImpl final : public Backend::Service {
   Status SuggestionItemProposition(
       ServerContext* context, const SuggestionItemPropositionRequest* request,
       GenericReply* reply) override {
+    VLOG(1) << "Received SuggestionItemProposition:\n"
+            << request->DebugString();
+
     int user_id;
     const Status status = user_orm_->CheckToken(request->token(), &user_id);
     if (!status.ok()) {
@@ -77,6 +82,8 @@ class BackendServiceImpl final : public Backend::Service {
   Status GetSuggestion(ServerContext* context,
                        const GetSuggestionRequest* request,
                        GetSuggestionReply* reply) override {
+    VLOG(1) << "Received GetSuggestion for category: "
+            << request->DebugString();
     int user_id;
     {
       const Status status = user_orm_->CheckToken(request->token(), &user_id);
@@ -99,6 +106,7 @@ class BackendServiceImpl final : public Backend::Service {
   Status TagProposition(ServerContext* context,
                         const TagPropositionRequest* request,
                         GenericReply* reply) override {
+    VLOG(1) << "Received TagProposition:" << request->DebugString();
     int user_id;
     const Status status = user_orm_->CheckToken(request->token(), &user_id);
     if (!status.ok()) {
@@ -110,6 +118,7 @@ class BackendServiceImpl final : public Backend::Service {
   Status TagValueProposition(ServerContext* context,
                              const TagValuePropositionRequest* request,
                              GenericReply* reply) override {
+    VLOG(1) << "Received TagValueProposition:" << request->DebugString();
     int user_id;
     const Status status = user_orm_->CheckToken(request->token(), &user_id);
     if (!status.ok()) {
@@ -122,6 +131,7 @@ class BackendServiceImpl final : public Backend::Service {
   Status GetSuggestionItemList(ServerContext* context,
                                const GetSuggestionItemListRequest* request,
                                GetSuggestionItemListReply* reply) override {
+    VLOG(1) << "Received GetSuggestionItemList:" << request->DebugString();
     int user_id;
     const Status status = user_orm_->CheckToken(request->token(), &user_id);
     if (!status.ok()) {
@@ -139,6 +149,7 @@ class BackendServiceImpl final : public Backend::Service {
   Status InformUserChoice(ServerContext* context,
                           const InformUserChoiceRequest* request,
                           GenericReply* reply) override {
+    VLOG(1) << "Received InformUserChoice:" << request->DebugString();
     int user_id;
     const Status status = user_orm_->CheckToken(request->token(), &user_id);
     if (!status.ok()) {

@@ -6,6 +6,7 @@ cc_library(
     hdrs = ["facebook.h"],
     deps = [
         "@cpr//:cpr",
+        "@glog//:glog",
         "@json//:json",
     ],
 )

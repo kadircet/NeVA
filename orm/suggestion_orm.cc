@@ -30,6 +30,7 @@ Status SuggestionOrm::GetSuggestees(
     suggestion.set_suggestee_id(row["id"]);
     suggestion.set_name(row["name"]);
     suggestees->push_back(suggestion);
+    VLOG(1) << suggestion.ShortDebugString() << " has been added to response.";
   }
   return Status::OK;
 }
@@ -48,10 +49,13 @@ Status SuggestionOrm::GetSuggestion(
 
   mysqlpp::StoreQueryResult res = query.store(suggestion_category);
   if (res.empty()) {
+    VLOG(1) << "Requested a suggestion from an empty category: "
+            << suggestion_category;
     return Status(StatusCode::INVALID_ARGUMENT,
                   "No items to suggest in that category.");
   }
   suggestion->set_name(res[0]["name"]);
+  VLOG(1) << "Returning:\n" << suggestion->ShortDebugString();
   return Status::OK;
 }
 

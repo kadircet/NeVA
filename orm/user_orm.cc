@@ -76,8 +76,12 @@ Status UserOrm::CheckCredentials(const std::string& email,
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(email);
-  if (res.empty()) return Status(StatusCode::UNKNOWN, "Wrong credentials.");
+  if (res.empty()) {
+    VLOG(1) << email << " doesn't exists in database.";
+    return Status(StatusCode::UNKNOWN, "Wrong credentials.");
+  }
   if (res.num_rows() != 1) {
+    VLOG(1) << email << " exists in duplicate entries.";
     return Status(StatusCode::UNKNOWN,
                   "More than one user matches this email.");
   }
@@ -96,8 +100,10 @@ Status UserOrm::CheckCredentials(const std::string& email,
     query.parse();
     // TODO(kadircet): Implement token expiration.
     query.execute(res[0]["id"], *session_token, 0);
+    VLOG(1) << email << " has been authenticated successfully.";
     return Status::OK;
   }
+  VLOG(1) << email << " contains wrong password.";
 
   return Status(StatusCode::INVALID_ARGUMENT, "Wrong credentials.");
 }
@@ -107,13 +113,16 @@ Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
 
+  const std::string email = user.email();
+
   mysqlpp::Query query = conn_->query();
 
   {
     query << "SELECT `id` FROM `user` WHERE `email`=%0q";
     query.parse();
-    const mysqlpp::StoreQueryResult res = query.store(user.email());
+    const mysqlpp::StoreQueryResult res = query.store(email);
     if (!res.empty()) {
+      VLOG(1) << email << " already exists in the database.";
       return Status(StatusCode::INVALID_ARGUMENT,
                     "This mail address has already been registered.");
     }
@@ -127,7 +136,7 @@ Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
     const std::string salt = util::GenerateRandomKey();
     const std::string hmac = util::HMac(salt, user.password());
     const int user_id =
-        query.execute(user.email(), hmac, User::INACTIVE, salt).insert_id();
+        query.execute(email, hmac, User::INACTIVE, salt).insert_id();
     query.reset();
 
     *verification_token = util::GenerateRandomKey();
@@ -139,6 +148,7 @@ Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
 
     // TODO(kadircet): Insert remaining fields into user_info.
   }
+  VLOG(1) << email << " has been successfully registered.";
 
   return Status::OK;
 }
@@ -155,11 +165,13 @@ Status UserOrm::CheckToken(const std::string& token, int* user_id) {
 
     const mysqlpp::StoreQueryResult res = query.store(token);
     if (res.empty()) {
+      VLOG(1) << "Session token deosn't exists.";
       return Status(StatusCode::INVALID_ARGUMENT,
                     "No such session token exists.");
     }
     // TODO(kadircet): Implement session expire check.
     *user_id = res[0]["id"];
+    VLOG(1) << "Session token belongs to user with id: " << *user_id;
 
     return Status::OK;
   }
