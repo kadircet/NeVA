@@ -12,6 +12,9 @@ import CoreData
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var historyEntries: [HistoryEntry] = []
+    @IBAction func addHistoryEntry(_ sender: UIButton) {
+        performSegue(withIdentifier: "addHistoryEntry", sender: self)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var calendar = Calendar.current
@@ -135,7 +138,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         dateField.inputView = datePickerOfDateField_
         datePickerOfDateField_.date = Date()
         datePickerOfDateField_.datePickerMode = .date
-        datePickerOfDateField_.addTarget(self, action: #selector(HistoryViewController.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
+        datePickerOfDateField_.timeZone = TimeZone.current
+        datePickerOfDateField_.addTarget(self, action:
+            #selector(HistoryViewController.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         dateFormatter.timeZone = TimeZone.current
@@ -158,6 +163,22 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addHistoryEntry" {
+            if let target = segue.destination as? AddHistoryEntryViewController {
+                var calendar = Calendar.current
+                calendar.timeZone = TimeZone.current
+                var dateSelected = calendar.dateComponents([.year, .month, .day, .hour, .minute],
+                                                           from: datePickerOfDateField_.date)
+                let dateNow = calendar.dateComponents([.year, .month, .day, .hour, .minute],
+                                                     from: Date())
+                dateSelected.hour = dateNow.hour
+                dateSelected.minute = dateNow.minute
+                target.date = calendar.date(from: dateSelected)
+            }
+        }
     }
     
 }

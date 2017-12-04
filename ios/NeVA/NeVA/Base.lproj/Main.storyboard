@@ -489,7 +489,7 @@ Meal Recommender</string>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.53327292203903198" green="0.53336817026138306" blue="0.53326696157455444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
                                         <color key="value" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -942,6 +942,9 @@ Meal Recommender</string>
                                                     <state key="normal" image="add-button"/>
                                                     <state key="selected" image="add-button-highlighted"/>
                                                     <state key="highlighted" image="add-button-highlighted"/>
+                                                    <connections>
+                                                        <action selector="addHistoryEntry:" destination="yCT-6y-ngv" eventType="touchUpInside" id="31y-wP-Rsc"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="bHw-eG-WuN">
                                                     <rect key="frame" x="120" y="32" width="210" height="62"/>
@@ -995,16 +998,152 @@ Meal Recommender</string>
                         <outlet property="dateField" destination="Pq0-op-EH7" id="A7g-5a-mI6"/>
                         <outlet property="historyTable" destination="aqk-R3-vFh" id="3nK-1h-5Zi"/>
                         <outlet property="segmentControl" destination="Mte-8c-PwU" id="la8-c8-vZu"/>
+                        <segue destination="3yE-5c-UXv" kind="show" identifier="addHistoryEntry" id="EBU-1d-JhA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O11-vV-DZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1796" y="556"/>
         </scene>
+        <!--Add History Entry View Controller-->
+        <scene sceneID="2P2-9v-srx">
+            <objects>
+                <viewController id="3yE-5c-UXv" customClass="AddHistoryEntryViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="m0C-uv-KZd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="FKL-Qx-3dY">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="9Sp-5Q-pEA">
+                                <rect key="frame" x="16" y="151" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="OjT-Fe-rcK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="2" height="2"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="lno-CB-55M">
+                                <rect key="frame" x="16" y="75" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="PUf-2D-IJI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="2" height="2"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G54-uc-xcm" customClass="SearchTextField" customModule="NeVA" customModuleProvider="target">
+                                <rect key="frame" x="16" y="113" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.49411764705882355" green="0.53314536809921265" blue="0.55408120155334473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="m3d-vu-dtg"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9l-Ev-hKM">
+                                <rect key="frame" x="16" y="227" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.4941176471" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="nhK-w7-5VI"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBp-Lz-M3W">
+                                <rect key="frame" x="16" y="34" width="50" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="Bkt-qq-h0k"/>
+                                    <constraint firstAttribute="width" constant="50" id="ZNJ-WT-o2R"/>
+                                </constraints>
+                                <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="3yE-5c-UXv" eventType="touchUpInside" id="Abk-Rq-MJV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRZ-Ek-EPI" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
+                                <rect key="frame" x="16" y="297" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ZQi-5E-HhU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Add History Entry"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                        <color key="value" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="3yE-5c-UXv" eventType="touchUpInside" id="bLT-pq-ljI"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4xL-al-M85">
+                                <rect key="frame" x="16" y="189" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SdF-fx-i4f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="shadowOffset" width="2" height="2"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FKL-Qx-3dY" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" id="396-Wv-TNN"/>
+                            <constraint firstItem="bBp-Lz-M3W" firstAttribute="top" secondItem="fbi-ge-65z" secondAttribute="top" constant="14" id="6oS-fS-dd6"/>
+                            <constraint firstItem="T9l-Ev-hKM" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="BEb-T0-GaZ"/>
+                            <constraint firstItem="FKL-Qx-3dY" firstAttribute="top" secondItem="m0C-uv-KZd" secondAttribute="top" id="CRK-DS-HlI"/>
+                            <constraint firstItem="4xL-al-M85" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="FG4-s6-pof"/>
+                            <constraint firstItem="bBp-Lz-M3W" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="HBp-ar-rWs"/>
+                            <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="4xL-al-M85" secondAttribute="trailing" constant="16" id="HyE-Jc-eXd"/>
+                            <constraint firstItem="G54-uc-xcm" firstAttribute="top" secondItem="lno-CB-55M" secondAttribute="bottom" constant="8" id="LVw-p2-yMK"/>
+                            <constraint firstItem="FKL-Qx-3dY" firstAttribute="bottom" secondItem="fbi-ge-65z" secondAttribute="bottom" id="MVU-vx-LbD"/>
+                            <constraint firstItem="FKL-Qx-3dY" firstAttribute="trailing" secondItem="fbi-ge-65z" secondAttribute="trailing" id="Pev-CK-1cP"/>
+                            <constraint firstItem="lno-CB-55M" firstAttribute="top" secondItem="bBp-Lz-M3W" secondAttribute="bottom" constant="8" id="SaD-C7-mMj"/>
+                            <constraint firstItem="QRZ-Ek-EPI" firstAttribute="top" secondItem="T9l-Ev-hKM" secondAttribute="bottom" constant="40" id="XwF-TA-d9P"/>
+                            <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="lno-CB-55M" secondAttribute="trailing" constant="16" id="Zvi-be-6jD"/>
+                            <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="QRZ-Ek-EPI" secondAttribute="trailing" constant="16" id="add-1k-t4R"/>
+                            <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="G54-uc-xcm" secondAttribute="trailing" constant="16" id="cF2-oT-pbS"/>
+                            <constraint firstItem="4xL-al-M85" firstAttribute="top" secondItem="9Sp-5Q-pEA" secondAttribute="bottom" constant="8" id="ctL-Wd-9I5"/>
+                            <constraint firstItem="QRZ-Ek-EPI" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="dBB-LQ-hka"/>
+                            <constraint firstItem="9Sp-5Q-pEA" firstAttribute="top" secondItem="G54-uc-xcm" secondAttribute="bottom" constant="8" id="fZv-aD-BMN"/>
+                            <constraint firstItem="lno-CB-55M" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="fjO-YA-DGs"/>
+                            <constraint firstItem="G54-uc-xcm" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="hHC-Ru-MSD"/>
+                            <constraint firstItem="T9l-Ev-hKM" firstAttribute="top" secondItem="4xL-al-M85" secondAttribute="bottom" constant="8" id="lR0-21-FXz"/>
+                            <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="9Sp-5Q-pEA" secondAttribute="trailing" constant="16" id="w5F-AQ-mBe"/>
+                            <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="T9l-Ev-hKM" secondAttribute="trailing" constant="16" id="x5w-Tz-kRC"/>
+                            <constraint firstItem="9Sp-5Q-pEA" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="z4w-na-02x"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fbi-ge-65z"/>
+                    </view>
+                    <connections>
+                        <outlet property="clockField" destination="T9l-Ev-hKM" id="Igt-TC-j6E"/>
+                        <outlet property="dateLabel" destination="9Sp-5Q-pEA" id="1ny-l8-a2i"/>
+                        <outlet property="mealField" destination="G54-uc-xcm" id="NzN-Nl-nfF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0q4-tf-pjg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2901.5999999999999" y="554.57271364317842"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add-button" width="100" height="100"/>
         <image name="add-button-highlighted" width="100" height="100"/>
+        <image name="back" width="100" height="67"/>
         <image name="clock" width="30" height="30"/>
         <image name="gift" width="30" height="30"/>
         <image name="gray-background-texture-2" width="810" height="1440"/>
