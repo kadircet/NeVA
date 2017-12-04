@@ -25,9 +25,12 @@ Status UserHistoryOrm::InsertChoice(const uint32_t user_id,
   if (!query.execute(user_id, choice.suggestee_id(),
                      choice.timestamp().seconds(), choice.latitude(),
                      choice.longitude())) {
+    VLOG(1) << "Something went wrong while inserting:\n"
+            << choice.DebugString() << "\nQuery is: " << query.str()
+            << "\nInfo: " << query.info();
     return Status(StatusCode::INTERNAL, "Internal server error.");
   }
-
+  VLOG(1) << choice.DebugString() << " inserted succesfully.";
   return Status::OK;
 }
 
