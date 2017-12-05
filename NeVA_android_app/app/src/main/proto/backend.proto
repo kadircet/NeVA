@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "user.proto";
 import "suggestion.proto";
+import "user_history.proto";
 
 package neva.backend;
 
@@ -23,6 +24,13 @@ service Backend {
   }
 
   rpc TagValueProposition(TagValuePropositionRequest) returns (GenericReply) {
+  }
+
+  rpc GetSuggestionItemList(GetSuggestionItemListRequest)
+      returns (GetSuggestionItemListReply) {
+  }
+
+  rpc InformUserChoice(InformUserChoiceRequest) returns (GenericReply) {
   }
 }
 
@@ -91,4 +99,28 @@ message TagValuePropositionRequest {
 
   // Holds value for the tag if appropriate.
   string value = 4;
+}
+
+message GetSuggestionItemListRequest {
+  // Session key for the user requesting item list.
+  bytes token = 1;
+
+  // Category for which the user requesting items.
+  Suggestion.SuggestionCategory suggestion_category = 2;
+
+  // Start index to fetch items.
+  uint32 start_index = 3;
+}
+
+message GetSuggestionItemListReply {
+  // Item names in the database.
+  repeated Suggestion items = 1;
+}
+
+message InformUserChoiceRequest {
+  // Session key for the user informing about request.
+  bytes token = 1;
+
+  // Choice of the user.
+  Choice choice = 2;
 }

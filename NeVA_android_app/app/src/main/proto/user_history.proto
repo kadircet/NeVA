@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "util.proto";
+
+package neva.backend;
+
+message Choice {
+  uint32 suggestee_id = 1;
+  util.Timestamp timestamp = 2;
+  double latitude = 3;
+  double longitude = 4;
+}
+
+message UserHistory {
+  uint32 user_id = 1;
+  repeated Choice history = 2;
+}

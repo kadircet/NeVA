@@ -45,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
     UserOuterClass.User.Gender gender;
 
     DatePickerDialog.OnDateSetListener mDateSetListener;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -90,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         DatePickerDialog dialog = new DatePickerDialog(
                 RegisterActivity.this,
-                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                android.R.style.Theme_DeviceDefault_Dialog_MinWidth,
                 mDateSetListener,
                 year,month,day);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

@@ -2,6 +2,7 @@ package mealrecommender.neva.com.neva_android_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
 
@@ -20,11 +23,12 @@ import io.grpc.ManagedChannelBuilder;
 import neva.backend.BackendGrpc;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     public ByteString loginToken;
     public ManagedChannel mChannel;
     public BackendGrpc.BackendBlockingStub blockingStub;
+    public FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         Intent intent = getIntent();
@@ -48,6 +52,8 @@ public class MainActivity extends AppCompatActivity
 
         mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
         blockingStub = BackendGrpc.newBlockingStub(mChannel);
+
+        fab = findViewById(R.id.fab);
 
 
         Fragment fragment = new RecommendFragment();
@@ -110,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_propose) {
             fragmentClass = ProposeFragment.class;
         } else if (id == R.id.nav_history) {
-
+            fragmentClass = HistoryFragment.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -132,5 +138,9 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
+    public void addHistoryFabClick(View view) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = new AddHistoryItemFragment();
+        fragmentManager.beginTransaction().add(R.id.content_view, fragment).addToBackStack(fragment.getTag()).commit();
+    }
 }
