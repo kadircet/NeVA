@@ -20,7 +20,7 @@ fi
 
 case "${1:-''}" in
   'start')
-    /var/NeVA/neva_backend >> $LOGFILE &
+    /var/NeVA/neva_backend --flagfile="/var/NeVA/prod.flags" &
     echo -n $! > $PIDFILE
     log_daemon_msg "Started server."
     ;;
@@ -39,7 +39,7 @@ case "${1:-''}" in
       pid=$(cat $PIDFILE)
       kill -0 $pid && kill -9 $pid && echo "Killed server."
     fi
-    /var/NeVA/neva_backend >> $LOGFILE &
+    /var/NeVA/neva_backend --flagfile="/var/NeVA/prod.flags" &
     echo -n $! > $PIDFILE
     log_daemon_msg "Restarted server."
     ;;

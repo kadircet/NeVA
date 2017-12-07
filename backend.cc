@@ -199,7 +199,7 @@ void RunServer() {
   builder.RegisterService(&service);
 
   std::unique_ptr<Server> server(builder.BuildAndStart());
-  std::cout << "Server started on " << FLAGS_server_uri << std::endl;
+  LOG(INFO) << "Server started on " << FLAGS_server_uri;
 
   server->Wait();
 }
