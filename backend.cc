@@ -27,10 +27,13 @@ using orm::SuggestionOrm;
 using orm::UserHistoryOrm;
 using orm::UserOrm;
 
-constexpr const char* const kNevaDatabaseName = "neva";
-constexpr const char* const kNevaDatabaseServer = "localhost";
-constexpr const char* const kNevaDatabaseUser = "neva";
-constexpr const char* const kNevaDatabasePassword = "";
+DEFINE_string(database_name, "", "Name of the database to connect to.");
+DEFINE_string(database_server, "", "Domain of the database server.");
+DEFINE_string(database_user, "", "Username to authenticate to database.");
+DEFINE_string(database_password, "",
+              "Password for the authentication of the user.");
+DEFINE_string(server_uri, "",
+              "URI for server to listen on, example: 0.0.0.0:50051");
 
 class BackendServiceImpl final : public Backend::Service {
  public:
@@ -163,9 +166,11 @@ class BackendServiceImpl final : public Backend::Service {
   BackendServiceImpl() {
     conn_ = std::make_shared<mysqlpp::Connection>(false);
     conn_->set_option(new mysqlpp::ReconnectOption(true));
-    conn_->connect(kNevaDatabaseName, kNevaDatabaseServer, kNevaDatabaseUser,
-                   kNevaDatabasePassword);
-    CHECK(conn_->connected()) << "Database connection failed.";
+    conn_->connect(FLAGS_database_name.c_str(), FLAGS_database_server.c_str(),
+                   FLAGS_database_user.c_str(),
+                   FLAGS_database_password.c_str());
+    CHECK(conn_->connected())
+        << "Database connection failed." << conn_->error();
 
     mysqlpp::Query query = conn_->query("SET NAMES utf8;");
     query.execute();
@@ -187,15 +192,14 @@ class BackendServiceImpl final : public Backend::Service {
 };
 
 void RunServer() {
-  std::string server_address("0.0.0.0:50051");
   BackendServiceImpl service;
 
   ServerBuilder builder;
-  builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+  builder.AddListeningPort(FLAGS_server_uri, grpc::InsecureServerCredentials());
   builder.RegisterService(&service);
 
   std::unique_ptr<Server> server(builder.BuildAndStart());
-  std::cout << "Server started on " << server_address << std::endl;
+  std::cout << "Server started on " << FLAGS_server_uri << std::endl;
 
   server->Wait();
 }

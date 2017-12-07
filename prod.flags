@@ -1,0 +1,4 @@
+--server_uri=0.0.0.0:50051
+--database_server=localhost
+--database_name=neva
+--database_user=neva
