@@ -19,8 +19,23 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` VARCHAR(255) NOT NULL UNIQUE,
   `salt` VARBINARY(255) NOT NULL,
   `status` TINYINT UNSIGNED NOT NULL DEFAULT 0,
-  `password` VARBINARY(255) NOT NULL,
   PRIMARY KEY(id)
+);
+
+/* Contains credentials associated with a user's account.
+ * id is the unique identifier of the credential.
+ * user_id is the id of the user which credential belongs to.
+ * credential is data that will be used for authentication.
+ * type specifies how should credential be verified. It is of type
+ * neva.backend.LoginRequest.AuthenticationType.
+ */
+CREATE TABLE IF NOT EXISTS `user_credentials` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `user_id` INTEGER NOT NULL,
+  `credential` VARBINARY(255) NOT NULL,
+  `type` INTEGER NOT NULL,
+  FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+  PRIMARY KEY(`id`)
 );
 
 /* Contains profile information for each user.
