@@ -25,10 +25,10 @@ class AddHistoryEntryViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         if date == nil {
-            date = Date()
+            date = Date().addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT()))
         }
         var formatter = DateFormatter()
-        formatter.timeZone = TimeZone.current
+        formatter.timeZone = TimeZone(secondsFromGMT:0)
         formatter.dateFormat = "EEEE, MMM d, yyyy"
         dateLabel.text = formatter.string(from: date!)
         
@@ -36,7 +36,7 @@ class AddHistoryEntryViewController: UIViewController {
         timePickerOfClockField_.frame = CGRect(x: 0, y: 50, width: self.view.frame.width, height: 190)
         timePickerOfClockField_.date = date!
         timePickerOfClockField_.datePickerMode = .time
-        timePickerOfClockField_.timeZone = TimeZone.current
+        timePickerOfClockField_.timeZone = TimeZone(secondsFromGMT: 0)
         timePickerOfClockField_.addTarget(self, action:
             #selector(AddHistoryEntryViewController.timePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
         inputView.addSubview(timePickerOfClockField_)
@@ -50,7 +50,7 @@ class AddHistoryEntryViewController: UIViewController {
         clockField.inputView = inputView
         
         formatter = DateFormatter()
-        formatter.timeZone = TimeZone.current
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = "HH:mm"
         clockField.text = formatter.string(from: timePickerOfClockField_.date)
         
@@ -103,7 +103,7 @@ class AddHistoryEntryViewController: UIViewController {
     
     @objc func timePickerValueChanged(sender: UIDatePicker) {
         let formatter = DateFormatter()
-        formatter.timeZone = TimeZone.current
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = "HH:mm"
         clockField.text = formatter.string(from: sender.date)
     }

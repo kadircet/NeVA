@@ -19,8 +19,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone.current
-        let date = Date()
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        let date = Date().addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT()))
         let today = calendar.startOfDay(for: date)
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute],from: today)
         components.day! += 1
@@ -94,7 +94,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     @objc func datePickerValueChanged(sender:UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateField.text = dateFormatter.string(from: datePickerOfDateField_.date)
         reloadEntries()
         sortHistoryEntries()
@@ -109,7 +109,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func reloadEntries() {
         let email = UserToken.email!
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone.current
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         let date = datePickerOfDateField_.date
         let dateFrom = calendar.startOfDay(for: date)
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: dateFrom)
@@ -137,14 +137,14 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         
         dateField.inputView = datePickerOfDateField_
-        datePickerOfDateField_.date = Date()
+        datePickerOfDateField_.date = Date().addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT()))
         datePickerOfDateField_.datePickerMode = .date
-        datePickerOfDateField_.timeZone = TimeZone.current
+        datePickerOfDateField_.timeZone = TimeZone(secondsFromGMT: 0)
         datePickerOfDateField_.addTarget(self, action:
             #selector(HistoryViewController.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         dateField.text = dateFormatter.string(from: datePickerOfDateField_.date)
         
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .reloadHistoryTable, object: nil)
@@ -170,11 +170,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         if segue.identifier == "addHistoryEntry" {
             if let target = segue.destination as? AddHistoryEntryViewController {
                 var calendar = Calendar.current
-                calendar.timeZone = TimeZone.current
+                calendar.timeZone = TimeZone(secondsFromGMT: 0)!
                 var dateSelected = calendar.dateComponents([.year, .month, .day, .hour, .minute],
                                                            from: datePickerOfDateField_.date)
                 let dateNow = calendar.dateComponents([.year, .month, .day, .hour, .minute],
-                                                     from: Date())
+                                                      from: Date().addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())))
                 dateSelected.hour = dateNow.hour
                 dateSelected.minute = dateNow.minute
                 target.date = calendar.date(from: dateSelected)

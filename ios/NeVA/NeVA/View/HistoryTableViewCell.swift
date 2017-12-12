@@ -22,7 +22,7 @@ class HistoryTableViewCell: UITableViewCell {
     }
     func setTime(time: Date) {
         let formatter = DateFormatter()
-        formatter.timeZone = TimeZone.current
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = "HH:mm"
         self.time.text = formatter.string(from: time)
     }
