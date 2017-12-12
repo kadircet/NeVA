@@ -173,7 +173,51 @@ Status UserOrm::InsertUser(
       query.reset();
     }
 
-    // TODO(kadircet): Insert remaining fields into user_info.
+    query << "INSERT INTO `user_info` (`id`, `register_date`) "
+             "VALUES (%0, %1)";
+    query.execute(user_id, util::GetTimestamp());
+    query.reset();
+
+    if(user.has_date_of_birth())
+    {
+      query << "UPDATE `user_info` " 
+               "SET `date_of_birth`=%0 "
+               "WHERE `id`=%1";
+      query.execute(user.date_of_birth().seconds(), user_id);
+      query.reset();
+    }
+    if(!user.name().isEmpty())
+    {
+      query << "UPDATE `user_info` " 
+               "SET `name`=%0q "
+               "WHERE `id`=%1";
+      query.execute(user.name(), user_id);
+      query.reset();
+    }
+    if(user.gender() != 0)
+    {
+      query << "UPDATE `user_info` " 
+               "SET `gender`=%0 "
+               "WHERE `id`=%1";
+      query.execute(user.gender(), user_id);
+      query.reset();
+    }
+    if(user.weight() != 0)
+    {
+      query << "UPDATE `user_info` " 
+               "SET `weight`=%0 "
+               "WHERE `id`=%1";
+      query.execute(user.weight(), user_id);
+      query.reset();
+    }
+    if(!user.photo().isEmpty())
+    {
+      query << "UPDATE `user_info` " 
+               "SET `photo`=%0q "
+               "WHERE `id`=%1";
+      query.execute(user.photo(), user_id);
+      query.reset();
+    }
   }
   VLOG(1) << email << " has been successfully registered.";
 
