@@ -186,7 +186,7 @@ Status UserOrm::InsertUser(
       query.execute(user.date_of_birth().seconds(), user_id);
       query.reset();
     }
-    if(!user.name().isEmpty())
+    if(!user.name().empty())
     {
       query << "UPDATE `user_info` " 
                "SET `name`=%0q "
@@ -210,7 +210,7 @@ Status UserOrm::InsertUser(
       query.execute(user.weight(), user_id);
       query.reset();
     }
-    if(!user.photo().isEmpty())
+    if(!user.photo().empty())
     {
       query << "UPDATE `user_info` " 
                "SET `photo`=%0q "
