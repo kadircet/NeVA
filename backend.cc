@@ -44,7 +44,8 @@ class BackendServiceImpl final : public Backend::Service {
     // TODO(kadircet): Implement input sanity checking.
 
     const User user = request->user();
-    const Status status = user_orm_->InsertUser(user, &verification_token);
+    const Status status =
+        user_orm_->InsertUser(user, LoginRequest::DEFAULT, &verification_token);
     // TODO(kadircet): Implement sending of verification_token with email.
     return status;
   }
@@ -54,20 +55,9 @@ class BackendServiceImpl final : public Backend::Service {
     const std::string email = request->email();
     const std::string password = request->password();
     VLOG(1) << "Received Login Request for: " << email;
-    if (request->authentication_type() == LoginRequest::FACEBOOK) {
-      if (!FacebookValidator::Validate(email, password)) {
-        return Status(grpc::StatusCode::INVALID_ARGUMENT,
-                      "Authentication token cannot be validated.");
-      }
-      // TODO(kadircet): Fetch relevant user info from facebook if logging in
-      // for the first time and perform register.
-      User user;
-      user.set_email(email);
-      user.set_password(password);
-      std::string verification_token;
-      user_orm_->InsertUser(user, &verification_token);
-    }
-    return user_orm_->CheckCredentials(email, password, reply->mutable_token());
+    return user_orm_->CheckCredentials(email, password,
+                                       request->authentication_type(),
+                                       reply->mutable_token());
   }
 
   Status SuggestionItemProposition(
