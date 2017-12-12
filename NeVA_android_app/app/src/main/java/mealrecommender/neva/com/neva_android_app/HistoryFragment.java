@@ -8,12 +8,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
+
+import java.sql.SQLException;
+
 import io.grpc.ManagedChannel;
 
 import neva.backend.BackendGrpc;
@@ -52,13 +56,25 @@ public class HistoryFragment extends ListFragment {
 
         BackendOuterClass.GetSuggestionItemListReply reply = blockingStub.getSuggestionItemList(request);
         SuggestionOuterClass.Suggestion[] values;
-        values = new SuggestionOuterClass.Suggestion[(reply.getItemsCount()/4)+1];
-        for(int i=0; i<(reply.getItemsCount()/4);i++)
-        {
-            values[i] = reply.getItems(i);
+        values = new SuggestionOuterClass.Suggestion[(reply.getItemsCount())];
+        getContext().deleteDatabase("MEAL_HISTORY.DB");
+        DatabaseManager dbman = new DatabaseManager(getContext());
+        try {
+            dbman.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        for(int i=0; i<(reply.getItemsCount());i++)
+        {
+            dbman.addMeal(reply.getItems(i));
+            values[i] = reply.getItems(i);
+            Log.i("Values:", values[i].getName());
+        }
+        dbman.close();
 
-        adapter = new HistoryItemAdapter(getContext(), R.layout.fragment_history, R.id.firstLine, values, hours);
+
+
+        adapter = new HistoryItemAdapter(getContext(), R.layout.fragment_history, R.id.firstLine, values);
         setListAdapter(adapter);
 
         return view;

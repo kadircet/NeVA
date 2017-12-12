@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -48,6 +49,8 @@ public class AddHistoryItemFragment extends Fragment {
     AutoCompleteTextView mealNameField;
     EditText timeField;
     Button addHistoryButton;
+
+    Calendar date;
 
     TimePickerDialog.OnTimeSetListener timeSetListener;
 
@@ -90,6 +93,12 @@ public class AddHistoryItemFragment extends Fragment {
                 timeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.clear(Calendar.HOUR_OF_DAY);
+                        cal.clear(Calendar.MINUTE);
+                        cal.set(Calendar.HOUR_OF_DAY, i);
+                        cal.set(Calendar.MINUTE, i1);
+                        date = cal;
                         timeField.setText(i + ":" + i1);
                     }
                 };
@@ -107,6 +116,15 @@ public class AddHistoryItemFragment extends Fragment {
         addHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                DatabaseManager dbman = new DatabaseManager(getContext());
+                try {
+                    dbman.open();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                dbman.addHistoryData("hkn@test.com", mealNameField.getText().toString(), date);
+
                 Toast.makeText(getContext(),"CLICK",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
             }

@@ -19,12 +19,10 @@ import neva.backend.SuggestionOuterClass;
 public class HistoryItemAdapter extends ArrayAdapter<SuggestionOuterClass.Suggestion> {
 
     SuggestionOuterClass.Suggestion[] meals;
-    String[] hours;
 
-    public HistoryItemAdapter(@NonNull Context context, int resource, int textViewResourceId, SuggestionOuterClass.Suggestion[] meals, String[] hours) {
+    public HistoryItemAdapter(@NonNull Context context, int resource, int textViewResourceId, SuggestionOuterClass.Suggestion[] meals) {
         super(context, resource, textViewResourceId);
         this.meals = meals;
-        this.hours = hours;
     }
 
 
@@ -44,9 +42,6 @@ public class HistoryItemAdapter extends ArrayAdapter<SuggestionOuterClass.Sugges
             v = vi.inflate(R.layout.fragment_history, null);
         }
 
-        Log.i("Count:", Integer.toString(getCount()));
-        Log.i("Pos:", Integer.toString(position));
-        Log.i("Name", meals[position].getName());
         SuggestionOuterClass.Suggestion item = meals[position];
         if (item != null) {
             TextView tt1 =  v.findViewById(R.id.firstLine);
@@ -60,7 +55,7 @@ public class HistoryItemAdapter extends ArrayAdapter<SuggestionOuterClass.Sugges
             }
 
             if (tt2 != null) {
-                tt2.setText(hours[position]);
+                tt2.setText(Integer.toString(position));
             }
 
         }
