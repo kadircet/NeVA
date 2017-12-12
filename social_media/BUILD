@@ -5,6 +5,7 @@ cc_library(
     srcs = ["facebook.cc"],
     hdrs = ["facebook.h"],
     deps = [
+        "//protos:user_proto",
         "@cpr//:cpr",
         "@glog//:glog",
         "@json//:json",
