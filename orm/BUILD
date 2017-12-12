@@ -10,7 +10,9 @@ cc_library(
     ],
     linkopts = ["-lmysqlpp"],
     deps = [
+        "//protos:backend_proto",
         "//protos:user_proto",
+        "//social_media:facebook_validator",
         "//util:hmac",
         "//util:time",
         "@glog//:glog",

@@ -5,6 +5,7 @@
 #include <mysql++.h>
 #include <cstdint>
 #include <memory>
+#include "protos/backend.pb.h"
 #include "protos/user.pb.h"
 
 namespace neva {
@@ -26,17 +27,20 @@ class UserOrm {
 
   // Checks whether credentials given in the user matches with the ones in
   // database. email and password fields of the user object must be filled.
-  grpc::Status CheckCredentials(const User& user, std::string* session_token);
-  grpc::Status CheckCredentials(const std::string& email,
-                                const std::string& password,
-                                std::string* session_token);
+  grpc::Status CheckCredentials(
+      const std::string& email, const std::string& password,
+      const LoginRequest::AuthenticationType authentication_type,
+      std::string* session_token);
 
   // Inserts given user into database. On success puts verification token
-  // generated for user into verification_token.
+  // generated for user into verification_token if it is not nullptr.
   // - email and password fields of the user must be filled.
   // - Everything except user_id, status, register_date and linked_accounts are
   //   optional. These mentioned fields are not used by this function.
-  grpc::Status InsertUser(const User& user, std::string* verification_token);
+  grpc::Status InsertUser(
+      const User& user,
+      const LoginRequest::AuthenticationType authentication_type,
+      std::string* verification_token);
 
   // Verifies a given authentication token and sets user_id to id of the user
   // bearing the token.

@@ -1,5 +1,6 @@
 #include "user_orm.h"
 #include "glog/logging.h"
+#include "social_media/facebook.h"
 #include "util/hmac.h"
 #include "util/time.h"
 
@@ -58,56 +59,70 @@ Status UserOrm::GetUserByEmail(const std::string& email, User* user) {
   return Status::OK;
 }
 
-Status UserOrm::CheckCredentials(const User& user, std::string* session_token) {
-  return CheckCredentials(user.email(), user.password(), session_token);
-}
-
-Status UserOrm::CheckCredentials(const std::string& email,
-                                 const std::string& password,
-                                 std::string* session_token) {
+Status UserOrm::CheckCredentials(
+    const std::string& email, const std::string& password,
+    const LoginRequest::AuthenticationType authentication_type,
+    std::string* session_token) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
 
-  mysqlpp::Query query = conn_->query(
-      "SELECT `id`, `salt`, `status`, `password` FROM `user` WHERE "
-      "`email`=%0q");
-  query.parse();
+  const bool is_facebook = authentication_type == LoginRequest::FACEBOOK;
 
-  mysqlpp::StoreQueryResult res = query.store(email);
-  if (res.empty()) {
-    VLOG(1) << email << " doesn't exists in database.";
+  if (is_facebook && !FacebookValidator::Validate(email, password)) {
     return Status(StatusCode::UNKNOWN, "Wrong credentials.");
   }
-  if (res.num_rows() != 1) {
-    VLOG(1) << email << " exists in duplicate entries.";
-    return Status(StatusCode::UNKNOWN,
-                  "More than one user matches this email.");
+
+  mysqlpp::Query query = conn_->query(
+      "SELECT `id`, `salt`, `status` FROM `user` WHERE `email`=%0q");
+  query.parse();
+
+  const mysqlpp::StoreQueryResult res = query.store(email);
+  if (res.empty()) {
+    if (is_facebook) {
+      VLOG(1) << email << " first login using facebook.";
+      const User user = FacebookValidator::FetchInfo(email, password);
+      InsertUser(user, authentication_type, nullptr);
+    } else {
+      VLOG(1) << email << " doesn't exists in database.";
+      return Status(StatusCode::UNKNOWN, "Wrong credentials.");
+    }
   }
 
   // TODO(kadircet): Implement Status::ACTIVE check after sending verification
   // emails.
-  const mysqlpp::String sql_password = res[0]["password"];
+  // TODO(kadircet): In feature deduce user_id from credentials table instead.
+  const int user_id = res[0]["id"];
   const mysqlpp::String sql_salt = res[0]["salt"];
+  query.reset();
+  query << "SELECT `credential` FROM `user_credentials` WHERE `id`=%0 AND "
+           "`type`=%1";
+  query.parse();
+  const mysqlpp::StoreQueryResult res_credential =
+      query.store(user_id, authentication_type);
+  const mysqlpp::String sql_password = res[0]["credential"];
   const std::string hash(sql_password.data(), sql_password.size());
   const std::string salt(sql_salt.data(), sql_salt.size());
-  if (hash == util::HMac(salt, password)) {
+  if (is_facebook || hash == util::HMac(salt, password)) {
     query.reset();
     *session_token = util::GenerateRandomKey();
     query << "INSERT INTO `user_session` (`id`, `token`, `expire`) VALUES "
              "(%0, %1q, %2) ON DUPLICATE KEY UPDATE `token`=%1q, `expire`=%2";
     query.parse();
     // TODO(kadircet): Implement token expiration.
-    query.execute(res[0]["id"], *session_token, 0);
+    query.execute(user_id, *session_token, 0);
     VLOG(1) << email << " has been authenticated successfully.";
     return Status::OK;
   }
-  VLOG(1) << email << " contains wrong password.";
+  VLOG(1) << email << " tried to authenticate with wrong credential.";
 
   return Status(StatusCode::INVALID_ARGUMENT, "Wrong credentials.");
-}
+}  // namespace orm
 
-Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
+Status UserOrm::InsertUser(
+    const User& user,
+    const LoginRequest::AuthenticationType authentication_type,
+    std::string* verification_token) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
@@ -129,21 +144,29 @@ Status UserOrm::InsertUser(const User& user, std::string* verification_token) {
   }
 
   {
-    query << "INSERT INTO `user` (`email`, `password`, `status`, `salt`) "
-             "VALUES (%0q, %1q, %2, %3q)";
+    query << "INSERT INTO `user` (`email` `status`, `salt`) "
+             "VALUES (%0q, %1, %2q)";
     query.parse();
     const std::string salt = util::GenerateRandomKey();
-    const std::string hmac = util::HMac(salt, user.password());
-    const int user_id =
-        query.execute(email, hmac, User::INACTIVE, salt).insert_id();
+    const int user_id = query.execute(email, User::INACTIVE, salt).insert_id();
     query.reset();
 
-    *verification_token = util::GenerateRandomKey();
-    query << "INSERT INTO `user_verification` (`id`, `token`, `expire`) VALUES "
-             "(%0, %1q, %2)";
-    query.execute(user_id, util::HMac(salt, *verification_token),
-                  util::GetTimestamp() + kVerficationTokenExpireTime);
+    const std::string hmac = util::HMac(salt, user.password());
+    query << "INSERT INTO `user_credentials` (`user_id`, `credential`, `type`) "
+             "VALUES (%0, %1q, %2)";
+    query.parse();
+    query.execute(user_id, hmac, authentication_type);
     query.reset();
+
+    if (verification_token != nullptr) {
+      *verification_token = util::GenerateRandomKey();
+      query
+          << "INSERT INTO `user_verification` (`id`, `token`, `expire`) VALUES "
+             "(%0, %1q, %2)";
+      query.execute(user_id, util::HMac(salt, *verification_token),
+                    util::GetTimestamp() + kVerficationTokenExpireTime);
+      query.reset();
+    }
 
     // TODO(kadircet): Insert remaining fields into user_info.
   }
