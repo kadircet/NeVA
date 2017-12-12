@@ -49,7 +49,7 @@ public class ProposeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_propose, container, false);
 
         MainActivity mainActivity = (MainActivity) getActivity();
-        loginToken = mainActivity.loginToken;
+        loginToken = NevaLoginManager.getInstance().getLoginToken();
         mChannel = mainActivity.mChannel;
         blockingStub = mainActivity.blockingStub;
 

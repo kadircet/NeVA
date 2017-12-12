@@ -32,6 +32,8 @@ import io.grpc.ManagedChannel;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
 import neva.backend.SuggestionOuterClass;
+import neva.backend.UserHistoryOuterClass;
+import neva.backend.util.Util;
 
 
 /**
@@ -129,14 +131,42 @@ public class AddHistoryItemFragment extends Fragment {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                dbman.addHistoryData("hkn@test.com", mealNameField.getText().toString(), date);
 
-                Cursor cursor = dbman.getHistory();
+                //
+                //  DIRTY FIX - BAD PACTICE
+                //  TODO: FIX PUBLIC DATABASE ACCESS
+                //
 
-                cursorAdapter.swapCursor(cursor);
+                String mealTableNameColumn[] = {DatabaseHelper.MEAL_ID, DatabaseHelper.MEAL_NAME};
+                Cursor c = dbman.database.query(DatabaseHelper.MEAL_TABLE,mealTableNameColumn, DatabaseHelper.MEAL_NAME + "= ?" , new String[]{mealNameField.getText().toString()}, null, null, null);
+                Log.v(TAG, "Find Meal Name Count: "+ Integer.toString(c.getCount())); //TODO: MAKE TEXT BOX RETURN MEAL ID TO DECREASE QUERY NUMS
+                c.moveToFirst();
+                Log.v(TAG, "FOUND: "+c.getString(0)+" "+c.getString(1));
 
-                Toast.makeText(getContext(),"CLICK",Toast.LENGTH_SHORT).show();
-                getActivity().onBackPressed();
+                int mealID = c.getInt(0);
+
+                UserHistoryOuterClass.Choice choice = UserHistoryOuterClass.Choice.newBuilder()
+                            .setSuggesteeId(mealID)
+                        .setTimestamp(Util.Timestamp.newBuilder().setSeconds((int)(date.getTimeInMillis()/1000)))
+                        .build();
+
+                BackendOuterClass.InformUserChoiceRequest informUserChoiceRequest;
+                informUserChoiceRequest = BackendOuterClass.InformUserChoiceRequest.newBuilder()
+                                            .setChoice(choice).setToken(loginToken).build();
+                try {
+                    BackendOuterClass.GenericReply genericReply = blockingStub.informUserChoice(informUserChoiceRequest);
+                    dbman.addHistoryData("hkn@test.com", mealID, date);
+
+                    Cursor cursor = dbman.getHistory();
+
+                    cursorAdapter.swapCursor(cursor);
+
+                    Toast.makeText(getContext(),"CLICK",Toast.LENGTH_SHORT).show();
+                    getActivity().onBackPressed();
+                }catch (Exception e)
+                {
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

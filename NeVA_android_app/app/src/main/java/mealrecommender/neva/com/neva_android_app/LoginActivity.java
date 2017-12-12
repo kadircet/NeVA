@@ -23,6 +23,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.protobuf.ByteString;
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +32,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import io.grpc.Status;
+import io.grpc.StatusRuntimeException;
 import neva.backend.BackendOuterClass;
 import neva.backend.BackendGrpc;
 import io.grpc.ManagedChannel;
@@ -50,6 +53,9 @@ public class LoginActivity extends AppCompatActivity {
     TextView registerButton;
     BackendGrpc.BackendBlockingStub blockingStub;
     ManagedChannel mChannel;
+    ByteString loginToken;
+
+    NevaLoginManager nevaLoginManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
         blockingStub = BackendGrpc.newBlockingStub(mChannel);
         facebook_login_button.setReadPermissions(Arrays.asList("public_profile","email"));
+        nevaLoginManager = NevaLoginManager.getInstance();
+        loginToken =null;
 
         facebook_login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
@@ -86,20 +94,12 @@ public class LoginActivity extends AppCompatActivity {
 
                             Log.i("Email: ", email);
                             Log.i("Name: ", name);
-
-                            BackendOuterClass.LoginRequest loginReq;
-                            loginReq = BackendOuterClass.LoginRequest.newBuilder()
-                                    .setAuthenticationType(BackendOuterClass.LoginRequest.AuthenticationType.FACEBOOK)
-                                    .setEmail(email)
-                                    .setPassword(loginResult.getAccessToken().getToken())
-                                    .build();
                             try {
-                                BackendOuterClass.LoginReply loginReply = blockingStub.login(loginReq);
-                                ByteString loginToken = loginReply.getToken();
+                                loginToken = nevaLoginManager.logIn(email,
+                                            loginResult.getAccessToken().getToken(),
+                                        BackendOuterClass.LoginRequest.AuthenticationType.FACEBOOK);
                                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                                 Toast.makeText(getBaseContext(), "Successfully FB logged in!", Toast.LENGTH_LONG).show();
-                                byte[] loginTokenArray = loginToken.toByteArray();
-                                intent.putExtra(TOKEN_EXTRA, loginTokenArray);
                                 startActivity(intent);
                             }
                             catch (Exception e)
@@ -166,33 +166,26 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //String loginToken = null;
-        ByteString loginToken;
         try {
             // SEND REQUEST
             login_button.setEnabled(false);
 
             pb.setVisibility(View.VISIBLE);
 
-            BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
-                                                            .setEmail(username)
-                                                            .setPassword(password)
-                                                            .setAuthenticationType(BackendOuterClass.LoginRequest.AuthenticationType.DEFAULT)
-                                                            .build();
-
-            // GET ANSWER
-            BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
-            loginToken = loginReply.getToken();
-
-            Intent intent = new Intent(this, MainActivity.class);
-            //String login_res = "Successfully Logged in as: " + username + " with grpc token: " + loginToken.toString();
-            Toast.makeText(this, "Successfully logged in!", Toast.LENGTH_LONG).show();
-            byte[] loginTokenArray = loginToken.toByteArray();
-            intent.putExtra(TOKEN_EXTRA, loginTokenArray);
-            login_button.setEnabled(true);
-            pb.setVisibility(View.GONE);
-            startActivity(intent);
-            finish();
-
+            loginToken = nevaLoginManager.logIn(username,password, BackendOuterClass.LoginRequest.AuthenticationType.DEFAULT);
+            Log.i(TAG, loginToken.toString());
+            if(loginToken != null) {
+                Intent intent = new Intent(this, MainActivity.class);
+                Toast.makeText(this, "Successfully logged in!", Toast.LENGTH_LONG).show();
+                login_button.setEnabled(true);
+                pb.setVisibility(View.GONE);
+                startActivity(intent);
+                finish();
+            }
+            else
+            {
+                Toast.makeText(this, "FAILED LOGIN", Toast.LENGTH_SHORT).show();
+            }
         }
         catch (Exception e)
         {

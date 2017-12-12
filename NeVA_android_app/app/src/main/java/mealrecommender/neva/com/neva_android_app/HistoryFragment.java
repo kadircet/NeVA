@@ -46,7 +46,7 @@ public class HistoryFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_history_list, container, false);
 
         MainActivity mainActivity = (MainActivity) getActivity();
-        loginToken = mainActivity.loginToken;
+        loginToken = NevaLoginManager.getInstance().getLoginToken();
         mChannel = mainActivity.mChannel;
         blockingStub = mainActivity.blockingStub;
         dbman = mainActivity.dbman;
@@ -65,7 +65,6 @@ public class HistoryFragment extends ListFragment {
 
         try {
             dbman.open();
-            //dbman.resetTables();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -95,9 +94,6 @@ public class HistoryFragment extends ListFragment {
         adapter = new HistoryCursorAdapter(getContext(), cursor, 0);
         mainActivity.adapter = adapter;
         setListAdapter(mainActivity.adapter);
-
-
-
 
         return view;
     }

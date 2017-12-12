@@ -20,7 +20,11 @@ public class DatabaseManager {
     private static final String TAG = "DatabaseManager";
 
     private DatabaseHelper dbHelper;
-    private SQLiteDatabase database;
+    //
+    //  DIRTY FIX - BAD PACTICE
+    //  TODO: FIX PUBLIC DATABASE ACCESS
+    //
+    public SQLiteDatabase database;
 
     private String mealTableColumns[] = {DatabaseHelper.MEAL_ID, DatabaseHelper.MEAL_NAME, DatabaseHelper.MEAL_PHOTO};
     private String historyTableColumns[] = {DatabaseHelper.HISTORY_USER_MAIL, DatabaseHelper.HISTORY_MEAL, DatabaseHelper.HISTORY_DATE};
@@ -57,16 +61,10 @@ public class DatabaseManager {
         database.delete(DatabaseHelper.HISTORY_TABLE, null, null);
     }
 
-    public long addHistoryData(String email, String mealName, Calendar date)
+    public long addHistoryData(String email, int mealID, Calendar date)
     {
         Log.i(TAG, "Adding History Data");
-        String mealTableNameColumn[] = {DatabaseHelper.MEAL_ID, DatabaseHelper.MEAL_NAME};
-        Cursor cursor = database.query(DatabaseHelper.MEAL_TABLE,mealTableNameColumn, DatabaseHelper.MEAL_NAME + "= ?" , new String[]{mealName}, null, null, null);
-        Log.v(TAG, "Find Meal Name Count: "+ Integer.toString(cursor.getCount())); //TODO: MAKE TEXT BOX RETURN MEAL ID TO DECREASE QUERY NUMS
-        cursor.moveToFirst();
-        Log.v(TAG, "FOUND: "+cursor.getString(0)+" "+cursor.getString(1));
 
-        int mealID = cursor.getInt(0);
         int epochDate = (int)(date.getTimeInMillis()/1000);
 
 
