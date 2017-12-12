@@ -4,6 +4,7 @@ package mealrecommender.neva.com.neva_android_app;
 import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -38,10 +39,13 @@ import neva.backend.SuggestionOuterClass;
  */
 public class AddHistoryItemFragment extends Fragment {
 
+    private static final String TAG = "AddHistoryItemFragment";
+
     ByteString loginToken;
     ManagedChannel mChannel;
     BackendGrpc.BackendBlockingStub blockingStub;
     FragmentManager fm;
+    HistoryCursorAdapter cursorAdapter;
 
     String[] mealNames;
     ArrayAdapter<String> adapter;
@@ -69,6 +73,8 @@ public class AddHistoryItemFragment extends Fragment {
         loginToken = mainActivity.loginToken;
         mChannel = mainActivity.mChannel;
         blockingStub = mainActivity.blockingStub;
+        cursorAdapter = mainActivity.adapter;
+
         fm = mainActivity.getFragmentManager();
 
         mealNameField = view.findViewById(R.id.eaten_meal_field);
@@ -124,6 +130,10 @@ public class AddHistoryItemFragment extends Fragment {
                     e.printStackTrace();
                 }
                 dbman.addHistoryData("hkn@test.com", mealNameField.getText().toString(), date);
+
+                Cursor cursor = dbman.getHistory();
+
+                cursorAdapter.swapCursor(cursor);
 
                 Toast.makeText(getContext(),"CLICK",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();

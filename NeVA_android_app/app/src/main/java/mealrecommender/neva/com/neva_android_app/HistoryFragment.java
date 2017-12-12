@@ -1,5 +1,6 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CursorAdapter;
 import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
@@ -27,11 +29,13 @@ import neva.backend.SuggestionOuterClass;
 
 public class HistoryFragment extends ListFragment {
 
+    private static final String TAG = "HistoryFragment";
+
     ByteString loginToken;
     ManagedChannel mChannel;
     BackendGrpc.BackendBlockingStub blockingStub;
-    HistoryItemAdapter adapter;
-
+    DatabaseManager dbman;
+    HistoryCursorAdapter adapter;
 
     public HistoryFragment() {
     }
@@ -45,8 +49,8 @@ public class HistoryFragment extends ListFragment {
         loginToken = mainActivity.loginToken;
         mChannel = mainActivity.mChannel;
         blockingStub = mainActivity.blockingStub;
-
-
+        dbman = mainActivity.dbman;
+        adapter = mainActivity.adapter;
 
         BackendOuterClass.GetSuggestionItemListRequest request;
         request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
@@ -57,25 +61,43 @@ public class HistoryFragment extends ListFragment {
         BackendOuterClass.GetSuggestionItemListReply reply = blockingStub.getSuggestionItemList(request);
         SuggestionOuterClass.Suggestion[] values;
         values = new SuggestionOuterClass.Suggestion[(reply.getItemsCount())];
-        getContext().deleteDatabase("MEAL_HISTORY.DB");
-        DatabaseManager dbman = new DatabaseManager(getContext());
+
+
         try {
             dbman.open();
+            //dbman.resetTables();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         for(int i=0; i<(reply.getItemsCount());i++)
         {
             dbman.addMeal(reply.getItems(i));
             values[i] = reply.getItems(i);
             Log.i("Values:", values[i].getName());
         }
+
+        Cursor cursor = dbman.getHistory();
+
         dbman.close();
 
+        cursor.moveToFirst();
+        Log.d(TAG, Integer.toString(cursor.getCount()));
+        for(int i=0; i<cursor.getCount(); i++)
+        {
+            Log.d(TAG, cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2));
+            cursor.moveToNext();
+        }
+        cursor.moveToFirst();
+
+        //adapter = new HistoryItemAdapter(getContext(), R.layout.fragment_history, R.id.firstLine, values);
+        //setListAdapter(adapter);
+        adapter = new HistoryCursorAdapter(getContext(), cursor, 0);
+        mainActivity.adapter = adapter;
+        setListAdapter(mainActivity.adapter);
 
 
-        adapter = new HistoryItemAdapter(getContext(), R.layout.fragment_history, R.id.firstLine, values);
-        setListAdapter(adapter);
+
 
         return view;
     }

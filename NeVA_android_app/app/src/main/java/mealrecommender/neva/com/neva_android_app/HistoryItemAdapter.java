@@ -18,6 +18,8 @@ import neva.backend.SuggestionOuterClass;
 
 public class HistoryItemAdapter extends ArrayAdapter<SuggestionOuterClass.Suggestion> {
 
+    private static final String TAG = "HistoryItemAdapter";
+
     SuggestionOuterClass.Suggestion[] meals;
 
     public HistoryItemAdapter(@NonNull Context context, int resource, int textViewResourceId, SuggestionOuterClass.Suggestion[] meals) {

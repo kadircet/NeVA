@@ -31,6 +31,8 @@ import neva.backend.util.Util;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private static final String TAG = "RegisterActivity";
+
     public static final String MESSAGE_CLASS = "com.neva.mealrecommender.MESSAGE";
 
     EditText username_field;

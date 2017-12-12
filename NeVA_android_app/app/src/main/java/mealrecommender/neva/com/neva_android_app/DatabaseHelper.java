@@ -11,6 +11,8 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    private static final String TAG = "DatabaseHelper";
+
     public static final String DB_NAME = "MEAL_HISTORY.DB";
 
     public static final String MEAL_TABLE = "MEALS";

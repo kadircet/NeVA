@@ -17,6 +17,7 @@ import neva.backend.SuggestionOuterClass;
  */
 
 public class DatabaseManager {
+    private static final String TAG = "DatabaseManager";
 
     private DatabaseHelper dbHelper;
     private SQLiteDatabase database;
@@ -34,34 +35,36 @@ public class DatabaseManager {
     }
 
 
-    public void addMeal(SuggestionOuterClass.Suggestion meal)
+    public long addMeal(SuggestionOuterClass.Suggestion meal)
     {
+        Log.i(TAG, "Adding "+ meal.getName()+" to MEALS");
+
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.MEAL_ID, meal.getSuggesteeId());
         values.put(DatabaseHelper.MEAL_NAME, meal.getName());
         values.put(DatabaseHelper.MEAL_PHOTO, "NoPhotoURL");
 
-
-        long returnID = database.insert(DatabaseHelper.MEAL_TABLE, null, values);
+        long rowNo = database.insert(DatabaseHelper.MEAL_TABLE, null, values);
         Cursor cursor = database.query(DatabaseHelper.MEAL_TABLE, mealTableColumns, null,
                         null, null, null, null);
-        cursor.moveToFirst();
-        Log.i("DB MEAL:", "MEAL");
-        int i=0;
-        do{
-            Log.i("     E: ", Integer.toString(cursor.getCount())+" "+cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2));
-        } while (cursor.moveToNext());
-        if(cursor.isLast()) Log.i("LAST OUTSIDE LOOP", null);
         cursor.close();
-
+        return rowNo;
     }
-    public void addHistoryData(String email, String mealName, Calendar date)
+
+    public void resetTables()
     {
+        database.delete(DatabaseHelper.MEAL_TABLE, null, null);
+        database.delete(DatabaseHelper.HISTORY_TABLE, null, null);
+    }
+
+    public long addHistoryData(String email, String mealName, Calendar date)
+    {
+        Log.i(TAG, "Adding History Data");
         String mealTableNameColumn[] = {DatabaseHelper.MEAL_ID, DatabaseHelper.MEAL_NAME};
         Cursor cursor = database.query(DatabaseHelper.MEAL_TABLE,mealTableNameColumn, DatabaseHelper.MEAL_NAME + "= ?" , new String[]{mealName}, null, null, null);
-        Log.i("Find Meal Name Count: ", Integer.toString(cursor.getCount())); //TODO: MAKE TEXT BOX RETURN MEAL ID TO DECREASE QUERY NUMS
+        Log.v(TAG, "Find Meal Name Count: "+ Integer.toString(cursor.getCount())); //TODO: MAKE TEXT BOX RETURN MEAL ID TO DECREASE QUERY NUMS
         cursor.moveToFirst();
-        Log.i("FOUND: ", cursor.getString(0)+" "+cursor.getString(1));
+        Log.v(TAG, "FOUND: "+cursor.getString(0)+" "+cursor.getString(1));
 
         int mealID = cursor.getInt(0);
         int epochDate = (int)(date.getTimeInMillis()/1000);
@@ -72,15 +75,31 @@ public class DatabaseManager {
         values.put(DatabaseHelper.HISTORY_MEAL, mealID);
         values.put(DatabaseHelper.HISTORY_DATE, epochDate);
 
-        long returnID = database.insert(DatabaseHelper.HISTORY_TABLE, null, values);
+        long rowNo = database.insert(DatabaseHelper.HISTORY_TABLE, null, values);
 
-        cursor = database.query(DatabaseHelper.HISTORY_TABLE, historyTableColumns, null, null, null, null, null);
+        return rowNo;
+    }
+
+    public Cursor getHistory()
+    {
+        Log.i(TAG, "Getting History from DB");
+        Cursor cursor = database.rawQuery("SELECT m.id as _id, m.meal_name, m.meal_photo, h.date" +
+                                            " FROM MEALS as m CROSS JOIN HISTORY as h" +
+                                            " WHERE m.id=h.meal" +
+                                            " ORDER BY h.date DESC", null, null);
+        Cursor cursora = database.rawQuery("SELECT id as _id, meal_name, meal_photo"+
+                                            " FROM MEALS ", null,null);
+
+        Log.d(TAG, Integer.toString(cursora.getCount()));
+        Log.d(TAG, Integer.toString(cursor.getCount()));
+
         cursor.moveToFirst();
         for(int i=0; i<cursor.getCount(); i++)
         {
-            Log.w("         H:", cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2));
+            Log.d("Cursor: ", cursor.getString(0)+" "+cursor.getString(1)+" "+cursor.getString(2)+" "+cursor.getString(3));
             cursor.moveToNext();
         }
+        return cursor;
     }
 
     public void close() {

@@ -37,6 +37,8 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private static final String TAG = "LoginActivity";
     public static final String TOKEN_EXTRA = "com.neva.mealrecommender.TOKEN";
 
     CallbackManager callbackManager;

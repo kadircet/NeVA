@@ -21,6 +21,8 @@ import neva.backend.SuggestionOuterClass;
 
 public class RecommendFragment extends Fragment {
 
+    private static final String TAG = "RecommendFragment";
+
     ByteString loginToken;
     ManagedChannel mChannel;
     BackendGrpc.BackendBlockingStub blockingStub;

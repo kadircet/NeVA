@@ -25,19 +25,24 @@ import neva.backend.BackendGrpc;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+    private static final String TAG = "MainActivity";
+
     public ByteString loginToken;
     public ManagedChannel mChannel;
     public BackendGrpc.BackendBlockingStub blockingStub;
     public FloatingActionButton fab;
+    public DatabaseManager dbman;
+    HistoryCursorAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -52,6 +57,8 @@ public class MainActivity extends AppCompatActivity
 
         mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
         blockingStub = BackendGrpc.newBlockingStub(mChannel);
+
+        dbman = new DatabaseManager(this);
 
         fab = findViewById(R.id.fab);
 
