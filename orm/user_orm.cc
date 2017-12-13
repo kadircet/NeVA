@@ -96,7 +96,7 @@ Status UserOrm::CheckCredentials(
   const int user_id = res[0]["id"];
   const mysqlpp::String sql_salt = res[0]["salt"];
   query.reset();
-  query << "SELECT `credential` FROM `user_credentials` WHERE `id`=%0 AND "
+  query << "SELECT `credential` FROM `user_credentials` WHERE `user_id`=%0 AND "
            "`type`=%1";
   query.parse();
   res = query.store(user_id, authentication_type);
