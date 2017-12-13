@@ -77,12 +77,13 @@ Status UserOrm::CheckCredentials(
       "SELECT `id`, `salt`, `status` FROM `user` WHERE `email`=%0q");
   query.parse();
 
-  const mysqlpp::StoreQueryResult res = query.store(email);
+  mysqlpp::StoreQueryResult res = query.store(email);
   if (res.empty()) {
     if (is_facebook) {
       VLOG(1) << email << " first login using facebook.";
       const User user = FacebookValidator::FetchInfo(email, password);
       InsertUser(user, authentication_type, nullptr);
+      res = query.store(email);
     } else {
       VLOG(1) << email << " doesn't exists in database.";
       return Status(StatusCode::UNKNOWN, "Wrong credentials.");
@@ -98,8 +99,12 @@ Status UserOrm::CheckCredentials(
   query << "SELECT `credential` FROM `user_credentials` WHERE `id`=%0 AND "
            "`type`=%1";
   query.parse();
-  const mysqlpp::StoreQueryResult res_credential =
-      query.store(user_id, authentication_type);
+  res = query.store(user_id, authentication_type);
+  if (res.empty()) {
+    VLOG(1) << "No credential of type: " << authentication_type
+            << " for user: " << email;
+    return Status(StatusCode::UNKNOWN, "Wrong credentials.");
+  }
   const mysqlpp::String sql_password = res[0]["credential"];
   const std::string hash(sql_password.data(), sql_password.size());
   const std::string salt(sql_salt.data(), sql_salt.size());
