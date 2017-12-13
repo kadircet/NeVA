@@ -149,7 +149,7 @@ Status UserOrm::InsertUser(
   }
 
   {
-    query << "INSERT INTO `user` (`email` `status`, `salt`) "
+    query << "INSERT INTO `user` (`email`, `status`, `salt`) "
              "VALUES (%0q, %1, %2q)";
     query.parse();
     const std::string salt = util::GenerateRandomKey();
