@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `user_info` (
  * expire is the expire date of the token in seconds.
  */
 CREATE TABLE IF NOT EXISTS `user_session` (
-  `id` INTEGER NOT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `user_id` INTEGER NOT NULL,
   `token` VARBINARY(255) NOT NULL UNIQUE,
   `expire` INTEGER UNSIGNED NOT NULL,
