@@ -111,8 +111,8 @@ Status UserOrm::CheckCredentials(
   if (is_facebook || hash == util::HMac(salt, password)) {
     query.reset();
     *session_token = util::GenerateRandomKey();
-    query << "INSERT INTO `user_session` (`id`, `token`, `expire`) VALUES "
-             "(%0, %1q, %2) ON DUPLICATE KEY UPDATE `token`=%1q, `expire`=%2";
+    query << "INSERT INTO `user_session` (`user_id`, `token`, `expire`) VALUES "
+             "(%0, %1q, %2)";
     query.parse();
     // TODO(kadircet): Implement token expiration.
     query.execute(user_id, *session_token, 0);
@@ -187,7 +187,7 @@ Status UserOrm::CheckToken(const std::string& token, int* user_id) {
 
   mysqlpp::Query query = conn_->query();
   {
-    query << "SELECT `id`, `expire` FROM `user_session` WHERE `token`=%0q";
+    query << "SELECT `user_id`, `expire` FROM `user_session` WHERE `token`=%0q";
     query.parse();
 
     const mysqlpp::StoreQueryResult res = query.store(token);
@@ -197,7 +197,7 @@ Status UserOrm::CheckToken(const std::string& token, int* user_id) {
                     "No such session token exists.");
     }
     // TODO(kadircet): Implement session expire check.
-    *user_id = res[0]["id"];
+    *user_id = res[0]["user_id"];
     VLOG(1) << "Session token belongs to user with id: " << *user_id;
 
     return Status::OK;
