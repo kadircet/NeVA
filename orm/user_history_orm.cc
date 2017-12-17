@@ -42,7 +42,7 @@ Status UserHistoryOrm::FetchUserHistory(const uint32_t user_id,
 
   mysqlpp::Query query = conn_->query(
       "SELECT `id`, `suggestee_id`, `timestamp`, `latitude`, `longitude` FROM "
-      "`user_choice_history` WHERE `user_id`=%0 AND `start_idx`>%1");
+      "`user_choice_history` WHERE `user_id`=%0 AND `id`>%1");
   query.parse();
 
   user_history->set_user_id(user_id);
