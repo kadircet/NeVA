@@ -81,7 +81,7 @@ public class AddHistoryItemFragment extends Fragment {
         timeField = view.findViewById(R.id.time_field);
         addHistoryButton = view.findViewById(R.id.sendMealHistory);
 
-        mealNames = getSuggestionNames(); \\TODO: Store meal names in a file instead of creating them from scratch
+        mealNames = getSuggestionNames(); //TODO: Store meal names in a file instead of creating them from scratch
 
         adapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
         mealNameField.setAdapter(adapter);
