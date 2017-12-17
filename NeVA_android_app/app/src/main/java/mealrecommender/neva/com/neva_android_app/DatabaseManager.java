@@ -20,11 +20,7 @@ public class DatabaseManager {
     private static final String TAG = "DatabaseManager";
 
     private DatabaseHelper dbHelper;
-    //
-    //  DIRTY FIX - BAD PACTICE
-    //  TODO: FIX PUBLIC DATABASE ACCESS
-    //
-    public SQLiteDatabase database;
+    private SQLiteDatabase database;
 
     private String mealTableColumns[] = {DatabaseHelper.MEAL_ID, DatabaseHelper.MEAL_NAME, DatabaseHelper.MEAL_PHOTO};
     private String historyTableColumns[] = {DatabaseHelper.HISTORY_USER_MAIL, DatabaseHelper.HISTORY_MEAL, DatabaseHelper.HISTORY_DATE};
