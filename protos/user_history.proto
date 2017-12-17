@@ -5,13 +5,24 @@ import "protos/util.proto";
 package neva.backend;
 
 message Choice {
+  // Which item was selected.
   uint32 suggestee_id = 1;
+
+  // When was the selection performed.
   util.Timestamp timestamp = 2;
+
+  // Where was the selection performed.
   double latitude = 3;
   double longitude = 4;
+
+  // What is the id of the selection in user_choice_history table.
+  uint32 choice_id = 5;
 }
 
 message UserHistory {
+  // Id of the user to which history entries belongs to.
   uint32 user_id = 1;
+
+  // Entries related to user.
   repeated Choice history = 2;
 }

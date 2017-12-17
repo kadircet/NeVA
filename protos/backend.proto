@@ -32,6 +32,10 @@ service Backend {
 
   rpc InformUserChoice(InformUserChoiceRequest) returns (GenericReply) {
   }
+
+  rpc FetchUserHistory(FetchUserHistoryRequest)
+      returns (FetchUserHistoryReply) {
+  }
 }
 
 message GenericReply {
@@ -123,4 +127,17 @@ message InformUserChoiceRequest {
 
   // Choice of the user.
   Choice choice = 2;
+}
+
+message FetchUserHistoryRequest {
+  // Session key for the user requesting the fetch.
+  bytes token = 1;
+
+  // Start index to fetch choice entries;
+  uint32 start_index = 2;
+}
+
+message FetchUserHistoryReply {
+  // User history object.
+  UserHistory user_history = 1;
 }
