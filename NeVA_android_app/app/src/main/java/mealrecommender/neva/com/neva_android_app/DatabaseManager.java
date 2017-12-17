@@ -55,6 +55,16 @@ public class DatabaseManager {
         return rowNo;
     }
 
+    public int getMealId(String mealName)
+    {
+        String mealTableNameColumn[] = {DatabaseHelper.MEAL_ID, DatabaseHelper.MEAL_NAME};
+        Cursor c = database.query(DatabaseHelper.MEAL_TABLE,mealTableNameColumn,
+                DatabaseHelper.MEAL_NAME + "= ?" , new String[]{mealName},
+                null, null, null);
+        c.moveToFirst();
+        return c.getInt(0);
+    }
+
     public void resetTables()
     {
         database.delete(DatabaseHelper.MEAL_TABLE, null, null);

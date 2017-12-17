@@ -1,13 +1,17 @@
 package mealrecommender.neva.com.neva_android_app;
 
-
-import android.app.DatePickerDialog;
+import android.Manifest;
 import android.app.FragmentManager;
-import android.app.TimePickerDialog;
+import android.app.TimePickerDialog;;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,36 +20,29 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
+import io.grpc.ManagedChannel;
+import neva.backend.UserHistoryOuterClass.*;
+import neva.backend.SuggestionOuterClass.*;
+import neva.backend.util.Util.*;
+import neva.backend.BackendOuterClass.*;
+import neva.backend.BackendGrpc.*;
 
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Locale;
-
-import io.grpc.Context;
-import io.grpc.ManagedChannel;
-import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
-import neva.backend.SuggestionOuterClass;
-import neva.backend.UserHistoryOuterClass;
-import neva.backend.util.Util;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AddHistoryItemFragment extends Fragment {
 
     private static final String TAG = "AddHistoryItemFragment";
 
     ByteString loginToken;
     ManagedChannel mChannel;
-    BackendGrpc.BackendBlockingStub blockingStub;
+    BackendBlockingStub blockingStub;
     FragmentManager fm;
     HistoryCursorAdapter cursorAdapter;
 
@@ -57,6 +54,7 @@ public class AddHistoryItemFragment extends Fragment {
     Button addHistoryButton;
 
     Calendar date;
+    LocationManager locationManager;
 
     TimePickerDialog.OnTimeSetListener timeSetListener;
 
@@ -85,15 +83,20 @@ public class AddHistoryItemFragment extends Fragment {
 
         mealNames = getSuggestionNames();
 
-        adapter = new ArrayAdapter<String>(getContext(), R.layout.textview_autocomplete_item, mealNames);
+        adapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
         mealNameField.setAdapter(adapter);
 
         return view;
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                1);
 
         timeField.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +110,8 @@ public class AddHistoryItemFragment extends Fragment {
                         cal.set(Calendar.HOUR_OF_DAY, i);
                         cal.set(Calendar.MINUTE, i1);
                         date = cal;
-                        timeField.setText(i + ":" + i1);
+
+                        timeField.setText(String.format("%02d", i) + ":" + String.format("%02d", i1));
                     }
                 };
 
@@ -125,6 +129,27 @@ public class AddHistoryItemFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                Location currentLoc = null;
+                locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+
+                if(!(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
+                    Log.e(TAG, "Provider not enabled");
+                } else {
+                    currentLoc = getLocation();
+                }
+
+                double latitude=-1;
+                double longitude=-1;
+                if(currentLoc!=null) {
+                    latitude = currentLoc.getLatitude();
+                    longitude = currentLoc.getLongitude();
+                } else {
+                    latitude = 0;
+                    longitude = 0;
+                }
+
+                Log.d(TAG, Double.toString(latitude)+" "+Double.toString(longitude));
+
                 DatabaseManager dbman = new DatabaseManager(getContext());
                 try {
                     dbman.open();
@@ -132,30 +157,23 @@ public class AddHistoryItemFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                //
-                //  DIRTY FIX - BAD PACTICE
-                //  TODO: FIX PUBLIC DATABASE ACCESS
-                //
+                int mealID = dbman.getMealId(mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
 
-                String mealTableNameColumn[] = {DatabaseHelper.MEAL_ID, DatabaseHelper.MEAL_NAME};
-                Cursor c = dbman.database.query(DatabaseHelper.MEAL_TABLE,mealTableNameColumn, DatabaseHelper.MEAL_NAME + "= ?" , new String[]{mealNameField.getText().toString()}, null, null, null);
-                Log.v(TAG, "Find Meal Name Count: "+ Integer.toString(c.getCount())); //TODO: MAKE TEXT BOX RETURN MEAL ID TO DECREASE QUERY NUMS
-                c.moveToFirst();
-                Log.v(TAG, "FOUND: "+c.getString(0)+" "+c.getString(1));
+                long timezoneOffset = date.getTimeZone().getOffset(date.getTimeInMillis());
 
-                int mealID = c.getInt(0);
-
-                UserHistoryOuterClass.Choice choice = UserHistoryOuterClass.Choice.newBuilder()
-                            .setSuggesteeId(mealID)
-                        .setTimestamp(Util.Timestamp.newBuilder().setSeconds((int)(date.getTimeInMillis()/1000)))
+                Choice choice = Choice.newBuilder()
+                        .setSuggesteeId(mealID)
+                        .setTimestamp(Timestamp.newBuilder().setSeconds((int)((date.getTimeInMillis()+timezoneOffset)/1000)))
+                        .setLatitude(latitude)
+                        .setLongitude(longitude)
                         .build();
 
-                BackendOuterClass.InformUserChoiceRequest informUserChoiceRequest;
-                informUserChoiceRequest = BackendOuterClass.InformUserChoiceRequest.newBuilder()
+                InformUserChoiceRequest informUserChoiceRequest;
+                informUserChoiceRequest = InformUserChoiceRequest.newBuilder()
                                             .setChoice(choice).setToken(loginToken).build();
                 try {
-                    BackendOuterClass.GenericReply genericReply = blockingStub.informUserChoice(informUserChoiceRequest);
-                    dbman.addHistoryData("hkn@test.com", mealID, date);
+                    GenericReply genericReply = blockingStub.informUserChoice(informUserChoiceRequest);
+                    dbman.addHistoryData(NevaLoginManager.getInstance().getUsername(), mealID, date);
 
                     Cursor cursor = dbman.getHistory();
 
@@ -171,15 +189,33 @@ public class AddHistoryItemFragment extends Fragment {
         });
     }
 
+
+    public Location getLocation() {
+        Location location = null;
+        if(ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+            Log.d(TAG, "Permission Denied");
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1);
+        }
+        else {
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }
+        return location;
+    }
+
     String[] getSuggestionNames(){
 
-        BackendOuterClass.GetSuggestionItemListRequest request;
-        request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
+        GetSuggestionItemListRequest request;
+        request = GetSuggestionItemListRequest.newBuilder()
                 .setToken(loginToken).setStartIndex(0)
-                .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+                .setSuggestionCategory(Suggestion.SuggestionCategory.MEAL)
                 .build();
 
-        BackendOuterClass.GetSuggestionItemListReply reply = blockingStub.getSuggestionItemList(request);
+        GetSuggestionItemListReply reply = blockingStub.getSuggestionItemList(request);
         String[] values;
         values = new String[reply.getItemsCount()];
         for(int i=0; i<reply.getItemsCount();i++)

@@ -17,6 +17,7 @@ import neva.backend.BackendOuterClass;
  */
 
 public class NevaLoginManager {
+    private final static String TAG="NevaLoginManager";
     private static NevaLoginManager instance = null;
 
     private String username;
@@ -65,13 +66,14 @@ public class NevaLoginManager {
                     .build();
 
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
-            loginToken = loginReply.getToken();
-            loggedIn = true;
+            this.username = username;
+            this.loginToken = loginReply.getToken();
+            this.loggedIn = true;
             return loginToken;
         }
         catch (Exception e)
         {
-            Log.i("LoginManager", e.getMessage());
+            Log.i(TAG, e.getMessage());
             return  null;
         }
     }
