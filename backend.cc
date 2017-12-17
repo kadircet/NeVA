@@ -153,6 +153,19 @@ class BackendServiceImpl final : public Backend::Service {
     return user_history_orm_->InsertChoice(user_id, request->choice());
   }
 
+  Status FetchUserHistory(ServerContext* context,
+                          const FetchUserHistoryRequest* request,
+                          FetchUserHistoryReply* reply) override {
+    VLOG(1) << "Received FetchUserHistory:" << request->DebugString();
+    int user_id;
+    const Status status = user_orm_->CheckToken(request->token(), &user_id);
+    if (!status.ok()) {
+      return status;
+    }
+    return user_history_orm_->FetchUserHistory(user_id, request->start_index(),
+                                               reply->mutable_user_history());
+  }
+
   BackendServiceImpl() {
     conn_ = std::make_shared<mysqlpp::Connection>(false);
     conn_->set_option(new mysqlpp::ReconnectOption(true));
