@@ -22,11 +22,13 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 struct Neva_Backend_Choice: SwiftProtobuf.Message {
   static let protoMessageName: String = _protobuf_package + ".Choice"
 
+  /// Which item was selected.
   var suggesteeID: UInt32 {
     get {return _storage._suggesteeID}
     set {_uniqueStorage()._suggesteeID = newValue}
   }
 
+  /// When was the selection performed.
   var timestamp: Neva_Backend_Util_Timestamp {
     get {return _storage._timestamp ?? Neva_Backend_Util_Timestamp()}
     set {_uniqueStorage()._timestamp = newValue}
@@ -36,6 +38,7 @@ struct Neva_Backend_Choice: SwiftProtobuf.Message {
   /// Clears the value of `timestamp`. Subsequent reads from it will return its default value.
   mutating func clearTimestamp() {_storage._timestamp = nil}
 
+  /// Where was the selection performed.
   var latitude: Double {
     get {return _storage._latitude}
     set {_uniqueStorage()._latitude = newValue}
@@ -44,6 +47,12 @@ struct Neva_Backend_Choice: SwiftProtobuf.Message {
   var longitude: Double {
     get {return _storage._longitude}
     set {_uniqueStorage()._longitude = newValue}
+  }
+
+  /// What is the id of the selection in user_choice_history table.
+  var choiceID: UInt32 {
+    get {return _storage._choiceID}
+    set {_uniqueStorage()._choiceID = newValue}
   }
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -63,6 +72,7 @@ struct Neva_Backend_Choice: SwiftProtobuf.Message {
         case 2: try decoder.decodeSingularMessageField(value: &_storage._timestamp)
         case 3: try decoder.decodeSingularDoubleField(value: &_storage._latitude)
         case 4: try decoder.decodeSingularDoubleField(value: &_storage._longitude)
+        case 5: try decoder.decodeSingularUInt32Field(value: &_storage._choiceID)
         default: break
         }
       }
@@ -87,6 +97,9 @@ struct Neva_Backend_Choice: SwiftProtobuf.Message {
       if _storage._longitude != 0 {
         try visitor.visitSingularDoubleField(value: _storage._longitude, fieldNumber: 4)
       }
+      if _storage._choiceID != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._choiceID, fieldNumber: 5)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -97,8 +110,10 @@ struct Neva_Backend_Choice: SwiftProtobuf.Message {
 struct Neva_Backend_UserHistory: SwiftProtobuf.Message {
   static let protoMessageName: String = _protobuf_package + ".UserHistory"
 
+  /// Id of the user to which history entries belongs to.
   var userID: UInt32 = 0
 
+  /// Entries related to user.
   var history: [Neva_Backend_Choice] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -144,6 +159,7 @@ extension Neva_Backend_Choice: SwiftProtobuf._MessageImplementationBase, SwiftPr
     2: .same(proto: "timestamp"),
     3: .same(proto: "latitude"),
     4: .same(proto: "longitude"),
+    5: .standard(proto: "choice_id"),
   ]
 
   fileprivate class _StorageClass {
@@ -151,6 +167,7 @@ extension Neva_Backend_Choice: SwiftProtobuf._MessageImplementationBase, SwiftPr
     var _timestamp: Neva_Backend_Util_Timestamp? = nil
     var _latitude: Double = 0
     var _longitude: Double = 0
+    var _choiceID: UInt32 = 0
 
     static let defaultInstance = _StorageClass()
 
@@ -161,6 +178,7 @@ extension Neva_Backend_Choice: SwiftProtobuf._MessageImplementationBase, SwiftPr
       _timestamp = source._timestamp
       _latitude = source._latitude
       _longitude = source._longitude
+      _choiceID = source._choiceID
     }
   }
 
@@ -180,6 +198,7 @@ extension Neva_Backend_Choice: SwiftProtobuf._MessageImplementationBase, SwiftPr
         if _storage._timestamp != other_storage._timestamp {return false}
         if _storage._latitude != other_storage._latitude {return false}
         if _storage._longitude != other_storage._longitude {return false}
+        if _storage._choiceID != other_storage._choiceID {return false}
         return true
       }
       if !storagesAreEqual {return false}

@@ -473,6 +473,61 @@ internal class Neva_Backend_BackendInformUserChoiceCall {
   }
 }
 
+/// FetchUserHistory (Unary)
+internal class Neva_Backend_BackendFetchUserHistoryCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/FetchUserHistory")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_FetchUserHistoryRequest,
+                       metadata: Metadata) throws -> Neva_Backend_FetchUserHistoryReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_FetchUserHistoryReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_FetchUserHistoryRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_FetchUserHistoryReply?, CallResult)->())
+    throws -> Neva_Backend_BackendFetchUserHistoryCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_FetchUserHistoryReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
 /// Call methods of this class to make API calls.
 internal class Neva_Backend_BackendService {
   private var channel: Channel
@@ -623,6 +678,21 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendInformUserChoiceCall {
       return try Neva_Backend_BackendInformUserChoiceCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func fetchuserhistory(_ request: Neva_Backend_FetchUserHistoryRequest)
+    throws
+    -> Neva_Backend_FetchUserHistoryReply {
+      return try Neva_Backend_BackendFetchUserHistoryCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func fetchuserhistory(_ request: Neva_Backend_FetchUserHistoryRequest,
+                  completion: @escaping (Neva_Backend_FetchUserHistoryReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendFetchUserHistoryCall {
+      return try Neva_Backend_BackendFetchUserHistoryCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }
