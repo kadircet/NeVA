@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B1003" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="HistoryEntry" representedClassName="HistoryEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="choice_id" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="userMail" attributeType="String" syncable="YES"/>
         <relationship name="meal" maxCount="1" deletionRule="Cascade" destinationEntity="Meal" syncable="YES"/>
@@ -17,7 +18,7 @@
         <relationship name="meals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Meal" inverseName="tags" inverseEntity="Meal" syncable="YES"/>
     </entity>
     <elements>
-        <element name="HistoryEntry" positionX="-308" positionY="168" width="128" height="88"/>
+        <element name="HistoryEntry" positionX="-308" positionY="168" width="128" height="103"/>
         <element name="Meal" positionX="-425" positionY="-9" width="128" height="105"/>
         <element name="Tag" positionX="-74" positionY="9" width="128" height="88"/>
     </elements>
