@@ -22,16 +22,17 @@ Status UserHistoryOrm::InsertChoice(const uint32_t user_id,
       "INSERT INTO `user_choice_history` (`user_id`, `suggestee_id`, "
       "`timestamp`, `latitude`, `longitude`) VALUES (%0, %1, %2, %3, %4)");
   query.parse();
-  const mysqlpp::SimpleResult res = query.execute(user_id, choice.suggestee_id(),
-                     choice.timestamp().seconds(), choice.latitude(),
-                     choice.longitude());
+  const mysqlpp::SimpleResult res = query.execute(
+      user_id, choice.suggestee_id(), choice.timestamp().seconds(),
+      choice.latitude(), choice.longitude());
   if (!res) {
     VLOG(1) << "Something went wrong while inserting:\n"
             << choice.DebugString() << "\nInfo:" << query.info();
     return Status(StatusCode::INTERNAL, "Internal server error.");
   }
   *choice_id = res.insert_id();
-  VLOG(1) << choice.DebugString() << " inserted succesfully with id: " << *choice_id;
+  VLOG(1) << choice.DebugString()
+          << " inserted succesfully with id: " << *choice_id;
   return Status::OK;
 }
 

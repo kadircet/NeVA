@@ -30,7 +30,8 @@ service Backend {
       returns (GetSuggestionItemListReply) {
   }
 
-  rpc InformUserChoice(InformUserChoiceRequest) returns (InformUserChoiceReply) {
+  rpc InformUserChoice(InformUserChoiceRequest)
+      returns (InformUserChoiceReply) {
   }
 
   rpc FetchUserHistory(FetchUserHistoryRequest)

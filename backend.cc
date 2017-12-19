@@ -154,13 +154,14 @@ class BackendServiceImpl final : public Backend::Service {
     }
     {
       int choice_id;
-      const Status status = user_history_orm_->InsertChoice(user_id, request->choice(), &choice_id);
+      const Status status = user_history_orm_->InsertChoice(
+          user_id, request->choice(), &choice_id);
       if (!status.ok()) {
         return status;
       }
       reply->set_choice_id(choice_id);
     }
-    
+
     return Status::OK;
   }
 

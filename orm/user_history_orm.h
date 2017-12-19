@@ -17,7 +17,8 @@ class UserHistoryOrm {
   UserHistoryOrm(std::shared_ptr<mysqlpp::Connection> conn) : conn_(conn) {}
 
   // Inserts one choice associated with user_id into database.
-  grpc::Status InsertChoice(const uint32_t user_id, const Choice& choice, int* choice_id);
+  grpc::Status InsertChoice(const uint32_t user_id, const Choice& choice,
+                            int* choice_id);
 
   // Fetches all history entries after given start_idx for the specified user.
   grpc::Status FetchUserHistory(const uint32_t user_id,
