@@ -71,7 +71,7 @@ message UpdateUserRequest {
   bytes token = 1;
 
   // Updated user data
-  User user = 1;
+  User user = 2;
 }
 
 message SuggestionItemPropositionRequest {
