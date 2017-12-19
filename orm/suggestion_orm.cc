@@ -1,5 +1,6 @@
 #include "orm/suggestion_orm.h"
 #include "glog/logging.h"
+#include "recommender/recommender.h"
 
 namespace neva {
 namespace backend {
@@ -36,25 +37,24 @@ Status SuggestionOrm::GetSuggestees(
 }
 
 Status SuggestionOrm::GetSuggestion(
+    const UserHistory& user_history,
     const Suggestion::SuggestionCategory suggestion_category,
     Suggestion* suggestion) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
 
-  mysqlpp::Query query = conn_->query(
-      "SELECT `name` FROM `suggestee` WHERE `category_id`=%0 ORDER BY RAND() "
-      "LIMIT 1");
-  query.parse();
+  SuggestionList suggestion_list;
+  GetSuggestees(suggestion_category, 0, &suggestion_list);
 
-  mysqlpp::StoreQueryResult res = query.store(suggestion_category);
-  if (res.empty()) {
+  if (suggestion_list.suggestion_list_size() == 0) {
     VLOG(1) << "Requested a suggestion from an empty category: "
             << suggestion_category;
     return Status(StatusCode::INVALID_ARGUMENT,
                   "No items to suggest in that category.");
   }
-  suggestion->set_name(res[0]["name"]);
+
+  *suggestion = recommender::GetSuggestion(user_history, suggestion_list);
   VLOG(1) << "Returning:\n" << suggestion->ShortDebugString();
   return Status::OK;
 }

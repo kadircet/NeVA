@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include "protos/suggestion.pb.h"
+#include "protos/user_history.pb.h"
 
 namespace neva {
 namespace backend {
@@ -22,6 +23,7 @@ class SuggestionOrm {
       const uint32_t start_index, SuggestionList* suggestion_list);
 
   grpc::Status GetSuggestion(
+      const UserHistory& user_history,
       const Suggestion::SuggestionCategory suggestion_category,
       Suggestion* suggestion);
 

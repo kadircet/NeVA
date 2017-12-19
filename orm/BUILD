@@ -45,6 +45,8 @@ cc_library(
     linkopts = ["-lmysqlpp"],
     deps = [
         "//protos:suggestion_proto",
+        "//protos:user_history_proto",
+        "//recommender",
         "@glog//:glog",
     ],
 )
