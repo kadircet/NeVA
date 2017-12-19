@@ -132,10 +132,11 @@ class BackendServiceImpl final : public Backend::Service {
     if (!status.ok()) {
       return status;
     }
-    std::vector<Suggestion> suggestees;
+    SuggestionList suggestion_list;
     suggestion_orm_->GetSuggestees(request->suggestion_category(),
-                                   request->start_index(), &suggestees);
-    for (const Suggestion& suggestion : suggestees) {
+                                   request->start_index(), &suggestion_list);
+    // TODO(kadircet): return suggestion_list directly in reply.
+    for (const Suggestion& suggestion : suggestion_list.suggestion_list()) {
       *reply->add_items() = suggestion;
     }
     return Status::OK;
