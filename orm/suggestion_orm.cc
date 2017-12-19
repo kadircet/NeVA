@@ -14,7 +14,7 @@ using grpc::StatusCode;
 
 Status SuggestionOrm::GetSuggestees(
     const Suggestion::SuggestionCategory suggestion_category,
-    const uint32_t start_index, std::vector<Suggestion>* suggestees) {
+    const uint32_t start_index, SuggestionList* suggestion_list) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
@@ -29,7 +29,7 @@ Status SuggestionOrm::GetSuggestees(
     Suggestion suggestion;
     suggestion.set_suggestee_id(row["id"]);
     suggestion.set_name(row["name"]);
-    suggestees->push_back(suggestion);
+    *suggestion_list->add_suggestion_list() = suggestion;
     VLOG(1) << suggestion.ShortDebugString() << " has been added to response.";
   }
   return Status::OK;
