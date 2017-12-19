@@ -13,6 +13,9 @@ service Backend {
   rpc Login(LoginRequest) returns (LoginReply) {
   }
 
+  rpc UpdateUser(UpdateUserRequest) returns (GenericReply) {
+  }
+
   rpc SuggestionItemProposition(SuggestionItemPropositionRequest)
       returns (GenericReply) {
   }
@@ -61,6 +64,14 @@ message LoginRequest {
 message LoginReply {
   // Authentication token to be used in upcoming requests.
   bytes token = 1;
+}
+
+message UpdateUserRequest {
+  // Session key for the user sending request
+  bytes token = 1;
+
+  // Updated user data
+  User user = 1;
 }
 
 message SuggestionItemPropositionRequest {

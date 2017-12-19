@@ -60,6 +60,19 @@ class BackendServiceImpl final : public Backend::Service {
                                        reply->mutable_token());
   }
 
+  Status UpdateUser(ServerContext* context, const UpdateUserRequest* request,
+                    GenericReply* reply) override {
+    VLOG(1) << "Received UpdateUser:\n" << request->DebugString();
+
+    int user_id;
+    const Status status = user_orm_->CheckToken(request->token(), &user_id);
+    if (!status.ok()) {
+      return status;
+    }
+    const User user = request->user();
+    return user_orm_->UpdateUserData(user_id, user);
+  }
+
   Status SuggestionItemProposition(
       ServerContext* context, const SuggestionItemPropositionRequest* request,
       GenericReply* reply) override {
