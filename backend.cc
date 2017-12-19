@@ -87,9 +87,11 @@ class BackendServiceImpl final : public Backend::Service {
       }
     }
     {
+      UserHistory user_history;
+      user_history_orm_->FetchUserHistory(user_id, 0, &user_history);
       Suggestion suggestion;
       const Status status = suggestion_orm_->GetSuggestion(
-          request->suggestion_category(), &suggestion);
+          user_history, request->suggestion_category(), &suggestion);
       if (!status.ok()) {
         return status;
       }
