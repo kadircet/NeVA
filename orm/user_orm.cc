@@ -195,6 +195,8 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
+  
+  mysqlpp::Query query = conn_->query();
 
   if (user.has_date_of_birth()) {
     query << "UPDATE `user_info` "

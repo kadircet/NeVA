@@ -66,11 +66,11 @@ message LoginReply {
   bytes token = 1;
 }
 
-message UpdateUserRequest  {
-  // Session key for the user sending request
+message UpdateUserRequest {
+  // Session key for the user sending request.
   bytes token = 1;
 
-  // Updated user data
+  // Updated user data.
   User user = 2;
 }
 
