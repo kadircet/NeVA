@@ -17,3 +17,7 @@ message Suggestion {
   // Name of the suggestion item, like "lahmacun".
   string name = 3;
 };
+
+message SuggestionList {
+  repeated Suggestion suggestion_list = 1;
+};
