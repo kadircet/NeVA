@@ -47,6 +47,16 @@ const std::string HMac(const std::string& key, const std::string& message) {
   return hmac;
 }
 
+uint32_t GetRandom(const uint32_t n) {
+  static std::default_random_engine* random_engine =
+      new std::default_random_engine();
+  uint64_t upper_limit = 1;
+  while (upper_limit < n) upper_limit <<= 1;
+  uint64_t result = (*random_engine)() % upper_limit;
+  while (result >= n) result = (*random_engine)() % upper_limit;
+  return result;
+}
+
 }  // namespace util
 }  // namespace backend
 }  // namespace neva

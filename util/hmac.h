@@ -17,6 +17,9 @@ const std::string GenerateRandomKey(const unsigned seed = 5489u,
 // Signs the message using the given key and returns the signature. Uses SHA512.
 const std::string HMac(const std::string& key, const std::string& message);
 
+// Returns a random integer in range [0,n).
+uint32_t GetRandom(const uint32_t n);
+
 }  // namespace util
 }  // namespace backend
 }  // namespace neva
