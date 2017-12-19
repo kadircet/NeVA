@@ -429,10 +429,10 @@ internal class Neva_Backend_BackendInformUserChoiceCall {
 
   /// Run the call. Blocks until the reply is received.
   fileprivate func run(request: Neva_Backend_InformUserChoiceRequest,
-                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
+                       metadata: Metadata) throws -> Neva_Backend_InformUserChoiceReply {
     let sem = DispatchSemaphore(value: 0)
     var returnCallResult : CallResult!
-    var returnResponse : Neva_Backend_GenericReply?
+    var returnResponse : Neva_Backend_InformUserChoiceReply?
     _ = try start(request:request, metadata:metadata) {response, callResult in
       returnResponse = response
       returnCallResult = callResult
@@ -449,7 +449,7 @@ internal class Neva_Backend_BackendInformUserChoiceCall {
   /// Start the call. Nonblocking.
   fileprivate func start(request: Neva_Backend_InformUserChoiceRequest,
                          metadata: Metadata,
-                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+                         completion: @escaping (Neva_Backend_InformUserChoiceReply?, CallResult)->())
     throws -> Neva_Backend_BackendInformUserChoiceCall {
 
       let requestData = try request.serializedData()
@@ -458,7 +458,7 @@ internal class Neva_Backend_BackendInformUserChoiceCall {
                      message:requestData)
       {(callResult) in
         if let responseData = callResult.resultData,
-          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
+          let response = try? Neva_Backend_InformUserChoiceReply(serializedData:responseData) {
           completion(response, callResult)
         } else {
           completion(nil, callResult)
@@ -669,12 +669,12 @@ internal class Neva_Backend_BackendService {
   /// Synchronous. Unary.
   internal func informuserchoice(_ request: Neva_Backend_InformUserChoiceRequest)
     throws
-    -> Neva_Backend_GenericReply {
+    -> Neva_Backend_InformUserChoiceReply {
       return try Neva_Backend_BackendInformUserChoiceCall(channel).run(request:request, metadata:metadata)
   }
   /// Asynchronous. Unary.
   internal func informuserchoice(_ request: Neva_Backend_InformUserChoiceRequest,
-                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+                  completion: @escaping (Neva_Backend_InformUserChoiceReply?, CallResult)->())
     throws
     -> Neva_Backend_BackendInformUserChoiceCall {
       return try Neva_Backend_BackendInformUserChoiceCall(channel).start(request:request,

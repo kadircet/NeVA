@@ -581,6 +581,41 @@ struct Neva_Backend_InformUserChoiceRequest: SwiftProtobuf.Message {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
+struct Neva_Backend_InformUserChoiceReply: SwiftProtobuf.Message {
+  static let protoMessageName: String = _protobuf_package + ".InformUserChoiceReply"
+
+  /// Database id of the user choice.
+  var choiceID: UInt32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularUInt32Field(value: &self.choiceID)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.choiceID != 0 {
+      try visitor.visitSingularUInt32Field(value: self.choiceID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+}
+
 struct Neva_Backend_FetchUserHistoryRequest: SwiftProtobuf.Message {
   static let protoMessageName: String = _protobuf_package + ".FetchUserHistoryRequest"
 
@@ -927,6 +962,18 @@ extension Neva_Backend_InformUserChoiceRequest: SwiftProtobuf._MessageImplementa
       }
       if !storagesAreEqual {return false}
     }
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_InformUserChoiceReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "choice_id"),
+  ]
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_InformUserChoiceReply) -> Bool {
+    if self.choiceID != other.choiceID {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }

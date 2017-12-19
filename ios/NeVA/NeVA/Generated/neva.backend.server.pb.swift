@@ -40,7 +40,7 @@ internal protocol Neva_Backend_BackendProvider {
   func tagproposition(request : Neva_Backend_TagPropositionRequest, session : Neva_Backend_BackendTagPropositionSession) throws -> Neva_Backend_GenericReply
   func tagvalueproposition(request : Neva_Backend_TagValuePropositionRequest, session : Neva_Backend_BackendTagValuePropositionSession) throws -> Neva_Backend_GenericReply
   func getsuggestionitemlist(request : Neva_Backend_GetSuggestionItemListRequest, session : Neva_Backend_BackendGetSuggestionItemListSession) throws -> Neva_Backend_GetSuggestionItemListReply
-  func informuserchoice(request : Neva_Backend_InformUserChoiceRequest, session : Neva_Backend_BackendInformUserChoiceSession) throws -> Neva_Backend_GenericReply
+  func informuserchoice(request : Neva_Backend_InformUserChoiceRequest, session : Neva_Backend_BackendInformUserChoiceSession) throws -> Neva_Backend_InformUserChoiceReply
   func fetchuserhistory(request : Neva_Backend_FetchUserHistoryRequest, session : Neva_Backend_BackendFetchUserHistorySession) throws -> Neva_Backend_FetchUserHistoryReply
 }
 
