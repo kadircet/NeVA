@@ -110,12 +110,16 @@ Status UserOrm::CheckCredentials(
   const std::string salt(sql_salt.data(), sql_salt.size());
   if (is_facebook || hash == util::HMac(salt, password)) {
     query.reset();
-    *session_token = util::GenerateRandomKey();
+    // TODO(kadircet): Implement token expiration.
     query << "INSERT INTO `user_session` (`user_id`, `token`, `expire`) VALUES "
              "(%0, %1q, %2)";
     query.parse();
-    // TODO(kadircet): Implement token expiration.
-    query.execute(user_id, *session_token, 0);
+
+    *session_token = util::GenerateRandomKey();
+    while (!query.execute(user_id, *session_token, 0)) {
+      VLOG(1) << "Query failed with:" << query.error();
+      *session_token = util::GenerateRandomKey();
+    }
     VLOG(1) << email << " has been authenticated successfully.";
     return Status::OK;
   }
