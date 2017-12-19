@@ -184,49 +184,61 @@ Status UserOrm::InsertUser(
     query.execute(user_id, util::GetTimestamp());
     query.reset();
 
-    if (user.has_date_of_birth()) {
-      query << "UPDATE `user_info` "
-               "SET `date_of_birth`=%0 "
-               "WHERE `id`=%1";
-      query.parse();
-      query.execute(user.date_of_birth().seconds(), user_id);
-      query.reset();
-    }
-    if (!user.name().empty()) {
-      query << "UPDATE `user_info` "
-               "SET `name`=%0q "
-               "WHERE `id`=%1";
-      query.parse();
-      query.execute(user.name(), user_id);
-      query.reset();
-    }
-    if (user.gender() != 0) {
-      query << "UPDATE `user_info` "
-               "SET `gender`=%0 "
-               "WHERE `id`=%1";
-      query.parse();
-      query.execute(user.gender(), user_id);
-      query.reset();
-    }
-    if (user.weight() != 0) {
-      query << "UPDATE `user_info` "
-               "SET `weight`=%0 "
-               "WHERE `id`=%1";
-      query.parse();
-      query.execute(user.weight(), user_id);
-      query.reset();
-    }
-    if (!user.photo().empty()) {
-      query << "UPDATE `user_info` "
-               "SET `photo`=%0q "
-               "WHERE `id`=%1";
-      query.parse();
-      query.execute(user.photo(), user_id);
-      query.reset();
-    }
+    UpdateUserData(user_id, user);
   }
   VLOG(1) << email << " has been successfully registered.";
 
+  return Status::OK;
+}
+
+Status UserOrm::UpdateUserData(const int user_id, const User& user) {
+  if (!conn_->ping()) {
+    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
+  }
+
+  if (user.has_date_of_birth()) {
+    query << "UPDATE `user_info` "
+             "SET `date_of_birth`=%0 "
+             "WHERE `id`=%1";
+    query.parse();
+    query.execute(user.date_of_birth().seconds(), user_id);
+    query.reset();
+  }
+  if (!user.name().empty()) {
+    query << "UPDATE `user_info` "
+             "SET `name`=%0q "
+             "WHERE `id`=%1";
+    query.parse();
+    query.execute(user.name(), user_id);
+    query.reset();
+  }
+  if (user.gender() != 0) {
+    query << "UPDATE `user_info` "
+             "SET `gender`=%0 "
+             "WHERE `id`=%1";
+    query.parse();
+    query.execute(user.gender(), user_id);
+    query.reset();
+  }
+  if (user.weight() != 0) {
+    query << "UPDATE `user_info` "
+             "SET `weight`=%0 "
+             "WHERE `id`=%1";
+    query.parse();
+    query.execute(user.weight(), user_id);
+    query.reset();
+  }
+  if (!user.photo().empty()) {
+    query << "UPDATE `user_info` "
+             "SET `photo`=%0q "
+             "WHERE `id`=%1";
+    query.parse();
+    query.execute(user.photo(), user_id);
+    query.reset();
+  }
+
+  VLOG(1) << "User data for user with id: " << user_id
+          << " has been successfully updated.";
   return Status::OK;
 }
 

@@ -42,6 +42,10 @@ class UserOrm {
       const LoginRequest::AuthenticationType authentication_type,
       std::string* verification_token);
 
+  // Updates optional profile data like gender, weight and date_of_birth of
+  // given user, if user is already registered.
+  grpc::Status UpdateUserData(const uint32_t user_id, const User& user);
+
   // Verifies a given authentication token and sets user_id to id of the user
   // bearing the token.
   grpc::Status CheckToken(const std::string& token, int* user_id);
