@@ -167,6 +167,8 @@ public class ProposeFragment extends Fragment {
                         .setTag(tagName)
                         .build();
 
+                //TODO: CHANGE TAG PROPOSAL PART WHEN BACKEND SUPPORTS IT.
+
                 try {
 
                     BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagPropositionReq);
