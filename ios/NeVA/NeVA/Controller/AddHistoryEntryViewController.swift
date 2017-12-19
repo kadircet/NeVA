@@ -91,7 +91,6 @@ class AddHistoryEntryViewController: UIViewController {
             let item = filteredResults[itemPosition]
             self.mealField.text = item.title
             self.selectedMealIndex = itemPosition
-            print(itemPosition)
         }
         //
     }
@@ -142,8 +141,8 @@ class AddHistoryEntryViewController: UIViewController {
                     do {
                         let response = try service.informuserchoice(request)
                         print(response)
-                        // Disabled until feature request is resolved
-                        /*let historyEntry = NSEntityDescription.insertNewObject(forEntityName: "HistoryEntry", into: managedObjectContext) as! HistoryEntry
+                        let historyEntry = NSEntityDescription.insertNewObject(forEntityName: "HistoryEntry", into: managedObjectContext) as! HistoryEntry
+                        historyEntry.choice_id = Int64(response.choiceID)
                         historyEntry.meal = meal
                         historyEntry.date = timePickerOfClockField_.date
                         historyEntry.userMail = UserToken.email!
@@ -153,11 +152,7 @@ class AddHistoryEntryViewController: UIViewController {
                             dismiss(animated: true, completion: nil)
                         } catch (let error){
                             fatalError("Failed to fetch: \(error)")
-                        }*/
-                        
-                        //TODO: Delete after feature request is resolved
-                        NotificationCenter.default.post(name: Notification.Name("reloadHistoryTable"), object: nil)
-                        dismiss(animated: true, completion: nil)
+                        }
                     } catch (let error) {
                         print(error)
                         mealField.shake()

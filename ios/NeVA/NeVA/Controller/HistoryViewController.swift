@@ -101,9 +101,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc func reload() {
-        //TODO: Delete after feature request is resolved
-        fetchEntriesFromServer()
-        //
         reloadEntries()
         sortHistoryEntries()
         historyTable.reloadData()
@@ -145,12 +142,15 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         //Find the last choice id for the user
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "HistoryEntry")
+        print(UserToken.email!)
+        print(UserToken.token!.base64EncodedString())
         let predicate = NSPredicate(format: "(userMail == %@) AND (choice_id == max(choice_id))", argumentArray: [UserToken.email!])
         fetchRequest.predicate = predicate
         var lastEntryNumber: UInt32 = 0
         do {
             let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as! [HistoryEntry]
             if !fetchedEntries.isEmpty {
+                print(fetchedEntries[0].userMail)
                 lastEntryNumber = UInt32(fetchedEntries[0].choice_id)
             }
         } catch (let error) {
@@ -168,6 +168,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             let response = try service.fetchuserhistory(request)
             let history = response.userHistory
             print("\(history.history.count) entries were fetched from server")
+            print(history.history)
             for choice in history.history {
                 let historyEntry = NSEntityDescription.insertNewObject(forEntityName: "HistoryEntry", into: managedObjectContext) as! HistoryEntry
                 historyEntry.choice_id = Int64(choice.choiceID)
