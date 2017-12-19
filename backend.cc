@@ -143,14 +143,25 @@ class BackendServiceImpl final : public Backend::Service {
 
   Status InformUserChoice(ServerContext* context,
                           const InformUserChoiceRequest* request,
-                          GenericReply* reply) override {
+                          InformUserChoiceReply* reply) override {
     VLOG(1) << "Received InformUserChoice:" << request->DebugString();
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
+    {
+      const Status status = user_orm_->CheckToken(request->token(), &user_id);
+      if (!status.ok()) {
+        return status;
+      }
     }
-    return user_history_orm_->InsertChoice(user_id, request->choice());
+    {
+      int choice_id;
+      const Status status = user_history_orm_->InsertChoice(user_id, request->choice(), &choice_id);
+      if (!status.ok()) {
+        return status;
+      }
+      reply->set_choice_id(choice_id);
+    }
+    
+    return Status::OK;
   }
 
   Status FetchUserHistory(ServerContext* context,

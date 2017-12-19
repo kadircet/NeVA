@@ -30,7 +30,7 @@ service Backend {
       returns (GetSuggestionItemListReply) {
   }
 
-  rpc InformUserChoice(InformUserChoiceRequest) returns (GenericReply) {
+  rpc InformUserChoice(InformUserChoiceRequest) returns (InformUserChoiceReply) {
   }
 
   rpc FetchUserHistory(FetchUserHistoryRequest)
@@ -127,6 +127,11 @@ message InformUserChoiceRequest {
 
   // Choice of the user.
   Choice choice = 2;
+}
+
+message InformUserChoiceReply {
+  // Database id of the user choice.
+  uint32 choice_id = 1;
 }
 
 message FetchUserHistoryRequest {
