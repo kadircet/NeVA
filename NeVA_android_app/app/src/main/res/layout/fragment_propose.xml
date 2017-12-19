@@ -4,15 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mealrecommender.neva.com.neva_android_app.ProposeFragment">
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout     android:orientation="horizontal"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
+            android:fontFamily="@font/latoregular"
+            android:text="Suggest Tag or Food Name"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:paddingTop="20sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/fragment_proposal_field"
                 android:layout_width="250sp"
@@ -41,10 +54,12 @@
                 tools:layout_editor_absoluteY="245dp" />
         </LinearLayout>
 
-        <LinearLayout     android:orientation="horizontal"
-            android:layout_height="wrap_content"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/fragment_tag_proposal_field"
                 android:layout_width="250sp"
@@ -71,6 +86,74 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="245dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/latoregular"
+            android:text="Suggest Tag For Specific Food"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:paddingTop="20dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingTop="10sp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <AutoCompleteTextView
+                    android:id="@+id/fragment_proposal_meal_for_tag"
+                    android:layout_width="250sp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/rounded_text_box"
+                    android:ems="10"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="Meal Name"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:textSize="24sp"
+                    />
+
+                <EditText
+                    android:id="@+id/fragment_proposal_tag_of_meal"
+                    android:layout_width="250sp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/rounded_text_box"
+                    android:ems="10"
+                    android:fontFamily="@font/latoregular"
+                    android:hint="Meal Name"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:textSize="24sp"
+                    android:layout_marginTop="15dp"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/fragment_proposal_tag_for_meal_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="@font/latoregular"
+                android:text="@string/suggest"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="245dp"  />
         </LinearLayout>
     </LinearLayout>
 

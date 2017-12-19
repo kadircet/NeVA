@@ -9,11 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
+
+import java.sql.SQLException;
 
 import io.grpc.ManagedChannel;
 import neva.backend.BackendGrpc;
@@ -37,6 +41,13 @@ public class ProposeFragment extends Fragment {
     Button fragment_proposal_button;
     Button fragment_tag_proposal_button;
 
+    AutoCompleteTextView meal_for_tag_field;
+    EditText tag_of_meal_field;
+    Button propose_tag_for_meal;
+
+    ArrayAdapter<String> autocompleteAdapter;
+    String[] mealNames;
+
     public ProposeFragment() {
         // Required empty public constructor
     }
@@ -55,9 +66,17 @@ public class ProposeFragment extends Fragment {
 
         fragment_proposal_field = view.findViewById(R.id.fragment_proposal_field);
         fragment_tag_proposal_field = view.findViewById(R.id.fragment_tag_proposal_field);
+        meal_for_tag_field = view.findViewById(R.id.fragment_proposal_meal_for_tag);
+        tag_of_meal_field = view.findViewById(R.id.fragment_proposal_tag_of_meal);
 
         fragment_proposal_button = view.findViewById(R.id.fragment_proposal_button);
         fragment_tag_proposal_button = view.findViewById(R.id.fragment_tag_proposal_button);
+        propose_tag_for_meal = view.findViewById(R.id.fragment_proposal_tag_for_meal_button);
+
+        mealNames = getMealNames(); //TODO: Store mealnames and not send request each time.
+
+        autocompleteAdapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
+        meal_for_tag_field.setAdapter(autocompleteAdapter);
 
         return view;
     }
@@ -125,12 +144,63 @@ public class ProposeFragment extends Fragment {
                     fragment_tag_proposal_button.setEnabled(true);
                 }
 
-
             }
         });
 
+        propose_tag_for_meal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DatabaseManager dbman = new DatabaseManager(getContext());
+                try {
+                    dbman.open();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                int mealID = dbman.getMealId(meal_for_tag_field.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
+                String tagName = tag_of_meal_field.getText().toString();
+
+                BackendOuterClass.TagPropositionRequest tagPropositionReq;
+                tagPropositionReq = BackendOuterClass.TagPropositionRequest.newBuilder()
+                        .setToken(loginToken)
+                        .setTag(tagName)
+                        .build();
+
+                try {
+
+                    BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagPropositionReq);
+                    Toast.makeText(getContext(), "Tag Suggested", Toast.LENGTH_SHORT).show();
+                    tag_of_meal_field.getText().clear();
+                    meal_for_tag_field.getText().clear();
+                    propose_tag_for_meal.setEnabled(true);
+                } catch (Exception e) {
+
+                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    propose_tag_for_meal.setEnabled(true);
+                }
+            }
+        });
 
     }
+    public String[] getMealNames() {
+        BackendOuterClass.GetSuggestionItemListRequest request;
+        request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
+                .setToken(loginToken).setStartIndex(0)
+                .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+                .build();
+
+        BackendOuterClass.GetSuggestionItemListReply reply = blockingStub.getSuggestionItemList(request);
+        String[] values;
+        values = new String[reply.getItemsCount()];
+        for(int i=0; i<reply.getItemsCount();i++)
+        {
+            values[i] = reply.getItems(i).getName();
+        }
+
+        return values;
+    }
+
 
 
 }
