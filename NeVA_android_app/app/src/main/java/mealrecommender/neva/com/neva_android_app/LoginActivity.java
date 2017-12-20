@@ -75,6 +75,13 @@ public class LoginActivity extends AppCompatActivity {
         nevaLoginManager = NevaLoginManager.getInstance();
         loginToken =null;
 
+        if(nevaLoginManager.isLoggedIn())
+        {
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            Toast.makeText(getBaseContext(), "Already logged in!", Toast.LENGTH_LONG).show();
+            startActivity(intent);
+        }
+
         facebook_login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override

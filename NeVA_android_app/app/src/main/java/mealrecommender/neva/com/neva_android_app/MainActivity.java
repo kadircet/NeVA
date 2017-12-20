@@ -1,5 +1,6 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.protobuf.ByteString;
 
 import io.grpc.ManagedChannel;
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView navdrawUsername = navigationView.getHeaderView(0).findViewById(R.id.nav_header_username);
+        navdrawUsername.setText(NevaLoginManager.getInstance().getUsername());
 
         loginToken = NevaLoginManager.getInstance().getLoginToken();
         mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
@@ -120,6 +125,11 @@ public class MainActivity extends AppCompatActivity
             fragmentClass = ProposeFragment.class;
         } else if (id == R.id.nav_history) {
             fragmentClass = HistoryFragment.class;
+        } else if (id == R.id.nav_logout) {
+            NevaLoginManager.getInstance().logOut();
+            Intent loginActivity = new Intent(getBaseContext(), LoginActivity.class);
+            startActivity(loginActivity);
+            return true;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -136,7 +146,7 @@ public class MainActivity extends AppCompatActivity
         setTitle(item.getTitle());
 
         // Close the navigation drawer
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
