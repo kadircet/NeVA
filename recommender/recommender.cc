@@ -31,6 +31,7 @@ Suggestion GetSuggestion(const UserHistory& history,
     if (it != frequencies.end()) {
       it->second++;
       if (it->second > max_freq) {
+        max_freq = it->second;
         max_freq_ids.clear();
         max_freq_ids.insert(suggestee_id);
       } else if (it->second == max_freq) {
@@ -42,11 +43,12 @@ Suggestion GetSuggestion(const UserHistory& history,
   // Insert one random element for diversity.
   if (max_freq_ids.size() != suggestion_list_size) {
     uint32_t random_id = util::GetRandom(suggestion_list_size);
-       uint32_t suggestee_id = suggestion_list.suggestion_list(random_id).suggestee_id();
+    uint32_t suggestee_id =
+        suggestion_list.suggestion_list(random_id).suggestee_id();
     while (max_freq_ids.find(suggestee_id) != max_freq_ids.end()) {
       random_id++;
       if (random_id == suggestion_list_size) random_id = 0;
-         suggestee_id = suggestion_list.suggestion_list(random_id).suggestee_id();
+      suggestee_id = suggestion_list.suggestion_list(random_id).suggestee_id();
     }
     max_freq_ids.insert(suggestee_id);
   }
