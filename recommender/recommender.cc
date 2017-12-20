@@ -40,11 +40,11 @@ Suggestion GetSuggestion(const UserHistory& history,
   }
 
   // Insert one random element for diversity.
-  if (max_freq_ids.size() != suggestion_list.suggestion_list_size()) {
-    uint32_t random_id =
-        util::GetRandom(suggestion_list.suggestion_list_size());
+  if (max_freq_ids.size() != suggestion_list_size) {
+    uint32_t random_id = util::GetRandom(suggestion_list_size);
     while (max_freq_ids.find(random_id) != max_freq_ids.end()) {
       random_id++;
+      if (random_id == suggestion_list_size) random_id = 0;
     }
     max_freq_ids.insert(random_id);
   }
