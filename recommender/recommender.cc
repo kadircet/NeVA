@@ -42,11 +42,13 @@ Suggestion GetSuggestion(const UserHistory& history,
   // Insert one random element for diversity.
   if (max_freq_ids.size() != suggestion_list_size) {
     uint32_t random_id = util::GetRandom(suggestion_list_size);
-    while (max_freq_ids.find(random_id) != max_freq_ids.end()) {
+       uint32_t suggestee_id = suggestion_list.suggestion_list(random_id).suggestee_id();
+    while (max_freq_ids.find(suggestee_id) != max_freq_ids.end()) {
       random_id++;
-      if (random_id == max_freq_ids.size()) random_id = 0;
+      if (random_id == suggestion_list_size) random_id = 0;
+         suggestee_id = suggestion_list.suggestion_list(random_id).suggestee_id();
     }
-    max_freq_ids.insert(random_id);
+    max_freq_ids.insert(suggestee_id);
   }
 
   // Pick one random element randomly from most frequent ones.
