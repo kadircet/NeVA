@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), MainActivity.class);
             Toast.makeText(getBaseContext(), "Already logged in!", Toast.LENGTH_LONG).show();
             startActivity(intent);
+            finish();
         }
 
         facebook_login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
