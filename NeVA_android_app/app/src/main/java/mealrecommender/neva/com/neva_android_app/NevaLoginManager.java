@@ -39,6 +39,10 @@ public class NevaLoginManager {
         return instance;
     }
 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
     public String getUsername() {
         if(loggedIn)
             return username;
