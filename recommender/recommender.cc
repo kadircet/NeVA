@@ -44,7 +44,7 @@ Suggestion GetSuggestion(const UserHistory& history,
     uint32_t random_id = util::GetRandom(suggestion_list_size);
     while (max_freq_ids.find(random_id) != max_freq_ids.end()) {
       random_id++;
-      if (random_id == suggestion_list_size) random_id = 0;
+      if (random_id == max_freq_ids.size()) random_id = 0;
     }
     max_freq_ids.insert(random_id);
   }
