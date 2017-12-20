@@ -6,7 +6,7 @@ stages:
 build_job:
   stage: build
   script: "bazel build ..."
-  script: GRADLE_USER_HOME=/tmp/ ANDROID_HOME=/usr/lib/android-sdk/ ./NeVA_android_app/gradlew --build-cache --parallel --project-cache-dir=/tmp/.gradle --build-file=NeVA_android_app/build.gradle -PbuildDir=/tmp/ assembleDebug
+  script: "ANDROID_HOME=/usr/lib/android-sdk/ ./NeVA_android_app/gradlew --build-cache --parallel --project-cache-dir=/tmp/neva_android.gradle --build-file=NeVA_android_app/build.gradle -PbuildDir=/tmp/neva_android/ assembleDebug" 
 
 test_job:
   stage: test
