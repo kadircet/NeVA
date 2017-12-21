@@ -7,7 +7,8 @@ sudo cp -f neva /etc/init.d/neva
 sudo systemctl daemon-reload
 sudo systemctl restart neva
 
-sudo cp -f /tmp/neva_android/outputs/apk/debug/app-debug.apk /var/www/file/
+sudo cp -f /tmp/neva_android/outputs/apk/debug/app-debug.apk \
+  /var/www/neva/android.apk
 
 exit 0
 
