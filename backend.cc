@@ -35,6 +35,8 @@ DEFINE_string(database_password, "",
               "Password for the authentication of the user.");
 DEFINE_string(server_uri, "",
               "URI for server to listen on, example: 0.0.0.0:50051");
+DEFINE_string(ssl_key_path, "", "Private key file path for ssl certificate.");
+DEFINE_string(ssl_cert_path, "", "File path for ssl certificate.");
 
 class BackendServiceImpl final : public Backend::Service {
  public:
@@ -227,9 +229,8 @@ void RunServer() {
   std::string key;
   std::string cert;
 
-  util::ReadFile("/etc/letsencrypt/live/ctf.0xdeffbeef.com/fullchain.pem",
-                 &cert);
-  util::ReadFile("/etc/letsencrypt/live/ctf.0xdeffbeef.com/privkey.pem", &key);
+  util::ReadFile(FLAGS_ssl_cert_path, &cert);
+  util::ReadFile(FLAGS_ssl_key_path, &key);
 
   grpc::SslServerCredentialsOptions::PemKeyCertPair keycert = {key, cert};
   grpc::SslServerCredentialsOptions ssl_options;
