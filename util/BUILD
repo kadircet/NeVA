@@ -30,3 +30,9 @@ cc_library(
     name = "error",
     hdrs = ["error.h"],
 )
+
+cc_library(
+    name = "file",
+    srcs = ["file.cc"],
+    hdrs = ["file.h"],
+)
