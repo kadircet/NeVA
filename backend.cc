@@ -13,6 +13,7 @@
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
 #include "social_media/facebook.h"
+#include "util/file.h"
 
 namespace neva {
 namespace backend {
@@ -223,10 +224,22 @@ class BackendServiceImpl final : public Backend::Service {
 };
 
 void RunServer() {
+  std::string key;
+  std::string cert;
+
+  util::ReadFile("/etc/letsencrypt/live/ctf.0xdeffbeef.com/fullchain.pem",
+                 &cert);
+  util::ReadFile("/etc/letsencrypt/live/ctf.0xdeffbeef.com/privkey.pem", &key);
+
+  grpc::SslServerCredentialsOptions::PemKeyCertPair keycert = {key, cert};
+  grpc::SslServerCredentialsOptions ssl_options;
+  ssl_options.pem_key_cert_pairs.push_back(keycert);
+
   BackendServiceImpl service;
 
   ServerBuilder builder;
-  builder.AddListeningPort(FLAGS_server_uri, grpc::InsecureServerCredentials());
+  builder.AddListeningPort(FLAGS_server_uri,
+                           grpc::SslServerCredentials(ssl_options));
   builder.RegisterService(&service);
 
   std::unique_ptr<Server> server(builder.BuildAndStart());

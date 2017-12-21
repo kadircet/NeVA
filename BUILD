@@ -17,6 +17,7 @@ cc_binary(
         "//orm:user_orm",
         "//protos:backend_proto",
         "//social_media:facebook_validator",
+        "//util:file",
         "@com_github_gflags_gflags//:gflags",
         "@glog//:glog",
     ],
