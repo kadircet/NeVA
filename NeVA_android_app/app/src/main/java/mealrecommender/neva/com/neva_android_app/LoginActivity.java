@@ -39,10 +39,13 @@ import neva.backend.BackendGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity_legacy extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginActivity_legacy";
     public static final String TOKEN_EXTRA = "com.neva.mealrecommender.TOKEN";
+    public static final String ARG_ACCOUNT_TYPE = "accountType";
+    public static final String ARG_AUTH_TYPE = "authType";
+    public static final String ARG_IS_ADDING_NEW_ACCOUNT = "isAddingNewAccount";
 
     CallbackManager callbackManager;
     EditText username_field;
@@ -156,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Process login request on login button press
     public void onLoginButton(View view) {
-        Log.d("LoginActivity", "Login pressed!");
+        Log.d("LoginActivity_legacy", "Login pressed!");
 
         EditText username_field = findViewById(R.id.username);
         EditText password_field = findViewById(R.id.password);
