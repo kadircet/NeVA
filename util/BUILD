@@ -4,9 +4,6 @@ cc_library(
     name = "hmac",
     srcs = ["hmac.cc"],
     hdrs = ["hmac.h"],
-    copts = [
-        "-I/usr/include/openssl/",
-    ],
     linkopts = ["-lcrypto"],
     deps = ["@glog//:glog"],
 )
