@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC3852AE1FBB0AAA0085DB27 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AC3852AD1FBB0AAA0085DB27 /* libz.tbd */; };
 		AC69435B1FD4A3C2002C817D /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */; };
+		AC69AFD11FEF0F9000A6884B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */; };
+		AC69AFD21FEF0F9000A6884B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFC91FEF0F8F00A6884B /* FBSDKLoginKit.framework */; };
+		AC69AFD31FEF0F9000A6884B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFCA1FEF0F8F00A6884B /* FBSDKShareKit.framework */; };
+		AC69AFD41FEF0F9000A6884B /* BoringSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFCB1FEF0F8F00A6884B /* BoringSSL.framework */; };
+		AC69AFD51FEF0F9000A6884B /* Czlib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFCC1FEF0F8F00A6884B /* Czlib.framework */; };
+		AC69AFD61FEF0F9000A6884B /* CgRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFCD1FEF0F8F00A6884B /* CgRPC.framework */; };
+		AC69AFD71FEF0F9000A6884B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFCE1FEF0F8F00A6884B /* Bolts.framework */; };
+		AC69AFD81FEF0F9000A6884B /* gRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFCF1FEF0F9000A6884B /* gRPC.framework */; };
+		AC69AFD91FEF0F9000A6884B /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFD01FEF0F9000A6884B /* SwiftProtobuf.framework */; };
 		AC6D2DED1FD58F2D00B14A72 /* AddHistoryEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6D2DEC1FD58F2D00B14A72 /* AddHistoryEntryViewController.swift */; };
 		AC6D2DF51FD59A2600B14A72 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6D2DF41FD59A2600B14A72 /* SearchTextField.swift */; };
-		AC6E48CF1FE9B261005B3A87 /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC6E48C91FE9B261005B3A87 /* SwiftProtobuf.framework */; };
-		AC6E48D11FE9B27B005B3A87 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC6E48D01FE9B27B005B3A87 /* Bolts.framework */; };
-		AC6E48D51FE9B376005B3A87 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC6E48D21FE9B376005B3A87 /* FBSDKShareKit.framework */; };
-		AC6E48D61FE9B376005B3A87 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC6E48D31FE9B376005B3A87 /* FBSDKCoreKit.framework */; };
-		AC6E48D71FE9B376005B3A87 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC6E48D41FE9B376005B3A87 /* FBSDKLoginKit.framework */; };
 		AC6F2D231FD429F50001F269 /* user_history.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6F2D1D1FD429F50001F269 /* user_history.pb.swift */; };
 		AC8AC8421FCDC5C300D68FB6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AC8411FCDC5C300D68FB6 /* SettingsViewController.swift */; };
 		AC8AC8441FCDDE6D00D68FB6 /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AC8431FCDDE6D00D68FB6 /* UserToken.swift */; };
@@ -39,10 +42,6 @@
 		ACA16AA11FC34D4700BFA8DC /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA16AA01FC34D4700BFA8DC /* RoundedView.swift */; };
 		ACA76A8A1FCE162000F090BA /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA76A891FCE162000F090BA /* GenericButton.swift */; };
 		ACA76A911FCE196500F090BA /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA76A901FCE196500F090BA /* RoundedImage.swift */; };
-		ACB04F371FEF0BD60058C709 /* CgRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB04F331FEF0BD50058C709 /* CgRPC.framework */; };
-		ACB04F381FEF0BD60058C709 /* BoringSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB04F341FEF0BD50058C709 /* BoringSSL.framework */; };
-		ACB04F391FEF0BD60058C709 /* Czlib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB04F351FEF0BD60058C709 /* Czlib.framework */; };
-		ACB04F3A1FEF0BD60058C709 /* gRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB04F361FEF0BD60058C709 /* gRPC.framework */; };
 		ACB174DC1FD4CDAF00EE5D98 /* NevaConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB174DB1FD4CDAF00EE5D98 /* NevaConstants.swift */; };
 		ACB6D4031FCE031500D8C06D /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB6D4021FCE031500D8C06D /* HistoryViewController.swift */; };
 		ACB6D4051FCE034E00D8C06D /* RecommendationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB6D4041FCE034E00D8C06D /* RecommendationViewController.swift */; };
@@ -81,15 +80,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AC3852AD1FBB0AAA0085DB27 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		AC69AFC91FEF0F8F00A6884B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		AC69AFCA1FEF0F8F00A6884B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Carthage/Build/iOS/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		AC69AFCB1FEF0F8F00A6884B /* BoringSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoringSSL.framework; path = Carthage/Build/iOS/BoringSSL.framework; sourceTree = "<group>"; };
+		AC69AFCC1FEF0F8F00A6884B /* Czlib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Czlib.framework; path = Carthage/Build/iOS/Czlib.framework; sourceTree = "<group>"; };
+		AC69AFCD1FEF0F8F00A6884B /* CgRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CgRPC.framework; path = Carthage/Build/iOS/CgRPC.framework; sourceTree = "<group>"; };
+		AC69AFCE1FEF0F8F00A6884B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
+		AC69AFCF1FEF0F9000A6884B /* gRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gRPC.framework; path = Carthage/Build/iOS/gRPC.framework; sourceTree = "<group>"; };
+		AC69AFD01FEF0F9000A6884B /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
 		AC6D2DEC1FD58F2D00B14A72 /* AddHistoryEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHistoryEntryViewController.swift; sourceTree = "<group>"; };
 		AC6D2DF41FD59A2600B14A72 /* SearchTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
-		AC6E48C91FE9B261005B3A87 /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
-		AC6E48D01FE9B27B005B3A87 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
-		AC6E48D21FE9B376005B3A87 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Carthage/Build/iOS/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		AC6E48D31FE9B376005B3A87 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		AC6E48D41FE9B376005B3A87 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		AC6F2D1D1FD429F50001F269 /* user_history.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user_history.pb.swift; sourceTree = "<group>"; };
 		AC8AC8411FCDC5C300D68FB6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		AC8AC8431FCDDE6D00D68FB6 /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
@@ -119,10 +121,6 @@
 		ACA16AA01FC34D4700BFA8DC /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		ACA76A891FCE162000F090BA /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		ACA76A901FCE196500F090BA /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
-		ACB04F331FEF0BD50058C709 /* CgRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CgRPC.framework; path = Carthage/Build/iOS/CgRPC.framework; sourceTree = "<group>"; };
-		ACB04F341FEF0BD50058C709 /* BoringSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BoringSSL.framework; path = Carthage/Build/iOS/BoringSSL.framework; sourceTree = "<group>"; };
-		ACB04F351FEF0BD60058C709 /* Czlib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Czlib.framework; path = Carthage/Build/iOS/Czlib.framework; sourceTree = "<group>"; };
-		ACB04F361FEF0BD60058C709 /* gRPC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = gRPC.framework; path = Carthage/Build/iOS/gRPC.framework; sourceTree = "<group>"; };
 		ACB174DB1FD4CDAF00EE5D98 /* NevaConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NevaConstants.swift; sourceTree = "<group>"; };
 		ACB6D4021FCE031500D8C06D /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		ACB6D4041FCE034E00D8C06D /* RecommendationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationViewController.swift; sourceTree = "<group>"; };
@@ -135,16 +133,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC6E48D51FE9B376005B3A87 /* FBSDKShareKit.framework in Frameworks */,
-				AC6E48D61FE9B376005B3A87 /* FBSDKCoreKit.framework in Frameworks */,
-				AC6E48D71FE9B376005B3A87 /* FBSDKLoginKit.framework in Frameworks */,
-				ACB04F371FEF0BD60058C709 /* CgRPC.framework in Frameworks */,
-				ACB04F381FEF0BD60058C709 /* BoringSSL.framework in Frameworks */,
-				ACB04F391FEF0BD60058C709 /* Czlib.framework in Frameworks */,
-				ACB04F3A1FEF0BD60058C709 /* gRPC.framework in Frameworks */,
-				AC6E48D11FE9B27B005B3A87 /* Bolts.framework in Frameworks */,
-				AC6E48CF1FE9B261005B3A87 /* SwiftProtobuf.framework in Frameworks */,
-				AC3852AE1FBB0AAA0085DB27 /* libz.tbd in Frameworks */,
+				AC69AFD11FEF0F9000A6884B /* FBSDKCoreKit.framework in Frameworks */,
+				AC69AFD21FEF0F9000A6884B /* FBSDKLoginKit.framework in Frameworks */,
+				AC69AFD31FEF0F9000A6884B /* FBSDKShareKit.framework in Frameworks */,
+				AC69AFD41FEF0F9000A6884B /* BoringSSL.framework in Frameworks */,
+				AC69AFD51FEF0F9000A6884B /* Czlib.framework in Frameworks */,
+				AC69AFD61FEF0F9000A6884B /* CgRPC.framework in Frameworks */,
+				AC69AFD71FEF0F9000A6884B /* Bolts.framework in Frameworks */,
+				AC69AFD81FEF0F9000A6884B /* gRPC.framework in Frameworks */,
+				AC69AFD91FEF0F9000A6884B /* SwiftProtobuf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,16 +278,15 @@
 		ACBC4C471FBA67E600E8D61F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ACB04F341FEF0BD50058C709 /* BoringSSL.framework */,
-				ACB04F331FEF0BD50058C709 /* CgRPC.framework */,
-				ACB04F351FEF0BD60058C709 /* Czlib.framework */,
-				ACB04F361FEF0BD60058C709 /* gRPC.framework */,
-				AC6E48D31FE9B376005B3A87 /* FBSDKCoreKit.framework */,
-				AC6E48D41FE9B376005B3A87 /* FBSDKLoginKit.framework */,
-				AC6E48D21FE9B376005B3A87 /* FBSDKShareKit.framework */,
-				AC6E48D01FE9B27B005B3A87 /* Bolts.framework */,
-				AC6E48C91FE9B261005B3A87 /* SwiftProtobuf.framework */,
-				AC3852AD1FBB0AAA0085DB27 /* libz.tbd */,
+				AC69AFCE1FEF0F8F00A6884B /* Bolts.framework */,
+				AC69AFCB1FEF0F8F00A6884B /* BoringSSL.framework */,
+				AC69AFCD1FEF0F8F00A6884B /* CgRPC.framework */,
+				AC69AFCC1FEF0F8F00A6884B /* Czlib.framework */,
+				AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */,
+				AC69AFC91FEF0F8F00A6884B /* FBSDKLoginKit.framework */,
+				AC69AFCA1FEF0F8F00A6884B /* FBSDKShareKit.framework */,
+				AC69AFCF1FEF0F9000A6884B /* gRPC.framework */,
+				AC69AFD01FEF0F9000A6884B /* SwiftProtobuf.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -605,7 +601,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Checkouts/grpc-swift/Sources/CgRPC/include";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -657,7 +653,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Checkouts/grpc-swift/Sources/CgRPC/include";
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -676,7 +672,7 @@
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Checkouts/grpc-swift/Sources/CgRPC/include";
 				INFOPLIST_FILE = NeVA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
@@ -698,7 +694,7 @@
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
-				HEADER_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Carthage/Checkouts/grpc-swift/Sources/CgRPC/include";
 				INFOPLIST_FILE = NeVA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
@@ -717,7 +713,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "../../dependencies/ios/**";
 				INFOPLIST_FILE = NeVATests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bilemiyorumaltan.NeVATests;
@@ -735,7 +730,6 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "../../dependencies/ios/**";
 				INFOPLIST_FILE = NeVATests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bilemiyorumaltan.NeVATests;
@@ -752,7 +746,6 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "../../dependencies/ios/**";
 				INFOPLIST_FILE = NeVAUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bilemiyorumaltan.NeVAUITests;
@@ -769,7 +762,6 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BKXHNMX4QR;
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "../../dependencies/ios/**";
 				INFOPLIST_FILE = NeVAUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bilemiyorumaltan.NeVAUITests;
