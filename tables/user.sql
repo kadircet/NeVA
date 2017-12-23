@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `user_credentials` (
   `credential` VARBINARY(255) NOT NULL,
   `type` INTEGER NOT NULL,
   FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+  UNIQUE KEY(`user_id`, `type`),
   PRIMARY KEY(`id`)
 );
 
