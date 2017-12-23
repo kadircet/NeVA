@@ -25,3 +25,8 @@ cc_library(
     srcs = ["time.cc"],
     hdrs = ["time.h"],
 )
+
+cc_library(
+    name = "error",
+    hdrs = ["error.h"],
+)
