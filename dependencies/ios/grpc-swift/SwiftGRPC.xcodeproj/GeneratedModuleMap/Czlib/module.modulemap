@@ -1,4 +1,0 @@
-module Czlib {
-    umbrella "/Users/bilaly/Documents/bilal/NeVA/dependencies/ios/grpc-swift/.build/checkouts/zlib.git--9016602441419864029/Sources/Czlib/include"
-    export *
-}
