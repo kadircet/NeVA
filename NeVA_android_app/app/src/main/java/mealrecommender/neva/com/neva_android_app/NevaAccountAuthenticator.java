@@ -7,8 +7,11 @@ import android.accounts.AccountManager;
 import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.facebook.login.Login;
 import com.facebook.login.LoginManager;
@@ -29,7 +32,7 @@ public class NevaAccountAuthenticator extends AbstractAccountAuthenticator {
 
     @Override
     public Bundle editProperties(AccountAuthenticatorResponse accountAuthenticatorResponse, String s) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -38,6 +41,13 @@ public class NevaAccountAuthenticator extends AbstractAccountAuthenticator {
                              String authTokenType,
                              String[] requiredFeatures,
                              Bundle options) throws NetworkErrorException {
+
+        if (ActivityCompat.checkSelfPermission(mContext,
+                android.Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+            // Checking to see if you can have a look at accounts present on the device.
+            Log.d("Authenticator", "GET_ACCOUNTS not present.");
+        }
+
         final Intent intent = new Intent(mContext, LoginActivity.class);
         intent.putExtra(LoginActivity.ARG_ACCOUNT_TYPE, accountType);
         intent.putExtra(LoginActivity.ARG_AUTH_TYPE, authTokenType);
@@ -89,16 +99,21 @@ public class NevaAccountAuthenticator extends AbstractAccountAuthenticator {
 
     @Override
     public String getAuthTokenLabel(String s) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Bundle updateCredentials(AccountAuthenticatorResponse accountAuthenticatorResponse, Account account, String s, Bundle bundle) throws NetworkErrorException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Bundle hasFeatures(AccountAuthenticatorResponse accountAuthenticatorResponse, Account account, String[] strings) throws NetworkErrorException {
-        return null;
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Bundle getAccountRemovalAllowed(AccountAuthenticatorResponse response, Account account) throws NetworkErrorException {
+        return super.getAccountRemovalAllowed(response, account);
     }
 }

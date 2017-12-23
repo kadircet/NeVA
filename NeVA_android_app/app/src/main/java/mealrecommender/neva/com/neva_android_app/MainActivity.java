@@ -1,6 +1,13 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -19,6 +26,8 @@ import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.protobuf.ByteString;
+
+import java.io.IOException;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -55,7 +64,51 @@ public class MainActivity extends AppCompatActivity
         TextView navdrawUsername = navigationView.getHeaderView(0).findViewById(R.id.nav_header_username);
         navdrawUsername.setText(NevaLoginManager.getInstance().getUsername());
 
-        loginToken = NevaLoginManager.getInstance().getLoginToken();
+        //loginToken = NevaLoginManager.getInstance().getLoginToken();
+        final AccountManager am = AccountManager.get(getBaseContext());
+        final Account accounts[] = am.getAccountsByType("accountType");
+
+        if(accounts.length>0){
+            for(int i=0; i<accounts.length; i++) {
+                Log.d(TAG, "PASS: "+am.getPassword(accounts[i]));
+                Bundle result=null;
+
+                @SuppressLint("StaticFieldLeak")
+                AsyncTask<Void, Void, Bundle> task = new AsyncTask<Void, Void, Bundle>() {
+                    @Override
+                    protected Bundle doInBackground(Void... voids) {
+                        Bundle res = null;
+                        AccountManager am = AccountManager.get(getBaseContext());
+                        Account acc[] = am.getAccountsByType(LoginActivity.ARG_ACCOUNT_TYPE);
+                        if(acc[0]!=null){
+                            try {
+                                res = am.getAuthToken(acc[0], LoginActivity.ARG_AUTH_TYPE, null, MainActivity.this, null, null).getResult();
+                            } catch (OperationCanceledException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            } catch (AuthenticatorException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        return res;
+                    }
+                    @Override
+                    protected void onPostExecute(Bundle res) {
+                        String auth = res.getString(AccountManager.KEY_AUTHTOKEN);
+                        Log.i(TAG,auth);
+                        Log.i(TAG,res.getString(AccountManager.KEY_AUTHTOKEN));
+                    }
+                };
+                task.execute();
+
+                if(result!=null)
+                    Log.d(TAG, result.getString(AccountManager.KEY_AUTHTOKEN));
+            }
+
+        }
+
+
         mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
         blockingStub = BackendGrpc.newBlockingStub(mChannel);
 
