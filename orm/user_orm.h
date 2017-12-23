@@ -51,6 +51,13 @@ class UserOrm {
   grpc::Status CheckToken(const std::string& token, int* user_id);
 
  private:
+  grpc::Status AddCredential(
+      const uint32_t user_id, const std::string& salt, const User& user,
+      const LoginRequest::AuthenticationType authentication_type,
+      std::string* verification_token);
+  grpc::Status UpdateVerificationToken(const uint32_t user_id,
+                                       const std::string& token,
+                                       const uint64_t expire);
   std::shared_ptr<mysqlpp::Connection> conn_;
 };
 

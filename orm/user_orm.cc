@@ -1,6 +1,7 @@
 #include "user_orm.h"
 #include "glog/logging.h"
 #include "social_media/facebook.h"
+#include "util/error.h"
 #include "util/hmac.h"
 #include "util/time.h"
 
@@ -78,16 +79,9 @@ Status UserOrm::CheckCredentials(
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(email);
-  if (res.empty()) {
-    if (is_facebook) {
-      VLOG(1) << email << " first login using facebook.";
-      const User user = FacebookValidator::FetchInfo(email, password);
-      InsertUser(user, authentication_type, nullptr);
-      res = query.store(email);
-    } else {
-      VLOG(1) << email << " doesn't exists in database.";
-      return Status(StatusCode::UNKNOWN, "Wrong credentials.");
-    }
+  if (!is_facebook && res.empty()) {
+    VLOG(1) << email << " doesn't exists in database.";
+    return Status(StatusCode::UNKNOWN, "Wrong credentials.");
   }
 
   // TODO(kadircet): Implement Status::ACTIVE check after sending verification
@@ -101,9 +95,16 @@ Status UserOrm::CheckCredentials(
   query.parse();
   res = query.store(user_id, authentication_type);
   if (res.empty()) {
-    VLOG(1) << "No credential of type: " << authentication_type
-            << " for user: " << email;
-    return Status(StatusCode::UNKNOWN, "Wrong credentials.");
+    if (is_facebook) {
+      VLOG(1) << email << " first login using facebook.";
+      const User user = FacebookValidator::FetchInfo(email, password);
+      InsertUser(user, authentication_type, nullptr);
+      res = query.store(email);
+    } else {
+      VLOG(1) << "No credential of type: " << authentication_type
+              << " for user: " << email;
+      return Status(StatusCode::UNKNOWN, "Wrong credentials.");
+    }
   }
   const mysqlpp::String sql_password = res[0]["credential"];
   const std::string hash(sql_password.data(), sql_password.size());
@@ -128,6 +129,34 @@ Status UserOrm::CheckCredentials(
   return Status(StatusCode::INVALID_ARGUMENT, "Wrong credentials.");
 }  // namespace orm
 
+Status UserOrm::AddCredential(
+    const uint32_t user_id, const std::string& salt, const User& user,
+    const LoginRequest::AuthenticationType authentication_type,
+    std::string* verification_token) {
+  const std::string hmac = util::HMac(salt, user.password());
+  mysqlpp::Query query = conn_->query(
+      "INSERT INTO `user_credentials` (`user_id`, `credential`, `type`) "
+      "VALUES (%0, %1q, %2)");
+  query.parse();
+  if (!query.execute(user_id, hmac, authentication_type)) {
+    return Status(StatusCode::INTERNAL, query.error());
+  }
+  return Status::OK;
+}
+
+Status UserOrm::UpdateVerificationToken(const uint32_t user_id,
+                                        const std::string& token,
+                                        const uint64_t expire) {
+  mysqlpp::Query query = conn_->query(
+      "INSERT INTO `user_verification` (`id`, `token`, `expire`) VALUES "
+      "(%0, %1q, %2)");
+  query.parse();
+  if (!query.execute(user_id, token, expire)) {
+    return Status(StatusCode::INTERNAL, query.error());
+  }
+  return Status::OK;
+}
+
 Status UserOrm::InsertUser(
     const User& user,
     const LoginRequest::AuthenticationType authentication_type,
@@ -138,54 +167,44 @@ Status UserOrm::InsertUser(
 
   const std::string email = user.email();
 
-  mysqlpp::Query query = conn_->query();
+  mysqlpp::Query query =
+      conn_->query("SELECT `id`, `salt` FROM `user` WHERE `email`=%0q");
+  query.parse();
+  const mysqlpp::StoreQueryResult res = query.store(email);
+  if (!res.empty()) {
+    VLOG(1) << email << " already exist trying to link new credentials.";
+    const uint32_t user_id = res[0]["id"];
+    const mysqlpp::String sql_salt = res[0]["salt"];
+    const std::string salt(sql_salt.data(), sql_salt.size());
+    return AddCredential(user_id, salt, user, authentication_type,
+                         verification_token);
+  }
+  query.reset();
+  query << "INSERT INTO `user` (`email`, `status`, `salt`) "
+           "VALUES (%0q, %1, %2q)";
+  query.parse();
+  const std::string salt = util::GenerateRandomKey();
+  const int user_id = query.execute(email, User::INACTIVE, salt).insert_id();
+  query.reset();
 
-  {
-    query << "SELECT `id` FROM `user` WHERE `email`=%0q";
-    query.parse();
-    const mysqlpp::StoreQueryResult res = query.store(email);
-    if (!res.empty()) {
-      VLOG(1) << email << " already exists in the database.";
-      return Status(StatusCode::INVALID_ARGUMENT,
-                    "This mail address has already been registered.");
-    }
-    query.reset();
+  RETURN_IF_ERROR(AddCredential(user_id, salt, user, authentication_type,
+                                verification_token));
+
+  if (verification_token != nullptr) {
+    *verification_token = util::GenerateRandomKey();
+    RETURN_IF_ERROR(UpdateVerificationToken(
+        user_id, util::HMac(salt, *verification_token),
+        util::GetTimestamp() + kVerficationTokenExpireTime));
   }
 
-  {
-    query << "INSERT INTO `user` (`email`, `status`, `salt`) "
-             "VALUES (%0q, %1, %2q)";
-    query.parse();
-    const std::string salt = util::GenerateRandomKey();
-    const int user_id = query.execute(email, User::INACTIVE, salt).insert_id();
-    query.reset();
-
-    const std::string hmac = util::HMac(salt, user.password());
-    query << "INSERT INTO `user_credentials` (`user_id`, `credential`, `type`) "
-             "VALUES (%0, %1q, %2)";
-    query.parse();
-    query.execute(user_id, hmac, authentication_type);
-    query.reset();
-
-    if (verification_token != nullptr) {
-      *verification_token = util::GenerateRandomKey();
-      query
-          << "INSERT INTO `user_verification` (`id`, `token`, `expire`) VALUES "
-             "(%0, %1q, %2)";
-      query.parse();
-      query.execute(user_id, util::HMac(salt, *verification_token),
-                    util::GetTimestamp() + kVerficationTokenExpireTime);
-      query.reset();
-    }
-
-    query << "INSERT INTO `user_info` (`id`, `register_date`) "
-             "VALUES (%0, %1)";
-    query.parse();
-    query.execute(user_id, util::GetTimestamp());
-    query.reset();
-
-    UpdateUserData(user_id, user);
+  query << "INSERT INTO `user_info` (`id`, `register_date`) "
+           "VALUES (%0, %1)";
+  query.parse();
+  if (!query.execute(user_id, util::GetTimestamp())) {
+    return Status(StatusCode::INTERNAL, query.error());
   }
+
+  RETURN_IF_ERROR(UpdateUserData(user_id, user));
   VLOG(1) << email << " has been successfully registered.";
 
   return Status::OK;
@@ -195,7 +214,7 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
-  
+
   mysqlpp::Query query = conn_->query();
 
   if (user.has_date_of_birth()) {

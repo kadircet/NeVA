@@ -13,6 +13,7 @@ cc_library(
         "//protos:backend_proto",
         "//protos:user_proto",
         "//social_media:facebook_validator",
+        "//util:error",
         "//util:hmac",
         "//util:time",
         "@glog//:glog",
