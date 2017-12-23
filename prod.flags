@@ -2,5 +2,5 @@
 --database_server=localhost
 --database_name=neva
 --database_user=neva
---ssl_key_path=/etc/letsencrypt/live/neva.0xdeffbeef.com/fullchain.pem
---ssl_cert_path=/etc/letsencrypt/live/neva.0xdeffbeef.com/privkey.pem
+--ssl_cert_path=/etc/letsencrypt/live/neva.0xdeffbeef.com/fullchain.pem
+--ssl_key_path=/etc/letsencrypt/live/neva.0xdeffbeef.com/privkey.pem
