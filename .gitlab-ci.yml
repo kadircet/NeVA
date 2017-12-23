@@ -22,7 +22,6 @@ deploy_job:
 iostest:
   stage: test
   before_script:
-    - (cd dependencies/ios/grpc-swift && swift package resolve && swift package update)
     - (cd ios/NeVA/ && carthage update --cache-builds --platform iOS)
   script:
     - xcodebuild clean -project ios/NeVA/NeVA.xcodeproj -scheme NeVA | xcpretty 
