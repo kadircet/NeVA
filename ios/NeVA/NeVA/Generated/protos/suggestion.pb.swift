@@ -96,6 +96,40 @@ struct Neva_Backend_Suggestion: SwiftProtobuf.Message {
   }
 }
 
+struct Neva_Backend_SuggestionList: SwiftProtobuf.Message {
+  static let protoMessageName: String = _protobuf_package + ".SuggestionList"
+
+  var suggestionList: [Neva_Backend_Suggestion] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeRepeatedMessageField(value: &self.suggestionList)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.suggestionList.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.suggestionList, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "neva.backend"
@@ -121,4 +155,16 @@ extension Neva_Backend_Suggestion.SuggestionCategory: SwiftProtobuf._ProtoNamePr
     0: .same(proto: "INVALID_SUGGESTION_CATEGORY"),
     1: .same(proto: "MEAL"),
   ]
+}
+
+extension Neva_Backend_SuggestionList: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "suggestion_list"),
+  ]
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_SuggestionList) -> Bool {
+    if self.suggestionList != other.suggestionList {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
 }

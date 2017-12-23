@@ -35,6 +35,7 @@ internal enum Neva_Backend_BackendServerError : Error {
 internal protocol Neva_Backend_BackendProvider {
   func register(request : Neva_Backend_RegisterRequest, session : Neva_Backend_BackendRegisterSession) throws -> Neva_Backend_GenericReply
   func login(request : Neva_Backend_LoginRequest, session : Neva_Backend_BackendLoginSession) throws -> Neva_Backend_LoginReply
+  func updateuser(request : Neva_Backend_UpdateUserRequest, session : Neva_Backend_BackendUpdateUserSession) throws -> Neva_Backend_GenericReply
   func suggestionitemproposition(request : Neva_Backend_SuggestionItemPropositionRequest, session : Neva_Backend_BackendSuggestionItemPropositionSession) throws -> Neva_Backend_GenericReply
   func getsuggestion(request : Neva_Backend_GetSuggestionRequest, session : Neva_Backend_BackendGetSuggestionSession) throws -> Neva_Backend_GetSuggestionReply
   func tagproposition(request : Neva_Backend_TagPropositionRequest, session : Neva_Backend_BackendTagPropositionSession) throws -> Neva_Backend_GenericReply
@@ -100,6 +101,31 @@ internal class Neva_Backend_BackendLoginSession : Neva_Backend_BackendSession {
       if let requestData = requestData {
         let requestMessage = try Neva_Backend_LoginRequest(serializedData:requestData)
         let replyMessage = try self.provider.login(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// UpdateUser (Unary)
+internal class Neva_Backend_BackendUpdateUserSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_UpdateUserRequest(serializedData:requestData)
+        let replyMessage = try self.provider.updateuser(request:requestMessage, session: self)
         try self.handler.sendResponse(message:replyMessage.serializedData(),
                                       statusCode:self.statusCode,
                                       statusMessage:self.statusMessage,
@@ -334,6 +360,8 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendRegisterSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/Login":
           try Neva_Backend_BackendLoginSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/UpdateUser":
+          try Neva_Backend_BackendUpdateUserSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/SuggestionItemProposition":
           try Neva_Backend_BackendSuggestionItemPropositionSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/GetSuggestion":

@@ -204,6 +204,65 @@ struct Neva_Backend_LoginReply: SwiftProtobuf.Message {
   }
 }
 
+struct Neva_Backend_UpdateUserRequest: SwiftProtobuf.Message {
+  static let protoMessageName: String = _protobuf_package + ".UpdateUserRequest"
+
+  /// Session key for the user sending request.
+  var token: Data {
+    get {return _storage._token}
+    set {_uniqueStorage()._token = newValue}
+  }
+
+  /// Updated user data.
+  var user: Neva_Backend_User {
+    get {return _storage._user ?? Neva_Backend_User()}
+    set {_uniqueStorage()._user = newValue}
+  }
+  /// Returns true if `user` has been explicitly set.
+  var hasUser: Bool {return _storage._user != nil}
+  /// Clears the value of `user`. Subsequent reads from it will return its default value.
+  mutating func clearUser() {_storage._user = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._user)
+        default: break
+        }
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._token.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
+      }
+      if let v = _storage._user {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
 struct Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf.Message {
   static let protoMessageName: String = _protobuf_package + ".SuggestionItemPropositionRequest"
 
@@ -790,6 +849,49 @@ extension Neva_Backend_LoginReply: SwiftProtobuf._MessageImplementationBase, Swi
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_LoginReply) -> Bool {
     if self.token != other.token {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_UpdateUserRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "token"),
+    2: .same(proto: "user"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _token: Data = SwiftProtobuf.Internal.emptyData
+    var _user: Neva_Backend_User? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _token = source._token
+      _user = source._user
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_UpdateUserRequest) -> Bool {
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._token != other_storage._token {return false}
+        if _storage._user != other_storage._user {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if unknownFields != other.unknownFields {return false}
     return true
   }

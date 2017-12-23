@@ -143,6 +143,61 @@ internal class Neva_Backend_BackendLoginCall {
   }
 }
 
+/// UpdateUser (Unary)
+internal class Neva_Backend_BackendUpdateUserCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/UpdateUser")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_UpdateUserRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GenericReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_UpdateUserRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws -> Neva_Backend_BackendUpdateUserCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
 /// SuggestionItemProposition (Unary)
 internal class Neva_Backend_BackendSuggestionItemPropositionCall {
   private var call : Call
@@ -547,15 +602,15 @@ internal class Neva_Backend_BackendService {
     }
   }
 
-  /// Create a client that makes insecure connections.
-  internal init(address: String) {
+  /// Create a client.
+  internal init(address: String, secure: Bool = true) {
     gRPC.initialize()
-    channel = Channel(address:address)
+    channel = Channel(address:address, secure:secure)
     metadata = Metadata()
   }
 
-  /// Create a client that makes secure connections.
-  internal init(address: String, certificates: String?, host: String?) {
+  /// Create a client that makes secure connections with a custom certificate and (optional) hostname.
+  internal init(address: String, certificates: String, host: String?) {
     gRPC.initialize()
     channel = Channel(address:address, certificates:certificates, host:host)
     metadata = Metadata()
@@ -588,6 +643,21 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendLoginCall {
       return try Neva_Backend_BackendLoginCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func updateuser(_ request: Neva_Backend_UpdateUserRequest)
+    throws
+    -> Neva_Backend_GenericReply {
+      return try Neva_Backend_BackendUpdateUserCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func updateuser(_ request: Neva_Backend_UpdateUserRequest,
+                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendUpdateUserCall {
+      return try Neva_Backend_BackendUpdateUserCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }
