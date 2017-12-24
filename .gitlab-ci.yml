@@ -15,8 +15,18 @@ test_job:
 
 deploy_job:
   stage: deploy
-  script: "/bin/bash deploy.sh"
+  script: "/bin/bash deploy.sh production"
+  environment:
+    name: production
   only:
+    - master
+
+stage_job:
+  stage: deploy
+  script: "/bin/bash deploy.sh staging"
+  environment:
+    name: staging
+  except:
     - master
 
 iostest:

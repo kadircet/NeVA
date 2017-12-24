@@ -10,8 +10,8 @@
 #   This script will manage NeVA backend server.
 ### END INIT INFO
 
-PIDFILE="/var/run/neva_backend.pid"
-ARGS="--flagfile=/var/NeVA/stage.flags"
+PIDFILE="/var/run/neva_backend_staging.pid"
+ARGS="--flagfile=/var/NeVA/stage.flags --server_uri=neva.0xdeffbeef.com:50052"
 BINARY="/var/NeVA/neva_backend_staging"
 
 if [ -f /etc/default/rcS ]; then
