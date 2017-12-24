@@ -52,7 +52,7 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
     //
     @IBAction func suggestTagButtonPressed(_ sender: Any) {
         if let tag = tagSuggestionField.text, !tag.isEmpty {
-            let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+            let service = NevaConstants.service
             var request = Neva_Backend_TagPropositionRequest()
             request.token = UserToken.token!
             request.tag = tag
@@ -78,7 +78,7 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
 
     @IBAction func suggestFoodNameButtonPressed(_ sender: Any) {
         if let name = foodSuggestionField.text, !name.isEmpty {
-            let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+            let service = NevaConstants.service
             var request = Neva_Backend_SuggestionItemPropositionRequest()
             request.suggestion = Neva_Backend_Suggestion()
             request.suggestion.name = name

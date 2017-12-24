@@ -60,7 +60,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                                 loginRequestMessage.password = result.token.tokenString
                                 loginRequestMessage.authenticationType = .facebook
                                 print(loginRequestMessage)
-                                let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+                                let service = NevaConstants.service
                                 do {
                                     let responseMessage = try service.login(loginRequestMessage)
                                     //print(responseMessage)
@@ -140,7 +140,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
     
         print(user)
         print(requestMessage)
-        let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+        let service = NevaConstants.service
         do {
             let responseMessage = try service.register(requestMessage)
             loginView.isHidden = false
@@ -194,7 +194,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         loginRequestMessage.password = loginPassword!
         loginRequestMessage.authenticationType = .default
         print(loginRequestMessage)
-        let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+        let service = NevaConstants.service
         do {
             let responseMessage = try service.login(loginRequestMessage)
             print(responseMessage)
@@ -329,7 +329,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                                 loginRequestMessage.password = FBSDKAccessToken.current().tokenString
                                 loginRequestMessage.authenticationType = .facebook
                                 print(loginRequestMessage)
-                                let service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+                                let service = NevaConstants.service
                                 do {
                                     let responseMessage = try service.login(loginRequestMessage)
                                     //print(responseMessage)
