@@ -18,8 +18,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         if let tabBarVC = tabBarController
         {
-            UserToken.token = nil
-            UserToken.email = nil
+            UserToken.clearUserToken()
             tabBarVC.dismiss(animated: true, completion: nil)
         }
     }
@@ -30,7 +29,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBAction func logoutButtonPressed(_ sender: Any) {
         if let tabBarVC = tabBarController
         {
-            UserToken.token = nil
+            UserToken.clearUserToken()
             tabBarVC.dismiss(animated: true, completion: nil)
         }
     }

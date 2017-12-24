@@ -198,9 +198,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         do {
             let responseMessage = try service.login(loginRequestMessage)
             print(responseMessage)
-            UserToken.token = responseMessage.token
-            UserToken.email = loginRequestMessage.email
-            UserToken.type = .default_type
+            UserToken.setUserToken(email: loginRequestMessage.email, token: responseMessage.token)
             loginEmail = ""
             loginEmailField.text = ""
             loginPassword = ""
@@ -345,6 +343,17 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                         }
                     }
                 })
+        } else if UserToken.initializeToken() {
+                let service = NevaConstants.service
+                var checkTokenRequest = Neva_Backend_CheckTokenRequest()
+                checkTokenRequest.token = UserToken.token!
+                do {
+                    let _ = try service.checktoken(checkTokenRequest)
+                    self.performSegue(withIdentifier: "loggedIn", sender: self)
+                } catch (let error) {
+                    print(error)
+                    UserToken.clearUserToken()
+                }
         }
     }
     

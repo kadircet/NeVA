@@ -14,10 +14,11 @@ class UserToken {
     
     static var token: Data? = nil
     static var email: String? = nil
-    static var type: AuthenticationType?
+    static var type: AuthenticationType? = nil
     static func setUserToken(email: String, token: Data) {
         UserToken.email = email
         UserToken.token = token
+        UserToken.type = .default_type
         keychain.set(email, forKey: "email")
         keychain.set(token, forKey: "token")
     }
@@ -30,20 +31,24 @@ class UserToken {
     static func clearUserToken() {
         UserToken.email = nil
         UserToken.token = nil
+        UserToken.type = nil
         keychain.delete("email")
         keychain.delete("token")
     }
-    static func initializeToken() {
+    static func initializeToken() -> Bool {
         let emailWillBeUsed = keychain.get("email")
         let tokenWillBeUsed = keychain.getData("token")
         if emailWillBeUsed != nil {
             if tokenWillBeUsed != nil {
                 UserToken.email = emailWillBeUsed
                 UserToken.token = tokenWillBeUsed
+                UserToken.type = .default_type
+                return true
             } else {
                 keychain.delete("email")
                 UserToken.email = nil
                 UserToken.token = nil
+                UserToken.type = nil
             }
         } else {
             if tokenWillBeUsed != nil {
@@ -51,7 +56,9 @@ class UserToken {
             }
             UserToken.email = nil
             UserToken.token = nil
+            UserToken.type = nil
         }
+        return false
     }
     
     enum AuthenticationType
