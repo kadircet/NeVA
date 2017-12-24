@@ -27,7 +27,7 @@ public class SplashScreen extends AppCompatActivity {
     // checking validity of authTokens.
     Account accounts[] = accountManager.getAccountsByType(LoginActivity.ACCOUNT_TYPE);
     Log.i(TAG, Integer.toString(accounts.length));
-    if(accounts.length > 0){
+    if (accounts.length > 0) {
       Account userAccount = accounts[0]; //TODO:Implement Account picker for multiple account support.
       try {
         String email = userAccount.name;

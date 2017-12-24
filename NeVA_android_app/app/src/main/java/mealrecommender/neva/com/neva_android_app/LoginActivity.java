@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
       Account account = new Account(email, ACCOUNT_TYPE);
       boolean accountAddSuccess = accountManager.addAccountExplicitly(account, password, null);
       accountManager.setAuthToken(account, AUTH_TOKEN_TYPE, authToken);
-      if(accountAddSuccess) {
+      if (accountAddSuccess) {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         startActivity(intent);
       } else {

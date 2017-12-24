@@ -21,57 +21,55 @@ import neva.backend.SuggestionOuterClass;
 
 public class RecommendFragment extends Fragment {
 
-    private static final String TAG = "RecommendFragment";
+  private static final String TAG = "RecommendFragment";
 
-    ByteString loginToken;
-    ManagedChannel mChannel;
-    BackendGrpc.BackendBlockingStub blockingStub;
+  ByteString loginToken;
+  ManagedChannel mChannel;
+  BackendGrpc.BackendBlockingStub blockingStub;
 
-    TextView recommendedView;
-    Button recommendButton;
+  TextView recommendedView;
+  Button recommendButton;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_recommend, null);
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    // Inflate the layout for this fragment
+    View view = inflater.inflate(R.layout.fragment_recommend, null);
 
-        MainActivity mainActivity = (MainActivity) getActivity();
-        loginToken = mainActivity.loginToken;
-        mChannel = mainActivity.mChannel;
-        blockingStub = mainActivity.blockingStub;
+    MainActivity mainActivity = (MainActivity) getActivity();
+    loginToken = mainActivity.loginToken;
+    mChannel = mainActivity.mChannel;
+    blockingStub = mainActivity.blockingStub;
 
-        recommendButton = view.findViewById(R.id.fragment_recommend_button);
-        recommendedView = view.findViewById(R.id.fragment_recommendation_field);
+    recommendButton = view.findViewById(R.id.fragment_recommend_button);
+    recommendedView = view.findViewById(R.id.fragment_recommendation_field);
 
-        return view;
-    }
+    return view;
+  }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        recommendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BackendOuterClass.GetSuggestionRequest recommendationReq;
-                recommendationReq = BackendOuterClass.GetSuggestionRequest.newBuilder()
-                        .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-                        .setToken(loginToken).build();
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    recommendButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        BackendOuterClass.GetSuggestionRequest recommendationReq;
+        recommendationReq = BackendOuterClass.GetSuggestionRequest.newBuilder()
+            .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+            .setToken(loginToken).build();
 
-                BackendOuterClass.GetSuggestionReply recommendationRep;
-                try {
-                    recommendationRep = blockingStub.getSuggestion(recommendationReq);
-                    recommendedView.setText(recommendationRep.getName());
+        BackendOuterClass.GetSuggestionReply recommendationRep;
+        try {
+          recommendationRep = blockingStub.getSuggestion(recommendationReq);
+          recommendedView.setText(recommendationRep.getName());
 
-                }
-                catch (Exception e)
-                {
-                    Toast.makeText(getContext(),  e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        } catch (Exception e) {
+          Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+      }
+    });
 
-    }
+  }
 
 }

@@ -18,50 +18,51 @@ import neva.backend.SuggestionOuterClass;
 
 public class HistoryItemAdapter extends ArrayAdapter<SuggestionOuterClass.Suggestion> {
 
-    private static final String TAG = "HistoryItemAdapter";
+  private static final String TAG = "HistoryItemAdapter";
 
-    SuggestionOuterClass.Suggestion[] meals;
+  SuggestionOuterClass.Suggestion[] meals;
 
-    public HistoryItemAdapter(@NonNull Context context, int resource, int textViewResourceId, SuggestionOuterClass.Suggestion[] meals) {
-        super(context, resource, textViewResourceId);
-        this.meals = meals;
+  public HistoryItemAdapter(@NonNull Context context, int resource, int textViewResourceId,
+      SuggestionOuterClass.Suggestion[] meals) {
+    super(context, resource, textViewResourceId);
+    this.meals = meals;
+  }
+
+
+  @Override
+  public int getCount() {
+    return meals.length;
+  }
+
+  @Override
+  public View getView(int position, View convertView, ViewGroup parent) {
+
+    View v = convertView;
+
+    if (v == null) {
+      LayoutInflater vi;
+      vi = LayoutInflater.from(getContext());
+      v = vi.inflate(R.layout.fragment_history, null);
     }
 
+    SuggestionOuterClass.Suggestion item = meals[position];
+    if (item != null) {
+      TextView tt1 = v.findViewById(R.id.firstLine);
+      TextView tt2 = v.findViewById(R.id.secondLine);
 
-    @Override
-    public int getCount() {
-        return meals.length;
+      if (tt1 != null) {
+        Log.i("NAME: ", meals[position].getName());
+        tt1.setText(meals[position].getName());
+      } else {
+        Log.e("NULL", "null");
+      }
+
+      if (tt2 != null) {
+        tt2.setText(Integer.toString(position));
+      }
+
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        View v = convertView;
-
-        if (v == null) {
-            LayoutInflater vi;
-            vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.fragment_history, null);
-        }
-
-        SuggestionOuterClass.Suggestion item = meals[position];
-        if (item != null) {
-            TextView tt1 =  v.findViewById(R.id.firstLine);
-            TextView tt2 =  v.findViewById(R.id.secondLine);
-
-            if (tt1 != null) {
-                Log.i("NAME: ", meals[position].getName());
-                tt1.setText(meals[position].getName());
-            }else{
-            Log.e("NULL","null");
-            }
-
-            if (tt2 != null) {
-                tt2.setText(Integer.toString(position));
-            }
-
-        }
-
-        return v;
-    }
+    return v;
+  }
 }
