@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import gRPC
 
 class NevaConstants {
-    static var service = Neva_Backend_BackendService.init(address: "0xdeffbeef.com:50051")
+    static var service = Neva_Backend_BackendService.init(address: "neva.0xdeffbeef.com:50051", secure: true)
 }
