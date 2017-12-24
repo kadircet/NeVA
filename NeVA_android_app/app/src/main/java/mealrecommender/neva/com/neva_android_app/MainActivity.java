@@ -134,6 +134,11 @@ public class MainActivity extends AppCompatActivity
     } else if (id == R.id.nav_history) {
       fragmentClass = HistoryFragment.class;
     } else if (id == R.id.nav_logout) {
+      AccountManager am = AccountManager.get(getBaseContext());
+      Account acc[] = am.getAccountsByType(LoginActivity.ACCOUNT_TYPE);
+      if(acc[0]!=null) {
+        am.removeAccount(acc[0],null,null);
+      }
       NevaLoginManager.getInstance().logOut();
       Intent loginActivity = new Intent(getBaseContext(), LoginActivity.class);
       startActivity(loginActivity);
