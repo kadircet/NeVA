@@ -43,6 +43,7 @@ internal protocol Neva_Backend_BackendProvider {
   func getsuggestionitemlist(request : Neva_Backend_GetSuggestionItemListRequest, session : Neva_Backend_BackendGetSuggestionItemListSession) throws -> Neva_Backend_GetSuggestionItemListReply
   func informuserchoice(request : Neva_Backend_InformUserChoiceRequest, session : Neva_Backend_BackendInformUserChoiceSession) throws -> Neva_Backend_InformUserChoiceReply
   func fetchuserhistory(request : Neva_Backend_FetchUserHistoryRequest, session : Neva_Backend_BackendFetchUserHistorySession) throws -> Neva_Backend_FetchUserHistoryReply
+  func checktoken(request : Neva_Backend_CheckTokenRequest, session : Neva_Backend_BackendCheckTokenSession) throws -> Neva_Backend_GenericReply
 }
 
 /// Common properties available in each service session.
@@ -310,6 +311,31 @@ internal class Neva_Backend_BackendFetchUserHistorySession : Neva_Backend_Backen
   }
 }
 
+// CheckToken (Unary)
+internal class Neva_Backend_BackendCheckTokenSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_CheckTokenRequest(serializedData:requestData)
+        let replyMessage = try self.provider.checktoken(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
 
 /// Main server for generated service
 internal class Neva_Backend_BackendServer {
@@ -376,6 +402,8 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendInformUserChoiceSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/FetchUserHistory":
           try Neva_Backend_BackendFetchUserHistorySession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/CheckToken":
+          try Neva_Backend_BackendCheckTokenSession(handler:handler, provider:provider).run(queue:queue)
         default:
           break // handle unknown requests
         }

@@ -583,6 +583,61 @@ internal class Neva_Backend_BackendFetchUserHistoryCall {
   }
 }
 
+/// CheckToken (Unary)
+internal class Neva_Backend_BackendCheckTokenCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/CheckToken")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_CheckTokenRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GenericReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_CheckTokenRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws -> Neva_Backend_BackendCheckTokenCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
 /// Call methods of this class to make API calls.
 internal class Neva_Backend_BackendService {
   private var channel: Channel
@@ -763,6 +818,21 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendFetchUserHistoryCall {
       return try Neva_Backend_BackendFetchUserHistoryCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func checktoken(_ request: Neva_Backend_CheckTokenRequest)
+    throws
+    -> Neva_Backend_GenericReply {
+      return try Neva_Backend_BackendCheckTokenCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func checktoken(_ request: Neva_Backend_CheckTokenRequest,
+                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendCheckTokenCall {
+      return try Neva_Backend_BackendCheckTokenCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }
