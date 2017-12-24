@@ -40,6 +40,9 @@ service Backend {
   rpc FetchUserHistory(FetchUserHistoryRequest)
       returns (FetchUserHistoryReply) {
   }
+
+  rpc CheckToken(CheckTokenRequest) returns (GenericReply) {
+  }
 }
 
 message GenericReply {
@@ -157,4 +160,9 @@ message FetchUserHistoryRequest {
 message FetchUserHistoryReply {
   // User history object.
   UserHistory user_history = 1;
+}
+
+message CheckTokenRequest {
+  // Session token to be checked.
+  bytes token = 1;
 }

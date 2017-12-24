@@ -13,6 +13,7 @@
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
 #include "social_media/facebook.h"
+#include "util/error.h"
 #include "util/file.h"
 
 namespace neva {
@@ -66,12 +67,8 @@ class BackendServiceImpl final : public Backend::Service {
   Status UpdateUser(ServerContext* context, const UpdateUserRequest* request,
                     GenericReply* reply) override {
     VLOG(1) << "Received UpdateUser:\n" << request->DebugString();
-
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
-    }
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     const User user = request->user();
     return user_orm_->UpdateUserData(user_id, user);
   }
@@ -81,12 +78,8 @@ class BackendServiceImpl final : public Backend::Service {
       GenericReply* reply) override {
     VLOG(1) << "Received SuggestionItemProposition:\n"
             << request->DebugString();
-
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
-    }
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     return proposition_orm_->InsertProposition(user_id, request->suggestion());
   }
 
@@ -96,23 +89,13 @@ class BackendServiceImpl final : public Backend::Service {
     VLOG(1) << "Received GetSuggestion for category: "
             << request->DebugString();
     int user_id;
-    {
-      const Status status = user_orm_->CheckToken(request->token(), &user_id);
-      if (!status.ok()) {
-        return status;
-      }
-    }
-    {
-      UserHistory user_history;
-      user_history_orm_->FetchUserHistory(user_id, 0, &user_history);
-      Suggestion suggestion;
-      const Status status = suggestion_orm_->GetSuggestion(
-          user_history, request->suggestion_category(), &suggestion);
-      if (!status.ok()) {
-        return status;
-      }
-      reply->set_name(suggestion.name());
-    }
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    UserHistory user_history;
+    user_history_orm_->FetchUserHistory(user_id, 0, &user_history);
+    Suggestion suggestion;
+    RETURN_IF_ERROR(suggestion_orm_->GetSuggestion(
+        user_history, request->suggestion_category(), &suggestion));
+    reply->set_name(suggestion.name());
     return Status::OK;
   }
 
@@ -121,10 +104,7 @@ class BackendServiceImpl final : public Backend::Service {
                         GenericReply* reply) override {
     VLOG(1) << "Received TagProposition:" << request->DebugString();
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
-    }
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     return proposition_orm_->InsertProposition(user_id, request->tag());
   }
 
@@ -133,10 +113,7 @@ class BackendServiceImpl final : public Backend::Service {
                              GenericReply* reply) override {
     VLOG(1) << "Received TagValueProposition:" << request->DebugString();
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
-    }
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     return proposition_orm_->InsertProposition(
         user_id, request->tag_id(), request->suggestee_id(), request->value());
   }
@@ -146,10 +123,7 @@ class BackendServiceImpl final : public Backend::Service {
                                GetSuggestionItemListReply* reply) override {
     VLOG(1) << "Received GetSuggestionItemList:" << request->DebugString();
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
-    }
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     SuggestionList suggestion_list;
     suggestion_orm_->GetSuggestees(request->suggestion_category(),
                                    request->start_index(), &suggestion_list);
@@ -165,21 +139,11 @@ class BackendServiceImpl final : public Backend::Service {
                           InformUserChoiceReply* reply) override {
     VLOG(1) << "Received InformUserChoice:" << request->DebugString();
     int user_id;
-    {
-      const Status status = user_orm_->CheckToken(request->token(), &user_id);
-      if (!status.ok()) {
-        return status;
-      }
-    }
-    {
-      int choice_id;
-      const Status status = user_history_orm_->InsertChoice(
-          user_id, request->choice(), &choice_id);
-      if (!status.ok()) {
-        return status;
-      }
-      reply->set_choice_id(choice_id);
-    }
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    int choice_id;
+    RETURN_IF_ERROR(user_history_orm_->InsertChoice(user_id, request->choice(),
+                                                    &choice_id));
+    reply->set_choice_id(choice_id);
 
     return Status::OK;
   }
@@ -189,12 +153,16 @@ class BackendServiceImpl final : public Backend::Service {
                           FetchUserHistoryReply* reply) override {
     VLOG(1) << "Received FetchUserHistory:" << request->DebugString();
     int user_id;
-    const Status status = user_orm_->CheckToken(request->token(), &user_id);
-    if (!status.ok()) {
-      return status;
-    }
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     return user_history_orm_->FetchUserHistory(user_id, request->start_index(),
                                                reply->mutable_user_history());
+  }
+
+  Status CheckToken(ServerContext* context, const CheckTokenRequest* request,
+                    GenericReply* reply) override {
+    int user_id;
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    return Status::OK;
   }
 
   BackendServiceImpl() {
