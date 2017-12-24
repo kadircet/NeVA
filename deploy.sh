@@ -1,6 +1,6 @@
 #!/bin/bash
 BINARY_NAME="neva_backend_staging"
-FLAGFILE_NAME="stag.flags"
+FLAGFILE_NAME="stage.flags"
 APK_NAME="android_staging.apk"
 SERVICE_NAME="neva_staging"
 
