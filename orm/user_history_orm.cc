@@ -64,6 +64,26 @@ Status UserHistoryOrm::FetchUserHistory(const uint32_t user_id,
   return Status::OK;
 }
 
+Status UserHistoryOrm::RecordFeedback(const uint32_t user_id,
+                                      const UserFeedback& user_feedback) {
+  if (!conn_->ping()) {
+    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
+  }
+  mysqlpp::Query query = conn_->query(
+      "INSERT INTO `user_recommendation_feedback` (`user_id`, `suggestee_id`, "
+      "`last_choice_id`, `timestamp`, `latitude`, `longitude`, `feedback`) "
+      "VALUES (%0, %1, %2, %3, %4, %5, %6)");
+  query.parse();
+
+  const Choice choice = user_feedback.choice();
+  if (!query.execute(user_id, choice.suggestee_id(), choice.choice_id(),
+                     choice.timestamp().seconds(), choice.latitude(),
+                     choice.longitude(), user_feedback.feedback())) {
+    return Status(StatusCode::INTERNAL, query.error());
+  }
+  return Status::OK;
+}
+
 }  // namespace orm
 }  // namespace backend
 }  // namespace neva

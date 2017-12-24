@@ -24,6 +24,10 @@ class UserHistoryOrm {
   grpc::Status FetchUserHistory(const uint32_t user_id,
                                 const uint32_t start_idx, UserHistory* choice);
 
+  // Records given feedback.
+  grpc::Status RecordFeedback(const uint32_t user_id,
+                              const UserFeedback& user_feedback);
+
  private:
   std::shared_ptr<mysqlpp::Connection> conn_;
 };
