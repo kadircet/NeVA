@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#689f38</color>
     <color name="colorAccent">#009edc</color>
     <color name="notificationBar">#000000</color>
+    <color name="orange">#F8B04C</color>
 </resources>

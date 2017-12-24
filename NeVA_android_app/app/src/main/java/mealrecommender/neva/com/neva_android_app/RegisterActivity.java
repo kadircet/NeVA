@@ -136,8 +136,8 @@ public class RegisterActivity extends AppCompatActivity {
             BackendOuterClass.RegisterRequest registerRequest = BackendOuterClass.RegisterRequest
                     .newBuilder().setUser(user).build();
 
-            ManagedChannel mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com",
-                    50051).usePlaintext(true).build();
+            ManagedChannel mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com",
+                    50052).build();
             BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
 
             BackendOuterClass.GenericReply registerReply = blockingStub.register(registerRequest);

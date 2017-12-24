@@ -1,5 +1,9 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,14 +25,15 @@ public class NevaLoginManager {
     private static NevaLoginManager instance = null;
 
     private String username;
-    private ByteString loginToken;
+    private ByteString byteStringToken;
+    private String stringToken;
     private boolean loggedIn;
 
     BackendGrpc.BackendBlockingStub blockingStub;
     ManagedChannel mChannel;
 
     protected NevaLoginManager() {
-        mChannel = ManagedChannelBuilder.forAddress("www.0xdeffbeef.com", 50051).usePlaintext(true).build();
+        mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051).build();
         blockingStub = BackendGrpc.newBlockingStub(mChannel);
     }
 
@@ -48,19 +53,28 @@ public class NevaLoginManager {
             return username;
         return null;
     }
-    public ByteString getLoginToken() {
+
+    public ByteString getByteStringToken() {
         if(loggedIn)
-            return loginToken;
+            return byteStringToken;
+        return null;
+    }
+
+    public String getStringToken() {
+        if(loggedIn)
+            return stringToken;
         return null;
     }
 
     public void logOut(){
         username = null;
-        loginToken = null;
+        byteStringToken = null;
+        stringToken = null;
         loggedIn = false;
     }
 
-    public ByteString logIn(String username, String password, BackendOuterClass.LoginRequest.AuthenticationType auth)
+
+    public boolean logIn(String username, String password, BackendOuterClass.LoginRequest.AuthenticationType auth)
     {
         try {
             BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
@@ -71,14 +85,15 @@ public class NevaLoginManager {
 
             BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
             this.username = username;
-            this.loginToken = loginReply.getToken();
+            this.byteStringToken = loginReply.getToken();
+            this.stringToken = Base64.encodeToString(byteStringToken.toByteArray(), Base64.DEFAULT);
             this.loggedIn = true;
-            return loginToken;
+            return true;
         }
         catch (Exception e)
         {
             Log.i(TAG, e.getMessage());
-            return  null;
+            return  false;
         }
     }
 }

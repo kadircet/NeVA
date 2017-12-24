@@ -51,9 +51,6 @@ public class RecommendFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
         recommendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

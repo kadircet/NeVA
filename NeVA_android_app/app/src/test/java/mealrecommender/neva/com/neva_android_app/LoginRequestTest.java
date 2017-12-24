@@ -25,7 +25,7 @@ public class LoginRequestTest {
     public void login_test(){
         try {
             //ManagedChannel mChannel = ManagedChannelBuilder.forAddress("0xdeffbeef.com",50051).build();
-            ManagedChannel ch = ManagedChannelBuilder.forAddress("0xdeffbeef.com", 50051).usePlaintext(true).build();
+            ManagedChannel ch = ManagedChannelBuilder.forAddress("0xdeffbeef.com", 50052).build();
             System.out.println(ch.getState(true));
             BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(ch);
             BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
@@ -47,7 +47,7 @@ public class LoginRequestTest {
     public void register_test(){
         try{
 
-            ManagedChannel ch = ManagedChannelBuilder.forAddress("0xdeffbeef.com", 50051).usePlaintext(true).build();
+            ManagedChannel ch = ManagedChannelBuilder.forAddress("0xdeffbeef.com", 50052).build();
             System.out.println(ch.getState(true));
             BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(ch);
             UserOuterClass.User user = UserOuterClass.User.newBuilder().setUserId(5)

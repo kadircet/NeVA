@@ -46,7 +46,7 @@ public class HistoryFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_history_list, container, false);
 
         MainActivity mainActivity = (MainActivity) getActivity();
-        loginToken = NevaLoginManager.getInstance().getLoginToken();
+        loginToken = NevaLoginManager.getInstance().getByteStringToken();
         mChannel = mainActivity.mChannel;
         blockingStub = mainActivity.blockingStub;
         dbman = mainActivity.dbman;

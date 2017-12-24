@@ -7,7 +7,7 @@ import android.os.IBinder;
 public class NevaAuthenticatorService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
-        NevaAccountAuthenticator authenticator = new NevaAccountAuthenticator(this);
+        NevaAuthenticator authenticator = new NevaAuthenticator(this);
         return authenticator.getIBinder();
     }
 }
