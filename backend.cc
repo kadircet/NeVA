@@ -165,6 +165,14 @@ class BackendServiceImpl final : public Backend::Service {
     return Status::OK;
   }
 
+  Status RecordFeedback(ServerContext* context,
+                        const RecordFeedbackRequest* request,
+                        GenericReply* reply) override {
+    int user_id;
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    return user_history_orm_->RecordFeedback(user_id, request->user_feedback());
+  }
+
   BackendServiceImpl() {
     conn_ = std::make_shared<mysqlpp::Connection>(false);
     conn_->set_option(new mysqlpp::ReconnectOption(true));

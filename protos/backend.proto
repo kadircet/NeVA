@@ -43,6 +43,9 @@ service Backend {
 
   rpc CheckToken(CheckTokenRequest) returns (GenericReply) {
   }
+
+  rpc RecordFeedback(RecordFeedbackRequest) returns (GenericReply) {
+  }
 }
 
 message GenericReply {
@@ -165,4 +168,12 @@ message FetchUserHistoryReply {
 message CheckTokenRequest {
   // Session token to be checked.
   bytes token = 1;
+}
+
+message RecordFeedbackRequest {
+  // Session token of the user sending the feedback.
+  bytes token = 1;
+
+  // Information about the feedback.
+  UserFeedback user_feedback = 2;
 }
