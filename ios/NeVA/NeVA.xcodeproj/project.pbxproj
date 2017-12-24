@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC063B711FF0397A002BE829 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC063B701FF0397A002BE829 /* KeychainSwift.framework */; };
 		AC69435B1FD4A3C2002C817D /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */; };
 		AC69AFD11FEF0F9000A6884B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */; };
 		AC69AFD21FEF0F9000A6884B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFC91FEF0F8F00A6884B /* FBSDKLoginKit.framework */; };
@@ -80,6 +81,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AC063B701FF0397A002BE829 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
 		AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		AC69AFC91FEF0F8F00A6884B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC063B711FF0397A002BE829 /* KeychainSwift.framework in Frameworks */,
 				AC69AFD11FEF0F9000A6884B /* FBSDKCoreKit.framework in Frameworks */,
 				AC69AFD21FEF0F9000A6884B /* FBSDKLoginKit.framework in Frameworks */,
 				AC69AFD31FEF0F9000A6884B /* FBSDKShareKit.framework in Frameworks */,
@@ -278,6 +281,7 @@
 		ACBC4C471FBA67E600E8D61F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC063B701FF0397A002BE829 /* KeychainSwift.framework */,
 				AC69AFCE1FEF0F8F00A6884B /* Bolts.framework */,
 				AC69AFCB1FEF0F8F00A6884B /* BoringSSL.framework */,
 				AC69AFCD1FEF0F8F00A6884B /* CgRPC.framework */,
@@ -450,6 +454,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Czlib.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/gRPC.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BoringSSL.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
@@ -462,6 +467,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Czlib.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/gRPC.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BoringSSL.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
