@@ -86,9 +86,10 @@ Status UserOrm::CheckCredentials(
 
   // TODO(kadircet): Implement Status::ACTIVE check after sending verification
   // emails.
-  // TODO(kadircet): In feature deduce user_id from credentials table instead.
-  const int user_id = res[0]["id"];
-  const mysqlpp::String sql_salt = res[0]["salt"];
+  // TODO(kadircet): In future deduce user_id from credentials table instead.
+  const int user_id = res.empty() ? 0 : res[0]["id"];
+  const mysqlpp::String sql_salt =
+      res.empty() ? mysqlpp::String() : res[0]["salt"];
   query.reset();
   query << "SELECT `credential` FROM `user_credentials` WHERE `user_id`=%0 AND "
            "`type`=%1";
