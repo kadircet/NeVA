@@ -11,8 +11,8 @@
 ### END INIT INFO
 
 PIDFILE="/var/run/neva_backend.pid"
-ARGS="--flagfile=/var/NeVA/stage.flags"
-BINARY="/var/NeVA/neva_backend_staging"
+ARGS="--flagfile=/var/NeVA/prod.flags"
+BINARY="/var/NeVA/neva_backend"
 
 if [ -f /etc/default/rcS ]; then
   . /etc/default/rcS
