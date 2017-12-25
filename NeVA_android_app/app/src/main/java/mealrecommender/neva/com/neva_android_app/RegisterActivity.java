@@ -133,10 +133,8 @@ public class RegisterActivity extends AppCompatActivity {
 
       BackendOuterClass.RegisterRequest registerRequest = BackendOuterClass.RegisterRequest
           .newBuilder().setUser(user).build();
-
-      ManagedChannel mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com",
-          50051).build();
-      BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
+      NevaLoginManager nevaLoginManager = NevaLoginManager.getInstance();
+      BackendGrpc.BackendBlockingStub blockingStub = nevaLoginManager.blockingStub;
 
       BackendOuterClass.GenericReply registerReply = blockingStub.register(registerRequest);
       //Intent intent = new Intent(this, LoginActivity.class);

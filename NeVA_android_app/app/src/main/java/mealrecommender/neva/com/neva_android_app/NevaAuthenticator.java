@@ -92,11 +92,10 @@ public class NevaAuthenticator extends AbstractAccountAuthenticator {
       Log.i(TAG, "Getting auth token from NevaLoginManager");
       NevaLoginManager.getInstance().setAuthToken(account.name, authToken);
       //TODO:Move this code to NevaLoginManager
+      NevaLoginManager nevaLoginManager = NevaLoginManager.getInstance();
       CheckTokenRequest checkTokenRequest = CheckTokenRequest.newBuilder()
-          .setToken(NevaLoginManager.getInstance().getByteStringToken()).build();
-      ManagedChannel mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051)
-          .build();
-      BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
+          .setToken(nevaLoginManager.getByteStringToken()).build();
+      BackendBlockingStub blockingStub = nevaLoginManager.blockingStub;
       try {
         GenericReply genericReply = blockingStub.checkToken(checkTokenRequest);
       } catch (Exception e) {

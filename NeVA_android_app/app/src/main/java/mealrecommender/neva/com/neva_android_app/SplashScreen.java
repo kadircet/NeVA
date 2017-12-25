@@ -81,11 +81,10 @@ public class SplashScreen extends AppCompatActivity {
     Log.i(TAG, "Token from Account Manager: " + token);
     Log.i(TAG, "Token from NevaLoginManager: " + NevaLoginManager.getInstance().getStringToken());
     //TODO: Move this check to NevaLoginManager
+    NevaLoginManager nevaLoginManager = NevaLoginManager.getInstance();
     CheckTokenRequest checkTokenRequest = CheckTokenRequest.newBuilder()
-        .setToken(NevaLoginManager.getInstance().getByteStringToken()).build();
-    ManagedChannel mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051)
-        .build();
-    BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
+        .setToken(nevaLoginManager.getByteStringToken()).build();
+    BackendBlockingStub blockingStub = nevaLoginManager.blockingStub;
 
     try {
       GenericReply genericReply = blockingStub.checkToken(checkTokenRequest);
