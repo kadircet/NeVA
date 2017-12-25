@@ -140,14 +140,11 @@ public class AddHistoryItemFragment extends Fragment {
           currentLoc = getLocation();
         }
 
-        double latitude = -1;
-        double longitude = -1;
+        double latitude = 0;
+        double longitude = 0;
         if (currentLoc != null) {
           latitude = currentLoc.getLatitude();
           longitude = currentLoc.getLongitude();
-        } else {
-          latitude = 0;
-          longitude = 0;
         }
 
         Log.d(TAG, Double.toString(latitude) + " " + Double.toString(longitude));
