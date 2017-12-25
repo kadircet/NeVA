@@ -21,87 +21,89 @@ import neva.backend.BackendOuterClass;
  */
 
 public class NevaLoginManager {
-    private final static String TAG="NevaLoginManager";
-    private static NevaLoginManager instance = null;
 
-    private String username;
-    private ByteString byteStringToken;
-    private String stringToken;
-    private boolean loggedIn;
+  private final static String TAG = "NevaLoginManager";
+  private static NevaLoginManager instance = null;
 
-    BackendGrpc.BackendBlockingStub blockingStub;
-    ManagedChannel mChannel;
+  private String username;
+  private ByteString byteStringToken;
+  private String stringToken;
+  private boolean loggedIn;
 
-    protected NevaLoginManager() {
-        mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051).build();
-        blockingStub = BackendGrpc.newBlockingStub(mChannel);
+  BackendGrpc.BackendBlockingStub blockingStub;
+  ManagedChannel mChannel;
+
+  protected NevaLoginManager() {
+    mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051).build();
+    blockingStub = BackendGrpc.newBlockingStub(mChannel);
+  }
+
+  public static NevaLoginManager getInstance() {
+    if (instance == null) {
+      instance = new NevaLoginManager();
     }
+    return instance;
+  }
 
-    public static NevaLoginManager getInstance(){
-        if(instance == null){
-            instance = new NevaLoginManager();
-        }
-        return instance;
+  public boolean isLoggedIn() {
+    return loggedIn;
+  }
+
+  public String getUsername() {
+    if (loggedIn) {
+      return username;
     }
+    return null;
+  }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
+  public ByteString getByteStringToken() {
+    if (loggedIn) {
+      return byteStringToken;
     }
+    return null;
+  }
 
-    public String getUsername() {
-        if(loggedIn)
-            return username;
-        return null;
+  public String getStringToken() {
+    if (loggedIn) {
+      return stringToken;
     }
+    return null;
+  }
 
-    public ByteString getByteStringToken() {
-        if(loggedIn)
-            return byteStringToken;
-        return null;
+  public void logOut() {
+    username = null;
+    byteStringToken = null;
+    stringToken = null;
+    loggedIn = false;
+  }
+
+  public void setAuthToken(String username, String token) {
+    stringToken = token;
+    byteStringToken = ByteString.copyFrom(Base64.decode(token, Base64.DEFAULT));
+    this.username = username;
+    loggedIn = true;
+  }
+
+
+  public boolean logIn(String username, String password,
+      BackendOuterClass.LoginRequest.AuthenticationType auth) {
+    try {
+      BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
+          .setEmail(username)
+          .setPassword(password)
+          .setAuthenticationType(auth)
+          .build();
+
+      BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
+      this.username = username;
+      this.byteStringToken = loginReply.getToken();
+      this.stringToken = Base64.encodeToString(byteStringToken.toByteArray(), Base64.DEFAULT);
+      this.loggedIn = true;
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      Log.i(TAG, e.getMessage());
+      return false;
     }
-
-    public String getStringToken() {
-        if(loggedIn)
-            return stringToken;
-        return null;
-    }
-
-    public void logOut(){
-        username = null;
-        byteStringToken = null;
-        stringToken = null;
-        loggedIn = false;
-    }
-
-    public void setAuthToken(String username, String token) {
-        stringToken = token;
-        byteStringToken = ByteString.copyFrom(Base64.decode(token,Base64.DEFAULT));
-        this.username = username;
-        loggedIn = true;
-    }
-
-
-    public boolean logIn(String username, String password, BackendOuterClass.LoginRequest.AuthenticationType auth)
-    {
-        try {
-            BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
-                    .setEmail(username)
-                    .setPassword(password)
-                    .setAuthenticationType(auth)
-                    .build();
-
-            BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
-            this.username = username;
-            this.byteStringToken = loginReply.getToken();
-            this.stringToken = Base64.encodeToString(byteStringToken.toByteArray(), Base64.DEFAULT);
-            this.loggedIn = true;
-            return true;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            Log.i(TAG, e.getMessage());
-            return  false;
-        }
-    }
+  }
 }

@@ -38,192 +38,196 @@ import java.util.Calendar;
 
 public class AddHistoryItemFragment extends Fragment {
 
-    private static final String TAG = "AddHistoryItemFragment";
+  private static final String TAG = "AddHistoryItemFragment";
 
-    ByteString loginToken;
-    ManagedChannel mChannel;
-    BackendBlockingStub blockingStub;
-    FragmentManager fm;
-    HistoryCursorAdapter cursorAdapter;
+  ByteString loginToken;
+  ManagedChannel mChannel;
+  BackendBlockingStub blockingStub;
+  FragmentManager fm;
+  HistoryCursorAdapter cursorAdapter;
 
-    String[] mealNames;
-    ArrayAdapter<String> adapter;
+  String[] mealNames;
+  ArrayAdapter<String> adapter;
 
-    AutoCompleteTextView mealNameField;
-    EditText timeField;
-    Button addHistoryButton;
+  AutoCompleteTextView mealNameField;
+  EditText timeField;
+  Button addHistoryButton;
 
-    Calendar date;
-    LocationManager locationManager;
+  Calendar date;
+  LocationManager locationManager;
 
-    TimePickerDialog.OnTimeSetListener timeSetListener;
+  TimePickerDialog.OnTimeSetListener timeSetListener;
 
-    public AddHistoryItemFragment() {
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_history, container, false);
-
-        MainActivity mainActivity = (MainActivity) getActivity();
-        loginToken = mainActivity.loginToken;
-        mChannel = mainActivity.mChannel;
-        blockingStub = mainActivity.blockingStub;
-        cursorAdapter = mainActivity.adapter;
-
-        fm = mainActivity.getFragmentManager();
-
-        mealNameField = view.findViewById(R.id.eaten_meal_field);
-        timeField = view.findViewById(R.id.time_field);
-        addHistoryButton = view.findViewById(R.id.sendMealHistory);
-
-        mealNames = getSuggestionNames(); //TODO: Store meal names in a file instead of creating them from scratch
-
-        adapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
-        mealNameField.setAdapter(adapter);
-
-        return view;
-    }
+  public AddHistoryItemFragment() {
+    // Required empty public constructor
+  }
 
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    // Inflate the layout for this fragment
+    View view = inflater.inflate(R.layout.fragment_add_history, container, false);
 
-        ActivityCompat.requestPermissions(getActivity(),
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                1);
+    MainActivity mainActivity = (MainActivity) getActivity();
+    loginToken = mainActivity.loginToken;
+    mChannel = mainActivity.mChannel;
+    blockingStub = mainActivity.blockingStub;
+    cursorAdapter = mainActivity.adapter;
 
-        timeField.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                        Calendar cal = Calendar.getInstance();
-                        cal.clear(Calendar.HOUR_OF_DAY);
-                        cal.clear(Calendar.MINUTE);
-                        cal.set(Calendar.HOUR_OF_DAY, i);
-                        cal.set(Calendar.MINUTE, i1);
-                        date = cal;
+    fm = mainActivity.getFragmentManager();
 
-                        timeField.setText(String.format("%02d", i) + ":" + String.format("%02d", i1));
-                    }
-                };
+    mealNameField = view.findViewById(R.id.eaten_meal_field);
+    timeField = view.findViewById(R.id.time_field);
+    addHistoryButton = view.findViewById(R.id.sendMealHistory);
 
-                Calendar currentTime = Calendar.getInstance();
-                int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-                int mins = currentTime.get(Calendar.MINUTE);
+    mealNames = getSuggestionNames(); //TODO: Store meal names in a file instead of creating them from scratch
 
-                TimePickerDialog tpDialog = new TimePickerDialog(getContext(),timeSetListener, hour, mins, true);
-                tpDialog.setTitle("Select Time");
-                tpDialog.show();
-            }
-        });
+    adapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
+    mealNameField.setAdapter(adapter);
 
-        addHistoryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Location currentLoc = null;
-                locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-
-                if(!(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
-                    Log.e(TAG, "Provider not enabled");
-                } else {
-                    currentLoc = getLocation();
-                }
-
-                double latitude=-1;
-                double longitude=-1;
-                if(currentLoc!=null) {
-                    latitude = currentLoc.getLatitude();
-                    longitude = currentLoc.getLongitude();
-                } else {
-                    latitude = 0;
-                    longitude = 0;
-                }
-
-                Log.d(TAG, Double.toString(latitude)+" "+Double.toString(longitude));
-
-                DatabaseManager dbman = new DatabaseManager(getContext());
-                try {
-                    dbman.open();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-
-                int mealID = dbman.getMealId(mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
-
-                long timezoneOffset = date.getTimeZone().getOffset(date.getTimeInMillis());
-
-                Choice choice = Choice.newBuilder()
-                        .setSuggesteeId(mealID)
-                        .setTimestamp(Timestamp.newBuilder().setSeconds((int)((date.getTimeInMillis()+timezoneOffset)/1000)))
-                        .setLatitude(latitude)
-                        .setLongitude(longitude)
-                        .build();
-
-                InformUserChoiceRequest informUserChoiceRequest;
-                informUserChoiceRequest = InformUserChoiceRequest.newBuilder()
-                                            .setChoice(choice).setToken(loginToken).build();
-                try {
-                    GenericReply genericReply = blockingStub.informUserChoice(informUserChoiceRequest);
-                    dbman.addHistoryData(NevaLoginManager.getInstance().getUsername(), mealID, date);
-
-                    Cursor cursor = dbman.getHistory();
-
-                    cursorAdapter.swapCursor(cursor);
-
-                    Toast.makeText(getContext(),"CLICK",Toast.LENGTH_SHORT).show();
-                    getActivity().onBackPressed();
-                }catch (Exception e)
-                {
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
+    return view;
+  }
 
 
-    public Location getLocation() {
-        Location location = null;
-        if(ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-            Log.d(TAG, "Permission Denied");
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-                    1);
-        }
-        else {
-            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        }
-        return location;
-    }
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
 
-    String[] getSuggestionNames(){
+    ActivityCompat.requestPermissions(getActivity(),
+        new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION},
+        1);
 
-        GetSuggestionItemListRequest request;
-        request = GetSuggestionItemListRequest.newBuilder()
-                .setToken(loginToken).setStartIndex(0)
-                .setSuggestionCategory(Suggestion.SuggestionCategory.MEAL)
-                .build();
+    timeField.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+          @Override
+          public void onTimeSet(TimePicker timePicker, int i, int i1) {
+            Calendar cal = Calendar.getInstance();
+            cal.clear(Calendar.HOUR_OF_DAY);
+            cal.clear(Calendar.MINUTE);
+            cal.set(Calendar.HOUR_OF_DAY, i);
+            cal.set(Calendar.MINUTE, i1);
+            date = cal;
 
-        GetSuggestionItemListReply reply = blockingStub.getSuggestionItemList(request);
-        String[] values;
-        values = new String[reply.getItemsCount()];
-        for(int i=0; i<reply.getItemsCount();i++)
-        {
-            values[i] = reply.getItems(i).getName();
+            timeField.setText(String.format("%02d", i) + ":" + String.format("%02d", i1));
+          }
+        };
+
+        Calendar currentTime = Calendar.getInstance();
+        int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+        int mins = currentTime.get(Calendar.MINUTE);
+
+        TimePickerDialog tpDialog = new TimePickerDialog(getContext(), timeSetListener, hour, mins,
+            true);
+        tpDialog.setTitle("Select Time");
+        tpDialog.show();
+      }
+    });
+
+    addHistoryButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        Location currentLoc = null;
+        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+
+        if (!(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
+          Log.e(TAG, "Provider not enabled");
+        } else {
+          currentLoc = getLocation();
         }
 
-        return values;
+        double latitude = -1;
+        double longitude = -1;
+        if (currentLoc != null) {
+          latitude = currentLoc.getLatitude();
+          longitude = currentLoc.getLongitude();
+        } else {
+          latitude = 0;
+          longitude = 0;
+        }
+
+        Log.d(TAG, Double.toString(latitude) + " " + Double.toString(longitude));
+
+        DatabaseManager dbman = new DatabaseManager(getContext());
+        try {
+          dbman.open();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+
+        int mealID = dbman.getMealId(
+            mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
+
+        long timezoneOffset = date.getTimeZone().getOffset(date.getTimeInMillis());
+
+        Choice choice = Choice.newBuilder()
+            .setSuggesteeId(mealID)
+            .setTimestamp(Timestamp.newBuilder()
+                .setSeconds((int) ((date.getTimeInMillis() + timezoneOffset) / 1000)))
+            .setLatitude(latitude)
+            .setLongitude(longitude)
+            .build();
+
+        InformUserChoiceRequest informUserChoiceRequest;
+        informUserChoiceRequest = InformUserChoiceRequest.newBuilder()
+            .setChoice(choice).setToken(loginToken).build();
+        try {
+          InformUserChoiceReply informUserChoiceReply = blockingStub
+              .informUserChoice(informUserChoiceRequest);
+          dbman.addHistoryData(NevaLoginManager.getInstance().getUsername(), mealID, date);
+
+          Cursor cursor = dbman.getHistory();
+
+          cursorAdapter.swapCursor(cursor);
+
+          Toast.makeText(getContext(), "CLICK", Toast.LENGTH_SHORT).show();
+          getActivity().onBackPressed();
+        } catch (Exception e) {
+          Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+      }
+    });
+  }
+
+
+  public Location getLocation() {
+    Location location = null;
+    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED &&
+        ActivityCompat
+            .checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+      Log.d(TAG, "Permission Denied");
+      ActivityCompat.requestPermissions(getActivity(),
+          new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+              Manifest.permission.ACCESS_COARSE_LOCATION},
+          1);
+    } else {
+      location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
     }
+    return location;
+  }
+
+  String[] getSuggestionNames() {
+
+    GetSuggestionItemListRequest request;
+    request = GetSuggestionItemListRequest.newBuilder()
+        .setToken(loginToken).setStartIndex(0)
+        .setSuggestionCategory(Suggestion.SuggestionCategory.MEAL)
+        .build();
+
+    GetSuggestionItemListReply reply = blockingStub.getSuggestionItemList(request);
+    String[] values;
+    values = new String[reply.getItemsCount()];
+    for (int i = 0; i < reply.getItemsCount(); i++) {
+      values[i] = reply.getItems(i).getName();
+    }
+
+    return values;
+  }
 
 }

@@ -13,6 +13,9 @@ service Backend {
   rpc Login(LoginRequest) returns (LoginReply) {
   }
 
+  rpc UpdateUser(UpdateUserRequest) returns (GenericReply) {
+  }
+
   rpc SuggestionItemProposition(SuggestionItemPropositionRequest)
       returns (GenericReply) {
   }
@@ -30,7 +33,18 @@ service Backend {
       returns (GetSuggestionItemListReply) {
   }
 
-  rpc InformUserChoice(InformUserChoiceRequest) returns (GenericReply) {
+  rpc InformUserChoice(InformUserChoiceRequest)
+      returns (InformUserChoiceReply) {
+  }
+
+  rpc FetchUserHistory(FetchUserHistoryRequest)
+      returns (FetchUserHistoryReply) {
+  }
+
+  rpc CheckToken(CheckTokenRequest) returns (GenericReply) {
+  }
+
+  rpc RecordFeedback(RecordFeedbackRequest) returns (GenericReply) {
   }
 }
 
@@ -56,6 +70,14 @@ message LoginRequest {
 message LoginReply {
   // Authentication token to be used in upcoming requests.
   bytes token = 1;
+}
+
+message UpdateUserRequest {
+  // Session key for the user sending request.
+  bytes token = 1;
+
+  // Updated user data.
+  User user = 2;
 }
 
 message SuggestionItemPropositionRequest {
@@ -123,4 +145,35 @@ message InformUserChoiceRequest {
 
   // Choice of the user.
   Choice choice = 2;
+}
+
+message InformUserChoiceReply {
+  // Database id of the user choice.
+  uint32 choice_id = 1;
+}
+
+message FetchUserHistoryRequest {
+  // Session key for the user requesting the fetch.
+  bytes token = 1;
+
+  // Start index to fetch choice entries;
+  uint32 start_index = 2;
+}
+
+message FetchUserHistoryReply {
+  // User history object.
+  UserHistory user_history = 1;
+}
+
+message CheckTokenRequest {
+  // Session token to be checked.
+  bytes token = 1;
+}
+
+message RecordFeedbackRequest {
+  // Session token of the user sending the feedback.
+  bytes token = 1;
+
+  // Information about the feedback.
+  UserFeedback user_feedback = 2;
 }

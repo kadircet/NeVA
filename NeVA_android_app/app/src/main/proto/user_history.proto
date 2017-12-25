@@ -5,13 +5,43 @@ import "util.proto";
 package neva.backend;
 
 message Choice {
+  // Which item was selected.
   uint32 suggestee_id = 1;
+
+  // When was the selection performed.
   util.Timestamp timestamp = 2;
+
+  // Where was the selection performed.
   double latitude = 3;
   double longitude = 4;
+
+  // What is the id of the selection in user_choice_history table.
+  uint32 choice_id = 5;
 }
 
 message UserHistory {
+  // Id of the user to which history entries belongs to.
   uint32 user_id = 1;
+
+  // Entries related to user.
   repeated Choice history = 2;
+}
+
+message UserFeedback {
+  enum Feedback {
+    UNKNOWN = 0;
+    DISLIKE = 1;
+    LIKE = 2;
+  }
+  // Information about the recommendation the feedback was given.
+  // choice.choice_id conisides with the last_choice_id in
+  // user_recommendation_feedback table
+  Choice choice = 1;
+
+  // Feedback given to recommendation.
+  Feedback feedback = 2;
+
+  // Id of the user to which feedback belongs to. On incoming requests is
+  // deduced from session token. So can be empty.
+  uint32 user_id = 3;
 }
