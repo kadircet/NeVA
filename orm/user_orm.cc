@@ -100,35 +100,35 @@ Status UserOrm::CheckCredentials(
       VLOG(1) << email << " first login using facebook.";
       const User user = FacebookValidator::FetchInfo(email, password);
       InsertUser(user, authentication_type, nullptr);
-      res = query.store(email);
     } else {
       VLOG(1) << "No credential of type: " << authentication_type
               << " for user: " << email;
       return Status(StatusCode::UNKNOWN, "Wrong credentials.");
     }
   }
-  const mysqlpp::String sql_password = res[0]["credential"];
-  const std::string hash(sql_password.data(), sql_password.size());
-  const std::string salt(sql_salt.data(), sql_salt.size());
-  if (is_facebook || hash == util::HMac(salt, password)) {
-    query.reset();
-    // TODO(kadircet): Implement token expiration.
-    query << "INSERT INTO `user_session` (`user_id`, `token`, `expire`) VALUES "
-             "(%0, %1q, %2)";
-    query.parse();
-
-    *session_token = util::GenerateRandomKey();
-    while (!query.execute(user_id, *session_token, 0)) {
-      VLOG(1) << "Query failed with:" << query.error();
-      *session_token = util::GenerateRandomKey();
+  if (!is_facebook) {
+    const mysqlpp::String sql_password = res[0]["credential"];
+    const std::string hash(sql_password.data(), sql_password.size());
+    const std::string salt(sql_salt.data(), sql_salt.size());
+    if (hash != util::HMac(salt, password)) {
+      VLOG(1) << email << " tried to authenticate with wrong credential.";
+      return Status(StatusCode::INVALID_ARGUMENT, "Wrong credentials.");
     }
-    VLOG(1) << email << " has been authenticated successfully.";
-    return Status::OK;
   }
-  VLOG(1) << email << " tried to authenticate with wrong credential.";
+  query.reset();
+  // TODO(kadircet): Implement token expiration.
+  query << "INSERT INTO `user_session` (`user_id`, `token`, `expire`) VALUES "
+           "(%0, %1q, %2)";
+  query.parse();
 
-  return Status(StatusCode::INVALID_ARGUMENT, "Wrong credentials.");
-}  // namespace orm
+  *session_token = util::GenerateRandomKey();
+  while (!query.execute(user_id, *session_token, 0)) {
+    VLOG(1) << "Query failed with:" << query.error();
+    *session_token = util::GenerateRandomKey();
+  }
+  VLOG(1) << email << " has been authenticated successfully.";
+  return Status::OK;
+}
 
 Status UserOrm::AddCredential(
     const uint32_t user_id, const std::string& salt, const User& user,
