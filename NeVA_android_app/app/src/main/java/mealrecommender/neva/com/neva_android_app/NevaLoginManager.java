@@ -73,6 +73,13 @@ public class NevaLoginManager {
         loggedIn = false;
     }
 
+    public void setAuthToken(String username, String token) {
+        stringToken = token;
+        byteStringToken = ByteString.copyFrom(Base64.decode(token,Base64.DEFAULT));
+        this.username = username;
+        loggedIn = true;
+    }
+
 
     public boolean logIn(String username, String password, BackendOuterClass.LoginRequest.AuthenticationType auth)
     {
@@ -92,6 +99,7 @@ public class NevaLoginManager {
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             Log.i(TAG, e.getMessage());
             return  false;
         }

@@ -61,14 +61,24 @@ public class LoginActivity extends AppCompatActivity {
       boolean accountAddSuccess = accountManager.addAccountExplicitly(account, password, null);
       accountManager.setAuthToken(account, AUTH_TOKEN_TYPE, authToken);
       if (accountAddSuccess) {
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        startActivity(intent);
+        Log.i(TAG, "Account Added Successfully!");
       } else {
         Log.e(TAG, "Couldn't Add Account!");
       }
+      finish();
     } catch (Exception e) {
       Log.d(TAG, e.getMessage());
     }
   }
 
+  @Override
+  public void onBackPressed() {
+    return;
+  }
+
+  @Override
+  public void finish() {
+    setResult(RESULT_OK);
+    super.finish();
+  }
 }

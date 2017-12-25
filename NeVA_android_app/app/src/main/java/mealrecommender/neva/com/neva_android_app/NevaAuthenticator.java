@@ -21,6 +21,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
+import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 
 /**
  * Created by hakan on 12/21/17.
@@ -75,30 +76,15 @@ public class NevaAuthenticator extends AbstractAccountAuthenticator {
     if (TextUtils.isEmpty(authToken)) {
       final String password = am.getPassword(account);
       if (password != null) {
-        BackendOuterClass.LoginRequest request = BackendOuterClass.LoginRequest.newBuilder()
-            .setAuthenticationType(BackendOuterClass.LoginRequest.AuthenticationType.DEFAULT)
-            .setEmail(account.name)
-            .setPassword(password)
-            .build();
-
-        ManagedChannel mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051)
-            .build();
-        BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
-        byte[] byteArrayToken = null;
-        try {
-          BackendOuterClass.LoginReply reply = blockingStub.login(request);
-          ByteString tokenByteString = reply.getToken();
-          byteArrayToken = tokenByteString.toByteArray();
-          authToken = Base64.encodeToString(byteArrayToken, Base64.DEFAULT);
-        } catch (Exception e) {
-          Log.d(TAG, e.getMessage());
-        }
+        NevaLoginManager.getInstance().logIn(account.name, password, AuthenticationType.DEFAULT);
+        authToken = NevaLoginManager.getInstance().getStringToken();
       }
     }
     // If authtoken isn't empty. It means we have an auth token already, we need to check it
     // and if it is valid we are done.
     if (!TextUtils.isEmpty(authToken)) {
       //TODO: Validate the authToken with the server.
+      NevaLoginManager.getInstance().setAuthToken(account.name, authToken);
       final Bundle result = new Bundle();
       result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
       result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);
