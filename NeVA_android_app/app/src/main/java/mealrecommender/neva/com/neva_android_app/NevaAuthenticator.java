@@ -20,7 +20,10 @@ import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import neva.backend.BackendGrpc;
+import neva.backend.BackendGrpc.BackendBlockingStub;
 import neva.backend.BackendOuterClass;
+import neva.backend.BackendOuterClass.CheckTokenRequest;
+import neva.backend.BackendOuterClass.GenericReply;
 import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 
 /**
@@ -53,7 +56,7 @@ public class NevaAuthenticator extends AbstractAccountAuthenticator {
     }
 
     //Fill the account data of the account to be created.
-    final Intent intent = new Intent(mContext, LoginActivity.class);
+    final Intent intent = new Intent(mContext, RegisterActivity.class);
     intent.putExtra(LoginActivity.ACCOUNT_TYPE, accountType);
     intent.putExtra(LoginActivity.AUTH_TOKEN_TYPE, authTokenType);
     intent.putExtra(LoginActivity.IS_ADDING_NEW_ACCOUNT, true);
@@ -74,8 +77,10 @@ public class NevaAuthenticator extends AbstractAccountAuthenticator {
     String authToken = am.peekAuthToken(account, authTokenType);
     // If there is no token, get one using the saved password for the user.
     if (TextUtils.isEmpty(authToken)) {
+      Log.i(TAG, "AuthToken is empty");
       final String password = am.getPassword(account);
       if (password != null) {
+        Log.i(TAG, "Tryin to login again with saved password");
         NevaLoginManager.getInstance().logIn(account.name, password, AuthenticationType.DEFAULT);
         authToken = NevaLoginManager.getInstance().getStringToken();
       }
@@ -83,8 +88,21 @@ public class NevaAuthenticator extends AbstractAccountAuthenticator {
     // If authtoken isn't empty. It means we have an auth token already, we need to check it
     // and if it is valid we are done.
     if (!TextUtils.isEmpty(authToken)) {
-      //TODO: Validate the authToken with the server.
+      Log.i(TAG, "Auth Token not empty");
+      Log.i(TAG, "Getting auth token from NevaLoginManager");
       NevaLoginManager.getInstance().setAuthToken(account.name, authToken);
+      //TODO:Move this code to NevaLoginManager
+      CheckTokenRequest checkTokenRequest = CheckTokenRequest.newBuilder()
+          .setToken(NevaLoginManager.getInstance().getByteStringToken()).build();
+      ManagedChannel mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051)
+          .build();
+      BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
+      try {
+        GenericReply genericReply = blockingStub.checkToken(checkTokenRequest);
+      } catch (Exception e) {
+        Log.e(TAG, "TOKEN AUTH FAIL" + e.getMessage());
+      }
+
       final Bundle result = new Bundle();
       result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
       result.putString(AccountManager.KEY_ACCOUNT_TYPE, account.type);

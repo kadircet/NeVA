@@ -83,8 +83,7 @@ public class NevaLoginManager {
     this.username = username;
     loggedIn = true;
   }
-
-
+  
   public boolean logIn(String username, String password,
       BackendOuterClass.LoginRequest.AuthenticationType auth) {
     try {

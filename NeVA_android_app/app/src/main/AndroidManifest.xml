@@ -59,9 +59,7 @@
           android:theme="@style/AppTheme.NoActionBar"/>
 
         <service
-          android:enabled="true"
-          android:exported="true"
-          android:name=".NevaAuthenticatorService">
+          android:name="mealrecommender.neva.com.neva_android_app.NevaAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
             </intent-filter>

@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
       Toast.makeText(getBaseContext(), "Fix your credentials.", Toast.LENGTH_LONG).show();
       return;
     }
-
+    //TODO: Move this code to NevaLoginManager
     try {
       signup_button.setEnabled(false);
       pb.setVisibility(View.VISIBLE);
@@ -135,15 +135,16 @@ public class RegisterActivity extends AppCompatActivity {
           .newBuilder().setUser(user).build();
 
       ManagedChannel mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com",
-          50052).build();
+          50051).build();
       BackendGrpc.BackendBlockingStub blockingStub = BackendGrpc.newBlockingStub(mChannel);
 
       BackendOuterClass.GenericReply registerReply = blockingStub.register(registerRequest);
-      Intent intent = new Intent(this, LoginActivity.class);
+      //Intent intent = new Intent(this, LoginActivity.class);
       Toast.makeText(this, "Succesfully Signed Up!", Toast.LENGTH_LONG).show();
       signup_button.setEnabled(true);
       pb.setVisibility(View.GONE);
-      startActivity(intent);
+      //startActivity(intent);
+      setResult(RESULT_OK);
       finish();
     } catch (Exception e) {
       Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
@@ -153,8 +154,8 @@ public class RegisterActivity extends AppCompatActivity {
   }
 
   public void onMemberButton(View view) {
-    Intent intent = new Intent(this, LoginActivity.class);
-    startActivity(intent);
+    setResult(RESULT_OK);
+    finish();
   }
 
   public boolean validateUsername() {
