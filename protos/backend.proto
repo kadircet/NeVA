@@ -16,6 +16,9 @@ service Backend {
   rpc UpdateUser(UpdateUserRequest) returns (GenericReply) {
   }
 
+  rpc GetUser(GetUserRequest) returns (GetUserReply) {
+  }
+
   rpc SuggestionItemProposition(SuggestionItemPropositionRequest)
       returns (GenericReply) {
   }
@@ -78,6 +81,16 @@ message UpdateUserRequest {
 
   // Updated user data.
   User user = 2;
+}
+
+message GetUserRequest {
+  // Session key for the user sending request.
+  bytes token = 1;
+}
+
+message GetUserReply {
+  // User data of the requested user.
+  User user = 1;
 }
 
 message SuggestionItemPropositionRequest {

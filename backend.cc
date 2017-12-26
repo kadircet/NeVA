@@ -73,6 +73,14 @@ class BackendServiceImpl final : public Backend::Service {
     return user_orm_->UpdateUserData(user_id, user);
   }
 
+  Status GetUser(ServerContext* context, const GetUserRequest* request,
+                 GetUserReply* reply) override {
+    VLOG(1) << "Received GetUser:\n" << request->DebugString();
+    int user_id;
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    return user_orm_->UpdateUserData(user_id, reply->mutable_user());
+  }
+
   Status SuggestionItemProposition(
       ServerContext* context, const SuggestionItemPropositionRequest* request,
       GenericReply* reply) override {
