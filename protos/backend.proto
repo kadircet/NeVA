@@ -114,8 +114,8 @@ message GetSuggestionRequest {
 }
 
 message GetSuggestionReply {
-  // Name of the suggested item.
-  string name = 1;
+  // List of suggested items.
+  SuggestionList suggestion = 1;
 }
 
 message TagPropositionRequest {
