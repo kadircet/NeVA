@@ -56,7 +56,7 @@ SuggestionList GetSuggestion(const UserHistory& history,
   // Return all most frequent elements
   SuggestionList* suggested_list;
   for (const auto& it : max_freq_ids) {
-    suggested_list->add_suggestion_list() = *id_to_suggestee[it];
+    *suggested_list->add_suggestion_list() = *id_to_suggestee[it];
   }
 
   return *suggested_list;
