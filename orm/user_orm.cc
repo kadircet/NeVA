@@ -284,7 +284,7 @@ Status UserOrm::GetUserData(const int user_id, User* user) {
   if (res[0]["date_of_birth"] != mysqlpp::null) {
     util::Timestamp timestamp;
     timestamp.set_seconds(res[0]["date_of_birth"]);
-    user->set_date_of_birth(timestamp);
+    *user->mutable_date_of_birth() = timestamp;
   }
 
   if (res[0]["name"] != mysqlpp::null) {
@@ -292,7 +292,7 @@ Status UserOrm::GetUserData(const int user_id, User* user) {
   }
 
   if (res[0]["gender"] != mysqlpp::null) {
-    user->set_gender(static_cast<User::Gender>(static_cast<int>(res[0]["gender")));
+    user->set_gender(static_cast<User::Gender>(static_cast<int>(res[0]["gender"])));
   }
 
   if (res[0]["weight"] != mysqlpp::null) {
@@ -306,7 +306,7 @@ Status UserOrm::GetUserData(const int user_id, User* user) {
   if (res[0]["register_date"] != mysqlpp::null) {
     util::Timestamp timestamp;
     timestamp.set_seconds(res[0]["register_date"]);
-    user->set_register_date(timestamp);
+    *user->mutable_register_date() = timestamp;
   }
 
   return Status::OK;
