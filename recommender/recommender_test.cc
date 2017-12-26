@@ -40,7 +40,7 @@ TEST(GetSuggestion, SanityTest) {
 
   const SuggestionList suggested_list =
       GetSuggestion(user_history, suggestion_list);
-  const Suggestion suggestion = suggested_list(0);
+  const Suggestion suggestion = suggested_list.suggestion_list(0);
   EXPECT_EQ(suggestion.suggestee_id(), kExpectedSuggesteeId);
   EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);
 }
