@@ -264,7 +264,7 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
   return Status::OK;
 }
 
-Status UserOrm::GetUserData(const int user_id, const User* user) {
+Status UserOrm::GetUserData(const int user_id, User* user) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }

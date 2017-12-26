@@ -78,7 +78,7 @@ class BackendServiceImpl final : public Backend::Service {
     VLOG(1) << "Received GetUser:\n" << request->DebugString();
     int user_id;
     RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
-    return user_orm_->UpdateUserData(user_id, reply->mutable_user());
+    return user_orm_->GetUserData(user_id, reply->mutable_user());
   }
 
   Status SuggestionItemProposition(
