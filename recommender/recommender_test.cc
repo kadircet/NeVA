@@ -38,7 +38,8 @@ TEST(GetSuggestion, SanityTest) {
   SuggestionList suggestion_list;
   TextFormat::ParseFromString(kSuggestionList, &suggestion_list);
 
-  const SuggestionList suggested_list = GetSuggestion(user_history, suggestion_list);
+  const SuggestionList suggested_list =
+      GetSuggestion(user_history, suggestion_list);
   const Suggestion suggestion = suggested_list(0);
   EXPECT_EQ(suggestion.suggestee_id(), kExpectedSuggesteeId);
   EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);

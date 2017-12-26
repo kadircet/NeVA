@@ -9,7 +9,7 @@ namespace backend {
 namespace recommender {
 
 SuggestionList GetSuggestion(const UserHistory& history,
-                         const SuggestionList& suggestion_list) {
+                             const SuggestionList& suggestion_list) {
   const size_t suggestion_list_size = suggestion_list.suggestion_list_size();
   CHECK(suggestion_list_size > 0) << "Empty suggestion list.";
 
@@ -56,7 +56,7 @@ SuggestionList GetSuggestion(const UserHistory& history,
   // Return all most frequent elements
   SuggestionList suggested_list;
   for (const auto& it : max_freq_ids) {
-    suggested_list->add_suggestion_list() = *id_to_suggestee[*it];
+    suggested_list.add_suggestion_list() = *id_to_suggestee[it];
   }
 
   return suggested_list;
