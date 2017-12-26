@@ -9,7 +9,7 @@ namespace backend {
 namespace recommender {
 
 // Get suggestion according to the given history.
-Suggestion GetSuggestion(const UserHistory& history,
+SuggestionList GetSuggestion(const UserHistory& history,
                          const SuggestionList& suggestion_list);
 }  // namespace recommender
 }  // namespace backend

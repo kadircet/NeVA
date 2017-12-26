@@ -8,7 +8,7 @@ namespace neva {
 namespace backend {
 namespace recommender {
 
-Suggestion GetSuggestion(const UserHistory& history,
+SuggestionList GetSuggestion(const UserHistory& history,
                          const SuggestionList& suggestion_list) {
   const size_t suggestion_list_size = suggestion_list.suggestion_list_size();
   CHECK(suggestion_list_size > 0) << "Empty suggestion list.";
@@ -53,11 +53,13 @@ Suggestion GetSuggestion(const UserHistory& history,
     max_freq_ids.insert(suggestee_id);
   }
 
-  // Pick one random element randomly from most frequent ones.
-  const uint32_t element_idx = util::GetRandom(max_freq_ids.size());
-  auto it = max_freq_ids.cbegin();
-  for (uint32_t i = 0; i < element_idx; i++) it++;
-  return *id_to_suggestee[*it];
+  // Return all most frequent elements
+  SuggestionList suggested_list;
+  for (const auto& it : max_freq_ids) {
+    suggested_list->add_suggestion_list() = *id_to_suggestee[*it];
+  }
+
+  return suggested_list;
 }
 
 }  // namespace recommender
