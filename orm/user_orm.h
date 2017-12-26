@@ -46,6 +46,9 @@ class UserOrm {
   // given user, if user is already registered.
   grpc::Status UpdateUserData(const int user_id, const User& user);
 
+  // Fetchs profile data of given user, if user is already registered.
+  grpc::Status GetUserData(const int user_id, User* user);
+
   // Verifies a given authentication token and sets user_id to id of the user
   // bearing the token.
   grpc::Status CheckToken(const std::string& token, int* user_id);

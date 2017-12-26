@@ -264,6 +264,54 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
   return Status::OK;
 }
 
+Status UserOrm::GetUserData(const int user_id, const User* user) {
+  if (!conn_->ping()) {
+    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
+  }
+
+  mysqlpp::Query query = conn_->query(
+      "SELECT `date_of_birth`, `name`, `gender`, `weight`, `photo`, "
+      "`register_date` FROM `user_info` WHERE `id`=%0");
+  query.parse();
+
+  mysqlpp::StoreQueryResult res = query.store(user_id);
+  if (res.empty()) {
+    VLOG(1) << "User data for user with id: " << user_id
+            << " doesn't exists in database.";
+    return Status(StatusCode::UNKNOWN, "User data not found.");
+  }
+
+  if (res[0]["date_of_birth"] != mysqlpp::null) {
+    util::Timestamp timestamp;
+    timestamp.set_seconds(res[0]["date_of_birth"]);
+    user->set_date_of_birth(timestamp);
+  }
+
+  if (res[0]["name"] != mysqlpp::null) {
+    user->set_name(res[0]["name"]);
+  }
+
+  if (res[0]["gender"] != mysqlpp::null) {
+    user->set_gender(static_cast<User::Gender>(static_cast<int>(res[0]["gender")));
+  }
+
+  if (res[0]["weight"] != mysqlpp::null) {
+    user->set_weight(res[0]["weight"]);
+  }
+
+  if (res[0]["photo"] != mysqlpp::null) {
+    user->set_photo(res[0]["photo"]);
+  }
+
+  if (res[0]["register_date"] != mysqlpp::null) {
+    util::Timestamp timestamp;
+    timestamp.set_seconds(res[0]["register_date"]);
+    user->set_register_date(timestamp);
+  }
+
+  return Status::OK;
+}
+
 Status UserOrm::CheckToken(const std::string& token, int* user_id) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
