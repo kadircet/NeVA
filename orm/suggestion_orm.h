@@ -26,7 +26,7 @@ class SuggestionOrm {
   grpc::Status GetSuggestion(
       const UserHistory& user_history,
       const Suggestion::SuggestionCategory suggestion_category,
-      Suggestion* suggestion);
+      SuggestionList* suggestion);
 
  private:
   std::shared_ptr<mysqlpp::Connection> conn_;

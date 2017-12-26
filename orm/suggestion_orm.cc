@@ -59,7 +59,7 @@ Status SuggestionOrm::GetSuggestees(
 Status SuggestionOrm::GetSuggestion(
     const UserHistory& user_history,
     const Suggestion::SuggestionCategory suggestion_category,
-    Suggestion* suggestion) {
+    SuggestionList* suggestion) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
