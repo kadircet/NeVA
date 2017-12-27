@@ -2,6 +2,8 @@ package mealrecommender.neva.com.neva_android_app;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.provider.ContactsContract.CommonDataKinds.Im;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import java.util.Locale;
 
 public class HistoryCursorAdapter extends CursorAdapter {
 
+  public static final String TAG = "HistoryCursorAdapter";
+
   LayoutInflater inflater;
 
   public HistoryCursorAdapter(Context context, Cursor cursor, int flags) {
@@ -28,13 +32,13 @@ public class HistoryCursorAdapter extends CursorAdapter {
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
     String mealName = cursor.getString(cursor.getColumnIndex("mealName"));
-    String dateText = cursor.getString(cursor.getColumnIndex("_id"));
+    //String dateText = cursor.getString(cursor.getColumnIndex("_id"));
     //String dateText = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEAL_PHOTO));
-    //long epochTime = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.HISTORY_DATE)) * 1000;
-    //Date date = new Date(epochTime);
-    //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy", Locale.ENGLISH);
-    //String dateText = sdf.format(date);
-
+    long epochTime = cursor.getLong(cursor.getColumnIndex("date")) * 1000;
+    Date date = new Date(epochTime);
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy", Locale.ENGLISH);
+    String dateText = sdf.format(date);
+    Log.d(TAG, mealName + " "+dateText);
     //TODO: HANDLE PHOTO URL
 
     TextView fl = view.findViewById(R.id.firstLine);

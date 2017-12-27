@@ -20,6 +20,9 @@ import com.google.protobuf.ByteString;
 import java.sql.SQLException;
 
 import io.grpc.ManagedChannel;
+import java.util.ArrayList;
+import mealrecommender.neva.com.neva_android_app.database.Meal;
+import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
 import neva.backend.SuggestionOuterClass;
@@ -44,6 +47,7 @@ public class ProposeFragment extends Fragment {
   AutoCompleteTextView meal_for_tag_field;
   EditText tag_of_meal_field;
   Button propose_tag_for_meal;
+  NevaDatabase db;
 
   ArrayAdapter<String> autocompleteAdapter;
   String[] mealNames;
@@ -63,6 +67,7 @@ public class ProposeFragment extends Fragment {
     loginToken = NevaLoginManager.getInstance().getByteStringToken();
     mChannel = mainActivity.mChannel;
     blockingStub = mainActivity.blockingStub;
+    db = mainActivity.db;
 
     fragment_proposal_field = view.findViewById(R.id.fragment_proposal_field);
     fragment_tag_proposal_field = view.findViewById(R.id.fragment_tag_proposal_field);
@@ -143,19 +148,11 @@ public class ProposeFragment extends Fragment {
       }
     });
 
-    /*propose_tag_for_meal.setOnClickListener(new View.OnClickListener() {
+    propose_tag_for_meal.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
 
-        DatabaseManager dbman = new DatabaseManager(getContext());
-        try {
-          dbman.open();
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
-
-        int mealID = dbman.getMealId(
-            meal_for_tag_field.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
+        db.nevaDao().getMealId(meal_for_tag_field.getText().toString());  // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
         String tagName = tag_of_meal_field.getText().toString();
 
         BackendOuterClass.TagPropositionRequest tagPropositionReq;
@@ -179,25 +176,18 @@ public class ProposeFragment extends Fragment {
           propose_tag_for_meal.setEnabled(true);
         }
       }
-    });*/
+    });
 
   }
 
   public String[] getMealNames() {
-    BackendOuterClass.GetSuggestionItemListRequest request;
-    request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
-        .setToken(loginToken).setStartIndex(0)
-        .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-        .build();
-
-    BackendOuterClass.GetSuggestionItemListReply reply = blockingStub
-        .getSuggestionItemList(request);
+    ArrayList<Meal> meals = (ArrayList<Meal>) db.nevaDao().getAllMeals();
     String[] values;
-    values = new String[reply.getItemsCount()];
-    for (int i = 0; i < reply.getItemsCount(); i++) {
-      values[i] = reply.getItems(i).getName();
+    values = new String[meals.size()];
+    for (int i = 0; i < meals.size(); i++) {
+      values[i] = meals.get(i).mealName;
     }
-
+    Log.d(TAG, Integer.toString(values.length));
     return values;
   }
 

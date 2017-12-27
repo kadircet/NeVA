@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
+import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
+import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.UserHistoryOuterClass.*;
 import neva.backend.SuggestionOuterClass.*;
 import neva.backend.util.Util.*;
@@ -58,6 +60,8 @@ public class AddHistoryItemFragment extends Fragment {
 
   TimePickerDialog.OnTimeSetListener timeSetListener;
 
+  NevaDatabase db;
+
   public AddHistoryItemFragment() {
     // Required empty public constructor
   }
@@ -74,7 +78,7 @@ public class AddHistoryItemFragment extends Fragment {
     mChannel = mainActivity.mChannel;
     blockingStub = mainActivity.blockingStub;
     cursorAdapter = mainActivity.adapter;
-
+    db = mainActivity.db;
     fm = mainActivity.getFragmentManager();
 
     mealNameField = view.findViewById(R.id.eaten_meal_field);
@@ -88,7 +92,6 @@ public class AddHistoryItemFragment extends Fragment {
 
     return view;
   }
-
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -127,7 +130,7 @@ public class AddHistoryItemFragment extends Fragment {
       }
     });
 
-    /*addHistoryButton.setOnClickListener(new View.OnClickListener() {
+    addHistoryButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
 
@@ -149,22 +152,16 @@ public class AddHistoryItemFragment extends Fragment {
 
         Log.d(TAG, Double.toString(latitude) + " " + Double.toString(longitude));
 
-        DatabaseManager dbman = new DatabaseManager(getContext());
-        try {
-          dbman.open();
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
 
-        int mealID = dbman.getMealId(
-            mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
+
+        int mealID = db.nevaDao().getMealId(mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
 
         long timezoneOffset = date.getTimeZone().getOffset(date.getTimeInMillis());
-
+        long dateEpoch = (date.getTimeInMillis() + timezoneOffset) / 1000;
         Choice choice = Choice.newBuilder()
             .setSuggesteeId(mealID)
             .setTimestamp(Timestamp.newBuilder()
-                .setSeconds((int) ((date.getTimeInMillis() + timezoneOffset) / 1000)))
+            .setSeconds((int) (dateEpoch)))
             .setLatitude(latitude)
             .setLongitude(longitude)
             .build();
@@ -175,9 +172,13 @@ public class AddHistoryItemFragment extends Fragment {
         try {
           InformUserChoiceReply informUserChoiceReply = blockingStub
               .informUserChoice(informUserChoiceRequest);
-          dbman.addHistoryData(NevaLoginManager.getInstance().getUsername(), mealID, date);
+          db.nevaDao().addHistoryEntry(new HistoryEntry(
+                                            informUserChoiceReply.getChoiceId(),
+                                            NevaLoginManager.getInstance().getUsername(),
+                                            mealID,
+                                            dateEpoch));
 
-          Cursor cursor = dbman.getHistory();
+          Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
 
           cursorAdapter.swapCursor(cursor);
 
@@ -187,7 +188,7 @@ public class AddHistoryItemFragment extends Fragment {
           Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
       }
-    });*/
+    });
   }
 
 

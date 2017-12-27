@@ -34,7 +34,7 @@ public class NevaLoginManager {
   ManagedChannel mChannel;
 
   protected NevaLoginManager() {
-    mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051).build();
+    mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50053).build();
     blockingStub = BackendGrpc.newBlockingStub(mChannel);
   }
 

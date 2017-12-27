@@ -12,10 +12,16 @@ import java.sql.Date;
 @Entity(tableName = "history",foreignKeys = @ForeignKey(entity = Meal.class, parentColumns = "id", childColumns = "mealId", onDelete = ForeignKey.CASCADE))
 public class HistoryEntry {
 
+  public HistoryEntry(int choiceId, String userMail, int mealId, long date) {
+    this.choiceId = choiceId;
+    this.userMail = userMail;
+    this.mealId = mealId;
+    this.date = date;
+  }
+
   @PrimaryKey
   public int choiceId;
-  public long date;
   public String userMail;
   public int mealId;
-
+  public long date;
 }

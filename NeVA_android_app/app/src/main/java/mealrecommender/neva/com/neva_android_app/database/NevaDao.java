@@ -24,6 +24,11 @@ public interface NevaDao {
   @Query("SELECT id as _id, mealName, mealPicture FROM meals")
   public Cursor getCursorAllMeals();
 
+  @Query( "SELECT h.choiceId as _id, m.mealName, m.mealPicture, h.date FROM history as h "
+          +"INNER JOIN meals as m ON m.id = h.mealId "
+          +"ORDER BY h.date DESC")
+  public Cursor getHistoryEntriesWithMealName();
+
   @Query("SELECT * FROM history")
   public List<HistoryEntry> getAllHistory();
 
