@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
     navdrawUsername.setText(NevaLoginManager.getInstance().getUsername());
 
     loginToken = NevaLoginManager.getInstance().getByteStringToken();
-    mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50053).build();
+    mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051).build();
     blockingStub = BackendGrpc.newBlockingStub(mChannel);
 
     db = Room.databaseBuilder(getBaseContext(), NevaDatabase.class, "nevadb")
