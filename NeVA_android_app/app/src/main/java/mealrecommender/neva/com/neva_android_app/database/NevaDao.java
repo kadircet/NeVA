@@ -16,13 +16,14 @@ public interface NevaDao {
   @Insert
   public void addMeals(List<Meal> meals);
 
-  @Insert void addMeal(Meal meal);
+  @Insert
+  void addMeal(Meal meal);
 
   @Insert
   public void addHistoryEntry(HistoryEntry historyEntry);
 
   @Insert
-  public void addHistoryEntires(HistoryEntry... historyEntries);
+  public void addHistoryEntires(List<HistoryEntry> historyEntries);
 
   @Update
   public void updateMeal(Meal meal);
@@ -52,4 +53,7 @@ public interface NevaDao {
 
   @Query("SELECT id FROM meals WHERE mealName = :mealName")
   public int getMealId(String mealName);
+
+  @Query("SELECT choiceId FROM history WHERE userMail = :userMail ORDER BY choiceId DESC LIMIT 1")
+  public int getLastChoiceIdOfUser(String userMail);
 }

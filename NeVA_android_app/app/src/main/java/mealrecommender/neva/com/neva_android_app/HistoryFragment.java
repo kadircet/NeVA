@@ -24,13 +24,18 @@ import java.sql.SQLException;
 import io.grpc.ManagedChannel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
+import neva.backend.BackendOuterClass.FetchUserHistoryReply;
+import neva.backend.BackendOuterClass.FetchUserHistoryRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
+import neva.backend.UserHistoryOuterClass.Choice;
 
 
 public class HistoryFragment extends ListFragment {
@@ -42,6 +47,7 @@ public class HistoryFragment extends ListFragment {
   BackendGrpc.BackendBlockingStub blockingStub;
   NevaDatabase db;
   HistoryCursorAdapter adapter;
+  NevaLoginManager nevaLoginManager;
 
   public HistoryFragment() {
   }
@@ -52,38 +58,33 @@ public class HistoryFragment extends ListFragment {
     View view = inflater.inflate(R.layout.fragment_history_list, container, false);
 
     MainActivity mainActivity = (MainActivity) getActivity();
-    loginToken = NevaLoginManager.getInstance().getByteStringToken();
+    nevaLoginManager = NevaLoginManager.getInstance();
+    loginToken = nevaLoginManager.getByteStringToken();
     mChannel = mainActivity.mChannel;
     blockingStub = mainActivity.blockingStub;
     db = mainActivity.db;
     adapter = mainActivity.adapter;
 
-    BackendOuterClass.GetSuggestionItemListRequest request;
-    request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
-        .setToken(loginToken).setStartIndex(0)
-        .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-        .build();
-
-    BackendOuterClass.GetSuggestionItemListReply reply = blockingStub
-        .getSuggestionItemList(request);
-    List<Meal> values = new ArrayList<>();
-
-    for(Suggestion sug : reply.getItemsList()) {
-      Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
-      values.add(meal);
+    Log.d(TAG, "Getting the last stored \"choiceId\" in database");
+    int lastChoiceId = db.nevaDao().getLastChoiceIdOfUser(nevaLoginManager.getUsername());
+    FetchUserHistoryRequest fetchUserHistoryRequest = FetchUserHistoryRequest.newBuilder()
+                                                      .setToken(nevaLoginManager.getByteStringToken())
+                                                      .setStartIndex(lastChoiceId)
+                                                      .build();
+    try {
+      Log.d(TAG, "Sending FetchUserHistoryRequest to server");
+      FetchUserHistoryReply fetchUserHistoryReply = blockingStub.fetchUserHistory(fetchUserHistoryRequest);
+      List<Choice> fetchedHistory = fetchUserHistoryReply.getUserHistory().getHistoryList();
+      Log.d(TAG, "Got FetchUserHistoryReply, Creating HistoryEntries");
+      List<HistoryEntry> historyEntries = userHistoryToHistoryEntry(fetchedHistory);
+      Log.d(TAG, "Adding Fetched HistoryEntries to the database");
+      db.nevaDao().addHistoryEntires(historyEntries);
+    } catch (Exception e) {
+      Toast.makeText(getContext(), "Couldn't fetch user history from server", Toast.LENGTH_LONG).show();
     }
+    Log.d(TAG, "Getting meal names for HistoryEntries");
     Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
-
     cursor.moveToFirst();
-    Log.d(TAG, Integer.toString(cursor.getCount()));
-    for (int i = 0; i < cursor.getCount(); i++) {
-      Log.d(TAG, cursor.getString(0) + " " + cursor.getString(1) + " " + cursor.getString(2));
-      cursor.moveToNext();
-    }
-    cursor.moveToFirst();
-
-    //adapter = new HistoryItemAdapter(getContext(), R.layout.fragment_history, R.id.firstLine, values);
-    //setListAdapter(adapter);
     adapter = new HistoryCursorAdapter(getContext(), cursor, 0);
     mainActivity.adapter = adapter;
     setListAdapter(mainActivity.adapter);
@@ -91,4 +92,18 @@ public class HistoryFragment extends ListFragment {
     return view;
   }
 
+  List<HistoryEntry> userHistoryToHistoryEntry(List<Choice> fetchedChoices) {
+    List<HistoryEntry> meals = new ArrayList<HistoryEntry>();
+    for (Choice choice : fetchedChoices) {
+      int choiceId = choice.getChoiceId();
+      String username = nevaLoginManager.getUsername();
+      int suggesteeId = choice.getSuggesteeId();
+      long epochTime = choice.getTimestamp().getSeconds() *1000;
+      long timezoneOffset = Calendar.getInstance().getTimeZone().getRawOffset();
+      meals.add(new HistoryEntry(choiceId, username, suggesteeId, epochTime-timezoneOffset));
+      Log.d(TAG, "::userHistoryToHistoryEntry: Converted "+Integer.toString(choiceId)+" "
+          +Integer.toString(suggesteeId)+" "+ Long.toString(epochTime));
+    }
+    return meals;
+  }
 }

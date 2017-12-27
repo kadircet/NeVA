@@ -32,13 +32,11 @@ public class HistoryCursorAdapter extends CursorAdapter {
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
     String mealName = cursor.getString(cursor.getColumnIndex("mealName"));
-    //String dateText = cursor.getString(cursor.getColumnIndex("_id"));
-    //String dateText = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEAL_PHOTO));
-    long epochTime = cursor.getLong(cursor.getColumnIndex("date")) * 1000;
+    long epochTime = cursor.getLong(cursor.getColumnIndex("date"));
     Date date = new Date(epochTime);
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy", Locale.ENGLISH);
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy");
     String dateText = sdf.format(date);
-    Log.d(TAG, mealName + " "+dateText);
+    Log.d(TAG, "Bind View: " + mealName + " " + dateText);
     //TODO: HANDLE PHOTO URL
 
     TextView fl = view.findViewById(R.id.firstLine);
@@ -46,7 +44,6 @@ public class HistoryCursorAdapter extends CursorAdapter {
 
     fl.setText(mealName);
     sl.setText(dateText);
-
   }
 
   @Override
