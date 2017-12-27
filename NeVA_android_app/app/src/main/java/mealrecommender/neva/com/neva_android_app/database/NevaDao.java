@@ -3,6 +3,7 @@ package mealrecommender.neva.com.neva_android_app.database;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 import android.database.Cursor;
 import java.util.List;
 
@@ -11,22 +12,39 @@ import java.util.List;
  */
 @Dao
 public interface NevaDao {
+
   @Insert
   public void addMeals(List<Meal> meals);
+
+  @Insert void addMeal(Meal meal);
+
   @Insert
   public void addHistoryEntry(HistoryEntry historyEntry);
+
   @Insert
   public void addHistoryEntires(HistoryEntry... historyEntries);
+
+  @Update
+  public void updateMeal(Meal meal);
+
+  @Update
+  public void updateMeals(List<Meal> meals);
 
   @Query("SELECT * FROM meals")
   public List<Meal> getAllMeals();
 
+  @Query("SELECT * FROM meals WHERE id = :mealId")
+  public Meal getMeal(int mealId);
+
+  @Query("SELECT COUNT(*) FROM meals WHERE id = :mealId")
+  public int mealExits(int mealId);
+
   @Query("SELECT id as _id, mealName, mealPicture FROM meals")
   public Cursor getCursorAllMeals();
 
-  @Query( "SELECT h.choiceId as _id, m.mealName, m.mealPicture, h.date FROM history as h "
-          +"INNER JOIN meals as m ON m.id = h.mealId "
-          +"ORDER BY h.date DESC")
+  @Query("SELECT h.choiceId as _id, m.mealName, m.mealPicture, h.date FROM history as h "
+      + "INNER JOIN meals as m ON m.id = h.mealId "
+      + "ORDER BY h.date DESC")
   public Cursor getHistoryEntriesWithMealName();
 
   @Query("SELECT * FROM history")

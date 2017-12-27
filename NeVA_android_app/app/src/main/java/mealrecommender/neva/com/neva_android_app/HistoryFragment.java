@@ -72,7 +72,6 @@ public class HistoryFragment extends ListFragment {
       Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
       values.add(meal);
     }
-    //db.nevaDao().addMeals(values);
     Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
 
     cursor.moveToFirst();

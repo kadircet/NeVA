@@ -32,8 +32,14 @@ import java.io.IOException;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import java.util.ArrayList;
+import java.util.List;
+import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
+import neva.backend.BackendOuterClass;
+import neva.backend.SuggestionOuterClass;
+import neva.backend.SuggestionOuterClass.Suggestion;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,6 +81,7 @@ public class MainActivity extends AppCompatActivity
         .fallbackToDestructiveMigration()
         .build();
 
+    addMealsToDatabase();
     fab = findViewById(R.id.fab);
 
     Fragment fragment = new RecommendFragment();
@@ -86,6 +93,37 @@ public class MainActivity extends AppCompatActivity
     item.setChecked(true);
     setTitle(item.getTitle());
 
+  }
+
+  public void addMealsToDatabase() {
+    BackendOuterClass.GetSuggestionItemListRequest request;
+    request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
+        .setToken(loginToken).setStartIndex(0)
+        .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+        .build();
+
+    BackendOuterClass.GetSuggestionItemListReply reply = blockingStub
+        .getSuggestionItemList(request);
+    List<Meal> values = new ArrayList<>();
+
+    for(Suggestion sug : reply.getItemsList()) {
+      Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
+      values.add(meal);
+    }
+    int inserted = 0;
+    int updated = 0;
+    for(Meal meal : values) {
+      int count = db.nevaDao().mealExits(meal.id);
+      if(count > 0) {
+        db.nevaDao().updateMeal(meal);
+        updated++;
+      } else {
+        db.nevaDao().addMeal(meal);
+        inserted++;
+      }
+    }
+    Log.d(TAG, Integer.toString(inserted)+" Meals inserted to db");
+    Log.d(TAG, Integer.toString(updated)+" Meals updated in db");
   }
 
   @Override
