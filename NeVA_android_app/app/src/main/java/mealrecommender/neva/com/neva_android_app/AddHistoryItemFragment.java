@@ -127,7 +127,7 @@ public class AddHistoryItemFragment extends Fragment {
       }
     });
 
-    addHistoryButton.setOnClickListener(new View.OnClickListener() {
+    /*addHistoryButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
 
@@ -187,7 +187,7 @@ public class AddHistoryItemFragment extends Fragment {
           Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
       }
-    });
+    });*/
   }
 
 

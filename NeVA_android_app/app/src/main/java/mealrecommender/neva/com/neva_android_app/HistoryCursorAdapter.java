@@ -27,12 +27,13 @@ public class HistoryCursorAdapter extends CursorAdapter {
 
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    String mealName = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEAL_NAME));
+    String mealName = cursor.getString(cursor.getColumnIndex("mealName"));
+    String dateText = cursor.getString(cursor.getColumnIndex("_id"));
     //String dateText = cursor.getString(cursor.getColumnIndex(DatabaseHelper.MEAL_PHOTO));
-    long epochTime = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.HISTORY_DATE)) * 1000;
-    Date date = new Date(epochTime);
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy", Locale.ENGLISH);
-    String dateText = sdf.format(date);
+    //long epochTime = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.HISTORY_DATE)) * 1000;
+    //Date date = new Date(epochTime);
+    //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy", Locale.ENGLISH);
+    //String dateText = sdf.format(date);
 
     //TODO: HANDLE PHOTO URL
 

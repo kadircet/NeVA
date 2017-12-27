@@ -143,7 +143,7 @@ public class ProposeFragment extends Fragment {
       }
     });
 
-    propose_tag_for_meal.setOnClickListener(new View.OnClickListener() {
+    /*propose_tag_for_meal.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
 
@@ -179,7 +179,7 @@ public class ProposeFragment extends Fragment {
           propose_tag_for_meal.setEnabled(true);
         }
       }
-    });
+    });*/
 
   }
 

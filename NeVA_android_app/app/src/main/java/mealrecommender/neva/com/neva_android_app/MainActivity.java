@@ -6,6 +6,7 @@ import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import java.io.IOException;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
 
 public class MainActivity extends AppCompatActivity
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity
   public ManagedChannel mChannel;
   public BackendGrpc.BackendBlockingStub blockingStub;
   public FloatingActionButton fab;
-  public DatabaseManager dbman;
+  public NevaDatabase db;
   HistoryCursorAdapter adapter;
 
 
@@ -69,7 +71,9 @@ public class MainActivity extends AppCompatActivity
     mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051).build();
     blockingStub = BackendGrpc.newBlockingStub(mChannel);
 
-    dbman = new DatabaseManager(this);
+    db = Room.databaseBuilder(getBaseContext(), NevaDatabase.class, "nevadb")
+        .allowMainThreadQueries()
+        .build();
 
     fab = findViewById(R.id.fab);
 

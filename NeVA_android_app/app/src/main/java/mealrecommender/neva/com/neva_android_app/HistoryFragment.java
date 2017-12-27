@@ -3,6 +3,7 @@ package mealrecommender.neva.com.neva_android_app;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import android.provider.ContactsContract.Intents.Insert;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -22,9 +23,14 @@ import java.sql.SQLException;
 
 import io.grpc.ManagedChannel;
 
+import java.util.ArrayList;
+import java.util.List;
+import mealrecommender.neva.com.neva_android_app.database.Meal;
+import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
 import neva.backend.SuggestionOuterClass;
+import neva.backend.SuggestionOuterClass.Suggestion;
 
 
 public class HistoryFragment extends ListFragment {
@@ -34,7 +40,7 @@ public class HistoryFragment extends ListFragment {
   ByteString loginToken;
   ManagedChannel mChannel;
   BackendGrpc.BackendBlockingStub blockingStub;
-  DatabaseManager dbman;
+  NevaDatabase db;
   HistoryCursorAdapter adapter;
 
   public HistoryFragment() {
@@ -49,7 +55,7 @@ public class HistoryFragment extends ListFragment {
     loginToken = NevaLoginManager.getInstance().getByteStringToken();
     mChannel = mainActivity.mChannel;
     blockingStub = mainActivity.blockingStub;
-    dbman = mainActivity.dbman;
+    db = mainActivity.db;
     adapter = mainActivity.adapter;
 
     BackendOuterClass.GetSuggestionItemListRequest request;
@@ -60,24 +66,14 @@ public class HistoryFragment extends ListFragment {
 
     BackendOuterClass.GetSuggestionItemListReply reply = blockingStub
         .getSuggestionItemList(request);
-    SuggestionOuterClass.Suggestion[] values;
-    values = new SuggestionOuterClass.Suggestion[(reply.getItemsCount())];
+    List<Meal> values = new ArrayList<>();
 
-    try {
-      dbman.open();
-    } catch (SQLException e) {
-      e.printStackTrace();
+    for(Suggestion sug : reply.getItemsList()) {
+      Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
+      values.add(meal);
     }
-
-    for (int i = 0; i < (reply.getItemsCount()); i++) {
-      dbman.addMeal(reply.getItems(i));
-      values[i] = reply.getItems(i);
-      Log.i("Values:", values[i].getName());
-    }
-
-    Cursor cursor = dbman.getHistory();
-
-    dbman.close();
+    db.nevaDao().addMeals(values);
+    Cursor cursor = db.nevaDao().getCursorAllMeals();
 
     cursor.moveToFirst();
     Log.d(TAG, Integer.toString(cursor.getCount()));
