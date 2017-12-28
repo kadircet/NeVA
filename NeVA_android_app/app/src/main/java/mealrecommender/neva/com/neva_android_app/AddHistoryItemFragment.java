@@ -96,6 +96,7 @@ public class AddHistoryItemFragment extends Fragment {
     mealNames = getSuggestionNames(); //TODO: Store meal names in a file instead of creating them from scratch
     adapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
     mealNameField.setAdapter(adapter);
+    locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
     return view;
   }
@@ -120,63 +121,58 @@ public class AddHistoryItemFragment extends Fragment {
     addHistoryButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
-        Location currentLoc = null;
-        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-
-        // Check if the gps is enabled
-        if (!(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
-          Log.e(TAG, "Provider not enabled");
-        } else {
-          currentLoc = getLocation();
-        }
-
-        double latitude = 0;
-        double longitude = 0;
-        if (currentLoc != null) {
-          latitude = currentLoc.getLatitude();
-          longitude = currentLoc.getLongitude();
-        }
-        int mealID = db.nevaDao().getMealId(mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
-        long timezoneOffset = date.getTimeZone().getRawOffset();
-        long dateEpoch = (date.getTimeInMillis() + timezoneOffset) / 1000;
-
-        Choice choice = Choice.newBuilder()
-            .setSuggesteeId(mealID)
-            .setTimestamp(Timestamp.newBuilder()
-            .setSeconds((int) (dateEpoch)))
-            .setLatitude(latitude)
-            .setLongitude(longitude)
-            .build();
-        Log.d(TAG, "Created choice with: ");
-        Log.d(TAG, "\t"+mealNameField.getText().toString()+" "+Integer.toString(mealID));
-        Log.d(TAG, "\tTimestamp(ms): "+ Long.toString(dateEpoch));
-        Log.d(TAG, "\tLatitude: "+Double.toString(latitude) + " Longitude: " + Double.toString(longitude));
-        InformUserChoiceRequest informUserChoiceRequest;
-        informUserChoiceRequest = InformUserChoiceRequest.newBuilder()
-                                                          .setChoice(choice)
-                                                          .setToken(loginToken)
-                                                          .build();
-        try {
-          Log.d(TAG, "Sending \"Choice\" to server");
-          InformUserChoiceReply informUserChoiceReply = blockingStub.informUserChoice(informUserChoiceRequest);
-          Log.d(TAG, "Adding \"Choice\" to database (choiceId = "+informUserChoiceReply.getChoiceId()+" )");
-          db.nevaDao().addHistoryEntry(new HistoryEntry(
-                                            informUserChoiceReply.getChoiceId(),
-                                            NevaLoginManager.getInstance().getUsername(),
-                                            mealID,
-                                            date.getTimeInMillis()));
-
-          Log.d(TAG, "Getting History from database again, and changing view cursors");
-          Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
-          cursorAdapter.swapCursor(cursor);
-          Toast.makeText(getContext(), "Added History Entry", Toast.LENGTH_SHORT).show();
-          getActivity().onBackPressed();
-        } catch (Exception e) {
-          Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        addHistoryEntry();
       }
     });
+  }
+
+  private void addHistoryEntry() {
+    double latitude = 0;
+    double longitude = 0;
+    Location currentLoc = getLocation();
+    if (currentLoc != null) {
+      latitude = currentLoc.getLatitude();
+      longitude = currentLoc.getLongitude();
+    }
+    int mealID = db.nevaDao().getMealId(mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
+    long timezoneOffset = date.getTimeZone().getRawOffset();
+    long dateEpoch = (date.getTimeInMillis() + timezoneOffset) / 1000;
+
+    Choice choice = Choice.newBuilder()
+        .setSuggesteeId(mealID)
+        .setTimestamp(Timestamp.newBuilder()
+        .setSeconds((int) (dateEpoch)))
+        .setLatitude(latitude)
+        .setLongitude(longitude)
+        .build();
+    Log.d(TAG, "Created choice with: ");
+    Log.d(TAG, "\t"+mealNameField.getText().toString()+" "+Integer.toString(mealID));
+    Log.d(TAG, "\tTimestamp(ms): "+ Long.toString(dateEpoch));
+    Log.d(TAG, "\tLatitude: "+Double.toString(latitude) + " Longitude: " + Double.toString(longitude));
+
+    InformUserChoiceRequest informUserChoiceRequest;
+    informUserChoiceRequest = InformUserChoiceRequest.newBuilder()
+        .setChoice(choice)
+        .setToken(loginToken)
+        .build();
+    try {
+      Log.d(TAG, "Sending \"Choice\" to server");
+      InformUserChoiceReply informUserChoiceReply = blockingStub.informUserChoice(informUserChoiceRequest);
+      Log.d(TAG, "Adding \"Choice\" to database (choiceId = "+informUserChoiceReply.getChoiceId()+" )");
+      db.nevaDao().addHistoryEntry(new HistoryEntry(
+          informUserChoiceReply.getChoiceId(),
+          NevaLoginManager.getInstance().getUsername(),
+          mealID,
+          date.getTimeInMillis()));
+
+      Log.d(TAG, "Getting History from database again, and changing view cursors");
+      Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
+      cursorAdapter.swapCursor(cursor);
+      Toast.makeText(getContext(), "Added History Entry", Toast.LENGTH_SHORT).show();
+      getActivity().onBackPressed();
+    } catch (Exception e) {
+      Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+    }
   }
 
   private void datePickerDialog() {
@@ -220,7 +216,7 @@ public class AddHistoryItemFragment extends Fragment {
         date = cal;
         Log.d(TAG, "Timestamp(milliseconds): "+Long.toString(date.getTimeInMillis()));
         Date mDate = new Date(date.getTimeInMillis());
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEE, MMMM d");
         String dateText = sdf.format(mDate);
         timeField.setText(dateText);
       }
@@ -235,31 +231,37 @@ public class AddHistoryItemFragment extends Fragment {
   }
 
   public Location getLocation() {
-    //Check permissions for location access.
-    if (ActivityCompat.checkSelfPermission(getActivity()
-                                            ,Manifest.permission.ACCESS_FINE_LOCATION)
-                                            != PackageManager.PERMISSION_GRANTED
-        && ActivityCompat.checkSelfPermission(getActivity()
-                                            ,Manifest.permission.ACCESS_COARSE_LOCATION)
-                                            != PackageManager.PERMISSION_GRANTED) {
-      Log.i(TAG, "Location permission Denied");
-      Log.d(TAG, "Requesting location permission");
-      ActivityCompat.requestPermissions(getActivity(),
-          new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-              Manifest.permission.ACCESS_COARSE_LOCATION},
-              1);
+    // Check if the gps is enabled
+    if (!(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
+      Log.e(TAG, "Provider not enabled");
+      //Check permissions for location access.
+      if (ActivityCompat.checkSelfPermission(getActivity()
+          , Manifest.permission.ACCESS_FINE_LOCATION)
+          != PackageManager.PERMISSION_GRANTED
+          && ActivityCompat.checkSelfPermission(getActivity()
+          , Manifest.permission.ACCESS_COARSE_LOCATION)
+          != PackageManager.PERMISSION_GRANTED) {
+        Log.i(TAG, "Location permission Denied");
+        Log.d(TAG, "Requesting location permission");
+        ActivityCompat.requestPermissions(getActivity(),
+            new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION},
+            1);
+      }
+      Location location = null;
+      if (ActivityCompat.checkSelfPermission(getActivity()
+          , Manifest.permission.ACCESS_FINE_LOCATION)
+          == PackageManager.PERMISSION_GRANTED
+          && ActivityCompat.checkSelfPermission(getActivity()
+          , Manifest.permission.ACCESS_COARSE_LOCATION)
+          == PackageManager.PERMISSION_GRANTED) {
+        Log.d(TAG, "Getting location");
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+      }
+      return location;
+    } else {
+      return null;
     }
-    Location location = null;
-    if (ActivityCompat.checkSelfPermission(getActivity()
-                                           ,Manifest.permission.ACCESS_FINE_LOCATION)
-                                            == PackageManager.PERMISSION_GRANTED
-        && ActivityCompat.checkSelfPermission(getActivity()
-                                              ,Manifest.permission.ACCESS_COARSE_LOCATION)
-                                              == PackageManager.PERMISSION_GRANTED) {
-      Log.d(TAG, "Getting location");
-      location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-    }
-    return location;
   }
 
   String[] getSuggestionNames() {
@@ -271,5 +273,6 @@ public class AddHistoryItemFragment extends Fragment {
     }
     return values;
   }
+
 
 }

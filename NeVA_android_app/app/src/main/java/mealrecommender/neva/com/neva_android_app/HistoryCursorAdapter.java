@@ -34,7 +34,7 @@ public class HistoryCursorAdapter extends CursorAdapter {
     String mealName = cursor.getString(cursor.getColumnIndex("mealName"));
     long epochTime = cursor.getLong(cursor.getColumnIndex("date"));
     Date date = new Date(epochTime);
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE, MMMM d, yyyy");
     String dateText = sdf.format(date);
     Log.d(TAG, "Bind View: " + mealName + " " + dateText);
     //TODO: HANDLE PHOTO URL
