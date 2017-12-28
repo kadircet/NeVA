@@ -47,3 +47,13 @@ cc_library(
         "@glog//:glog",
     ],
 )
+
+cc_library(
+    name = "tag_orm",
+    srcs = ["tag_orm.cc"],
+    hdrs = ["tag_orm.h"],
+    deps = [
+        "//protos:suggestion_proto",
+        "@glog//:glog",
+    ],
+)
