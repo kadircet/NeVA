@@ -1,6 +1,8 @@
 package mealrecommender.neva.com.neva_android_app;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;;
 import android.content.Context;
@@ -20,14 +22,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.TimeZone;
 import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
@@ -63,6 +68,7 @@ public class AddHistoryItemFragment extends Fragment {
   LocationManager locationManager;
 
   TimePickerDialog.OnTimeSetListener timeSetListener;
+  DatePickerDialog.OnDateSetListener dateSetListener;
 
   NevaDatabase db;
 
@@ -107,31 +113,7 @@ public class AddHistoryItemFragment extends Fragment {
       @Override
       public void onClick(View view) {
         Log.d(TAG, "TimeSelector");
-        timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-          @Override
-          public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-            Calendar cal = Calendar.getInstance();
-            cal.clear(Calendar.HOUR_OF_DAY);
-            cal.clear(Calendar.MINUTE);
-            cal.set(Calendar.HOUR_OF_DAY, hour);
-            cal.set(Calendar.MINUTE, minute);
-            date = cal;
-            Log.d(TAG, "Timestamp(milliseconds): "+Long.toString(date.getTimeInMillis()));
-            timeField.setText(String.format("%02d", hour) + ":" + String.format("%02d", minute));
-          }
-        };
-
-        Calendar currentTime = Calendar.getInstance();
-        int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-        int mins = currentTime.get(Calendar.MINUTE);
-
-        TimePickerDialog tpDialog = new TimePickerDialog(getContext(),
-                                                          timeSetListener,
-                                                          hour,
-                                                          mins,
-                                                          true);
-        tpDialog.setTitle("Select Time");
-        tpDialog.show();
+        datePickerDialog();
       }
     });
 
@@ -197,6 +179,60 @@ public class AddHistoryItemFragment extends Fragment {
     });
   }
 
+  private void datePickerDialog() {
+    final Calendar currentTime = Calendar.getInstance();
+    int year = currentTime.get(Calendar.YEAR);
+    int month = currentTime.get(Calendar.MONTH);
+    int day = currentTime.get(Calendar.DAY_OF_MONTH);
+
+    dateSetListener = new OnDateSetListener() {
+      @Override
+      public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.clear(Calendar.YEAR);
+        cal.clear(Calendar.MONTH);
+        cal.clear(Calendar.DAY_OF_MONTH);
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        date = cal;
+        timePickerDialog();
+      }
+    };
+
+    DatePickerDialog dpDialog = new DatePickerDialog(getContext(), dateSetListener, year, month, day);
+    dpDialog.show();
+  }
+
+  private void timePickerDialog() {
+    final Calendar cal = date;
+    int hour = cal.get(Calendar.HOUR_OF_DAY);
+    int mins = cal.get(Calendar.MINUTE);
+
+    timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+      @Override
+      public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+        Calendar cal = date;
+        cal.clear(Calendar.HOUR_OF_DAY);
+        cal.clear(Calendar.MINUTE);
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute);
+        date = cal;
+        Log.d(TAG, "Timestamp(milliseconds): "+Long.toString(date.getTimeInMillis()));
+        Date mDate = new Date(date.getTimeInMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE,MMMM d,yyyy");
+        String dateText = sdf.format(mDate);
+        timeField.setText(dateText);
+      }
+    };
+
+    TimePickerDialog tpDialog = new TimePickerDialog(getContext()
+        ,timeSetListener
+        ,hour
+        ,mins
+        ,true);
+    tpDialog.show();
+  }
 
   public Location getLocation() {
     //Check permissions for location access.
@@ -227,7 +263,6 @@ public class AddHistoryItemFragment extends Fragment {
   }
 
   String[] getSuggestionNames() {
-
     ArrayList<Meal> meals = (ArrayList<Meal>) db.nevaDao().getAllMeals();
     String[] values;
     values = new String[meals.size()];

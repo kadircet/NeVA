@@ -190,6 +190,4 @@ public class ProposeFragment extends Fragment {
     Log.d(TAG, Integer.toString(values.length));
     return values;
   }
-
-
 }
