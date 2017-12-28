@@ -15,7 +15,7 @@ namespace orm {
 
 class SuggestionOrm {
  public:
-  // Initiates UserOrm class wih given mysql connection.
+  // Initiates SuggestionOrm class wih given mysql connection.
   SuggestionOrm(std::shared_ptr<mysqlpp::Connection> conn) : conn_(conn) {}
 
   grpc::Status GetSuggestees(
