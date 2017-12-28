@@ -11,6 +11,19 @@ namespace {
 using grpc::Status;
 using grpc::StatusCode;
 
+// Fetches tags associated with given suggestee and stores them into it.
+// Assumes suggestee->suggestee_id is set.
+void GetTags(mysqlpp::Connection* conn, Suggestion* suggestee) {
+  mysqlpp::Query query = conn->query(
+      "SELECT `tag_id` FROM `suggestee_tags` WHERE `suggestee_id`=%0");
+  query.parse();
+  const mysqlpp::StoreQueryResult res = query.store(suggestee->suggestee_id());
+  for (const auto row : res) {
+    Tag* tag = suggestee->add_tags();
+    tag->set_id(row["tag_id"]);
+  }
+}
+
 }  // namespace
 
 Status SuggestionOrm::GetSuggestees(
@@ -25,11 +38,13 @@ Status SuggestionOrm::GetSuggestees(
       "`id`>%1");
   query.parse();
 
-  mysqlpp::StoreQueryResult res = query.store(suggestion_category, start_index);
+  const mysqlpp::StoreQueryResult res =
+      query.store(suggestion_category, start_index);
   for (const auto row : res) {
     Suggestion suggestion;
     suggestion.set_suggestee_id(row["id"]);
     suggestion.set_name(row["name"]);
+    GetTags(conn_.get(), &suggestion);
     *suggestion_list->add_suggestion_list() = suggestion;
     VLOG(1) << suggestion.ShortDebugString() << " has been added to response.";
   }
