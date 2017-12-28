@@ -9,6 +9,7 @@
 #include "glog/logging.h"
 #include "orm/proposition_orm.h"
 #include "orm/suggestion_orm.h"
+#include "orm/tag_orm.h"
 #include "orm/user_history_orm.h"
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
@@ -26,6 +27,7 @@ using grpc::ServerContext;
 using grpc::Status;
 using orm::PropositionOrm;
 using orm::SuggestionOrm;
+using orm::TagOrm;
 using orm::UserHistoryOrm;
 using orm::UserOrm;
 
@@ -181,6 +183,13 @@ class BackendServiceImpl final : public Backend::Service {
     return user_history_orm_->RecordFeedback(user_id, request->user_feedback());
   }
 
+  Status GetTags(ServerContext* context, const GetTagsRequest* request,
+                 GetTagsReply* reply) override {
+    int user_id;
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    return tag_orm_->GetTags(request->start_index(), reply->mutable_tag_list());
+  }
+
   BackendServiceImpl() {
     conn_ = std::make_shared<mysqlpp::Connection>(false);
     conn_->set_option(new mysqlpp::ReconnectOption(true));
@@ -199,6 +208,7 @@ class BackendServiceImpl final : public Backend::Service {
     suggestion_orm_ = std::unique_ptr<SuggestionOrm>(new SuggestionOrm(conn_));
     user_history_orm_ =
         std::unique_ptr<UserHistoryOrm>(new UserHistoryOrm(conn_));
+    tag_orm_ = std::unique_ptr<TagOrm>(new TagOrm(conn_));
   }
 
  private:
@@ -207,6 +217,7 @@ class BackendServiceImpl final : public Backend::Service {
   std::unique_ptr<PropositionOrm> proposition_orm_;
   std::unique_ptr<SuggestionOrm> suggestion_orm_;
   std::unique_ptr<UserHistoryOrm> user_history_orm_;
+  std::unique_ptr<TagOrm> tag_orm_;
 };
 
 void RunServer() {

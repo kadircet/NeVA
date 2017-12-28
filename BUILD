@@ -8,6 +8,7 @@ cc_binary(
     deps = [
         "//orm:proposition_orm",
         "//orm:suggestion_orm",
+        "//orm:tag_orm",
         "//orm:user_history_orm",
         "//orm:user_orm",
         "//protos:backend_proto",
