@@ -133,7 +133,7 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
                 return
         }
         let managedObjectContext =
-            appDelegate.persistentContainer.viewContext
+            appDelegate.databaseContext
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]

@@ -67,7 +67,7 @@ class AddHistoryEntryViewController: UIViewController {
                 return
         }
         let managedObjectContext =
-            appDelegate.persistentContainer.viewContext
+            appDelegate.databaseContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
         do {
             let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Meal]
@@ -122,7 +122,7 @@ class AddHistoryEntryViewController: UIViewController {
                     return
             }
             let managedObjectContext =
-                appDelegate.persistentContainer.viewContext
+                appDelegate.databaseContext
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
             fetchRequest.predicate = NSPredicate(format: "name==%@", argumentArray: [mealName!])
             do {

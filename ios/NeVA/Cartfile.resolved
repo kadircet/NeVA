@@ -1,6 +1,6 @@
 github "BoltsFramework/Bolts-ObjC" "1.8.4"
 github "apple/swift-protobuf" "1.0.2"
-github "bilalyaylak/grpc-swift" "4b62d3170568372ed95fd03d4d5ad21e4451f410"
+github "bilalyaylak/grpc-swift" "f5387c85c8661e1d5a5d97d307f05de6c986f540"
 github "evgenyneu/keychain-swift" "10.0.0"
 github "facebook/Facebook-SDK-Swift" "0.3.0"
 github "facebook/facebook-ios-sdk" "sdk-version-4.29.0"

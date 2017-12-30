@@ -82,12 +82,12 @@ class RecommendationViewController: UIViewController {
         }
         
         let managedObjectContext =
-            appDelegate.persistentContainer.viewContext
+            appDelegate.databaseContext
         
         var startIndex = 0
         
         //Finding maximum id in database
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
+        /*let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
         fetchRequest.predicate = NSPredicate(format: "id==max(id)", argumentArray: nil)
         do {
             let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Meal]
@@ -96,7 +96,7 @@ class RecommendationViewController: UIViewController {
             }
         } catch {
             fatalError("Failed to fetch: \(error)")
-        }
+        }*/
         //
         
         //Get meals from server

@@ -121,7 +121,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 return
         }
         let managedObjectContext =
-            appDelegate.persistentContainer.viewContext
+            appDelegate.databaseContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "HistoryEntry")
         fetchRequest.predicate = predicate
         do {
@@ -138,7 +138,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
                 return
         }
         let managedObjectContext =
-            appDelegate.persistentContainer.viewContext
+            appDelegate.databaseContext
         
         //Find the last choice id for the user
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "HistoryEntry")
