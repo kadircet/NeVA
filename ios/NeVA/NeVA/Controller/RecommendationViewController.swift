@@ -85,7 +85,7 @@ class RecommendationViewController: UIViewController {
             appDelegate.databaseContext
         
         var startIndex = 0
-        
+        //TODO: Change fetching and updating system, just a temporary solution
         //Finding maximum id in database
         /*let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
         fetchRequest.predicate = NSPredicate(format: "id==max(id)", argumentArray: nil)
@@ -109,7 +109,7 @@ class RecommendationViewController: UIViewController {
         do {
             let responseMessage = try service.getsuggestionitemlist(request)
             print(responseMessage)
-            itemsAcquired = responseMessage.items
+            itemsAcquired = responseMessage.items.suggestionList
         } catch (let error) {
             print(error)
         }
