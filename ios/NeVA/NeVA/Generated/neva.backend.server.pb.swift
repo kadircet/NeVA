@@ -36,6 +36,7 @@ internal protocol Neva_Backend_BackendProvider {
   func register(request : Neva_Backend_RegisterRequest, session : Neva_Backend_BackendRegisterSession) throws -> Neva_Backend_GenericReply
   func login(request : Neva_Backend_LoginRequest, session : Neva_Backend_BackendLoginSession) throws -> Neva_Backend_LoginReply
   func updateuser(request : Neva_Backend_UpdateUserRequest, session : Neva_Backend_BackendUpdateUserSession) throws -> Neva_Backend_GenericReply
+  func getuser(request : Neva_Backend_GetUserRequest, session : Neva_Backend_BackendGetUserSession) throws -> Neva_Backend_GetUserReply
   func suggestionitemproposition(request : Neva_Backend_SuggestionItemPropositionRequest, session : Neva_Backend_BackendSuggestionItemPropositionSession) throws -> Neva_Backend_GenericReply
   func getsuggestion(request : Neva_Backend_GetSuggestionRequest, session : Neva_Backend_BackendGetSuggestionSession) throws -> Neva_Backend_GetSuggestionReply
   func tagproposition(request : Neva_Backend_TagPropositionRequest, session : Neva_Backend_BackendTagPropositionSession) throws -> Neva_Backend_GenericReply
@@ -44,6 +45,8 @@ internal protocol Neva_Backend_BackendProvider {
   func informuserchoice(request : Neva_Backend_InformUserChoiceRequest, session : Neva_Backend_BackendInformUserChoiceSession) throws -> Neva_Backend_InformUserChoiceReply
   func fetchuserhistory(request : Neva_Backend_FetchUserHistoryRequest, session : Neva_Backend_BackendFetchUserHistorySession) throws -> Neva_Backend_FetchUserHistoryReply
   func checktoken(request : Neva_Backend_CheckTokenRequest, session : Neva_Backend_BackendCheckTokenSession) throws -> Neva_Backend_GenericReply
+  func recordfeedback(request : Neva_Backend_RecordFeedbackRequest, session : Neva_Backend_BackendRecordFeedbackSession) throws -> Neva_Backend_GenericReply
+  func gettags(request : Neva_Backend_GetTagsRequest, session : Neva_Backend_BackendGetTagsSession) throws -> Neva_Backend_GetTagsReply
 }
 
 /// Common properties available in each service session.
@@ -127,6 +130,31 @@ internal class Neva_Backend_BackendUpdateUserSession : Neva_Backend_BackendSessi
       if let requestData = requestData {
         let requestMessage = try Neva_Backend_UpdateUserRequest(serializedData:requestData)
         let replyMessage = try self.provider.updateuser(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// GetUser (Unary)
+internal class Neva_Backend_BackendGetUserSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_GetUserRequest(serializedData:requestData)
+        let replyMessage = try self.provider.getuser(request:requestMessage, session: self)
         try self.handler.sendResponse(message:replyMessage.serializedData(),
                                       statusCode:self.statusCode,
                                       statusMessage:self.statusMessage,
@@ -336,6 +364,56 @@ internal class Neva_Backend_BackendCheckTokenSession : Neva_Backend_BackendSessi
   }
 }
 
+// RecordFeedback (Unary)
+internal class Neva_Backend_BackendRecordFeedbackSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_RecordFeedbackRequest(serializedData:requestData)
+        let replyMessage = try self.provider.recordfeedback(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// GetTags (Unary)
+internal class Neva_Backend_BackendGetTagsSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_GetTagsRequest(serializedData:requestData)
+        let replyMessage = try self.provider.gettags(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
 
 /// Main server for generated service
 internal class Neva_Backend_BackendServer {
@@ -388,6 +466,8 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendLoginSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/UpdateUser":
           try Neva_Backend_BackendUpdateUserSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/GetUser":
+          try Neva_Backend_BackendGetUserSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/SuggestionItemProposition":
           try Neva_Backend_BackendSuggestionItemPropositionSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/GetSuggestion":
@@ -404,6 +484,10 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendFetchUserHistorySession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/CheckToken":
           try Neva_Backend_BackendCheckTokenSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/RecordFeedback":
+          try Neva_Backend_BackendRecordFeedbackSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/GetTags":
+          try Neva_Backend_BackendGetTagsSession(handler:handler, provider:provider).run(queue:queue)
         default:
           break // handle unknown requests
         }

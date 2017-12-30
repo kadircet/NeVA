@@ -198,6 +198,61 @@ internal class Neva_Backend_BackendUpdateUserCall {
   }
 }
 
+/// GetUser (Unary)
+internal class Neva_Backend_BackendGetUserCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/GetUser")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_GetUserRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GetUserReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GetUserReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_GetUserRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GetUserReply?, CallResult)->())
+    throws -> Neva_Backend_BackendGetUserCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GetUserReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
 /// SuggestionItemProposition (Unary)
 internal class Neva_Backend_BackendSuggestionItemPropositionCall {
   private var call : Call
@@ -638,6 +693,116 @@ internal class Neva_Backend_BackendCheckTokenCall {
   }
 }
 
+/// RecordFeedback (Unary)
+internal class Neva_Backend_BackendRecordFeedbackCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/RecordFeedback")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_RecordFeedbackRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GenericReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_RecordFeedbackRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws -> Neva_Backend_BackendRecordFeedbackCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
+/// GetTags (Unary)
+internal class Neva_Backend_BackendGetTagsCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/GetTags")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_GetTagsRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GetTagsReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GetTagsReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_GetTagsRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GetTagsReply?, CallResult)->())
+    throws -> Neva_Backend_BackendGetTagsCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GetTagsReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
 /// Call methods of this class to make API calls.
 internal class Neva_Backend_BackendService {
   private var channel: Channel
@@ -713,6 +878,21 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendUpdateUserCall {
       return try Neva_Backend_BackendUpdateUserCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func getuser(_ request: Neva_Backend_GetUserRequest)
+    throws
+    -> Neva_Backend_GetUserReply {
+      return try Neva_Backend_BackendGetUserCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func getuser(_ request: Neva_Backend_GetUserRequest,
+                  completion: @escaping (Neva_Backend_GetUserReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendGetUserCall {
+      return try Neva_Backend_BackendGetUserCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }
@@ -833,6 +1013,36 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendCheckTokenCall {
       return try Neva_Backend_BackendCheckTokenCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func recordfeedback(_ request: Neva_Backend_RecordFeedbackRequest)
+    throws
+    -> Neva_Backend_GenericReply {
+      return try Neva_Backend_BackendRecordFeedbackCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func recordfeedback(_ request: Neva_Backend_RecordFeedbackRequest,
+                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendRecordFeedbackCall {
+      return try Neva_Backend_BackendRecordFeedbackCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func gettags(_ request: Neva_Backend_GetTagsRequest)
+    throws
+    -> Neva_Backend_GetTagsReply {
+      return try Neva_Backend_BackendGetTagsCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func gettags(_ request: Neva_Backend_GetTagsRequest,
+                  completion: @escaping (Neva_Backend_GetTagsReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendGetTagsCall {
+      return try Neva_Backend_BackendGetTagsCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }

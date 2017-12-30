@@ -149,6 +149,109 @@ struct Neva_Backend_UserHistory: SwiftProtobuf.Message {
   }
 }
 
+struct Neva_Backend_UserFeedback: SwiftProtobuf.Message {
+  static let protoMessageName: String = _protobuf_package + ".UserFeedback"
+
+  /// Information about the recommendation the feedback was given.
+  /// choice.choice_id conisides with the last_choice_id in
+  /// user_recommendation_feedback table
+  var choice: Neva_Backend_Choice {
+    get {return _storage._choice ?? Neva_Backend_Choice()}
+    set {_uniqueStorage()._choice = newValue}
+  }
+  /// Returns true if `choice` has been explicitly set.
+  var hasChoice: Bool {return _storage._choice != nil}
+  /// Clears the value of `choice`. Subsequent reads from it will return its default value.
+  mutating func clearChoice() {_storage._choice = nil}
+
+  /// Feedback given to recommendation.
+  var feedback: Neva_Backend_UserFeedback.Feedback {
+    get {return _storage._feedback}
+    set {_uniqueStorage()._feedback = newValue}
+  }
+
+  /// Id of the user to which feedback belongs to. On incoming requests is
+  /// deduced from session token. So can be empty.
+  var userID: UInt32 {
+    get {return _storage._userID}
+    set {_uniqueStorage()._userID = newValue}
+  }
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  enum Feedback: SwiftProtobuf.Enum {
+    typealias RawValue = Int
+    case unknown // = 0
+    case dislike // = 1
+    case like // = 2
+    case UNRECOGNIZED(Int)
+
+    init() {
+      self = .unknown
+    }
+
+    init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .unknown
+      case 1: self = .dislike
+      case 2: self = .like
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    var rawValue: Int {
+      switch self {
+      case .unknown: return 0
+      case .dislike: return 1
+      case .like: return 2
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
+
+  init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._choice)
+        case 2: try decoder.decodeSingularEnumField(value: &_storage._feedback)
+        case 3: try decoder.decodeSingularUInt32Field(value: &_storage._userID)
+        default: break
+        }
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._choice {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if _storage._feedback != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._feedback, fieldNumber: 2)
+      }
+      if _storage._userID != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._userID, fieldNumber: 3)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "neva.backend"
@@ -220,4 +323,59 @@ extension Neva_Backend_UserHistory: SwiftProtobuf._MessageImplementationBase, Sw
     if unknownFields != other.unknownFields {return false}
     return true
   }
+}
+
+extension Neva_Backend_UserFeedback: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "choice"),
+    2: .same(proto: "feedback"),
+    3: .standard(proto: "user_id"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _choice: Neva_Backend_Choice? = nil
+    var _feedback: Neva_Backend_UserFeedback.Feedback = .unknown
+    var _userID: UInt32 = 0
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _choice = source._choice
+      _feedback = source._feedback
+      _userID = source._userID
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_UserFeedback) -> Bool {
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._choice != other_storage._choice {return false}
+        if _storage._feedback != other_storage._feedback {return false}
+        if _storage._userID != other_storage._userID {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_UserFeedback.Feedback: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "UNKNOWN"),
+    1: .same(proto: "DISLIKE"),
+    2: .same(proto: "LIKE"),
+  ]
 }

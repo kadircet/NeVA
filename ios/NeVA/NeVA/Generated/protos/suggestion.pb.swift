@@ -31,6 +31,9 @@ struct Neva_Backend_Suggestion: SwiftProtobuf.Message {
   /// Name of the suggestion item, like "lahmacun".
   var name: String = String()
 
+  /// Tags associated with that suggestion.
+  var tags: [Neva_Backend_Tag] = []
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   enum SuggestionCategory: SwiftProtobuf.Enum {
@@ -73,6 +76,7 @@ struct Neva_Backend_Suggestion: SwiftProtobuf.Message {
       case 1: try decoder.decodeSingularEnumField(value: &self.suggestionCategory)
       case 2: try decoder.decodeSingularUInt32Field(value: &self.suggesteeID)
       case 3: try decoder.decodeSingularStringField(value: &self.name)
+      case 4: try decoder.decodeRepeatedMessageField(value: &self.tags)
       default: break
       }
     }
@@ -91,6 +95,9 @@ struct Neva_Backend_Suggestion: SwiftProtobuf.Message {
     }
     if !self.name.isEmpty {
       try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
+    }
+    if !self.tags.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.tags, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -130,6 +137,48 @@ struct Neva_Backend_SuggestionList: SwiftProtobuf.Message {
   }
 }
 
+struct Neva_Backend_Tag: SwiftProtobuf.Message {
+  static let protoMessageName: String = _protobuf_package + ".Tag"
+
+  /// id of the tag in `tag` table.
+  var id: UInt32 = 0
+
+  /// name of the tag.
+  var name: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
+  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
+  /// initializers are defined in the SwiftProtobuf library. See the Message and
+  /// Message+*Additions` files.
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularUInt32Field(value: &self.id)
+      case 2: try decoder.decodeSingularStringField(value: &self.name)
+      default: break
+      }
+    }
+  }
+
+  /// Used by the encoding methods of the SwiftProtobuf library, not generally
+  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
+  /// other serializer methods are defined in the SwiftProtobuf library. See the
+  /// `Message` and `Message+*Additions` files.
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.id != 0 {
+      try visitor.visitSingularUInt32Field(value: self.id, fieldNumber: 1)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "neva.backend"
@@ -139,12 +188,14 @@ extension Neva_Backend_Suggestion: SwiftProtobuf._MessageImplementationBase, Swi
     1: .standard(proto: "suggestion_category"),
     2: .standard(proto: "suggestee_id"),
     3: .same(proto: "name"),
+    4: .same(proto: "tags"),
   ]
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_Suggestion) -> Bool {
     if self.suggestionCategory != other.suggestionCategory {return false}
     if self.suggesteeID != other.suggesteeID {return false}
     if self.name != other.name {return false}
+    if self.tags != other.tags {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
@@ -164,6 +215,20 @@ extension Neva_Backend_SuggestionList: SwiftProtobuf._MessageImplementationBase,
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_SuggestionList) -> Bool {
     if self.suggestionList != other.suggestionList {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_Tag: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+    2: .same(proto: "name"),
+  ]
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_Tag) -> Bool {
+    if self.id != other.id {return false}
+    if self.name != other.name {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
