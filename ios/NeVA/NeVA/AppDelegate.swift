@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let url = self.applicationDocumentsDirectory.appendingPathComponent("Neva").appendingPathExtension("sqlite")
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("NeVA").appendingPathExtension("sqlite")
         do {
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch {
@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     // MARK: - Core Data stack (iOS 9)
-    @available(iOS 8.0, *)
+    @available(iOS 9.0, *)
     lazy var managedObjectContext: NSManagedObjectContext = {
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
