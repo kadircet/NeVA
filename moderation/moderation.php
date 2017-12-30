@@ -16,7 +16,7 @@ if(isset($_GET['error'])) {
 if(!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
   $_SESSION['loggedin'] = false;
   if(isset($_POST['login'])) {
-    if(md5($_POST['password']) == "40ad8fc9442f32397834d1971abfb38e") {
+    if(md5($_POST['password']) === "f969306d174389f30cb508e21412d741") {
       $_SESSION['loggedin'] = true;
       header('Location: /moderation.php');
     } else {
