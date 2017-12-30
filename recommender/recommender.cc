@@ -106,12 +106,14 @@ SuggestionList GetMultipleSuggestions(const UserHistory& history,
   }
 
   // Return all most frequent elements
-  SuggestionList* suggested_list;
+  SuggestionList suggested_list;
   for (const auto& it : max_freq_ids) {
-    *suggested_list->add_suggestion_list() = *id_to_suggestee[*it];
+    const Suggestion suggestion = *id_to_suggestee[it];
+    VLOG(1) << suggestion.ShortDebugString() << " is current suggestion.";
+    *suggested_list->add_suggestion_list() = suggestion;
   }
 
-  return *suggested_list;
+  return suggested_list;
 }
 
 }  // namespace recommender
