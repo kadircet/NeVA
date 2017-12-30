@@ -84,9 +84,9 @@ while($suggestee = $res->fetch_array()) {
   $category_id = $suggestee[0];
   $name = $suggestee[1];
   if(!array_key_exists($category_id, $suggestees)) {
-    $suggestees[$category_id] = array();
+    $suggestees[$category_id] = new \Ds\Set();
   }
-  $suggestees[$category_id][] = $name;
+  $suggestees[$category_id]->add($name);
 }
 
 $sql = "SELECT items.`id`, `name`, `suggestion`, cats.`id` FROM
@@ -99,7 +99,7 @@ if($res->num_rows==0) {
 
 echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
-  $exists = array_key_exists($prop[1], $suggestees[$prop[3]]);
+  $exists = $suggestees[$prop[3]]->contains($prop[2]);
   echo <<<EOF
 <tr style='background: $exists?red:green;'>
 <form method="POST">
