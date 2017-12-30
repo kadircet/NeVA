@@ -2,13 +2,25 @@
 
 session_start();
 
+if(isset($_GET['error'])) {
+  switch($_GET['error']) {
+  case 1:
+    echo "<b>Wrong password.</b>";
+    break;
+  default:
+    echo "<b>An unknown error occured.</b>";
+    break;
+  }
+}
+
 if(!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
   $_SESSION['loggedin'] = false;
   if(isset($_POST['login'])) {
     if(md5($_POST['password']) == "40ad8fc9442f32397834d1971abfb38e") {
       $_SESSION['loggedin'] = true;
+      header('Location: /moderation.php');
     } else {
-      echo "<b>Wrong password.</b>";
+      header('Location: /moderation.php?error=1');
     }
   }
   if(!$_SESSION['loggedin']) {
@@ -73,7 +85,7 @@ if($res->num_rows==0) {
   echo "Nothing to moderate, well done.";
 }
 
-echo "<table>";
+echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
   echo <<<EOF
 <tr>
@@ -107,7 +119,7 @@ if($res->num_rows==0) {
   echo "No tag to moderate, well done.";
 }
 
-echo "<table>";
+echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
   echo <<<EOF
 <tr>
