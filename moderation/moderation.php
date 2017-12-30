@@ -50,6 +50,21 @@ if(isset($_POST['accept']) || isset($_POST['reject'])) {
   $stmt->execute();
 }
 
+if(isset($_POST['accept_tag']) || isset($_POST['reject_tag'])) {
+  if(isset($_POST['accept_tag'])) {
+    $name = $_POST['suggestion'];
+    $sql = "INSERT INTO `tag` (`key`) VALUES (?)";
+    $stmt = $db->prepare($sql);
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+  }
+  $prop_id = (int)$_POST['id'];
+  $sql = "DELETE FROM `tag_suggestion` WHERE `id`=?";
+  $stmt = $db->prepare($sql);
+  $stmt->bind_param("i", $prop_id);
+  $stmt->execute();
+}
+
 $sql = "SELECT items.`id`, `name`, `suggestion`, cats.`id` FROM
   `item_suggestion` items, `suggestion_category` cats WHERE
   items.`category_id` = cats.`id`";
@@ -73,4 +88,47 @@ while($prop = $res->fetch_array()) {
 </tr>
 EOF;
 }
+echo <<<EOF
+<tr>
+<form method="POST">
+  <input type="hidden" name="id" value="0">
+  <td><label>meal</label></td>
+  <td><input type="text" name="suggestion" value=""></td>
+  <td><input type="submit" name="accept" value="add meal"></td>
+  <input type="hidden" name="category_id" value="1">
+</form>
+</tr>
+EOF;
+echo "</table>";
+
+$sql = "SELECT `id`, `tag` FROM `tag_suggestion` tags";
+$res = $db->query($sql);
+if($res->num_rows==0) {
+  echo "No tag to moderate, well done.";
+}
+
+echo "<table>";
+while($prop = $res->fetch_array()) {
+  echo <<<EOF
+<tr>
+<form method="POST">
+  <input type="hidden" name="id" value="$prop[0]">
+  <td><label>tag</label></td>
+  <td><input type="text" name="suggestion" value="$prop[1]"></td>
+  <td><input type="submit" name="accept_tag" value="accept"></td>
+  <td><input type="submit" name="reject_tag" value="reject"></td>
+</form>
+</tr>
+EOF;
+}
+echo <<<EOF
+<tr>
+<form method="POST">
+  <input type="hidden" name="id" value="0">
+  <td><label>tag</label></td>
+  <td><input type="text" name="suggestion" value=""></td>
+  <td><input type="submit" name="accept_tag" value="add tag"></td>
+</form>
+</tr>
+EOF;
 echo "</table>";
