@@ -4,12 +4,13 @@
         <attribute name="choice_id" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="userMail" attributeType="String" syncable="YES"/>
-        <relationship name="meal" maxCount="1" deletionRule="Cascade" destinationEntity="Meal" syncable="YES"/>
+        <relationship name="meal" maxCount="1" deletionRule="Cascade" destinationEntity="Meal" inverseName="historyEntries" inverseEntity="Meal" syncable="YES"/>
     </entity>
     <entity name="Meal" representedClassName="Meal" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="Integer 32" minValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="historyEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HistoryEntry" inverseName="meal" inverseEntity="HistoryEntry" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="meals" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
@@ -19,7 +20,7 @@
     </entity>
     <elements>
         <element name="HistoryEntry" positionX="-308" positionY="168" width="128" height="103"/>
-        <element name="Meal" positionX="-425" positionY="-9" width="128" height="105"/>
+        <element name="Meal" positionX="-425" positionY="-9" width="128" height="118"/>
         <element name="Tag" positionX="-74" positionY="9" width="128" height="88"/>
     </elements>
 </model>
