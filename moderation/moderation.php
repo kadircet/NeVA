@@ -229,6 +229,7 @@ while($prop = $res->fetch_array()) {
   <input type="hidden" name="id" value="$prop[0]">
   <input type="hidden" name="suggestee_id" value="$prop[1]">
   <input type="hidden" name="tag_id" value="$prop[3]">
+  <td><label>tvs</label></td>
   <td><label>$prop[2]</label></td>
   <td><label>$prop[4]</label></td>
   <td><input type="submit" name="accept_tvs" value="accept"></td>
@@ -241,6 +242,7 @@ echo <<<EOF
 <tr>
 <form method="POST">
   <input type="hidden" name="id" value="0">
+  <td><label>tvs</label></td>
   <td><input type="text" name="suggestee_name" list="suggestees"></td>
   <td><input type="text" name="tag_name" list="tags"></td>
   <td><input type="submit" name="add_tvs" value="accept"></td>
