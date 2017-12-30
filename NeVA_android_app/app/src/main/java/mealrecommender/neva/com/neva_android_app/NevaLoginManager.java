@@ -15,6 +15,8 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
+import neva.backend.BackendOuterClass.CheckTokenRequest;
+import neva.backend.BackendOuterClass.GenericReply;
 
 /**
  * Created by hakan on 12/12/17.
@@ -30,8 +32,8 @@ public class NevaLoginManager {
   private String stringToken;
   private boolean loggedIn;
 
-  BackendGrpc.BackendBlockingStub blockingStub;
   ManagedChannel mChannel;
+  public BackendGrpc.BackendBlockingStub blockingStub;
 
   protected NevaLoginManager() {
     mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051).build();
@@ -102,6 +104,17 @@ public class NevaLoginManager {
     } catch (Exception e) {
       e.printStackTrace();
       Log.i(TAG, e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean validateToken() {
+    CheckTokenRequest checkTokenRequest = CheckTokenRequest.newBuilder()
+        .setToken(getByteStringToken()).build();
+    try{
+      GenericReply genericReply = blockingStub.checkToken(checkTokenRequest);
+      return true;
+    } catch (Exception e) {
       return false;
     }
   }

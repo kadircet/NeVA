@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity
       if (acc[0] != null) {
         am.removeAccount(acc[0], null, null);
       }
+      LoginManager.getInstance().logOut();
       NevaLoginManager.getInstance().logOut();
       Intent loginActivity = new Intent(getBaseContext(), LoginActivity.class);
       startActivity(loginActivity);

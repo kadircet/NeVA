@@ -1,4 +1,4 @@
-package mealrecommender.neva.com.neva_android_app;
+package mealrecommender.neva.com.neva_android_app.authenticator;
 
 import android.app.Service;
 import android.content.Intent;

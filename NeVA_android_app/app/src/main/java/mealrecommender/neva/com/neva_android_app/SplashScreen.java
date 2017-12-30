@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
+import com.facebook.login.LoginManager;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -33,7 +35,6 @@ public class SplashScreen extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     accountManager = AccountManager.get(getBaseContext());
     checkAccounts();
   }
@@ -47,6 +48,7 @@ public class SplashScreen extends AppCompatActivity {
       Intent intent = new Intent(this, LoginActivity.class);
       intent.putExtra(LoginActivity.IS_ADDING_NEW_ACCOUNT, true);
       startActivityForResult(intent, 1);
+      LoginManager.getInstance().logOut();
       return;
     }
 
@@ -58,15 +60,17 @@ public class SplashScreen extends AppCompatActivity {
   @SuppressLint("StaticFieldLeak")
   private void executeLogin(Account userAccount) {
     final Account loginAccount = userAccount;
+    Toast.makeText(getBaseContext(), "Logging in with account: " + loginAccount.name,
+        Toast.LENGTH_LONG).show();
     Log.i(TAG, "Getting authtoken from AccountManager");
     try {
       //BE CAREFUL THERE MAY BE A MEMORY LEAK HERE DUE TO ASYNCTASK LIVING LONGER THAN SPLASHSCREEN
       //When task gets the authtoken OnTokenAcquired.run() is called.
       new AsyncTask<Void, Void, Void>() {
         protected Void doInBackground(Void... voids) {
-          accountManager.getAuthToken(loginAccount, LoginActivity.AUTH_TOKEN_TYPE, null,
+          accountManager.getAuthToken(loginAccount, LoginActivity.NEVA_TOKEN_TYPE, null,
               SplashScreen.this, new OnTokenAcquired(), null);
-          return null;
+          return  null;
         }
       }.execute();
     } catch (Exception e) {
@@ -75,32 +79,7 @@ public class SplashScreen extends AppCompatActivity {
     }
   }
 
-  private void processToken(String token) {
-    //TODO: Check Auth Token With Server
-    Log.i(TAG, "Checking auth token");
-    Log.i(TAG, "Token from Account Manager: " + token);
-    Log.i(TAG, "Token from NevaLoginManager: " + NevaLoginManager.getInstance().getStringToken());
-    //TODO: Move this check to NevaLoginManager
-    NevaLoginManager nevaLoginManager = NevaLoginManager.getInstance();
-    CheckTokenRequest checkTokenRequest = CheckTokenRequest.newBuilder()
-        .setToken(nevaLoginManager.getByteStringToken()).build();
-    BackendBlockingStub blockingStub = nevaLoginManager.blockingStub;
-
-    try {
-      GenericReply genericReply = blockingStub.checkToken(checkTokenRequest);
-      Log.i(TAG, "TOKEN VALID");
-      Log.i(TAG, "Launching MainActivity");
-      Intent intent = new Intent(getBaseContext(), MainActivity.class);
-      startActivity(intent);
-    } catch (Exception e) {
-      Log.e(TAG, "TOKEN AUTH FAIL" + e.getMessage());
-      e.printStackTrace();
-    }
-    return;
-  }
-
   private class OnTokenAcquired implements AccountManagerCallback<Bundle> {
-
     @Override
     public void run(AccountManagerFuture<Bundle> result) {
       Bundle bundle = null;
@@ -108,20 +87,39 @@ public class SplashScreen extends AppCompatActivity {
       try {
         bundle = result.getResult();
         authIntent = (Intent) bundle.get(AccountManager.KEY_INTENT);
+        if (authIntent != null) {
+          Log.i(TAG, "Response bundle contains Intent, directing to LoginActivity");
+          Toast.makeText(getBaseContext(), "Problem with AuthToken, please login again", Toast.LENGTH_LONG).show();
+          startActivityForResult(authIntent, 0);
+          return;
+        }
+        String accountName = bundle.getString(AccountManager.KEY_ACCOUNT_NAME);
+        String token = bundle.getString(AccountManager.KEY_AUTHTOKEN);
+        accountManager.invalidateAuthToken(LoginActivity.ACCOUNT_TYPE, token);
+        NevaLoginManager.getInstance().setAuthToken(accountName, token); //Initiate NevaLoginManager
+        processToken(token);
       } catch (Exception e) {
         Log.e(TAG, "Cannot get data from response bundle!");
         e.printStackTrace();
       }
-      if (authIntent != null) {
-        Log.i(TAG, "Response bundle contains Intent, directing to LoginActivity");
-        startActivityForResult(authIntent, 0);
-        return;
-      }
-      String accountName = bundle.getString(AccountManager.KEY_ACCOUNT_NAME);
-      String token = bundle.getString(AccountManager.KEY_AUTHTOKEN);
-      accountManager.invalidateAuthToken(LoginActivity.ACCOUNT_TYPE, token);
-      NevaLoginManager.getInstance().setAuthToken(accountName, token); //Initiate NevaLoginManager
-      processToken(token);
+    }
+  }
+
+  private void processToken(String token) {
+    Log.i(TAG, "Checking auth token");
+    Log.i(TAG, "Token from Account Manager: " + token);
+    Log.i(TAG, "Token from NevaLoginManager: " + NevaLoginManager.getInstance().getStringToken());
+
+    if(NevaLoginManager.getInstance().validateToken()){
+      Log.i(TAG, "TOKEN VALID");
+      Log.i(TAG, "Launching MainActivity");
+      Intent intent = new Intent(getBaseContext(), MainActivity.class);
+      startActivity(intent);
+      finish();
+    } else {
+      Log.e(TAG, "TOKEN AUTH INVALID");
+      Toast.makeText(getBaseContext(), "Problem while validating token", Toast.LENGTH_LONG).show();
+      finishAndRemoveTask();
     }
   }
 
@@ -134,6 +132,8 @@ public class SplashScreen extends AppCompatActivity {
     if (resultCode == RESULT_OK && (requestCode == 0 || requestCode == 1)) {
       Log.i(TAG, "Checking acocunts again");
       checkAccounts();
+    } else {
+      Toast.makeText(getBaseContext(), "There was a problem with LoginActivity", Toast.LENGTH_LONG).show();
     }
     super.onActivityResult(requestCode, resultCode, data);
   }
