@@ -103,6 +103,22 @@ class BackendServiceImpl final : public Backend::Service {
     RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     UserHistory user_history;
     user_history_orm_->FetchUserHistory(user_id, 0, &user_history);
+    Suggestion suggestion;
+    RETURN_IF_ERROR(suggestion_orm_->GetSuggestion(
+        user_history, request->suggestion_category(), &suggestion));
+    reply->set_name(suggestion.name());
+    return Status::OK;
+  }
+
+  Status GetMultipleSuggestions(ServerContext* context,
+                                const GetSuggestionRequest* request,
+                                GetSuggestionReply* reply) override {
+    VLOG(1) << "Received GetMultipleSuggestions for category: "
+            << request->DebugString();
+    int user_id;
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    UserHistory user_history;
+    user_history_orm_->FetchUserHistory(user_id, 0, &user_history);
     SuggestionList suggestion;
     RETURN_IF_ERROR(suggestion_orm_->GetSuggestion(
         user_history, request->suggestion_category(),
