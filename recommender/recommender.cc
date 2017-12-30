@@ -17,7 +17,7 @@ Suggestion GetSuggestion(const UserHistory& history,
 
   // Pick one random element randomly from most frequent ones.
   const uint32_t element_idx = util::GetRandom(suggested_list.suggestion_list_size());
-  return suggested_list.suggestion_list(element_idx - 1);
+  return suggested_list.suggestion_list(element_idx);
 }
 
 SuggestionList GetMultipleSuggestions(const UserHistory& history,
