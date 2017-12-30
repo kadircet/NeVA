@@ -69,7 +69,7 @@ SuggestionList GetMultipleSuggestions(const UserHistory& history,
   SuggestionList suggested_list;
   for (const auto& it : max_freq_ids) {
     const Suggestion suggestion = *id_to_suggestee[it];
-    VLOG(1) << suggestion.ShortDebugString() << " is current suggestion.";
+    VLOG(1) << suggestion.ShortDebugString() << " has been added to list.";
     *suggested_list.add_suggestion_list() = suggestion;
   }
 
