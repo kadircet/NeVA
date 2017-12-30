@@ -100,8 +100,9 @@ if($res->num_rows==0) {
 echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
   $exists = $suggestees[$prop[3]]->contains($prop[2]);
+  $color = $exists ? 'red' : 'green';
   echo <<<EOF
-<tr style='background: $exists?red:green;'>
+<tr style='background: $color;'>
 <form method="POST">
   <input type="hidden" name="id" value="$prop[0]">
   <td><label>$prop[1]</label></td>
