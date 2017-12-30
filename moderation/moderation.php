@@ -61,6 +61,7 @@ if(isset($_POST['accept']) || isset($_POST['reject'])) {
   $stmt = $db->prepare($sql);
   $stmt->bind_param("i", $prop_id);
   $stmt->execute();
+  header('Location: /moderation.php');
 }
 
 if(isset($_POST['accept_tag']) || isset($_POST['reject_tag'])) {
@@ -76,6 +77,38 @@ if(isset($_POST['accept_tag']) || isset($_POST['reject_tag'])) {
   $stmt = $db->prepare($sql);
   $stmt->bind_param("i", $prop_id);
   $stmt->execute();
+  header('Location: /moderation.php');
+}
+
+if(isset($_POST['accept_tvs']) || isset($_POST['reject_tvs'])) {
+  if(isset($_POST['accept_tvs'])) {
+    $suggestee_id = $_POST['suggestee_id'];
+    $tag_id = $_POST['tag_id'];
+    $sql = "INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`) 
+      VALUES (?, ?)";
+    $stmt = $db->prepare($sql);
+    $stmt->bind_param("ii", $suggestee_id, $tag_id);
+    $stmt->execute();
+  }
+  $prop_id = (int)$_POST['id'];
+  $sql = "DELETE FROM `tag_value_suggestion` WHERE `id`=?";
+  $stmt = $db->prepare($sql);
+  $stmt->bind_param("i", $prop_id);
+  $stmt->execute();
+  header('Location: /moderation.php');
+}
+
+if(isset($_POST['add_tvs'])) {
+  $suggestee = $_POST['suggestee_name'];
+  $tag = $_POST['tag_name'];
+
+  $sql = "INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`)
+    SELECT `suggestee`.`id`, `tag`.`id` FROM `suggestee`, `tag` WHERE `name`=? 
+    AND `key`=?";
+  $stmt = $db->prepare($sql);
+  $stmt->bind_param("ss", $suggestee, $tag);
+  $stmt->execute();
+  header('Location: /moderation.php');
 }
 
 $sql = "SELECT `category_id`, `name` FROM `suggestee`";
@@ -175,6 +208,42 @@ echo <<<EOF
   <td><label>tag</label></td>
   <td><input type="text" name="suggestion" value=""></td>
   <td><input type="submit" name="accept_tag" value="add tag"></td>
+</form>
+</tr>
+EOF;
+echo "</table>";
+
+$sql = "SELECT `id`, `suggestee_id`, `name`, `tag_id`, `tag` FROM 
+  `tag_value_suggestion`, `suggestee`, `tag` WHERE 
+  `suggestee_id`=`suggestee`.`id` AND `tag_id`=`tag`.`id`";
+$res = $db->query($sql);
+if($res->num_rows==0) {
+  echo "No suggestee-tag relation to moderate, well done.";
+}
+
+echo "<table style='float: left;'>";
+while($prop = $res->fetch_array()) {
+  echo <<<EOF
+<tr style='background: $color;'>
+<form method="POST">
+  <input type="hidden" name="id" value="$prop[0]">
+  <input type="hidden" name="suggestee_id" value="$prop[1]">
+  <input type="hidden" name="tag_id" value="$prop[3]">
+  <td><label>$prop[2]</label></td>
+  <td><label>$prop[4]</label></td>
+  <td><input type="submit" name="accept_tvs" value="accept"></td>
+  <td><input type="submit" name="reject_tvs" value="reject"></td>
+</form>
+</tr>
+EOF;
+}
+echo <<<EOF
+<tr>
+<form method="POST">
+  <input type="hidden" name="id" value="0">
+  <td><input type="text" name="suggestee" list="suggestees" value="$prop[2]"></td>
+  <td><input type="text" name="tag" list="tags" value="$prop[4]"></td>
+  <td><input type="submit" name="add_tvs" value="accept"></td>
 </form>
 </tr>
 EOF;
