@@ -147,13 +147,17 @@ message GetSuggestionItemListRequest {
   // Category for which the user requesting items.
   Suggestion.SuggestionCategory suggestion_category = 2;
 
-  // Start index to fetch items.
+  // Fetch elements updated after that index. Giving zero as start_index would
+  // result in fetching all items.
   uint32 start_index = 3;
 }
 
 message GetSuggestionItemListReply {
   // Item names in the database.
-  repeated Suggestion items = 1;
+  SuggestionList items = 1;
+
+  // Current version of the database.
+  uint32 last_updated = 2;
 }
 
 message InformUserChoiceRequest {

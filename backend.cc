@@ -134,13 +134,11 @@ class BackendServiceImpl final : public Backend::Service {
     VLOG(1) << "Received GetSuggestionItemList:" << request->DebugString();
     int user_id;
     RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
-    SuggestionList suggestion_list;
+    uint32_t last_updated;
     suggestion_orm_->GetSuggestees(request->suggestion_category(),
-                                   request->start_index(), &suggestion_list);
-    // TODO(kadircet): return suggestion_list directly in reply.
-    for (const Suggestion& suggestion : suggestion_list.suggestion_list()) {
-      *reply->add_items() = suggestion;
-    }
+                                   request->start_index(),
+                                   reply->mutable_items(), &last_updated);
+    reply->set_last_updated(last_updated);
     return Status::OK;
   }
 
