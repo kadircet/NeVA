@@ -28,26 +28,31 @@ void GetTags(mysqlpp::Connection* conn, Suggestion* suggestee) {
 
 Status SuggestionOrm::GetSuggestees(
     const Suggestion::SuggestionCategory suggestion_category,
-    const uint32_t start_index, SuggestionList* suggestion_list) {
+    const uint32_t start_index, SuggestionList* suggestion_list,
+    uint32_t* last_updated) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
 
   mysqlpp::Query query = conn_->query(
-      "SELECT `id`, `name` FROM `suggestee` WHERE `category_id`=%0 AND "
-      "`id`>%1");
+      "SELECT `id`, `name`, `last_updated` FROM `suggestee` WHERE "
+      "`category_id`=%0 AND `last_updated`>%1");
   query.parse();
 
   const mysqlpp::StoreQueryResult res =
       query.store(suggestion_category, start_index);
+  uint32_t max_updated = start_index;
   for (const auto row : res) {
     Suggestion suggestion;
     suggestion.set_suggestee_id(row["id"]);
     suggestion.set_name(row["name"]);
+    max_updated =
+        std::max(max_updated, static_cast<uint32_t>(row["last_updated"]));
     GetTags(conn_.get(), &suggestion);
     *suggestion_list->add_suggestion_list() = suggestion;
     VLOG(1) << suggestion.ShortDebugString() << " has been added to response.";
   }
+  if (last_updated != nullptr) *last_updated = max_updated;
   return Status::OK;
 }
 
