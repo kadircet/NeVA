@@ -241,8 +241,8 @@ echo <<<EOF
 <tr>
 <form method="POST">
   <input type="hidden" name="id" value="0">
-  <td><input type="text" name="suggestee" list="suggestees" value="$prop[2]"></td>
-  <td><input type="text" name="tag" list="tags" value="$prop[4]"></td>
+  <td><input type="text" name="suggestee_name" list="suggestees" value="$prop[2]"></td>
+  <td><input type="text" name="tag_name" list="tags" value="$prop[4]"></td>
   <td><input type="submit" name="add_tvs" value="accept"></td>
 </form>
 </tr>
