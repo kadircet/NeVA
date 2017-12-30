@@ -51,10 +51,15 @@ if(isset($_POST['accept']) || isset($_POST['reject'])) {
   if(isset($_POST['accept'])) {
     $name = $_POST['suggestion'];
     $category = (int)$_POST['category_id'];
+
+    $sql = "SELECT MAX(`last_updated`) FROM `suggestee`";
+    $res = $db->query($sql);
+    $last_updated = $res->fetch_array()[0] + 1;
+
     $sql = "INSERT INTO `suggestee` (`category_id`, `name`, `last_updated`)
-      VALUES (?, ?, (SELECT MAX(`last_updated`) FROM `suggestee`)+1)";
+      VALUES (?, ?, ?)";
     $stmt = $db->prepare($sql);
-    $stmt->bind_param("is", $category, $name);
+    $stmt->bind_param("isi", $category, $name, $last_updated);
     $stmt->execute();
   }
   $prop_id = (int)$_POST['id'];
@@ -93,11 +98,11 @@ if(isset($_POST['accept_tvs']) || isset($_POST['reject_tvs'])) {
 
     $sql = "SELECT MAX(`last_updated`) FROM `suggestee`";
     $res = $db->query($sql);
-    $last_updated = $res->fetch_array()[0];
+    $last_updated = $res->fetch_array()[0] + 1;
 
     $sql = "UPDATE `suggestee` SET `last_updated`=? WHERE `id`=?";
     $stmt = $db->prepare($sql);
-    $stmt->bind_param("ii", $last_updated+1, $suggestee_id);
+    $stmt->bind_param("ii", $last_updated, $suggestee_id);
     $stmt->execute();
   }
   $prop_id = (int)$_POST['id'];
@@ -121,11 +126,11 @@ if(isset($_POST['add_tvs'])) {
 
   $sql = "SELECT MAX(`last_updated`) FROM `suggestee`";
   $res = $db->query($sql);
-  $last_updated = $res->fetch_array()[0];
+  $last_updated = $res->fetch_array()[0] + 1;
 
   $sql = "UPDATE `suggestee` SET `last_updated`=? WHERE `name`=?";
   $stmt = $db->prepare($sql);
-  $stmt->bind_param("is", $last_updated+1, $suggestee);
+  $stmt->bind_param("is", $last_updated, $suggestee);
   $stmt->execute();
 
   header('Location: /moderation.php');
