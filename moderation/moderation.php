@@ -126,6 +126,14 @@ echo <<<EOF
 </tr>
 EOF;
 echo "</table>";
+unset($suggestees);
+
+$sql = "SELECT `key` FROM `tag`";
+$res = $db->query($sql);
+$tags = new \Ds\Set();
+while($tag = $res->fetch_array()) {
+  $tags->add($tag[0]);
+}
 
 $sql = "SELECT `id`, `tag` FROM `tag_suggestion` tags";
 $res = $db->query($sql);
@@ -135,8 +143,10 @@ if($res->num_rows==0) {
 
 echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
+  $exists = $tags->contain($prop[1]);
+  $color = $exists ? 'red' : 'green';
   echo <<<EOF
-<tr>
+<tr style='background: $color;'>
 <form method="POST">
   <input type="hidden" name="id" value="$prop[0]">
   <td><label>tag</label></td>
