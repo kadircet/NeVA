@@ -38,12 +38,9 @@ TEST(GetSuggestion, SanityTest) {
   SuggestionList suggestion_list;
   TextFormat::ParseFromString(kSuggestionList, &suggestion_list);
 
-  // TODO(alperenakcay): Fix recommendation test with multiple food items.
-  const SuggestionList suggested_list =
-      GetSuggestion(user_history, suggestion_list);
-  const Suggestion suggestion = suggested_list.suggestion_list(0);
-  //EXPECT_EQ(suggestion.suggestee_id(), kExpectedSuggesteeId);
-  //EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);
+  const Suggestion suggestion = GetSuggestion(user_history, suggestion_list);
+  EXPECT_EQ(suggestion.suggestee_id(), kExpectedSuggesteeId);
+  EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);
 }
 
 }  // namespace
