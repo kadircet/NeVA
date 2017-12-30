@@ -1,6 +1,7 @@
 package mealrecommender.neva.com.neva_android_app;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.util.Log;
@@ -20,8 +21,8 @@ import java.util.Locale;
 
 public class HistoryCursorAdapter extends CursorAdapter {
 
-  public static final String TAG = "HistoryCursorAdapter";
-
+  public final String TAG = this.getClass().getSimpleName();
+  final String dateFormat = Resources.getSystem().getString(R.string.adapter_date_format);
   LayoutInflater inflater;
 
   public HistoryCursorAdapter(Context context, Cursor cursor, int flags) {
@@ -34,7 +35,7 @@ public class HistoryCursorAdapter extends CursorAdapter {
     String mealName = cursor.getString(cursor.getColumnIndex("mealName"));
     long epochTime = cursor.getLong(cursor.getColumnIndex("date"));
     Date date = new Date(epochTime);
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm, EEEE, MMMM d, yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
     String dateText = sdf.format(date);
     Log.d(TAG, "Bind View: " + mealName + " " + dateText);
     //TODO: HANDLE PHOTO URL

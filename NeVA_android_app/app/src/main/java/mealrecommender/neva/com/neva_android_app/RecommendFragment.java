@@ -21,7 +21,7 @@ import neva.backend.SuggestionOuterClass;
 
 public class RecommendFragment extends Fragment {
 
-  private static final String TAG = "RecommendFragment";
+  private final String TAG = this.getClass().getSimpleName();
 
   ByteString loginToken;
   ManagedChannel mChannel;
@@ -69,7 +69,5 @@ public class RecommendFragment extends Fragment {
         }
       }
     });
-
   }
-
 }

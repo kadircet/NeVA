@@ -29,7 +29,7 @@ import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 
 public class SplashScreen extends AppCompatActivity {
 
-  public static final String TAG = "SplashScreen";
+  public final String TAG = this.getClass().getSimpleName();
   AccountManager accountManager;
 
   @Override
@@ -89,7 +89,7 @@ public class SplashScreen extends AppCompatActivity {
         authIntent = (Intent) bundle.get(AccountManager.KEY_INTENT);
         if (authIntent != null) {
           Log.i(TAG, "Response bundle contains Intent, directing to LoginActivity");
-          Toast.makeText(getBaseContext(), "Problem with AuthToken, please login again", Toast.LENGTH_LONG).show();
+          Toast.makeText(getBaseContext(), getResources().getString(R.string.error_authtoken), Toast.LENGTH_LONG).show();
           startActivityForResult(authIntent, 0);
           return;
         }
@@ -118,7 +118,7 @@ public class SplashScreen extends AppCompatActivity {
       finish();
     } else {
       Log.e(TAG, "TOKEN AUTH INVALID");
-      Toast.makeText(getBaseContext(), "Problem while validating token", Toast.LENGTH_LONG).show();
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_authtoken), Toast.LENGTH_LONG).show();
       finishAndRemoveTask();
     }
   }
@@ -133,7 +133,7 @@ public class SplashScreen extends AppCompatActivity {
       Log.i(TAG, "Checking acocunts again");
       checkAccounts();
     } else {
-      Toast.makeText(getBaseContext(), "There was a problem with LoginActivity", Toast.LENGTH_LONG).show();
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_login), Toast.LENGTH_LONG).show();
     }
     super.onActivityResult(requestCode, resultCode, data);
   }

@@ -28,14 +28,13 @@ import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 
 public class NevaAuthenticator extends AbstractAccountAuthenticator {
 
-  private static final String TAG = "NevaAcc.Authenticator";
+  private final String TAG = this.getClass().getSimpleName();
   private final Context mContext;
 
   public NevaAuthenticator(Context context) {
     super(context);
     this.mContext = context;
   }
-
 
   //Add new account to the device (to AccountManager).
   @Override

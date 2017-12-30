@@ -31,7 +31,7 @@ import org.json.JSONObject;
 @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
 public class LoginActivity extends AppCompatActivity {
 
-  private static final String TAG = "LoginActivity";
+  private final String TAG = this.getClass().getSimpleName();
   public static final String ACCOUNT_TYPE = "com.neva.mealrecommender";
   public static final String FACEBOOK_APP_ID = "FACEBOOK_APP_ID";
   public static final String FACEBOOK_USER_ID = "FACEBOOK_USER_ID";
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
           accountManager.setAuthToken(account, NEVA_TOKEN_TYPE, authToken);
           Log.i(TAG, "Account Added Successfully!");
-          Toast.makeText(getBaseContext(), "Added Your Account", Toast.LENGTH_SHORT).show();
+          Toast.makeText(getBaseContext(), getResources().getString(R.string.success_add_account), Toast.LENGTH_SHORT).show();
           setResult(RESULT_OK);
         } else {
           setResult(RESULT_CANCELED);
@@ -153,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
 
   public boolean validateEmail(String email) {
     if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-      emailField.setError("Enter a valid email.");
+      emailField.setError(getResources().getString(R.string.error_invalid_email));
       return false;
     }
     emailField.setError(null);
@@ -163,7 +163,7 @@ public class LoginActivity extends AppCompatActivity {
 
   public boolean validatePassword(String password) {
     if (password.isEmpty()) {
-      passwordField.setError("Password cannot be empty");
+      passwordField.setError(getResources().getString(R.string.error_invalid_password));
       return false;
     }
     passwordField.setError(null);
@@ -178,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
       Log.i(TAG, loginResult.getAccessToken().getApplicationId());
       Log.i(TAG, loginResult.getAccessToken().getUserId());
       Log.i(TAG,"Facebook Access Token: " +accessToken);
-      Toast.makeText(getBaseContext(), "Facebook Login Success, Making a GraphRequest", Toast.LENGTH_SHORT).show();
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.success_facebook_login), Toast.LENGTH_SHORT).show();
       GraphRequest graphReq =GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
         @Override
         public void onCompleted(JSONObject object, GraphResponse response) {
@@ -211,12 +211,12 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onCancel() {
-      Toast.makeText(getBaseContext(), "Facebook Login Cancelled.", Toast.LENGTH_LONG).show();
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_facebook_cancel), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onError(FacebookException error) {
-      Toast.makeText(getBaseContext(), "Facebook Login Error.", Toast.LENGTH_LONG).show();
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_facebook_error), Toast.LENGTH_LONG).show();
     }
   }
 

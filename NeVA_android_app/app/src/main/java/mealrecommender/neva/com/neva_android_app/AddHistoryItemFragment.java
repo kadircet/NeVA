@@ -49,7 +49,7 @@ import java.util.Calendar;
 
 public class AddHistoryItemFragment extends Fragment {
 
-  private static final String TAG = "AddHistoryItemFragment";
+  private final String TAG = this.getClass().getSimpleName();
 
   ByteString loginToken;
   ManagedChannel mChannel;
@@ -93,7 +93,7 @@ public class AddHistoryItemFragment extends Fragment {
     mealNameField = view.findViewById(R.id.eaten_meal_field);
     timeField = view.findViewById(R.id.time_field);
     addHistoryButton = view.findViewById(R.id.sendMealHistory);
-    mealNames = getSuggestionNames(); //TODO: Store meal names in a file instead of creating them from scratch
+    mealNames = getSuggestionNames();
     adapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
     mealNameField.setAdapter(adapter);
     locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
@@ -168,7 +168,7 @@ public class AddHistoryItemFragment extends Fragment {
       Log.d(TAG, "Getting History from database again, and changing view cursors");
       Cursor cursor = db.nevaDao().getUserHistoryMeals(NevaLoginManager.getInstance().getUsername());
       cursorAdapter.swapCursor(cursor);
-      Toast.makeText(getContext(), "Added History Entry", Toast.LENGTH_SHORT).show();
+      Toast.makeText(getContext(), getResources().getString(R.string.success_add_history_entry), Toast.LENGTH_SHORT).show();
       getActivity().onBackPressed();
     } catch (Exception e) {
       Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();

@@ -44,7 +44,7 @@
                     android:fontFamily="@font/latoregular"
                     android:gravity="center"
                     android:text="@string/signup_description"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@android:color/white"
                     android:textSize="15sp" />
 
                 <EditText
@@ -58,7 +58,7 @@
                     android:inputType="text"
                     android:singleLine="false"
                     android:textColor="@android:color/white"
-                    android:textColorHint="#a2a3a5" />
+                    android:textColorHint="@color/hint_gray" />
 
                 <EditText
                     android:id="@+id/username"
@@ -71,7 +71,7 @@
                     android:inputType="text"
                     android:singleLine="false"
                     android:textColor="@android:color/white"
-                    android:textColorHint="#a2a3a5" />
+                    android:textColorHint="@color/hint_gray" />
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,11 +86,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:buttonTint="#a2a3a5"
+                        android:buttonTint="@color/hint_gray"
                         android:duplicateParentState="false"
                         android:onClick="onGenderButton"
                         android:text="@string/gender_male"
-                        android:textColor="#a2a3a5"
+                        android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
                     <RadioButton
@@ -99,11 +99,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0"
-                        android:buttonTint="#a2a3a5"
+                        android:buttonTint="@color/hint_gray"
                         android:duplicateParentState="false"
                         android:onClick="onGenderButton"
                         android:text="@string/gender_female"
-                        android:textColor="#a2a3a5"
+                        android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
                 </RadioGroup>
@@ -121,7 +121,7 @@
                     android:onClick="onBirthdayButton"
                     android:singleLine="false"
                     android:textColor="@android:color/white"
-                    android:textColorHint="#a2a3a5"
+                    android:textColorHint="@color/hint_gray"
                     android:textSize="18sp" />
 
                 <EditText
@@ -134,7 +134,7 @@
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:textColor="@android:color/white"
-                    android:textColorHint="#a2a3a5" />
+                    android:textColorHint="@color/hint_gray" />
 
 
                 <Button
@@ -145,7 +145,7 @@
                     android:background="@drawable/rounded_button"
                     android:onClick="onSignupButton"
                     android:text="@string/signup"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@android:color/white" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -159,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="onMemberButton"
                         android:text="@string/already_member"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@android:color/white"
                         android:textSize="14sp" />
 
                 </LinearLayout>

@@ -33,7 +33,7 @@ import neva.backend.SuggestionOuterClass;
  */
 public class ProposeFragment extends Fragment {
 
-  private static final String TAG = "ProposeFragment";
+  private final String TAG = this.getClass().getSimpleName();
 
   ByteString loginToken;
   ManagedChannel mChannel;
@@ -78,7 +78,7 @@ public class ProposeFragment extends Fragment {
     fragment_tag_proposal_button = view.findViewById(R.id.fragment_tag_proposal_button);
     propose_tag_for_meal = view.findViewById(R.id.fragment_proposal_tag_for_meal_button);
 
-    mealNames = getMealNames(); //TODO: Store mealnames and not send request each time.
+    mealNames = getMealNames();
 
     autocompleteAdapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item,
         mealNames);
@@ -112,7 +112,7 @@ public class ProposeFragment extends Fragment {
         try {
           BackendOuterClass.GenericReply genRep = blockingStub
               .suggestionItemProposition(suggestionRequest);
-          Toast.makeText(getContext(), "Meal Suggested", Toast.LENGTH_SHORT).show();
+          Toast.makeText(getContext(), getResources().getString(R.string.success_meal_propose), Toast.LENGTH_SHORT).show();
           fragment_proposal_field.getText().clear();
           fragment_proposal_button.setEnabled(true);
         } catch (Exception e) {
@@ -137,7 +137,7 @@ public class ProposeFragment extends Fragment {
 
         try {
           BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagProp);
-          Toast.makeText(getContext(), "Tag Suggested", Toast.LENGTH_SHORT).show();
+          Toast.makeText(getContext(), getResources().getString(R.string.success_tag_propose), Toast.LENGTH_SHORT).show();
           fragment_tag_proposal_field.getText().clear();
           fragment_tag_proposal_button.setEnabled(true);
         } catch (Exception e) {
@@ -166,7 +166,7 @@ public class ProposeFragment extends Fragment {
         try {
 
           BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagPropositionReq);
-          Toast.makeText(getContext(), "Tag Suggested", Toast.LENGTH_SHORT).show();
+          Toast.makeText(getContext(), getResources().getString(R.string.success_tag_propose), Toast.LENGTH_SHORT).show();
           tag_of_meal_field.getText().clear();
           meal_for_tag_field.getText().clear();
           propose_tag_for_meal.setEnabled(true);

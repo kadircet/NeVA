@@ -45,7 +45,7 @@ import neva.backend.SuggestionOuterClass.Suggestion;
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
-  private static final String TAG = "MainActivity";
+  private final String TAG = this.getClass().getSimpleName();
 
   public ByteString loginToken;
   public ManagedChannel mChannel;
@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity
 
     loginToken = NevaLoginManager.getInstance().getByteStringToken();
     blockingStub = NevaLoginManager.getInstance().blockingStub;
-    
-    db = Room.databaseBuilder(getBaseContext(), NevaDatabase.class, "nevadb")
+
+    db = Room.databaseBuilder(getBaseContext(), NevaDatabase.class, getResources().getString(R.string.database_name))
         .allowMainThreadQueries()
         .fallbackToDestructiveMigration()
         .build();

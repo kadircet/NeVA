@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#689f38</color>
     <color name="colorAccent">#009edc</color>
     <color name="notificationBar">#000000</color>
+    <color name="hint_gray">#a2a3a5</color>
+    <color name="background_gray">#7F888F</color>
     <color name="orange">#F8B04C</color>
 </resources>

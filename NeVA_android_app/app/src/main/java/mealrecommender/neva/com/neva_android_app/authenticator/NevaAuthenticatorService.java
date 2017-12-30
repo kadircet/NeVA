@@ -9,7 +9,7 @@ public class NevaAuthenticatorService extends Service {
 
   // Instance field that stores the authenticator object
   // Notice, this is the same Authenticator class we defined earlier
-  private static final String TAG = "NevaAuthenticatorSvc";
+  private final String TAG = this.getClass().getSimpleName().substring(0,23); // TAG can at most be 24 chars long
   private NevaAuthenticator mAuthenticator;
 
   @Override

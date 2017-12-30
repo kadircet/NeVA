@@ -3,6 +3,7 @@ package mealrecommender.neva.com.neva_android_app;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
@@ -24,9 +25,10 @@ import neva.backend.BackendOuterClass.GenericReply;
 
 public class NevaLoginManager {
 
-  private final static String TAG = "NevaLoginManager";
+  private final String TAG = this.getClass().getSimpleName();
+  private final String serverAddress = "neva.0xdeffbeef.com";
+  private final int serverPort = 50051;
   private static NevaLoginManager instance = null;
-
   private String username;
   private ByteString byteStringToken;
   private String stringToken;
@@ -36,7 +38,7 @@ public class NevaLoginManager {
   public BackendGrpc.BackendBlockingStub blockingStub;
 
   protected NevaLoginManager() {
-    mChannel = ManagedChannelBuilder.forAddress("neva.0xdeffbeef.com", 50051).build();
+    mChannel = ManagedChannelBuilder.forAddress(serverAddress, serverPort).build();
     blockingStub = BackendGrpc.newBlockingStub(mChannel);
   }
 

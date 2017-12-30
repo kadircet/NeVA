@@ -31,9 +31,7 @@ import neva.backend.util.Util;
 
 public class RegisterActivity extends AppCompatActivity {
 
-  private static final String TAG = "RegisterActivity";
-
-  public static final String MESSAGE_CLASS = "com.neva.mealrecommender.MESSAGE";
+  private final String TAG = this.getClass().getSimpleName();
 
   EditText username_field;
   EditText email_field;
@@ -115,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
   public void onSignupButton(View view) {
 
     if (!validate()) {
-      Toast.makeText(getBaseContext(), "Fix your credentials.", Toast.LENGTH_LONG).show();
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_fix_credentials), Toast.LENGTH_LONG).show();
       return;
     }
     //TODO: Move this code to NevaLoginManager
@@ -138,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
 
       BackendOuterClass.GenericReply registerReply = blockingStub.register(registerRequest);
       //Intent intent = new Intent(this, LoginActivity.class);
-      Toast.makeText(this, "Succesfully Signed Up!", Toast.LENGTH_LONG).show();
+      Toast.makeText(this, getResources().getString(R.string.success_signup), Toast.LENGTH_LONG).show();
       signup_button.setEnabled(true);
       pb.setVisibility(View.GONE);
       //startActivity(intent);
@@ -159,7 +157,7 @@ public class RegisterActivity extends AppCompatActivity {
   public boolean validateUsername() {
     String username = username_field.getText().toString();
     if (username.isEmpty()) {
-      username_field.setError("Enter a valid username");
+      username_field.setError(getResources().getString(R.string.error_invalid_name));
       return false;
     } else {
       username_field.setError(null);
@@ -170,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity {
   public boolean validateEmail() {
     String email = email_field.getText().toString();
     if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-      email_field.setError("Enter a valid email.");
+      email_field.setError(getResources().getString(R.string.error_invalid_email));
       return false;
     }
     return true;
@@ -178,7 +176,7 @@ public class RegisterActivity extends AppCompatActivity {
 
   public boolean validatePassword() {
     String password = password_field.getText().toString();
-    if (!isValidPassword(password)) {
+    if (password.isEmpty()) {
       return false;
     } else {
       password_field.setError(null);
@@ -188,16 +186,16 @@ public class RegisterActivity extends AppCompatActivity {
 
   public boolean validateGender() {
     if (gender_field == null) {
-      Toast.makeText(this, "Please check radio buttons", Toast.LENGTH_LONG).show();
+      Toast.makeText(this, getResources().getString(R.string.error_invalid_gender), Toast.LENGTH_LONG).show();
       return false;
     }
     return true;
   }
 
-  public boolean validateBithday() {
+  public boolean validateBirthday() {
     long currentTime = Calendar.getInstance().getTimeInMillis() - 6000000;
     if (birthday_time > currentTime) {
-      Toast.makeText(this, "Please enter a valid birthday", Toast.LENGTH_LONG).show();
+      Toast.makeText(this, getResources().getString(R.string.error_invalid_birthday), Toast.LENGTH_LONG).show();
       return false;
     }
     return true;
@@ -205,19 +203,6 @@ public class RegisterActivity extends AppCompatActivity {
 
   public boolean validate() {
     return validateUsername() && validateEmail() && validatePassword()
-        && validateGender() && validateBithday();
-  }
-
-  // Check password with RegEx to see if it fits the qualifications
-  private static boolean isValidPassword(final String password) {
-
-    Pattern pattern;
-    Matcher matcher;
-    final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*[a-z]).{4,}$"; // <---SIMPLIFIED  "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
-    pattern = Pattern.compile(PASSWORD_PATTERN);
-    matcher = pattern.matcher(password);
-
-    return matcher.matches();
-
+        && validateGender() && validateBirthday();
   }
 }

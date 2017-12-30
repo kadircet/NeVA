@@ -41,7 +41,7 @@ import neva.backend.UserHistoryOuterClass.Choice;
 
 public class HistoryFragment extends ListFragment {
 
-  private static final String TAG = "HistoryFragment";
+  private final String TAG = this.getClass().getSimpleName();
 
   ByteString loginToken;
   ManagedChannel mChannel;
@@ -82,7 +82,7 @@ public class HistoryFragment extends ListFragment {
       Log.d(TAG, "Adding Fetched HistoryEntries to the database");
       db.nevaDao().addHistoryEntires(historyEntries);
     } catch (Exception e) {
-      Toast.makeText(getContext(), "Couldn't fetch user history from server", Toast.LENGTH_LONG).show();
+      Toast.makeText(getContext(), getResources().getString(R.string.error_fetch_userhistory), Toast.LENGTH_LONG).show();
     }
     Log.d(TAG, "Getting meal names for HistoryEntries");
     //Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();

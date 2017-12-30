@@ -67,8 +67,8 @@
                   android:focusableInTouchMode="true"
                   android:fontFamily="@font/latoregular"
                   android:gravity="center"
-                  android:hint="@string/username"
-                  android:inputType="text"
+                  android:hint="@string/email"
+                  android:inputType="textEmailAddress"
                   android:textColor="@android:color/white"
                   android:textColorHint="#a2a3a5" />
 
@@ -94,7 +94,7 @@
                   android:fontFamily="@font/latoregular"
                   android:onClick="onLoginButton"
                   android:text="@string/login"
-                  android:textColor="#FFFFFF" />
+                  android:textColor="@android:color/white" />
 
                 <com.facebook.login.widget.LoginButton
                   android:id="@+id/facebook_login_button"
@@ -115,14 +115,14 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="@string/forgot_pass"
-                      android:textColor="#FFFFFF"
+                      android:textColor="@android:color/white"
                       android:textSize="14sp" />
 
                     <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text=" | "
-                      android:textColor="#FFFFFF"
+                      android:textColor="@android:color/white"
                       android:textSize="14sp" />
 
                     <TextView
@@ -131,7 +131,7 @@
                       android:layout_height="wrap_content"
                       android:onClick="onRegisterButton"
                       android:text="@string/register"
-                      android:textColor="#FFFFFF"
+                      android:textColor="@android:color/white"
                       android:textSize="14sp"/>
                 </LinearLayout>
             </LinearLayout>

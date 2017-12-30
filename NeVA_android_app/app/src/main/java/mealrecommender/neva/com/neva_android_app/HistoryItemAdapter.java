@@ -18,7 +18,7 @@ import neva.backend.SuggestionOuterClass;
 
 public class HistoryItemAdapter extends ArrayAdapter<SuggestionOuterClass.Suggestion> {
 
-  private static final String TAG = "HistoryItemAdapter";
+  private final String TAG = this.getClass().getSimpleName();
 
   SuggestionOuterClass.Suggestion[] meals;
 
