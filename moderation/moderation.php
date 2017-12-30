@@ -26,6 +26,7 @@ if(!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
   if(!$_SESSION['loggedin']) {
     echo <<<EOF
 <form method="POST">
+  <input type="text" name="username" />
   <input type="password" name="password" />
   <input type="submit" name="login" />
 </form>
