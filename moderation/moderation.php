@@ -51,7 +51,8 @@ if(isset($_POST['accept']) || isset($_POST['reject'])) {
   if(isset($_POST['accept'])) {
     $name = $_POST['suggestion'];
     $category = (int)$_POST['category_id'];
-    $sql = "INSERT INTO `suggestee` (`category_id`, `name`) VALUES (?, ?)";
+    $sql = "INSERT INTO `suggestee` (`category_id`, `name`, `last_updated`)
+      VALUES (?, ?, (SELECT MAX(`last_updated`) FROM `suggestee`)+1)";
     $stmt = $db->prepare($sql);
     $stmt->bind_param("is", $category, $name);
     $stmt->execute();
@@ -89,6 +90,15 @@ if(isset($_POST['accept_tvs']) || isset($_POST['reject_tvs'])) {
     $stmt = $db->prepare($sql);
     $stmt->bind_param("ii", $suggestee_id, $tag_id);
     $stmt->execute();
+
+    $sql = "SELECT MAX(`last_updated`) FROM `suggestee`";
+    $res = $db->query($sql);
+    $last_updated = $res->fetch_array()[0];
+
+    $sql = "UPDATE `suggestee` SET `last_updated`=? WHERE `id`=?";
+    $stmt = $db->prepare($sql);
+    $stmt->bind_param("ii", $last_updated+1, $suggestee_id);
+    $stmt->execute();
   }
   $prop_id = (int)$_POST['id'];
   $sql = "DELETE FROM `tag_value_suggestion` WHERE `id`=?";
@@ -102,11 +112,15 @@ if(isset($_POST['add_tvs'])) {
   $suggestee = $_POST['suggestee_name'];
   $tag = $_POST['tag_name'];
 
-  $sql = "INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`)
-    SELECT `suggestee`.`id`, `tag`.`id` FROM `suggestee`, `tag` WHERE `name`=? 
-    AND `key`=?";
+  $sql = "SELECT MAX(`last_updated`) FROM `suggestee`";
+  $res = $db->query($sql);
+  $last_updated = $res->fetch_array()[0];
+
+  $sql = "INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`, 
+    `last_updated`) SELECT `suggestee`.`id`, `tag`.`id`, ? FROM `suggestee`,
+    `tag` WHERE `name`=? AND `key`=?";
   $stmt = $db->prepare($sql);
-  $stmt->bind_param("ss", $suggestee, $tag);
+  $stmt->bind_param("iss", $last_updated + 1, $suggestee, $tag);
   $stmt->execute();
   header('Location: /moderation.php');
 }
