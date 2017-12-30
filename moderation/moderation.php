@@ -81,6 +81,7 @@ if(isset($_POST['accept_tag']) || isset($_POST['reject_tag'])) {
 $sql = "SELECT `category_id`, `name` FROM `suggestee`";
 $res = $db->query($sql);
 $suggestees = array();
+echo "<datalist id='suggestees'>";
 while($suggestee = $res->fetch_array()) {
   $category_id = $suggestee[0];
   $name = $suggestee[1];
@@ -88,7 +89,10 @@ while($suggestee = $res->fetch_array()) {
     $suggestees[$category_id] = new \Ds\Set();
   }
   $suggestees[$category_id]->add($name);
+  $name = htmlspecialchars($name, ENT_QUOTES);
+  echo "<option value='$name'>";
 }
+echo "</datalist>";
 
 $sql = "SELECT items.`id`, `name`, `suggestion`, cats.`id` FROM
   `item_suggestion` items, `suggestion_category` cats WHERE
@@ -102,6 +106,7 @@ echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
   $exists = $suggestees[$prop[3]]->contains($prop[2]);
   $color = $exists ? 'red' : 'green';
+  $prop[2] = htmlspecialchars($prop[2], ENT_QUOTES);
   echo <<<EOF
 <tr style='background: $color;'>
 <form method="POST">
@@ -132,9 +137,13 @@ unset($suggestees);
 $sql = "SELECT `key` FROM `tag`";
 $res = $db->query($sql);
 $tags = new \Ds\Set();
+echo "<datalist id='tags'>";
 while($tag = $res->fetch_array()) {
   $tags->add($tag[0]);
+  $tag[0] = htmlspecialchars($tag[0], ENT_QUOTES);
+  echo "<option value='$tag[0]'>";
 }
+echo "</datalist>";
 
 $sql = "SELECT `id`, `tag` FROM `tag_suggestion` tags";
 $res = $db->query($sql);
@@ -146,6 +155,7 @@ echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
   $exists = $tags->contains($prop[1]);
   $color = $exists ? 'red' : 'green';
+  $prop[1] = htmlspecialchars($prop[1], ENT_QUOTES);
   echo <<<EOF
 <tr style='background: $color;'>
 <form method="POST">
