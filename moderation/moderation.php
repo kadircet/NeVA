@@ -143,7 +143,7 @@ if($res->num_rows==0) {
 
 echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
-  $exists = $tags->contain($prop[1]);
+  $exists = $tags->contains($prop[1]);
   $color = $exists ? 'red' : 'green';
   echo <<<EOF
 <tr style='background: $color;'>
