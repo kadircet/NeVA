@@ -213,8 +213,8 @@ echo <<<EOF
 EOF;
 echo "</table>";
 
-$sql = "SELECT `tag_value_suggestion`.`id`, `suggestee_id`, `name`, `tag_id`, i
-  `tag` FROM  `tag_value_suggestion`, `suggestee`, `tag` WHERE 
+$sql = "SELECT `tag_value_suggestion`.`id`, `suggestee_id`, `name`, `tag_id`,
+  `key` FROM  `tag_value_suggestion`, `suggestee`, `tag` WHERE 
   `suggestee_id`=`suggestee`.`id` AND `tag_id`=`tag`.`id`";
 $res = $db->query($sql);
 if($res->num_rows==0) {
