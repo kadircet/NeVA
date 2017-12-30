@@ -77,6 +77,18 @@ if(isset($_POST['accept_tag']) || isset($_POST['reject_tag'])) {
   $stmt->execute();
 }
 
+$sql = "SELECT `category_id`, `name` FROM `suggestee`";
+$res = $db->query($sql);
+$suggestees = array();
+while($suggestee = $res->fetch_array()) {
+  $category_id = $suggestee[0];
+  $name = $suggestee[1];
+  if(!array_key_exists($category_id, $suggestees)) {
+    $suggestees[$category_id] = array();
+  }
+  $suggestees[$category_id][] = $name;
+}
+
 $sql = "SELECT items.`id`, `name`, `suggestion`, cats.`id` FROM
   `item_suggestion` items, `suggestion_category` cats WHERE
   items.`category_id` = cats.`id`";
@@ -87,8 +99,9 @@ if($res->num_rows==0) {
 
 echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
+  $exists = array_key_exists($prop[1], $suggestees[$prop[3]]);
   echo <<<EOF
-<tr>
+<tr style='background: $exists?red:green;'>
 <form method="POST">
   <input type="hidden" name="id" value="$prop[0]">
   <td><label>$prop[1]</label></td>
