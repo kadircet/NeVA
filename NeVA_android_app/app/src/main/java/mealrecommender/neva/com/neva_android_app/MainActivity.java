@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity
       }
       LoginManager.getInstance().logOut();
       NevaLoginManager.getInstance().logOut();
-      Intent loginActivity = new Intent(getBaseContext(), LoginActivity.class);
+      Intent loginActivity = new Intent(getBaseContext(), SplashScreen.class);
       startActivity(loginActivity);
       return true;
     }
