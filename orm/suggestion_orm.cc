@@ -97,7 +97,7 @@ Status SuggestionOrm::GetMultipleSuggestions(
                   "No items to suggest in that category.");
   }
 
-  *suggestion = recommender::GetSuggestion(user_history, suggestion_list);
+  *suggestion = recommender::GetMultipleSuggestions(user_history, suggestion_list);
   VLOG(1) << "Returning:\n" << suggestion->ShortDebugString();
   return Status::OK;
 }

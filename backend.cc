@@ -111,8 +111,8 @@ class BackendServiceImpl final : public Backend::Service {
   }
 
   Status GetMultipleSuggestions(ServerContext* context,
-                                const GetSuggestionRequest* request,
-                                GetSuggestionReply* reply) override {
+                                const GetMultipleSuggestionsRequest* request,
+                                GetMultipleSuggestionsReply* reply) override {
     VLOG(1) << "Received GetMultipleSuggestions for category: "
             << request->DebugString();
     int user_id;
@@ -120,7 +120,7 @@ class BackendServiceImpl final : public Backend::Service {
     UserHistory user_history;
     user_history_orm_->FetchUserHistory(user_id, 0, &user_history);
     SuggestionList suggestion;
-    RETURN_IF_ERROR(suggestion_orm_->GetSuggestion(
+    RETURN_IF_ERROR(suggestion_orm_->GetMultipleSuggestions(
         user_history, request->suggestion_category(),
         reply->mutable_suggestion()));
     return Status::OK;
