@@ -112,16 +112,22 @@ if(isset($_POST['add_tvs'])) {
   $suggestee = $_POST['suggestee_name'];
   $tag = $_POST['tag_name'];
 
+  $sql = "INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`)
+    SELECT `suggestee`.`id`, `tag`.`id` FROM `suggestee`, `tag` WHERE `name`=? 
+    AND `key`=?";
+  $stmt = $db->prepare($sql);
+  $stmt->bind_param("ss", $suggestee, $tag);
+  $stmt->execute();
+
   $sql = "SELECT MAX(`last_updated`) FROM `suggestee`";
   $res = $db->query($sql);
   $last_updated = $res->fetch_array()[0];
 
-  $sql = "INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`, 
-    `last_updated`) SELECT `suggestee`.`id`, `tag`.`id`, ? FROM `suggestee`,
-    `tag` WHERE `name`=? AND `key`=?";
+  $sql = "UPDATE `suggestee` SET `last_updated`=? WHERE `name`=?";
   $stmt = $db->prepare($sql);
-  $stmt->bind_param("iss", $last_updated + 1, $suggestee, $tag);
+  $stmt->bind_param("is", $last_updated+1, $suggestee);
   $stmt->execute();
+
   header('Location: /moderation.php');
 }
 
