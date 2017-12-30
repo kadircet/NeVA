@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `suggestee` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `category_id` INTEGER NOT NULL,
   `name` VARCHAR(255) NOT NULL,
+  `last_updated` INTEGER NOT NULL,
   FOREIGN KEY(`category_id`) REFERENCES `suggestion_category`(`id`)
     ON DELETE CASCADE,
   PRIMARY KEY(`id`)
