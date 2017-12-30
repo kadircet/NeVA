@@ -26,6 +26,11 @@ class SuggestionOrm {
   grpc::Status GetSuggestion(
       const UserHistory& user_history,
       const Suggestion::SuggestionCategory suggestion_category,
+      Suggestion* suggestion);
+
+  grpc::Status GetMultipleSuggestions(
+      const UserHistory& user_history,
+      const Suggestion::SuggestionCategory suggestion_category,
       SuggestionList* suggestion);
 
  private:
