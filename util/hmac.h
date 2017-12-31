@@ -20,6 +20,15 @@ const std::string HMac(const std::string& key, const std::string& message);
 // Returns a random integer in range [0,n).
 uint32_t GetRandom(const uint32_t n);
 
+// Initializes seed of random number generator.
+void InitializeRandom();
+
+// Generates a random key of given length.
+// Please note that, this function is designed to be cryptograpihacally secure.
+// Therefore it is a lot slower when entropy is low compared to insecure
+// version. Make sure you use it whenever security is a real concern.
+const std::string GenerateRandomKeySecure(const int length = 128);
+
 }  // namespace util
 }  // namespace backend
 }  // namespace neva
