@@ -56,4 +56,9 @@ public interface NevaDao {
 
   @Query("SELECT choiceId FROM history WHERE userMail = :userMail ORDER BY choiceId DESC LIMIT 1")
   public int getLastChoiceIdOfUser(String userMail);
+
+  @Query("SELECT h.choiceId as _id, m.mealName, m.mealPicture, h.date FROM history as h "
+      + "INNER JOIN meals as m ON m.id = h.mealId "
+      + "WHERE h.usermail = :username ORDER BY h.date DESC")
+  public Cursor getUserHistoryMeals(String username);
 }

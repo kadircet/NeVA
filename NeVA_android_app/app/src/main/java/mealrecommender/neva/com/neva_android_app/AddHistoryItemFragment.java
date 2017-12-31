@@ -166,7 +166,7 @@ public class AddHistoryItemFragment extends Fragment {
           date.getTimeInMillis()));
 
       Log.d(TAG, "Getting History from database again, and changing view cursors");
-      Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
+      Cursor cursor = db.nevaDao().getUserHistoryMeals(NevaLoginManager.getInstance().getUsername());
       cursorAdapter.swapCursor(cursor);
       Toast.makeText(getContext(), "Added History Entry", Toast.LENGTH_SHORT).show();
       getActivity().onBackPressed();

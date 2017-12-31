@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
   public BackendGrpc.BackendBlockingStub blockingStub;
   public FloatingActionButton fab;
   public NevaDatabase db;
+  public SharedPreferences sharedPreferences;
   HistoryCursorAdapter adapter;
 
 
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         .allowMainThreadQueries()
         .fallbackToDestructiveMigration()
         .build();
+    sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_pref_filename), MODE_PRIVATE);
 
     addMealsToDatabase();
     fab = findViewById(R.id.fab);
@@ -97,16 +100,22 @@ public class MainActivity extends AppCompatActivity
 
   public void addMealsToDatabase() {
     BackendOuterClass.GetSuggestionItemListRequest request;
+    int databaseVersion = sharedPreferences.getInt("databaseVersion", 0);
+    Log.i(TAG, "Current DB ver: "+ Integer.toString(databaseVersion));
     request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
-        .setToken(loginToken).setStartIndex(0)
+        .setToken(loginToken)
         .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+        .setStartIndex(databaseVersion)
         .build();
 
     BackendOuterClass.GetSuggestionItemListReply reply = blockingStub
         .getSuggestionItemList(request);
-    List<Meal> values = new ArrayList<>();
+    List<Suggestion> suggestions = reply.getItems().getSuggestionListList();
+    Log.i(TAG, "Reply DB ver: "+ Integer.toString(reply.getLastUpdated()));
+    sharedPreferences.edit().putInt("databaseVersion", reply.getLastUpdated()).commit();
 
-    for(Suggestion sug : reply.getItemsList()) {
+    List<Meal> values = new ArrayList<>();
+    for(Suggestion sug : suggestions) {
       Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
       values.add(meal);
     }

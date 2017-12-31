@@ -16,6 +16,9 @@ service Backend {
   rpc UpdateUser(UpdateUserRequest) returns (GenericReply) {
   }
 
+  rpc GetUser(GetUserRequest) returns (GetUserReply) {
+  }
+
   rpc SuggestionItemProposition(SuggestionItemPropositionRequest)
       returns (GenericReply) {
   }
@@ -45,6 +48,10 @@ service Backend {
   }
 
   rpc RecordFeedback(RecordFeedbackRequest) returns (GenericReply) {
+  }
+
+  // Returns all tags in the database.
+  rpc GetTags(GetTagsRequest) returns (GetTagsReply) {
   }
 }
 
@@ -78,6 +85,16 @@ message UpdateUserRequest {
 
   // Updated user data.
   User user = 2;
+}
+
+message GetUserRequest {
+  // Session key for the user sending request.
+  bytes token = 1;
+}
+
+message GetUserReply {
+  // User data of the requested user.
+  User user = 1;
 }
 
 message SuggestionItemPropositionRequest {
@@ -130,13 +147,17 @@ message GetSuggestionItemListRequest {
   // Category for which the user requesting items.
   Suggestion.SuggestionCategory suggestion_category = 2;
 
-  // Start index to fetch items.
+  // Fetch elements updated after that index. Giving zero as start_index would
+  // result in fetching all items.
   uint32 start_index = 3;
 }
 
 message GetSuggestionItemListReply {
   // Item names in the database.
-  repeated Suggestion items = 1;
+  SuggestionList items = 1;
+
+  // Current version of the database.
+  uint32 last_updated = 2;
 }
 
 message InformUserChoiceRequest {
@@ -176,4 +197,17 @@ message RecordFeedbackRequest {
 
   // Information about the feedback.
   UserFeedback user_feedback = 2;
+}
+
+message GetTagsRequest {
+  // Token of the user making request.
+  bytes token = 1;
+
+  // Start index to fetch tags. start_index is exclusive.
+  uint32 start_index = 2;
+}
+
+message GetTagsReply {
+  // Tags in the database both id and names.
+  repeated Tag tag_list = 1;
 }

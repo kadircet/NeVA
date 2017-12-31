@@ -1,5 +1,6 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -67,6 +68,7 @@ public class HistoryFragment extends ListFragment {
 
     Log.d(TAG, "Getting the last stored \"choiceId\" in database");
     int lastChoiceId = db.nevaDao().getLastChoiceIdOfUser(nevaLoginManager.getUsername());
+    Log.e(TAG, Integer.toString(lastChoiceId) + " " + nevaLoginManager.getUsername());
     FetchUserHistoryRequest fetchUserHistoryRequest = FetchUserHistoryRequest.newBuilder()
                                                       .setToken(nevaLoginManager.getByteStringToken())
                                                       .setStartIndex(lastChoiceId)
@@ -83,7 +85,8 @@ public class HistoryFragment extends ListFragment {
       Toast.makeText(getContext(), "Couldn't fetch user history from server", Toast.LENGTH_LONG).show();
     }
     Log.d(TAG, "Getting meal names for HistoryEntries");
-    Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
+    //Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
+    Cursor cursor = db.nevaDao().getUserHistoryMeals(nevaLoginManager.getUsername());
     cursor.moveToFirst();
     adapter = new HistoryCursorAdapter(getContext(), cursor, 0);
     mainActivity.adapter = adapter;

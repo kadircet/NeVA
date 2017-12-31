@@ -16,8 +16,18 @@ message Suggestion {
 
   // Name of the suggestion item, like "lahmacun".
   string name = 3;
+
+  // Tags associated with that suggestion.
+  repeated Tag tags = 4;
 };
 
 message SuggestionList {
   repeated Suggestion suggestion_list = 1;
+};
+
+message Tag {
+  // id of the tag in `tag` table.
+  uint32 id = 1;
+  // name of the tag.
+  string name = 2;
 };
