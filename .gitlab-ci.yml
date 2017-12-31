@@ -3,15 +3,26 @@ stages:
   - test
   - deploy
   
-build_job:
+build_backend:
   stage: build
-  script:
-    - "bazel build ..."
-    - "ANDROID_HOME=/usr/lib/android-sdk/ ./NeVA_android_app/gradlew --build-cache --parallel --project-cache-dir=/tmp/neva_android.gradle --build-file=NeVA_android_app/build.gradle -PbuildDir=/tmp/neva_android/ assembleDebug" 
+  script: "bazel build ..."
+  except:
+    - /^.*android.*$/
+    - /^.*ios-.*$/
 
-test_job:
+test_backend:
   stage: test
   script: "bazel test ..."
+  except:
+    - /^.*android.*$/
+    - /^.*ios-.*$/
+
+build_android:
+  stage: build
+  script: "ANDROID_HOME=/usr/lib/android-sdk/ ./NeVA_android_app/gradlew --build-cache --parallel --project-cache-dir=/tmp/neva_android.gradle --build-file=NeVA_android_app/build.gradle -PbuildDir=/tmp/neva_android/ assembleDebug" 
+  only:
+    - /^.*android.*$/
+    - master
 
 deploy_job:
   stage: deploy
