@@ -16,6 +16,7 @@
 #include "social_media/facebook.h"
 #include "util/error.h"
 #include "util/file.h"
+#include "util/hmac.h"
 
 namespace neva {
 namespace backend {
@@ -219,6 +220,8 @@ class BackendServiceImpl final : public Backend::Service {
 };
 
 void RunServer() {
+  util::InitializeRandom();
+
   std::string key;
   std::string cert;
 

@@ -15,6 +15,7 @@ cc_binary(
         "//social_media:facebook_validator",
         "//util:error",
         "//util:file",
+        "//util:hmac",
         "@com_github_gflags_gflags//:gflags",
         "@glog//:glog",
     ],
