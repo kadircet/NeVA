@@ -121,7 +121,7 @@ Status UserOrm::CheckCredentials(
            "(%0, %1q, %2)";
   query.parse();
 
-  *session_token = util::GenerateRandomKey();
+  *session_token = util::GenerateRandomKeySecure();
   while (!query.execute(user_id, *session_token, 0)) {
     VLOG(1) << "Query failed with:" << query.error();
     *session_token = util::GenerateRandomKey();
@@ -192,7 +192,7 @@ Status UserOrm::InsertUser(
                                 verification_token));
 
   if (verification_token != nullptr) {
-    *verification_token = util::GenerateRandomKey();
+    *verification_token = util::GenerateRandomKeySecure();
     RETURN_IF_ERROR(UpdateVerificationToken(
         user_id, util::HMac(salt, *verification_token),
         util::GetTimestamp() + kVerficationTokenExpireTime));
@@ -292,7 +292,8 @@ Status UserOrm::GetUserData(const int user_id, User* user) {
   }
 
   if (res[0]["gender"] != mysqlpp::null) {
-    user->set_gender(static_cast<User::Gender>(static_cast<int>(res[0]["gender"])));
+    user->set_gender(
+        static_cast<User::Gender>(static_cast<int>(res[0]["gender"])));
   }
 
   if (res[0]["weight"] != mysqlpp::null) {
