@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity
   public void addMealsToDatabase() {
     BackendOuterClass.GetSuggestionItemListRequest request;
     int databaseVersion = sharedPreferences.getInt("databaseVersion", 0);
-    databaseVersion = 0;
     Log.i(TAG, "Current DB ver: "+ Integer.toString(databaseVersion));
     request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
         .setToken(loginToken)
@@ -190,6 +189,7 @@ public class MainActivity extends AppCompatActivity
       Account acc[] = am.getAccountsByType(LoginActivity.ACCOUNT_TYPE);
       if (acc[0] != null) {
         am.removeAccount(acc[0], null, null);
+        sharedPreferences.edit().putInt("databaseVersion", 0).commit();
       }
       LoginManager.getInstance().logOut();
       NevaLoginManager.getInstance().logOut();
