@@ -2,7 +2,6 @@
 <resources>
   <string name="shared_pref_filename">com.neva.mealrecommender.sharedprefs</string>
   <string name="database_name">nevadb</string>
-  <string name="adapter_date_format"></string>
   <string name="facebook_app_id">169031667015286</string>
   <string name="fb_login_protocol_scheme">fb169031667015286</string>
 </resources>

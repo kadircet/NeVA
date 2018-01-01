@@ -22,7 +22,7 @@ import java.util.Locale;
 public class HistoryCursorAdapter extends CursorAdapter {
 
   public final String TAG = this.getClass().getSimpleName();
-  final String dateFormat = Resources.getSystem().getString(R.string.adapter_date_format);
+  final String dateFormat = "HH:mm, EEEE, MMMM d YYYY";
   LayoutInflater inflater;
 
   public HistoryCursorAdapter(Context context, Cursor cursor, int flags) {

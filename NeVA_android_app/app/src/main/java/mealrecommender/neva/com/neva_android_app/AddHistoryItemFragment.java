@@ -268,6 +268,7 @@ public class AddHistoryItemFragment extends Fragment {
     ArrayList<Meal> meals = (ArrayList<Meal>) db.nevaDao().getAllMeals();
     String[] values;
     values = new String[meals.size()];
+    Log.i(TAG, "MealsSize: "+ Integer.toString(meals.size()));
     for (int i = 0; i < meals.size(); i++) {
       values[i] = meals.get(i).mealName;
     }

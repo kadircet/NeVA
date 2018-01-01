@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity
   public void addMealsToDatabase() {
     BackendOuterClass.GetSuggestionItemListRequest request;
     int databaseVersion = sharedPreferences.getInt("databaseVersion", 0);
+    databaseVersion = 0;
     Log.i(TAG, "Current DB ver: "+ Integer.toString(databaseVersion));
     request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
         .setToken(loginToken)
