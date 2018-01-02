@@ -11,14 +11,16 @@
         android:orientation="vertical">
 
         <LinearLayout
+          android:id="@+id/linearLayout4"
           android:layout_width="0dp"
           android:layout_height="112dp"
+          android:layout_marginTop="100dp"
           android:layout_marginStart="50dp"
           android:layout_marginEnd="50dp"
           android:orientation="vertical"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          tools:layout_editor_absoluteY="148dp">
+          app:layout_constraintTop_toTopOf="parent">
             <TextView
               android:id="@+id/fragment_recommendation_field"
               android:layout_width="match_parent"
@@ -48,6 +50,9 @@
           android:id="@+id/fragment_recommend_button"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:layout_marginTop="64dp"
+          android:layout_marginStart="64dp"
+          android:layout_marginEnd="64dp"
           android:layout_gravity="center"
           android:paddingLeft="10dp"
           android:paddingRight="10dp"
@@ -55,8 +60,9 @@
           android:fontFamily="@font/latoregular"
           android:text="@string/recommend"
           android:textColor="@android:color/white"
-          tools:layout_editor_absoluteX="100dp"
-          tools:layout_editor_absoluteY="270dp"/>
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/linearLayout4"/>
 
     </android.support.constraint.ConstraintLayout>
 

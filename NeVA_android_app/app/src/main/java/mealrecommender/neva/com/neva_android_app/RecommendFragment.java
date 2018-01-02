@@ -15,6 +15,8 @@ import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import java.util.List;
 import java.util.Random;
+import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
+import mealrecommender.neva.com.neva_android_app.database.Tag;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
 import neva.backend.BackendOuterClass.GetMultipleSuggestionsReply;
@@ -31,6 +33,7 @@ public class RecommendFragment extends Fragment {
   ByteString loginToken;
   ManagedChannel mChannel;
   BackendGrpc.BackendBlockingStub blockingStub;
+  NevaDatabase db;
 
   TextView recommendedView;
   Button recommendButton;
@@ -45,6 +48,7 @@ public class RecommendFragment extends Fragment {
     loginToken = mainActivity.loginToken;
     mChannel = mainActivity.mChannel;
     blockingStub = mainActivity.blockingStub;
+    db = mainActivity.db;
     flexboxLayout = view.findViewById(R.id.flexbox_layout);
 
     recommendButton = view.findViewById(R.id.fragment_recommend_button);
@@ -59,22 +63,29 @@ public class RecommendFragment extends Fragment {
     recommendButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        flexboxLayout.removeAllViews();
         GetMultipleSuggestionsRequest recommendationReq;
         recommendationReq = GetMultipleSuggestionsRequest.newBuilder()
             .setToken(loginToken)
             .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
             .build();
-        
+
         GetMultipleSuggestionsReply recommendationRep;
         try {
           recommendationRep = blockingStub.getMultipleSuggestions(recommendationReq);
           List<Suggestion> suggestionList = recommendationRep.getSuggestion().getSuggestionListList();
           Random r = new Random();
           Suggestion suggestion = suggestionList.get(r.nextInt(suggestionList.size()));
+          List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();
+          int tagIdList[] = new int[tagList.size()];
+          for(int i =0; i<tagIdList.length; i++) {
+            tagIdList[i] = tagList.get(i).getId();
+          }
+          String[] tagNames = db.nevaDao().getTagNames(tagIdList);
           recommendedView.setText(suggestion.getName());
-          for(int i=0; i < 5; i++) {
+          for(int i=0; i < tagNames.length; i++) {
             TextView textView = new TextView(getContext());
-            textView.setText("SOME TAG YO "+Integer.toString(i));
+            textView.setText(tagNames[i]);
             textView.setTextSize(12);
             textView.setTextColor(getResources().getColor(R.color.com_facebook_blue));
             textView.setPadding(16,0,16,0);
