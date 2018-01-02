@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecommendationView" customModule="NeVA" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="CKT-W2-adF"/>
+                <outlet property="image" destination="yKk-4s-nol" id="gNa-4L-FE2"/>
+                <outlet property="name" destination="ZiV-0C-L4h" id="aEl-4q-p0t"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yKk-4s-nol">
+                    <rect key="frame" x="56" y="20" width="128" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="yKk-4s-nol" secondAttribute="height" multiplier="1:1" id="zWS-3d-M4d"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="ZiV-0C-L4h">
+                    <rect key="frame" x="5" y="156" width="230" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="aB1-xF-bla"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <size key="shadowOffset" width="2" height="2"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="yKk-4s-nol" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="56" id="2Li-d6-bV6"/>
+                <constraint firstItem="yKk-4s-nol" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="2fR-3w-f7F"/>
+                <constraint firstItem="ZiV-0C-L4h" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="CCj-Wu-gfg"/>
+                <constraint firstItem="ZiV-0C-L4h" firstAttribute="top" secondItem="yKk-4s-nol" secondAttribute="bottom" constant="8" id="FMg-PR-TI5"/>
+                <constraint firstItem="ZiV-0C-L4h" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-5" id="JMn-6x-Myp"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="yKk-4s-nol" secondAttribute="trailing" constant="56" id="bEP-zI-eVK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-6.5" y="159.5"/>
+        </view>
+    </objects>
+</document>
