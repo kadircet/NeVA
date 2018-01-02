@@ -39,6 +39,7 @@ internal protocol Neva_Backend_BackendProvider {
   func getuser(request : Neva_Backend_GetUserRequest, session : Neva_Backend_BackendGetUserSession) throws -> Neva_Backend_GetUserReply
   func suggestionitemproposition(request : Neva_Backend_SuggestionItemPropositionRequest, session : Neva_Backend_BackendSuggestionItemPropositionSession) throws -> Neva_Backend_GenericReply
   func getsuggestion(request : Neva_Backend_GetSuggestionRequest, session : Neva_Backend_BackendGetSuggestionSession) throws -> Neva_Backend_GetSuggestionReply
+  func getmultiplesuggestions(request : Neva_Backend_GetMultipleSuggestionsRequest, session : Neva_Backend_BackendGetMultipleSuggestionsSession) throws -> Neva_Backend_GetMultipleSuggestionsReply
   func tagproposition(request : Neva_Backend_TagPropositionRequest, session : Neva_Backend_BackendTagPropositionSession) throws -> Neva_Backend_GenericReply
   func tagvalueproposition(request : Neva_Backend_TagValuePropositionRequest, session : Neva_Backend_BackendTagValuePropositionSession) throws -> Neva_Backend_GenericReply
   func getsuggestionitemlist(request : Neva_Backend_GetSuggestionItemListRequest, session : Neva_Backend_BackendGetSuggestionItemListSession) throws -> Neva_Backend_GetSuggestionItemListReply
@@ -205,6 +206,31 @@ internal class Neva_Backend_BackendGetSuggestionSession : Neva_Backend_BackendSe
       if let requestData = requestData {
         let requestMessage = try Neva_Backend_GetSuggestionRequest(serializedData:requestData)
         let replyMessage = try self.provider.getsuggestion(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// GetMultipleSuggestions (Unary)
+internal class Neva_Backend_BackendGetMultipleSuggestionsSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_GetMultipleSuggestionsRequest(serializedData:requestData)
+        let replyMessage = try self.provider.getmultiplesuggestions(request:requestMessage, session: self)
         try self.handler.sendResponse(message:replyMessage.serializedData(),
                                       statusCode:self.statusCode,
                                       statusMessage:self.statusMessage,
@@ -472,6 +498,8 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendSuggestionItemPropositionSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/GetSuggestion":
           try Neva_Backend_BackendGetSuggestionSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/GetMultipleSuggestions":
+          try Neva_Backend_BackendGetMultipleSuggestionsSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/TagProposition":
           try Neva_Backend_BackendTagPropositionSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/TagValueProposition":

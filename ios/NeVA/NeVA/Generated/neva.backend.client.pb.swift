@@ -363,6 +363,61 @@ internal class Neva_Backend_BackendGetSuggestionCall {
   }
 }
 
+/// GetMultipleSuggestions (Unary)
+internal class Neva_Backend_BackendGetMultipleSuggestionsCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/GetMultipleSuggestions")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_GetMultipleSuggestionsRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GetMultipleSuggestionsReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GetMultipleSuggestionsReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_GetMultipleSuggestionsRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GetMultipleSuggestionsReply?, CallResult)->())
+    throws -> Neva_Backend_BackendGetMultipleSuggestionsCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GetMultipleSuggestionsReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
 /// TagProposition (Unary)
 internal class Neva_Backend_BackendTagPropositionCall {
   private var call : Call
@@ -923,6 +978,21 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendGetSuggestionCall {
       return try Neva_Backend_BackendGetSuggestionCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func getmultiplesuggestions(_ request: Neva_Backend_GetMultipleSuggestionsRequest)
+    throws
+    -> Neva_Backend_GetMultipleSuggestionsReply {
+      return try Neva_Backend_BackendGetMultipleSuggestionsCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func getmultiplesuggestions(_ request: Neva_Backend_GetMultipleSuggestionsRequest,
+                  completion: @escaping (Neva_Backend_GetMultipleSuggestionsReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendGetMultipleSuggestionsCall {
+      return try Neva_Backend_BackendGetMultipleSuggestionsCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }

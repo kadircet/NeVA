@@ -34,6 +34,11 @@ Service Backend
   output .neva.backend.GetSuggestionReply
   client_streaming false
   server_streaming false
+ Method GetMultipleSuggestions
+  input .neva.backend.GetMultipleSuggestionsRequest
+  output .neva.backend.GetMultipleSuggestionsReply
+  client_streaming false
+  server_streaming false
  Method TagProposition
   input .neva.backend.TagPropositionRequest
   output .neva.backend.GenericReply
@@ -1579,6 +1584,35 @@ proto_file {
     }
   }
   message_type {
+    name: "GetMultipleSuggestionsRequest"
+    field {
+      name: "token"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_BYTES
+      json_name: "token"
+    }
+    field {
+      name: "suggestion_category"
+      number: 2
+      label: LABEL_OPTIONAL
+      type: TYPE_ENUM
+      type_name: ".neva.backend.Suggestion.SuggestionCategory"
+      json_name: "suggestionCategory"
+    }
+  }
+  message_type {
+    name: "GetMultipleSuggestionsReply"
+    field {
+      name: "suggestion"
+      number: 1
+      label: LABEL_OPTIONAL
+      type: TYPE_MESSAGE
+      type_name: ".neva.backend.SuggestionList"
+      json_name: "suggestion"
+    }
+  }
+  message_type {
     name: "TagPropositionRequest"
     field {
       name: "token"
@@ -1826,6 +1860,13 @@ proto_file {
       }
     }
     method {
+      name: "GetMultipleSuggestions"
+      input_type: ".neva.backend.GetMultipleSuggestionsRequest"
+      output_type: ".neva.backend.GetMultipleSuggestionsReply"
+      options {
+      }
+    }
+    method {
       name: "TagProposition"
       input_type: ".neva.backend.TagPropositionRequest"
       output_type: ".neva.backend.GenericReply"
@@ -1884,7 +1925,7 @@ proto_file {
   }
   source_code_info {
     location {
-      span: [0, 0, 212, 1]
+      span: [0, 0, 229, 1]
     }
     location {
       path: [12]
@@ -1908,7 +1949,7 @@ proto_file {
     }
     location {
       path: [6, 0]
-      span: [8, 0, 55, 1]
+      span: [8, 0, 59, 1]
     }
     location {
       path: [6, 0, 1]
@@ -2012,51 +2053,51 @@ proto_file {
     }
     location {
       path: [6, 0, 2, 6]
-      span: [28, 2, 29, 3]
+      span: [28, 2, 30, 3]
     }
     location {
       path: [6, 0, 2, 6, 1]
-      span: [28, 6, 20]
+      span: [28, 6, 28]
     }
     location {
       path: [6, 0, 2, 6, 2]
-      span: [28, 21, 42]
+      span: [28, 29, 58]
     }
     location {
       path: [6, 0, 2, 6, 3]
-      span: [28, 53, 65]
+      span: [29, 15, 42]
     }
     location {
       path: [6, 0, 2, 7]
-      span: [31, 2, 32, 3]
+      span: [32, 2, 33, 3]
     }
     location {
       path: [6, 0, 2, 7, 1]
-      span: [31, 6, 25]
+      span: [32, 6, 20]
     }
     location {
       path: [6, 0, 2, 7, 2]
-      span: [31, 26, 52]
+      span: [32, 21, 42]
     }
     location {
       path: [6, 0, 2, 7, 3]
-      span: [31, 63, 75]
+      span: [32, 53, 65]
     }
     location {
       path: [6, 0, 2, 8]
-      span: [34, 2, 36, 3]
+      span: [35, 2, 36, 3]
     }
     location {
       path: [6, 0, 2, 8, 1]
-      span: [34, 6, 27]
+      span: [35, 6, 25]
     }
     location {
       path: [6, 0, 2, 8, 2]
-      span: [34, 28, 56]
+      span: [35, 26, 52]
     }
     location {
       path: [6, 0, 2, 8, 3]
-      span: [35, 15, 41]
+      span: [35, 63, 75]
     }
     location {
       path: [6, 0, 2, 9]
@@ -2064,15 +2105,15 @@ proto_file {
     }
     location {
       path: [6, 0, 2, 9, 1]
-      span: [38, 6, 22]
+      span: [38, 6, 27]
     }
     location {
       path: [6, 0, 2, 9, 2]
-      span: [38, 23, 46]
+      span: [38, 28, 56]
     }
     location {
       path: [6, 0, 2, 9, 3]
-      span: [39, 15, 36]
+      span: [39, 15, 41]
     }
     location {
       path: [6, 0, 2, 10]
@@ -2092,1045 +2133,1140 @@ proto_file {
     }
     location {
       path: [6, 0, 2, 11]
-      span: [46, 2, 47, 3]
+      span: [46, 2, 48, 3]
     }
     location {
       path: [6, 0, 2, 11, 1]
-      span: [46, 6, 16]
+      span: [46, 6, 22]
     }
     location {
       path: [6, 0, 2, 11, 2]
-      span: [46, 17, 34]
+      span: [46, 23, 46]
     }
     location {
       path: [6, 0, 2, 11, 3]
-      span: [46, 45, 57]
+      span: [47, 15, 36]
     }
     location {
       path: [6, 0, 2, 12]
-      span: [49, 2, 50, 3]
+      span: [50, 2, 51, 3]
     }
     location {
       path: [6, 0, 2, 12, 1]
-      span: [49, 6, 20]
+      span: [50, 6, 16]
     }
     location {
       path: [6, 0, 2, 12, 2]
-      span: [49, 21, 42]
+      span: [50, 17, 34]
     }
     location {
       path: [6, 0, 2, 12, 3]
-      span: [49, 53, 65]
+      span: [50, 45, 57]
     }
     location {
       path: [6, 0, 2, 13]
       span: [53, 2, 54, 3]
-      leading_comments: " Returns all tags in the database.\n"
     }
     location {
       path: [6, 0, 2, 13, 1]
-      span: [53, 6, 13]
+      span: [53, 6, 20]
     }
     location {
       path: [6, 0, 2, 13, 2]
-      span: [53, 14, 28]
+      span: [53, 21, 42]
     }
     location {
       path: [6, 0, 2, 13, 3]
-      span: [53, 39, 51]
+      span: [53, 53, 65]
+    }
+    location {
+      path: [6, 0, 2, 14]
+      span: [57, 2, 58, 3]
+      leading_comments: " Returns all tags in the database.\n"
+    }
+    location {
+      path: [6, 0, 2, 14, 1]
+      span: [57, 6, 13]
+    }
+    location {
+      path: [6, 0, 2, 14, 2]
+      span: [57, 14, 28]
+    }
+    location {
+      path: [6, 0, 2, 14, 3]
+      span: [57, 39, 51]
     }
     location {
       path: [4, 0]
-      span: [57, 0, 58, 1]
+      span: [61, 0, 62, 1]
     }
     location {
       path: [4, 0, 1]
-      span: [57, 8, 20]
+      span: [61, 8, 20]
     }
     location {
       path: [4, 1]
-      span: [60, 0, 62, 1]
+      span: [64, 0, 66, 1]
     }
     location {
       path: [4, 1, 1]
-      span: [60, 8, 23]
+      span: [64, 8, 23]
     }
     location {
       path: [4, 1, 2, 0]
-      span: [61, 2, 16]
+      span: [65, 2, 16]
     }
     location {
       path: [4, 1, 2, 0, 4]
-      span: [61, 2, 60, 25]
+      span: [65, 2, 64, 25]
     }
     location {
       path: [4, 1, 2, 0, 6]
-      span: [61, 2, 6]
+      span: [65, 2, 6]
     }
     location {
       path: [4, 1, 2, 0, 1]
-      span: [61, 7, 11]
+      span: [65, 7, 11]
     }
     location {
       path: [4, 1, 2, 0, 3]
-      span: [61, 14, 15]
+      span: [65, 14, 15]
     }
     location {
       path: [4, 2]
-      span: [64, 0, 74, 1]
+      span: [68, 0, 78, 1]
     }
     location {
       path: [4, 2, 1]
-      span: [64, 8, 20]
+      span: [68, 8, 20]
     }
     location {
       path: [4, 2, 4, 0]
-      span: [65, 2, 69, 3]
+      span: [69, 2, 73, 3]
     }
     location {
       path: [4, 2, 4, 0, 1]
-      span: [65, 7, 25]
+      span: [69, 7, 25]
     }
     location {
       path: [4, 2, 4, 0, 2, 0]
-      span: [66, 4, 16]
+      span: [70, 4, 16]
     }
     location {
       path: [4, 2, 4, 0, 2, 0, 1]
-      span: [66, 4, 11]
+      span: [70, 4, 11]
     }
     location {
       path: [4, 2, 4, 0, 2, 0, 2]
-      span: [66, 14, 15]
+      span: [70, 14, 15]
     }
     location {
       path: [4, 2, 4, 0, 2, 1]
-      span: [67, 4, 16]
+      span: [71, 4, 16]
     }
     location {
       path: [4, 2, 4, 0, 2, 1, 1]
-      span: [67, 4, 11]
+      span: [71, 4, 11]
     }
     location {
       path: [4, 2, 4, 0, 2, 1, 2]
-      span: [67, 14, 15]
+      span: [71, 14, 15]
     }
     location {
       path: [4, 2, 4, 0, 2, 2]
-      span: [68, 4, 17]
+      span: [72, 4, 17]
     }
     location {
       path: [4, 2, 4, 0, 2, 2, 1]
-      span: [68, 4, 12]
+      span: [72, 4, 12]
     }
     location {
       path: [4, 2, 4, 0, 2, 2, 2]
-      span: [68, 15, 16]
+      span: [72, 15, 16]
     }
     location {
       path: [4, 2, 2, 0]
-      span: [71, 2, 19]
+      span: [75, 2, 19]
     }
     location {
       path: [4, 2, 2, 0, 4]
-      span: [71, 2, 69, 4]
+      span: [75, 2, 73, 4]
     }
     location {
       path: [4, 2, 2, 0, 5]
-      span: [71, 2, 8]
+      span: [75, 2, 8]
     }
     location {
       path: [4, 2, 2, 0, 1]
-      span: [71, 9, 14]
+      span: [75, 9, 14]
     }
     location {
       path: [4, 2, 2, 0, 3]
-      span: [71, 17, 18]
+      span: [75, 17, 18]
     }
     location {
       path: [4, 2, 2, 1]
-      span: [72, 2, 22]
+      span: [76, 2, 22]
     }
     location {
       path: [4, 2, 2, 1, 4]
-      span: [72, 2, 71, 19]
+      span: [76, 2, 75, 19]
     }
     location {
       path: [4, 2, 2, 1, 5]
-      span: [72, 2, 8]
+      span: [76, 2, 8]
     }
     location {
       path: [4, 2, 2, 1, 1]
-      span: [72, 9, 17]
+      span: [76, 9, 17]
     }
     location {
       path: [4, 2, 2, 1, 3]
-      span: [72, 20, 21]
+      span: [76, 20, 21]
     }
     location {
       path: [4, 2, 2, 2]
-      span: [73, 2, 45]
+      span: [77, 2, 45]
     }
     location {
       path: [4, 2, 2, 2, 4]
-      span: [73, 2, 72, 22]
+      span: [77, 2, 76, 22]
     }
     location {
       path: [4, 2, 2, 2, 6]
-      span: [73, 2, 20]
+      span: [77, 2, 20]
     }
     location {
       path: [4, 2, 2, 2, 1]
-      span: [73, 21, 40]
+      span: [77, 21, 40]
     }
     location {
       path: [4, 2, 2, 2, 3]
-      span: [73, 43, 44]
+      span: [77, 43, 44]
     }
     location {
       path: [4, 3]
-      span: [76, 0, 79, 1]
+      span: [80, 0, 83, 1]
     }
     location {
       path: [4, 3, 1]
-      span: [76, 8, 18]
+      span: [80, 8, 18]
     }
     location {
       path: [4, 3, 2, 0]
-      span: [78, 2, 18]
+      span: [82, 2, 18]
       leading_comments: " Authentication token to be used in upcoming requests.\n"
     }
     location {
       path: [4, 3, 2, 0, 4]
-      span: [78, 2, 76, 20]
+      span: [82, 2, 80, 20]
     }
     location {
       path: [4, 3, 2, 0, 5]
-      span: [78, 2, 7]
+      span: [82, 2, 7]
     }
     location {
       path: [4, 3, 2, 0, 1]
-      span: [78, 8, 13]
+      span: [82, 8, 13]
     }
     location {
       path: [4, 3, 2, 0, 3]
-      span: [78, 16, 17]
+      span: [82, 16, 17]
     }
     location {
       path: [4, 4]
-      span: [81, 0, 87, 1]
+      span: [85, 0, 91, 1]
     }
     location {
       path: [4, 4, 1]
-      span: [81, 8, 25]
+      span: [85, 8, 25]
     }
     location {
       path: [4, 4, 2, 0]
-      span: [83, 2, 18]
+      span: [87, 2, 18]
       leading_comments: " Session key for the user sending request.\n"
     }
     location {
       path: [4, 4, 2, 0, 4]
-      span: [83, 2, 81, 27]
+      span: [87, 2, 85, 27]
     }
     location {
       path: [4, 4, 2, 0, 5]
-      span: [83, 2, 7]
+      span: [87, 2, 7]
     }
     location {
       path: [4, 4, 2, 0, 1]
-      span: [83, 8, 13]
+      span: [87, 8, 13]
     }
     location {
       path: [4, 4, 2, 0, 3]
-      span: [83, 16, 17]
+      span: [87, 16, 17]
     }
     location {
       path: [4, 4, 2, 1]
-      span: [86, 2, 16]
+      span: [90, 2, 16]
       leading_comments: " Updated user data.\n"
     }
     location {
       path: [4, 4, 2, 1, 4]
-      span: [86, 2, 83, 18]
+      span: [90, 2, 87, 18]
     }
     location {
       path: [4, 4, 2, 1, 6]
-      span: [86, 2, 6]
+      span: [90, 2, 6]
     }
     location {
       path: [4, 4, 2, 1, 1]
-      span: [86, 7, 11]
+      span: [90, 7, 11]
     }
     location {
       path: [4, 4, 2, 1, 3]
-      span: [86, 14, 15]
+      span: [90, 14, 15]
     }
     location {
       path: [4, 5]
-      span: [89, 0, 92, 1]
+      span: [93, 0, 96, 1]
     }
     location {
       path: [4, 5, 1]
-      span: [89, 8, 22]
+      span: [93, 8, 22]
     }
     location {
       path: [4, 5, 2, 0]
-      span: [91, 2, 18]
+      span: [95, 2, 18]
       leading_comments: " Session key for the user sending request.\n"
     }
     location {
       path: [4, 5, 2, 0, 4]
-      span: [91, 2, 89, 24]
+      span: [95, 2, 93, 24]
     }
     location {
       path: [4, 5, 2, 0, 5]
-      span: [91, 2, 7]
+      span: [95, 2, 7]
     }
     location {
       path: [4, 5, 2, 0, 1]
-      span: [91, 8, 13]
+      span: [95, 8, 13]
     }
     location {
       path: [4, 5, 2, 0, 3]
-      span: [91, 16, 17]
+      span: [95, 16, 17]
     }
     location {
       path: [4, 6]
-      span: [94, 0, 97, 1]
+      span: [98, 0, 101, 1]
     }
     location {
       path: [4, 6, 1]
-      span: [94, 8, 20]
+      span: [98, 8, 20]
     }
     location {
       path: [4, 6, 2, 0]
-      span: [96, 2, 16]
+      span: [100, 2, 16]
       leading_comments: " User data of the requested user.\n"
     }
     location {
       path: [4, 6, 2, 0, 4]
-      span: [96, 2, 94, 22]
+      span: [100, 2, 98, 22]
     }
     location {
       path: [4, 6, 2, 0, 6]
-      span: [96, 2, 6]
+      span: [100, 2, 6]
     }
     location {
       path: [4, 6, 2, 0, 1]
-      span: [96, 7, 11]
+      span: [100, 7, 11]
     }
     location {
       path: [4, 6, 2, 0, 3]
-      span: [96, 14, 15]
+      span: [100, 14, 15]
     }
     location {
       path: [4, 7]
-      span: [99, 0, 105, 1]
+      span: [103, 0, 109, 1]
     }
     location {
       path: [4, 7, 1]
-      span: [99, 8, 40]
+      span: [103, 8, 40]
     }
     location {
       path: [4, 7, 2, 0]
-      span: [101, 2, 18]
+      span: [105, 2, 18]
       leading_comments: " Session key for the user proposing the item.\n"
     }
     location {
       path: [4, 7, 2, 0, 4]
-      span: [101, 2, 99, 42]
+      span: [105, 2, 103, 42]
     }
     location {
       path: [4, 7, 2, 0, 5]
-      span: [101, 2, 7]
+      span: [105, 2, 7]
     }
     location {
       path: [4, 7, 2, 0, 1]
-      span: [101, 8, 13]
+      span: [105, 8, 13]
     }
     location {
       path: [4, 7, 2, 0, 3]
-      span: [101, 16, 17]
+      span: [105, 16, 17]
     }
     location {
       path: [4, 7, 2, 1]
-      span: [104, 2, 28]
+      span: [108, 2, 28]
       leading_comments: " Holds information on propositions category and name.\n"
     }
     location {
       path: [4, 7, 2, 1, 4]
-      span: [104, 2, 101, 18]
+      span: [108, 2, 105, 18]
     }
     location {
       path: [4, 7, 2, 1, 6]
-      span: [104, 2, 12]
+      span: [108, 2, 12]
     }
     location {
       path: [4, 7, 2, 1, 1]
-      span: [104, 13, 23]
+      span: [108, 13, 23]
     }
     location {
       path: [4, 7, 2, 1, 3]
-      span: [104, 26, 27]
+      span: [108, 26, 27]
     }
     location {
       path: [4, 8]
-      span: [107, 0, 113, 1]
+      span: [111, 0, 117, 1]
     }
     location {
       path: [4, 8, 1]
-      span: [107, 8, 28]
+      span: [111, 8, 28]
     }
     location {
       path: [4, 8, 2, 0]
-      span: [109, 2, 18]
+      span: [113, 2, 18]
       leading_comments: " Session key for the user requesting a suggestion.\n"
     }
     location {
       path: [4, 8, 2, 0, 4]
-      span: [109, 2, 107, 30]
+      span: [113, 2, 111, 30]
     }
     location {
       path: [4, 8, 2, 0, 5]
-      span: [109, 2, 7]
+      span: [113, 2, 7]
     }
     location {
       path: [4, 8, 2, 0, 1]
-      span: [109, 8, 13]
+      span: [113, 8, 13]
     }
     location {
       path: [4, 8, 2, 0, 3]
-      span: [109, 16, 17]
+      span: [113, 16, 17]
     }
     location {
       path: [4, 8, 2, 1]
-      span: [112, 2, 56]
+      span: [116, 2, 56]
       leading_comments: " Category for which the user requests a suggestion.\n"
     }
     location {
       path: [4, 8, 2, 1, 4]
-      span: [112, 2, 109, 18]
+      span: [116, 2, 113, 18]
     }
     location {
       path: [4, 8, 2, 1, 6]
-      span: [112, 2, 31]
+      span: [116, 2, 31]
     }
     location {
       path: [4, 8, 2, 1, 1]
-      span: [112, 32, 51]
+      span: [116, 32, 51]
     }
     location {
       path: [4, 8, 2, 1, 3]
-      span: [112, 54, 55]
+      span: [116, 54, 55]
     }
     location {
       path: [4, 9]
-      span: [115, 0, 118, 1]
+      span: [119, 0, 122, 1]
     }
     location {
       path: [4, 9, 1]
-      span: [115, 8, 26]
+      span: [119, 8, 26]
     }
     location {
       path: [4, 9, 2, 0]
-      span: [117, 2, 18]
+      span: [121, 2, 18]
       leading_comments: " Name of the suggested item.\n"
     }
     location {
       path: [4, 9, 2, 0, 4]
-      span: [117, 2, 115, 28]
+      span: [121, 2, 119, 28]
     }
     location {
       path: [4, 9, 2, 0, 5]
-      span: [117, 2, 8]
+      span: [121, 2, 8]
     }
     location {
       path: [4, 9, 2, 0, 1]
-      span: [117, 9, 13]
+      span: [121, 9, 13]
     }
     location {
       path: [4, 9, 2, 0, 3]
-      span: [117, 16, 17]
+      span: [121, 16, 17]
     }
     location {
       path: [4, 10]
-      span: [120, 0, 126, 1]
+      span: [124, 0, 130, 1]
     }
     location {
       path: [4, 10, 1]
-      span: [120, 8, 29]
+      span: [124, 8, 37]
     }
     location {
       path: [4, 10, 2, 0]
-      span: [122, 2, 18]
-      leading_comments: " Session key for the user proposing the tag.\n"
+      span: [126, 2, 18]
+      leading_comments: " Session key for the user requesting a suggestion.\n"
     }
     location {
       path: [4, 10, 2, 0, 4]
-      span: [122, 2, 120, 31]
+      span: [126, 2, 124, 39]
     }
     location {
       path: [4, 10, 2, 0, 5]
-      span: [122, 2, 7]
+      span: [126, 2, 7]
     }
     location {
       path: [4, 10, 2, 0, 1]
-      span: [122, 8, 13]
+      span: [126, 8, 13]
     }
     location {
       path: [4, 10, 2, 0, 3]
-      span: [122, 16, 17]
+      span: [126, 16, 17]
     }
     location {
       path: [4, 10, 2, 1]
-      span: [125, 2, 17]
-      leading_comments: " Holds name for proposed tag.\n"
+      span: [129, 2, 56]
+      leading_comments: " Category for which the user requests a suggestion.\n"
     }
     location {
       path: [4, 10, 2, 1, 4]
-      span: [125, 2, 122, 18]
+      span: [129, 2, 126, 18]
     }
     location {
-      path: [4, 10, 2, 1, 5]
-      span: [125, 2, 8]
+      path: [4, 10, 2, 1, 6]
+      span: [129, 2, 31]
     }
     location {
       path: [4, 10, 2, 1, 1]
-      span: [125, 9, 12]
+      span: [129, 32, 51]
     }
     location {
       path: [4, 10, 2, 1, 3]
-      span: [125, 15, 16]
+      span: [129, 54, 55]
     }
     location {
       path: [4, 11]
-      span: [128, 0, 140, 1]
+      span: [132, 0, 135, 1]
     }
     location {
       path: [4, 11, 1]
-      span: [128, 8, 34]
+      span: [132, 8, 35]
     }
     location {
       path: [4, 11, 2, 0]
-      span: [130, 2, 18]
-      leading_comments: " Session key for the user proposing the tag.\n"
+      span: [134, 2, 32]
+      leading_comments: " List of suggested items.\n"
     }
     location {
       path: [4, 11, 2, 0, 4]
-      span: [130, 2, 128, 36]
+      span: [134, 2, 132, 37]
     }
     location {
-      path: [4, 11, 2, 0, 5]
-      span: [130, 2, 7]
+      path: [4, 11, 2, 0, 6]
+      span: [134, 2, 16]
     }
     location {
       path: [4, 11, 2, 0, 1]
-      span: [130, 8, 13]
+      span: [134, 17, 27]
     }
     location {
       path: [4, 11, 2, 0, 3]
-      span: [130, 16, 17]
-    }
-    location {
-      path: [4, 11, 2, 1]
-      span: [133, 2, 20]
-      leading_comments: " Holds id of the tag.\n"
-    }
-    location {
-      path: [4, 11, 2, 1, 4]
-      span: [133, 2, 130, 18]
-    }
-    location {
-      path: [4, 11, 2, 1, 5]
-      span: [133, 2, 8]
-    }
-    location {
-      path: [4, 11, 2, 1, 1]
-      span: [133, 9, 15]
-    }
-    location {
-      path: [4, 11, 2, 1, 3]
-      span: [133, 18, 19]
-    }
-    location {
-      path: [4, 11, 2, 2]
-      span: [136, 2, 26]
-      leading_comments: " Holds id of the suggestion item.\n"
-    }
-    location {
-      path: [4, 11, 2, 2, 4]
-      span: [136, 2, 133, 20]
-    }
-    location {
-      path: [4, 11, 2, 2, 5]
-      span: [136, 2, 8]
-    }
-    location {
-      path: [4, 11, 2, 2, 1]
-      span: [136, 9, 21]
-    }
-    location {
-      path: [4, 11, 2, 2, 3]
-      span: [136, 24, 25]
-    }
-    location {
-      path: [4, 11, 2, 3]
-      span: [139, 2, 19]
-      leading_comments: " Holds value for the tag if appropriate.\n"
-    }
-    location {
-      path: [4, 11, 2, 3, 4]
-      span: [139, 2, 136, 26]
-    }
-    location {
-      path: [4, 11, 2, 3, 5]
-      span: [139, 2, 8]
-    }
-    location {
-      path: [4, 11, 2, 3, 1]
-      span: [139, 9, 14]
-    }
-    location {
-      path: [4, 11, 2, 3, 3]
-      span: [139, 17, 18]
+      span: [134, 30, 31]
     }
     location {
       path: [4, 12]
-      span: [142, 0, 152, 1]
+      span: [137, 0, 143, 1]
     }
     location {
       path: [4, 12, 1]
-      span: [142, 8, 36]
+      span: [137, 8, 29]
     }
     location {
       path: [4, 12, 2, 0]
-      span: [144, 2, 18]
-      leading_comments: " Session key for the user requesting item list.\n"
+      span: [139, 2, 18]
+      leading_comments: " Session key for the user proposing the tag.\n"
     }
     location {
       path: [4, 12, 2, 0, 4]
-      span: [144, 2, 142, 38]
+      span: [139, 2, 137, 31]
     }
     location {
       path: [4, 12, 2, 0, 5]
-      span: [144, 2, 7]
+      span: [139, 2, 7]
     }
     location {
       path: [4, 12, 2, 0, 1]
-      span: [144, 8, 13]
+      span: [139, 8, 13]
     }
     location {
       path: [4, 12, 2, 0, 3]
-      span: [144, 16, 17]
+      span: [139, 16, 17]
     }
     location {
       path: [4, 12, 2, 1]
-      span: [147, 2, 56]
-      leading_comments: " Category for which the user requesting items.\n"
+      span: [142, 2, 17]
+      leading_comments: " Holds name for proposed tag.\n"
     }
     location {
       path: [4, 12, 2, 1, 4]
-      span: [147, 2, 144, 18]
+      span: [142, 2, 139, 18]
     }
     location {
-      path: [4, 12, 2, 1, 6]
-      span: [147, 2, 31]
+      path: [4, 12, 2, 1, 5]
+      span: [142, 2, 8]
     }
     location {
       path: [4, 12, 2, 1, 1]
-      span: [147, 32, 51]
+      span: [142, 9, 12]
     }
     location {
       path: [4, 12, 2, 1, 3]
-      span: [147, 54, 55]
-    }
-    location {
-      path: [4, 12, 2, 2]
-      span: [151, 2, 25]
-      leading_comments: " Fetch elements updated after that index. Giving zero as start_index would\n result in fetching all items.\n"
-    }
-    location {
-      path: [4, 12, 2, 2, 4]
-      span: [151, 2, 147, 56]
-    }
-    location {
-      path: [4, 12, 2, 2, 5]
-      span: [151, 2, 8]
-    }
-    location {
-      path: [4, 12, 2, 2, 1]
-      span: [151, 9, 20]
-    }
-    location {
-      path: [4, 12, 2, 2, 3]
-      span: [151, 23, 24]
+      span: [142, 15, 16]
     }
     location {
       path: [4, 13]
-      span: [154, 0, 160, 1]
+      span: [145, 0, 157, 1]
     }
     location {
       path: [4, 13, 1]
-      span: [154, 8, 34]
+      span: [145, 8, 34]
     }
     location {
       path: [4, 13, 2, 0]
-      span: [156, 2, 27]
-      leading_comments: " Item names in the database.\n"
+      span: [147, 2, 18]
+      leading_comments: " Session key for the user proposing the tag.\n"
     }
     location {
       path: [4, 13, 2, 0, 4]
-      span: [156, 2, 154, 36]
+      span: [147, 2, 145, 36]
     }
     location {
-      path: [4, 13, 2, 0, 6]
-      span: [156, 2, 16]
+      path: [4, 13, 2, 0, 5]
+      span: [147, 2, 7]
     }
     location {
       path: [4, 13, 2, 0, 1]
-      span: [156, 17, 22]
+      span: [147, 8, 13]
     }
     location {
       path: [4, 13, 2, 0, 3]
-      span: [156, 25, 26]
+      span: [147, 16, 17]
     }
     location {
       path: [4, 13, 2, 1]
-      span: [159, 2, 26]
-      leading_comments: " Current version of the database.\n"
+      span: [150, 2, 20]
+      leading_comments: " Holds id of the tag.\n"
     }
     location {
       path: [4, 13, 2, 1, 4]
-      span: [159, 2, 156, 27]
+      span: [150, 2, 147, 18]
     }
     location {
       path: [4, 13, 2, 1, 5]
-      span: [159, 2, 8]
+      span: [150, 2, 8]
     }
     location {
       path: [4, 13, 2, 1, 1]
-      span: [159, 9, 21]
+      span: [150, 9, 15]
     }
     location {
       path: [4, 13, 2, 1, 3]
-      span: [159, 24, 25]
+      span: [150, 18, 19]
+    }
+    location {
+      path: [4, 13, 2, 2]
+      span: [153, 2, 26]
+      leading_comments: " Holds id of the suggestion item.\n"
+    }
+    location {
+      path: [4, 13, 2, 2, 4]
+      span: [153, 2, 150, 20]
+    }
+    location {
+      path: [4, 13, 2, 2, 5]
+      span: [153, 2, 8]
+    }
+    location {
+      path: [4, 13, 2, 2, 1]
+      span: [153, 9, 21]
+    }
+    location {
+      path: [4, 13, 2, 2, 3]
+      span: [153, 24, 25]
+    }
+    location {
+      path: [4, 13, 2, 3]
+      span: [156, 2, 19]
+      leading_comments: " Holds value for the tag if appropriate.\n"
+    }
+    location {
+      path: [4, 13, 2, 3, 4]
+      span: [156, 2, 153, 26]
+    }
+    location {
+      path: [4, 13, 2, 3, 5]
+      span: [156, 2, 8]
+    }
+    location {
+      path: [4, 13, 2, 3, 1]
+      span: [156, 9, 14]
+    }
+    location {
+      path: [4, 13, 2, 3, 3]
+      span: [156, 17, 18]
     }
     location {
       path: [4, 14]
-      span: [162, 0, 168, 1]
+      span: [159, 0, 169, 1]
     }
     location {
       path: [4, 14, 1]
-      span: [162, 8, 31]
+      span: [159, 8, 36]
     }
     location {
       path: [4, 14, 2, 0]
-      span: [164, 2, 18]
-      leading_comments: " Session key for the user informing about request.\n"
+      span: [161, 2, 18]
+      leading_comments: " Session key for the user requesting item list.\n"
     }
     location {
       path: [4, 14, 2, 0, 4]
-      span: [164, 2, 162, 33]
+      span: [161, 2, 159, 38]
     }
     location {
       path: [4, 14, 2, 0, 5]
-      span: [164, 2, 7]
+      span: [161, 2, 7]
     }
     location {
       path: [4, 14, 2, 0, 1]
-      span: [164, 8, 13]
+      span: [161, 8, 13]
     }
     location {
       path: [4, 14, 2, 0, 3]
-      span: [164, 16, 17]
+      span: [161, 16, 17]
     }
     location {
       path: [4, 14, 2, 1]
-      span: [167, 2, 20]
-      leading_comments: " Choice of the user.\n"
+      span: [164, 2, 56]
+      leading_comments: " Category for which the user requesting items.\n"
     }
     location {
       path: [4, 14, 2, 1, 4]
-      span: [167, 2, 164, 18]
+      span: [164, 2, 161, 18]
     }
     location {
       path: [4, 14, 2, 1, 6]
-      span: [167, 2, 8]
+      span: [164, 2, 31]
     }
     location {
       path: [4, 14, 2, 1, 1]
-      span: [167, 9, 15]
+      span: [164, 32, 51]
     }
     location {
       path: [4, 14, 2, 1, 3]
-      span: [167, 18, 19]
+      span: [164, 54, 55]
+    }
+    location {
+      path: [4, 14, 2, 2]
+      span: [168, 2, 25]
+      leading_comments: " Fetch elements updated after that index. Giving zero as start_index would\n result in fetching all items.\n"
+    }
+    location {
+      path: [4, 14, 2, 2, 4]
+      span: [168, 2, 164, 56]
+    }
+    location {
+      path: [4, 14, 2, 2, 5]
+      span: [168, 2, 8]
+    }
+    location {
+      path: [4, 14, 2, 2, 1]
+      span: [168, 9, 20]
+    }
+    location {
+      path: [4, 14, 2, 2, 3]
+      span: [168, 23, 24]
     }
     location {
       path: [4, 15]
-      span: [170, 0, 173, 1]
+      span: [171, 0, 177, 1]
     }
     location {
       path: [4, 15, 1]
-      span: [170, 8, 29]
+      span: [171, 8, 34]
     }
     location {
       path: [4, 15, 2, 0]
-      span: [172, 2, 23]
-      leading_comments: " Database id of the user choice.\n"
+      span: [173, 2, 27]
+      leading_comments: " Item names in the database.\n"
     }
     location {
       path: [4, 15, 2, 0, 4]
-      span: [172, 2, 170, 31]
+      span: [173, 2, 171, 36]
     }
     location {
-      path: [4, 15, 2, 0, 5]
-      span: [172, 2, 8]
+      path: [4, 15, 2, 0, 6]
+      span: [173, 2, 16]
     }
     location {
       path: [4, 15, 2, 0, 1]
-      span: [172, 9, 18]
+      span: [173, 17, 22]
     }
     location {
       path: [4, 15, 2, 0, 3]
-      span: [172, 21, 22]
+      span: [173, 25, 26]
+    }
+    location {
+      path: [4, 15, 2, 1]
+      span: [176, 2, 26]
+      leading_comments: " Current version of the database.\n"
+    }
+    location {
+      path: [4, 15, 2, 1, 4]
+      span: [176, 2, 173, 27]
+    }
+    location {
+      path: [4, 15, 2, 1, 5]
+      span: [176, 2, 8]
+    }
+    location {
+      path: [4, 15, 2, 1, 1]
+      span: [176, 9, 21]
+    }
+    location {
+      path: [4, 15, 2, 1, 3]
+      span: [176, 24, 25]
     }
     location {
       path: [4, 16]
-      span: [175, 0, 181, 1]
+      span: [179, 0, 185, 1]
     }
     location {
       path: [4, 16, 1]
-      span: [175, 8, 31]
+      span: [179, 8, 31]
     }
     location {
       path: [4, 16, 2, 0]
-      span: [177, 2, 18]
-      leading_comments: " Session key for the user requesting the fetch.\n"
+      span: [181, 2, 18]
+      leading_comments: " Session key for the user informing about request.\n"
     }
     location {
       path: [4, 16, 2, 0, 4]
-      span: [177, 2, 175, 33]
+      span: [181, 2, 179, 33]
     }
     location {
       path: [4, 16, 2, 0, 5]
-      span: [177, 2, 7]
+      span: [181, 2, 7]
     }
     location {
       path: [4, 16, 2, 0, 1]
-      span: [177, 8, 13]
+      span: [181, 8, 13]
     }
     location {
       path: [4, 16, 2, 0, 3]
-      span: [177, 16, 17]
+      span: [181, 16, 17]
     }
     location {
       path: [4, 16, 2, 1]
-      span: [180, 2, 25]
-      leading_comments: " Start index to fetch choice entries;\n"
+      span: [184, 2, 20]
+      leading_comments: " Choice of the user.\n"
     }
     location {
       path: [4, 16, 2, 1, 4]
-      span: [180, 2, 177, 18]
+      span: [184, 2, 181, 18]
     }
     location {
-      path: [4, 16, 2, 1, 5]
-      span: [180, 2, 8]
+      path: [4, 16, 2, 1, 6]
+      span: [184, 2, 8]
     }
     location {
       path: [4, 16, 2, 1, 1]
-      span: [180, 9, 20]
+      span: [184, 9, 15]
     }
     location {
       path: [4, 16, 2, 1, 3]
-      span: [180, 23, 24]
+      span: [184, 18, 19]
     }
     location {
       path: [4, 17]
-      span: [183, 0, 186, 1]
+      span: [187, 0, 190, 1]
     }
     location {
       path: [4, 17, 1]
-      span: [183, 8, 29]
+      span: [187, 8, 29]
     }
     location {
       path: [4, 17, 2, 0]
-      span: [185, 2, 31]
-      leading_comments: " User history object.\n"
+      span: [189, 2, 23]
+      leading_comments: " Database id of the user choice.\n"
     }
     location {
       path: [4, 17, 2, 0, 4]
-      span: [185, 2, 183, 31]
+      span: [189, 2, 187, 31]
     }
     location {
-      path: [4, 17, 2, 0, 6]
-      span: [185, 2, 13]
+      path: [4, 17, 2, 0, 5]
+      span: [189, 2, 8]
     }
     location {
       path: [4, 17, 2, 0, 1]
-      span: [185, 14, 26]
+      span: [189, 9, 18]
     }
     location {
       path: [4, 17, 2, 0, 3]
-      span: [185, 29, 30]
+      span: [189, 21, 22]
     }
     location {
       path: [4, 18]
-      span: [188, 0, 191, 1]
+      span: [192, 0, 198, 1]
     }
     location {
       path: [4, 18, 1]
-      span: [188, 8, 25]
+      span: [192, 8, 31]
     }
     location {
       path: [4, 18, 2, 0]
-      span: [190, 2, 18]
-      leading_comments: " Session token to be checked.\n"
+      span: [194, 2, 18]
+      leading_comments: " Session key for the user requesting the fetch.\n"
     }
     location {
       path: [4, 18, 2, 0, 4]
-      span: [190, 2, 188, 27]
+      span: [194, 2, 192, 33]
     }
     location {
       path: [4, 18, 2, 0, 5]
-      span: [190, 2, 7]
+      span: [194, 2, 7]
     }
     location {
       path: [4, 18, 2, 0, 1]
-      span: [190, 8, 13]
+      span: [194, 8, 13]
     }
     location {
       path: [4, 18, 2, 0, 3]
-      span: [190, 16, 17]
+      span: [194, 16, 17]
+    }
+    location {
+      path: [4, 18, 2, 1]
+      span: [197, 2, 25]
+      leading_comments: " Start index to fetch choice entries;\n"
+    }
+    location {
+      path: [4, 18, 2, 1, 4]
+      span: [197, 2, 194, 18]
+    }
+    location {
+      path: [4, 18, 2, 1, 5]
+      span: [197, 2, 8]
+    }
+    location {
+      path: [4, 18, 2, 1, 1]
+      span: [197, 9, 20]
+    }
+    location {
+      path: [4, 18, 2, 1, 3]
+      span: [197, 23, 24]
     }
     location {
       path: [4, 19]
-      span: [193, 0, 199, 1]
+      span: [200, 0, 203, 1]
     }
     location {
       path: [4, 19, 1]
-      span: [193, 8, 29]
+      span: [200, 8, 29]
     }
     location {
       path: [4, 19, 2, 0]
-      span: [195, 2, 18]
-      leading_comments: " Session token of the user sending the feedback.\n"
+      span: [202, 2, 31]
+      leading_comments: " User history object.\n"
     }
     location {
       path: [4, 19, 2, 0, 4]
-      span: [195, 2, 193, 31]
+      span: [202, 2, 200, 31]
     }
     location {
-      path: [4, 19, 2, 0, 5]
-      span: [195, 2, 7]
+      path: [4, 19, 2, 0, 6]
+      span: [202, 2, 13]
     }
     location {
       path: [4, 19, 2, 0, 1]
-      span: [195, 8, 13]
+      span: [202, 14, 26]
     }
     location {
       path: [4, 19, 2, 0, 3]
-      span: [195, 16, 17]
-    }
-    location {
-      path: [4, 19, 2, 1]
-      span: [198, 2, 33]
-      leading_comments: " Information about the feedback.\n"
-    }
-    location {
-      path: [4, 19, 2, 1, 4]
-      span: [198, 2, 195, 18]
-    }
-    location {
-      path: [4, 19, 2, 1, 6]
-      span: [198, 2, 14]
-    }
-    location {
-      path: [4, 19, 2, 1, 1]
-      span: [198, 15, 28]
-    }
-    location {
-      path: [4, 19, 2, 1, 3]
-      span: [198, 31, 32]
+      span: [202, 29, 30]
     }
     location {
       path: [4, 20]
-      span: [201, 0, 207, 1]
+      span: [205, 0, 208, 1]
     }
     location {
       path: [4, 20, 1]
-      span: [201, 8, 22]
+      span: [205, 8, 25]
     }
     location {
       path: [4, 20, 2, 0]
-      span: [203, 2, 18]
-      leading_comments: " Token of the user making request.\n"
+      span: [207, 2, 18]
+      leading_comments: " Session token to be checked.\n"
     }
     location {
       path: [4, 20, 2, 0, 4]
-      span: [203, 2, 201, 24]
+      span: [207, 2, 205, 27]
     }
     location {
       path: [4, 20, 2, 0, 5]
-      span: [203, 2, 7]
+      span: [207, 2, 7]
     }
     location {
       path: [4, 20, 2, 0, 1]
-      span: [203, 8, 13]
+      span: [207, 8, 13]
     }
     location {
       path: [4, 20, 2, 0, 3]
-      span: [203, 16, 17]
-    }
-    location {
-      path: [4, 20, 2, 1]
-      span: [206, 2, 25]
-      leading_comments: " Start index to fetch tags. start_index is exclusive.\n"
-    }
-    location {
-      path: [4, 20, 2, 1, 4]
-      span: [206, 2, 203, 18]
-    }
-    location {
-      path: [4, 20, 2, 1, 5]
-      span: [206, 2, 8]
-    }
-    location {
-      path: [4, 20, 2, 1, 1]
-      span: [206, 9, 20]
-    }
-    location {
-      path: [4, 20, 2, 1, 3]
-      span: [206, 23, 24]
+      span: [207, 16, 17]
     }
     location {
       path: [4, 21]
-      span: [209, 0, 212, 1]
+      span: [210, 0, 216, 1]
     }
     location {
       path: [4, 21, 1]
-      span: [209, 8, 20]
+      span: [210, 8, 29]
     }
     location {
       path: [4, 21, 2, 0]
-      span: [211, 2, 28]
-      leading_comments: " Tags in the database both id and names.\n"
+      span: [212, 2, 18]
+      leading_comments: " Session token of the user sending the feedback.\n"
     }
     location {
       path: [4, 21, 2, 0, 4]
-      span: [211, 2, 10]
+      span: [212, 2, 210, 31]
     }
     location {
-      path: [4, 21, 2, 0, 6]
-      span: [211, 11, 14]
+      path: [4, 21, 2, 0, 5]
+      span: [212, 2, 7]
     }
     location {
       path: [4, 21, 2, 0, 1]
-      span: [211, 15, 23]
+      span: [212, 8, 13]
     }
     location {
       path: [4, 21, 2, 0, 3]
-      span: [211, 26, 27]
+      span: [212, 16, 17]
+    }
+    location {
+      path: [4, 21, 2, 1]
+      span: [215, 2, 33]
+      leading_comments: " Information about the feedback.\n"
+    }
+    location {
+      path: [4, 21, 2, 1, 4]
+      span: [215, 2, 212, 18]
+    }
+    location {
+      path: [4, 21, 2, 1, 6]
+      span: [215, 2, 14]
+    }
+    location {
+      path: [4, 21, 2, 1, 1]
+      span: [215, 15, 28]
+    }
+    location {
+      path: [4, 21, 2, 1, 3]
+      span: [215, 31, 32]
+    }
+    location {
+      path: [4, 22]
+      span: [218, 0, 224, 1]
+    }
+    location {
+      path: [4, 22, 1]
+      span: [218, 8, 22]
+    }
+    location {
+      path: [4, 22, 2, 0]
+      span: [220, 2, 18]
+      leading_comments: " Token of the user making request.\n"
+    }
+    location {
+      path: [4, 22, 2, 0, 4]
+      span: [220, 2, 218, 24]
+    }
+    location {
+      path: [4, 22, 2, 0, 5]
+      span: [220, 2, 7]
+    }
+    location {
+      path: [4, 22, 2, 0, 1]
+      span: [220, 8, 13]
+    }
+    location {
+      path: [4, 22, 2, 0, 3]
+      span: [220, 16, 17]
+    }
+    location {
+      path: [4, 22, 2, 1]
+      span: [223, 2, 25]
+      leading_comments: " Start index to fetch tags. start_index is exclusive.\n"
+    }
+    location {
+      path: [4, 22, 2, 1, 4]
+      span: [223, 2, 220, 18]
+    }
+    location {
+      path: [4, 22, 2, 1, 5]
+      span: [223, 2, 8]
+    }
+    location {
+      path: [4, 22, 2, 1, 1]
+      span: [223, 9, 20]
+    }
+    location {
+      path: [4, 22, 2, 1, 3]
+      span: [223, 23, 24]
+    }
+    location {
+      path: [4, 23]
+      span: [226, 0, 229, 1]
+    }
+    location {
+      path: [4, 23, 1]
+      span: [226, 8, 20]
+    }
+    location {
+      path: [4, 23, 2, 0]
+      span: [228, 2, 28]
+      leading_comments: " Tags in the database both id and names.\n"
+    }
+    location {
+      path: [4, 23, 2, 0, 4]
+      span: [228, 2, 10]
+    }
+    location {
+      path: [4, 23, 2, 0, 6]
+      span: [228, 11, 14]
+    }
+    location {
+      path: [4, 23, 2, 0, 1]
+      span: [228, 15, 23]
+    }
+    location {
+      path: [4, 23, 2, 0, 3]
+      span: [228, 26, 27]
     }
   }
   syntax: "proto3"
