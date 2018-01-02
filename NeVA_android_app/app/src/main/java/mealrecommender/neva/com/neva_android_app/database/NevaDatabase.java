@@ -7,7 +7,7 @@ import android.arch.persistence.room.RoomDatabase;
  * Created by hakan on 12/27/17.
  */
 
-@Database(entities = {Meal.class, HistoryEntry.class}, version = 4)
+@Database(entities = {Meal.class, HistoryEntry.class, Tag.class, MealTagRelation.class}, version = 5)
 public abstract class NevaDatabase extends RoomDatabase{
   public abstract NevaDao nevaDao();
 }
