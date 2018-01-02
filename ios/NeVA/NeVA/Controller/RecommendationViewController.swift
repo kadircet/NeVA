@@ -64,6 +64,7 @@ class RecommendationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("merhaba")
         recommendationView.isHidden = true
         getTagsFromServer()
         getMealsFromServer()
