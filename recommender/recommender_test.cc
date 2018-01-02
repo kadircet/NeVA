@@ -9,6 +9,7 @@ namespace recommender {
 namespace {
 
 using ::testing::get;
+using ::testing::Contains;
 using google::protobuf::TextFormat;
 
 TEST(GetSuggestion, SanityTest) {
@@ -44,9 +45,8 @@ TEST(GetSuggestion, SanityTest) {
   EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);
 }
 
-MATCHER(SuggestionEq, "") {
-  return get<0>(arg).suggestee_id() == get<1>(arg).suggestee_id() &&
-         get<0>(arg).name() == get<1>(arg).name();
+ATCHER_P(SuggestionEq, elem, "Checks equality between Suggestion items.") {
+  return arg.suggestee_id() == elem.suggestee_id() && arg.name() == elem.name();
 }
 
 TEST(GetMultipleSuggestions, SanityTest) {
@@ -78,12 +78,10 @@ TEST(GetMultipleSuggestions, SanityTest) {
   const SuggestionList suggestion_list =
       GetMultipleSuggestions(user_history, all_suggestees);
   EXPECT_EQ(suggestion_list.suggestion_list_size(), kExpectedSuggesteeCount);
-  EXPECT_THAT(
-      suggestion_list.suggestion_list(),
-      Contains(Pointwise(SuggestionEq(), all_suggestees.suggestion_list(0))));
-  EXPECT_THAT(
-      suggestion_list.suggestion_list(),
-      Contains(Pointwise(SuggestionEq(), all_suggestees.suggestion_list(1))));
+  EXPECT_THAT(suggestion_list.suggestion_list(),
+              Contains(SuggestionEq(all_suggestees.suggestion_list(0))));
+  EXPECT_THAT(suggestion_list.suggestion_list(),
+              Contains(SuggestionEq(all_suggestees.suggestion_list(1))));
 }
 
 }  // namespace
