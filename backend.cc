@@ -119,7 +119,6 @@ class BackendServiceImpl final : public Backend::Service {
     RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     UserHistory user_history;
     user_history_orm_->FetchUserHistory(user_id, 0, &user_history);
-    SuggestionList suggestion;
     RETURN_IF_ERROR(suggestion_orm_->GetMultipleSuggestions(
         user_history, request->suggestion_category(),
         reply->mutable_suggestion()));

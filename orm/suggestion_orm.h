@@ -31,7 +31,7 @@ class SuggestionOrm {
   grpc::Status GetMultipleSuggestions(
       const UserHistory& user_history,
       const Suggestion::SuggestionCategory suggestion_category,
-      SuggestionList* suggestion);
+      SuggestionList* suggestion_list);
 
  private:
   std::shared_ptr<mysqlpp::Connection> conn_;

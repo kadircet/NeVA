@@ -82,23 +82,23 @@ Status SuggestionOrm::GetSuggestion(
 Status SuggestionOrm::GetMultipleSuggestions(
     const UserHistory& user_history,
     const Suggestion::SuggestionCategory suggestion_category,
-    SuggestionList* suggestion) {
+    SuggestionList* suggestion_list) {
   if (!conn_->ping()) {
     return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
   }
 
-  SuggestionList suggestion_list;
-  GetSuggestees(suggestion_category, 0, &suggestion_list);
+  SuggestionList all_suggestees;
+  GetSuggestees(suggestion_category, 0, &all_suggestees);
 
-  if (suggestion_list.suggestion_list_size() == 0) {
+  if (all_suggestees.suggestion_list_size() == 0) {
     VLOG(1) << "Requested a suggestion from an empty category: "
             << suggestion_category;
     return Status(StatusCode::INVALID_ARGUMENT,
                   "No items to suggest in that category.");
   }
 
-  *suggestion = recommender::GetMultipleSuggestions(user_history, suggestion_list);
-  VLOG(1) << "Returning:\n" << suggestion->ShortDebugString();
+  *suggestion_list = recommender::GetMultipleSuggestions(user_history, all_suggestees);
+  VLOG(1) << "Returning:\n" << suggestion_list->ShortDebugString();
   return Status::OK;
 }
 
