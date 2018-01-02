@@ -319,22 +319,20 @@ Status UserOrm::CheckToken(const std::string& token, int* user_id) {
   }
 
   mysqlpp::Query query = conn_->query();
-  {
-    query << "SELECT `user_id`, `expire` FROM `user_session` WHERE `token`=%0q";
-    query.parse();
+  query << "SELECT `user_id`, `expire` FROM `user_session` WHERE `token`=%0q";
+  query.parse();
 
-    const mysqlpp::StoreQueryResult res = query.store(token);
-    if (res.empty()) {
-      VLOG(1) << "Session token deosn't exists.";
-      return Status(StatusCode::INVALID_ARGUMENT,
-                    "No such session token exists.");
-    }
-    // TODO(kadircet): Implement session expire check.
-    *user_id = res[0]["user_id"];
-    VLOG(1) << "Session token belongs to user with id: " << *user_id;
-
-    return Status::OK;
+  const mysqlpp::StoreQueryResult res = query.store(token);
+  if (!res || res.empty()) {
+    VLOG(1) << "Session token deosn't exists." << query.error();
+    return Status(StatusCode::INVALID_ARGUMENT,
+                  "No such session token exists.");
   }
+  // TODO(kadircet): Implement session expire check.
+  *user_id = res[0]["user_id"];
+  VLOG(1) << "Session token belongs to user with id: " << *user_id;
+
+  return Status::OK;
 }
 
 }  // namespace orm
