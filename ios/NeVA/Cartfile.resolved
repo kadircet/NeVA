@@ -1,4 +1,4 @@
-github "BoltsFramework/Bolts-ObjC" "1.8.4"
+github "BoltsFramework/Bolts-ObjC" "1.9.0"
 github "apple/swift-protobuf" "1.0.2"
 github "bilalyaylak/grpc-swift" "f5387c85c8661e1d5a5d97d307f05de6c986f540"
 github "evgenyneu/keychain-swift" "10.0.0"
