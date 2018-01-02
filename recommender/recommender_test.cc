@@ -1,6 +1,7 @@
 #include "recommender.h"
 #include <google/protobuf/text_format.h>
 #include "glog/logging.h"
+#include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
 namespace neva {
@@ -8,7 +9,6 @@ namespace backend {
 namespace recommender {
 namespace {
 
-using ::testing::get;
 using ::testing::Contains;
 using google::protobuf::TextFormat;
 
