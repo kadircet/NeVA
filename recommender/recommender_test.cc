@@ -8,6 +8,7 @@ namespace backend {
 namespace recommender {
 namespace {
 
+using ::testing::get;
 using google::protobuf::TextFormat;
 
 TEST(GetSuggestion, SanityTest) {
@@ -43,6 +44,11 @@ TEST(GetSuggestion, SanityTest) {
   EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);
 }
 
+MATCHER(SuggestionEq, "") {
+  return get<0>(arg).suggestee_id() == get<1>(arg).suggestee_id() &&
+         get<0>(arg).name() == get<1>(arg).name();
+}
+
 TEST(GetMultipleSuggestions, SanityTest) {
   constexpr const char* kUserHistory = R"(
     history {
@@ -72,15 +78,12 @@ TEST(GetMultipleSuggestions, SanityTest) {
   const SuggestionList suggestion_list =
       GetMultipleSuggestions(user_history, all_suggestees);
   EXPECT_EQ(suggestion_list.suggestion_list_size(), kExpectedSuggesteeCount);
-  suggestion_list.suggestion_list().begin();
-  auto it = find(suggestion_list.suggestion_list().begin(),
-                 suggestion_list.suggestion_list().end(),
-                 all_suggestees.suggestion_list(0));
-  EXPECT_NE(it, suggestion_list.suggestion_list().end());
-  it = find(suggestion_list.suggestion_list().begin(),
-            suggestion_list.suggestion_list().end(),
-            all_suggestees.suggestion_list(1));
-  EXPECT_NE(it, suggestion_list.suggestion_list().end());
+  EXPECT_THAT(
+      suggestion_list.suggestion_list(),
+      Contains(Pointwise(SuggestionEq(), all_suggestees.suggestion_list(0))));
+  EXPECT_THAT(
+      suggestion_list.suggestion_list(),
+      Contains(Pointwise(SuggestionEq(), all_suggestees.suggestion_list(1))));
 }
 
 }  // namespace
