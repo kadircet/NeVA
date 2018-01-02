@@ -72,8 +72,8 @@ TEST(GetMultipleSuggestions, SanityTest) {
   const SuggestionList suggestion_list =
       GetMultipleSuggestions(user_history, all_suggestees);
   EXPECT_EQ(suggestion_list.suggestion_list_size(), kExpectedSuggesteeCount);
-    EXPECT(suggestion_list.suggestion_list.Contains(all_suggestees.suggestion_list(0));
-    EXPECT(suggestion_list.suggestion_list.Contains(all_suggestees.suggestion_list(1));
+  EXPECT(suggestion_list.suggestion_list().Contains(all_suggestees.suggestion_list(0));
+  EXPECT(suggestion_list.suggestion_list().Contains(all_suggestees.suggestion_list(1));
 }
 
 }  // namespace
