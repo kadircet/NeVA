@@ -10,6 +10,8 @@ namespace recommender {
 namespace {
 
 using ::testing::Contains;
+using ::testing::Pointwise;
+using ::testing::get;
 using google::protobuf::TextFormat;
 
 TEST(GetSuggestion, SanityTest) {
