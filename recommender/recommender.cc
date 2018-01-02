@@ -19,7 +19,7 @@ Suggestion GetSuggestion(const UserHistory& history,
   // Pick one random element randomly from most frequent ones.
   const uint32_t element_idx =
       util::GetRandom(suggested_list.suggestion_list_size());
-  CHECK(element_idx < suggestion_list_size && element_idx > 0)
+  CHECK(element_idx < suggestion_list_size && element_idx >= 0)
       << "element_idx: " << element_idx << " out of scope.";
   return suggested_list.suggestion_list(element_idx);
 }
