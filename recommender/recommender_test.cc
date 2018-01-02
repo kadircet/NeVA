@@ -45,7 +45,7 @@ TEST(GetSuggestion, SanityTest) {
   EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);
 }
 
-ATCHER_P(SuggestionEq, elem, "Checks equality between Suggestion items.") {
+MATCHER_P(SuggestionEq, elem, "Checks equality between Suggestion items.") {
   return arg.suggestee_id() == elem.suggestee_id() && arg.name() == elem.name();
 }
 
