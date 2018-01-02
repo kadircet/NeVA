@@ -4,7 +4,7 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.FragmentManager;
-import android.app.TimePickerDialog;;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -26,25 +26,22 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
-import neva.backend.UserHistoryOuterClass.*;
-import neva.backend.SuggestionOuterClass.*;
-import neva.backend.util.Util.*;
-import neva.backend.BackendOuterClass.*;
-import neva.backend.BackendGrpc.*;
+import neva.backend.BackendGrpc.BackendBlockingStub;
+import neva.backend.BackendOuterClass.InformUserChoiceReply;
+import neva.backend.BackendOuterClass.InformUserChoiceRequest;
+import neva.backend.UserHistoryOuterClass.Choice;
+import neva.backend.util.Util.Timestamp;
 
-import java.sql.SQLException;
-import java.util.Calendar;
+;
 
 
 public class AddHistoryItemFragment extends Fragment {

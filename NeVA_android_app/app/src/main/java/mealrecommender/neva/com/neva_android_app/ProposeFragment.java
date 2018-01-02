@@ -14,11 +14,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.protobuf.ByteString;
-
-import java.sql.SQLException;
-
 import io.grpc.ManagedChannel;
 import java.util.ArrayList;
 import mealrecommender.neva.com.neva_android_app.database.Meal;

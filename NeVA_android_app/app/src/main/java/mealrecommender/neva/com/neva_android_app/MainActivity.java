@@ -2,19 +2,14 @@ package mealrecommender.neva.com.neva_android_app;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,20 +20,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.facebook.login.LoginManager;
 import com.google.protobuf.ByteString;
-
-import java.io.IOException;
-
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
+import mealrecommender.neva.com.neva_android_app.database.MealTagRelation;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
+import mealrecommender.neva.com.neva_android_app.database.Tag;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
+import neva.backend.BackendOuterClass.GetSuggestionItemListReply;
+import neva.backend.BackendOuterClass.GetSuggestionItemListRequest;
+import neva.backend.BackendOuterClass.GetTagsReply;
+import neva.backend.BackendOuterClass.GetTagsRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
 
@@ -85,6 +81,7 @@ public class MainActivity extends AppCompatActivity
     sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_pref_filename), MODE_PRIVATE);
 
     addMealsToDatabase();
+    addTagsToDatabase();
     fab = findViewById(R.id.fab);
 
     Fragment fragment = new RecommendFragment();
@@ -98,41 +95,95 @@ public class MainActivity extends AppCompatActivity
 
   }
 
+  public void addTagsToDatabase() {
+    GetTagsRequest request;
+    int tagTableVersion = sharedPreferences.getInt("tagTableVersion", 0);
+    tagTableVersion = 0; //FOR TESTING ONLY
+    Log.i(TAG, "Current Tag Version: "+ Integer.toString(tagTableVersion));
+    request = GetTagsRequest.newBuilder().setToken(loginToken).setStartIndex(tagTableVersion).build();
+    try{
+      GetTagsReply reply = blockingStub.getTags(request);
+      List<SuggestionOuterClass.Tag> tagList = reply.getTagListList();
+      List<Tag> tags = new ArrayList<>();
+      for(SuggestionOuterClass.Tag tag : tagList) {
+        Tag tagToAdd = new Tag(tag.getId(), tag.getName());
+        tags.add(tagToAdd);
+      }
+      int inserted = 0;
+      int updated = 0;
+      for(Tag tag: tags){
+        int count = db.nevaDao().tagExists(tag.id); // TODO: insert all tags with insertTags()
+        if (count>0) {
+          db.nevaDao().updateTag(tag);
+          updated++;
+        } else {
+          db.nevaDao().addTag(tag);
+          inserted++;
+        }
+      }
+      Log.d(TAG, Integer.toString(inserted)+" Tags inserted to db");
+      Log.d(TAG, Integer.toString(updated)+" Tags updated in db");
+    } catch (Exception e) {
+      Log.e(TAG, "CANT ADD TAGS");
+      Log.e(TAG, e.getMessage());
+    }
+  }
+
   public void addMealsToDatabase() {
-    BackendOuterClass.GetSuggestionItemListRequest request;
-    int databaseVersion = sharedPreferences.getInt("databaseVersion", 0);
-    Log.i(TAG, "Current DB ver: "+ Integer.toString(databaseVersion));
-    request = BackendOuterClass.GetSuggestionItemListRequest.newBuilder()
+    GetSuggestionItemListRequest request;
+    int mealTableVersion = sharedPreferences.getInt("mealTableVersion", 0);
+    mealTableVersion = 0; // FOR TESTING ONLY
+    Log.i(TAG, "Current DB ver: "+ Integer.toString(mealTableVersion));
+    request = GetSuggestionItemListRequest.newBuilder()
         .setToken(loginToken)
         .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-        .setStartIndex(databaseVersion)
+        .setStartIndex(mealTableVersion)
         .build();
 
-    BackendOuterClass.GetSuggestionItemListReply reply = blockingStub
+    GetSuggestionItemListReply reply = blockingStub
         .getSuggestionItemList(request);
     List<Suggestion> suggestions = reply.getItems().getSuggestionListList();
     Log.i(TAG, "Reply DB ver: "+ Integer.toString(reply.getLastUpdated()));
-    sharedPreferences.edit().putInt("databaseVersion", reply.getLastUpdated()).commit();
+    sharedPreferences.edit().putInt("mealTableVersion", reply.getLastUpdated()).commit();
 
-    List<Meal> values = new ArrayList<>();
-    for(Suggestion sug : suggestions) {
-      Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
-      values.add(meal);
-    }
     int inserted = 0;
     int updated = 0;
-    for(Meal meal : values) {
+    for(Suggestion sug : suggestions) {
+      Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
+      List<SuggestionOuterClass.Tag> tagList = sug.getTagsList();
+      List<Tag> mealTags = new ArrayList<>();
+      for (SuggestionOuterClass.Tag tag : tagList) {
+        Tag tagToAdd = new Tag(tag.getId(), tag.getName());
+        mealTags.add(tagToAdd);
+      }
+
       int count = db.nevaDao().mealExits(meal.id);
-      if(count > 0) {
+      if (count > 0) {
         db.nevaDao().updateMeal(meal);
         updated++;
       } else {
         db.nevaDao().addMeal(meal);
         inserted++;
       }
+      int tagInserted = 0;
+      int tagUpdated = 0;
+      for (Tag tag : mealTags) {
+        MealTagRelation relation = new MealTagRelation(meal.id, tag.id);
+        count = db.nevaDao().mealTagRelationExists(relation.mealId, relation.tagId);
+        if (count > 0) {
+          db.nevaDao().updateMealTag(relation);
+          tagUpdated++;
+        } else {
+          db.nevaDao().addMealTag(relation);
+          tagInserted++;
+        }
+        Log.d(TAG,
+            Integer.toString(tagInserted) + " tags inserted for " + meal.mealName + " to db");
+        Log.d(TAG, Integer.toString(tagUpdated) + " tags updated for " + meal.mealName + " in db");
+      }
     }
-    Log.d(TAG, Integer.toString(inserted)+" Meals inserted to db");
-    Log.d(TAG, Integer.toString(updated)+" Meals updated in db");
+    Log.d(TAG, Integer.toString(inserted) + " Meals inserted to db");
+    Log.d(TAG, Integer.toString(updated) + " Meals updated in db");
   }
 
   @Override

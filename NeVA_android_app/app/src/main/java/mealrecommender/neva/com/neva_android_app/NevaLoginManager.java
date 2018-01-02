@@ -1,19 +1,10 @@
 package mealrecommender.neva.com.neva_android_app;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.content.Context;
-import android.content.res.Resources;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.facebook.login.LoginManager;
 import com.google.protobuf.ByteString;
-
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
 import neva.backend.BackendOuterClass.CheckTokenRequest;

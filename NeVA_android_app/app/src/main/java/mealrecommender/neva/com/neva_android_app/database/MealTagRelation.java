@@ -8,7 +8,7 @@ import android.arch.persistence.room.Entity;
 @Entity(tableName = "meal_tag_relations", primaryKeys = {"mealId", "tagId"})
 public class MealTagRelation {
 
-  MealTagRelation(int mealId, int tagId) {
+  public MealTagRelation(int mealId, int tagId) {
     this.mealId = mealId;
     this.tagId = tagId;
   }

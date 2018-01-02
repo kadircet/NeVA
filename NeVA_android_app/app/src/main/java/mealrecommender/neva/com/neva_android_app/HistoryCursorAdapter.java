@@ -1,19 +1,15 @@
 package mealrecommender.neva.com.neva_android_app;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by hakan on 12/12/17.

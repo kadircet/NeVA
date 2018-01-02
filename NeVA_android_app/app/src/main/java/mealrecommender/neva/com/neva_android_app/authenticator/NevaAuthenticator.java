@@ -12,14 +12,10 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.facebook.AccessToken;
 import mealrecommender.neva.com.neva_android_app.LoginActivity;
 import mealrecommender.neva.com.neva_android_app.NevaLoginManager;
 import mealrecommender.neva.com.neva_android_app.RegisterActivity;
-import neva.backend.BackendGrpc.BackendBlockingStub;
-import neva.backend.BackendOuterClass.CheckTokenRequest;
-import neva.backend.BackendOuterClass.GenericReply;
 import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 
 /**

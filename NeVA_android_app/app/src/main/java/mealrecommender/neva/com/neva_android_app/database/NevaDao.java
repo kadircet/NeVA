@@ -49,6 +49,9 @@ public interface NevaDao {
   @Update
   public void updateTags(List<Tag> tags);
 
+  @Update
+  public void updateMealTag(MealTagRelation relation);
+
   @Query("SELECT * FROM meals")
   public List<Meal> getAllMeals();
 
@@ -57,6 +60,15 @@ public interface NevaDao {
 
   @Query("SELECT COUNT(*) FROM meals WHERE id = :mealId")
   public int mealExits(int mealId);
+
+  @Query("SELECT COUNT(*) FROM tags WHERE id = :tagId")
+  public int tagExists(int tagId);
+
+  @Query("SELECT COUNT(*) FROM meal_tag_relations WHERE mealId = :mealId AND tagId = :tagId")
+  public int mealTagRelationExists(int mealId, int tagId);
+
+  @Query("SELECT name FROM tags WHERE id IN (:tagIds)")
+  public String[] getTagNames(int[] tagIds);
 
   @Query("SELECT id as _id, mealName, mealPicture FROM meals")
   public Cursor getCursorAllMeals();

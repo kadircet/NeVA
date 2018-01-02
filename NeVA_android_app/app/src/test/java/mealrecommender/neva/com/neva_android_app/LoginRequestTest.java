@@ -1,19 +1,13 @@
 package mealrecommender.neva.com.neva_android_app;
 
 import com.google.protobuf.ByteString;
-
-import org.junit.Test;
-
-import java.nio.charset.Charset;
-
-import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import java.nio.charset.Charset;
+import neva.backend.BackendGrpc;
+import neva.backend.BackendOuterClass;
 import neva.backend.UserOuterClass;
-import neva.backend.util.Util;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  * Created by hakan on 11/14/17.

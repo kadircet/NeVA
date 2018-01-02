@@ -4,28 +4,14 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 import com.facebook.login.LoginManager;
-import com.google.protobuf.ByteString;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import neva.backend.BackendGrpc;
-import neva.backend.BackendGrpc.BackendBlockingStub;
-import neva.backend.BackendOuterClass.CheckTokenRequest;
-import neva.backend.BackendOuterClass.GenericReply;
-import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 
 public class SplashScreen extends AppCompatActivity {
 

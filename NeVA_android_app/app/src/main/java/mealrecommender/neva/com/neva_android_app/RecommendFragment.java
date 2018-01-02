@@ -10,9 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.google.android.flexbox.FlexboxLayout;
 import com.google.protobuf.ByteString;
-
 import io.grpc.ManagedChannel;
 import java.util.List;
 import java.util.Random;
@@ -28,6 +27,7 @@ public class RecommendFragment extends Fragment {
 
   private final String TAG = this.getClass().getSimpleName();
 
+  FlexboxLayout flexboxLayout;
   ByteString loginToken;
   ManagedChannel mChannel;
   BackendGrpc.BackendBlockingStub blockingStub;
@@ -35,7 +35,6 @@ public class RecommendFragment extends Fragment {
   TextView recommendedView;
   Button recommendButton;
 
-  @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
@@ -46,6 +45,7 @@ public class RecommendFragment extends Fragment {
     loginToken = mainActivity.loginToken;
     mChannel = mainActivity.mChannel;
     blockingStub = mainActivity.blockingStub;
+    flexboxLayout = view.findViewById(R.id.flexbox_layout);
 
     recommendButton = view.findViewById(R.id.fragment_recommend_button);
     recommendedView = view.findViewById(R.id.fragment_recommendation_field);
@@ -64,7 +64,7 @@ public class RecommendFragment extends Fragment {
             .setToken(loginToken)
             .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
             .build();
-
+        
         GetMultipleSuggestionsReply recommendationRep;
         try {
           recommendationRep = blockingStub.getMultipleSuggestions(recommendationReq);
@@ -72,6 +72,15 @@ public class RecommendFragment extends Fragment {
           Random r = new Random();
           Suggestion suggestion = suggestionList.get(r.nextInt(suggestionList.size()));
           recommendedView.setText(suggestion.getName());
+          for(int i=0; i < 5; i++) {
+            TextView textView = new TextView(getContext());
+            textView.setText("SOME TAG YO "+Integer.toString(i));
+            textView.setTextSize(12);
+            textView.setTextColor(getResources().getColor(R.color.com_facebook_blue));
+            textView.setPadding(16,0,16,0);
+            textView.setBackground(getResources().getDrawable(R.drawable.rounded_tagview_background));
+            flexboxLayout.addView(textView);
+          }
 
         } catch (Exception e) {
           Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

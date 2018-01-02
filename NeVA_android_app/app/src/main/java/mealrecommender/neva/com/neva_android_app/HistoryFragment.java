@@ -1,41 +1,23 @@
 package mealrecommender.neva.com.neva_android_app;
 
-import android.arch.lifecycle.LifecycleOwner;
 import android.database.Cursor;
 import android.os.Bundle;
-
-import android.provider.ContactsContract.Intents.Insert;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
 import android.widget.Toast;
-
 import com.google.protobuf.ByteString;
-
-import java.sql.SQLException;
-
 import io.grpc.ManagedChannel;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
-import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
 import neva.backend.BackendOuterClass.FetchUserHistoryReply;
 import neva.backend.BackendOuterClass.FetchUserHistoryRequest;
-import neva.backend.SuggestionOuterClass;
-import neva.backend.SuggestionOuterClass.Suggestion;
 import neva.backend.UserHistoryOuterClass.Choice;
 
 
