@@ -72,8 +72,15 @@ TEST(GetMultipleSuggestions, SanityTest) {
   const SuggestionList suggestion_list =
       GetMultipleSuggestions(user_history, all_suggestees);
   EXPECT_EQ(suggestion_list.suggestion_list_size(), kExpectedSuggesteeCount);
-  EXPECT(suggestion_list.suggestion_list()->Contains(all_suggestees.suggestion_list(0));
-  EXPECT(suggestion_list.suggestion_list()->Contains(all_suggestees.suggestion_list(1));
+  suggestion_list.suggestion_list().begin();
+  auto it = find(suggestion_list.suggestion_list().begin(),
+                 suggestion_list.suggestion_list().end(),
+                 all_suggestees.suggestion_list(0));
+  EXPECT_NE(it, suggestion_list.suggestion_list().end());
+  it = find(suggestion_list.suggestion_list().begin(),
+            suggestion_list.suggestion_list().end(),
+            all_suggestees.suggestion_list(1));
+  EXPECT_NE(it, suggestion_list.suggestion_list().end());
 }
 
 }  // namespace
