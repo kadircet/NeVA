@@ -475,97 +475,61 @@ Meal Recommender</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-LC-iDH">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7n5-TT-nE1">
-                                <rect key="frame" x="169" y="526" width="37" height="37"/>
-                            </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="deB-Kv-l8z" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="100" y="578" width="175" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="PBM-Wn-da1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal" title="Get Meal!">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="getRecommendation:" destination="BWU-M1-OCj" eventType="touchUpInside" id="596-XM-Cav"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsb-2B-Bm0" userLabel="Recommendation View">
-                                <rect key="frame" x="67.5" y="205.5" width="240" height="256"/>
-                                <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginRegisterViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="qMW-xr-TCU" customClass="RoundedImage" customModule="NeVA" customModuleProvider="target">
-                                        <rect key="frame" x="56" y="18" width="128" height="128"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="128" id="68B-GW-Hnv"/>
-                                            <constraint firstAttribute="height" constant="128" id="xp1-3r-djE"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAHMACUN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="coM-pv-DrR">
-                                        <rect key="frame" x="0.0" y="174" width="240" height="41"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="41" id="CJU-EV-qnb"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <size key="shadowOffset" width="2" height="2"/>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsb-2B-Bm0" userLabel="Recommendation View" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="67.5" y="183.5" width="240" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="256" id="RiF-FA-MQX"/>
-                                    <constraint firstItem="qMW-xr-TCU" firstAttribute="centerX" secondItem="dsb-2B-Bm0" secondAttribute="centerX" id="ST5-J5-X1z"/>
-                                    <constraint firstItem="coM-pv-DrR" firstAttribute="leading" secondItem="dsb-2B-Bm0" secondAttribute="leading" id="Utx-to-RbS"/>
-                                    <constraint firstItem="coM-pv-DrR" firstAttribute="top" secondItem="qMW-xr-TCU" secondAttribute="bottom" constant="28" id="bfs-sM-cGD"/>
-                                    <constraint firstAttribute="trailing" secondItem="coM-pv-DrR" secondAttribute="trailing" id="er7-Dn-HLU"/>
+                                    <constraint firstAttribute="height" constant="300" id="RiF-FA-MQX"/>
                                     <constraint firstAttribute="width" constant="240" id="ht8-Ut-JzG"/>
-                                    <constraint firstItem="qMW-xr-TCU" firstAttribute="top" secondItem="dsb-2B-Bm0" secondAttribute="top" constant="18" id="lZy-D8-OLm"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNr-22-KEa" userLabel="Dislike Button">
+                                <rect key="frame" x="95" y="509" width="45" height="45"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="E1n-4G-S1F"/>
+                                    <constraint firstAttribute="width" constant="45" id="j4s-6h-ZRm"/>
+                                </constraints>
+                                <state key="normal" image="ic_skip">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedDislike:" destination="BWU-M1-OCj" eventType="touchUpInside" id="ME8-wy-Hlv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2E-ae-CR2" userLabel="Like Button">
+                                <rect key="frame" x="235" y="509" width="45" height="45"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="DHd-C1-syS"/>
+                                    <constraint firstAttribute="height" constant="45" id="hLA-y2-WaG"/>
+                                </constraints>
+                                <state key="normal" image="ic_like">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedLike:" destination="BWU-M1-OCj" eventType="touchUpInside" id="FAn-qB-rI3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="C1k-Td-gqd" firstAttribute="trailing" secondItem="deB-Kv-l8z" secondAttribute="trailing" constant="100" id="4nQ-H9-Vsl"/>
                             <constraint firstItem="C1k-Td-gqd" firstAttribute="trailing" secondItem="CiU-LC-iDH" secondAttribute="trailing" id="5aD-tr-OUg"/>
                             <constraint firstItem="dsb-2B-Bm0" firstAttribute="centerY" secondItem="IXI-21-wmd" secondAttribute="centerY" id="7nF-TE-tMH"/>
-                            <constraint firstItem="deB-Kv-l8z" firstAttribute="top" secondItem="7n5-TT-nE1" secondAttribute="bottom" constant="15" id="9ua-zW-XOi"/>
-                            <constraint firstItem="7n5-TT-nE1" firstAttribute="leading" secondItem="C1k-Td-gqd" secondAttribute="leading" constant="169" id="FFi-8h-Sm0"/>
                             <constraint firstAttribute="bottom" secondItem="CiU-LC-iDH" secondAttribute="bottom" id="Iph-eh-n28"/>
-                            <constraint firstItem="deB-Kv-l8z" firstAttribute="leading" secondItem="C1k-Td-gqd" secondAttribute="leading" constant="100" id="Kna-R9-AGE"/>
                             <constraint firstItem="CiU-LC-iDH" firstAttribute="leading" secondItem="C1k-Td-gqd" secondAttribute="leading" id="Lb6-qg-PP8"/>
-                            <constraint firstItem="C1k-Td-gqd" firstAttribute="bottom" secondItem="deB-Kv-l8z" secondAttribute="bottom" constant="10" id="Npm-Cc-fZy"/>
-                            <constraint firstItem="C1k-Td-gqd" firstAttribute="trailing" secondItem="7n5-TT-nE1" secondAttribute="trailing" constant="169" id="hVq-Rk-qmF"/>
+                            <constraint firstItem="X2E-ae-CR2" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" constant="70" id="WRU-79-6Qq"/>
+                            <constraint firstItem="X2E-ae-CR2" firstAttribute="top" secondItem="dsb-2B-Bm0" secondAttribute="bottom" constant="25" id="X3J-aI-tVD"/>
                             <constraint firstItem="dsb-2B-Bm0" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" id="hnE-ob-hKQ"/>
                             <constraint firstItem="CiU-LC-iDH" firstAttribute="top" secondItem="IXI-21-wmd" secondAttribute="top" id="kjg-b9-Eok"/>
+                            <constraint firstItem="xNr-22-KEa" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" constant="-70" id="qcg-a0-fqe"/>
+                            <constraint firstItem="xNr-22-KEa" firstAttribute="top" secondItem="dsb-2B-Bm0" secondAttribute="bottom" constant="25" id="une-fx-D5p"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="C1k-Td-gqd"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Recommendation" image="gift" landscapeImage="gift" largeContentSizeImage="gift" id="e6s-K5-ojo"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="7n5-TT-nE1" id="lMW-8P-CM4"/>
-                        <outlet property="recommendationImage" destination="qMW-xr-TCU" id="wud-Aa-AOm"/>
-                        <outlet property="recommendationName" destination="coM-pv-DrR" id="oEK-8m-gLU"/>
-                        <outlet property="recommendationView" destination="dsb-2B-Bm0" id="obA-H7-2E3"/>
+                        <outlet property="recommendationKolodaView" destination="dsb-2B-Bm0" id="V70-xZ-h2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Fr-eU-g0U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1147,6 +1111,8 @@ Meal Recommender</string>
         <image name="clock" width="30" height="30"/>
         <image name="gift" width="30" height="30"/>
         <image name="gray-background-texture-2" width="810" height="1440"/>
+        <image name="ic_like" width="38" height="34"/>
+        <image name="ic_skip" width="34" height="34"/>
         <image name="idea" width="30" height="30"/>
         <image name="loginRegisterViewBackground" width="1070" height="1902"/>
         <image name="settings" width="30" height="30"/>

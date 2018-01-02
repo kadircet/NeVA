@@ -8,66 +8,108 @@
 
 import UIKit
 import CoreData
+import Koloda
 
-class RecommendationViewController: UIViewController {
+class RecommendationViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSource {
+
+    var foods: [Meal] = []
     
-    @IBOutlet weak var recommendationView: UIView!
+    @IBAction func pressedDislike(_ sender: Any) {
+        recommendationKolodaView.swipe(.left)
+    }
+    @IBAction func pressedLike(_ sender: Any) {
+        recommendationKolodaView.swipe(.right)
+    }
+    //Koloda View Data Source and delegate functions
+    func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
+        let view = RecommendationView()
+        view.name.text = foods[index].name
+        view.image.image = UIImage(named: "loginRegisterViewBackground")
+        return view
+    }
     
-    @IBOutlet weak var recommendationImage: UIImage!
     
-    @IBOutlet weak var recommendationName: UILabel!
+    func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
+        return foods.count
+    }
     
-    @IBAction func getRecommendation(_ sender: Any) {
-        activityIndicator.startAnimating()
-        //recommendationView.isHidden = false
-        if let button = sender as? UIButton {
-            button.isHidden = true
-        }
-        
-        var request = Neva_Backend_GetSuggestionRequest()
+    func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -> DragSpeed {
+        return .fast
+    }
+    
+    func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+        getRecommendationList()
+        koloda.resetCurrentCardIndex()
+    }
+    
+    func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        var request = Neva_Backend_RecordFeedbackRequest()
         request.token = UserToken.token!
-        request.suggestionCategory = .meal
-        print(request)
+        var feedback = Neva_Backend_UserFeedback()
+        switch direction {
+            case .right:
+                feedback.feedback = .like
+            case .left:
+                feedback.feedback = .dislike
+            default:
+                //Never
+                feedback.feedback = .dislike
+        }
+        var choice = Neva_Backend_Choice()
+        //TODO GPS
+        choice.choiceID = getLastChoiceId()
+        choice.timestamp.seconds = UInt64(Date().addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT())).timeIntervalSince1970)
+        choice.timestamp.nanos = 0
+        choice.suggesteeID = UInt32(foods[index].id)
+        feedback.choice = choice
+        request.userFeedback = feedback
+        
         let service = NevaConstants.service
         do {
-            /*_ = try service.getmealsuggestion(request, completion: { reply, result in
-                    print(result)
-                    self.activityIndicator.stopAnimating()
-                    if let button = sender as? UIButton {
-                        button.isHidden = false
-                    }
-                    if reply != nil {
-                        self.recommendationView.isHidden = false
-                        self.recommendationName.text = reply!.name
-                    }
-                } )*/
-            //TODO: DO IT ASYNC
-            let reply = try service.getsuggestion(request)
-            print(reply)
-            self.activityIndicator.stopAnimating()
-            if let button = sender as? UIButton {
-                button.isHidden = false
-            }
-            self.recommendationView.isHidden = false
-            self.recommendationName.text = reply.name
-        } catch (let error){
+            let response = try service.recordfeedback(request)
+            print(response)
+        } catch (let error) {
             print(error)
-            self.recommendationView.isHidden = false
-            self.recommendationName.text = error.localizedDescription
-            self.activityIndicator.stopAnimating()
-            if let button = sender as? UIButton {
-                button.isHidden = false
-            }
         }
     }
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    func koloda(_ koloda: KolodaView, allowedDirectionsForIndex index: Int) -> [SwipeResultDirection] {
+        return [.left, .right]
+    }
+
+    func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
+    }
+    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+        return nil
+    }
+    
+    @IBOutlet weak var recommendationKolodaView: KolodaView!
+    
+    func getRecommendationList() {
+        foods = []
+        var request = Neva_Backend_GetMultipleSuggestionsRequest()
+        request.token = UserToken.token!
+        request.suggestionCategory = .meal
+        let service = NevaConstants.service
+        do {
+            //TODO: DO IT ASYNC
+            let reply = try service.getmultiplesuggestions(request)
+            print(reply)
+            for suggestedItem in reply.suggestion.suggestionList {
+                if let meal = getMeal(with: Int(suggestedItem.suggesteeID)) {
+                    foods.append(meal)
+                }
+            }
+        } catch (let error){
+            print(error)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("merhaba")
-        recommendationView.isHidden = true
-        getTagsFromServer()
-        getMealsFromServer()
+        getRecommendationList()
+        recommendationKolodaView.delegate = self
+        recommendationKolodaView.dataSource = self
+        
         // Do any additional setup after loading the view.
     }
 
@@ -75,152 +117,42 @@ class RecommendationViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func getTagsFromServer() {
+    func getMeal(with id: Int) -> Meal? {
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
-                return
+                return nil
         }
-        let managedObjectContext = appDelegate.databaseContext
-        var startIndex = 0
-        // Find start index
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tag")
-        fetchRequest.predicate = NSPredicate(format: "id==max(id)", argumentArray: nil)
+        let managedObjectContext =
+            appDelegate.databaseContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
+        fetchRequest.predicate = NSPredicate(format: "id==%@", argumentArray: [id])
         do {
-            let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Tag]
-            if let maximumTagID = fetchedEntries, !maximumTagID.isEmpty {
-                startIndex = Int(maximumTagID[0].id)
+            let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Meal]
+            if let meal = fetchedEntries, !meal.isEmpty {
+                return meal[0]
             }
+            return nil
         } catch {
             fatalError("Failed to fetch: \(error)")
         }
-        // Fetch tags from server
-        let service = NevaConstants.service
-        var request = Neva_Backend_GetTagsRequest()
-        request.startIndex = UInt32(startIndex)
-        request.token = UserToken.token!
-        var tagsAcquired: [Neva_Backend_Tag] = []
-        do {
-            let responseMessage = try service.gettags(request)
-            print(responseMessage)
-            tagsAcquired = responseMessage.tagList
-        } catch (let error) {
-            print(error)
-        }
-        
-        //Update or create tags
-        for tagAcquired in tagsAcquired {
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tag")
-            fetchRequest.predicate = NSPredicate(format: "id==%@", argumentArray: [tagAcquired.id])
-            do {
-                let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Tag]
-                if let tags = fetchedEntries, !tags.isEmpty {
-                    print("Updating tag \(tagAcquired.id)")
-                    let tag = tags[0]
-                    tag.name = tagAcquired.name
-                } else {
-                    print("Creating tag \(tagAcquired.id)")
-                    let tag = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: managedObjectContext) as! Tag
-                    tag.id = Int32(tagAcquired.id)
-                    tag.name = tagAcquired.name
-                }
-            } catch (let error){
-                fatalError("Failed to fetch: \(error)")
-            }
-        }
-        //Commit changes
-        do {
-            try managedObjectContext.save()
-        } catch (let error){
-            fatalError("Failed to fetch: \(error)")
-        }
     }
-    func getMealsFromServer() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
+    func getLastChoiceId() -> UInt32 {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedObjectContext = appDelegate.databaseContext
-        let defaults = UserDefaults.standard
-        let startIndex = defaults.integer(forKey: "lastUpdatedMealID")
-        
-        //Get meals from server
-        let service = NevaConstants.service
-        var request = Neva_Backend_GetSuggestionItemListRequest()
-        request.startIndex = UInt32(startIndex)
-        request.token = UserToken.token!
-        request.suggestionCategory = .meal
-        var mealsAcquired: [Neva_Backend_Suggestion] = []
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "HistoryEntry")
+        let sortDescriptor = NSSortDescriptor(key: "choice_id", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.fetchLimit = 1
+        let predicate = NSPredicate(format: "(userMail == %@)", argumentArray: [UserToken.email!])
+        fetchRequest.predicate = predicate
         do {
-            let responseMessage = try service.getsuggestionitemlist(request)
-            print(responseMessage)
-            mealsAcquired = responseMessage.items.suggestionList
-            defaults.set(Int(responseMessage.lastUpdated), forKey: "lastUpdatedMealID")
+            let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as! [HistoryEntry]
+            if !fetchedEntries.isEmpty {
+                return UInt32(fetchedEntries[0].choice_id)
+           }
         } catch (let error) {
-            print(error)
+           fatalError("Failed to fetch: \(error)")
         }
-        //
-        
-        //Update or add items
-        for mealAcquired in mealsAcquired {
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
-            fetchRequest.predicate = NSPredicate(format: "id==%@", argumentArray: [mealAcquired.suggesteeID])
-            do {
-                let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Meal]
-                //TODO: Update pictures too
-                var meal: Meal? = nil
-                if let meals = fetchedEntries, !meals.isEmpty {
-                    print("Updating meal \(mealAcquired.suggesteeID)")
-                    meal = meals[0]
-                    meal!.name = mealAcquired.name
-                } else {
-                    print("Creating meal \(mealAcquired.suggesteeID)")
-                    meal = (NSEntityDescription.insertNewObject(forEntityName: "Meal", into: managedObjectContext) as! Meal)
-                    meal!.id = Int32(mealAcquired.suggesteeID)
-                    meal!.name = mealAcquired.name
-                }
-                
-                //Fetch all tags from coredata
-                var tagsOfDatabase = [Int32: Tag]()
-                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Tag")
-                do {
-                    let fetchedTags = try managedObjectContext.fetch(fetchRequest) as! [Tag]
-                    for fetchedTag in fetchedTags {
-                        tagsOfDatabase[fetchedTag.id] = fetchedTag
-                    }
-                } catch (let error){
-                    fatalError("Failed to fetch: \(error)")
-                }
-                //Save Tags of meal
-                for tagOfMeal in mealAcquired.tags {
-                    let tag = tagsOfDatabase[Int32(tagOfMeal.id)]
-                    print("\(tag!.id):\(tag!.name!) is added to \(meal!.id):\(meal!.name!)")
-                    meal?.addToTags(tag!)
-                }
-            } catch (let error){
-                fatalError("Failed to fetch: \(error)")
-            }
-        }
-        //
-        
-        //Commit changes
-        do {
-            try managedObjectContext.save()
-        } catch (let error){
-            fatalError("Failed to fetch: \(error)")
-        }
-        //
-        
+        return 0
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

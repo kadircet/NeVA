@@ -49,6 +49,10 @@
 		ACB6D4071FCE035B00D8C06D /* SuggestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB6D4061FCE035B00D8C06D /* SuggestionViewController.swift */; };
 		ACCE1D001FCDB31700D04579 /* suggestion.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE1CFA1FCDB31700D04579 /* suggestion.pb.swift */; };
 		ACE528471FFBF4890069287E /* NevaTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE528461FFBF4890069287E /* NevaTabBarController.swift */; };
+		ACE5284A1FFBFD210069287E /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACE528481FFBFD210069287E /* pop.framework */; };
+		ACE5284B1FFBFD210069287E /* Koloda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACE528491FFBFD210069287E /* Koloda.framework */; };
+		ACE5284F1FFC04890069287E /* RecommendationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE5284E1FFC04890069287E /* RecommendationView.swift */; };
+		ACE528511FFC04960069287E /* RecommendationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACE528501FFC04960069287E /* RecommendationView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +134,10 @@
 		ACB6D4061FCE035B00D8C06D /* SuggestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewController.swift; sourceTree = "<group>"; };
 		ACCE1CFA1FCDB31700D04579 /* suggestion.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = suggestion.pb.swift; sourceTree = "<group>"; };
 		ACE528461FFBF4890069287E /* NevaTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NevaTabBarController.swift; sourceTree = "<group>"; };
+		ACE528481FFBFD210069287E /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = Carthage/Build/iOS/pop.framework; sourceTree = "<group>"; };
+		ACE528491FFBFD210069287E /* Koloda.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Koloda.framework; path = Carthage/Build/iOS/Koloda.framework; sourceTree = "<group>"; };
+		ACE5284E1FFC04890069287E /* RecommendationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationView.swift; sourceTree = "<group>"; };
+		ACE528501FFC04960069287E /* RecommendationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendationView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +145,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACE5284A1FFBFD210069287E /* pop.framework in Frameworks */,
+				ACE5284B1FFBFD210069287E /* Koloda.framework in Frameworks */,
 				AC063B711FF0397A002BE829 /* KeychainSwift.framework in Frameworks */,
 				AC69AFD11FEF0F9000A6884B /* FBSDKCoreKit.framework in Frameworks */,
 				AC69AFD21FEF0F9000A6884B /* FBSDKLoginKit.framework in Frameworks */,
@@ -222,6 +232,7 @@
 				AC8F91841FA9366800D6AB8F /* LaunchScreen.storyboard */,
 				AC8F91871FA9366800D6AB8F /* Info.plist */,
 				AC8F917F1FA9366800D6AB8F /* NeVA.xcdatamodeld */,
+				ACE528501FFC04960069287E /* RecommendationView.xib */,
 			);
 			path = NeVA;
 			sourceTree = "<group>";
@@ -263,6 +274,7 @@
 				ACA76A891FCE162000F090BA /* GenericButton.swift */,
 				ACA76A901FCE196500F090BA /* RoundedImage.swift */,
 				AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */,
+				ACE5284E1FFC04890069287E /* RecommendationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -284,6 +296,8 @@
 		ACBC4C471FBA67E600E8D61F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACE528491FFBFD210069287E /* Koloda.framework */,
+				ACE528481FFBFD210069287E /* pop.framework */,
 				AC063B701FF0397A002BE829 /* KeychainSwift.framework */,
 				AC69AFCE1FEF0F8F00A6884B /* Bolts.framework */,
 				AC69AFCB1FEF0F8F00A6884B /* BoringSSL.framework */,
@@ -422,6 +436,7 @@
 				AC8F91831FA9366800D6AB8F /* Assets.xcassets in Resources */,
 				AC8EF6351FC211C900CFABBE /* swiftgrpc.log in Resources */,
 				AC8F917E1FA9366800D6AB8F /* Main.storyboard in Resources */,
+				ACE528511FFC04960069287E /* RecommendationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +473,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/gRPC.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BoringSSL.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/pop.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Koloda.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
@@ -471,6 +488,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/gRPC.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BoringSSL.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/pop.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Koloda.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -500,6 +519,7 @@
 				ACB6D4071FCE035B00D8C06D /* SuggestionViewController.swift in Sources */,
 				AC9B9C0A1FB104E100507F20 /* LoginRegisterInputField.swift in Sources */,
 				AC6D2DED1FD58F2D00B14A72 /* AddHistoryEntryViewController.swift in Sources */,
+				ACE5284F1FFC04890069287E /* RecommendationView.swift in Sources */,
 				ACA16AA11FC34D4700BFA8DC /* RoundedView.swift in Sources */,
 				AC8F91791FA9366800D6AB8F /* AppDelegate.swift in Sources */,
 				AC8EF6341FC211C900CFABBE /* neva.backend.server.pb.swift in Sources */,
