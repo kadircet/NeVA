@@ -25,11 +25,29 @@ public interface NevaDao {
   @Insert
   public void addHistoryEntires(List<HistoryEntry> historyEntries);
 
+  @Insert
+  public void addTag(Tag tag);
+
+  @Insert
+  public void addTags(List<Tag> tags);
+
+  @Insert
+  public void addMealTag(MealTagRelation relation);
+
+  @Insert
+  public void addMealTags(List<MealTagRelation> mealTagRelations);
+
   @Update
   public void updateMeal(Meal meal);
 
   @Update
   public void updateMeals(List<Meal> meals);
+
+  @Update
+  public void updateTag(Tag tag);
+
+  @Update
+  public void updateTags(List<Tag> tags);
 
   @Query("SELECT * FROM meals")
   public List<Meal> getAllMeals();
