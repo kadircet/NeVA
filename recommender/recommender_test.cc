@@ -43,6 +43,39 @@ TEST(GetSuggestion, SanityTest) {
   EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);
 }
 
+TEST(GetMultipleSuggestions, SanityTest) {
+  constexpr const char* kUserHistory = R"(
+    history {
+      suggestee_id: 1
+    }
+    history {
+      suggestee_id: 1
+    })";
+  constexpr const char* kSuggestionList = R"(
+    suggestion_list {
+      suggestee_id: 1
+      name: "test1"
+    }
+    suggestion_list {
+      suggestee_id: 2
+      name: "test2"
+    }
+  )";
+
+  constexpr const uint32_t kExpectedSuggesteeCount = 2;
+
+  UserHistory user_history;
+  TextFormat::ParseFromString(kUserHistory, &user_history);
+  SuggestionList all_suggestees;
+  TextFormat::ParseFromString(kSuggestionList, &all_suggestees);
+
+  const SuggestionList suggestion_list =
+      GetMultipleSuggestions(user_history, all_suggestees);
+  EXPECT_EQ(suggestion_list.suggestion_list_size(), kExpectedSuggesteeCount);
+    EXPECT(suggestion_list.suggestion_list.Contains(all_suggestees.suggestion_list(0));
+    EXPECT(suggestion_list.suggestion_list.Contains(all_suggestees.suggestion_list(1));
+}
+
 }  // namespace
 }  // namespace recommender
 }  // namespace backend
