@@ -14,9 +14,14 @@ import android.widget.Toast;
 import com.google.protobuf.ByteString;
 
 import io.grpc.ManagedChannel;
+import java.util.List;
+import java.util.Random;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
+import neva.backend.BackendOuterClass.GetMultipleSuggestionsReply;
+import neva.backend.BackendOuterClass.GetMultipleSuggestionsRequest;
 import neva.backend.SuggestionOuterClass;
+import neva.backend.SuggestionOuterClass.Suggestion;
 
 
 public class RecommendFragment extends Fragment {
@@ -54,15 +59,19 @@ public class RecommendFragment extends Fragment {
     recommendButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        BackendOuterClass.GetSuggestionRequest recommendationReq;
-        recommendationReq = BackendOuterClass.GetSuggestionRequest.newBuilder()
+        GetMultipleSuggestionsRequest recommendationReq;
+        recommendationReq = GetMultipleSuggestionsRequest.newBuilder()
+            .setToken(loginToken)
             .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-            .setToken(loginToken).build();
+            .build();
 
-        BackendOuterClass.GetSuggestionReply recommendationRep;
+        GetMultipleSuggestionsReply recommendationRep;
         try {
-          recommendationRep = blockingStub.getSuggestion(recommendationReq);
-          recommendedView.setText(recommendationRep.getName());
+          recommendationRep = blockingStub.getMultipleSuggestions(recommendationReq);
+          List<Suggestion> suggestionList = recommendationRep.getSuggestion().getSuggestionListList();
+          Random r = new Random();
+          Suggestion suggestion = suggestionList.get(r.nextInt(suggestionList.size()));
+          recommendedView.setText(suggestion.getName());
 
         } catch (Exception e) {
           Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

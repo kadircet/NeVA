@@ -26,6 +26,10 @@ service Backend {
   rpc GetSuggestion(GetSuggestionRequest) returns (GetSuggestionReply) {
   }
 
+  rpc GetMultipleSuggestions(GetMultipleSuggestionsRequest)
+      returns (GetMultipleSuggestionsReply) {
+  }
+
   rpc TagProposition(TagPropositionRequest) returns (GenericReply) {
   }
 
@@ -116,6 +120,19 @@ message GetSuggestionRequest {
 message GetSuggestionReply {
   // Name of the suggested item.
   string name = 1;
+}
+
+message GetMultipleSuggestionsRequest {
+  // Session key for the user requesting a suggestion.
+  bytes token = 1;
+
+  // Category for which the user requests a suggestion.
+  Suggestion.SuggestionCategory suggestion_category = 2;
+}
+
+message GetMultipleSuggestionsReply {
+  // List of suggested items.
+  SuggestionList suggestion = 1;
 }
 
 message TagPropositionRequest {
