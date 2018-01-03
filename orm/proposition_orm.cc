@@ -60,7 +60,8 @@ Status PropositionOrm::InsertProposition(const int user_id, const int tag_id,
   }
 
   mysqlpp::Query query = conn_->query(
-      "INSERT INTO `tag_suggestion` (`user_id`, `tag_id`, `suggestee_id`, "
+      "INSERT INTO `tag_value_suggestion` (`user_id`, `tag_id`, "
+      "`suggestee_id`, "
       "`value`) VALUES (%0, %1, %2, %3q)");
   query.parse();
 
