@@ -71,7 +71,7 @@ Status PropositionOrm::InsertProposition(const int user_id, const int tag_id,
             << suggestee_id << " with value " << value;
     return Status::OK;
   }
-  VLOG(1) << "Something went wrong during the insertion.";
+  VLOG(1) << "Something went wrong during the insertion." << query.error();
   return Status(StatusCode::UNKNOWN, "Internal error.");
 }
 
