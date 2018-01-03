@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="mealrecommender.neva.com.neva_android_app.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:theme="@style/AppTheme">
 
     <FrameLayout
         android:id="@+id/content_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_gray">
+        android:layout_height="match_parent">
 
     </FrameLayout>
 

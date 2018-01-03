@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <item android:drawable="@color/orange"/>
+  <item android:drawable="@color/iconBackground"/>
+  <item android:drawable="@mipmap/ic_launcher_foreground"
+    android:gravity="center"
+    android:height="@dimen/icon_size"
+    android:width="@dimen/icon_size"/>
 
 </layer-list>

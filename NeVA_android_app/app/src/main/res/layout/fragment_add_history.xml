@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mealrecommender.neva.com.neva_android_app.AddHistoryItemFragment"
-    android:background="#7F888F">
+    android:theme="@style/AppTheme"
+    android:background="@color/backgroundWhite">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -20,8 +21,6 @@
         android:layout_marginTop="100dp"
         android:fontFamily="@font/latoregular"
         android:hint="@string/meal_name"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,8 +38,6 @@
         android:ems="10"
         android:fontFamily="@font/latoregular"
         android:hint="@string/meal_time"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +54,7 @@
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/latoregular"
         android:text="@string/add_meal_history"
-        android:textColor="@android:color/white"
+        android:textColor="@color/textSecondaryColor"
         android:textStyle="bold"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"

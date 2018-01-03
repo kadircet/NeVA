@@ -2,12 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
-  android:gravity="center">
+  android:gravity="center"
+  android:theme="@style/AppTheme">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
       android:layout_width="fill_parent"
-      android:layout_height="fill_parent">
+      android:layout_height="fill_parent"
+      android:theme="@style/AppTheme">
 
         <ScrollView
           android:id="@+id/scrollView1"
@@ -28,7 +30,7 @@
                   android:fontFamily="@font/latoregular"
                   android:gravity="center"
                   android:text="@string/welcome_text"
-                  android:textColor="@android:color/white"
+                  android:textColor="@color/textPrimaryColor"
                   android:textSize="45sp" />
 
                 <TextView
@@ -38,7 +40,7 @@
                   android:fontFamily="@font/latoregular"
                   android:gravity="center"
                   android:text="@string/login_app_name"
-                  android:textColor="@android:color/white"
+                  android:textColor="@color/textPrimaryColor"
                   android:textSize="25sp" />
 
                 <TextView
@@ -52,36 +54,47 @@
                   android:fontFamily="@font/latoregular"
                   android:gravity="center"
                   android:text="@string/login_description"
-                  android:textColor="#FFFFFF"
+                  android:textColor="@color/textPrimaryColor"
                   android:textSize="15sp" />
 
-                <EditText
-                  android:id="@+id/user_email"
+                <android.support.design.widget.TextInputLayout
                   android:layout_width="match_parent"
-                  android:layout_height="40dp"
-                  android:layout_margin="10dp"
-                  android:background="@drawable/rounded_text_box"
-                  android:descendantFocusability="beforeDescendants"
-                  android:focusableInTouchMode="true"
-                  android:fontFamily="@font/latoregular"
-                  android:gravity="center"
-                  android:hint="@string/email"
-                  android:inputType="textEmailAddress"
-                  android:textColor="@android:color/white"
-                  android:textColorHint="#a2a3a5" />
+                  android:layout_height="wrap_content"
+                  android:gravity="left">
 
-                <EditText
-                  android:id="@+id/user_password"
+                    <EditText
+                      android:id="@+id/user_email"
+                      android:layout_width="match_parent"
+                      android:layout_height="40dp"
+                      android:layout_margin="10dp"
+                      android:descendantFocusability="beforeDescendants"
+                      android:focusableInTouchMode="true"
+                      android:fontFamily="@font/latoregular"
+                      android:gravity="center"
+                      android:hint="@string/email"
+                      android:inputType="textEmailAddress"
+                      android:textColor="@color/textPrimaryColor"
+                      android:textColorHint="@color/textHintColor" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
                   android:layout_width="match_parent"
-                  android:layout_height="40dp"
-                  android:layout_margin="10dp"
-                  android:background="@drawable/rounded_text_box"
-                  android:fontFamily="@font/latoregular"
-                  android:gravity="center"
-                  android:hint="@string/password"
-                  android:inputType="textPassword"
-                  android:textColor="@android:color/white"
-                  android:textColorHint="#a2a3a5" />
+                  android:layout_height="wrap_content">
+
+                    <EditText
+                      android:id="@+id/user_password"
+                      android:layout_width="match_parent"
+                      android:layout_height="40dp"
+                      android:layout_margin="10dp"
+                      android:fontFamily="@font/latoregular"
+                      android:gravity="center"
+                      android:hint="@string/password"
+                      android:inputType="textPassword"
+                      android:textColor="@color/textPrimaryColor"
+                      android:textColorHint="@color/textHintColor" />
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                   android:id="@+id/submit_button"
@@ -92,7 +105,7 @@
                   android:fontFamily="@font/latoregular"
                   android:onClick="onLoginButton"
                   android:text="@string/login"
-                  android:textColor="@android:color/white" />
+                  android:textColor="@color/textSecondaryColor" />
 
                 <com.facebook.login.widget.LoginButton
                   android:id="@+id/facebook_login_button"
@@ -113,23 +126,23 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="@string/forgot_pass"
-                      android:textColor="@android:color/white"
+                      android:textColor="@color/textPrimaryColor"
                       android:textSize="14sp" />
 
                     <TextView
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text=" | "
-                      android:textColor="@android:color/white"
+                      android:textColor="@color/textPrimaryColor"
                       android:textSize="14sp" />
 
                     <TextView
-                      android:id="@+id/register_text"
+                      android:id=   "@+id/register_text"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:onClick="onRegisterButton"
                       android:text="@string/register"
-                      android:textColor="@android:color/white"
+                      android:textColor="@color/textPrimaryColor"
                       android:textSize="14sp"/>
                 </LinearLayout>
             </LinearLayout>

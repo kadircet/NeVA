@@ -18,7 +18,7 @@ public class NevaLoginManager {
 
   private final String TAG = this.getClass().getSimpleName();
   private final String serverAddress = "neva.0xdeffbeef.com";
-  private final int serverPort = 50051;
+  private final int serverPort = 50055;
   private static NevaLoginManager instance = null;
   private String username;
   private ByteString byteStringToken;

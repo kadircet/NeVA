@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/background_gray"
+    android:background="@android:color/white"
     android:id="@+id/autocomplete_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fontFamily="@font/latoregular"
     android:textAllCaps="false"
-    android:textColor="@android:color/white"
     android:textSize="18sp"
     android:typeface="normal"
     android:padding="5dp"/>

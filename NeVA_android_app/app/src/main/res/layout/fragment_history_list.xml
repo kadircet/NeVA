@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+  android:theme="@style/AppTheme">
 
 <android.support.v7.widget.ListViewCompat
 
@@ -22,15 +23,16 @@
 </android.support.v7.widget.ListViewCompat>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"
-        android:src="@android:drawable/ic_menu_add"
-        app:elevation="2dp"
-        app:fabSize="normal"
-        android:onClick="addHistoryFabClick"/>
+      android:id="@+id/fab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/fab_margin"
+      android:layout_gravity="bottom|end"
+      android:clickable="true"
+
+      android:onClick="addHistoryFabClick"
+      app:elevation="2dp"
+      app:fabSize="normal"
+      app:srcCompat="@mipmap/ic_add_white_24dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

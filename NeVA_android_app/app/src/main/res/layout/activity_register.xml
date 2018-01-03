@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
-  android:background="@drawable/background"
   android:gravity="center">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +27,7 @@
                     android:fontFamily="@font/latoregular"
                     android:gravity="center"
                     android:text="@string/signup"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/textPrimaryColor"
                     android:textSize="45sp" />
 
                 <TextView
@@ -42,7 +41,7 @@
                     android:fontFamily="@font/latoregular"
                     android:gravity="center"
                     android:text="@string/signup_description"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/textPrimaryColor"
                     android:textSize="15sp" />
 
                 <EditText
@@ -55,8 +54,8 @@
                     android:hint="@string/email"
                     android:inputType="text"
                     android:singleLine="false"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/hint_gray" />
+                    android:textColor="@color/textPrimaryColor"
+                    android:textColorHint="@color/textHintColor" />
 
                 <EditText
                     android:id="@+id/username"
@@ -68,8 +67,8 @@
                     android:hint="@string/name"
                     android:inputType="text"
                     android:singleLine="false"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/hint_gray" />
+                    android:textColor="@color/textPrimaryColor"
+                    android:textColorHint="@color/textHintColor" />
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -84,11 +83,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:buttonTint="@color/hint_gray"
+                        android:buttonTint="@color/primaryColor"
                         android:duplicateParentState="false"
                         android:onClick="onGenderButton"
                         android:text="@string/gender_male"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textPrimaryColor"
                         android:textSize="18sp" />
 
                     <RadioButton
@@ -97,11 +96,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0"
-                        android:buttonTint="@color/hint_gray"
+                        android:buttonTint="@color/primaryColor"
                         android:duplicateParentState="false"
                         android:onClick="onGenderButton"
                         android:text="@string/gender_female"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textPrimaryColor"
                         android:textSize="18sp" />
 
                 </RadioGroup>
@@ -118,8 +117,8 @@
                     android:inputType="text"
                     android:onClick="onBirthdayButton"
                     android:singleLine="false"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/hint_gray"
+                    android:textColor="@color/textPrimaryColor"
+                    android:textColorHint="@color/textHintColor"
                     android:textSize="18sp" />
 
                 <EditText
@@ -131,8 +130,8 @@
                     android:gravity="center"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/hint_gray" />
+                    android:textColor="@color/textPrimaryColor"
+                    android:textColorHint="@color/textHintColor" />
 
 
                 <Button
@@ -143,7 +142,7 @@
                     android:background="@drawable/rounded_button"
                     android:onClick="onSignupButton"
                     android:text="@string/signup"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@color/textSecondaryColor" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -157,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="onMemberButton"
                         android:text="@string/already_member"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textPrimaryColor"
                         android:textSize="14sp" />
 
                 </LinearLayout>

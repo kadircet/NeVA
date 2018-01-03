@@ -70,6 +70,9 @@ public interface NevaDao {
   @Query("SELECT name FROM tags WHERE id IN (:tagIds)")
   public String[] getTagNames(int[] tagIds);
 
+  @Query("SELECT name FROM tags")
+  public String[] getTagNames();
+
   @Query("SELECT id as _id, mealName, mealPicture FROM meals")
   public Cursor getCursorAllMeals();
 
@@ -83,6 +86,9 @@ public interface NevaDao {
 
   @Query("SELECT id FROM meals WHERE mealName = :mealName")
   public int getMealId(String mealName);
+
+  @Query("SELECT id FROM tags WHERE name = :tagName")
+  public int getTagId(String tagName);
 
   @Query("SELECT choiceId FROM history WHERE userMail = :userMail ORDER BY choiceId DESC LIMIT 1")
   public int getLastChoiceIdOfUser(String userMail);

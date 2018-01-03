@@ -21,6 +21,8 @@ import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
+import neva.backend.BackendOuterClass.TagPropositionRequest;
+import neva.backend.BackendOuterClass.TagValuePropositionRequest;
 import neva.backend.SuggestionOuterClass;
 
 
@@ -151,7 +153,7 @@ public class ProposeFragment extends Fragment {
         db.nevaDao().getMealId(meal_for_tag_field.getText().toString());  // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
         String tagName = tag_of_meal_field.getText().toString();
 
-        BackendOuterClass.TagPropositionRequest tagPropositionReq;
+        TagPropositionRequest tagPropositionReq;
         tagPropositionReq = BackendOuterClass.TagPropositionRequest.newBuilder()
             .setToken(loginToken)
             .setTag(tagName)

@@ -16,9 +16,7 @@ import io.grpc.ManagedChannel;
 import java.util.List;
 import java.util.Random;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
-import mealrecommender.neva.com.neva_android_app.database.Tag;
 import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
 import neva.backend.BackendOuterClass.GetMultipleSuggestionsReply;
 import neva.backend.BackendOuterClass.GetMultipleSuggestionsRequest;
 import neva.backend.SuggestionOuterClass;
@@ -87,7 +85,7 @@ public class RecommendFragment extends Fragment {
             TextView textView = new TextView(getContext());
             textView.setText(tagNames[i]);
             textView.setTextSize(12);
-            textView.setTextColor(getResources().getColor(R.color.com_facebook_blue));
+            textView.setTextColor(getResources().getColor(R.color.textPrimaryColor));
             textView.setPadding(16,0,16,0);
             textView.setBackground(getResources().getDrawable(R.drawable.rounded_tagview_background));
             flexboxLayout.addView(textView);
