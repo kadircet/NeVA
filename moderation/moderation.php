@@ -146,7 +146,7 @@ while($suggestee = $res->fetch_array()) {
   if(!array_key_exists($category_id, $suggestees)) {
     $suggestees[$category_id] = new \Ds\Set();
   }
-  $suggestees[$category_id]->add($name);
+  $suggestees[$category_id]->add(strtolower($name));
   $name = htmlspecialchars($name, ENT_QUOTES);
   echo "<option value='$name'>";
 }
@@ -162,7 +162,7 @@ if($res->num_rows==0) {
 
 echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
-  $exists = $suggestees[$prop[3]]->contains($prop[2]);
+  $exists = $suggestees[$prop[3]]->contains(strtolower($prop[2]));
   $color = $exists ? 'red' : 'green';
   $prop[2] = htmlspecialchars($prop[2], ENT_QUOTES);
   echo <<<EOF
@@ -197,7 +197,7 @@ $res = $db->query($sql);
 $tags = new \Ds\Set();
 echo "<datalist id='tags'>";
 while($tag = $res->fetch_array()) {
-  $tags->add($tag[0]);
+  $tags->add(strtolower($tag[0]));
   $tag[0] = htmlspecialchars($tag[0], ENT_QUOTES);
   echo "<option value='$tag[0]'>";
 }
@@ -211,7 +211,7 @@ if($res->num_rows==0) {
 
 echo "<table style='float: left;'>";
 while($prop = $res->fetch_array()) {
-  $exists = $tags->contains($prop[1]);
+  $exists = $tags->contains(strtolower($prop[1]));
   $color = $exists ? 'red' : 'green';
   $prop[1] = htmlspecialchars($prop[1], ENT_QUOTES);
   echo <<<EOF
