@@ -21,6 +21,7 @@ import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass;
+import neva.backend.BackendOuterClass.GenericReply;
 import neva.backend.BackendOuterClass.TagPropositionRequest;
 import neva.backend.BackendOuterClass.TagValuePropositionRequest;
 import neva.backend.SuggestionOuterClass;
@@ -43,12 +44,14 @@ public class ProposeFragment extends Fragment {
   Button fragment_tag_proposal_button;
 
   AutoCompleteTextView meal_for_tag_field;
-  EditText tag_of_meal_field;
+  AutoCompleteTextView tag_of_meal_field;
   Button propose_tag_for_meal;
   NevaDatabase db;
 
-  ArrayAdapter<String> autocompleteAdapter;
+  ArrayAdapter<String> mealAutocompleteAdapter;
+  ArrayAdapter<String> tagAutocompleteAdapter;
   String[] mealNames;
+  String[] tagNames;
 
   public ProposeFragment() {
     // Required empty public constructor
@@ -77,10 +80,14 @@ public class ProposeFragment extends Fragment {
     propose_tag_for_meal = view.findViewById(R.id.fragment_proposal_tag_for_meal_button);
 
     mealNames = getMealNames();
+    tagNames = db.nevaDao().getTagNames();
 
-    autocompleteAdapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item,
+    mealAutocompleteAdapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item,
         mealNames);
-    meal_for_tag_field.setAdapter(autocompleteAdapter);
+    meal_for_tag_field.setAdapter(mealAutocompleteAdapter);
+
+    tagAutocompleteAdapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, tagNames);
+    tag_of_meal_field.setAdapter(tagAutocompleteAdapter);
 
     return view;
   }
@@ -150,20 +157,24 @@ public class ProposeFragment extends Fragment {
       @Override
       public void onClick(View view) {
 
-        db.nevaDao().getMealId(meal_for_tag_field.getText().toString());  // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
-        String tagName = tag_of_meal_field.getText().toString();
+        int sugId = db.nevaDao().getMealId(meal_for_tag_field.getText().toString());  // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
+        int tagId = db.nevaDao().getTagId(tag_of_meal_field.getText().toString());
 
-        TagPropositionRequest tagPropositionReq;
+        /*TagPropositionRequest tagPropositionReq;
         tagPropositionReq = BackendOuterClass.TagPropositionRequest.newBuilder()
             .setToken(loginToken)
             .setTag(tagName)
-            .build();
+            .build();*/
+
+        TagValuePropositionRequest request = TagValuePropositionRequest.newBuilder().setToken(loginToken)
+            .setSuggesteeId(sugId).setTagId(tagId).build();
 
         //TODO: CHANGE TAG PROPOSAL PART WHEN BACKEND SUPPORTS IT.
 
         try {
 
-          BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagPropositionReq);
+          //BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagPropositionReq);
+          GenericReply reply = blockingStub.tagValueProposition(request);
           Toast.makeText(getContext(), getResources().getString(R.string.success_tag_propose), Toast.LENGTH_SHORT).show();
           tag_of_meal_field.getText().clear();
           meal_for_tag_field.getText().clear();

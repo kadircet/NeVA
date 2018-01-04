@@ -5,7 +5,10 @@
   android:layout_height="match_parent"
   android:theme="@style/AppTheme"
   tools:context="mealrecommender.neva.com.neva_android_app.ProposeFragment">
-
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true">
   <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -13,31 +16,38 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.design.widget.TextInputLayout
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:paddingTop="20sp"
-      android:fontFamily="@font/latoregular"
-      android:text=""
-      android:textSize="18sp"/>
+      android:layout_height="wrap_content">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20sp"
+        android:fontFamily="@font/latoregular"
+        android:text=""
+        android:textSize="18sp"/>
+    </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal">
 
-      <EditText
-        android:id="@+id/fragment_proposal_field"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/rounded_text_box"
-        android:ems="10"
-        android:fontFamily="@font/latoregular"
-        android:hint="@string/meal_name"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:layout_marginRight="12dp"/>
+      <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+          android:id="@+id/fragment_proposal_field"
+          android:layout_width="250sp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:ems="10"
+          android:fontFamily="@font/latoregular"
+          android:hint="@string/meal_name"
+          android:textAlignment="center"
+          android:textSize="24sp"
+          android:layout_marginRight="12dp"/>
+      </android.support.design.widget.TextInputLayout>
 
       <Button
         android:id="@+id/fragment_proposal_button"
@@ -59,18 +69,21 @@
       android:layout_marginTop="20dp"
       android:orientation="horizontal">
 
-      <EditText
-        android:id="@+id/fragment_tag_proposal_field"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/rounded_text_box"
-        android:ems="10"
-        android:fontFamily="@font/latoregular"
-        android:hint="@string/tag_name"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:layout_marginRight="12dp"/>
+      <android.support.design.widget.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+          android:id="@+id/fragment_tag_proposal_field"
+          android:layout_width="250sp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:ems="10"
+          android:fontFamily="@font/latoregular"
+          android:hint="@string/tag_name"
+          android:textAlignment="center"
+          android:textSize="24sp"
+          android:layout_marginRight="12dp"/>
+      </android.support.design.widget.TextInputLayout>
 
       <Button
         android:id="@+id/fragment_tag_proposal_button"
@@ -107,32 +120,38 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <AutoCompleteTextView
-          android:id="@+id/fragment_proposal_meal_for_tag"
-          android:layout_width="250sp"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center_vertical"
-          android:background="@drawable/rounded_text_box"
-          android:ems="10"
-          android:fontFamily="@font/latoregular"
-          android:hint="@string/meal_name"
-          android:textAlignment="center"
-          android:textSize="24sp"
-          android:layout_marginRight="12dp"/>
+        <android.support.design.widget.TextInputLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+          <AutoCompleteTextView
+            android:id="@+id/fragment_proposal_meal_for_tag"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:ems="10"
+            android:fontFamily="@font/latoregular"
+            android:hint="@string/meal_name"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:layout_marginRight="12dp"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <AutoCompleteTextView
-          android:id="@+id/fragment_proposal_tag_of_meal"
-          android:layout_width="250sp"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="15dp"
-          android:layout_gravity="center_vertical"
-          android:background="@drawable/rounded_text_box"
-          android:ems="10"
-          android:fontFamily="@font/latoregular"
-          android:hint="@string/tag_name"
-          android:textAlignment="center"
-          android:textSize="24sp"
-          android:layout_marginRight="12dp"/>
+        <android.support.design.widget.TextInputLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+          <AutoCompleteTextView
+            android:id="@+id/fragment_proposal_tag_of_meal"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_vertical"
+            android:ems="10"
+            android:fontFamily="@font/latoregular"
+            android:hint="@string/tag_name"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:layout_marginRight="12dp"/>
+        </android.support.design.widget.TextInputLayout>
 
       </LinearLayout>
 
@@ -150,5 +169,6 @@
         tools:layout_editor_absoluteY="245dp"/>
     </LinearLayout>
   </LinearLayout>
+  </ScrollView>
 
 </FrameLayout>

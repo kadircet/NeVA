@@ -60,7 +60,7 @@
                 <android.support.design.widget.TextInputLayout
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:gravity="left">
+                  >
 
                     <EditText
                       android:id="@+id/user_email"
@@ -70,7 +70,7 @@
                       android:descendantFocusability="beforeDescendants"
                       android:focusableInTouchMode="true"
                       android:fontFamily="@font/latoregular"
-                      android:gravity="center"
+
                       android:hint="@string/email"
                       android:inputType="textEmailAddress"
                       android:textColor="@color/textPrimaryColor"
@@ -89,7 +89,7 @@
                       android:layout_height="40dp"
                       android:layout_margin="10dp"
                       android:fontFamily="@font/latoregular"
-                      android:gravity="center"
+
                       android:hint="@string/password"
                       android:inputType="textPassword"
                       android:textColor="@color/textPrimaryColor"

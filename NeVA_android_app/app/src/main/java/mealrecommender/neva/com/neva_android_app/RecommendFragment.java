@@ -84,7 +84,7 @@ public class RecommendFragment extends Fragment {
           for(int i=0; i < tagNames.length; i++) {
             TextView textView = new TextView(getContext());
             textView.setText(tagNames[i]);
-            textView.setTextSize(12);
+            textView.setTextSize(16);
             textView.setTextColor(getResources().getColor(R.color.textPrimaryColor));
             textView.setPadding(16,0,16,0);
             textView.setBackground(getResources().getDrawable(R.drawable.rounded_tagview_background));
