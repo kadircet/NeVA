@@ -5,6 +5,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.database.Cursor;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -68,7 +69,7 @@ public interface NevaDao {
   public int mealTagRelationExists(int mealId, int tagId);
 
   @Query("SELECT name FROM tags WHERE id IN (:tagIds)")
-  public String[] getTagNames(int[] tagIds);
+  public List<String> getTagNames(int[] tagIds);
 
   @Query("SELECT name FROM tags")
   public String[] getTagNames();

@@ -1,9 +1,12 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.content.res.Resources.Theme;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +16,18 @@ import android.widget.Toast;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
+import io.grpc.StatusRuntimeException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
+import mealrecommender.neva.com.neva_android_app.database.Tag;
 import neva.backend.BackendGrpc;
 import neva.backend.BackendOuterClass.GetMultipleSuggestionsReply;
 import neva.backend.BackendOuterClass.GetMultipleSuggestionsRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
+import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 
 
 public class RecommendFragment extends Fragment {
@@ -61,40 +68,62 @@ public class RecommendFragment extends Fragment {
     recommendButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        flexboxLayout.removeAllViews();
-        GetMultipleSuggestionsRequest recommendationReq;
-        recommendationReq = GetMultipleSuggestionsRequest.newBuilder()
-            .setToken(loginToken)
-            .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-            .build();
-
-        GetMultipleSuggestionsReply recommendationRep;
-        try {
-          recommendationRep = blockingStub.getMultipleSuggestions(recommendationReq);
-          List<Suggestion> suggestionList = recommendationRep.getSuggestion().getSuggestionListList();
-          Random r = new Random();
-          Suggestion suggestion = suggestionList.get(r.nextInt(suggestionList.size()));
-          List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();
-          int tagIdList[] = new int[tagList.size()];
-          for(int i =0; i<tagIdList.length; i++) {
-            tagIdList[i] = tagList.get(i).getId();
-          }
-          String[] tagNames = db.nevaDao().getTagNames(tagIdList);
-          recommendedView.setText(suggestion.getName());
-          for(int i=0; i < tagNames.length; i++) {
-            TextView textView = new TextView(getContext());
-            textView.setText(tagNames[i]);
-            textView.setTextSize(16);
-            textView.setTextColor(getResources().getColor(R.color.textPrimaryColor));
-            textView.setPadding(16,0,16,0);
-            textView.setBackground(getResources().getDrawable(R.drawable.rounded_tagview_background));
-            flexboxLayout.addView(textView);
-          }
-
-        } catch (Exception e) {
-          Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        GetSuggestionsTask getSuggestionsTask = new GetSuggestionsTask();
+        getSuggestionsTask.execute();
       }
     });
   }
+  class GetSuggestionsTask extends AsyncTask<Void, Void, Void> {
+    String suggestionName;
+    ArrayList<String> tagNames;
+
+    @Override
+    protected void onPreExecute() {
+      flexboxLayout.removeAllViews();
+      recommendButton.setEnabled(false);
+      recommendedView.setText("");
+    }
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+      GetMultipleSuggestionsRequest request = GetMultipleSuggestionsRequest.newBuilder()
+                                              .setToken(loginToken)
+                                              .setSuggestionCategory(SuggestionCategory.MEAL)
+                                              .build();
+      try {
+        GetMultipleSuggestionsReply reply = blockingStub.getMultipleSuggestions(request);
+        List<Suggestion> suggestionList = reply.getSuggestion().getSuggestionListList();
+        Random r = new Random();
+        Suggestion suggestion = suggestionList.get(r.nextInt(suggestionList.size()));
+        List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();
+        int[] tagIdList = new int[tagList.size()];
+        for(int i=0; i<tagIdList.length; i++) {
+          tagIdList[i] = tagList.get(i).getId();
+        }
+        List<String> tagNames = db.nevaDao().getTagNames(tagIdList);
+        Log.i(TAG, Integer.toString(tagNames.size()));
+        suggestionName = suggestion.getName();
+        this.tagNames = (ArrayList<String>) tagNames;
+      } catch (Exception e) {
+        Log.e(TAG, e.getMessage());
+      }
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+      recommendedView.setText(suggestionName);
+      for (int i = 0; i < tagNames.size(); i++) {
+        TextView textView = new TextView(getContext());
+        textView.setText(tagNames.get(i));
+        textView.setTextSize(16);
+        textView.setTextColor(getResources().getColor(R.color.textPrimaryColor));
+        textView.setPadding(16, 0, 16, 0);
+        textView.setBackground(getResources().getDrawable(R.drawable.rounded_tagview_background, getContext().getTheme()));
+        flexboxLayout.addView(textView);
+      }
+      recommendButton.setEnabled(true);
+    }
+  }
+
 }
