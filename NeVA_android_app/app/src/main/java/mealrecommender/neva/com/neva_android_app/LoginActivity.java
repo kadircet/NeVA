@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     nevaLoginManager = NevaLoginManager.getInstance();
     Intent intent = getIntent();
     addAccount = intent.getBooleanExtra(LoginActivity.IS_ADDING_NEW_ACCOUNT, false);
+    NevaConnectionHelper.getInstance(getBaseContext());
 
     facebook_login_button.setReadPermissions(Arrays.asList("public_profile","email"));
     facebook_login_button.registerCallback(callbackManager, new FacebookButtonCallback());

@@ -99,6 +99,16 @@ public class NevaLoginManager {
       Log.i(TAG, e.getMessage());
       return false;
     }
+
+    /*this.username = username;
+    byteStringToken = NevaConnectionHelper.getInstance().login(username, password, auth);
+    if(byteStringToken == null) {
+      Log.e(TAG, "Null token");
+      return false;
+    }
+    this.stringToken = Base64.encodeToString(byteStringToken.toByteArray(), Base64.DEFAULT);
+    this.loggedIn = true;
+    return true;*/
   }
 
   public boolean validateToken() {

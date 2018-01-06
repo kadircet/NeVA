@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="server_name">neva.0xdeffbeef.com</string>
+  <integer name="server_port">50051</integer>
   <string name="shared_pref_filename">com.neva.mealrecommender.sharedprefs</string>
   <string name="database_name">nevadb</string>
   <string name="facebook_app_id">169031667015286</string>
