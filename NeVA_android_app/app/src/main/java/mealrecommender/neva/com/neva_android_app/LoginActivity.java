@@ -3,6 +3,7 @@ package mealrecommender.neva.com.neva_android_app;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -12,6 +13,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.facebook.AccessToken;
@@ -23,7 +25,9 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.protobuf.ByteString;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 import org.json.JSONObject;
 
@@ -44,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
   private Button loginButton;
   private TextView registerText;
   private LoginButton facebook_login_button;
+  private ProgressBar progressBar;
   private CallbackManager callbackManager;
   private AccountManager accountManager;
   private NevaLoginManager nevaLoginManager;
@@ -60,14 +65,14 @@ public class LoginActivity extends AppCompatActivity {
     loginButton = findViewById(R.id.submit_button);
     registerText = findViewById(R.id.register_text);
     facebook_login_button = findViewById(R.id.facebook_login_button);
+    progressBar = findViewById(R.id.progress_bar);
     callbackManager = CallbackManager.Factory.create();
     accountManager = AccountManager.get(getBaseContext());
     nevaLoginManager = NevaLoginManager.getInstance();
     Intent intent = getIntent();
     addAccount = intent.getBooleanExtra(LoginActivity.IS_ADDING_NEW_ACCOUNT, false);
-    NevaConnectionHelper.getInstance(getBaseContext());
 
-    facebook_login_button.setReadPermissions(Arrays.asList("public_profile","email"));
+    facebook_login_button.setReadPermissions(Arrays.asList("public_profile", "email"));
     facebook_login_button.registerCallback(callbackManager, new FacebookButtonCallback());
   }
 
@@ -76,10 +81,9 @@ public class LoginActivity extends AppCompatActivity {
     String email = emailField.getText().toString();
     String password = passwordField.getText().toString();
     if (validateEmail(email) && validatePassword(password)) {
-      loginButton.setEnabled(false);
       Toast.makeText(getBaseContext(), "Logging In", Toast.LENGTH_SHORT).show();
-      submit(email, password, AuthenticationType.DEFAULT, null);
-      loginButton.setEnabled(true);
+      LoginTask loginTask = new LoginTask(email, password, AuthenticationType.DEFAULT, null);
+      loginTask.execute();
     }
   }
 
@@ -89,49 +93,16 @@ public class LoginActivity extends AppCompatActivity {
     startActivityForResult(intent, 1);
   }
 
-  public void submit(String email, String password, AuthenticationType authenticationType, AccessToken facebookToken) {
-    boolean loginSuccess = nevaLoginManager.logIn(email, password, authenticationType);
-    Log.i(TAG, "Login Success: " + Boolean.toString(loginSuccess));
-    if(loginSuccess) {
-      String authToken = nevaLoginManager.getStringToken();
-      Log.i(TAG, "AuthToken: "+ authToken);
-      if (addAccount) {
-        Log.i(TAG,"Adding Account");
-        Account account = new Account(email, ACCOUNT_TYPE);
-        boolean accountAddSuccess = accountManager.addAccountExplicitly(account, password, null);
-        if (accountAddSuccess) {
-          if(facebookToken != null) {
-            accountManager.setUserData(account, IS_FACEBOOK_LOGIN, "true");
-            accountManager.setUserData(account, FACEBOOK_USER_ID, facebookToken.getUserId());
-            accountManager.setUserData(account, FACEBOOK_APP_ID, facebookToken.getApplicationId());
-            accountManager.setUserData(account, FACEBOOK_TOKEN, facebookToken.getToken());
-            Log.i(TAG, "Facebook Account Added");
-          } else {
-            accountManager.setUserData(account, IS_FACEBOOK_LOGIN, "false");
-            accountManager.setUserData(account, FACEBOOK_USER_ID, null);
-            accountManager.setUserData(account, FACEBOOK_APP_ID, null);
-            accountManager.setUserData(account, FACEBOOK_TOKEN, null);
-            Log.i(TAG, "Neva Account Added");
-          }
-
-          accountManager.setAuthToken(account, NEVA_TOKEN_TYPE, authToken);
-          Log.i(TAG, "Account Added Successfully!");
-          Toast.makeText(getBaseContext(), getResources().getString(R.string.success_add_account), Toast.LENGTH_SHORT).show();
-          setResult(RESULT_OK);
-        } else {
-          setResult(RESULT_CANCELED);
-          Log.e(TAG, "Couldn't Add Account!");
-        }
-        finish();
-      } else {
-        Log.i(TAG, "Updating Account Password");
-        Account account = accountManager.getAccountsByType(ACCOUNT_TYPE)[0];
-        accountManager.setPassword(account, password);
-        accountManager.setAuthToken(account, NEVA_TOKEN_TYPE, authToken);
-        setResult(RESULT_OK);
-        finish();
-      }
+  public void submit(int result) {
+    Log.i(TAG, "Login Result: " + Integer.toString(result));
+    if (result == RESULT_OK) {
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.success_add_account),
+          Toast.LENGTH_SHORT).show();
+      setResult(RESULT_OK);
+    } else {
+      setResult(RESULT_CANCELED);
     }
+    finish();
   }
 
   @Override
@@ -177,46 +148,119 @@ public class LoginActivity extends AppCompatActivity {
       final String accessToken = loginResult.getAccessToken().getToken();
       Log.i(TAG, loginResult.getAccessToken().getApplicationId());
       Log.i(TAG, loginResult.getAccessToken().getUserId());
-      Log.i(TAG,"Facebook Access Token: " +accessToken);
-      Toast.makeText(getBaseContext(), getResources().getString(R.string.success_facebook_login), Toast.LENGTH_SHORT).show();
-      GraphRequest graphReq =GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-        @Override
-        public void onCompleted(JSONObject object, GraphResponse response) {
-          Log.i(TAG, "Response: "+response.toString());
-          if(response.getError() != null) {
-            Log.e(TAG, response.getError().getErrorMessage());
-          }
-          else {
-            String email = object.optString("email");
-            String name = object.optString("name");
+      Log.i(TAG, "Facebook Access Token: " + accessToken);
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.success_facebook_login),
+          Toast.LENGTH_SHORT).show();
+      GraphRequest graphReq = GraphRequest
+          .newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+              Log.i(TAG, "Response: " + response.toString());
+              if (response.getError() != null) {
+                Log.e(TAG, response.getError().getErrorMessage());
+              } else {
+                String email = object.optString("email");
+                String name = object.optString("name");
 
-            Log.i(TAG, "Email: "+ email);
-            Log.i(TAG,"Name: "+ name);
-            try {
-              submit(email, accessToken, AuthenticationType.FACEBOOK, loginResult.getAccessToken());
+                Log.i(TAG, "Email: " + email);
+                Log.i(TAG, "Name: " + name);
+                try {
+                  // Facebook login
+                  LoginTask loginTask = new LoginTask(email, accessToken,
+                      AuthenticationType.FACEBOOK, loginResult.getAccessToken());
+                  loginTask.execute();
+                  // submit(email, accessToken, AuthenticationType.FACEBOOK, loginResult.getAccessToken());
+                } catch (Exception e) {
+                  Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                  LoginManager.getInstance().logOut();
+                }
+              }
             }
-            catch (Exception e)
-            {
-              Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-              LoginManager.getInstance().logOut();
-            }
-          }
-        }
-      });
+          });
       Bundle parameters = new Bundle();
-      parameters.putString("fields","id,name,email");
+      parameters.putString("fields", "id,name,email");
       graphReq.setParameters(parameters);
+      progressBar.setVisibility(View.VISIBLE);
       graphReq.executeAsync();
+      progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void onCancel() {
-      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_facebook_cancel), Toast.LENGTH_LONG).show();
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_facebook_cancel),
+          Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onError(FacebookException error) {
-      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_facebook_error), Toast.LENGTH_LONG).show();
+      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_facebook_error),
+          Toast.LENGTH_LONG).show();
+    }
+  }
+
+  class LoginTask extends AsyncTask<Void, Void, Integer> {
+
+    String email;
+    String password;
+    AuthenticationType authType;
+    AccessToken facebookToken;
+
+    public LoginTask(String email, String password, AuthenticationType authType,
+        AccessToken facebookToken) {
+      this.email = email;
+      this.password = password;
+      this.authType = authType;
+      this.facebookToken = facebookToken;
+    }
+
+    @Override
+    protected void onPreExecute() {
+      loginButton.setEnabled(false);
+      progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected Integer doInBackground(Void... voids) {
+      nevaLoginManager.logIn(email, password, authType);
+      String authToken = nevaLoginManager.getStringToken();
+      Log.i(TAG, "Login Token: " + authToken);
+      if (addAccount) {
+        Log.i(TAG, "Adding Account");
+        Account account = new Account(email, ACCOUNT_TYPE);
+        boolean accountAddSuccess = accountManager.addAccountExplicitly(account, password, null);
+        if (accountAddSuccess) {
+          if (facebookToken != null) {
+            accountManager.setUserData(account, IS_FACEBOOK_LOGIN, "true");
+            accountManager.setUserData(account, FACEBOOK_USER_ID, facebookToken.getUserId());
+            accountManager.setUserData(account, FACEBOOK_APP_ID, facebookToken.getApplicationId());
+            accountManager.setUserData(account, FACEBOOK_TOKEN, facebookToken.getToken());
+            Log.i(TAG, "Facebook Account Added");
+          } else {
+            accountManager.setUserData(account, IS_FACEBOOK_LOGIN, "false");
+            accountManager.setUserData(account, FACEBOOK_USER_ID, null);
+            accountManager.setUserData(account, FACEBOOK_APP_ID, null);
+            accountManager.setUserData(account, FACEBOOK_TOKEN, null);
+            Log.i(TAG, "Neva Account Added");
+          }
+          accountManager.setAuthToken(account, NEVA_TOKEN_TYPE, authToken);
+          Log.i(TAG, "Account Added Successfully!");
+        } else {
+          return RESULT_CANCELED;
+        }
+      } else {
+        Log.i(TAG, "Updating Account Password");
+        Account account = accountManager.getAccountsByType(ACCOUNT_TYPE)[0];
+        accountManager.setPassword(account, password);
+        accountManager.setAuthToken(account, NEVA_TOKEN_TYPE, authToken);
+      }
+      return RESULT_OK;
+    }
+
+    @Override
+    protected void onPostExecute(Integer result) {
+      loginButton.setEnabled(true);
+      progressBar.setVisibility(View.GONE);
+      submit(result);
     }
   }
 

@@ -1,5 +1,6 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
 import com.google.protobuf.ByteString;
@@ -82,6 +83,7 @@ public class NevaLoginManager {
   public boolean logIn(String username, String password,
       BackendOuterClass.LoginRequest.AuthenticationType auth) {
     try {
+      Log.i(TAG,"UI Thread? "+Boolean.toString(Looper.getMainLooper() == Looper.myLooper()));
       BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
           .setEmail(username)
           .setPassword(password)
@@ -100,15 +102,6 @@ public class NevaLoginManager {
       return false;
     }
 
-    /*this.username = username;
-    byteStringToken = NevaConnectionHelper.getInstance().login(username, password, auth);
-    if(byteStringToken == null) {
-      Log.e(TAG, "Null token");
-      return false;
-    }
-    this.stringToken = Base64.encodeToString(byteStringToken.toByteArray(), Base64.DEFAULT);
-    this.loggedIn = true;
-    return true;*/
   }
 
   public boolean validateToken() {
