@@ -5,9 +5,11 @@ import android.accounts.AccountManager;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.facebook.login.LoginManager;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
@@ -65,6 +68,8 @@ public class MainActivity extends AppCompatActivity
     drawer.addDrawerListener(toggle);
     toggle.syncState();
 
+
+
     NavigationView navigationView = findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
     TextView navdrawUsername = navigationView.getHeaderView(0)
@@ -80,14 +85,15 @@ public class MainActivity extends AppCompatActivity
         .build();
     sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_pref_filename), MODE_PRIVATE);
 
-    addMealsToDatabase();
-    addTagsToDatabase();
-    fab = findViewById(R.id.fab);
-
     Fragment fragment = new RecommendFragment();
     FragmentManager fragmentManager = getSupportFragmentManager();
     fragmentManager.beginTransaction().replace(R.id.content_view, fragment)
         .addToBackStack(fragment.getTag()).commit();
+
+    FillDatabaseTask fillDatabaseTask = new FillDatabaseTask();
+    fillDatabaseTask.execute();
+
+    fab = findViewById(R.id.fab);
 
     MenuItem item = navigationView.getMenu().getItem(0);
     item.setChecked(true);
@@ -95,96 +101,117 @@ public class MainActivity extends AppCompatActivity
 
   }
 
-  public void addTagsToDatabase() {
-    GetTagsRequest request;
-    int tagTableVersion = sharedPreferences.getInt("tagTableVersion", 0);
-    tagTableVersion = 0; //FOR TESTING ONLY
-    Log.i(TAG, "Current Tag Version: "+ Integer.toString(tagTableVersion));
-    request = GetTagsRequest.newBuilder().setToken(loginToken).setStartIndex(tagTableVersion).build();
-    try{
-      GetTagsReply reply = blockingStub.getTags(request);
-      List<SuggestionOuterClass.Tag> tagList = reply.getTagListList();
-      List<Tag> tags = new ArrayList<>();
-      for(SuggestionOuterClass.Tag tag : tagList) {
-        Tag tagToAdd = new Tag(tag.getId(), tag.getName());
-        tags.add(tagToAdd);
+  class FillDatabaseTask extends AsyncTask<Void, Void, Void> {
+
+    @Override
+    protected void onPreExecute() {
+      Snackbar.make(findViewById(R.id.content_view), "Adding meals and tags to DB", Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+      addMealsToDatabase();
+      addTagsToDatabase();
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+      Snackbar.make(findViewById(R.id.content_view), "Added meals and tags to DB", Snackbar.LENGTH_SHORT).show();
+    }
+
+    public void addTagsToDatabase() {
+      GetTagsRequest request;
+      int tagTableVersion = sharedPreferences.getInt("tagTableVersion", 0);
+      tagTableVersion = 0; //FOR TESTING ONLY
+      Log.i(TAG, "Current Tag Version: "+ Integer.toString(tagTableVersion));
+      request = GetTagsRequest.newBuilder().setToken(loginToken).setStartIndex(tagTableVersion).build();
+      try{
+        GetTagsReply reply = blockingStub.getTags(request);
+        List<SuggestionOuterClass.Tag> tagList = reply.getTagListList();
+        List<Tag> tags = new ArrayList<>();
+        for(SuggestionOuterClass.Tag tag : tagList) {
+          Tag tagToAdd = new Tag(tag.getId(), tag.getName());
+          tags.add(tagToAdd);
+        }
+        int inserted = 0;
+        int updated = 0;
+        for(Tag tag: tags){
+          int count = db.nevaDao().tagExists(tag.id); // TODO: insert all tags with insertTags()
+          if (count>0) {
+            db.nevaDao().updateTag(tag);
+            updated++;
+          } else {
+            db.nevaDao().addTag(tag);
+            inserted++;
+          }
+        }
+        Log.d(TAG, Integer.toString(inserted)+" Tags inserted to db");
+        Log.d(TAG, Integer.toString(updated)+" Tags updated in db");
+      } catch (Exception e) {
+        Log.e(TAG, "CANT ADD TAGS");
+        Log.e(TAG, e.getMessage());
       }
+    }
+
+    public void addMealsToDatabase() {
+      GetSuggestionItemListRequest request;
+      int mealTableVersion = sharedPreferences.getInt("mealTableVersion", 0);
+      mealTableVersion = 0; // FOR TESTING ONLY
+      Log.i(TAG, "Current DB ver: "+ Integer.toString(mealTableVersion));
+      request = GetSuggestionItemListRequest.newBuilder()
+          .setToken(loginToken)
+          .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+          .setStartIndex(mealTableVersion)
+          .build();
+
+      GetSuggestionItemListReply reply = blockingStub
+          .getSuggestionItemList(request);
+      List<Suggestion> suggestions = reply.getItems().getSuggestionListList();
+      Log.i(TAG, "Reply DB ver: "+ Integer.toString(reply.getLastUpdated()));
+      sharedPreferences.edit().putInt("mealTableVersion", reply.getLastUpdated()).commit();
+
       int inserted = 0;
       int updated = 0;
-      for(Tag tag: tags){
-        int count = db.nevaDao().tagExists(tag.id); // TODO: insert all tags with insertTags()
-        if (count>0) {
-          db.nevaDao().updateTag(tag);
+      for(Suggestion sug : suggestions) {
+        Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
+        List<SuggestionOuterClass.Tag> tagList = sug.getTagsList();
+        List<Tag> mealTags = new ArrayList<>();
+        for (SuggestionOuterClass.Tag tag : tagList) {
+          Tag tagToAdd = new Tag(tag.getId(), tag.getName());
+          mealTags.add(tagToAdd);
+        }
+
+        int count = db.nevaDao().mealExits(meal.id);
+        if (count > 0) {
+          db.nevaDao().updateMeal(meal);
           updated++;
         } else {
-          db.nevaDao().addTag(tag);
+          db.nevaDao().addMeal(meal);
           inserted++;
         }
-      }
-      Log.d(TAG, Integer.toString(inserted)+" Tags inserted to db");
-      Log.d(TAG, Integer.toString(updated)+" Tags updated in db");
-    } catch (Exception e) {
-      Log.e(TAG, "CANT ADD TAGS");
-      Log.e(TAG, e.getMessage());
-    }
-  }
-
-  public void addMealsToDatabase() {
-    GetSuggestionItemListRequest request;
-    int mealTableVersion = sharedPreferences.getInt("mealTableVersion", 0);
-    mealTableVersion = 0; // FOR TESTING ONLY
-    Log.i(TAG, "Current DB ver: "+ Integer.toString(mealTableVersion));
-    request = GetSuggestionItemListRequest.newBuilder()
-        .setToken(loginToken)
-        .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-        .setStartIndex(mealTableVersion)
-        .build();
-
-    GetSuggestionItemListReply reply = blockingStub
-        .getSuggestionItemList(request);
-    List<Suggestion> suggestions = reply.getItems().getSuggestionListList();
-    Log.i(TAG, "Reply DB ver: "+ Integer.toString(reply.getLastUpdated()));
-    sharedPreferences.edit().putInt("mealTableVersion", reply.getLastUpdated()).commit();
-
-    int inserted = 0;
-    int updated = 0;
-    for(Suggestion sug : suggestions) {
-      Meal meal = new Meal(sug.getSuggesteeId(), sug.getName(), "PhotoURL");
-      List<SuggestionOuterClass.Tag> tagList = sug.getTagsList();
-      List<Tag> mealTags = new ArrayList<>();
-      for (SuggestionOuterClass.Tag tag : tagList) {
-        Tag tagToAdd = new Tag(tag.getId(), tag.getName());
-        mealTags.add(tagToAdd);
-      }
-
-      int count = db.nevaDao().mealExits(meal.id);
-      if (count > 0) {
-        db.nevaDao().updateMeal(meal);
-        updated++;
-      } else {
-        db.nevaDao().addMeal(meal);
-        inserted++;
-      }
-      int tagInserted = 0;
-      int tagUpdated = 0;
-      for (Tag tag : mealTags) {
-        MealTagRelation relation = new MealTagRelation(meal.id, tag.id);
-        count = db.nevaDao().mealTagRelationExists(relation.mealId, relation.tagId);
-        if (count > 0) {
-          db.nevaDao().updateMealTag(relation);
-          tagUpdated++;
-        } else {
-          db.nevaDao().addMealTag(relation);
-          tagInserted++;
+        int tagInserted = 0;
+        int tagUpdated = 0;
+        for (Tag tag : mealTags) {
+          MealTagRelation relation = new MealTagRelation(meal.id, tag.id);
+          count = db.nevaDao().mealTagRelationExists(relation.mealId, relation.tagId);
+          if (count > 0) {
+            db.nevaDao().updateMealTag(relation);
+            tagUpdated++;
+          } else {
+            db.nevaDao().addMealTag(relation);
+            tagInserted++;
+          }
+          Log.d(TAG,
+              Integer.toString(tagInserted) + " tags inserted for " + meal.mealName + " to db");
+          Log.d(TAG, Integer.toString(tagUpdated) + " tags updated for " + meal.mealName + " in db");
         }
-        Log.d(TAG,
-            Integer.toString(tagInserted) + " tags inserted for " + meal.mealName + " to db");
-        Log.d(TAG, Integer.toString(tagUpdated) + " tags updated for " + meal.mealName + " in db");
       }
+      Log.d(TAG, Integer.toString(inserted) + " Meals inserted to db");
+      Log.d(TAG, Integer.toString(updated) + " Meals updated in db");
     }
-    Log.d(TAG, Integer.toString(inserted) + " Meals inserted to db");
-    Log.d(TAG, Integer.toString(updated) + " Meals updated in db");
   }
+
 
   @Override
   public void onBackPressed() {
@@ -239,7 +266,7 @@ public class MainActivity extends AppCompatActivity
       AccountManager am = AccountManager.get(getBaseContext());
       Account acc[] = am.getAccountsByType(LoginActivity.ACCOUNT_TYPE);
       if (acc[0] != null) {
-        am.removeAccount(acc[0], null, null);
+        am.removeAccountExplicitly(acc[0]);
         sharedPreferences.edit().putInt("databaseVersion", 0).commit();
       }
       LoginManager.getInstance().logOut();
