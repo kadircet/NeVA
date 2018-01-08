@@ -26,11 +26,10 @@ public class HistoryFragment extends ListFragment {
   private final String TAG = this.getClass().getSimpleName();
 
   ByteString loginToken;
-  ManagedChannel mChannel;
-  BackendGrpc.BackendBlockingStub blockingStub;
   NevaDatabase db;
   HistoryCursorAdapter adapter;
   NevaLoginManager nevaLoginManager;
+  NevaConnectionManager connectionManager;
 
   public HistoryFragment() {
   }
@@ -42,23 +41,17 @@ public class HistoryFragment extends ListFragment {
 
     MainActivity mainActivity = (MainActivity) getActivity();
     nevaLoginManager = NevaLoginManager.getInstance();
+    connectionManager = NevaConnectionManager.getInstance();
     loginToken = nevaLoginManager.getByteStringToken();
-    mChannel = mainActivity.mChannel;
-    blockingStub = mainActivity.blockingStub;
     db = mainActivity.db;
     adapter = mainActivity.adapter;
 
     Log.d(TAG, "Getting the last stored \"choiceId\" in database");
-    int lastChoiceId = db.nevaDao().getLastChoiceIdOfUser(nevaLoginManager.getUsername());
-    Log.e(TAG, Integer.toString(lastChoiceId) + " " + nevaLoginManager.getUsername());
-    FetchUserHistoryRequest fetchUserHistoryRequest = FetchUserHistoryRequest.newBuilder()
-                                                      .setToken(nevaLoginManager.getByteStringToken())
-                                                      .setStartIndex(lastChoiceId)
-                                                      .build();
+    int lastChoiceId = db.nevaDao().getLastChoiceIdOfUser(nevaLoginManager.getEmail());
+    Log.e(TAG, Integer.toString(lastChoiceId) + " " + nevaLoginManager.getEmail());
     try {
       Log.d(TAG, "Sending FetchUserHistoryRequest to server");
-      FetchUserHistoryReply fetchUserHistoryReply = blockingStub.fetchUserHistory(fetchUserHistoryRequest);
-      List<Choice> fetchedHistory = fetchUserHistoryReply.getUserHistory().getHistoryList();
+      List<Choice> fetchedHistory = connectionManager.fetchUserHistory(lastChoiceId);//fetchUserHistoryReply.getUserHistory().getHistoryList();
       Log.d(TAG, "Got FetchUserHistoryReply, Creating HistoryEntries");
       List<HistoryEntry> historyEntries = userHistoryToHistoryEntry(fetchedHistory);
       Log.d(TAG, "Adding Fetched HistoryEntries to the database");
@@ -68,7 +61,7 @@ public class HistoryFragment extends ListFragment {
     }
     Log.d(TAG, "Getting meal names for HistoryEntries");
     //Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
-    Cursor cursor = db.nevaDao().getUserHistoryMeals(nevaLoginManager.getUsername());
+    Cursor cursor = db.nevaDao().getUserHistoryMeals(nevaLoginManager.getEmail());
     cursor.moveToFirst();
     adapter = new HistoryCursorAdapter(getContext(), cursor, 0);
     mainActivity.adapter = adapter;
@@ -81,7 +74,7 @@ public class HistoryFragment extends ListFragment {
     List<HistoryEntry> meals = new ArrayList<HistoryEntry>();
     for (Choice choice : fetchedChoices) {
       int choiceId = choice.getChoiceId();
-      String username = nevaLoginManager.getUsername();
+      String username = nevaLoginManager.getEmail();
       int suggesteeId = choice.getSuggesteeId();
       long epochTime = choice.getTimestamp().getSeconds() *1000;
       long timezoneOffset = Calendar.getInstance().getTimeZone().getRawOffset();

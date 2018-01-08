@@ -36,9 +36,9 @@ public class RecommendFragment extends Fragment {
 
   FlexboxLayout flexboxLayout;
   ByteString loginToken;
-  ManagedChannel mChannel;
-  BackendGrpc.BackendBlockingStub blockingStub;
+
   NevaDatabase db;
+  NevaConnectionManager connectionManager;
 
   TextView recommendedView;
   Button recommendButton;
@@ -51,9 +51,8 @@ public class RecommendFragment extends Fragment {
 
     MainActivity mainActivity = (MainActivity) getActivity();
     loginToken = mainActivity.loginToken;
-    mChannel = mainActivity.mChannel;
-    blockingStub = mainActivity.blockingStub;
     db = mainActivity.db;
+    connectionManager = NevaConnectionManager.getInstance();
     flexboxLayout = view.findViewById(R.id.flexbox_layout);
 
     recommendButton = view.findViewById(R.id.fragment_recommend_button);
@@ -86,13 +85,8 @@ public class RecommendFragment extends Fragment {
 
     @Override
     protected Void doInBackground(Void... voids) {
-      GetMultipleSuggestionsRequest request = GetMultipleSuggestionsRequest.newBuilder()
-                                              .setToken(loginToken)
-                                              .setSuggestionCategory(SuggestionCategory.MEAL)
-                                              .build();
       try {
-        GetMultipleSuggestionsReply reply = blockingStub.getMultipleSuggestions(request);
-        List<Suggestion> suggestionList = reply.getSuggestion().getSuggestionListList();
+        List<Suggestion> suggestionList = connectionManager.getMultipleSuggestions();
         Random r = new Random();
         Suggestion suggestion = suggestionList.get(r.nextInt(suggestionList.size()));
         List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();

@@ -36,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
   ProgressBar pb;
   Integer birthday_time;
   UserOuterClass.User.Gender gender;
+  NevaConnectionManager connectionManager;
 
   DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -49,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
     already_member = findViewById(R.id.already_member);
     birthdate_field = findViewById(R.id.birthdate);
     pb = findViewById(R.id.progress_bar);
+    connectionManager = NevaConnectionManager.getInstance();
 
     mDateSetListener = new DatePickerDialog.OnDateSetListener() {
       @Override
@@ -110,33 +112,26 @@ public class RegisterActivity extends AppCompatActivity {
       return;
     }
     //TODO: Move this code to NevaLoginManager
-    try {
-      signup_button.setEnabled(false);
-      pb.setVisibility(View.VISIBLE);
-      String email = email_field.getText().toString();
-      String username = username_field.getText().toString();
-      gender = getGenderOfButton(gender_field);
-      Util.Timestamp bdate = Util.Timestamp.newBuilder().setSeconds(birthday_time).build();
-      String password = password_field.getText().toString();
 
-      UserOuterClass.User user = UserOuterClass.User.newBuilder().setName(username).setEmail(email)
-          .setGender(gender).setDateOfBirth(bdate).setPassword(password).build();
+    signup_button.setEnabled(false);
+    pb.setVisibility(View.VISIBLE);
+    String email = email_field.getText().toString();
+    String username = username_field.getText().toString();
+    gender = getGenderOfButton(gender_field);
+    Util.Timestamp bdate = Util.Timestamp.newBuilder().setSeconds(birthday_time).build();
+    String password = password_field.getText().toString();
 
-      BackendOuterClass.RegisterRequest registerRequest = BackendOuterClass.RegisterRequest
-          .newBuilder().setUser(user).build();
-      NevaLoginManager nevaLoginManager = NevaLoginManager.getInstance();
-      BackendGrpc.BackendBlockingStub blockingStub = nevaLoginManager.blockingStub;
-
-      BackendOuterClass.GenericReply registerReply = blockingStub.register(registerRequest);
-      //Intent intent = new Intent(this, LoginActivity.class);
-      Toast.makeText(this, getResources().getString(R.string.success_signup), Toast.LENGTH_LONG).show();
+    boolean registerSuccess = connectionManager.registerRequest(username, email, password, gender, bdate);
+    if(registerSuccess) {
+      Toast.makeText(this, getResources().getString(R.string.success_signup), Toast.LENGTH_LONG)
+          .show();
       signup_button.setEnabled(true);
       pb.setVisibility(View.GONE);
       //startActivity(intent);
       setResult(RESULT_OK);
       finish();
-    } catch (Exception e) {
-      Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+    } else {
+      Toast.makeText(getBaseContext(), "Register Failed", Toast.LENGTH_LONG).show();
       pb.setVisibility(View.GONE);
       signup_button.setEnabled(true);
     }

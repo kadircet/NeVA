@@ -40,6 +40,7 @@ import neva.backend.BackendOuterClass.GetTagsReply;
 import neva.backend.BackendOuterClass.GetTagsRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
+import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity
   public FloatingActionButton fab;
   public NevaDatabase db;
   public SharedPreferences sharedPreferences;
+  public NevaConnectionManager connectionManager;
   HistoryCursorAdapter adapter;
 
 
@@ -74,15 +76,16 @@ public class MainActivity extends AppCompatActivity
     navigationView.setNavigationItemSelectedListener(this);
     TextView navdrawUsername = navigationView.getHeaderView(0)
         .findViewById(R.id.nav_header_username);
-    navdrawUsername.setText(NevaLoginManager.getInstance().getUsername());
+    navdrawUsername.setText(NevaLoginManager.getInstance().getEmail());
 
     loginToken = NevaLoginManager.getInstance().getByteStringToken();
-    blockingStub = NevaLoginManager.getInstance().blockingStub;
 
     db = Room.databaseBuilder(getBaseContext(), NevaDatabase.class, getResources().getString(R.string.database_name))
         .allowMainThreadQueries()
         .fallbackToDestructiveMigration()
         .build();
+
+    connectionManager = NevaConnectionManager.getInstance();
     sharedPreferences = getSharedPreferences(getResources().getString(R.string.shared_pref_filename), MODE_PRIVATE);
 
     Fragment fragment = new RecommendFragment();
@@ -125,10 +128,8 @@ public class MainActivity extends AppCompatActivity
       int tagTableVersion = sharedPreferences.getInt("tagTableVersion", 0);
       tagTableVersion = 0; //FOR TESTING ONLY
       Log.i(TAG, "Current Tag Version: "+ Integer.toString(tagTableVersion));
-      request = GetTagsRequest.newBuilder().setToken(loginToken).setStartIndex(tagTableVersion).build();
       try{
-        GetTagsReply reply = blockingStub.getTags(request);
-        List<SuggestionOuterClass.Tag> tagList = reply.getTagListList();
+        List<SuggestionOuterClass.Tag> tagList = connectionManager.getTags(tagTableVersion);
         List<Tag> tags = new ArrayList<>();
         for(SuggestionOuterClass.Tag tag : tagList) {
           Tag tagToAdd = new Tag(tag.getId(), tag.getName());
@@ -159,14 +160,7 @@ public class MainActivity extends AppCompatActivity
       int mealTableVersion = sharedPreferences.getInt("mealTableVersion", 0);
       mealTableVersion = 0; // FOR TESTING ONLY
       Log.i(TAG, "Current DB ver: "+ Integer.toString(mealTableVersion));
-      request = GetSuggestionItemListRequest.newBuilder()
-          .setToken(loginToken)
-          .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-          .setStartIndex(mealTableVersion)
-          .build();
-
-      GetSuggestionItemListReply reply = blockingStub
-          .getSuggestionItemList(request);
+      GetSuggestionItemListReply reply = connectionManager.getSuggestions(SuggestionCategory.MEAL, mealTableVersion);
       List<Suggestion> suggestions = reply.getItems().getSuggestionListList();
       Log.i(TAG, "Reply DB ver: "+ Integer.toString(reply.getLastUpdated()));
       sharedPreferences.edit().putInt("mealTableVersion", reply.getLastUpdated()).commit();

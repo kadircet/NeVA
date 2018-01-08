@@ -6,10 +6,17 @@ import android.util.Log;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import java.util.List;
 import neva.backend.BackendGrpc;
+import neva.backend.BackendGrpc.BackendBlockingStub;
 import neva.backend.BackendOuterClass;
 import neva.backend.BackendOuterClass.CheckTokenRequest;
 import neva.backend.BackendOuterClass.GenericReply;
+import neva.backend.BackendOuterClass.GetTagsReply;
+import neva.backend.BackendOuterClass.GetTagsRequest;
+import neva.backend.BackendOuterClass.LoginReply;
+import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
+import neva.backend.SuggestionOuterClass.Tag;
 
 /**
  * Created by hakan on 12/12/17.
@@ -18,20 +25,15 @@ import neva.backend.BackendOuterClass.GenericReply;
 public class NevaLoginManager {
 
   private final String TAG = this.getClass().getSimpleName();
-  private final String serverAddress = "neva.0xdeffbeef.com";
-  private final int serverPort = 50051;
   private static NevaLoginManager instance = null;
-  private String username;
+  private String email;
   private ByteString byteStringToken;
   private String stringToken;
   private boolean loggedIn;
-
-  ManagedChannel mChannel;
-  public BackendGrpc.BackendBlockingStub blockingStub;
+  private NevaConnectionManager connectionManager;
 
   protected NevaLoginManager() {
-    mChannel = ManagedChannelBuilder.forAddress(serverAddress, serverPort).build();
-    blockingStub = BackendGrpc.newBlockingStub(mChannel);
+    connectionManager = NevaConnectionManager.getInstance();
   }
 
   public static NevaLoginManager getInstance() {
@@ -45,9 +47,9 @@ public class NevaLoginManager {
     return loggedIn;
   }
 
-  public String getUsername() {
+  public String getEmail() {
     if (loggedIn) {
-      return username;
+      return email;
     }
     return null;
   }
@@ -67,31 +69,24 @@ public class NevaLoginManager {
   }
 
   public void logOut() {
-    username = null;
+    email = null;
     byteStringToken = null;
     stringToken = null;
     loggedIn = false;
   }
 
-  public void setAuthToken(String username, String token) {
+  public void setAuthToken(String email, String token) {
     stringToken = token;
     byteStringToken = ByteString.copyFrom(Base64.decode(token, Base64.DEFAULT));
-    this.username = username;
+    this.email = email;
     loggedIn = true;
   }
   
-  public boolean logIn(String username, String password,
+  public boolean logIn(String email, String password,
       BackendOuterClass.LoginRequest.AuthenticationType auth) {
     try {
-      Log.i(TAG,"UI Thread? "+Boolean.toString(Looper.getMainLooper() == Looper.myLooper()));
-      BackendOuterClass.LoginRequest loginRequest = BackendOuterClass.LoginRequest.newBuilder()
-          .setEmail(username)
-          .setPassword(password)
-          .setAuthenticationType(auth)
-          .build();
-
-      BackendOuterClass.LoginReply loginReply = blockingStub.login(loginRequest);
-      this.username = username;
+      LoginReply loginReply = connectionManager.loginRequest(email, password, auth);
+      this.email = email;
       this.byteStringToken = loginReply.getToken();
       this.stringToken = Base64.encodeToString(byteStringToken.toByteArray(), Base64.DEFAULT);
       this.loggedIn = true;
@@ -99,19 +94,13 @@ public class NevaLoginManager {
     } catch (Exception e) {
       e.printStackTrace();
       Log.i(TAG, e.getMessage());
+      this.loggedIn = false;
       return false;
     }
 
   }
 
   public boolean validateToken() {
-    CheckTokenRequest checkTokenRequest = CheckTokenRequest.newBuilder()
-        .setToken(getByteStringToken()).build();
-    try{
-      GenericReply genericReply = blockingStub.checkToken(checkTokenRequest);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
+      return connectionManager.checkToken(getByteStringToken()); //blockingStub.checkToken(checkTokenRequest);
   }
 }

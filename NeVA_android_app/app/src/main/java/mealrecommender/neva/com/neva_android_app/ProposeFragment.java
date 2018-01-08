@@ -49,6 +49,7 @@ public class ProposeFragment extends Fragment {
   AutoCompleteTextView tag_of_meal_field;
   Button propose_tag_for_meal;
   NevaDatabase db;
+  NevaConnectionManager connectionManager;
 
   ArrayAdapter<String> mealAutocompleteAdapter;
   ArrayAdapter<String> tagAutocompleteAdapter;
@@ -68,9 +69,8 @@ public class ProposeFragment extends Fragment {
 
     MainActivity mainActivity = (MainActivity) getActivity();
     loginToken = NevaLoginManager.getInstance().getByteStringToken();
-    mChannel = mainActivity.mChannel;
-    blockingStub = mainActivity.blockingStub;
     db = mainActivity.db;
+    connectionManager = NevaConnectionManager.getInstance();
 
     fragment_proposal_field = view.findViewById(R.id.fragment_proposal_field);
     fragment_tag_proposal_field = view.findViewById(R.id.fragment_tag_proposal_field);
@@ -120,26 +120,7 @@ public class ProposeFragment extends Fragment {
     public boolean mealProposal() {
 
       String suggestionText = fragment_proposal_field.getText().toString();
-
-      SuggestionOuterClass.Suggestion suggestion;
-      suggestion = SuggestionOuterClass.Suggestion.newBuilder()
-          .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-          .setName(suggestionText)
-          .build();
-
-      BackendOuterClass.SuggestionItemPropositionRequest suggestionRequest;
-      suggestionRequest = BackendOuterClass.SuggestionItemPropositionRequest.newBuilder()
-          .setToken(loginToken)
-          .setSuggestion(suggestion)
-          .build();
-      try {
-        BackendOuterClass.GenericReply genRep = blockingStub
-            .suggestionItemProposition(suggestionRequest);
-        return true;
-      } catch (Exception e) {
-        Log.d("SUGG_Click", "Exception: "+ e.getMessage());
-        return false;
-      }
+      return connectionManager.suggestionItemProposition(suggestionText);
     }
   }
 
@@ -156,18 +137,7 @@ public class ProposeFragment extends Fragment {
 
     public boolean tagPropose() {
       String tagString = fragment_tag_proposal_field.getText().toString();
-
-      BackendOuterClass.TagPropositionRequest tagProp;
-      tagProp = BackendOuterClass.TagPropositionRequest.newBuilder()
-          .setTag(tagString).setToken(loginToken).build();
-
-      try {
-        BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagProp);
-        return true;
-      } catch (Exception e) {
-        Log.d(TAG, "Tag Propose Exception: "+ e.getMessage());
-        return false;
-      }
+      return connectionManager.tagProposition(tagString);
     }
 
     @Override
@@ -210,15 +180,7 @@ public class ProposeFragment extends Fragment {
       int sugId = db.nevaDao().getMealId(meal_for_tag_field.getText().toString());  // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
       int tagId = db.nevaDao().getTagId(tag_of_meal_field.getText().toString());
 
-      TagValuePropositionRequest request = TagValuePropositionRequest.newBuilder().setToken(loginToken)
-          .setSuggesteeId(sugId).setTagId(tagId).build();
-      try {
-        GenericReply reply = blockingStub.tagValueProposition(request);
-        return true;
-      } catch (Exception e) {
-        Log.d(TAG, "MealTag Exception: " + e.getMessage());
-        return false;
-      }
+      return connectionManager.tagValueProposition(sugId, tagId);
     }
   }
 

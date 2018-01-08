@@ -50,8 +50,6 @@ public class AddHistoryItemFragment extends Fragment {
   private final String TAG = this.getClass().getSimpleName();
 
   ByteString loginToken;
-  ManagedChannel mChannel;
-  BackendBlockingStub blockingStub;
   FragmentManager fm;
   HistoryCursorAdapter cursorAdapter;
 
@@ -69,6 +67,7 @@ public class AddHistoryItemFragment extends Fragment {
   DatePickerDialog.OnDateSetListener dateSetListener;
 
   NevaDatabase db;
+  NevaConnectionManager connectionManager;
 
   public AddHistoryItemFragment() {
     // Required empty public constructor
@@ -83,10 +82,9 @@ public class AddHistoryItemFragment extends Fragment {
 
     MainActivity mainActivity = (MainActivity) getActivity();
     loginToken = mainActivity.loginToken;
-    mChannel = mainActivity.mChannel;
-    blockingStub = mainActivity.blockingStub;
     cursorAdapter = mainActivity.adapter;
     db = mainActivity.db;
+    connectionManager = NevaConnectionManager.getInstance();
     fm = mainActivity.getFragmentManager();
     mealNameField = view.findViewById(R.id.eaten_meal_field);
     timeField = view.findViewById(R.id.time_field);
@@ -150,38 +148,20 @@ public class AddHistoryItemFragment extends Fragment {
           longitude = currentLoc.getLongitude();
         }
       }
-
-      Choice choice = Choice.newBuilder()
-          .setSuggesteeId(mealID)
-          .setTimestamp(Timestamp.newBuilder()
-              .setSeconds((int) (dateEpoch)))
-          .setLatitude(latitude)
-          .setLongitude(longitude)
-          .build();
-      Log.d(TAG, "Created choice with: ");
-      Log.d(TAG, "\t"+mealNameField.getText().toString()+" "+Integer.toString(mealID));
-      Log.d(TAG, "\tTimestamp(ms): "+ Long.toString(dateEpoch));
-      Log.d(TAG, "\tLatitude: "+Double.toString(latitude) + " Longitude: " + Double.toString(longitude));
-
-      InformUserChoiceRequest informUserChoiceRequest;
-      informUserChoiceRequest = InformUserChoiceRequest.newBuilder()
-          .setChoice(choice)
-          .setToken(loginToken)
-          .build();
       try {
-        Log.d(TAG, "Sending \"Choice\" to server");
-        InformUserChoiceReply informUserChoiceReply = blockingStub.informUserChoice(informUserChoiceRequest);
+        InformUserChoiceReply informUserChoiceReply = connectionManager.informUserChoice(mealID, dateEpoch, latitude, longitude);
         Log.d(TAG, "Adding \"Choice\" to database (choiceId = "+informUserChoiceReply.getChoiceId()+" )");
         db.nevaDao().addHistoryEntry(new HistoryEntry(
             informUserChoiceReply.getChoiceId(),
-            NevaLoginManager.getInstance().getUsername(),
+            NevaLoginManager.getInstance().getEmail(),
             mealID,
             date.getTimeInMillis()));
 
         Log.d(TAG, "Getting History from database again, and changing view cursors");
-        newCursor = db.nevaDao().getUserHistoryMeals(NevaLoginManager.getInstance().getUsername());
+        newCursor = db.nevaDao().getUserHistoryMeals(NevaLoginManager.getInstance().getEmail());
         return true;
       } catch (Exception e) {
+        Log.e(TAG, e.getMessage());
         return false;
       }
     }
