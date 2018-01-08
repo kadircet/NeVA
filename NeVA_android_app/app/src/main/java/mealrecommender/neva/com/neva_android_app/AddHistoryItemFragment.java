@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -118,57 +119,83 @@ public class AddHistoryItemFragment extends Fragment {
     addHistoryButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        addHistoryEntry();
+        AddHistoryTask addHistoryTask = new AddHistoryTask();
+        addHistoryTask.execute();
       }
     });
   }
 
-  private void addHistoryEntry() {
-    double latitude = 0;
-    double longitude = 0;
-    Location currentLoc = getLocation();
-    if (currentLoc != null) {
-      latitude = currentLoc.getLatitude();
-      longitude = currentLoc.getLongitude();
+  class AddHistoryTask extends AsyncTask<Void, Void, Boolean> {
+
+    boolean locationEnabled;
+    Cursor newCursor;
+
+    @Override
+    protected void onPreExecute() {
+      addHistoryButton.setEnabled(false);
+      locationEnabled = checkLocationPermissions();
     }
-    int mealID = db.nevaDao().getMealId(mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
-    long timezoneOffset = date.getTimeZone().getRawOffset();
-    long dateEpoch = (date.getTimeInMillis() + timezoneOffset) / 1000;
 
-    Choice choice = Choice.newBuilder()
-        .setSuggesteeId(mealID)
-        .setTimestamp(Timestamp.newBuilder()
-        .setSeconds((int) (dateEpoch)))
-        .setLatitude(latitude)
-        .setLongitude(longitude)
-        .build();
-    Log.d(TAG, "Created choice with: ");
-    Log.d(TAG, "\t"+mealNameField.getText().toString()+" "+Integer.toString(mealID));
-    Log.d(TAG, "\tTimestamp(ms): "+ Long.toString(dateEpoch));
-    Log.d(TAG, "\tLatitude: "+Double.toString(latitude) + " Longitude: " + Double.toString(longitude));
+    @Override
+    protected Boolean doInBackground(Void... voids) {
+      int mealID = db.nevaDao().getMealId(mealNameField.getText().toString()); // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
+      long timezoneOffset = date.getTimeZone().getRawOffset();
+      long dateEpoch = (date.getTimeInMillis() + timezoneOffset) / 1000;
+      double latitude = 0;
+      double longitude = 0;
+      if(locationEnabled) {
+        Location currentLoc = getLocation();
+        if (currentLoc != null) {
+          latitude = currentLoc.getLatitude();
+          longitude = currentLoc.getLongitude();
+        }
+      }
 
-    InformUserChoiceRequest informUserChoiceRequest;
-    informUserChoiceRequest = InformUserChoiceRequest.newBuilder()
-        .setChoice(choice)
-        .setToken(loginToken)
-        .build();
-    try {
-      Log.d(TAG, "Sending \"Choice\" to server");
-      InformUserChoiceReply informUserChoiceReply = blockingStub.informUserChoice(informUserChoiceRequest);
-      Log.d(TAG, "Adding \"Choice\" to database (choiceId = "+informUserChoiceReply.getChoiceId()+" )");
-      db.nevaDao().addHistoryEntry(new HistoryEntry(
-          informUserChoiceReply.getChoiceId(),
-          NevaLoginManager.getInstance().getUsername(),
-          mealID,
-          date.getTimeInMillis()));
+      Choice choice = Choice.newBuilder()
+          .setSuggesteeId(mealID)
+          .setTimestamp(Timestamp.newBuilder()
+              .setSeconds((int) (dateEpoch)))
+          .setLatitude(latitude)
+          .setLongitude(longitude)
+          .build();
+      Log.d(TAG, "Created choice with: ");
+      Log.d(TAG, "\t"+mealNameField.getText().toString()+" "+Integer.toString(mealID));
+      Log.d(TAG, "\tTimestamp(ms): "+ Long.toString(dateEpoch));
+      Log.d(TAG, "\tLatitude: "+Double.toString(latitude) + " Longitude: " + Double.toString(longitude));
 
-      Log.d(TAG, "Getting History from database again, and changing view cursors");
-      Cursor cursor = db.nevaDao().getUserHistoryMeals(NevaLoginManager.getInstance().getUsername());
-      cursorAdapter.swapCursor(cursor);
-      Toast.makeText(getContext(), getResources().getString(R.string.success_add_history_entry), Toast.LENGTH_SHORT).show();
-      getActivity().onBackPressed();
-    } catch (Exception e) {
-      Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+      InformUserChoiceRequest informUserChoiceRequest;
+      informUserChoiceRequest = InformUserChoiceRequest.newBuilder()
+          .setChoice(choice)
+          .setToken(loginToken)
+          .build();
+      try {
+        Log.d(TAG, "Sending \"Choice\" to server");
+        InformUserChoiceReply informUserChoiceReply = blockingStub.informUserChoice(informUserChoiceRequest);
+        Log.d(TAG, "Adding \"Choice\" to database (choiceId = "+informUserChoiceReply.getChoiceId()+" )");
+        db.nevaDao().addHistoryEntry(new HistoryEntry(
+            informUserChoiceReply.getChoiceId(),
+            NevaLoginManager.getInstance().getUsername(),
+            mealID,
+            date.getTimeInMillis()));
+
+        Log.d(TAG, "Getting History from database again, and changing view cursors");
+        newCursor = db.nevaDao().getUserHistoryMeals(NevaLoginManager.getInstance().getUsername());
+        return true;
+      } catch (Exception e) {
+        return false;
+      }
+    }
+
+    @Override
+    protected void onPostExecute(Boolean addMealSuccess) {
+      if(addMealSuccess) {
+        cursorAdapter.swapCursor(newCursor);
+        Toast.makeText(getContext(), getResources().getString(R.string.success_add_history_entry), Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();
+      } else {
+        Toast.makeText(getContext(), "Problem while adding meal", Toast.LENGTH_LONG).show();
+      }
+      addHistoryButton.setEnabled(true);
     }
   }
 
@@ -226,8 +253,8 @@ public class AddHistoryItemFragment extends Fragment {
         ,true);
     tpDialog.show();
   }
+  public boolean checkLocationPermissions() {
 
-  public Location getLocation() {
     // Check if the gps is enabled
     if (!(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))) {
       Log.e(TAG, "Provider not enabled");
@@ -238,14 +265,37 @@ public class AddHistoryItemFragment extends Fragment {
           && ActivityCompat.checkSelfPermission(getActivity()
           , Manifest.permission.ACCESS_COARSE_LOCATION)
           != PackageManager.PERMISSION_GRANTED) {
-        Log.i(TAG, "Location permission Denied");
+        Log.d(TAG, "Location permission Denied");
         Log.d(TAG, "Requesting location permission");
         ActivityCompat.requestPermissions(getActivity(),
             new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION},
             1);
+        if (ActivityCompat.checkSelfPermission(getActivity()
+            , Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(getActivity()
+            , Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+          //We have location access
+          return true;
+        } else {
+          //User denied location access permission
+          return false;
+        }
       }
+      else {
+        // GPS is enabled and we have location acceess
+        return true;
+      }
+    }
+    // GPS is disabled
+    return false;
+  }
+
+  public Location getLocation() {
       Location location = null;
+      // Check permissions again in case something goes wrong
       if (ActivityCompat.checkSelfPermission(getActivity()
           , Manifest.permission.ACCESS_FINE_LOCATION)
           == PackageManager.PERMISSION_GRANTED
@@ -254,11 +304,11 @@ public class AddHistoryItemFragment extends Fragment {
           == PackageManager.PERMISSION_GRANTED) {
         Log.d(TAG, "Getting location");
         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        return location;
       }
-      return location;
-    } else {
-      return null;
-    }
+      else {
+        return null;
+      }
   }
 
   String[] getSuggestionNames() {
