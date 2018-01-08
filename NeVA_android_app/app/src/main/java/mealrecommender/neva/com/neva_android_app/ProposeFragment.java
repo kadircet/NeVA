@@ -1,6 +1,7 @@
 package mealrecommender.neva.com.neva_android_app;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -92,98 +94,159 @@ public class ProposeFragment extends Fragment {
     return view;
   }
 
+  class MealProposalTask extends AsyncTask<Void, Void, Boolean> {
+
+    @Override
+    protected void onPreExecute() {
+      fragment_proposal_button.setEnabled(false);
+    }
+
+    @Override
+    protected Boolean doInBackground(Void... voids) {
+      return mealProposal();
+    }
+
+    @Override
+    protected void onPostExecute(Boolean proposeSuccess) {
+      if(proposeSuccess) {
+        fragment_proposal_field.getText().clear();
+        Toast.makeText(getContext(), getResources().getString(R.string.success_meal_propose), Toast.LENGTH_SHORT).show();
+      } else {
+        Toast.makeText(getContext(), "Error while proposing", Toast.LENGTH_LONG).show();
+      }
+      fragment_proposal_button.setEnabled(true);
+    }
+
+    public boolean mealProposal() {
+
+      String suggestionText = fragment_proposal_field.getText().toString();
+
+      SuggestionOuterClass.Suggestion suggestion;
+      suggestion = SuggestionOuterClass.Suggestion.newBuilder()
+          .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+          .setName(suggestionText)
+          .build();
+
+      BackendOuterClass.SuggestionItemPropositionRequest suggestionRequest;
+      suggestionRequest = BackendOuterClass.SuggestionItemPropositionRequest.newBuilder()
+          .setToken(loginToken)
+          .setSuggestion(suggestion)
+          .build();
+      try {
+        BackendOuterClass.GenericReply genRep = blockingStub
+            .suggestionItemProposition(suggestionRequest);
+        return true;
+      } catch (Exception e) {
+        Log.d("SUGG_Click", "Exception: "+ e.getMessage());
+        return false;
+      }
+    }
+  }
+
+  class TagProposalTask extends AsyncTask<Void, Void, Boolean> {
+    @Override
+    protected void onPreExecute() {
+      fragment_tag_proposal_button.setEnabled(false);
+    }
+
+    @Override
+    protected Boolean doInBackground(Void... voids) {
+      return tagPropose();
+    }
+
+    public boolean tagPropose() {
+      String tagString = fragment_tag_proposal_field.getText().toString();
+
+      BackendOuterClass.TagPropositionRequest tagProp;
+      tagProp = BackendOuterClass.TagPropositionRequest.newBuilder()
+          .setTag(tagString).setToken(loginToken).build();
+
+      try {
+        BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagProp);
+        return true;
+      } catch (Exception e) {
+        Log.d(TAG, "Tag Propose Exception: "+ e.getMessage());
+        return false;
+      }
+    }
+
+    @Override
+    protected void onPostExecute(Boolean proposeSuccess) {
+      if (proposeSuccess) {
+        Toast.makeText(getContext(), getResources().getString(R.string.success_tag_propose), Toast.LENGTH_SHORT).show();
+        fragment_tag_proposal_field.getText().clear();
+      } else {
+        Toast.makeText(getContext(), "Error while proposing tag", Toast.LENGTH_LONG).show();
+      }
+      fragment_tag_proposal_button.setEnabled(true);
+    }
+  }
+
+  class MealTagProposalTask extends AsyncTask<Void, Void, Boolean> {
+    @Override
+    protected void onPreExecute() {
+
+    }
+
+    @Override
+    protected Boolean doInBackground(Void... voids) {
+      return tagMealPropose();
+    }
+
+    @Override
+    protected void onPostExecute(Boolean proposeSuccess) {
+      if(proposeSuccess) {
+        Toast.makeText(getContext(), getResources().getString(R.string.success_tag_propose), Toast.LENGTH_SHORT).show();
+        tag_of_meal_field.getText().clear();
+        meal_for_tag_field.getText().clear();
+      } else {
+        Toast.makeText(getContext(), "Error while proposing tag for meal", Toast.LENGTH_LONG).show();
+      }
+      propose_tag_for_meal.setEnabled(true);
+    }
+
+    public boolean tagMealPropose() {
+
+      int sugId = db.nevaDao().getMealId(meal_for_tag_field.getText().toString());  // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
+      int tagId = db.nevaDao().getTagId(tag_of_meal_field.getText().toString());
+
+      TagValuePropositionRequest request = TagValuePropositionRequest.newBuilder().setToken(loginToken)
+          .setSuggesteeId(sugId).setTagId(tagId).build();
+      try {
+        GenericReply reply = blockingStub.tagValueProposition(request);
+        return true;
+      } catch (Exception e) {
+        Log.d(TAG, "MealTag Exception: " + e.getMessage());
+        return false;
+      }
+    }
+  }
+
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    fragment_proposal_button.setOnClickListener(new View.OnClickListener() {
+    fragment_proposal_button.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-
-        String suggestionText = fragment_proposal_field.getText().toString();
-        fragment_proposal_button.setEnabled(false);
-
-        SuggestionOuterClass.Suggestion suggestion;
-        suggestion = SuggestionOuterClass.Suggestion.newBuilder()
-            .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-            .setName(suggestionText)
-            .build();
-
-        BackendOuterClass.SuggestionItemPropositionRequest suggestionRequest;
-        suggestionRequest = BackendOuterClass.SuggestionItemPropositionRequest.newBuilder()
-            .setToken(loginToken)
-            .setSuggestion(suggestion)
-            .build();
-        try {
-          BackendOuterClass.GenericReply genRep = blockingStub
-              .suggestionItemProposition(suggestionRequest);
-          Toast.makeText(getContext(), getResources().getString(R.string.success_meal_propose), Toast.LENGTH_SHORT).show();
-          fragment_proposal_field.getText().clear();
-          fragment_proposal_button.setEnabled(true);
-        } catch (Exception e) {
-          Log.d("SUGG_Click", "Exception");
-          Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-          fragment_proposal_button.setEnabled(true);
-        }
-
+        MealProposalTask mealProposalTask = new MealProposalTask();
+        mealProposalTask.execute();
       }
     });
 
-    fragment_tag_proposal_button.setOnClickListener(new View.OnClickListener() {
+    fragment_tag_proposal_button.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-
-        String tagString = fragment_tag_proposal_field.getText().toString();
-        fragment_tag_proposal_button.setEnabled(false);
-
-        BackendOuterClass.TagPropositionRequest tagProp;
-        tagProp = BackendOuterClass.TagPropositionRequest.newBuilder()
-            .setTag(tagString).setToken(loginToken).build();
-
-        try {
-          BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagProp);
-          Toast.makeText(getContext(), getResources().getString(R.string.success_tag_propose), Toast.LENGTH_SHORT).show();
-          fragment_tag_proposal_field.getText().clear();
-          fragment_tag_proposal_button.setEnabled(true);
-        } catch (Exception e) {
-          Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-          fragment_tag_proposal_button.setEnabled(true);
-        }
-
+        TagProposalTask tagProposalTask = new TagProposalTask();
+        tagProposalTask.execute();
       }
     });
 
-    propose_tag_for_meal.setOnClickListener(new View.OnClickListener() {
+    propose_tag_for_meal.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-
-        int sugId = db.nevaDao().getMealId(meal_for_tag_field.getText().toString());  // TODO:GET MEAL ID DIRECTLY FROM TEXT BOX?
-        int tagId = db.nevaDao().getTagId(tag_of_meal_field.getText().toString());
-
-        /*TagPropositionRequest tagPropositionReq;
-        tagPropositionReq = BackendOuterClass.TagPropositionRequest.newBuilder()
-            .setToken(loginToken)
-            .setTag(tagName)
-            .build();*/
-
-        TagValuePropositionRequest request = TagValuePropositionRequest.newBuilder().setToken(loginToken)
-            .setSuggesteeId(sugId).setTagId(tagId).build();
-
-        //TODO: CHANGE TAG PROPOSAL PART WHEN BACKEND SUPPORTS IT.
-
-        try {
-
-          //BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(tagPropositionReq);
-          GenericReply reply = blockingStub.tagValueProposition(request);
-          Toast.makeText(getContext(), getResources().getString(R.string.success_tag_propose), Toast.LENGTH_SHORT).show();
-          tag_of_meal_field.getText().clear();
-          meal_for_tag_field.getText().clear();
-          propose_tag_for_meal.setEnabled(true);
-        } catch (Exception e) {
-
-          Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-          propose_tag_for_meal.setEnabled(true);
-        }
+        MealTagProposalTask mealTagProposalTask = new MealTagProposalTask();
+        mealTagProposalTask.execute();
       }
     });
 
