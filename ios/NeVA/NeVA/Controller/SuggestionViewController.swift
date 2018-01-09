@@ -109,7 +109,7 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet weak var foodSuggestionField: UITextField!
     
     @IBOutlet weak var tagPickerField: UITextField!
-    @IBOutlet weak var foodPickerField: LoginRegisterInputField!
+    @IBOutlet weak var foodPickerField: UITextField!
     
     let tagPickerView = UIPickerView()
     let foodPickerView = UIPickerView()

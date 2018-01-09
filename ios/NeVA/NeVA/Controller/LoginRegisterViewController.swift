@@ -243,19 +243,19 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
     
     //Login Screen Elements
     @IBOutlet weak var loginView: UIView!
-    @IBOutlet weak var loginEmailField: LoginRegisterInputField!
-    @IBOutlet weak var loginPasswordField: LoginRegisterInputField!
+    @IBOutlet weak var loginEmailField: UITextField!
+    @IBOutlet weak var loginPasswordField: UITextField!
     
     //
     
     //Register Screen Elements
     @IBOutlet weak var registerView: UIView!
-    @IBOutlet weak var registerEmailField: LoginRegisterInputField!
-    @IBOutlet weak var registerNameField: LoginRegisterInputField!
+    @IBOutlet weak var registerEmailField: UITextField!
+    @IBOutlet weak var registerNameField: UITextField!
     @IBOutlet weak var birthdayPicker: UIDatePicker!
     @IBOutlet weak var genderPicker: UISegmentedControl!
-    @IBOutlet weak var registerPasswordField: LoginRegisterInputField!
-    @IBOutlet weak var registerConfirmPasswordField: LoginRegisterInputField!
+    @IBOutlet weak var registerPasswordField: UITextField!
+    @IBOutlet weak var registerConfirmPasswordField: UITextField!
     //
     
     

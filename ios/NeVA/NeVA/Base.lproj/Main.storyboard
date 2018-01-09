@@ -72,7 +72,7 @@ Meal Recommender</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86G-Dy-7Y2" userLabel="Container View">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aY7-VG-7UN" userLabel="Register Email" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aY7-VG-7UN" userLabel="Register Email" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="0.0" width="345" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="bL6-ab-RwL"/>
@@ -87,7 +87,7 @@ Meal Recommender</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PSe-zv-2IS" userLabel="Register Name" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PSe-zv-2IS" userLabel="Register Name" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="60" width="345" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="FZf-zF-iP3"/>
@@ -152,7 +152,7 @@ Meal Recommender</string>
                                                             <constraint firstItem="wZC-F8-gOk" firstAttribute="leading" secondItem="EqJ-0k-hMS" secondAttribute="leading" id="xdw-kN-YAA"/>
                                                         </constraints>
                                                     </view>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V6N-oj-Gad" userLabel="Register Password" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V6N-oj-Gad" userLabel="Register Password" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="240" width="345" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="7HB-Do-LSj"/>
@@ -167,7 +167,7 @@ Meal Recommender</string>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxx-dq-Ttp" userLabel="Register Confirm Password" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxx-dq-Ttp" userLabel="Register Confirm Password" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="300" width="345" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="yMW-ds-NLZ"/>
@@ -289,7 +289,7 @@ Meal Recommender</string>
                                             <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QuM-0w-KQO"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-Jf-qin" userLabel="Login Email" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-Jf-qin" userLabel="Login Email" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                         <rect key="frame" x="60" y="40" width="255" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="HO6-4k-eYs"/>
@@ -304,7 +304,7 @@ Meal Recommender</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KrZ-iS-wvb" userLabel="Login Password" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KrZ-iS-wvb" userLabel="Login Password" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                         <rect key="frame" x="60" y="80" width="255" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="BcC-Ra-p5g"/>
@@ -415,14 +415,164 @@ Meal Recommender</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="r5x-YD-Ebc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="r5x-YD-Ebc" userLabel="backgroundtexture">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbs-qe-oBC" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="100" y="318.5" width="175" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiQ-Qh-Xb7" userLabel="Profile">
+                                <rect key="frame" x="0.0" y="38" width="375" height="518"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ze7-Pv-DnK">
+                                        <rect key="frame" x="10" y="20" width="355" height="45"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4du-iw-saX">
+                                                <rect key="frame" x="0.0" y="0.0" width="75.5" height="45"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="shadowOffset" width="2" height="2"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-Wv-h1z" userLabel="Name Field" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
+                                                <rect key="frame" x="85.5" y="0.0" width="269.5" height="45"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="name"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="mrq-t6-hX6"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Th1-ic-CKY">
+                                        <rect key="frame" x="10" y="75" width="355" height="45"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-2F-dW8">
+                                                <rect key="frame" x="0.0" y="0.0" width="92" height="45"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="shadowOffset" width="2" height="2"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QcK-lm-uQA">
+                                                <rect key="frame" x="102" y="0.0" width="253" height="46"/>
+                                                <color key="backgroundColor" red="0.65863317251205444" green="0.66273003816604614" blue="0.66679173707962036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <segments>
+                                                    <segment title="Male"/>
+                                                    <segment title="Female"/>
+                                                </segments>
+                                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </segmentedControl>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="gMd-U8-K8H"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VTL-WA-ZTy">
+                                        <rect key="frame" x="10" y="130" width="355" height="45"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="tPe-gh-AfO">
+                                                <rect key="frame" x="0.0" y="0.0" width="86" height="45"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="shadowOffset" width="2" height="2"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="tvD-yZ-Inq" userLabel="Weight Field" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
+                                                <rect key="frame" x="96" y="0.0" width="259" height="45"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="iTj-b5-bJz"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="d4n-iL-5oi">
+                                        <rect key="frame" x="10" y="185" width="355" height="90"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthdate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cll-8z-wGt">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="shadowOffset" width="2" height="2"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-zD-oNU" userLabel="Date Picker Background" customClass="RoundedView" customModule="NeVA" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="45" width="355" height="45"/>
+                                                <subviews>
+                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3W2-Eh-DaL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <date key="date" timeIntervalSinceReferenceDate="532889319.27842897">
+                                                            <!--2017-11-20 16:48:39 +0000-->
+                                                        </date>
+                                                        <date key="maximumDate" timeIntervalSinceReferenceDate="504874800">
+                                                            <!--2016-12-31 11:00:00 +0000-->
+                                                        </date>
+                                                    </datePicker>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="3W2-Eh-DaL" firstAttribute="top" secondItem="FDh-zD-oNU" secondAttribute="top" id="4p2-Sk-33M"/>
+                                                    <constraint firstAttribute="bottom" secondItem="3W2-Eh-DaL" secondAttribute="bottom" id="CKO-Tk-xsD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="3W2-Eh-DaL" secondAttribute="trailing" id="hIC-2Y-mtl"/>
+                                                    <constraint firstItem="3W2-Eh-DaL" firstAttribute="leading" secondItem="FDh-zD-oNU" secondAttribute="leading" id="idl-x2-CUp"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="R4h-2F-Q1t"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXU-ge-PTT" userLabel="UPDATE" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
+                                        <rect key="frame" x="100" y="285" width="175" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="1ap-gS-bOd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="UPDATE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                <color key="value" red="0.53327292199999998" green="0.53336817030000006" blue="0.53326696159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                <color key="value" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="updateButtonPressed:" destination="x5X-eu-dXy" eventType="touchUpInside" id="5fO-Kl-tTc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="awe-cS-Chw"/>
+                                    <constraint firstItem="EXU-ge-PTT" firstAttribute="leading" secondItem="eiQ-Qh-Xb7" secondAttribute="leading" constant="100" id="CK0-nS-Kom"/>
+                                    <constraint firstItem="EXU-ge-PTT" firstAttribute="top" secondItem="d4n-iL-5oi" secondAttribute="bottom" constant="10" id="GFI-td-tc6"/>
+                                    <constraint firstItem="VTL-WA-ZTy" firstAttribute="top" secondItem="Th1-ic-CKY" secondAttribute="bottom" constant="10" id="Ggt-yh-0vL"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ze7-Pv-DnK" secondAttribute="trailing" constant="10" id="Hmk-jX-fzP"/>
+                                    <constraint firstItem="VTL-WA-ZTy" firstAttribute="leading" secondItem="eiQ-Qh-Xb7" secondAttribute="leading" constant="10" id="NLA-Cv-sFT"/>
+                                    <constraint firstAttribute="trailing" secondItem="Th1-ic-CKY" secondAttribute="trailing" constant="10" id="Nlh-Yt-zSo"/>
+                                    <constraint firstAttribute="trailing" secondItem="d4n-iL-5oi" secondAttribute="trailing" constant="10" id="UXl-NJ-WXh"/>
+                                    <constraint firstItem="d4n-iL-5oi" firstAttribute="leading" secondItem="eiQ-Qh-Xb7" secondAttribute="leading" constant="10" id="Zxf-VH-5J7"/>
+                                    <constraint firstItem="Ze7-Pv-DnK" firstAttribute="top" secondItem="eiQ-Qh-Xb7" secondAttribute="top" constant="20" id="eRZ-o9-Ume"/>
+                                    <constraint firstAttribute="trailing" secondItem="VTL-WA-ZTy" secondAttribute="trailing" constant="10" id="eyd-wa-cjq"/>
+                                    <constraint firstItem="Ze7-Pv-DnK" firstAttribute="leading" secondItem="eiQ-Qh-Xb7" secondAttribute="leading" constant="10" id="mdF-eO-Okh"/>
+                                    <constraint firstAttribute="trailing" secondItem="EXU-ge-PTT" secondAttribute="trailing" constant="100" id="vEa-ic-MMT"/>
+                                    <constraint firstItem="Th1-ic-CKY" firstAttribute="leading" secondItem="eiQ-Qh-Xb7" secondAttribute="leading" constant="10" id="wEf-tz-2vm"/>
+                                    <constraint firstItem="d4n-iL-5oi" firstAttribute="top" secondItem="VTL-WA-ZTy" secondAttribute="bottom" constant="10" id="xp0-cX-RoP"/>
+                                    <constraint firstItem="Th1-ic-CKY" firstAttribute="top" secondItem="Ze7-Pv-DnK" secondAttribute="bottom" constant="10" id="zjo-6R-RLp"/>
                                 </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbs-qe-oBC" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
+                                <rect key="frame" x="100" y="572" width="175" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="LOGOUT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -437,32 +587,39 @@ Meal Recommender</string>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="getRecommendation:" destination="BWU-M1-OCj" eventType="touchUpInside" id="kcg-XZ-hGb"/>
                                     <action selector="logoutButtonPressed:" destination="x5X-eu-dXy" eventType="touchUpInside" id="m9y-eR-wP0"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="top" secondItem="cou-pC-S7N" secondAttribute="top" id="0ut-Jd-wsp"/>
-                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="trailing" secondItem="xd1-md-MXd" secondAttribute="trailing" id="3BP-UG-ydh"/>
-                            <constraint firstItem="Rbs-qe-oBC" firstAttribute="centerY" secondItem="cou-pC-S7N" secondAttribute="centerY" id="3JV-hu-8mp"/>
-                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" id="7Zt-Bo-NtP"/>
-                            <constraint firstItem="Rbs-qe-oBC" firstAttribute="centerX" secondItem="cou-pC-S7N" secondAttribute="centerX" id="Awz-vK-I6t"/>
-                            <constraint firstAttribute="bottom" secondItem="r5x-YD-Ebc" secondAttribute="bottom" id="bNj-xB-495"/>
-                            <constraint firstItem="Rbs-qe-oBC" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" constant="100" id="mkH-qM-jMs"/>
-                            <constraint firstItem="xd1-md-MXd" firstAttribute="trailing" secondItem="Rbs-qe-oBC" secondAttribute="trailing" constant="100" id="p5W-Zv-Qc2"/>
+                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="top" secondItem="cou-pC-S7N" secondAttribute="top" id="2c4-4d-XGD"/>
+                            <constraint firstAttribute="bottom" secondItem="r5x-YD-Ebc" secondAttribute="bottom" id="9bd-A1-HfI"/>
+                            <constraint firstItem="eiQ-Qh-Xb7" firstAttribute="trailing" secondItem="xd1-md-MXd" secondAttribute="trailing" id="FGL-dK-NNd"/>
+                            <constraint firstItem="eiQ-Qh-Xb7" firstAttribute="top" secondItem="xd1-md-MXd" secondAttribute="top" constant="18" id="L69-8N-giA"/>
+                            <constraint firstItem="xd1-md-MXd" firstAttribute="bottom" secondItem="Rbs-qe-oBC" secondAttribute="bottom" constant="16" id="LG9-UO-1Br"/>
+                            <constraint firstItem="Rbs-qe-oBC" firstAttribute="top" secondItem="eiQ-Qh-Xb7" secondAttribute="bottom" constant="16" id="Trf-TI-6XY"/>
+                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="trailing" secondItem="xd1-md-MXd" secondAttribute="trailing" id="eGe-b7-Yub"/>
+                            <constraint firstItem="xd1-md-MXd" firstAttribute="bottom" secondItem="eiQ-Qh-Xb7" secondAttribute="bottom" constant="62" id="inx-sb-Q3u"/>
+                            <constraint firstItem="xd1-md-MXd" firstAttribute="trailing" secondItem="Rbs-qe-oBC" secondAttribute="trailing" constant="100" id="kbc-Oa-mPZ"/>
+                            <constraint firstItem="eiQ-Qh-Xb7" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" id="nfu-b6-gO7"/>
+                            <constraint firstItem="Rbs-qe-oBC" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" constant="100" id="uRs-Th-yMs"/>
+                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" id="xKE-Ka-3Ak"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xd1-md-MXd"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="settings" landscapeImage="settings" largeContentSizeImage="settings" id="b9k-SH-x1T"/>
                     <connections>
+                        <outlet property="birthdatePicker" destination="3W2-Eh-DaL" id="gwf-j3-Azx"/>
+                        <outlet property="genderPicker" destination="QcK-lm-uQA" id="AWr-LM-okO"/>
                         <outlet property="logoutButton" destination="Rbs-qe-oBC" id="7tw-6k-P1j"/>
+                        <outlet property="nameField" destination="bb6-Wv-h1z" id="G4J-Ji-czC"/>
+                        <outlet property="weightField" destination="tvD-yZ-Inq" id="0zn-bd-H2B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hq-rR-qqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="862" y="1010"/>
+            <point key="canvasLocation" x="861.60000000000002" y="1009.7451274362819"/>
         </scene>
         <!--Recommendation-->
         <scene sceneID="qC6-4D-FYo">
@@ -601,7 +758,7 @@ Meal Recommender</string>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
-                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-4b-aYh" userLabel="Tag Name" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-4b-aYh" userLabel="Tag Name" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="69.5" width="225" height="35"/>
                                 <color key="backgroundColor" red="0.49289417266845703" green="0.53314536809921265" blue="0.55408120155334473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -650,7 +807,7 @@ Meal Recommender</string>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
-                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N5N-aB-X7z" userLabel="Food Name" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N5N-aB-X7z" userLabel="Food Name" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="160" width="225" height="35"/>
                                 <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -665,7 +822,7 @@ Meal Recommender</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tag" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="leR-4d-bfa" userLabel="Tag" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tag" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="leR-4d-bfa" userLabel="Tag" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="250" width="355" height="35"/>
                                 <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -680,7 +837,7 @@ Meal Recommender</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Food" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUc-Ds-26F" userLabel="Food" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                            <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Food" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUc-Ds-26F" userLabel="Food" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="295" width="355" height="35"/>
                                 <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>

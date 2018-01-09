@@ -8,7 +8,7 @@
 
 import UIKit
 @IBDesignable
-class LoginRegisterInputField: UITextField {
+class CustomInputField: UITextField {
 
     @IBInspectable var placeholderText: String? = "" {
         didSet {

@@ -39,7 +39,7 @@
 		AC8F919C1FA9366800D6AB8F /* NeVAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8F919B1FA9366800D6AB8F /* NeVAUITests.swift */; };
 		AC9B9C061FB0EB0100507F20 /* LoginRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C051FB0EB0100507F20 /* LoginRegisterViewController.swift */; };
 		AC9B9C081FB0F34900507F20 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C071FB0F34900507F20 /* LoginButton.swift */; };
-		AC9B9C0A1FB104E100507F20 /* LoginRegisterInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C091FB104E100507F20 /* LoginRegisterInputField.swift */; };
+		AC9B9C0A1FB104E100507F20 /* CustomInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9B9C091FB104E100507F20 /* CustomInputField.swift */; };
 		ACA16AA11FC34D4700BFA8DC /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA16AA01FC34D4700BFA8DC /* RoundedView.swift */; };
 		ACA76A8A1FCE162000F090BA /* GenericButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA76A891FCE162000F090BA /* GenericButton.swift */; };
 		ACA76A911FCE196500F090BA /* RoundedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA76A901FCE196500F090BA /* RoundedImage.swift */; };
@@ -124,7 +124,7 @@
 		AC8F919D1FA9366800D6AB8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC9B9C051FB0EB0100507F20 /* LoginRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterViewController.swift; sourceTree = "<group>"; };
 		AC9B9C071FB0F34900507F20 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
-		AC9B9C091FB104E100507F20 /* LoginRegisterInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegisterInputField.swift; sourceTree = "<group>"; };
+		AC9B9C091FB104E100507F20 /* CustomInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputField.swift; sourceTree = "<group>"; };
 		ACA16AA01FC34D4700BFA8DC /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		ACA76A891FCE162000F090BA /* GenericButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericButton.swift; sourceTree = "<group>"; };
 		ACA76A901FCE196500F090BA /* RoundedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImage.swift; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 			children = (
 				AC6D2DF31FD5993300B14A72 /* External */,
 				AC9B9C071FB0F34900507F20 /* LoginButton.swift */,
-				AC9B9C091FB104E100507F20 /* LoginRegisterInputField.swift */,
+				AC9B9C091FB104E100507F20 /* CustomInputField.swift */,
 				ACA16AA01FC34D4700BFA8DC /* RoundedView.swift */,
 				ACA76A891FCE162000F090BA /* GenericButton.swift */,
 				ACA76A901FCE196500F090BA /* RoundedImage.swift */,
@@ -517,7 +517,7 @@
 				ACA76A911FCE196500F090BA /* RoundedImage.swift in Sources */,
 				AC8AC8421FCDC5C300D68FB6 /* SettingsViewController.swift in Sources */,
 				ACB6D4071FCE035B00D8C06D /* SuggestionViewController.swift in Sources */,
-				AC9B9C0A1FB104E100507F20 /* LoginRegisterInputField.swift in Sources */,
+				AC9B9C0A1FB104E100507F20 /* CustomInputField.swift in Sources */,
 				AC6D2DED1FD58F2D00B14A72 /* AddHistoryEntryViewController.swift in Sources */,
 				ACE5284F1FFC04890069287E /* RecommendationView.swift in Sources */,
 				ACA16AA11FC34D4700BFA8DC /* RoundedView.swift in Sources */,
