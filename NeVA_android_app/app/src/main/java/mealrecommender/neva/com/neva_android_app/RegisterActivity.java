@@ -109,6 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     if (!validate()) {
       Toast.makeText(getBaseContext(), getResources().getString(R.string.error_fix_credentials), Toast.LENGTH_LONG).show();
+      signup_button.setEnabled(true);
       return;
     }
     //TODO: Move this code to NevaLoginManager
@@ -182,11 +183,11 @@ public class RegisterActivity extends AppCompatActivity {
 
   public boolean validateBirthday() {
     long currentTime = Calendar.getInstance().getTimeInMillis() - 6000000;
-    if (birthday_time > currentTime) {
-      Toast.makeText(this, getResources().getString(R.string.error_invalid_birthday), Toast.LENGTH_LONG).show();
-      return false;
+    if (birthday_time != null && birthday_time < (currentTime/1000) ) {
+      return true;
     }
-    return true;
+    Toast.makeText(this, getResources().getString(R.string.error_invalid_birthday), Toast.LENGTH_LONG).show();
+    return false;
   }
 
   public boolean validate() {
