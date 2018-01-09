@@ -5,6 +5,7 @@
 #include <mysql++.h>
 #include <cstdint>
 #include <memory>
+#include "orm/connectionpool.h"
 #include "protos/user_history.pb.h"
 
 namespace neva {
@@ -14,7 +15,8 @@ namespace orm {
 class UserHistoryOrm {
  public:
   // Initiates UserHistoryOrm class wih given mysql connection.
-  UserHistoryOrm(std::shared_ptr<mysqlpp::Connection> conn) : conn_(conn) {}
+  UserHistoryOrm(std::shared_ptr<NevaConnectionPool> conn_pool)
+      : conn_pool_(conn_pool) {}
 
   // Inserts one choice associated with user_id into database.
   grpc::Status InsertChoice(const uint32_t user_id, const Choice& choice,
@@ -29,7 +31,7 @@ class UserHistoryOrm {
                               const UserFeedback& user_feedback);
 
  private:
-  std::shared_ptr<mysqlpp::Connection> conn_;
+  std::shared_ptr<NevaConnectionPool> conn_pool_;
 };
 
 }  // namespace orm

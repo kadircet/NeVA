@@ -14,11 +14,8 @@ using grpc::StatusCode;
 
 Status UserHistoryOrm::InsertChoice(const uint32_t user_id,
                                     const Choice& choice, int* choice_id) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
-  mysqlpp::Query query = conn_->query(
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query(
       "INSERT INTO `user_choice_history` (`user_id`, `suggestee_id`, "
       "`timestamp`, `latitude`, `longitude`) VALUES (%0, %1, %2, %3, %4)");
   query.parse();
@@ -39,11 +36,8 @@ Status UserHistoryOrm::InsertChoice(const uint32_t user_id,
 Status UserHistoryOrm::FetchUserHistory(const uint32_t user_id,
                                         const uint32_t start_idx,
                                         UserHistory* user_history) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
-  mysqlpp::Query query = conn_->query(
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query(
       "SELECT `id`, `suggestee_id`, `timestamp`, `latitude`, `longitude` FROM "
       "`user_choice_history` WHERE `user_id`=%0 AND `id`>%1");
   query.parse();
@@ -66,10 +60,8 @@ Status UserHistoryOrm::FetchUserHistory(const uint32_t user_id,
 
 Status UserHistoryOrm::RecordFeedback(const uint32_t user_id,
                                       const UserFeedback& user_feedback) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-  mysqlpp::Query query = conn_->query(
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query(
       "INSERT INTO `user_recommendation_feedback` (`user_id`, `suggestee_id`, "
       "`last_choice_id`, `timestamp`, `latitude`, `longitude`, `feedback`) "
       "VALUES (%0, %1, %2, %3, %4, %5, %6)");
