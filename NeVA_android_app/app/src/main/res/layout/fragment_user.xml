@@ -132,7 +132,7 @@
           android:paddingRight="12dp"
           android:hint="BiMilyonKilo"
           android:textAlignment="textEnd"
-          android:textSize="14Wsp"/>
+          android:textSize="14sp"/>
       </TableRow>
     </TableLayout>
   </RelativeLayout>
