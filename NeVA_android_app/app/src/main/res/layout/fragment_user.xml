@@ -43,7 +43,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="30dp"
-      android:layout_marginLeft="35dp" android:layout_marginRight="35dp">
+      android:layout_marginLeft="45dp" android:layout_marginRight="45dp">
       <TableRow android:layout_marginBottom="15dp">
         <TextView
           android:layout_width="wrap_content"
@@ -57,9 +57,9 @@
       <TableRow
         android:background="@drawable/profile_pic_border">
         <TextView
-          android:paddingTop="4dp"
-          android:paddingBottom="4dp"
-          android:paddingLeft="8dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="6dp"
+          android:paddingLeft="12dp"
           android:layout_width="wrap_content"
           android:fontFamily="@font/latoregular"
           android:text="Email:"
@@ -67,19 +67,19 @@
         <TextView
           android:id="@+id/profile_email"
           android:layout_weight="1"
-          android:paddingTop="4dp"
-          android:paddingBottom="4dp"
-          android:paddingRight="8dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="6dp"
+          android:paddingRight="12dp"
           android:hint="someemailuser95@test.com"
           android:textAlignment="textEnd"
-          android:textSize="12sp"/>
+          android:textSize="14sp"/>
       </TableRow>
       <TableRow
         android:background="@drawable/profile_pic_border">
         <TextView
-          android:paddingTop="4dp"
-          android:paddingBottom="4dp"
-          android:paddingLeft="8dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="6dp"
+          android:paddingLeft="12dp"
           android:layout_width="wrap_content"
           android:fontFamily="@font/latoregular"
           android:text="Birthday:"
@@ -87,19 +87,19 @@
         <TextView
           android:id="@+id/profile_bday"
           android:layout_weight="1"
-          android:paddingTop="4dp"
-          android:paddingBottom="4dp"
-          android:paddingRight="8dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="6dp"
+          android:paddingRight="12dp"
           android:hint="25 November 1888"
           android:textAlignment="textEnd"
-          android:textSize="12sp"/>
+          android:textSize="14sp"/>
       </TableRow>
       <TableRow
         android:background="@drawable/profile_pic_border">
         <TextView
-          android:paddingTop="4dp"
-          android:paddingBottom="4dp"
-          android:paddingLeft="8dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="6dp"
+          android:paddingLeft="12dp"
           android:layout_width="wrap_content"
           android:fontFamily="@font/latoregular"
           android:text="Gender:"
@@ -107,19 +107,19 @@
         <TextView
           android:id="@+id/profile_gender"
           android:layout_weight="1"
-          android:paddingTop="4dp"
-          android:paddingBottom="4dp"
-          android:paddingRight="8dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="6dp"
+          android:paddingRight="12dp"
           android:hint="Male"
           android:textAlignment="textEnd"
-          android:textSize="12sp"/>
+          android:textSize="14sp"/>
       </TableRow>
       <TableRow
         android:background="@drawable/profile_pic_border">
         <TextView
-          android:paddingTop="4dp"
-          android:paddingBottom="4dp"
-          android:paddingLeft="8dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="6dp"
+          android:paddingLeft="12dp"
           android:layout_width="wrap_content"
           android:fontFamily="@font/latoregular"
           android:text="Weight:"
@@ -127,12 +127,12 @@
         <TextView
           android:id="@+id/profile_weight"
           android:layout_weight="1"
-          android:paddingTop="4dp"
-          android:paddingBottom="4dp"
-          android:paddingRight="8dp"
+          android:paddingTop="6dp"
+          android:paddingBottom="6dp"
+          android:paddingRight="12dp"
           android:hint="BiMilyonKilo"
           android:textAlignment="textEnd"
-          android:textSize="12sp"/>
+          android:textSize="14Wsp"/>
       </TableRow>
     </TableLayout>
   </RelativeLayout>
