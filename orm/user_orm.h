@@ -5,6 +5,7 @@
 #include <mysql++.h>
 #include <cstdint>
 #include <memory>
+#include "orm/connectionpool.h"
 #include "protos/backend.pb.h"
 #include "protos/user.pb.h"
 
@@ -15,7 +16,8 @@ namespace orm {
 class UserOrm {
  public:
   // Initiates UserOrm class wih given mysql connection.
-  UserOrm(std::shared_ptr<mysqlpp::Connection> conn) : conn_(conn) {}
+  UserOrm(std::shared_ptr<NevaConnectionPool> conn_pool)
+      : conn_pool_(conn_pool) {}
 
   // Fills in the given user object's id, email and status fields, where user_id
   // specifies which user to be fetched. Returns Status::OK on success.
@@ -61,7 +63,7 @@ class UserOrm {
   grpc::Status UpdateVerificationToken(const uint32_t user_id,
                                        const std::string& token,
                                        const uint64_t expire);
-  std::shared_ptr<mysqlpp::Connection> conn_;
+  std::shared_ptr<NevaConnectionPool> conn_pool_;
 };
 
 }  // namespace orm

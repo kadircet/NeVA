@@ -20,13 +20,12 @@ constexpr const uint64_t kVerficationTokenExpireTime = 24 * 60 * 60;
 }  // namespace
 
 Status UserOrm::GetUserById(const uint32_t user_id, User* user) {
-  conn_->ping();
-
+  mysqlpp::ScopedConnection conn(*conn_pool_);
   mysqlpp::Query query =
-      conn_->query("SELECT `email`, `status` FROM `user` WHERE `id`=:%0");
+      conn->query("SELECT `email`, `status` FROM `user` WHERE `id`=:%0");
   query.parse();
 
-  mysqlpp::StoreQueryResult res = query.store(user_id);
+  const mysqlpp::StoreQueryResult res = query.store(user_id);
   if (res.empty()) return Status(StatusCode::UNKNOWN, "User not found.");
   if (res.num_rows() != 1) {
     return Status(StatusCode::UNKNOWN, "More than one user matches this id.");
@@ -40,13 +39,12 @@ Status UserOrm::GetUserById(const uint32_t user_id, User* user) {
 }
 
 Status UserOrm::GetUserByEmail(const std::string& email, User* user) {
-  conn_->ping();
-
+  mysqlpp::ScopedConnection conn(*conn_pool_);
   mysqlpp::Query query =
-      conn_->query("SELECT `id`, `status` FROM `user` WHERE `email`=:%0q");
+      conn->query("SELECT `id`, `status` FROM `user` WHERE `email`=:%0q");
   query.parse();
 
-  mysqlpp::StoreQueryResult res = query.store(email);
+  const mysqlpp::StoreQueryResult res = query.store(email);
   if (res.empty()) return Status(StatusCode::UNKNOWN, "User not found.");
   if (res.num_rows() != 1) {
     return Status(StatusCode::UNKNOWN,
@@ -64,9 +62,7 @@ Status UserOrm::CheckCredentials(
     const std::string& email, const std::string& password,
     const LoginRequest::AuthenticationType authentication_type,
     std::string* session_token) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
+  mysqlpp::ScopedConnection conn(*conn_pool_);
 
   const bool is_facebook = authentication_type == LoginRequest::FACEBOOK;
 
@@ -74,7 +70,7 @@ Status UserOrm::CheckCredentials(
     return Status(StatusCode::UNKNOWN, "Wrong credentials.");
   }
 
-  mysqlpp::Query query = conn_->query(
+  mysqlpp::Query query = conn->query(
       "SELECT `id`, `salt`, `status` FROM `user` WHERE `email`=%0q");
   query.parse();
 
@@ -134,8 +130,9 @@ Status UserOrm::AddCredential(
     const uint32_t user_id, const std::string& salt, const User& user,
     const LoginRequest::AuthenticationType authentication_type,
     std::string* verification_token) {
+  mysqlpp::ScopedConnection conn(*conn_pool_);
   const std::string hmac = util::HMac(salt, user.password());
-  mysqlpp::Query query = conn_->query(
+  mysqlpp::Query query = conn->query(
       "INSERT INTO `user_credentials` (`user_id`, `credential`, `type`) "
       "VALUES (%0, %1q, %2)");
   query.parse();
@@ -148,7 +145,8 @@ Status UserOrm::AddCredential(
 Status UserOrm::UpdateVerificationToken(const uint32_t user_id,
                                         const std::string& token,
                                         const uint64_t expire) {
-  mysqlpp::Query query = conn_->query(
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query(
       "INSERT INTO `user_verification` (`id`, `token`, `expire`) VALUES "
       "(%0, %1q, %2)");
   query.parse();
@@ -162,14 +160,12 @@ Status UserOrm::InsertUser(
     const User& user,
     const LoginRequest::AuthenticationType authentication_type,
     std::string* verification_token) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
+  mysqlpp::ScopedConnection conn(*conn_pool_);
 
   const std::string email = user.email();
 
   mysqlpp::Query query =
-      conn_->query("SELECT `id`, `salt` FROM `user` WHERE `email`=%0q");
+      conn->query("SELECT `id`, `salt` FROM `user` WHERE `email`=%0q");
   query.parse();
   const mysqlpp::StoreQueryResult res = query.store(email);
   if (!res.empty()) {
@@ -212,11 +208,8 @@ Status UserOrm::InsertUser(
 }
 
 Status UserOrm::UpdateUserData(const int user_id, const User& user) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
-  mysqlpp::Query query = conn_->query();
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query();
 
   if (user.has_date_of_birth()) {
     query << "UPDATE `user_info` "
@@ -265,11 +258,8 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
 }
 
 Status UserOrm::GetUserData(const int user_id, User* user) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
-  mysqlpp::Query query = conn_->query(
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query(
       "SELECT `date_of_birth`, `name`, `gender`, `weight`, `photo`, "
       "`register_date` FROM `user_info` WHERE `id`=%0");
   query.parse();
@@ -314,11 +304,8 @@ Status UserOrm::GetUserData(const int user_id, User* user) {
 }
 
 Status UserOrm::CheckToken(const std::string& token, int* user_id) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
-  mysqlpp::Query query = conn_->query();
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query();
   query << "SELECT `user_id`, `expire` FROM `user_session` WHERE `token`=%0q";
   query.parse();
 
