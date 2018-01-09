@@ -7,6 +7,7 @@
 
 #include "gflags/gflags.h"
 #include "glog/logging.h"
+#include "orm/connectionpool.h"
 #include "orm/proposition_orm.h"
 #include "orm/suggestion_orm.h"
 #include "orm/tag_orm.h"
@@ -26,6 +27,7 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
+using orm::NevaConnectionPool;
 using orm::PropositionOrm;
 using orm::SuggestionOrm;
 using orm::TagOrm;
@@ -205,28 +207,22 @@ class BackendServiceImpl final : public Backend::Service {
   }
 
   BackendServiceImpl() {
-    conn_ = std::make_shared<mysqlpp::Connection>(false);
-    conn_->set_option(new mysqlpp::ReconnectOption(true));
-    conn_->connect(FLAGS_database_name.c_str(), FLAGS_database_server.c_str(),
-                   FLAGS_database_user.c_str(),
-                   FLAGS_database_password.c_str());
-    CHECK(conn_->connected())
-        << "Database connection failed." << conn_->error();
+    conn_pool_ = std::make_shared<NevaConnectionPool>(
+        FLAGS_database_name, FLAGS_database_server, FLAGS_database_user,
+        FLAGS_database_password);
 
-    mysqlpp::Query query = conn_->query("SET NAMES utf8;");
-    query.execute();
-
-    user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_));
+    user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_pool_));
     proposition_orm_ =
-        std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_));
-    suggestion_orm_ = std::unique_ptr<SuggestionOrm>(new SuggestionOrm(conn_));
+        std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_pool_));
+    suggestion_orm_ =
+        std::unique_ptr<SuggestionOrm>(new SuggestionOrm(conn_pool_));
     user_history_orm_ =
-        std::unique_ptr<UserHistoryOrm>(new UserHistoryOrm(conn_));
-    tag_orm_ = std::unique_ptr<TagOrm>(new TagOrm(conn_));
+        std::unique_ptr<UserHistoryOrm>(new UserHistoryOrm(conn_pool_));
+    tag_orm_ = std::unique_ptr<TagOrm>(new TagOrm(conn_pool_));
   }
 
  private:
-  std::shared_ptr<mysqlpp::Connection> conn_;
+  std::shared_ptr<NevaConnectionPool> conn_pool_;
   std::unique_ptr<UserOrm> user_orm_;
   std::unique_ptr<PropositionOrm> proposition_orm_;
   std::unique_ptr<SuggestionOrm> suggestion_orm_;
