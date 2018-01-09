@@ -1,0 +1,4465 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="tr">
+
+<head>
+<base href="https://www.frmtr.com/" /><!--[if IE]></base><![endif]-->
+
+	<link rel="canonical" href="https://www.frmtr.com/damak-keyfi/5697869-yemek-isimleri-listesi.html" />
+<meta name="google-site-verification" content="WEFIsDLucVgGZn-r11k0INP2z9tlmm-WTmEG4CYV2rY" />
+
+<meta name='yandex-verification' content='74436a2061681749' />
+
+<meta name="theme-color" content="#0099CC">
+
+<meta name="subject" content="forum">
+
+<meta name="language" content="turkish">
+
+<meta name="copyright" content="2016 ForumTR">
+
+<meta name="rating" content="General">
+
+<meta name="distribution" content="Global">
+
+<meta name="robots" content="index,follow">
+
+<link rel="shortcut icon" href="https://www.frmtr.com/favicon.ico">
+
+<link rel="icon" href="https://www.frmtr.com/favicon.gif" type="image/gif">
+
+
+
+<meta name="viewport" content="target-densitydpi=device-dpi"> 
+
+<meta name="viewport" content="initial-scale=1" />
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-9" />
+
+<meta name="generator" content="vBulletin 3.8.9" />
+
+
+
+<meta name="keywords" content=" Yemek İsimleri Listesi, forum, türkiye, forumtr, knight online, garip olaylar, galatasaray, fenerbahçe, beşiktaş,aşk" />
+
+<meta name="description" content=" Yemek İsimleri Listesi Damak Keyfi" />
+
+
+
+<!-- CSS Stylesheet -->
+
+<style type="text/css" id="vbulletin_css">
+
+/**
+
+* vBulletin 3.8.9 CSS
+
+* Style: 'FrmTR Modern Stil'; Style ID: 12
+
+*/
+
+@import url("https://www.frmtr.com/clientscript/vbulletin_css/style-4c7d6c87-00012.css");
+
+</style>
+
+<link rel="stylesheet" type="text/css" href="https://www.frmtr.com/clientscript/vbulletin_important.css?v=389" />
+
+
+
+
+
+<!-- / CSS Stylesheet -->
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/yui/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js?v=389"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/yui/2.9.0/build/connection/connection-min.js?v=389"></script>
+
+<script type="text/javascript">
+
+<!--
+
+var SESSIONURL = "";
+
+var SECURITYTOKEN = "guest";
+
+var IMGDIR_MISC = "https://www.frmtr.com/images/SultanThemeVB3R/misc";
+
+var vb_disable_ajax = parseInt("1", 10);
+
+// -->
+
+</script>
+
+<script type="text/javascript" src="https://www.frmtr.com/clientscript/vbulletin_global.js?v=389"></script>
+
+<script type="text/javascript" src="https://www.frmtr.com/clientscript/vbulletin_menu.js?v=389"></script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+// Called by Adapt.js
+
+function myCallback(i, width) {
+
+  // Alias HTML tag.
+
+  var html = document.documentElement;
+
+
+
+  // Find all instances of range_NUMBER and kill 'em.
+
+  html.className = html.className.replace(/(\s+)?range_\d/g, '');
+
+
+
+  // Check for valid range.
+
+  if (i > -1) {
+
+    // Add class="range_NUMBER"
+
+    html.className += ' range_' + i;
+
+  }
+
+
+
+  // Note: Not making use of width here, but I'm sure
+
+  // you could think of an interesting way to use it.
+
+}
+
+
+
+// Edit to suit your needs.
+
+var ADAPT_CONFIG = {
+
+  // false = Only run once, when page first loads.
+
+  // true = Change on window resize and page tilt.
+
+  dynamic: true,
+
+
+
+  // Optional callback... myCallback(i, width)
+
+  callback: myCallback,
+
+
+
+  // First range entry is the minimum.
+
+  // Last range entry is the maximum.
+
+  // Separate ranges by "to" keyword.
+
+  range: [
+
+    '0 to 320',
+
+    '320 to 480',
+
+    '480 to 780',
+
+    '780 to 980',
+
+    '980 to 1280',
+
+    '1280'
+
+  ]
+
+};
+
+</script>
+
+<script type="text/javascript" src="https://www.frmtr.com/images/SultanThemeVB3R/js/adapt.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext' rel='stylesheet' type='text/css' />
+
+
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+
+})(window,document,'script','dataLayer','GTM-KMQBF2N');</script>
+
+
+
+<script type="text/javascript" src="https://www.frmtr.com/keyboard.js" charset="UTF-8"></script>
+
+<link rel="stylesheet" type="text/css" href="https://www.frmtr.com/keyboard.css">
+
+
+
+<!-- 
+
+  nCode Image Resizer
+
+  (c) nCode
+
+  http://www.ncode.nl/vbulletinplugins/
+
+-->
+
+<script type="text/javascript" src="https://www.frmtr.com/clientscript/ncode_imageresizer.js?v=1.0.1"></script>
+
+<style type="text/css">
+
+<!--
+
+table.ncode_imageresizer_warning {
+
+	background: #FFFFE1;
+
+	color: #000000;
+
+	border: 1px solid #CCC;
+
+	cursor: pointer;
+
+}
+
+
+
+table.ncode_imageresizer_warning td {
+
+	font-size: 10px;
+
+	vertical-align: middle;
+
+	text-decoration: none;
+
+}
+
+
+
+table.ncode_imageresizer_warning td.td1 {
+
+	padding: 5px;
+
+}
+
+
+
+table.ncode_imageresizer_warning td.td1 {
+
+	padding: 2px;
+
+}
+
+-->
+
+</style>
+
+<script type="text/javascript">
+
+<!--
+
+NcodeImageResizer.MODE = 'enlarge';
+
+NcodeImageResizer.MAXWIDTH = 736;
+
+NcodeImageResizer.MAXHEIGHT = 0;
+
+
+
+NcodeImageResizer.BBURL = 'https://www.frmtr.com';
+
+
+
+vbphrase['ncode_imageresizer_warning_small'] = 'Buraya tıklayarak resmi büyütebilirsiniz.';
+
+vbphrase['ncode_imageresizer_warning_filesize'] = 'Büyütmek için tıklayınız, esas boyutları %1$sx%2$s ve %3$sKB.';
+
+vbphrase['ncode_imageresizer_warning_no_filesize'] = 'Büyütmek için tıklayınız, esas boyutları %1$sx%2$s.';
+
+vbphrase['ncode_imageresizer_warning_fullsize'] = 'Buraya tıklayarak resmi küçültebilirsiniz.';
+
+//-->
+
+</script><script type="application/ld+json">
+
+{
+
+	"@context": "http://schema.org",
+
+	"@type": "WebSite",
+
+	"url": "https://www.frmtr.com",
+
+	"potentialAction": {
+
+		"@type": "SearchAction",
+
+		"target": "https://www.frmtr.com/search.php?do=process&query={search_term_string}",
+
+		"query-input": "required name=search_term_string"
+
+	}
+
+}
+
+</script><style type="text/css">.thanks_highlight_White { background: none White; }
+
+.thanks_highlight_Silver { background: none Silver; }
+
+.thanks_highlight_Gray { background: none Gray; }
+
+.thanks_highlight_Black { background: none Black; }
+
+.thanks_highlight_Red { background: none Red; }
+
+.thanks_highlight_Maroon { background: none Maroon; }
+
+.thanks_highlight_Yellow { background: none Yellow; }
+
+.thanks_highlight_Olive { background: none Olive; }
+
+.thanks_highlight_Lime { background: none Lime; }
+
+.thanks_highlight_Green { background: none Green; }
+
+.thanks_highlight_Aqua { background: none Aqua; }
+
+.thanks_highlight_Teal { background: none Teal; }
+
+.thanks_highlight_Blue { background: none Blue; }
+
+.thanks_highlight_Navy { background: none Navy; }
+
+.thanks_highlight_Fuchsia { background: none Fuchsia; }
+
+.thanks_highlight_Purple { background: none Purple; }
+
+
+
+.dbtech_thanks_box {
+
+	padding:6px;
+
+	margin-top:6px;
+
+	margin-bottom:6px;
+
+	float:right;
+
+	-moz-border-radius-topright: 5px;
+
+	-moz-border-radius-topleft: 5px;
+
+	-moz-border-radius-bottomright: 5px;
+
+	-moz-border-radius-bottomleft: 5px;
+
+	-webkit-border-top-right-radius: 5px;
+
+	-webkit-border-top-left-radius: 5px;
+
+	-webkit-border-bottom-right-radius: 5px;
+
+	-webkit-border-bottom-left-radius: 5px;
+
+	border-top-right-radius: 5px;
+
+	border-top-left-radius: 5px;
+
+	border-bottom-right-radius: 5px;
+
+	border-bottom-left-radius: 5px;
+
+}
+
+
+
+.dbtech-thanks-bubble-flyout {
+
+	border:#D1CCCC;
+
+	/*margin-left:4px;*/
+
+	display:inline-block;
+
+	-moz-border-radius:2px;
+
+	-webkit-border-radius:2px;
+
+	border-radius:2px;
+
+	/*position: absolute;
+
+	right: -26px;
+
+	left: auto;
+
+	top: -2px;*/
+
+	background: white;
+
+	color: #696969;
+
+	cursor: pointer;
+
+}
+
+.dbtech-thanks-bubble-flyout i, .dbtech-thanks-bubble-flyout u {
+
+	position: absolute;
+
+	/*left: 0;*/
+
+	top: 40%;
+
+	line-height: 0;
+
+	width: 0;
+
+	/*height: 0;*/
+
+	margin: 0;
+
+	margin-top:-4px;
+
+	margin-left:-5px;
+
+	margin-bottom:0;
+
+	border-right: #D1CCCC;
+
+	border: 4px transparent solid;
+
+	border-left: 0;
+
+}
+
+.dbtech-thanks-bubble-flyout u {
+
+	margin-left: -4px;
+
+	border-right-color: #FFF;
+
+}
+
+.dbtech-thanks-bubble-flyout i {
+
+	border-right-color: #D1CCCC;
+
+}
+
+/* FF hack */
+
+@-moz-document url-prefix() {
+
+	.dbtech-thanks-bubble-flyout u {
+
+		margin-left:-3px;
+
+	}
+
+	.dbtech-thanks-bubble-flyout i {
+
+		margin-left:-4px;
+
+	}
+
+}
+
+.dbtech-thanks-bubble-flyout .dbtech-thanks-bubble-content {
+
+	min-width:20px;
+
+	height:18px;
+
+	line-height:18px;
+
+	display:inline-block;
+
+	text-align:center;
+
+	font-size:11px;
+
+}
+
+
+
+.ui-tooltip li { list-style: none outside none; }
+
+.ui-tooltip ul { margin: 0; padding: 0; }
+
+
+
+.ui-tooltip-whovoted ul li {
+
+	clear: left;
+
+	padding-top: 5px;
+
+}
+
+.ui-tooltip-whovoted ul li .avatar {
+
+	display: inline-block;
+
+	height: auto;
+
+	margin: auto;
+
+	float: left;
+
+	margin-right: 5px;
+
+}
+
+.ui-tooltip-whovoted ul li img {
+
+	width: 45px;
+
+	height: 45px;
+
+}
+
+.ui-tooltip-whovoted ul li .username {
+
+	font-size: 14px;
+
+	font-weight: bold;
+
+}
+
+.ui-tooltip-whovoted ul li .usertitle {
+
+	color: #CCC;
+
+}
+
+.ui-tooltip-whovoted .ui-tooltip-content {
+
+	padding-right: 25px;
+
+	max-height: 195px;
+
+	overflow-y: auto;
+
+	/*white-space: nowrap;*/
+
+	overflow-wrap: break-word;
+
+	/*word-wrap: normal;*/
+
+}
+
+
+
+.ui-tooltip,.qtip{position:absolute;left:-28000px;top:-28000px;display:none;max-width:280px;min-width:50px;font-size:10.5px;line-height:12px;}.ui-tooltip-fluid{display:block;visibility:hidden;position:static!important;float:left!important;}.ui-tooltip-content{position:relative;padding:5px 9px;overflow:hidden;border:1px solid #000001;text-align:left;word-wrap:break-word;overflow:hidden;}.ui-tooltip-titlebar{position:relative;min-height:14px;padding:5px 35px 5px 10px;overflow:hidden;border:1px solid #000001;border-width:1px 1px 0;font-weight:bold;}.ui-tooltip-titlebar+.ui-tooltip-content{border-top-width:0!important;}/*!Default close button class */ .ui-tooltip-titlebar .ui-state-default{position:absolute;right:4px;top:50%;margin-top:-9px;cursor:pointer;outline:medium none;border-width:1px;border-style:solid;}* html .ui-tooltip-titlebar .ui-state-default{top:16px;}.ui-tooltip-titlebar .ui-icon,.ui-tooltip-icon .ui-icon{display:block;text-indent:-1000em;}.ui-tooltip-icon,.ui-tooltip-icon .ui-icon{-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}.ui-tooltip-icon .ui-icon{width:18px;height:14px;text-align:center;text-indent:0;font:normal bold 10px/13px Tahoma,sans-serif;color:inherit;background:transparent none no-repeat -100em -100em;}/*!Default tooltip style */ .ui-tooltip-default .ui-tooltip-titlebar,.ui-tooltip-default .ui-tooltip-content{border-color:#F1D031;background-color:#FFFFA3;color:#555;}.ui-tooltip-default .ui-tooltip-titlebar{background-color:#FFEF93;}.ui-tooltip-default .ui-tooltip-icon{border-color:#CCC;background:#F1F1F1;color:#777;}.ui-tooltip-default .ui-tooltip-titlebar .ui-state-hover{border-color:#AAA;color:#111;}.ui-tooltip .ui-tooltip-tip{margin:0 auto;overflow:hidden;z-index:10;}.ui-tooltip .ui-tooltip-tip,.ui-tooltip .ui-tooltip-tip *{position:absolute;line-height:.1px!important;font-size:.1px!important;color:#123456;background:transparent;border:0 dashed transparent;}.ui-tooltip .ui-tooltip-tip canvas{top:0;left:0;}#qtip-overlay{position:fixed;left:-10000em;top:-10000em;}#qtip-overlay.blurs{cursor:pointer;}#qtip-overlay div{position:absolute;left:0;top:0;width:100%;height:100%;background-color:black;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";}/*!Light tooltip style */ .ui-tooltip-light .ui-tooltip-titlebar,.ui-tooltip-light .ui-tooltip-content{border-color:#E2E2E2;color:#454545;}.ui-tooltip-light .ui-tooltip-content{background-color:white;}.ui-tooltip-light .ui-tooltip-titlebar{background-color:#f1f1f1;}/*!Dark tooltip style */ .ui-tooltip-dark .ui-tooltip-titlebar,.ui-tooltip-dark .ui-tooltip-content{border-color:#303030;color:#f3f3f3;}.ui-tooltip-dark .ui-tooltip-content{background-color:#505050;}.ui-tooltip-dark .ui-tooltip-titlebar{background-color:#404040;}.ui-tooltip-dark .ui-tooltip-icon{border-color:#444;}.ui-tooltip-dark .ui-tooltip-titlebar .ui-state-hover{border-color:#303030;}/*!Cream tooltip style */ .ui-tooltip-cream .ui-tooltip-titlebar,.ui-tooltip-cream .ui-tooltip-content{border-color:#F9E98E;color:#A27D35;}.ui-tooltip-cream .ui-tooltip-content{background-color:#FBF7AA;}.ui-tooltip-cream .ui-tooltip-titlebar{background-color:#F0DE7D;}.ui-tooltip-cream .ui-state-default .ui-tooltip-icon{background-position:-82px 0;}/*!Red tooltip style */ .ui-tooltip-red .ui-tooltip-titlebar,.ui-tooltip-red .ui-tooltip-content{border-color:#D95252;color:#912323;}.ui-tooltip-red .ui-tooltip-content{background-color:#F78B83;}.ui-tooltip-red .ui-tooltip-titlebar{background-color:#F06D65;}.ui-tooltip-red .ui-state-default .ui-tooltip-icon{background-position:-102px 0;}.ui-tooltip-red .ui-tooltip-icon{border-color:#D95252;}.ui-tooltip-red .ui-tooltip-titlebar .ui-state-hover{border-color:#D95252;}/*!Green tooltip style */ .ui-tooltip-green .ui-tooltip-titlebar,.ui-tooltip-green .ui-tooltip-content{border-color:#90D93F;color:#3F6219;}.ui-tooltip-green .ui-tooltip-content{background-color:#CAED9E;}.ui-tooltip-green .ui-tooltip-titlebar{background-color:#B0DE78;}.ui-tooltip-green .ui-state-default .ui-tooltip-icon{background-position:-42px 0;}/*!Blue tooltip style */ .ui-tooltip-blue .ui-tooltip-titlebar,.ui-tooltip-blue .ui-tooltip-content{border-color:#ADD9ED;color:#5E99BD;}.ui-tooltip-blue .ui-tooltip-content{background-color:#E5F6FE;}.ui-tooltip-blue .ui-tooltip-titlebar{background-color:#D0E9F5;}.ui-tooltip-blue .ui-state-default .ui-tooltip-icon{background-position:-2px 0;}/*!Add shadows to your tooltips in:FF3+,Chrome 2+,Opera 10.6+,IE6+,Safari 2+*/ .ui-tooltip-shadow{-webkit-box-shadow:1px 1px 3px 1px rgba(0,0,0,0.15);-moz-box-shadow:1px 1px 3px 1px rgba(0,0,0,0.15);box-shadow:1px 1px 3px 1px rgba(0,0,0,0.15);}.ui-tooltip-shadow .ui-tooltip-titlebar,.ui-tooltip-shadow .ui-tooltip-content{filter:progid:DXImageTransform.Microsoft.Shadow(Color='gray',Direction=135,Strength=3);-ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Color='gray',Direction=135,Strength=3)";_margin-bottom:-3px;.margin-bottom:-3px;}/*!Add rounded corners to your tooltips in:FF3+,Chrome 2+,Opera 10.6+,IE9+,Safari 2+*/ .ui-tooltip-rounded,.ui-tooltip-rounded .ui-tooltip-content,.ui-tooltip-tipsy,.ui-tooltip-tipsy .ui-tooltip-content,.ui-tooltip-youtube,.ui-tooltip-youtube .ui-tooltip-content{-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;}.ui-tooltip-rounded .ui-tooltip-titlebar,.ui-tooltip-tipsy .ui-tooltip-titlebar,.ui-tooltip-youtube .ui-tooltip-titlebar{-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;}.ui-tooltip-rounded .ui-tooltip-titlebar+.ui-tooltip-content,.ui-tooltip-tipsy .ui-tooltip-titlebar+.ui-tooltip-content,.ui-tooltip-youtube .ui-tooltip-titlebar+.ui-tooltip-content{-moz-border-radius:0 0 5px 5px;-webkit-border-radius:0 0 5px 5px;border-radius:0 0 5px 5px;}/*!Youtube tooltip style */ .ui-tooltip-youtube{-webkit-box-shadow:0 0 3px #333;-moz-box-shadow:0 0 3px #333;box-shadow:0 0 3px #333;}.ui-tooltip-youtube .ui-tooltip-titlebar,.ui-tooltip-youtube .ui-tooltip-content{_margin-bottom:0;.margin-bottom:0;background:transparent;background:rgba(0,0,0,0.85);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000)";color:white;border-color:#CCC;}.ui-tooltip-youtube .ui-tooltip-icon{border-color:#222;}.ui-tooltip-youtube .ui-tooltip-titlebar .ui-state-hover{border-color:#303030;}.ui-tooltip-jtools{background:#232323;background:rgba(0,0,0,0.7);background-image:-moz-linear-gradient(top,#717171,#232323);background-image:-webkit-gradient(linear,left top,left bottom,from(#717171),to(#232323));border:2px solid #ddd;border:2px solid rgba(241,241,241,1);-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;-webkit-box-shadow:0 0 12px #333;-moz-box-shadow:0 0 12px #333;box-shadow:0 0 12px #333;}.ui-tooltip-jtools .ui-tooltip-titlebar{filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#717171,endColorstr=#4A4A4A);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#717171,endColorstr=#4A4A4A)";}.ui-tooltip-jtools .ui-tooltip-content{filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4A4A4A,endColorstr=#232323);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#4A4A4A,endColorstr=#232323)";}.ui-tooltip-jtools .ui-tooltip-titlebar,.ui-tooltip-jtools .ui-tooltip-content{background:transparent;color:white;border:0 dashed transparent;}.ui-tooltip-jtools .ui-tooltip-icon{border-color:#555;}.ui-tooltip-jtools .ui-tooltip-titlebar .ui-state-hover{border-color:#333;}.ui-tooltip-cluetip{-webkit-box-shadow:4px 4px 5px rgba(0,0,0,0.4);-moz-box-shadow:4px 4px 5px rgba(0,0,0,0.4);box-shadow:4px 4px 5px rgba(0,0,0,0.4);}.ui-tooltip-cluetip .ui-tooltip-titlebar{background-color:#87876A;color:white;border:0 dashed transparent;}.ui-tooltip-cluetip .ui-tooltip-content{background-color:#D9D9C2;color:#111;border:0 dashed transparent;}.ui-tooltip-cluetip .ui-tooltip-icon{border-color:#808064;}.ui-tooltip-cluetip .ui-tooltip-titlebar .ui-state-hover{border-color:#696952;color:#696952;}.ui-tooltip-tipsy{border:0;}.ui-tooltip-tipsy .ui-tooltip-titlebar,.ui-tooltip-tipsy .ui-tooltip-content{_margin-bottom:0;.margin-bottom:0;background:transparent;background:rgba(0,0,0,.87);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000)";color:white;border:0 transparent;font-size:11px;font-family:'Lucida Grande',sans-serif;font-weight:bold;line-height:16px;text-shadow:0 1px black;}.ui-tooltip-tipsy .ui-tooltip-titlebar{padding:6px 35px 0 10px;}.ui-tooltip-tipsy .ui-tooltip-content{padding:6px 10px;}.ui-tooltip-tipsy .ui-tooltip-icon{border-color:#222;text-shadow:none;}.ui-tooltip-tipsy .ui-tooltip-titlebar .ui-state-hover{border-color:#303030;}.ui-tooltip-tipped .ui-tooltip-titlebar,.ui-tooltip-tipped .ui-tooltip-content{border:3px solid #959FA9;filter:none;-ms-filter:none;}.ui-tooltip-tipped .ui-tooltip-titlebar{background:#3A79B8;background-image:-moz-linear-gradient(top,#3A79B8,#2E629D);background-image:-webkit-gradient(linear,left top,left bottom,from(#3A79B8),to(#2E629D));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D)";color:white;font-weight:normal;font-family:serif;border-bottom-width:0;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;}.ui-tooltip-tipped .ui-tooltip-content{background-color:#F9F9F9;color:#454545;-moz-border-radius:0 0 3px 3px;-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}.ui-tooltip-tipped .ui-tooltip-icon{border:2px solid #285589;background:#285589;}.ui-tooltip-tipped .ui-tooltip-icon .ui-icon{background-color:#FBFBFB;color:#555;}.ui-tooltip:not(.ie9haxors) div.ui-tooltip-content,.ui-tooltip:not(.ie9haxors) div.ui-tooltip-titlebar{filter:none;-ms-filter:none;}</style>
+
+	<title> Yemek İsimleri Listesi</title>
+
+	<script type="text/javascript" src="https://www.frmtr.com/clientscript/vbulletin_post_loader.js?v=389"></script>
+
+	<style type="text/css" id="vbulletin_showthread_css">
+
+	<!--
+
+	
+
+	#links div { white-space: nowrap; }
+
+	#links img { vertical-align: middle; }
+
+	-->
+
+	</style>
+
+<script language="JavaScript">
+
+<!--//BEGIN Script
+
+function new_window(url) {
+
+link = window.open(url,"Link","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=500,height=250,left=180,top=180");
+
+}
+
+//END Script-->
+
+</script>
+
+
+
+</head>
+
+<body onload="">
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMQBF2N"
+
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+
+<div class="topwrap tcat">
+
+<table border="0" width="100%" cellpadding="0" cellspacing="0" align="center">
+
+<tr>
+
+
+
+	<td class="white" nowrap="nowrap" style="padding:0px">
+
+		<!-- login form -->
+
+		<form action="https://www.frmtr.com/login.php?do=login" method="post" onsubmit="md5hash(vb_login_password, vb_login_md5password, vb_login_md5password_utf, 0)">
+
+		<script type="text/javascript" src="https://www.frmtr.com/clientscript/vbulletin_md5.js?v=389"></script>
+
+		<table cellpadding="2px" cellspacing="3" border="0" style="float:right">
+
+		<tr>
+
+
+
+			<td><input type="text" class="bginput" style="font-size: 11px" name="vb_login_username" id="navbar_username" size="10" accesskey="u" tabindex="101" value="Kullanıcı Adı" onfocus="if (this.value == 'Kullanıcı Adı') this.value = '';" /></td>
+
+
+
+			<td><input type="password" class="bginput" style="font-size: 11px" name="vb_login_password" id="navbar_password" size="10" tabindex="102" /></td>
+
+
+
+			<td><input type="submit" class="button" value="Giriş Yap" tabindex="104" title="Kullanıcı adınızı ve şifrenizi yazarak giriş yapınız." accesskey="s" /></td>
+
+			<td class="smallfont" nowrap="nowrap"><label for="cb_cookieuser_navbar"><input type="checkbox" checked="checked" name="cookieuser" value="1" tabindex="103" id="cb_cookieuser_navbar" accesskey="c" />Hatırlasın mı?</label></td>
+
+
+
+		</tr>
+
+		</table>
+
+		<input type="hidden" name="s" value="" />
+
+		<input type="hidden" name="securitytoken" value="guest" />
+
+		<input type="hidden" name="do" value="login" />
+
+		<input type="hidden" name="vb_login_md5password" />
+
+		<input type="hidden" name="vb_login_md5password_utf" />
+
+		</form>
+
+		<!-- / login form -->
+
+	</td>
+
+
+
+</tr>
+
+</table>
+
+</div><!-- end topwrap -->
+
+
+
+<!-- open content container -->
+
+
+
+<div align="center">
+
+	<div class="page" style="width:100%; text-align:left">
+
+		<div style="padding:0px 25px 0px 25px" align="left" class="paddingmobile">
+
+
+
+<!-- logo -->
+
+<a name="top"></a>
+
+<table class="header" border="0" width="100%" cellpadding="0" cellspacing="0" align="center">
+
+<tr>
+
+	<td class="logo" align="left"><a href="https://www.frmtr.com/"><img src="https://www.frmtr.com/images/misc/v_frmtr2.png" border="0" alt="Forum TR" /></a></td>
+
+	<td>
+
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="908px">
+
+	<tr>
+
+		<td>
+
+
+
+
+
+<div id="ENGAGEYA_WIDGET_112743"></div>
+
+<script data-cfasync="false">
+
+(function(E,n,G,A,g,Y,a){E['EngageyaObject']=g;E[g]=E[g]||function(){ (E[g].q=E[g].q||[]).push(arguments)},E[g].l=1*new Date();Y=n.createElement(G), a=n.getElementsByTagName(G)[0];Y.async=1;Y.src=A;a.parentNode.insertBefore(Y,a)})(window,document,'script','//widget.engageya.com/engageya_loader.js','__engWidget');
+
+__engWidget('createWidget',{wwei:'ENGAGEYA_WIDGET_112743',pubid:160717,webid:121049,wid:112743});
+
+</script>
+
+
+
+
+
+</td>
+
+	</tr>
+
+</table>
+
+
+
+
+
+
+
+	</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+<!-- /logo -->
+
+
+
+<!-- content table -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- breadcrumb, login, pm info -->
+
+<table class="st_bg" cellpadding="6" cellspacing="0" border="0" width="100%" align="center">
+
+<tr>
+
+	<td width="100%" height=90>
+
+
+
+<!-- reklam -->
+
+
+
+<!-- reklam -->
+
+
+
+	</td>
+
+
+
+</tr>
+
+</table>
+
+<!-- / breadcrumb, login, pm info -->
+
+
+
+<!-- nav buttons bar -->
+
+<div class="mainnavbar" style="padding:0px; border-top-width:0px">
+
+	<table class="mainmenu" cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+
+	<tr align="center">
+
+		
+
+		
+
+
+
+		
+
+			
+
+			
+
+		
+
+
+
+		
+
+			
+
+			
+
+		
+
+		
+
+		
+
+		</tr>
+
+	</table>
+
+</div>
+
+
+
+<!-- reklam -->
+
+
+
+<ins data-publisher="adm-pub-199572935761" data-ad-type="inpage" class="adm-ads-area" data-ad-network="104066689795" data-ad-sid="600"></ins>
+
+<script src="//cdn2.admatic.com.tr/showad/showad.js" async></script>
+
+
+
+<!-- reklam -->
+
+
+
+<!-- / nav buttons bar -->
+
+
+
+<br class="forumtitlehide"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- NAVBAR POPUP MENUS -->
+
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+<!-- / NAVBAR POPUP MENUS -->
+
+
+
+<!-- PAGENAV POPUP -->
+
+	<div class="vbmenu_popup" id="pagenav_menu" style="display:none">
+
+		<table cellpadding="4" cellspacing="1" border="0">
+
+		<tr>
+
+			<td class="thead" nowrap="nowrap">Sayfaya Git...</td>
+
+		</tr>
+
+		<tr>
+
+			<td class="vbmenu_option" title="nohilite">
+
+			<form action="https://www.frmtr.com/index.php" method="get" onsubmit="return this.gotopage()" id="pagenav_form">
+
+				<input type="text" class="bginput" id="pagenav_itxt" style="font-size:11px" size="4" />
+
+				<input type="button" class="button" id="pagenav_ibtn" value="Git" />
+
+			</form>
+
+			</td>
+
+		</tr>
+
+		</table>
+
+	</div>
+
+<!-- / PAGENAV POPUP -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="breadcrumbwrap">
+
+		
+
+			<table cellpadding="0" cellspacing="0" border="0">
+
+			<tr valign="bottom">
+
+				<td width="100%">
+
+<span class="navbar"><a href="https://www.frmtr.com/" accesskey="1">Forum TR</a></span> 
+
+<span itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+
+	<span class="navbar">&gt; <a href="https://www.frmtr.com/genel-kultur/" itemprop="url"><span itemprop="title">Genel Kültür</span></a></span>
+
+</span>
+
+
+
+<span itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+
+	<span class="navbar">&gt; <a href="https://www.frmtr.com/damak-keyfi/" itemprop="url"><span itemprop="title">Damak Keyfi</span></a></span>
+
+</span>
+
+
+
+<span class="navbar">></span>
+
+<strong>
+
+	<span itemprop="title"> Yemek İsimleri Listesi</span>
+
+</strong>
+
+                                 </td>
+
+			</tr>
+
+			</table>
+
+		
+
+
+
+</div><!-- end breadcrumbwrap -->
+
+
+
+
+
+
+
+
+
+
+
+<a name="poststop" id="poststop"></a>
+
+
+
+<!-- controls above postbits -->
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:3px">
+
+<tr valign="bottom">
+
+	
+
+		<td class="smallfont buttondrop2"><a class="newreplybutton" href="https://www.frmtr.com/newreply.php?do=newreply&amp;noquote=1&amp;p=65284486" rel="nofollow">Cevapla</a></td>
+
+	
+
+	
+
+</tr>
+
+</table>
+
+<!-- / controls above postbits -->
+
+
+
+<!-- toolbar -->
+
+<table class="tborder mytoolbar" cellpadding="6" cellspacing="0" border="0" width="100%" align="center" style="border-bottom-width:0px">
+
+<tr>
+
+	<td class="tcat" width="100%">
+
+		<div class="smallfont">
+
+		
+
+		&nbsp;
+
+		</div>
+
+	</td>
+
+	<td class="vbmenu_control" id="threadtools" nowrap="nowrap">
+
+		<a rel="nofollow" href="https://www.frmtr.com/damak-keyfi/5697869-yemek-isimleri-listesi.html?nojs=1#goto_threadtools" accesskey="3">Konu Araçları</a>
+
+		<script type="text/javascript"> vbmenu_register("threadtools"); </script>
+
+	</td>
+
+	
+
+	
+
+	
+
+
+
+	
+
+
+
+</tr>
+
+</table>
+
+<!-- / toolbar -->
+
+
+
+
+
+
+
+<!-- end content table -->
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<!-- / close content container -->
+
+<!-- / end content table -->
+
+
+
+
+
+
+
+
+
+
+
+<div id="posts"><!-- post #53113675 -->
+
+
+
+	<!-- open content container -->
+
+
+
+<div align="center">
+
+	<div class="page" style="width:100%; text-align:left">
+
+		<div style="padding:0px 25px 0px 25px" align="left" class="paddingmobile">
+
+
+
+	<div id="edit53113675" style="padding:0px 0px 6px 0px">
+
+	<!-- this is not the last post shown on the page -->
+
+
+
+
+
+
+
+<table id="post53113675" class="tborder legacy myfixedtable" cellpadding="6" cellspacing="0" border="0" width="100%" align="center">
+
+<tr class="headstyle">
+
+	
+
+		<td class="thead block2" style="font-weight:normal; border: 0px solid #FFFFFF; border-right: 0px" >
+
+			<!-- status icon and date -->
+
+			<a name="post53113675"><img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/post_old.gif" alt="Eski" border="0" /></a>
+
+			03-12-13, 10:15
+
+			
+
+			<!-- / status icon and date -->
+
+		</td>
+
+		<td class="thead postcount" style="font-weight:normal; border: 0px solid #FFFFFF; border-left: 0px" align="right">
+
+			#<a href="https://www.frmtr.com/53113675-post1.html" target="new"  id="postcount53113675" name="1"><strong>1</strong></a>
+
+			
+
+		</td>
+
+	
+
+</tr>
+
+<tr valign="top" class="custompostbit">
+
+	<td class="alt2" style="width:200px;border: 0px solid #FFFFFF; border-top: 0px; border-bottom: 0px">
+
+
+
+			<div class="reposition0" id="postmenu_53113675">
+
+				
+
+				<a rel="nofollow" class="bigusername" href="https://www.frmtr.com/member.php?u=4103622"><font color="#007700">SerdaR</font></a>
+
+				<script type="text/javascript"> vbmenu_register("postmenu_53113675", true); </script>
+
+				
+
+					
+
+<img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/user_online.gif" alt="SerdaR çevrimiçi" border="0" />
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+<!-- reklam -->
+
+			</div>
+
+
+
+	</td>
+
+	
+
+	<td class="alt1" id="td_post_53113675" style="border-right: 0px solid #FFFFFF">
+
+	
+
+		
+
+		
+
+			<!-- icon and title -->
+
+			<div class="smallfont hideonmobile">
+
+				<img class="inlineimg" src="https://www.frmtr.com/images/icons/icon1.gif" alt="Varsayılan" border="0" />
+
+				<strong>Yemek İsimleri Listesi</strong>
+
+			</div>
+
+			<hr class="hideonmobile" size="1" style="color:#FFFFFF; background-color:#FFFFFF" />
+
+			<!-- / icon and title -->
+
+		
+
+
+
+		<!-- message -->
+
+		<div class="postbitcontrol2" id="post_message_53113675">
+
+			
+
+
+
+<!-- reklam -->
+
+
+
+<script type="text/javascript">
+
+var reklamstore_region_id = 1644;
+
+</script>
+
+<script type="text/javascript" src="//adserver.reklamstore.com/reklamstore.js"></script>
+
+
+
+<br />
+
+
+
+                         
+
+ 
+
+         
+
+              
+
+
+
+<br />
+
+
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+			<b><font size="6"><font color="#ffff00">A</font></font><br />
+<br />
+&#8226; Abugannuc: <br />
+&#8226; Abugannuş kebabı: <br />
+&#8226; Acı filiz: <br />
+&#8226; Adana kebabı: <br />
+&#8226; Adana köfte: <br />
+&#8226; Ajvar: <br />
+&#8226; Akçaabat köftesi: <br />
+&#8226; Akhisar köftesi: <br />
+&#8226; Akıtma: <br />
+&#8226; Akide şekeri: <br />
+&#8226; Akkız: <br />
+&#8226; Alanya kebabı: <br />
+&#8226; Ali nazik: <br />
+&#8226; Ali nazik kebabı: <br />
+&#8226; Alt-üst böreği: <br />
+&#8226; Altı ezmeli tike kebabı: <br />
+&#8226; Amin çorbası: <br />
+&#8226; Analı kızlı: <br />
+&#8226; Analı kızlı köfte: <br />
+&#8226; Antep salatası: <br />
+&#8226; Arabaşı: <br />
+&#8226; Arap aşı: <br />
+&#8226; Armut tatlısı: <br />
+&#8226; Arpa şehriye çorbası: <br />
+&#8226; Aspurlu pilav: <br />
+&#8226; Aşure:<br />
+&#8226; Ayfa salatası: <br />
+&#8226; Ayranaşı: <br />
+&#8226; Ayva tatlısı: <br />
+&#8226; Ayvalı tas kebabı: <br />
+&#8226; Ayvalı yahni: <br />
+&#8226; Ayvalık tostu:<br />
+<br />
+<br />
+<font size="6"><font color="#ffff00">B</font></font><br />
+<br />
+&#8226; Baba tatlısı: <br />
+&#8226; Babuko: <br />
+&#8226; Badem ezmesi: <br />
+&#8226; Bahçıvan çorbası: <br />
+&#8226; Bahçıvan kebabı: <br />
+&#8226; Bakla: <br />
+&#8226; Baklava: <br />
+&#8226; Balık çorbası: <br />
+&#8226; Balıkesir kaymaklısı: <br />
+&#8226; Balıkesir mantısı: <br />
+&#8226; Balıkesir pidesi: <br />
+&#8226; Balıkesir salçası: <br />
+&#8226; Bamya çorbası: <br />
+&#8226; Bandırma köfte: <br />
+&#8226; Bat: <br />
+&#8226; Batırık: <br />
+&#8226; Bazlama: <br />
+&#8226; Beğendili patlıcan kebabı: <br />
+&#8226; Beşamel sosu: <br />
+&#8226; Beyaz lahana salatası: <br />
+&#8226; Beyti kebabı: <br />
+&#8226; Beze: <br />
+&#8226; Bıldırcın kebabı: <br />
+&#8226; Biber dolması: <br />
+&#8226; Biber kebabı: <br />
+&#8226; Bici bici: <br />
+&#8226; Biftek: <br />
+&#8226; Biga köftesi: <br />
+&#8226; Biberde Yumurta<br />
+&#8226; Birlik köfte: <br />
+&#8226; Bisküvi: <br />
+&#8226; Bitlis köftesi: <br />
+&#8226; Bohça böreği: <br />
+&#8226; Bolu mengen köfte: <br />
+&#8226; Bolu orman kebabı: <br />
+&#8226; Bomonti kebap: <br />
+&#8226; Bonfile kebabı: <br />
+&#8226; Boranı: <br />
+&#8226; Bostona salatası: <br />
+&#8226; Boyoz: <br />
+&#8226; Bozbaş: <br />
+&#8226; Börek çorbası: <br />
+&#8226; Börülce: <br />
+&#8226; Buğu kebabı: <br />
+&#8226; Bulgur çorbası: <br />
+&#8226; Bulgur pilavı: <br />
+&#8226; Bulgur çorbaları: <br />
+&#8226; Bulgur salatası: <br />
+&#8226; Bükme: <br />
+&#8226; Bülbül yuvası: <br />
+&#8226; Büryan: <br />
+&#8226; Büryan pilavı:<br />
+<br />
+<font size="6"><font color="#ffff00">C<br />
+<br />
+</font></font>&#8226; Cacık: <br />
+&#8226; Cadı pastası: <br />
+&#8226; Cağ kebabı: <br />
+&#8226; Cağırtlak kebabı: <br />
+&#8226; Calla: <br />
+&#8226; Cantık: <br />
+&#8226; Celtik kebabı: <br />
+&#8226; Cevizli çörek: <br />
+&#8226; Cevizli patlıcan salatası: <br />
+&#8226; Cevizli sucuk: <br />
+&#8226; Cezerye: <br />
+&#8226; Cılvır: <br />
+&#8226; Cıvıklı: <br />
+&#8226; Cızbız köfte: <br />
+&#8226; Ciğer sarma: <br />
+&#8226; Ciğer tava: <br />
+&#8226; Ciğerli kağıt kebabı: <br />
+&#8226; Cirgindiş: <br />
+&#8226; Civil peynir: <br />
+&#8226; Cizleme: <br />
+&#8226; Continental hardalı: <br />
+&#8226; Cordon bleu: <br />
+<br />
+<font size="6"><font color="#ffff00">Ç<br />
+<br />
+</font></font>&#8226; Çağ kebabı: <br />
+&#8226; Çardak kebabı: <br />
+&#8226; Çatal aşı: <br />
+&#8226; Çekirdekli ekmek: <br />
+&#8226; Çeltik kebabı: <br />
+&#8226; Çerkez tavuğu: <br />
+&#8226; Çılbır: <br />
+&#8226; Çıplak börek: <br />
+&#8226; Çiçek ekmek: <br />
+&#8226; Çiftlik kebabı: <br />
+&#8226; Çiğ börek: <br />
+&#8226; Çiğ köfte: <br />
+&#8226; Çikolata: <br />
+&#8226; Çiroz: <br />
+&#8226; Çoban salatası: <br />
+&#8226; Çorba: <br />
+&#8226; Çökelek: <br />
+&#8226; Çökertme kebabı: <br />
+&#8226; Çömlek kebabı: <br />
+&#8226; Çöp kebabı: <br />
+&#8226; Çöp şiş kebabı: <br />
+&#8226; Çubuk turşu: <br />
+</b><br />
+ <br />
+<b><font size="6"><font color="#ffff00">D<br />
+<br />
+</font></font>&#8226; Dalyan köfte: <br />
+&#8226; Damat dolması: <br />
+&#8226; Dijon hardalı: <br />
+&#8226; Dilber dudağı: <br />
+&#8226; Diyar köfte: <br />
+&#8226; Dolma:<br />
+&#8226; Domates dolması: <br />
+&#8226; Domatesli gözleme: <br />
+&#8226; Domatesli pirinç pilavı: <br />
+&#8226; Dizme patlıcan kebabı: <br />
+&#8226; Domates dolması: <br />
+&#8226; Dondurma: <br />
+&#8226; Döner: <br />
+&#8226; Döner kebabı: <br />
+&#8226; Dövme pilavı: <br />
+&#8226; Duxelles: <br />
+&#8226; Düğün çorbası: <br />
+&#8226; Düğür çorbası: <br />
+&#8226; Düğürcük çorbası:<br />
+</b><br />
+ <br />
+<b><font size="6"><font color="#ffff00">E<br />
+<br />
+</font></font>&#8226; Ebegümeci: <br />
+&#8226; Ekler: <br />
+&#8226; Ekmek Dolması: <br />
+&#8226; Ekmek Kadayıfı: <br />
+&#8226; Ekşili: <br />
+&#8226; Ekşili Çorba: <br />
+&#8226; Ekşili Dolma: <br />
+&#8226; Ekşili Kış Dolması: <br />
+&#8226; Ekşili Köfte: <br />
+&#8226; Ekşili Ufak Köfte: <br />
+&#8226; Elbasan Tava: <br />
+&#8226; Elma Kompostosu: <br />
+&#8226; Emet Kebabı: <br />
+&#8226; Empanada: <br />
+&#8226; Enginarlı Yuva Kebabı: <br />
+&#8226; Erik Hoşafı: <br />
+&#8226; Erişte: <br />
+&#8226; Etli Ekmek: <br />
+&#8226; Etli Kuru Bamya: <br />
+&#8226; Etli Kuru Fasülye: <br />
+&#8226; Etli Nohut: <br />
+&#8226; Etli Patlıcan: <br />
+&#8226; Etli Pide: <br />
+&#8226; Etli Taze Fasulye: <br />
+&#8226; Ezo Gelin Çorbası: <br />
+<br />
+<font size="6"><font color="#ffff00">F<br />
+<br />
+</font></font>&#8226; Fajita: <br />
+&#8226; Fasülye Çorbası: <br />
+&#8226; Fasulye Piyazı: <br />
+&#8226; Fava: <br />
+&#8226; Fener Çöp Şiş: <br />
+&#8226; Fetir: <br />
+&#8226; Fındık Köfte: <br />
+&#8226; Fırın Kebabı: <br />
+&#8226; Fırında Patlıcan Kebabı: <br />
+&#8226; Fırında Poşet Kebabı: <br />
+&#8226; Fırında Tavuklu Mantı: <br />
+&#8226; Fıstıklı Kebap: <br />
+&#8226; Firik Pilavı: <br />
+&#8226; Francala: <br />
+<br />
+<font size="6"><font color="#ffff00">G<br />
+<br />
+</font></font>&#8226; Gavur Dağı Salatası: <br />
+&#8226; Gaziler Helvası: <br />
+&#8226; Gebol: <br />
+&#8226; Gelin Kebabı: <br />
+&#8226; Gencer Macunu: <br />
+&#8226; Germknödel: <br />
+&#8226; Goralı Sandviç: <br />
+&#8226; Göbete Böreği: <br />
+&#8226; Gölevez: <br />
+&#8226; Gönül Kebabı: <br />
+&#8226; Gözleme: <br />
+&#8226; Guakamole: <br />
+&#8226; Gulaç: <br />
+&#8226; Ğuliya: <br />
+&#8226; Güllaç: <br />
+&#8226; Güveç: <br />
+</b><br />
+<b><font size="6"><font color="#ffff00">H<br />
+<br />
+</font></font>&#8226; Halil İbrahim Sofrası Kebabı: <br />
+&#8226; Halka Ekmek: <br />
+&#8226; Hamburger: <br />
+&#8226; Hamsi Buğulaması: <br />
+&#8226; Hamsi Çorbası: <br />
+&#8226; Hamsi Diblesi: <br />
+&#8226; Hamsi Izgara: <br />
+&#8226; Hamsi Köftesi: <br />
+&#8226; Hamsi Kuşu: <br />
+&#8226; Hamsi Tava: <br />
+&#8226; Hamsi Tuzlaması: <br />
+&#8226; Hamsili Börek: <br />
+&#8226; Hamsili Ekmek: <br />
+&#8226; Hamsili İçli Tava: <br />
+&#8226; Hamsili Pilav: <br />
+&#8226; Hamur Çorbası: <br />
+&#8226; Hardal: <br />
+&#8226; Harput Çorbası: <br />
+&#8226; Harput Köftesi: <br />
+&#8226; Hasan Paşa Köftesi: <br />
+&#8226; Hasıda: <br />
+&#8226; Haşhaşlı Nokul: <br />
+&#8226; Havuç Salatası: <br />
+&#8226; Havuçlu Gözleme: <br />
+&#8226; Havyar: <br />
+&#8226; Helise: <br />
+&#8226; Helle Aşı: <br />
+&#8226; Helva: <br />
+&#8226; Herle Çorbası: <br />
+&#8226; Hıngel: <br />
+&#8226; Hibeş: <br />
+&#8226; Hoşmerim: <br />
+&#8226; Humus: <br />
+&#8226; Hünkârbeğendi:<br />
+</b><br />
+<b><font size="6"><font color="#ffff00">I<br />
+<br />
+</font></font>&#8226; Islama Köfte: <br />
+&#8226; Ispanak Çorbası: <br />
+&#8226; Ispanak Salatası: <br />
+&#8226; Ispanaklı Börek: <br />
+&#8226; Ispanaklı Gözleme: <br />
+&#8226; Ispanaklı Tandır Böreği: <br />
+&#8226; Ispanaklı Yufka Böreği: <br />
+&#8226; Izgara Köfte: <br />
+<br />
+<font size="6"><font color="#ffff00">İ<br />
+<br />
+</font></font>&#8226; İç Pilav:<br />
+&#8226; İçli Adana Kebabı: <br />
+&#8226; İçli Köfte:<br />
+&#8226; İçli Patates Köftesi: <br />
+&#8226; İmam Bayıldı: <br />
+&#8226; İncik Kebabı: <br />
+&#8226; İncik Yahnisi: <br />
+&#8226; İncir Dolması: <br />
+&#8226; İncir Uyuşturması: <br />
+&#8226; İnegöl Köftesi: <br />
+&#8226; İrmik Helvası: <br />
+&#8226; İskeçe Köfte: <br />
+&#8226; İskender Kebabı: <br />
+&#8226; İskenderun Köfte: <br />
+&#8226; İskilip Dolması: <br />
+&#8226; İskilip Sirke Salatası: <br />
+&#8226; İskilip Tepsi Kebabı: <br />
+&#8226; İskilip Turşusu: <br />
+&#8226; İskilip Yaprak Sarması: <br />
+&#8226; İslim Köfte: <br />
+&#8226; İstanbul Pilavı: <br />
+&#8226; İstim Kebabı: <br />
+&#8226; İstim Kebap: <br />
+&#8226; İşkembe Çorbası: <br />
+&#8226; İzmir Köfte: <br />
+<br />
+<font size="6"><font color="#ffff00">K<br />
+<br />
+</font></font>&#8226; Kabak Bayıldı: <br />
+&#8226; Kabak Çiçeği Dolması: <br />
+&#8226; Kabak Dolması: <br />
+&#8226; Kabak Kış Böreği: <br />
+&#8226; Kabak Musakka: <br />
+&#8226; Kabak Tatlısı: <br />
+&#8226; Kabaklı Kebap: <br />
+&#8226; Kabaklı Yufka Böreği: <br />
+&#8226; Kabune Etli Pilavı: <br />
+&#8226; Kaburga Dolması: <br />
+&#8226; Kaburga Kebabı: <br />
+&#8226; Kaçamak: <br />
+&#8226; Kadayıf: <br />
+&#8226; Kadayıf Dolması: <br />
+&#8226; Kadınbudu Köfte: <br />
+&#8226; Kadınhanı Tahinli Pidesi: <br />
+&#8226; Kağıt Helvası: <br />
+&#8226; Kağıt Kebabı: <br />
+&#8226; Kahramanmaraş Dövme Dondurması: <br />
+&#8226; Kalamar Dolması: <br />
+&#8226; Kalbura Bastı: <br />
+&#8226; Kandil Şekeri: <br />
+&#8226; Kapaktan Çıkma: <br />
+&#8226; Kapama: <br />
+&#8226; Kapama Börek: <br />
+&#8226; Kapuska: <br />
+&#8226; Kar Helvası: <br />
+&#8226; Kara Lahana Çorbası: <br />
+&#8226; Karamel: <br />
+&#8226; Karanfilli Ekmek: <br />
+&#8226; Karnıbahar Musakka: <br />
+&#8226; Karnıyarık: <br />
+&#8226; Karsambaç: <br />
+&#8226; Kartalaç: <br />
+&#8226; Kastamonu Ekşili Pilavı: <br />
+&#8226; Katmer: <br />
+&#8226; Kavurma: <br />
+&#8226; Kavut: <br />
+&#8226; Kaygana: <br />
+&#8226; Kayganak: <br />
+&#8226; Kayısı Dolması: <br />
+&#8226; Kayısı Hoşafı: <br />
+&#8226; Kaymaçina: <br />
+&#8226; Kaymaklı Elmasiye: <br />
+&#8226; Kaysafa: <br />
+&#8226; Kayseri Köftesi: <br />
+&#8226; Kaz Dolması: <br />
+&#8226; Kazan Dibi: <br />
+&#8226; Kazan Kebabı: <br />
+&#8226; Kebap: <br />
+&#8226; Keçi Peyniri: <br />
+&#8226; Kelecoş: <br />
+&#8226; Kemal Paşa Tatlısı: <br />
+&#8226; Kemal Zade Kebabı: <br />
+&#8226; Kemeli Kıyma Kebabı: <br />
+&#8226; Kerebiç: <br />
+&#8226; Kereviz Dolması: <br />
+&#8226; Kestane Şekeri: <br />
+&#8226; Kestaneli Pilav: <br />
+&#8226; Keşkek: <br />
+&#8226; Keşkeği: <br />
+&#8226; Keşkül: <br />
+&#8226; Ketçap: <br />
+&#8226; Kete: <br />
+&#8226; Khinkal: <br />
+&#8226; Kırlı Kızartması: <br />
+&#8226; Kısır: <br />
+&#8226; Kış Türlüsü: <br />
+&#8226; Kıyma Kebabı: <br />
+&#8226; Kıymalı Bezelye: <br />
+&#8226; Kıymalı Gözleme: <br />
+&#8226; Kıymalı Ispanak: <br />
+&#8226; Kıymalı Kapuska: <br />
+&#8226; Kıymalı Tandır Böreği: <br />
+&#8226; Kıymalı Yufka Böreği: <br />
+&#8226; Kızılcık Şurubu: <br />
+&#8226; Kilis Kebabı: <br />
+&#8226; Kimçi: <br />
+&#8226; Kokoreç: <br />
+&#8226; Komposto: <br />
+&#8226; Koruk Salatası: <br />
+&#8226; Koruk Suyu: <br />
+&#8226; Koyun Kol Sarma: <br />
+&#8226; Köfteli Kebap: <br />
+&#8226; Kömbe: <br />
+&#8226; Köpük Helva: <br />
+&#8226; Köy Ekmeği: <br />
+&#8226; Köy Peyniri: <br />
+&#8226; Köy-Ev Baklavası: <br />
+&#8226; Köylü Çorbası: <br />
+&#8226; Kremalı Tas Kebap: <br />
+&#8226; Kulak: <br />
+&#8226; Kumpir: <br />
+&#8226; Kumru: <br />
+&#8226; Kuna: <br />
+&#8226; Kuru Dolma: <br />
+&#8226; Kuru Fasülye: <br />
+&#8226; Kuru Tarhana Hazırlanışı: <br />
+&#8226; Kuymak: <br />
+&#8226; Kuyu Kebabı: <br />
+&#8226; Kuzu Kapama: <br />
+&#8226; Kuzu Kulağı: <br />
+&#8226; Kuzu Şiş Kebabı: <br />
+&#8226; Künefe: <br />
+&#8226; Küp Peyniri: <br />
+<br />
+<font size="6"><font color="#ffff00">L<br />
+<br />
+</font></font>&#8226; Lahana Salatası: <br />
+&#8226; Lahana Sarması: <br />
+&#8226; Lahmacun: <br />
+&#8226; Lavaş: <br />
+&#8226; Lavaş Ekmekli Yayla Kebabı: <br />
+&#8226; Lazanya: <br />
+&#8226; Lepeli Etli Pilav: <br />
+&#8226; Lokma: <br />
+&#8226; Lokma Tatlısı: <br />
+&#8226; Lokum: <br />
+<br />
+<br />
+<font size="6"><font color="#ffff00">M<br />
+<br />
+</font></font>&#8226; Mafiş Tatlısı: <br />
+&#8226; Mahluta Çorbası:<br />
+&#8226; Makarna: <br />
+&#8226; Maklube: <br />
+&#8226; Manisa Kebabı: <br />
+&#8226; Mantar Çorbası: <br />
+&#8226; Mantarlı Ve Jambonlu Sıra Kebabı: <br />
+&#8226; Mantı: <br />
+&#8226; Manyas Peyniri: <br />
+&#8226; Marmelat Reçeli: <br />
+&#8226; Maş Çorbası: <br />
+&#8226; Maydonozlu Kebap: <br />
+&#8226; Mayonez: <br />
+&#8226; Mekik Böreği: <br />
+&#8226; Menemen: <br />
+&#8226; Mercimek Köftesi: <br />
+&#8226; Mercimek Pilavı: <br />
+&#8226; Mercimek Piyazı: <br />
+&#8226; Mercimekli Bükme Böreği: <br />
+&#8226; Mercimekli Ispanak Başı: <br />
+&#8226; Mercimekli Kabak: <br />
+&#8226; Mercimekli Mantı: <br />
+&#8226; Met Helvası: <br />
+&#8226; Mevlevi Pilavı: <br />
+&#8226; Meyhane Pilavı: <br />
+&#8226; Meyveli Pasta: <br />
+&#8226; Mırra: <br />
+&#8226; Midye Çorbası: <br />
+&#8226; Mihaliç Peyniri: <br />
+&#8226; Minci: <br />
+&#8226; Muhallebi: <br />
+&#8226; Musakka: <br />
+&#8226; Muzlu Jöleli Pasta: <br />
+&#8226; Müceddere: <br />
+&#8226; Mücver: <br />
+&#8226; Mücver Köfte: <br />
+&#8226; Mürdükaşı: <br />
+</b><br />
+<b><font size="6"><font color="#ffff00">N<br />
+<br />
+</font></font>&#8226; Nabat: <br />
+&#8226; Nar Ekşisi: <br />
+&#8226; Nevzine: <br />
+&#8226; Nokul: <br />
+&#8226; Nohutlu Ekmek: <br />
+&#8226; Nohutlu Patlıcan Dolması: <br />
+&#8226; Nohutlu Püre Kebabı: <br />
+<br />
+<font size="6"><font color="#ffff00">O<br />
+<br />
+</font></font>&#8226; Odun Köfte: <br />
+&#8226; Oğmaç Çorbası: <br />
+&#8226; Omacaşı: <br />
+&#8226; Omaç Helvası: <br />
+&#8226; Orman Kebabı: <br />
+&#8226; Oruk:<br />
+<br />
+<font size="6"><font color="#ffff00">Ö<br />
+<br />
+</font></font>&#8226; Öküz Helvası: <br />
+&#8226; Örgülü Pilav: <br />
+&#8226; Örtülü Kebap: <br />
+&#8226; Özbek Pilavı: <br />
+<br />
+<br />
+<font size="6"><font color="#ffff00">P<br />
+<br />
+</font></font>&#8226; Palize: <br />
+&#8226; Papalina: <br />
+&#8226; Papaz Yahnisi: <br />
+&#8226; Pasta: <br />
+&#8226; Pastırma:<br />
+&#8226; Pastırmalı Kuru Fasülye: <br />
+&#8226; Pastırmalı Tarak Kebabı: <br />
+&#8226; Paşa Mantısı: <br />
+&#8226; Patates Çorbası: <br />
+&#8226; Patates Kebabı: <br />
+&#8226; Patates Köftesi: <br />
+&#8226; Patetes Püreli Kebap: <br />
+&#8226; Patates Salatası: <br />
+&#8226; Patlıcan Dolması: <br />
+&#8226; Patlıcan Kebabı: <br />
+&#8226; Patlıcan Musakka: <br />
+&#8226; Patlıcan Reçeli: <br />
+&#8226; Patlıcan Salatası: <br />
+&#8226; Patlıcan Yemeği: <br />
+&#8226; Patlıcanlı Kebap: <br />
+&#8226; Patlıcanlı Köfte: <br />
+&#8226; Patlıcanlı Kuzu Kebabı: <br />
+&#8226; Patlıcanlı Paşa Kebabı: <br />
+&#8226; Patlıcanlı Pilav: <br />
+&#8226; Patlıcanlı Saksı Kebabı: <br />
+&#8226; Patlıcanlı Tencere Kebabı: <br />
+&#8226; Pekmez Helvası: <br />
+&#8226; Pekmezli Ayva Dolması: <br />
+&#8226; Perdelli Pilav: <br />
+&#8226; Petibör: <br />
+&#8226; Peynir Helvası: <br />
+&#8226; Peynirli Gözleme: <br />
+&#8226; Peynirli Pide: <br />
+&#8226; Peynirli Poğaça: <br />
+&#8226; Peynirli Sigara Böreği: <br />
+&#8226; Peynirli Yufka Böreği: <br />
+&#8226; Pırasa Sarması: <br />
+&#8226; Pırasalı Yufka Böreği: <br />
+&#8226; Pırtımpırt: <br />
+&#8226; Pide: <br />
+&#8226; Pideli Köfte: <br />
+&#8226; Pilav: <br />
+&#8226; Piliç Avcı Kebabı: <br />
+&#8226; Piliç Kebabı: <br />
+&#8226; Piliçli Patlıcan Saltanat Kebabı: <br />
+&#8226; Pirzola: <br />
+&#8226; Pişi: <br />
+&#8226; Pişmaniye: <br />
+&#8226; Piti Kebabı: <br />
+&#8226; Piyaz: <br />
+&#8226; Pizza: <br />
+&#8226; Portakal Peltesi: <br />
+&#8226; Puf Böreği: <br />
+&#8226; Pür Lezzet: <br />
+&#8226; Püreli Beykoz Kebabı:<br />
+<br />
+<font size="6"><font color="#ffff00">R<br />
+<br />
+</font></font>&#8226; Ragû: <br />
+&#8226; Reçel: <br />
+&#8226; Revani Tatlısı: <br />
+&#8226; Robespierre: <br />
+&#8226; Rosto Köfte: <br />
+&#8226; Rus Salatası: <br />
+<br />
+<font size="6"><font color="#ffff00">S<br />
+<br />
+</font></font>&#8226; Sabahaşı: <br />
+&#8226; Saçaklı Mantı: <br />
+&#8226; Sahan Kebabı: <br />
+&#8226; Sakız: <br />
+&#8226; Sallama: <br />
+&#8226; Salata: <br />
+&#8226; Samosa: <br />
+&#8226; Samsıra: <br />
+&#8226; Saray Köfte: <br />
+&#8226; Sarığı Burma: <br />
+&#8226; Sarma: <br />
+&#8226; Sarımsak Kebabı: <br />
+&#8226; Sarmısaklı Köfte: <br />
+&#8226; Satır Köfte: <br />
+&#8226; Sebze Çorbası: <br />
+&#8226; Sebzeli Kebap: <br />
+&#8226; Semizotu Piyazı: <br />
+&#8226; Semizotu Salatası: <br />
+&#8226; Sıkma: <br />
+&#8226; Sıkma Köfte: <br />
+&#8226; Sırık Kebabı: <br />
+&#8226; Simit Kebabı: <br />
+&#8226; Sini Böreği: <br />
+&#8226; Sini Köftesi: <br />
+&#8226; Sirke: <br />
+&#8226; Sirke Salatası: <br />
+&#8226; Sirkeli Patlıcan: <br />
+&#8226; Sirkeli Pırasa: <br />
+&#8226; Sodd: <br />
+&#8226; Soğan Dolması: <br />
+&#8226; Soğan Kebabı: <br />
+&#8226; Soğan Piyazı: <br />
+&#8226; Sos: <br />
+&#8226; Soya Sosu: <br />
+&#8226; Su Böreği: <br />
+&#8226; Sucuk Köfte: <br />
+&#8226; Suimono: <br />
+&#8226; Sultan Ahmet Köftesi: <br />
+&#8226; Sultan Reşat Pilavı: <br />
+&#8226; Sultan Tatlısı: <br />
+&#8226; Sulu Köfte: <br />
+&#8226; Sulu Yağlı Köfte: <br />
+&#8226; Sura: <br />
+&#8226; Susam Tozu: <br />
+&#8226; Susurluk Ayranı: <br />
+&#8226; Suşi: <br />
+&#8226; Sütlaç: <br />
+&#8226; Sütlü Nuriye: <br />
+&#8226; Sütlü Pilav: <br />
+&#8226; Süzme Yoğurt:<br />
+</b><br />
+<b> <br />
+</b>
+
+
+
+<!-- reklam -->
+
+
+
+ 
+
+
+
+<br />
+
+__________________
+
+<br />
+
+
+
+
+
+<div id="ENGAGEYA_WIDGET_112742"></div>
+
+<script data-cfasync="false">
+
+(function(E,n,G,A,g,Y,a){E['EngageyaObject']=g;E[g]=E[g]||function(){ (E[g].q=E[g].q||[]).push(arguments)},E[g].l=1*new Date();Y=n.createElement(G), a=n.getElementsByTagName(G)[0];Y.async=1;Y.src=A;a.parentNode.insertBefore(Y,a)})(window,document,'script','//widget.engageya.com/engageya_loader.js','__engWidget');
+
+__engWidget('createWidget',{wwei:'ENGAGEYA_WIDGET_112742',pubid:160717,webid:121049,wid:112742});
+
+</script>
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+		</div>
+
+		<!-- / message -->
+
+
+
+		
+
+
+
+		
+
+		
+
+
+
+	
+
+
+
+		
+
+
+
+		
+
+
+
+	</td>
+
+</tr>
+
+<tr class="custompostbit2">
+
+	<td class="alt2" style="border: 0px solid #FFFFFF; border-top: 0px">
+
+
+
+
+
+
+
+		
+
+		
+
+		
+
+		
+
+		&nbsp;
+
+	</td>
+
+	
+
+	<td class="alt1" align="right" style="border: 0px solid #FFFFFF; border-left: 0px; border-top: 0px">
+
+	
+
+		<!-- controls -->
+
+		
+
+		
+
+		
+
+			<a href="https://www.frmtr.com/newreply.php?do=newreply&amp;p=53113675" rel="nofollow"><img src="https://www.frmtr.com/images/SultanThemeVB3R/buttons/quote.gif" alt="Alıntı Yaparak Cevapla" border="0"  align="top" /><span class="hideonmobile">Alıntı Yaparak Cevapla</span></a>
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+			
+
+		
+
+		
+
+		<!-- / controls -->
+
+	</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+ 
+
+<!-- post 53113675 popup menu -->
+
+<div class="vbmenu_popup" id="postmenu_53113675_menu" style="display:none">
+
+	<table cellpadding="4" cellspacing="1" border="0">
+
+	<tr>
+
+		<td class="thead">SerdaR</td>
+
+	</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+		<tr><td class="vbmenu_option"><a rel="nofollow" href="https://www.frmtr.com/member.php?u=4103622">Kullanıcının Profilini Göster</a></td></tr>
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+
+
+	
+
+	
+
+	
+
+	</table>
+
+</div>
+
+<!-- / post 53113675 popup menu -->
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<!-- / close content container -->
+
+
+
+<!-- / post #53113675 --><!-- post #53129767 -->
+
+
+
+	<!-- open content container -->
+
+
+
+<div align="center">
+
+	<div class="page" style="width:100%; text-align:left">
+
+		<div style="padding:0px 25px 0px 25px" align="left" class="paddingmobile">
+
+
+
+	<div id="edit53129767" style="padding:0px 0px 6px 0px">
+
+	<!-- this is not the last post shown on the page -->
+
+
+
+
+
+
+
+<table id="post53129767" class="tborder legacy myfixedtable" cellpadding="6" cellspacing="0" border="0" width="100%" align="center">
+
+<tr class="headstyle">
+
+	
+
+		<td class="thead block2" style="font-weight:normal; border: 0px solid #FFFFFF; border-right: 0px" >
+
+			<!-- status icon and date -->
+
+			<a name="post53129767"><img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/post_old.gif" alt="Eski" border="0" /></a>
+
+			04-12-13, 10:27
+
+			
+
+			<!-- / status icon and date -->
+
+		</td>
+
+		<td class="thead postcount" style="font-weight:normal; border: 0px solid #FFFFFF; border-left: 0px" align="right">
+
+			#<a href="https://www.frmtr.com/53129767-post2.html" target="new"  id="postcount53129767" name="2"><strong>2</strong></a>
+
+			
+
+		</td>
+
+	
+
+</tr>
+
+<tr valign="top" class="custompostbit">
+
+	<td class="alt2" style="width:200px;border: 0px solid #FFFFFF; border-top: 0px; border-bottom: 0px">
+
+
+
+			<div class="reposition0" id="postmenu_53129767">
+
+				
+
+				<a rel="nofollow" class="bigusername" href="https://www.frmtr.com/member.php?u=4103622"><font color="#007700">SerdaR</font></a>
+
+				<script type="text/javascript"> vbmenu_register("postmenu_53129767", true); </script>
+
+				
+
+					
+
+<img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/user_online.gif" alt="SerdaR çevrimiçi" border="0" />
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+<!-- reklam -->
+
+			</div>
+
+
+
+	</td>
+
+	
+
+	<td class="alt1" id="td_post_53129767" style="border-right: 0px solid #FFFFFF">
+
+	
+
+		
+
+		
+
+			<!-- icon and title -->
+
+			<div class="smallfont hideonmobile">
+
+				<img class="inlineimg" src="https://www.frmtr.com/images/icons/icon1.gif" alt="Varsayılan" border="0" />
+
+				<strong>C: Yemek İsimleri Listesi</strong>
+
+			</div>
+
+			<hr class="hideonmobile" size="1" style="color:#FFFFFF; background-color:#FFFFFF" />
+
+			<!-- / icon and title -->
+
+		
+
+
+
+		<!-- message -->
+
+		<div class="postbitcontrol2" id="post_message_53129767">
+
+			
+
+
+
+<!-- reklam -->
+
+
+
+<script type="text/javascript">
+
+var reklamstore_region_id = 1644;
+
+</script>
+
+<script type="text/javascript" src="//adserver.reklamstore.com/reklamstore.js"></script>
+
+
+
+<br />
+
+
+
+                         
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+			<b><font size="6"><font color="#ffff00">Ş<br />
+<br />
+</font></font>&#8226; Şafak Çorbası: <br />
+&#8226; Şalgam Dolması: <br />
+&#8226; Şalgam Musakka: <br />
+&#8226; Şam Kebabı: <br />
+&#8226; Şam Tatlısı: <br />
+&#8226; Şeftali Kebabı: <br />
+&#8226; Şehriye: <br />
+&#8226; Şehriyeli Güveç: <br />
+&#8226; Şekerli Ayva Dolması: <br />
+&#8226; Şekerpare: <br />
+&#8226; Şerbet: <br />
+&#8226; Şıllık: <br />
+&#8226; Şırdan: <br />
+&#8226; Şiş Kebabı: <br />
+&#8226; Şiş Kebap: <br />
+&#8226; Şiş Köfte: <br />
+&#8226; Şiveydiz: <br />
+&#8226; Şöbiyet:</b><br />
+<br />
+<b><font size="6"><font color="#ffff00">T<br />
+<br />
+</font></font>&#8226; Tabasco Sosu: <br />
+&#8226; Tahinli Patlıcan Salatası: <br />
+&#8226; Talaş Kebabı: <br />
+&#8226; Tandır Çorbası: <br />
+&#8226; Tandır Ekmeği: <br />
+&#8226; Tandır Kebabı: <br />
+&#8226; Tandır Şiş: <br />
+&#8226; Tantuni: <br />
+&#8226; Tapan: <br />
+&#8226; Tarator: <br />
+&#8226; Tarhana Çorbası: <br />
+&#8226; Tas Kebabı: <br />
+&#8226; Taş Köfte: <br />
+&#8226; Tava Ekmeği: <br />
+&#8226; Tavuk Çorbası: <br />
+&#8226; Tavuk Göğsü: <br />
+&#8226; Tavuk Şiş Kebabı: <br />
+&#8226; Tavuklu Kebap: <br />
+&#8226; Tavuklu Şehriye Çorbası: <br />
+&#8226; Tayın Ekmeği: <br />
+&#8226; Tekirdağ Köftesi: <br />
+&#8226; Tel Kadayıf: <br />
+&#8226; Telli Peynir: <br />
+&#8226; Tencere Kebabı: <br />
+&#8226; Tepsi Kebabı: <br />
+&#8226; Tepside Çubuk Kebabı: <br />
+&#8226; Terbiyeli Etli Pırasa: <br />
+&#8226; Terbiyeli Köfte Pirinçli: <br />
+&#8226; Testi Kebabı: <br />
+&#8226; Tırnak: <br />
+&#8226; Tırtıl Baklavası: <br />
+&#8226; Tike Kebabı: <br />
+&#8226; Tiramisu: <br />
+&#8226; Tire Köfte: <br />
+&#8226; Tirit: <br />
+&#8226; Tirşik Çorbası:<br />
+&#8226; Tokat Kebabı: <br />
+&#8226; Topalak: <br />
+&#8226; Topkapı Kebabı: <br />
+&#8226; Tortellini: <br />
+&#8226; Toyga Çorbası: <br />
+&#8226; Tulumba Tatlısı: <br />
+&#8226; Tutmaç Aşı: <br />
+&#8226; Tükürüklü Köfte:</b><br />
+<br />
+<b><font size="6"><font color="#ffff00">U<br />
+<br />
+</font></font>&#8226; Un Helvası: <br />
+&#8226; Urfa Kebabı: <br />
+<br />
+<font size="6"><font color="#ffff00">Ü</font></font><br />
+<br />
+&#8226; Üzümlü-Kayısılı Kek: <br />
+<br />
+<font size="6"><font color="#ffff00">V</font></font><br />
+<br />
+&#8226; Van Otlu Peyniri:-(Terbiyeden-Yoksunum)-<br />
+&#8226; Vişne Hoşafı:-(Terbiyeden-Yoksunum)-</b><br />
+<br />
+<b><font size="6"><font color="#ffff00">Y<br />
+<br />
+</font></font>&#8226; Yağ Çorbası: <br />
+&#8226; Yağlama: <br />
+&#8226; Yahni: <br />
+&#8226; Yalancı Dolma: <br />
+&#8226; Yalancı İskender: <br />
+&#8226; Yanardağ Kebabı: <br />
+&#8226; Yaprak Sarması: <br />
+&#8226; Yarma Çorbası:<br />
+&#8226; Yayla Çorbası: <br />
+&#8226; Yayla Kebabı: <br />
+&#8226; Yayla Köfte: <br />
+&#8226; Yengen: <br />
+&#8226; Yenidünya Kebabı: <br />
+&#8226; Yeşil Domates Yemeği:<br />
+&#8226; Yeşil Mercimek Çorbası: <br />
+&#8226; Yeşil Mercimek Plaki: <br />
+&#8226; Yeşil Salata: <br />
+&#8226; Yeşil Soğanlı Et: <br />
+&#8226; Yeşil Zeytin Piyazı: <br />
+&#8226; Yeşil Zeytinli Çörek: <br />
+&#8226; Yırtma: <br />
+&#8226; Yoğurtlu Bulgur Köftesi: <br />
+&#8226; Yoğurtlu Kebap: <br />
+&#8226; Yoğurtlu Patates: <br />
+&#8226; Yoğurtlu Semizotu Salatası: <br />
+&#8226; Yoğurtlu Ufak Köfte: <br />
+&#8226; Yörük Kebabı: <br />
+&#8226; Yufka: <br />
+&#8226; Yufkalı Saç Kebabı: <br />
+&#8226; Yumru Köfte: <br />
+&#8226; Yumurta: <br />
+&#8226; Yumurta Salatası: <br />
+&#8226; Yumurta Tozu: <br />
+&#8226; Yuvarlama: <br />
+&#8226; Yüksük Çorbası: </b><br />
+<br />
+<b><font size="6"><font color="#ffff00">Z<br />
+<br />
+</font></font>&#8226; Zerde: <br />
+&#8226; Zeytinyağlı Bakla: <br />
+&#8226; Zeytinyağlı Barbunya Plaki: <br />
+&#8226; Zeytinyağlı Enginar: <br />
+&#8226; Zeytinyağlı Havuç: <br />
+&#8226; Zeytinyağlı Kereviz: <br />
+&#8226; Zeytinyağlı Pırasa: <br />
+&#8226; Zeytinyağlı Pirinçli Fasulye: <br />
+&#8226; Zeytinyağlı Şalgam: <br />
+&#8226; Zeytinyağlı Taze Fasulye: <br />
+&#8226; Zeytinyağlı Yer Elması:</b>
+
+
+
+<!-- reklam -->
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+		</div>
+
+		<!-- / message -->
+
+
+
+		
+
+
+
+		
+
+		
+
+
+
+	
+
+
+
+		
+
+
+
+		
+
+
+
+	</td>
+
+</tr>
+
+<tr class="custompostbit2">
+
+	<td class="alt2" style="border: 0px solid #FFFFFF; border-top: 0px">
+
+
+
+
+
+
+
+		
+
+		
+
+		
+
+		
+
+		&nbsp;
+
+	</td>
+
+	
+
+	<td class="alt1" align="right" style="border: 0px solid #FFFFFF; border-left: 0px; border-top: 0px">
+
+	
+
+		<!-- controls -->
+
+		
+
+		
+
+		
+
+			<a href="https://www.frmtr.com/newreply.php?do=newreply&amp;p=53129767" rel="nofollow"><img src="https://www.frmtr.com/images/SultanThemeVB3R/buttons/quote.gif" alt="Alıntı Yaparak Cevapla" border="0"  align="top" /><span class="hideonmobile">Alıntı Yaparak Cevapla</span></a>
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+			
+
+		
+
+		
+
+		<!-- / controls -->
+
+	</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+ 
+
+<!-- post 53129767 popup menu -->
+
+<div class="vbmenu_popup" id="postmenu_53129767_menu" style="display:none">
+
+	<table cellpadding="4" cellspacing="1" border="0">
+
+	<tr>
+
+		<td class="thead">SerdaR</td>
+
+	</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+		<tr><td class="vbmenu_option"><a rel="nofollow" href="https://www.frmtr.com/member.php?u=4103622">Kullanıcının Profilini Göster</a></td></tr>
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+
+
+	
+
+	
+
+	
+
+	</table>
+
+</div>
+
+<!-- / post 53129767 popup menu -->
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<!-- / close content container -->
+
+
+
+<!-- / post #53129767 --><!-- post #53144344 -->
+
+
+
+	<!-- open content container -->
+
+
+
+<div align="center">
+
+	<div class="page" style="width:100%; text-align:left">
+
+		<div style="padding:0px 25px 0px 25px" align="left" class="paddingmobile">
+
+
+
+	<div id="edit53144344" style="padding:0px 0px 6px 0px">
+
+	<!-- this is not the last post shown on the page -->
+
+
+
+
+
+
+
+<table id="post53144344" class="tborder legacy myfixedtable" cellpadding="6" cellspacing="0" border="0" width="100%" align="center">
+
+<tr class="headstyle">
+
+	
+
+		<td class="thead block2" style="font-weight:normal; border: 0px solid #FFFFFF; border-right: 0px" >
+
+			<!-- status icon and date -->
+
+			<a name="post53144344"><img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/post_old.gif" alt="Eski" border="0" /></a>
+
+			05-12-13, 04:01
+
+			
+
+			<!-- / status icon and date -->
+
+		</td>
+
+		<td class="thead postcount" style="font-weight:normal; border: 0px solid #FFFFFF; border-left: 0px" align="right">
+
+			#<a href="https://www.frmtr.com/53144344-post3.html" target="new"  id="postcount53144344" name="3"><strong>3</strong></a>
+
+			
+
+		</td>
+
+	
+
+</tr>
+
+<tr valign="top" class="custompostbit">
+
+	<td class="alt2" style="width:200px;border: 0px solid #FFFFFF; border-top: 0px; border-bottom: 0px">
+
+
+
+			<div class="reposition0" id="postmenu_53144344">
+
+				
+
+				<a rel="nofollow" class="bigusername" href="https://www.frmtr.com/member.php?u=4416000">BatiTrakyali93</a>
+
+				<script type="text/javascript"> vbmenu_register("postmenu_53144344", true); </script>
+
+				
+
+					<img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/user_offline.gif" alt="BatiTrakyali93 çevrimdışı" border="0" />
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+<!-- reklam -->
+
+			</div>
+
+
+
+	</td>
+
+	
+
+	<td class="alt1" id="td_post_53144344" style="border-right: 0px solid #FFFFFF">
+
+	
+
+		
+
+		
+
+			<!-- icon and title -->
+
+			<div class="smallfont hideonmobile">
+
+				<img class="inlineimg" src="https://www.frmtr.com/images/icons/icon1.gif" alt="Varsayılan" border="0" />
+
+				<strong>C: Yemek İsimleri Listesi</strong>
+
+			</div>
+
+			<hr class="hideonmobile" size="1" style="color:#FFFFFF; background-color:#FFFFFF" />
+
+			<!-- / icon and title -->
+
+		
+
+
+
+		<!-- message -->
+
+		<div class="postbitcontrol2" id="post_message_53144344">
+
+			
+
+
+
+<!-- reklam -->
+
+
+
+<script type="text/javascript">
+
+var reklamstore_region_id = 1644;
+
+</script>
+
+<script type="text/javascript" src="//adserver.reklamstore.com/reklamstore.js"></script>
+
+
+
+<br />
+
+
+
+                         
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+			<b><i>Adını bile duymadığım ne çok yemek varmış meğer.<br />
+
+Teşekkürler,paylaşım için..</i></b>
+
+
+
+<!-- reklam -->
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+		</div>
+
+		<!-- / message -->
+
+
+
+		
+
+
+
+		
+
+		
+
+
+
+	
+
+
+
+		
+
+
+
+		
+
+
+
+	</td>
+
+</tr>
+
+<tr class="custompostbit2">
+
+	<td class="alt2" style="border: 0px solid #FFFFFF; border-top: 0px">
+
+
+
+
+
+
+
+		
+
+		
+
+		
+
+		
+
+		&nbsp;
+
+	</td>
+
+	
+
+	<td class="alt1" align="right" style="border: 0px solid #FFFFFF; border-left: 0px; border-top: 0px">
+
+	
+
+		<!-- controls -->
+
+		
+
+		
+
+		
+
+			<a href="https://www.frmtr.com/newreply.php?do=newreply&amp;p=53144344" rel="nofollow"><img src="https://www.frmtr.com/images/SultanThemeVB3R/buttons/quote.gif" alt="Alıntı Yaparak Cevapla" border="0"  align="top" /><span class="hideonmobile">Alıntı Yaparak Cevapla</span></a>
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+			
+
+		
+
+		
+
+		<!-- / controls -->
+
+	</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+ 
+
+<!-- post 53144344 popup menu -->
+
+<div class="vbmenu_popup" id="postmenu_53144344_menu" style="display:none">
+
+	<table cellpadding="4" cellspacing="1" border="0">
+
+	<tr>
+
+		<td class="thead">BatiTrakyali93</td>
+
+	</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+		<tr><td class="vbmenu_option"><a rel="nofollow" href="https://www.frmtr.com/member.php?u=4416000">Kullanıcının Profilini Göster</a></td></tr>
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+
+
+	
+
+	
+
+	
+
+	</table>
+
+</div>
+
+<!-- / post 53144344 popup menu -->
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<!-- / close content container -->
+
+
+
+<!-- / post #53144344 --><!-- post #53478933 -->
+
+
+
+	<!-- open content container -->
+
+
+
+<div align="center">
+
+	<div class="page" style="width:100%; text-align:left">
+
+		<div style="padding:0px 25px 0px 25px" align="left" class="paddingmobile">
+
+
+
+	<div id="edit53478933" style="padding:0px 0px 6px 0px">
+
+	<!-- this is not the last post shown on the page -->
+
+
+
+
+
+
+
+<table id="post53478933" class="tborder legacy myfixedtable" cellpadding="6" cellspacing="0" border="0" width="100%" align="center">
+
+<tr class="headstyle">
+
+	
+
+		<td class="thead block2" style="font-weight:normal; border: 0px solid #FFFFFF; border-right: 0px" >
+
+			<!-- status icon and date -->
+
+			<a name="post53478933"><img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/post_old.gif" alt="Eski" border="0" /></a>
+
+			25-12-13, 01:09
+
+			
+
+			<!-- / status icon and date -->
+
+		</td>
+
+		<td class="thead postcount" style="font-weight:normal; border: 0px solid #FFFFFF; border-left: 0px" align="right">
+
+			#<a href="https://www.frmtr.com/53478933-post4.html" target="new"  id="postcount53478933" name="4"><strong>4</strong></a>
+
+			
+
+		</td>
+
+	
+
+</tr>
+
+<tr valign="top" class="custompostbit">
+
+	<td class="alt2" style="width:200px;border: 0px solid #FFFFFF; border-top: 0px; border-bottom: 0px">
+
+
+
+			<div class="reposition0" id="postmenu_53478933">
+
+				
+
+				<a rel="nofollow" class="bigusername" href="https://www.frmtr.com/member.php?u=2845671"><font color="#FFFFFF"><span style="font-weight: 700; background-color: #800000">macellaio</span></font></a>
+
+				<script type="text/javascript"> vbmenu_register("postmenu_53478933", true); </script>
+
+				
+
+					<img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/user_offline.gif" alt="macellaio çevrimdışı" border="0" />
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+<!-- reklam -->
+
+			</div>
+
+
+
+	</td>
+
+	
+
+	<td class="alt1" id="td_post_53478933" style="border-right: 0px solid #FFFFFF">
+
+	
+
+		
+
+		
+
+			<!-- icon and title -->
+
+			<div class="smallfont hideonmobile">
+
+				<img class="inlineimg" src="https://www.frmtr.com/images/icons/icon1.gif" alt="Varsayılan" border="0" />
+
+				<strong>C: Yemek İsimleri Listesi</strong>
+
+			</div>
+
+			<hr class="hideonmobile" size="1" style="color:#FFFFFF; background-color:#FFFFFF" />
+
+			<!-- / icon and title -->
+
+		
+
+
+
+		<!-- message -->
+
+		<div class="postbitcontrol2" id="post_message_53478933">
+
+			
+
+
+
+<!-- reklam -->
+
+
+
+<script type="text/javascript">
+
+var reklamstore_region_id = 1644;
+
+</script>
+
+<script type="text/javascript" src="//adserver.reklamstore.com/reklamstore.js"></script>
+
+
+
+<br />
+
+
+
+                         
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+			<b><i><u><font color="Blue">Çağ kebabı muhteşem <img src="https://www.frmtr.com/images/smilies/smile.gif" border="0" alt="" title="Smile" class="inlineimg" /></font></u></i></b>
+
+
+
+<!-- reklam -->
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+		</div>
+
+		<!-- / message -->
+
+
+
+		
+
+
+
+		
+
+		
+
+
+
+	
+
+
+
+		
+
+
+
+		
+
+
+
+	</td>
+
+</tr>
+
+<tr class="custompostbit2">
+
+	<td class="alt2" style="border: 0px solid #FFFFFF; border-top: 0px">
+
+
+
+
+
+
+
+		
+
+		
+
+		
+
+		
+
+		&nbsp;
+
+	</td>
+
+	
+
+	<td class="alt1" align="right" style="border: 0px solid #FFFFFF; border-left: 0px; border-top: 0px">
+
+	
+
+		<!-- controls -->
+
+		
+
+		
+
+		
+
+			<a href="https://www.frmtr.com/newreply.php?do=newreply&amp;p=53478933" rel="nofollow"><img src="https://www.frmtr.com/images/SultanThemeVB3R/buttons/quote.gif" alt="Alıntı Yaparak Cevapla" border="0"  align="top" /><span class="hideonmobile">Alıntı Yaparak Cevapla</span></a>
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+			
+
+		
+
+		
+
+		<!-- / controls -->
+
+	</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+ 
+
+<!-- post 53478933 popup menu -->
+
+<div class="vbmenu_popup" id="postmenu_53478933_menu" style="display:none">
+
+	<table cellpadding="4" cellspacing="1" border="0">
+
+	<tr>
+
+		<td class="thead">macellaio</td>
+
+	</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+		<tr><td class="vbmenu_option"><a rel="nofollow" href="https://www.frmtr.com/member.php?u=2845671">Kullanıcının Profilini Göster</a></td></tr>
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+
+
+	
+
+	
+
+	
+
+	</table>
+
+</div>
+
+<!-- / post 53478933 popup menu -->
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<!-- / close content container -->
+
+
+
+<!-- / post #53478933 --><!-- post #65284486 -->
+
+
+
+	<!-- open content container -->
+
+
+
+<div align="center">
+
+	<div class="page" style="width:100%; text-align:left">
+
+		<div style="padding:0px 25px 0px 25px" align="left" class="paddingmobile">
+
+
+
+	<div id="edit65284486" style="padding:0px 0px 6px 0px">
+
+	
+
+
+
+
+
+
+
+<table id="post65284486" class="tborder legacy myfixedtable" cellpadding="6" cellspacing="0" border="0" width="100%" align="center">
+
+<tr class="headstyle">
+
+	
+
+		<td class="thead block2" style="font-weight:normal; border: 0px solid #FFFFFF; border-right: 0px" >
+
+			<!-- status icon and date -->
+
+			<a name="post65284486"><img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/post_old.gif" alt="Eski" border="0" /></a>
+
+			28-12-17, 16:22
+
+			
+
+			<!-- / status icon and date -->
+
+		</td>
+
+		<td class="thead postcount" style="font-weight:normal; border: 0px solid #FFFFFF; border-left: 0px" align="right">
+
+			#<a href="https://www.frmtr.com/65284486-post5.html" target="new"  id="postcount65284486" name="5"><strong>5</strong></a>
+
+			
+
+		</td>
+
+	
+
+</tr>
+
+<tr valign="top" class="custompostbit">
+
+	<td class="alt2" style="width:200px;border: 0px solid #FFFFFF; border-top: 0px; border-bottom: 0px">
+
+
+
+			<div class="reposition0" id="postmenu_65284486">
+
+				
+
+				<a rel="nofollow" class="bigusername" href="https://www.frmtr.com/member.php?u=84113"><font color="#007700">MusTi</font></a>
+
+				<script type="text/javascript"> vbmenu_register("postmenu_65284486", true); </script>
+
+				
+
+					
+
+<img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/statusicon-blue/user_online.gif" alt="MusTi çevrimiçi" border="0" />
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+<!-- reklam -->
+
+			</div>
+
+
+
+	</td>
+
+	
+
+	<td class="alt1" id="td_post_65284486" style="border-right: 0px solid #FFFFFF">
+
+	
+
+		
+
+		
+
+			<!-- icon and title -->
+
+			<div class="smallfont hideonmobile">
+
+				<img class="inlineimg" src="https://www.frmtr.com/images/icons/icon1.gif" alt="Varsayılan" border="0" />
+
+				<strong>C: Yemek İsimleri Listesi</strong>
+
+			</div>
+
+			<hr class="hideonmobile" size="1" style="color:#FFFFFF; background-color:#FFFFFF" />
+
+			<!-- / icon and title -->
+
+		
+
+
+
+		<!-- message -->
+
+		<div class="postbitcontrol2" id="post_message_65284486">
+
+			
+
+
+
+<!-- reklam -->
+
+
+
+<script type="text/javascript">
+
+var reklamstore_region_id = 1644;
+
+</script>
+
+<script type="text/javascript" src="//adserver.reklamstore.com/reklamstore.js"></script>
+
+
+
+<br />
+
+
+
+                         
+
+
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+			Guzelmis Eline Saglik
+
+
+
+<!-- reklam -->
+
+
+
+
+
+
+
+<!-- reklam -->
+
+
+
+		</div>
+
+		<!-- / message -->
+
+
+
+		
+
+
+
+		
+
+		
+
+
+
+	
+
+
+
+		
+
+
+
+		
+
+
+
+	</td>
+
+</tr>
+
+<tr class="custompostbit2">
+
+	<td class="alt2" style="border: 0px solid #FFFFFF; border-top: 0px">
+
+
+
+
+
+
+
+		
+
+		
+
+		
+
+		
+
+		&nbsp;
+
+	</td>
+
+	
+
+	<td class="alt1" align="right" style="border: 0px solid #FFFFFF; border-left: 0px; border-top: 0px">
+
+	
+
+		<!-- controls -->
+
+		
+
+		
+
+		
+
+			<a href="https://www.frmtr.com/newreply.php?do=newreply&amp;p=65284486" rel="nofollow"><img src="https://www.frmtr.com/images/SultanThemeVB3R/buttons/quote.gif" alt="Alıntı Yaparak Cevapla" border="0"  align="top" /><span class="hideonmobile">Alıntı Yaparak Cevapla</span></a>
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+		
+
+			
+
+		
+
+		
+
+		<!-- / controls -->
+
+	</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+ 
+
+<!-- post 65284486 popup menu -->
+
+<div class="vbmenu_popup" id="postmenu_65284486_menu" style="display:none">
+
+	<table cellpadding="4" cellspacing="1" border="0">
+
+	<tr>
+
+		<td class="thead">MusTi</td>
+
+	</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+		<tr><td class="vbmenu_option"><a rel="nofollow" href="https://www.frmtr.com/member.php?u=84113">Kullanıcının Profilini Göster</a></td></tr>
+
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	
+
+
+
+
+
+	
+
+	
+
+	
+
+	</table>
+
+</div>
+
+<!-- / post 65284486 popup menu -->
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+
+	
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<!-- / close content container -->
+
+
+
+<!-- / post #65284486 --><div id="lastpost"></div></div>
+
+
+
+<!-- start content table -->
+
+<!-- open content container -->
+
+
+
+<div align="center">
+
+	<div class="page" style="width:100%; text-align:left">
+
+		<div style="padding:0px 25px 0px 25px" align="left" class="paddingmobile">
+
+
+
+<!-- / start content table -->
+
+
+
+<!-- controls below postbits -->
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="clear:both;margin-top:8px">
+
+<tr valign="top">
+
+	
+
+		<td class="smallfont buttondrop2"><a class="newreplybutton" href="https://www.frmtr.com/newreply.php?do=newreply&amp;noquote=1&amp;p=65284486" rel="nofollow">Cevapla</a></td>
+
+	
+
+	
+
+</tr>
+
+</table>
+
+<!-- / controls below postbits -->
+
+
+
+
+
+
+
+
+
+<!-- social bookmarking links -->
+
+	<br class="hidebookmark" />
+
+	<table cellpadding="6" cellspacing="0" border="0" width="100%" class="tborder hidebookmark" align="center">
+
+	<tr>
+
+		<td class="thead">Bu konunun kısa yolunu aşağıdaki sitelere ekleyebilirsiniz</td>
+
+	</tr>
+
+	<tr>
+
+		<td class="alt2" style="padding-top:0px"><div style="clear:both"></div><ul style="list-style-type:none; margin:0px; padding:0px"><li class="smallfont" style="width:25%; min-width:160px; float:left; margin-top:6px">
+
+	
+
+		<a rel="nofollow" href="https://www.facebook.com/share.php?u=https%3A%2F%2Fwww.frmtr.com%2Fshowthread.php%3Ft%3D5697869" target="socialbookmark"><img src="https://www.frmtr.com/images/SultanThemeVB3R/misc/bookmarksite_facebook.gif" border="0" alt="Submit Thread to Facebook" class="inlineimg" /></a>
+
+	
+
+	<a rel="nofollow" href="https://www.facebook.com/share.php?u=https%3A%2F%2Fwww.frmtr.com%2Fshowthread.php%3Ft%3D5697869" target="socialbookmark" style="text-decoration:none">Facebook</a>
+
+</li><li class="smallfont" style="width:25%; min-width:160px; float:left; margin-top:6px">
+
+	
+
+		<a rel="nofollow" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.frmtr.com%2Fshowthread.php%3Ft%3D5697869" target="socialbookmark"><img src="https://www.frmtr.com/images/SultanThemeVB3R/misc/bookmarksite_google.png" border="0" alt="Submit Thread to Google" class="inlineimg" /></a>
+
+	
+
+	<a rel="nofollow" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.frmtr.com%2Fshowthread.php%3Ft%3D5697869" target="socialbookmark" style="text-decoration:none">Google</a>
+
+</li><li class="smallfont" style="width:25%; min-width:160px; float:left; margin-top:6px">
+
+	
+
+		<a rel="nofollow" href="https://twitter.com/home?status=https%3A%2F%2Fwww.frmtr.com%2Fshowthread.php%3Ft%3D5697869" target="socialbookmark"><img src="https://www.frmtr.com/images/SultanThemeVB3R/misc/bookmarksite_twitter.png" border="0" alt="Submit Thread to Twitter" class="inlineimg" /></a>
+
+	
+
+	<a rel="nofollow" href="https://twitter.com/home?status=https%3A%2F%2Fwww.frmtr.com%2Fshowthread.php%3Ft%3D5697869" target="socialbookmark" style="text-decoration:none">Twitter</a>
+
+</li></ul><div style="clear:both"></div></td>
+
+	</tr>
+
+	</table>
+
+<!-- / social bookmarking links -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- lightbox scripts -->
+
+	<script type="text/javascript" src="https://www.frmtr.com/clientscript/vbulletin_lightbox.js?v=389"></script>
+
+	<script type="text/javascript">
+
+	<!--
+
+	vBulletin.register_control("vB_Lightbox_Container", "posts", 1);
+
+	//-->
+
+	</script>
+
+<!-- / lightbox scripts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- next / previous links -->
+
+	<br />
+
+	<div class="smallfont nextprevstyle" align="center">
+
+		<strong>&laquo;</strong>
+
+			<a href="https://www.frmtr.com/damak-keyfi/5697869-yemek-isimleri-listesi-prev-thread.html" rel="nofollow">Önceki Konu</a>
+
+			|
+
+			<a href="https://www.frmtr.com/damak-keyfi/5697869-yemek-isimleri-listesi-next-thread.html" rel="nofollow">Sonraki Konu</a>
+
+		<strong>&raquo;</strong>
+
+	</div>
+
+<!-- / next / previous links -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- popup menu contents -->
+
+<br />
+
+
+
+<!-- thread tools menu -->
+
+<div class="vbmenu_popup" id="threadtools_menu" style="display:none">
+
+<form action="https://www.frmtr.com/postings.php?t=5697869&amp;pollid=" method="post" name="threadadminform">
+
+	<table cellpadding="4" cellspacing="1" border="0">
+
+	<tr>
+
+		<td class="thead">Konu Araçları<a name="goto_threadtools"></a></td>
+
+	</tr>
+
+	<tr>
+
+		<td class="vbmenu_option"><img class="inlineimg" src="https://www.frmtr.com/images/SultanThemeVB3R/buttons/printer.gif" alt="Çıktı Görüntüsünü Göster" /> <a href="https://www.frmtr.com/printthread.php?t=5697869" accesskey="3" rel="nofollow">Çıktı Görüntüsünü Göster</a></td>
+
+	</tr>
+
+	
+
+	
+
+	
+
+	
+
+	</table>
+
+</form>
+
+</div>
+
+<!-- / thread tools menu -->
+
+
+
+<!-- **************************************************** -->
+
+
+
+
+
+
+
+<!-- **************************************************** -->
+
+
+
+
+
+
+
+<!-- / popup menu contents -->
+
+
+
+
+
+<!-- forum rules and admin links -->
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+
+<tr valign="bottom">
+
+	<td class="forumrulescol" width="100%" valign="top">
+
+		<table class="tborder forumrules" cellpadding="6" cellspacing="0" border="0" width="98%">
+
+<thead>
+
+<tr>
+
+	<td class="thead">
+
+		<a style="float:right" href="https://www.frmtr.com/damak-keyfi/5697869-yemek-isimleri-listesi.html#top" onclick="return toggle_collapse('forumrules')"><img id="collapseimg_forumrules" src="https://www.frmtr.com/images/SultanThemeVB3R/buttons/collapse_thead.gif" alt="" border="0" /></a>
+
+		Gönderme Kuralları
+
+	</td>
+
+</tr>
+
+</thead>
+
+<tbody id="collapseobj_forumrules" style="">
+
+<tr>
+
+	<td class="alt1" nowrap="nowrap"><div class="smallfont">
+
+		
+
+		<div>Yeni konu <strong>açamazsınız</strong></div>
+
+		<div>Cevap <strong>yazamazsınız</strong></div>
+
+		<div>Dosya <strong>gönderemezsiniz</strong></div>
+
+		<div>Mesajlarınızı <strong>düzenleyemezsiniz</strong></div>
+
+		<hr />
+
+		
+
+		<div><a rel="nofollow" href="https://www.frmtr.com/misc.php?do=bbcode" target="_blank">BB code</a> is <strong>Açık</strong></div>
+
+		<div><a rel="nofollow" href="https://www.frmtr.com/misc.php?do=showsmilies" target="_blank">Smiley</a> <strong>Açık</strong></div>
+
+		<div><a rel="nofollow" href="https://www.frmtr.com/misc.php?do=bbcode#imgcode" target="_blank">[IMG]</a> kodu <strong>Açık</strong></div>
+
+		<div>HTML kodu <strong>Kapalı</strong></div>
+
+		<hr />
+
+		<div><a rel="nofollow" href="https://www.frmtr.com/misc.php?do=showrules" target="_blank">Forum Rules</a></div>
+
+	</div></td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+	</td>
+
+	<td class="smallfont" align="right">
+
+		<table cellpadding="0" cellspacing="0" border="0">
+
+		
+
+		<tr>
+
+			<td>
+
+			
+
+			</td>
+
+		</tr>
+
+		</table>
+
+	</td>
+
+</tr>
+
+</table>
+
+<!-- /forum rules and admin links -->
+
+
+
+<br />
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
+<div class="smallfont timestyle" align="center" style="clear:both;">Tüm saatler GMT +3. Şuan saat: <span class="time">08:52</span><br /><font size="1">(Türkiye için artık GMT +3 seçilmelidir.)</font></div>
+
+<br />
+
+
+
+<div align="center">
+
+
+
+
+
+<script type="text/javascript">
+
+var reklamstore_region_id = 1644;
+
+</script>
+
+<script type="text/javascript" src="//adserver.reklamstore.com/reklamstore.js"></script>
+
+
+
+
+
+</div>
+
+
+
+
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<!-- / close content container -->
+
+<!-- /content area table -->
+
+<form action="https://www.frmtr.com/index.php" method="get" style="clear:left">
+
+
+
+<div align="center" class="hidecopytext">
+
+	<div class="smallfont" align="center">
+
+	<!-- Do not remove this copyright notice -->
+
+	 
+
+	<!-- Do not remove this copyright notice -->
+
+	</div>
+
+
+
+	<div class="smallfont" align="center">
+
+	<!-- Do not remove cronimage or your scheduled tasks will cease to function -->
+
+	
+
+	<!-- Do not remove cronimage or your scheduled tasks will cease to function -->
+
+
+
+	
+
+	</div>
+
+</div>
+
+<table cellpadding="6" cellspacing="0" border="0" width="100%" class="page footerselector" align="center">
+
+<tr>
+
+	
+
+	
+
+	<td class="tfoot footselectorhide" align="right" width="100%">&nbsp;</td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+<!--
+
+	// Main vBulletin Javascript Initialization
+
+	vBulletin_init();
+
+//-->
+
+</script>
+
+
+
+
+
+<div class="footerwrap">
+
+<div class="columnwrap">
+
+
+
+<div class="columnL">
+
+<div class="columncontent columnleft">
+
+</font><font face="Arial" size="1">
+
+5651 sayılı yasaya göre forumumuzdaki mesajlardan doğabilecek her türlü sorumluluk yazan kullanıcılara aittir. 
+
+Şikayet <a rel="nofollow" href="/cdn-cgi/l/email-protection#5122383a302834251137233c25237f323e3c">Mailimiz</a>. İçerik, Yer Sağlayıcı <a href="https://www.frmtr.com/iletisim.html">Bilgilerimiz</a>. 
+
+Reklam <a rel="nofollow" href="/cdn-cgi/l/email-protection#3644535d5a575b7650445b42441855595b094543545c5355420b44535d5a575b">Mailimiz.</a> <a href="https://www.frmtr.com/adsense.html">Gizlilik Politikası.</a> <a href="http://www.tatilsitesi.com">Tatil</a></font>
+
+
+
+
+
+
+
+</div><!-- end columncontent -->
+
+</div><!-- end columnL -->
+
+
+
+<div class="columnR">
+
+<div class="columncontent">
+
+
+
+</div><!-- end columncontent -->
+
+</div><!-- end columnR -->
+
+
+
+<div class="columnC">
+
+<div class="columncontent">
+
+
+
+</div><!-- end columncontent -->
+
+</div><!-- end columnC -->
+
+
+
+
+
+</div><!-- end columnwrap -->
+
+</div><!-- end footerwrap -->
+
+
+
+
+
+<div class="footwrap tcat">
+
+
+
+		<div class="footlinks">
+
+			<strong>
+
+				
+
+				<a href="https://www.frmtr.com">Ana Sayfa</a> 
+
+				
+
+				
+
+
+
+				
+
+				
+
+				
+
+
+
+			</strong>
+
+		</div>
+
+<div class="copywrap">Copyright © 2016 </div><!-- end copywrap -->
+
+</div><!-- end footwrap -->
+
+
+
+
+
+                
+
+
+
+<table align="center" cellpadding="0" cellspacing="0" style="width: 1200px">
+
+	<tr>
+
+		<td align="center">
+
+		
+
+<div id="ENGAGEYA_WIDGET_112744"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/af2821b0/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false">
+
+(function(E,n,G,A,g,Y,a){E['EngageyaObject']=g;E[g]=E[g]||function(){ (E[g].q=E[g].q||[]).push(arguments)},E[g].l=1*new Date();Y=n.createElement(G), a=n.getElementsByTagName(G)[0];Y.async=1;Y.src=A;a.parentNode.insertBefore(Y,a)})(window,document,'script','//widget.engageya.com/engageya_loader.js','__engWidget');
+
+__engWidget('createWidget',{wwei:'ENGAGEYA_WIDGET_112744',pubid:160717,webid:121049,wid:112744});
+
+</script>
+
+	
+
+		</td>
+
+	</tr>
+
+</table>
+
+
+
+
+
+
+
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+
+  ga('create', 'UA-72752-1', 'auto');
+
+  ga('send', 'pageview');
+
+
+
+</script>
+
+
+
+
+
+
+				<script type="text/javascript">
+					<!--
+					vbphrase['dbtech_thanks_must_wait_x_seconds'] = "Tıklamalar arasında en az %time% saniye beklemelisiniz. Son tıklamanızdan sonra sadece %time2% saniye geçti."
+					vbphrase['dbtech_thanks_people_who_clicked'] = "People Who Clicked"
+					vbphrase['dbtech_thanks_loading'] = "Loading"
+					vbphrase['dbtech_thanks_noone_clicked'] = "No one clicked."
+					
+		var thanksOptions = {"threadId":"5697869","vbversion":"3","postCount":"5","thanksEntries":{"53129767":{"likes":"1"},"53144344":{"likes":"1"},"53478933":{"likes":"1"}},"colorOptions":{"likes":{"10":{"color":"White","settings":""}}},"contenttype":"post","floodTime":"3","noRefresh":"0"};
+	
+					// -->
+				</script>
+			<script type="text/javascript"> window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">\x3C/script>'); </script><script type="text/javascript" src="https://www.frmtr.com/dbtech/thanks/clientscript/jquery.qtip.min.js"></script><script type="text/javascript" src="https://www.frmtr.com/dbtech/thanks/clientscript/thanks.js?v=362"></script>
+
+
+
+<!-- temp -->
+
+<div style="display:none">
+
+	<!-- thread rate -->
+
+	
+
+		
+
+	
+
+	<!-- / thread rate -->
+
+</div>
+
+
+
+</body>
+
+</html>
