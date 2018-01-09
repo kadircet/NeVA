@@ -21,3 +21,17 @@ cc_binary(
         "@glog//:glog",
     ],
 )
+
+cc_library(
+    name = "json",
+    srcs = ["json.hpp"],
+    hdrs = ["json.hpp"],
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "json_header",
+    srcs = ["@json//file"],
+    outs = ["json.hpp"],
+    cmd = "cp $(locations @json//file) $@",
+)
