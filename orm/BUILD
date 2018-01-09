@@ -5,6 +5,7 @@ cc_library(
     srcs = ["user_orm.cc"],
     hdrs = ["user_orm.h"],
     deps = [
+        ":connectionpool",
         "//protos:backend_proto",
         "//protos:user_proto",
         "//social_media:facebook_validator",
@@ -20,6 +21,7 @@ cc_library(
     srcs = ["proposition_orm.cc"],
     hdrs = ["proposition_orm.h"],
     deps = [
+        ":connectionpool",
         "//protos:suggestion_proto",
         "@glog//:glog",
     ],
@@ -30,6 +32,7 @@ cc_library(
     srcs = ["suggestion_orm.cc"],
     hdrs = ["suggestion_orm.h"],
     deps = [
+        ":connectionpool",
         "//protos:suggestion_proto",
         "//protos:user_history_proto",
         "//recommender",
@@ -42,6 +45,7 @@ cc_library(
     srcs = ["user_history_orm.cc"],
     hdrs = ["user_history_orm.h"],
     deps = [
+        ":connectionpool",
         "//protos:user_history_proto",
         "//protos:user_proto",
         "@glog//:glog",
@@ -53,7 +57,17 @@ cc_library(
     srcs = ["tag_orm.cc"],
     hdrs = ["tag_orm.h"],
     deps = [
+        ":connectionpool",
         "//protos:suggestion_proto",
+        "@glog//:glog",
+    ],
+)
+
+cc_library(
+    name = "connectionpool",
+    srcs = ["connectionpool.cc"],
+    hdrs = ["connectionpool.h"],
+    deps = [
         "@glog//:glog",
     ],
 )

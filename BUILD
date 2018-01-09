@@ -6,6 +6,7 @@ cc_binary(
     name = "neva_backend",
     srcs = ["backend.cc"],
     deps = [
+        "//orm:connectionpool",
         "//orm:proposition_orm",
         "//orm:suggestion_orm",
         "//orm:tag_orm",
