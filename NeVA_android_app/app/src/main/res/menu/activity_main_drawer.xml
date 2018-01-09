@@ -22,6 +22,9 @@
 
     <group
         android:id="@+id/nav_menu_bottom">
+            <item android:id="@+id/nav_profile"
+              android:icon="@mipmap/ic_person_black_24dp"
+                android:title="Profile"/>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@mipmap/ic_exit_to_app_white_24dp"

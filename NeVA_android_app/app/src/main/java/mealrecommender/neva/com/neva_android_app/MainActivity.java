@@ -256,6 +256,8 @@ public class MainActivity extends AppCompatActivity
       fragmentClass = ProposeFragment.class;
     } else if (id == R.id.nav_history) {
       fragmentClass = HistoryFragment.class;
+    } else if (id == R.id.nav_profile){
+      fragmentClass = UserFragment.class;
     } else if (id == R.id.nav_logout) {
       AccountManager am = AccountManager.get(getBaseContext());
       Account acc[] = am.getAccountsByType(LoginActivity.ACCOUNT_TYPE);

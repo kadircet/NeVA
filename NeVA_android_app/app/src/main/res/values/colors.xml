@@ -11,5 +11,5 @@
     <color name="textSecondaryColor">#ffffff</color>
     <color name="textHintColor">#a3a4a5</color>
     <color name="ic_launcher_background">#F8B04C</color>
-    <color name="backgroundWhite">#ffffff</color>
+    <color name="backgroundWhite">#dddddd</color>
 </resources>

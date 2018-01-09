@@ -20,6 +20,8 @@ import neva.backend.BackendOuterClass.GetSuggestionItemListReply;
 import neva.backend.BackendOuterClass.GetSuggestionItemListRequest;
 import neva.backend.BackendOuterClass.GetTagsReply;
 import neva.backend.BackendOuterClass.GetTagsRequest;
+import neva.backend.BackendOuterClass.GetUserReply;
+import neva.backend.BackendOuterClass.GetUserRequest;
 import neva.backend.BackendOuterClass.InformUserChoiceReply;
 import neva.backend.BackendOuterClass.InformUserChoiceRequest;
 import neva.backend.BackendOuterClass.LoginReply;
@@ -35,6 +37,7 @@ import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 import neva.backend.SuggestionOuterClass.Tag;
 import neva.backend.UserHistoryOuterClass.Choice;
 import neva.backend.UserOuterClass;
+import neva.backend.UserOuterClass.User;
 import neva.backend.UserOuterClass.User.Gender;
 import neva.backend.util.Util.Timestamp;
 
@@ -43,6 +46,7 @@ import neva.backend.util.Util.Timestamp;
  */
 
 public class NevaConnectionManager {
+
   private final String TAG = this.getClass().getSimpleName();
   private final String serverAddress = "neva.0xdeffbeef.com";
   private final int serverPort = 50051;
@@ -57,7 +61,7 @@ public class NevaConnectionManager {
   }
 
   public static NevaConnectionManager getInstance() {
-    if(instance == null) {
+    if (instance == null) {
       instance = new NevaConnectionManager();
     }
     return instance;
@@ -65,10 +69,10 @@ public class NevaConnectionManager {
 
   public LoginReply loginRequest(String email, String password, AuthenticationType auth) {
     LoginRequest request = LoginRequest.newBuilder()
-                                      .setEmail(email)
-                                      .setPassword(password)
-                                      .setAuthenticationType(auth)
-                                      .build();
+        .setEmail(email)
+        .setPassword(password)
+        .setAuthenticationType(auth)
+        .build();
 
     try {
       return blockingStub.login(request);
@@ -78,7 +82,8 @@ public class NevaConnectionManager {
     }
   }
 
-  public boolean registerRequest(String username, String email, String password, Gender gender, Timestamp bdate) {
+  public boolean registerRequest(String username, String email, String password, Gender gender,
+      Timestamp bdate) {
     UserOuterClass.User user = UserOuterClass.User.newBuilder().setName(username).setEmail(email)
         .setGender(gender).setDateOfBirth(bdate).setPassword(password).build();
 
@@ -94,7 +99,7 @@ public class NevaConnectionManager {
 
   public boolean checkToken(ByteString token) {
     CheckTokenRequest request = CheckTokenRequest.newBuilder().setToken(token).build();
-    try{
+    try {
       GenericReply reply = blockingStub.checkToken(request);
       return true;
     } catch (Exception e) {
@@ -108,7 +113,7 @@ public class NevaConnectionManager {
         .setToken(NevaLoginManager.getInstance().getByteStringToken())
         .setStartIndex(tagTableVersion)
         .build();
-    try{
+    try {
       GetTagsReply reply = blockingStub.getTags(request);
       return reply.getTagListList();
     } catch (Exception e) {
@@ -117,7 +122,8 @@ public class NevaConnectionManager {
     }
   }
 
-  public GetSuggestionItemListReply getSuggestions(SuggestionCategory category, int mealTableVersion) {
+  public GetSuggestionItemListReply getSuggestions(SuggestionCategory category,
+      int mealTableVersion) {
     GetSuggestionItemListRequest request = GetSuggestionItemListRequest.newBuilder()
         .setToken(NevaLoginManager.getInstance().getByteStringToken())
         .setSuggestionCategory(category)
@@ -133,7 +139,8 @@ public class NevaConnectionManager {
   }
 
   public boolean tagValueProposition(int mealId, int tagId) {
-    TagValuePropositionRequest request = TagValuePropositionRequest.newBuilder().setToken(NevaLoginManager.getInstance().getByteStringToken())
+    TagValuePropositionRequest request = TagValuePropositionRequest.newBuilder()
+        .setToken(NevaLoginManager.getInstance().getByteStringToken())
         .setSuggesteeId(mealId).setTagId(tagId).build();
     try {
       GenericReply reply = blockingStub.tagValueProposition(request);
@@ -146,33 +153,33 @@ public class NevaConnectionManager {
 
   public boolean suggestionItemProposition(String suggestionName) {
     Suggestion suggestion = Suggestion.newBuilder()
-                                      .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
-                                      .setName(suggestionName)
-                                      .build();
+        .setSuggestionCategory(SuggestionOuterClass.Suggestion.SuggestionCategory.MEAL)
+        .setName(suggestionName)
+        .build();
 
     SuggestionItemPropositionRequest request = SuggestionItemPropositionRequest.newBuilder()
-                                      .setToken(NevaLoginManager.getInstance().getByteStringToken())
-                                      .setSuggestion(suggestion)
-                                      .build();
+        .setToken(NevaLoginManager.getInstance().getByteStringToken())
+        .setSuggestion(suggestion)
+        .build();
 
     try {
       GenericReply genRep = blockingStub.suggestionItemProposition(request);
       return true;
     } catch (Exception e) {
-      Log.d("SUGG_Click", "Exception: "+ e.getMessage());
+      Log.d("SUGG_Click", "Exception: " + e.getMessage());
       return false;
     }
   }
 
   public boolean tagProposition(String tagName) {
-     TagPropositionRequest request = TagPropositionRequest.newBuilder()
-                                                          .setToken(NevaLoginManager.getInstance().getByteStringToken())
-                                                          .setTag(tagName).build();
+    TagPropositionRequest request = TagPropositionRequest.newBuilder()
+        .setToken(NevaLoginManager.getInstance().getByteStringToken())
+        .setTag(tagName).build();
     try {
       BackendOuterClass.GenericReply genRep = blockingStub.tagProposition(request);
       return true;
     } catch (Exception e) {
-      Log.d(TAG, "Tag Propose Exception: "+ e.getMessage());
+      Log.d(TAG, "Tag Propose Exception: " + e.getMessage());
       return false;
     }
   }
@@ -192,7 +199,8 @@ public class NevaConnectionManager {
     }
   }
 
-  public InformUserChoiceReply informUserChoice(int mealId, long epochTime, double latitude, double longitude) {
+  public InformUserChoiceReply informUserChoice(int mealId, long epochTime, double latitude,
+      double longitude) {
     Choice choice = Choice.newBuilder()
         .setSuggesteeId(mealId)
         .setTimestamp(Timestamp.newBuilder()
@@ -202,16 +210,16 @@ public class NevaConnectionManager {
         .build();
 
     Log.d(TAG, "Created choice with: ");
-    Log.d(TAG, "\tMeal Id: "+Integer.toString(mealId));
-    Log.d(TAG, "\tTimestamp(ms): "+ Long.toString(epochTime));
-    Log.d(TAG, "\tLatitude: "+Double.toString(latitude) + " Longitude: " + Double.toString(longitude));
-
+    Log.d(TAG, "\tMeal Id: " + Integer.toString(mealId));
+    Log.d(TAG, "\tTimestamp(ms): " + Long.toString(epochTime));
+    Log.d(TAG,
+        "\tLatitude: " + Double.toString(latitude) + " Longitude: " + Double.toString(longitude));
 
     InformUserChoiceRequest request = InformUserChoiceRequest.newBuilder()
         .setChoice(choice)
         .setToken(NevaLoginManager.getInstance().getByteStringToken())
         .build();
-    try{
+    try {
       Log.d(TAG, "Sending \"Choice\" to server");
       return blockingStub.informUserChoice(request);
     } catch (Exception e) {
@@ -220,7 +228,7 @@ public class NevaConnectionManager {
     }
   }
 
-  public List<Suggestion> getMultipleSuggestions(){
+  public List<Suggestion> getMultipleSuggestions() {
     GetMultipleSuggestionsRequest request = GetMultipleSuggestionsRequest.newBuilder()
         .setToken(NevaLoginManager.getInstance().getByteStringToken())
         .setSuggestionCategory(SuggestionCategory.MEAL)
@@ -232,6 +240,20 @@ public class NevaConnectionManager {
       Log.e(TAG, e.getMessage());
       return null;
     }
+  }
+
+  public User getUser() {
+    GetUserRequest request = GetUserRequest.newBuilder()
+        .setToken(NevaLoginManager.getInstance().getByteStringToken()).build();
+
+    try {
+      GetUserReply reply = blockingStub.getUser(request);
+      return reply.getUser();
+    } catch (Exception e) {
+      Log.e(TAG, e.getMessage());
+      return null;
+    }
+
   }
 
 }
