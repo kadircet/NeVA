@@ -5,6 +5,7 @@
 #include <mysql++.h>
 #include <cstdint>
 #include <memory>
+#include "orm/connectionpool.h"
 #include "protos/suggestion.pb.h"
 
 namespace neva {
@@ -14,7 +15,8 @@ namespace orm {
 class PropositionOrm {
  public:
   // Initiates PropositionOrm class wih given mysql connection.
-  PropositionOrm(std::shared_ptr<mysqlpp::Connection> conn) : conn_(conn) {}
+  PropositionOrm(std::shared_ptr<NevaConnectionPool> conn_pool)
+      : conn_pool_(conn_pool) {}
 
   // Inserts given suggestion item proposition to database.
   grpc::Status InsertProposition(const int user_id,
@@ -29,7 +31,7 @@ class PropositionOrm {
                                  const std::string& value);
 
  private:
-  std::shared_ptr<mysqlpp::Connection> conn_;
+  std::shared_ptr<NevaConnectionPool> conn_pool_;
 };
 
 }  // namespace orm
