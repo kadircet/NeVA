@@ -13,7 +13,7 @@ using grpc::StatusCode;
 
 // Fetches tags associated with given suggestee and stores them into it.
 // Assumes suggestee->suggestee_id is set.
-void GetTags(mysqlpp::Connection* conn, Suggestion* suggestee) {
+void GetTags(const mysqlpp::ScopedConnection& conn, Suggestion* suggestee) {
   mysqlpp::Query query = conn->query(
       "SELECT `tag_id` FROM `suggestee_tags` WHERE `suggestee_id`=%0");
   query.parse();
@@ -30,11 +30,8 @@ Status SuggestionOrm::GetSuggestees(
     const Suggestion::SuggestionCategory suggestion_category,
     const uint32_t start_index, SuggestionList* suggestion_list,
     uint32_t* last_updated) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
-  mysqlpp::Query query = conn_->query(
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query(
       "SELECT `id`, `name`, `last_updated` FROM `suggestee` WHERE "
       "`category_id`=%0 AND `last_updated`>%1");
   query.parse();
@@ -48,7 +45,7 @@ Status SuggestionOrm::GetSuggestees(
     suggestion.set_name(row["name"]);
     max_updated =
         std::max(max_updated, static_cast<uint32_t>(row["last_updated"]));
-    GetTags(conn_.get(), &suggestion);
+    GetTags(conn, &suggestion);
     *suggestion_list->add_suggestion_list() = suggestion;
     VLOG(1) << suggestion.ShortDebugString() << " has been added to response.";
   }
@@ -60,10 +57,6 @@ Status SuggestionOrm::GetSuggestion(
     const UserHistory& user_history,
     const Suggestion::SuggestionCategory suggestion_category,
     Suggestion* suggestion) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
   SuggestionList suggestion_list;
   GetSuggestees(suggestion_category, 0, &suggestion_list);
 
@@ -83,10 +76,6 @@ Status SuggestionOrm::GetMultipleSuggestions(
     const UserHistory& user_history,
     const Suggestion::SuggestionCategory suggestion_category,
     SuggestionList* suggestion_list) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
   SuggestionList all_suggestees;
   GetSuggestees(suggestion_category, 0, &all_suggestees);
 

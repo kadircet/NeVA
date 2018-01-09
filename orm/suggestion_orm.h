@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <memory>
 #include <vector>
+#include "orm/connectionpool.h"
 #include "protos/suggestion.pb.h"
 #include "protos/user_history.pb.h"
 
@@ -16,7 +17,8 @@ namespace orm {
 class SuggestionOrm {
  public:
   // Initiates SuggestionOrm class wih given mysql connection.
-  SuggestionOrm(std::shared_ptr<mysqlpp::Connection> conn) : conn_(conn) {}
+  SuggestionOrm(std::shared_ptr<NevaConnectionPool> conn)
+      : conn_pool_(conn_pool) {}
 
   grpc::Status GetSuggestees(
       const Suggestion::SuggestionCategory suggestion_category,
@@ -34,7 +36,7 @@ class SuggestionOrm {
       SuggestionList* suggestion_list);
 
  private:
-  std::shared_ptr<mysqlpp::Connection> conn_;
+  std::shared_ptr<NevaConnectionPool> conn_pool_;
 };
 
 }  // namespace orm
