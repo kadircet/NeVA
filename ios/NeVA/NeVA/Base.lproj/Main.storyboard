@@ -511,15 +511,24 @@ Meal Recommender</string>
                                     <action selector="pressedLike:" destination="BWU-M1-OCj" eventType="touchUpInside" id="FAn-qB-rI3"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yMV-Bn-qfI">
+                                <rect key="frame" x="169" y="571" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="GLf-XU-iIJ"/>
+                                    <constraint firstAttribute="width" constant="37" id="ka3-xY-ic0"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="yMV-Bn-qfI" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" id="2gB-cL-07B"/>
                             <constraint firstItem="C1k-Td-gqd" firstAttribute="trailing" secondItem="CiU-LC-iDH" secondAttribute="trailing" id="5aD-tr-OUg"/>
                             <constraint firstItem="dsb-2B-Bm0" firstAttribute="centerY" secondItem="IXI-21-wmd" secondAttribute="centerY" id="7nF-TE-tMH"/>
                             <constraint firstAttribute="bottom" secondItem="CiU-LC-iDH" secondAttribute="bottom" id="Iph-eh-n28"/>
                             <constraint firstItem="CiU-LC-iDH" firstAttribute="leading" secondItem="C1k-Td-gqd" secondAttribute="leading" id="Lb6-qg-PP8"/>
                             <constraint firstItem="X2E-ae-CR2" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" constant="70" id="WRU-79-6Qq"/>
                             <constraint firstItem="X2E-ae-CR2" firstAttribute="top" secondItem="dsb-2B-Bm0" secondAttribute="bottom" constant="25" id="X3J-aI-tVD"/>
+                            <constraint firstItem="C1k-Td-gqd" firstAttribute="bottom" secondItem="yMV-Bn-qfI" secondAttribute="bottom" constant="10" id="gui-xS-jxi"/>
                             <constraint firstItem="dsb-2B-Bm0" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" id="hnE-ob-hKQ"/>
                             <constraint firstItem="CiU-LC-iDH" firstAttribute="top" secondItem="IXI-21-wmd" secondAttribute="top" id="kjg-b9-Eok"/>
                             <constraint firstItem="xNr-22-KEa" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" constant="-70" id="qcg-a0-fqe"/>
@@ -529,6 +538,7 @@ Meal Recommender</string>
                     </view>
                     <tabBarItem key="tabBarItem" title="Recommendation" image="gift" landscapeImage="gift" largeContentSizeImage="gift" id="e6s-K5-ojo"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="yMV-Bn-qfI" id="h0E-Ab-BLx"/>
                         <outlet property="recommendationKolodaView" destination="dsb-2B-Bm0" id="V70-xZ-h2f"/>
                     </connections>
                 </viewController>

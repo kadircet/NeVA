@@ -11,7 +11,8 @@ import CoreData
 import Koloda
 
 class RecommendationViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSource {
-
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var foods: [Meal] = []
     
     @IBAction func pressedDislike(_ sender: Any) {
@@ -38,11 +39,14 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
     }
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-        getRecommendationList()
-        koloda.resetCurrentCardIndex()
+        getRecommendationList(koloda)
     }
     
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        /* Enable for testing if mysqlpp is still not thread safe
+         if index == foods.count-1 {
+            return
+        }*/
         var request = Neva_Backend_RecordFeedbackRequest()
         request.token = UserToken.token!
         var feedback = Neva_Backend_UserFeedback()
@@ -63,11 +67,19 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
         choice.suggesteeID = UInt32(foods[index].id)
         feedback.choice = choice
         request.userFeedback = feedback
-        
+        print(request)
         let service = NevaConstants.service
         do {
-            let response = try service.recordfeedback(request)
-            print(response)
+            let call = try service.recordfeedback(request) {responseMessage, callResult in
+                //print("recordfeedback callback start")
+                if let responseMessage = responseMessage {
+                    print(responseMessage)
+                } else  {
+                    print("No message received. \(callResult)")
+                }
+                //print("recordfeedback callback end")
+            }
+            //print(call)
         } catch (let error) {
             print(error)
         }
@@ -84,21 +96,32 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
     
     @IBOutlet weak var recommendationKolodaView: KolodaView!
     
-    func getRecommendationList() {
+    func getRecommendationList(_ koloda: KolodaView?) {
+        activityIndicator.startAnimating()
         foods = []
         var request = Neva_Backend_GetMultipleSuggestionsRequest()
         request.token = UserToken.token!
         request.suggestionCategory = .meal
         let service = NevaConstants.service
         do {
-            //TODO: DO IT ASYNC
-            let reply = try service.getmultiplesuggestions(request)
-            print(reply)
-            for suggestedItem in reply.suggestion.suggestionList {
-                if let meal = getMeal(with: Int(suggestedItem.suggesteeID)) {
-                    foods.append(meal)
+            let call = try service.getmultiplesuggestions(request) {responseMessage, callResult in
+                //print("getmultiplesuggestion callback start")
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    if let responseMessage = responseMessage {
+                        for suggestedItem in responseMessage.suggestion.suggestionList {
+                            if let meal = self.getMeal(with: Int(suggestedItem.suggesteeID)) {
+                                self.foods.append(meal)
+                            }
+                        }
+                        koloda?.resetCurrentCardIndex()
+                    } else  {
+                        print("No message received. \(callResult)")
+                    }
                 }
+                //print("getmultiplesuggestion callback end")
             }
+            //print(call)
         } catch (let error){
             print(error)
         }
@@ -106,10 +129,10 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRecommendationList()
         recommendationKolodaView.delegate = self
         recommendationKolodaView.dataSource = self
-        
+        getRecommendationList(recommendationKolodaView)
+
         // Do any additional setup after loading the view.
     }
 
