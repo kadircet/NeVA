@@ -13,19 +13,16 @@ using grpc::StatusCode;
 
 Status TagOrm::GetTags(const uint32_t start_index,
                        ::google::protobuf::RepeatedPtrField<Tag>* tag_list) {
-  if (!conn_->ping()) {
-    return Status(StatusCode::UNKNOWN, "SQL server connection faded away.");
-  }
-
+  mysqlpp::ScopedConnection conn(*conn_pool_);
   mysqlpp::Query query =
-      conn_->query("SELECT `id`, `key` FROM `tag` WHERE `id`>%0");
+      conn->query("SELECT `id`, `key` FROM `tag` WHERE `id`>%0");
   query.parse();
 
   const mysqlpp::StoreQueryResult res = query.store(start_index);
   if (!res) {
     return Status(StatusCode::INTERNAL, query.error());
   }
-  for (const auto row : res) {
+  for (const auto& row : res) {
     Tag* tag = tag_list->Add();
     tag->set_id(row["id"]);
     tag->set_name(row["key"]);

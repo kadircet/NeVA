@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <memory>
 #include <vector>
+#include "orm/connectionpool.h"
 #include "protos/suggestion.pb.h"
 
 namespace neva {
@@ -16,14 +17,15 @@ namespace orm {
 class TagOrm {
  public:
   // Initiates TagOrm class wih given mysql connection.
-  TagOrm(std::shared_ptr<mysqlpp::Connection> conn) : conn_(conn) {}
+  TagOrm(std::shared_ptr<NevaConnectionPool> conn_pool)
+      : conn_pool_(conn_pool) {}
 
   // Returns tags in the database.
   grpc::Status GetTags(const uint32_t start_index,
                        ::google::protobuf::RepeatedPtrField<Tag>* tag_list);
 
  private:
-  std::shared_ptr<mysqlpp::Connection> conn_;
+  std::shared_ptr<NevaConnectionPool> conn_pool_;
 };
 
 }  // namespace orm
