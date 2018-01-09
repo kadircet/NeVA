@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="12dp">
+
+  <TextView
+    android:id="@+id/profile_dialog_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="TextView"
+    android:textSize="22sp"
+    android:textColor="@color/textPrimaryColor"/>
+  <android.support.design.widget.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
+
+    <EditText
+      android:id="@+id/profile_edittext"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:ems="10"
+      android:hint="asd"
+      android:textSize="18sp"
+      />
+  </android.support.design.widget.TextInputLayout>
+
+</RelativeLayout>

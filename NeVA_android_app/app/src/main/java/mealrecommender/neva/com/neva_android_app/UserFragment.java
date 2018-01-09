@@ -1,15 +1,22 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
@@ -26,6 +33,8 @@ public class UserFragment extends Fragment {
   TextView profile_bday;
   TextView profile_gender;
   TextView profile_weight;
+
+  AlertDialog changeTextDialog;
 
   public UserFragment() {
     // Required empty public constructor
@@ -46,6 +55,94 @@ public class UserFragment extends Fragment {
     getUserData.execute();
     return view;
   }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+
+    profile_username.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        showDialog(view);
+      }
+    });
+    profile_bday.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        showDialog(view);
+      }
+    });
+    profile_weight.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        showDialog(view);
+      }
+    });
+    profile_gender.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        showDialog(view);
+      }
+    });
+  }
+
+  public void showDialog(View view) {
+    TextView thisView = (TextView) view;
+    changeTextDialog = new AlertDialog.Builder(getContext()).create();
+    EditText newTextField = new EditText(getContext());
+
+    newTextField.setTextSize(18);
+    TextInputLayout layout = new TextInputLayout(getContext());
+    layout.setPadding(48,48,48,48);
+    layout.addView(newTextField);
+    newTextField.setText(thisView.getText());
+    changeTextDialog.setView(layout);
+    switch (view.getId()) {
+      case R.id.profile_username:
+        newTextField.setHint("Name");
+        changeTextDialog.setTitle("Name");
+        break;
+      case R.id.profile_gender:
+        newTextField.setHint("Gender");
+        changeTextDialog.setTitle("Gender");
+        break;
+      case R.id.profile_bday:
+        newTextField.setHint("Birthday");
+        changeTextDialog.setTitle("Birthday");
+        break;
+      case R.id.profile_weight:
+        newTextField.setHint("Weight");
+        changeTextDialog.setTitle("Weight");
+        break;
+    }
+    changeTextDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save", new OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        //Update task if success modify ui, else dismiss
+      }
+    });
+    changeTextDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Discard", new OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        changeTextDialog.dismiss();
+      }
+    });
+    changeTextDialog.show();
+  }
+
+  public void updateBirthday(View view) {
+
+  }
+
+  public void updateGender(View view) {
+
+  }
+
+  public void updateWeight(View view) {
+
+  }
+
+  //TODO: Store user data in shared preferences and get it only once
 
   class GetUserData extends AsyncTask<Void, Void, Boolean> {
 
