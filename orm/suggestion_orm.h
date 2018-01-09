@@ -17,7 +17,7 @@ namespace orm {
 class SuggestionOrm {
  public:
   // Initiates SuggestionOrm class wih given mysql connection.
-  SuggestionOrm(std::shared_ptr<NevaConnectionPool> conn)
+  SuggestionOrm(std::shared_ptr<NevaConnectionPool> conn_pool)
       : conn_pool_(conn_pool) {}
 
   grpc::Status GetSuggestees(
