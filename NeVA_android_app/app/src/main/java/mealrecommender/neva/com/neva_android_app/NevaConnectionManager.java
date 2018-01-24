@@ -27,6 +27,7 @@ import neva.backend.BackendOuterClass.InformUserChoiceRequest;
 import neva.backend.BackendOuterClass.LoginReply;
 import neva.backend.BackendOuterClass.LoginRequest;
 import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
+import neva.backend.BackendOuterClass.RecordFeedbackRequest;
 import neva.backend.BackendOuterClass.RegisterRequest;
 import neva.backend.BackendOuterClass.SuggestionItemPropositionRequest;
 import neva.backend.BackendOuterClass.TagPropositionRequest;
@@ -37,6 +38,8 @@ import neva.backend.SuggestionOuterClass.Suggestion;
 import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 import neva.backend.SuggestionOuterClass.Tag;
 import neva.backend.UserHistoryOuterClass.Choice;
+import neva.backend.UserHistoryOuterClass.UserFeedback;
+import neva.backend.UserHistoryOuterClass.UserFeedback.Feedback;
 import neva.backend.UserOuterClass;
 import neva.backend.UserOuterClass.User;
 import neva.backend.UserOuterClass.User.Gender;
@@ -264,6 +267,31 @@ public class NevaConnectionManager {
       GenericReply reply = blockingStub.updateUser(request);
       return true;
     } catch (Exception e){
+      Log.e(TAG, e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean sendFeedback(boolean like, int lastChoiceId, int suggesteeId, int timestamp, long latitude, long longitude) {
+    UserFeedback feedback;
+    Choice meal = Choice.newBuilder().setChoiceId(lastChoiceId)
+        .setSuggesteeId(suggesteeId)
+        .setTimestamp(Timestamp.newBuilder().setSeconds(timestamp).build())
+        .setLatitude(latitude)
+        .setLongitude(longitude)
+        .build();
+    if(like) {
+      feedback = UserFeedback.newBuilder().setFeedback(Feedback.LIKE).setChoice(meal).build();
+    } else {
+      feedback = UserFeedback.newBuilder().setFeedback((Feedback.DISLIKE)).setChoice(meal).build();
+    }
+    try {
+      RecordFeedbackRequest request = RecordFeedbackRequest.newBuilder()
+          .setToken(NevaLoginManager.getInstance().getByteStringToken())
+          .setUserFeedback(feedback).build();
+      GenericReply reply = blockingStub.recordFeedback(request);
+      return true;
+    } catch (Exception e) {
       Log.e(TAG, e.getMessage());
       return false;
     }
