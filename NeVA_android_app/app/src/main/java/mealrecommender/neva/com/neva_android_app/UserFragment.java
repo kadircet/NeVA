@@ -1,6 +1,8 @@
 package mealrecommender.neva.com.neva_android_app;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -16,12 +18,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import neva.backend.UserOuterClass.User;
+import neva.backend.util.Util.Timestamp;
 
 
 public class UserFragment extends Fragment {
@@ -35,6 +41,7 @@ public class UserFragment extends Fragment {
   TextView profile_weight;
 
   AlertDialog changeTextDialog;
+  DatePickerDialog.OnDateSetListener dateSetListener;
 
   public UserFragment() {
     // Required empty public constructor
@@ -69,7 +76,7 @@ public class UserFragment extends Fragment {
     profile_bday.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        showDialog(view);
+        datePickerDialog();
       }
     });
     profile_weight.setOnClickListener(new View.OnClickListener() {
@@ -86,10 +93,38 @@ public class UserFragment extends Fragment {
     });
   }
 
-  public void showDialog(View view) {
+  public void datePickerDialog() {
+    final Calendar currentTime = Calendar.getInstance();
+    int year = currentTime.get(Calendar.YEAR);
+    int month = currentTime.get(Calendar.MONTH);
+    int day = currentTime.get(Calendar.DAY_OF_MONTH);
+
+    dateSetListener = new OnDateSetListener() {
+      @Override
+      public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.clear(Calendar.YEAR);
+        cal.clear(Calendar.MONTH);
+        cal.clear(Calendar.DAY_OF_MONTH);
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        long seconds = cal.getTimeInMillis() / 1000;
+        Timestamp timestamp = Timestamp.newBuilder().setSeconds(seconds).setNanos(0).build();
+        User updatedUser = User.newBuilder().setDateOfBirth(timestamp).build();
+        UpdateUserDataTask updateTask = new UpdateUserDataTask();
+        updateTask.execute(updatedUser);
+      }
+    };
+
+    DatePickerDialog dpDialog = new DatePickerDialog(getContext(), dateSetListener, year, month, day);
+    dpDialog.show();
+  }
+
+  public void showDialog(final View view) {
     TextView thisView = (TextView) view;
     changeTextDialog = new AlertDialog.Builder(getContext()).create();
-    EditText newTextField = new EditText(getContext());
+    final EditText newTextField = new EditText(getContext());
 
     newTextField.setTextSize(18);
     TextInputLayout layout = new TextInputLayout(getContext());
@@ -102,14 +137,9 @@ public class UserFragment extends Fragment {
         newTextField.setHint("Name");
         changeTextDialog.setTitle("Name");
         break;
-      case R.id.profile_gender:
-        newTextField.setHint("Gender");
-        changeTextDialog.setTitle("Gender");
-        break;
-      case R.id.profile_bday:
-        newTextField.setHint("Birthday");
-        changeTextDialog.setTitle("Birthday");
-        break;
+      case R.id.profile_email:
+        newTextField.setHint("Email");
+        changeTextDialog.setTitle("Email");
       case R.id.profile_weight:
         newTextField.setHint("Weight");
         changeTextDialog.setTitle("Weight");
@@ -119,6 +149,24 @@ public class UserFragment extends Fragment {
       @Override
       public void onClick(DialogInterface dialogInterface, int i) {
         //Update task if success modify ui, else dismiss
+        User updatedUser;
+        switch (view.getId()) {
+          case R.id.profile_username:
+            updatedUser = User.newBuilder().setName(newTextField.getText().toString()).build();
+            break;
+          case R.id.profile_email:
+            updatedUser = User.newBuilder().setEmail(newTextField.getText().toString()).build();
+          case R.id.profile_weight:
+            String weightText = newTextField.getText().toString();
+            weightText = weightText.substring(0, weightText.indexOf(" kg"));
+            updatedUser = User.newBuilder().setWeight(Float.valueOf(weightText)).build();
+            break;
+          default:
+            updatedUser = User.newBuilder().build();
+            break;
+        }
+        UpdateUserDataTask updateTask = new UpdateUserDataTask();
+        updateTask.execute(updatedUser);
       }
     });
     changeTextDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Discard", new OnClickListener() {
@@ -130,16 +178,33 @@ public class UserFragment extends Fragment {
     changeTextDialog.show();
   }
 
-  public void updateBirthday(View view) {
+  class UpdateUserDataTask extends AsyncTask<User, Void, Boolean> {
 
-  }
+    @Override
+    protected void onPreExecute() {
 
-  public void updateGender(View view) {
+    }
 
-  }
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+      if(aBoolean) {
+        GetUserData task = new GetUserData();
+        task.execute();
+      } else {
+        Toast.makeText(getContext(), "Failed to update user data", Toast.LENGTH_SHORT).show();
+      }
+    }
 
-  public void updateWeight(View view) {
-
+    @Override
+    protected Boolean doInBackground(User... users) {
+      try{
+        NevaConnectionManager.getInstance().updateUser(users[0]);
+        return true;
+      } catch (Exception e) {
+        Log.e(TAG, e.getMessage());
+        return false;
+      }
+    }
   }
 
   //TODO: Store user data in shared preferences and get it only once

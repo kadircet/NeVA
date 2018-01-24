@@ -31,6 +31,7 @@ import neva.backend.BackendOuterClass.RegisterRequest;
 import neva.backend.BackendOuterClass.SuggestionItemPropositionRequest;
 import neva.backend.BackendOuterClass.TagPropositionRequest;
 import neva.backend.BackendOuterClass.TagValuePropositionRequest;
+import neva.backend.BackendOuterClass.UpdateUserRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
 import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
@@ -254,6 +255,18 @@ public class NevaConnectionManager {
       return null;
     }
 
+  }
+
+  public boolean updateUser(User updatedUserData) {
+    try{
+      UpdateUserRequest request = UpdateUserRequest.newBuilder().setToken(NevaLoginManager.getInstance().getByteStringToken())
+          .setUser(updatedUserData).build();
+      GenericReply reply = blockingStub.updateUser(request);
+      return true;
+    } catch (Exception e){
+      Log.e(TAG, e.getMessage());
+      return false;
+    }
   }
 
 }
