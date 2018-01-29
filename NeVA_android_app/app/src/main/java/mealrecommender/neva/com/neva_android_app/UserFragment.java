@@ -24,9 +24,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import neva.backend.UserOuterClass.User;
+import neva.backend.UserOuterClass.User.Gender;
 import neva.backend.util.Util.Timestamp;
 
 
@@ -39,6 +42,7 @@ public class UserFragment extends Fragment {
   TextView profile_bday;
   TextView profile_gender;
   TextView profile_weight;
+  Integer newGenderType;
 
   AlertDialog changeTextDialog;
   DatePickerDialog.OnDateSetListener dateSetListener;
@@ -88,7 +92,7 @@ public class UserFragment extends Fragment {
     profile_gender.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        showDialog(view);
+        showGenderDialog(view);
       }
     });
   }
@@ -119,6 +123,35 @@ public class UserFragment extends Fragment {
 
     DatePickerDialog dpDialog = new DatePickerDialog(getContext(), dateSetListener, year, month, day);
     dpDialog.show();
+  }
+
+  public void showGenderDialog(final View view) {
+    String[] genders = new String[]{"Male", "Female"};
+    AlertDialog builder = new AlertDialog.Builder(getContext()).setTitle("Gender")
+        .setSingleChoiceItems(genders, -1, new OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        newGenderType = i;
+      }
+    }).setPositiveButton("Save", new OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        User updatedUser;
+        if(newGenderType == 0){
+          updatedUser = User.newBuilder().setGender(Gender.MALE).build();
+        } else {
+          updatedUser = User.newBuilder().setGender(Gender.FEMALE).build();
+        }
+        UpdateUserDataTask updateTask = new UpdateUserDataTask();
+        updateTask.execute(updatedUser);
+      }
+    }).setNegativeButton("Discard", new OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialogInterface, int i) {
+        dialogInterface.dismiss();
+      }
+    }).create();
+    builder.show();
   }
 
   public void showDialog(final View view) {
