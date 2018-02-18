@@ -25,9 +25,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginRegisterViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="0cD-Nv-PxW">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                            </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Welcome" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3w-9M-ioS" userLabel="Welcome">
                                 <rect key="frame" x="0.0" y="70" width="375" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -35,7 +32,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="42r-lF-f6a"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="33"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -48,7 +45,7 @@
                                 </constraints>
                                 <string key="text">NeVA 
 Meal Recommender</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -62,7 +59,7 @@ Meal Recommender</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2Yz-Fq-CVO"/>
                                         </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -77,13 +74,13 @@ Meal Recommender</string>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="bL6-ab-RwL"/>
                                                         </constraints>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="E-mail"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                                <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
@@ -92,13 +89,13 @@ Meal Recommender</string>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="FZf-zF-iP3"/>
                                                         </constraints>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" textContentType="name"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Name Surname"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                                <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
@@ -118,7 +115,7 @@ Meal Recommender</string>
                                                                 </connections>
                                                             </datePicker>
                                                         </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="yyL-54-Dhj" secondAttribute="bottom" id="0HZ-9I-sYr"/>
                                                             <constraint firstAttribute="height" constant="50" id="2bi-eQ-zaA"/>
@@ -137,13 +134,13 @@ Meal Recommender</string>
                                                                     <segment title="Male"/>
                                                                     <segment title="Female"/>
                                                                 </segments>
-                                                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <connections>
                                                                     <action selector="genderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="2wd-od-nfp"/>
                                                                 </connections>
                                                             </segmentedControl>
                                                         </subviews>
-                                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="1" green="0.54000000000000004" blue="0.31" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="wZC-F8-gOk" secondAttribute="bottom" id="DSc-dW-1yT"/>
                                                             <constraint firstAttribute="height" constant="50" id="JvY-5w-Gea"/>
@@ -157,13 +154,13 @@ Meal Recommender</string>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="7HB-Do-LSj"/>
                                                         </constraints>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Password"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                                <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
@@ -172,13 +169,13 @@ Meal Recommender</string>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="yMW-ds-NLZ"/>
                                                         </constraints>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Confirm Password"/>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                                <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
@@ -224,7 +221,7 @@ Meal Recommender</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="BACK">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="backButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4mr-Fh-WJv"/>
@@ -237,7 +234,7 @@ Meal Recommender</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="REGISTER">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="registerButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NRZ-XK-l69"/>
@@ -272,7 +269,7 @@ Meal Recommender</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="fgH-3r-aCw"/>
                                         </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -283,7 +280,7 @@ Meal Recommender</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="LOGIN">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QuM-0w-KQO"/>
@@ -294,13 +291,13 @@ Meal Recommender</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="HO6-4k-eYs"/>
                                         </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" textContentType="email"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="E-mail"/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
@@ -309,13 +306,13 @@ Meal Recommender</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="BcC-Ra-p5g"/>
                                         </constraints>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Password"/>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                                <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
@@ -326,14 +323,14 @@ Meal Recommender</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="127.5" height="30"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <state key="normal" title="Forgot Password?">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vhp-JM-guG">
                                                 <rect key="frame" x="127.5" y="0.0" width="127.5" height="30"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <state key="normal" title="Register">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="registerScreenButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="owE-zm-f0I"/>
@@ -365,26 +362,32 @@ Meal Recommender</string>
                                     <constraint firstAttribute="trailing" secondItem="Cdu-oa-eAl" secondAttribute="trailing" id="vrK-cu-iJT"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lX1-2O-nEj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="YG8-t8-RKV"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0cD-Nv-PxW" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="0wy-YA-dJY"/>
+                            <constraint firstItem="lX1-2O-nEj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="6x3-aU-DSH"/>
                             <constraint firstItem="oEU-A9-37c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FUf-UL-w30"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tmP-Bo-ZbU" secondAttribute="bottom" id="IMm-l7-nNW"/>
                             <constraint firstItem="oEU-A9-37c" firstAttribute="top" secondItem="zqU-Gc-J0N" secondAttribute="bottom" id="MRc-lz-LWa"/>
                             <constraint firstItem="tmP-Bo-ZbU" firstAttribute="top" secondItem="zqU-Gc-J0N" secondAttribute="bottom" id="Phf-1a-DZX"/>
                             <constraint firstItem="zqU-Gc-J0N" firstAttribute="top" secondItem="p3w-9M-ioS" secondAttribute="bottom" id="QjI-Cv-gkv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oEU-A9-37c" secondAttribute="trailing" id="UPZ-1V-DLv"/>
-                            <constraint firstItem="0cD-Nv-PxW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ude-fO-xeA"/>
                             <constraint firstItem="zqU-Gc-J0N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V41-t1-hKc"/>
                             <constraint firstItem="tmP-Bo-ZbU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Wao-sV-5B2"/>
-                            <constraint firstItem="0cD-Nv-PxW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZK2-MQ-f69"/>
-                            <constraint firstItem="0cD-Nv-PxW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ZQb-yb-Aef"/>
+                            <constraint firstAttribute="trailing" secondItem="lX1-2O-nEj" secondAttribute="trailing" id="bU4-dJ-TD3"/>
                             <constraint firstItem="p3w-9M-ioS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="hcH-uq-aZZ"/>
                             <constraint firstItem="zqU-Gc-J0N" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="i0r-ux-Rwv"/>
                             <constraint firstItem="p3w-9M-ioS" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jO9-rj-9g7"/>
                             <constraint firstItem="p3w-9M-ioS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jbi-DM-a8j"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tmP-Bo-ZbU" secondAttribute="trailing" id="lQZ-mJ-8bM"/>
+                            <constraint firstItem="lX1-2O-nEj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nA7-Ug-jYd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="oEU-A9-37c" secondAttribute="bottom" id="qyL-Xj-ire"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -405,19 +408,16 @@ Meal Recommender</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="22" y="113"/>
+            <point key="canvasLocation" x="21.600000000000001" y="112.89355322338831"/>
         </scene>
         <!--Settings-->
         <scene sceneID="xTk-if-Su6">
             <objects>
                 <viewController id="x5X-eu-dXy" customClass="SettingsViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cou-pC-S7N">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="r5x-YD-Ebc" userLabel="backgroundtexture">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiQ-Qh-Xb7" userLabel="Profile">
                                 <rect key="frame" x="0.0" y="38" width="375" height="518"/>
                                 <subviews>
@@ -427,9 +427,9 @@ Meal Recommender</string>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4du-iw-saX">
                                                 <rect key="frame" x="0.0" y="0.0" width="75.5" height="45"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
-                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <size key="shadowOffset" width="2" height="2"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-Wv-h1z" userLabel="Name Field" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
@@ -450,19 +450,19 @@ Meal Recommender</string>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-2F-dW8">
                                                 <rect key="frame" x="0.0" y="0.0" width="92" height="45"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
-                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <size key="shadowOffset" width="2" height="2"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QcK-lm-uQA">
                                                 <rect key="frame" x="102" y="0.0" width="253" height="46"/>
-                                                <color key="backgroundColor" red="0.65863317251205444" green="0.66273003816604614" blue="0.66679173707962036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <segments>
                                                     <segment title="Male"/>
                                                     <segment title="Female"/>
                                                 </segments>
-                                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                             </segmentedControl>
                                         </subviews>
                                         <constraints>
@@ -475,9 +475,9 @@ Meal Recommender</string>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="tPe-gh-AfO">
                                                 <rect key="frame" x="0.0" y="0.0" width="86" height="45"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
-                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <size key="shadowOffset" width="2" height="2"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="tvD-yZ-Inq" userLabel="Weight Field" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
@@ -498,9 +498,9 @@ Meal Recommender</string>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthdate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cll-8z-wGt">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
-                                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <size key="shadowOffset" width="2" height="2"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-zD-oNU" userLabel="Date Picker Background" customClass="RoundedView" customModule="NeVA" customModuleProvider="target">
@@ -540,10 +540,10 @@ Meal Recommender</string>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                <color key="value" red="0.53327292199999998" green="0.53336817030000006" blue="0.53326696159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                <color key="value" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
                                         </userDefinedRuntimeAttributes>
@@ -552,7 +552,7 @@ Meal Recommender</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.57633463541666663" green="0.85880533854166663" blue="0.38433159722222221" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="EXU-ge-PTT" firstAttribute="leading" secondItem="eiQ-Qh-Xb7" secondAttribute="leading" constant="100" id="CK0-nS-Kom"/>
                                     <constraint firstItem="EXU-ge-PTT" firstAttribute="top" secondItem="d4n-iL-5oi" secondAttribute="bottom" constant="10" id="GFI-td-tc6"/>
@@ -579,10 +579,10 @@ Meal Recommender</string>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.53327292199999998" green="0.53336817030000006" blue="0.53326696159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -590,21 +590,27 @@ Meal Recommender</string>
                                     <action selector="logoutButtonPressed:" destination="x5X-eu-dXy" eventType="touchUpInside" id="m9y-eR-wP0"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6X-yG-zSC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="fDB-qa-cFe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="top" secondItem="cou-pC-S7N" secondAttribute="top" id="2c4-4d-XGD"/>
-                            <constraint firstAttribute="bottom" secondItem="r5x-YD-Ebc" secondAttribute="bottom" id="9bd-A1-HfI"/>
                             <constraint firstItem="eiQ-Qh-Xb7" firstAttribute="trailing" secondItem="xd1-md-MXd" secondAttribute="trailing" id="FGL-dK-NNd"/>
+                            <constraint firstAttribute="trailing" secondItem="f6X-yG-zSC" secondAttribute="trailing" id="JaL-yb-1xI"/>
                             <constraint firstItem="eiQ-Qh-Xb7" firstAttribute="top" secondItem="xd1-md-MXd" secondAttribute="top" constant="18" id="L69-8N-giA"/>
                             <constraint firstItem="xd1-md-MXd" firstAttribute="bottom" secondItem="Rbs-qe-oBC" secondAttribute="bottom" constant="16" id="LG9-UO-1Br"/>
                             <constraint firstItem="Rbs-qe-oBC" firstAttribute="top" secondItem="eiQ-Qh-Xb7" secondAttribute="bottom" constant="16" id="Trf-TI-6XY"/>
-                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="trailing" secondItem="xd1-md-MXd" secondAttribute="trailing" id="eGe-b7-Yub"/>
+                            <constraint firstItem="f6X-yG-zSC" firstAttribute="top" secondItem="cou-pC-S7N" secondAttribute="top" id="fht-yz-0vc"/>
                             <constraint firstItem="xd1-md-MXd" firstAttribute="bottom" secondItem="eiQ-Qh-Xb7" secondAttribute="bottom" constant="62" id="inx-sb-Q3u"/>
                             <constraint firstItem="xd1-md-MXd" firstAttribute="trailing" secondItem="Rbs-qe-oBC" secondAttribute="trailing" constant="100" id="kbc-Oa-mPZ"/>
+                            <constraint firstItem="f6X-yG-zSC" firstAttribute="leading" secondItem="cou-pC-S7N" secondAttribute="leading" id="n4W-OQ-8Jn"/>
                             <constraint firstItem="eiQ-Qh-Xb7" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" id="nfu-b6-gO7"/>
                             <constraint firstItem="Rbs-qe-oBC" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" constant="100" id="uRs-Th-yMs"/>
-                            <constraint firstItem="r5x-YD-Ebc" firstAttribute="leading" secondItem="xd1-md-MXd" secondAttribute="leading" id="xKE-Ka-3Ak"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xd1-md-MXd"/>
                     </view>
@@ -626,14 +632,11 @@ Meal Recommender</string>
             <objects>
                 <viewController id="BWU-M1-OCj" customClass="RecommendationViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IXI-21-wmd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-LC-iDH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsb-2B-Bm0" userLabel="Recommendation View" customClass="KolodaView" customModule="Koloda">
-                                <rect key="frame" x="67.5" y="183.5" width="240" height="300"/>
+                                <rect key="frame" x="67.5" y="159" width="240" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="RiF-FA-MQX"/>
@@ -641,13 +644,14 @@ Meal Recommender</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNr-22-KEa" userLabel="Dislike Button">
-                                <rect key="frame" x="95" y="509" width="45" height="45"/>
+                                <rect key="frame" x="95" y="484.5" width="45" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="E1n-4G-S1F"/>
                                     <constraint firstAttribute="width" constant="45" id="j4s-6h-ZRm"/>
                                 </constraints>
-                                <state key="normal" image="ic_skip">
+                                <color key="tintColor" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="ic_skip_primary">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -655,13 +659,14 @@ Meal Recommender</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2E-ae-CR2" userLabel="Like Button">
-                                <rect key="frame" x="235" y="509" width="45" height="45"/>
+                                <rect key="frame" x="235" y="484.5" width="45" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="DHd-C1-syS"/>
                                     <constraint firstAttribute="height" constant="45" id="hLA-y2-WaG"/>
                                 </constraints>
-                                <state key="normal" image="ic_like">
+                                <color key="tintColor" red="1" green="0.3411764706" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="ic_like_primary">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -675,19 +680,25 @@ Meal Recommender</string>
                                     <constraint firstAttribute="width" constant="37" id="ka3-xY-ic0"/>
                                 </constraints>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHN-EF-lak">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="2cz-rB-vfx"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yMV-Bn-qfI" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" id="2gB-cL-07B"/>
-                            <constraint firstItem="C1k-Td-gqd" firstAttribute="trailing" secondItem="CiU-LC-iDH" secondAttribute="trailing" id="5aD-tr-OUg"/>
                             <constraint firstItem="dsb-2B-Bm0" firstAttribute="centerY" secondItem="IXI-21-wmd" secondAttribute="centerY" id="7nF-TE-tMH"/>
-                            <constraint firstAttribute="bottom" secondItem="CiU-LC-iDH" secondAttribute="bottom" id="Iph-eh-n28"/>
-                            <constraint firstItem="CiU-LC-iDH" firstAttribute="leading" secondItem="C1k-Td-gqd" secondAttribute="leading" id="Lb6-qg-PP8"/>
+                            <constraint firstAttribute="trailing" secondItem="nHN-EF-lak" secondAttribute="trailing" id="ITP-0H-qd0"/>
+                            <constraint firstItem="nHN-EF-lak" firstAttribute="top" secondItem="IXI-21-wmd" secondAttribute="top" id="N2X-25-KiV"/>
                             <constraint firstItem="X2E-ae-CR2" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" constant="70" id="WRU-79-6Qq"/>
                             <constraint firstItem="X2E-ae-CR2" firstAttribute="top" secondItem="dsb-2B-Bm0" secondAttribute="bottom" constant="25" id="X3J-aI-tVD"/>
+                            <constraint firstItem="nHN-EF-lak" firstAttribute="leading" secondItem="IXI-21-wmd" secondAttribute="leading" id="gRS-bn-Wyy"/>
                             <constraint firstItem="C1k-Td-gqd" firstAttribute="bottom" secondItem="yMV-Bn-qfI" secondAttribute="bottom" constant="10" id="gui-xS-jxi"/>
                             <constraint firstItem="dsb-2B-Bm0" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" id="hnE-ob-hKQ"/>
-                            <constraint firstItem="CiU-LC-iDH" firstAttribute="top" secondItem="IXI-21-wmd" secondAttribute="top" id="kjg-b9-Eok"/>
                             <constraint firstItem="xNr-22-KEa" firstAttribute="centerX" secondItem="IXI-21-wmd" secondAttribute="centerX" constant="-70" id="qcg-a0-fqe"/>
                             <constraint firstItem="xNr-22-KEa" firstAttribute="top" secondItem="dsb-2B-Bm0" secondAttribute="bottom" constant="25" id="une-fx-D5p"/>
                         </constraints>
@@ -707,11 +718,12 @@ Meal Recommender</string>
         <scene sceneID="ms9-P8-3aD">
             <objects>
                 <tabBarController id="Aml-VC-jh1" customClass="NevaTabBarController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="hRR-nH-hkN">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="hRR-nH-hkN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="BWU-M1-OCj" kind="relationship" relationship="viewControllers" id="c5K-w6-aqv"/>
@@ -729,22 +741,19 @@ Meal Recommender</string>
             <objects>
                 <viewController id="J0b-vb-epx" userLabel="Suggestion" customClass="SuggestionViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lk8-8d-a9j">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="ifM-Er-Xqk">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggest Tag Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Sbe-gA-1cX">
-                                <rect key="frame" x="10" y="25" width="355" height="29.5"/>
+                                <rect key="frame" x="10" y="25" width="355" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="cUc-nP-cel"/>
                                     <constraint firstAttribute="height" constant="30" id="mfE-1k-jSd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggest Tag For Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4Va-nc-hYG">
@@ -753,23 +762,23 @@ Meal Recommender</string>
                                     <constraint firstAttribute="height" constant="30" id="oir-ZZ-jzi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-4b-aYh" userLabel="Tag Name" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="10" y="69.5" width="225" height="35"/>
-                                <color key="backgroundColor" red="0.49289417266845703" green="0.53314536809921265" blue="0.55408120155334473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="10" y="70" width="225" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="eOt-XF-eYJ"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
@@ -785,10 +794,10 @@ Meal Recommender</string>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.53327292199999998" green="0.53336817030000006" blue="0.53326696159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -802,53 +811,53 @@ Meal Recommender</string>
                                     <constraint firstAttribute="height" constant="30" id="lVW-dF-aR4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N5N-aB-X7z" userLabel="Food Name" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="160" width="225" height="35"/>
-                                <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="vPf-kC-Fep"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tag" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="leR-4d-bfa" userLabel="Tag" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="250" width="355" height="35"/>
-                                <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="DSg-dU-n5F"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Food" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUc-Ds-26F" userLabel="Food" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="10" y="295" width="355" height="35"/>
-                                <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="uDJ-TS-Vl9"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardAppearance="alert"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" cocoaTouchSystemColor="lightTextColor"/>
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
@@ -864,10 +873,10 @@ Meal Recommender</string>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.53327292199999998" green="0.53336817030000006" blue="0.53326696159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
                                 </userDefinedRuntimeAttributes>
@@ -895,6 +904,13 @@ Meal Recommender</string>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isRounded" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9o6-84-hNL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="L0W-ei-kxP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -902,29 +918,28 @@ Meal Recommender</string>
                             <constraint firstItem="Mn2-FJ-3Ah" firstAttribute="leading" secondItem="N5N-aB-X7z" secondAttribute="trailing" constant="10" id="2Fo-2D-Uhd"/>
                             <constraint firstItem="rdJ-HX-9i7" firstAttribute="trailing" secondItem="aio-NQ-bIi" secondAttribute="trailing" constant="10" id="2cF-2H-IZF"/>
                             <constraint firstItem="aio-NQ-bIi" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" constant="10" id="3SM-Rj-T9J"/>
+                            <constraint firstItem="9o6-84-hNL" firstAttribute="top" secondItem="lk8-8d-a9j" secondAttribute="top" id="9Wg-0d-q9k"/>
                             <constraint firstItem="rdJ-HX-9i7" firstAttribute="trailing" secondItem="Sbe-gA-1cX" secondAttribute="trailing" constant="10" id="FAw-Ef-mAa"/>
                             <constraint firstItem="leR-4d-bfa" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" constant="10" id="GTP-Ix-Lpy"/>
+                            <constraint firstItem="9o6-84-hNL" firstAttribute="leading" secondItem="lk8-8d-a9j" secondAttribute="leading" id="Hf7-A1-MCa"/>
                             <constraint firstItem="Sbe-gA-1cX" firstAttribute="top" secondItem="rdJ-HX-9i7" secondAttribute="top" constant="5" id="Hza-tO-Cw4"/>
                             <constraint firstItem="o4E-eE-8HN" firstAttribute="top" secondItem="EUc-Ds-26F" secondAttribute="bottom" constant="10" id="Npj-Mn-o87"/>
                             <constraint firstItem="leR-4d-bfa" firstAttribute="top" secondItem="4Va-nc-hYG" secondAttribute="bottom" constant="15" id="ODI-Os-z4g"/>
                             <constraint firstItem="Sbe-gA-1cX" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" constant="10" id="Qeu-sI-j2y"/>
-                            <constraint firstItem="ifM-Er-Xqk" firstAttribute="trailing" secondItem="rdJ-HX-9i7" secondAttribute="trailing" id="R8N-aS-dDJ"/>
                             <constraint firstItem="N5N-aB-X7z" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" constant="10" id="RjE-Ef-SoJ"/>
                             <constraint firstItem="Sbe-gA-1cX" firstAttribute="top" secondItem="rdJ-HX-9i7" secondAttribute="top" constant="5" id="Saa-xh-ejc"/>
                             <constraint firstItem="N5N-aB-X7z" firstAttribute="top" secondItem="aio-NQ-bIi" secondAttribute="bottom" constant="15" id="USR-AD-MNc"/>
-                            <constraint firstItem="ifM-Er-Xqk" firstAttribute="top" secondItem="lk8-8d-a9j" secondAttribute="top" id="Wrw-gf-kfT"/>
                             <constraint firstItem="4Va-nc-hYG" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" constant="10" id="YmP-yv-m83"/>
                             <constraint firstItem="rdJ-HX-9i7" firstAttribute="trailing" secondItem="leR-4d-bfa" secondAttribute="trailing" constant="10" id="ZDh-MI-ixz"/>
                             <constraint firstItem="EUc-Ds-26F" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" constant="10" id="Zh4-EB-LYa"/>
+                            <constraint firstAttribute="trailing" secondItem="9o6-84-hNL" secondAttribute="trailing" id="bYG-X3-U1Y"/>
                             <constraint firstItem="rdJ-HX-9i7" firstAttribute="trailing" secondItem="o4E-eE-8HN" secondAttribute="trailing" constant="10" id="dWI-d2-XcJ"/>
                             <constraint firstItem="rdJ-HX-9i7" firstAttribute="trailing" secondItem="EUc-Ds-26F" secondAttribute="trailing" constant="10" id="duP-8m-Kos"/>
                             <constraint firstItem="TCF-ai-Vyc" firstAttribute="top" secondItem="Sbe-gA-1cX" secondAttribute="bottom" constant="15" id="evt-fJ-0HU"/>
                             <constraint firstItem="rdJ-HX-9i7" firstAttribute="trailing" secondItem="Sbe-gA-1cX" secondAttribute="trailing" constant="10" id="fQo-f7-qsj"/>
                             <constraint firstItem="rdJ-HX-9i7" firstAttribute="trailing" secondItem="TCF-ai-Vyc" secondAttribute="trailing" constant="10" id="fbS-RH-CQz"/>
                             <constraint firstItem="Mn2-FJ-3Ah" firstAttribute="top" secondItem="aio-NQ-bIi" secondAttribute="bottom" constant="15" id="gFf-gu-NXp"/>
-                            <constraint firstItem="rdJ-HX-9i7" firstAttribute="bottom" secondItem="ifM-Er-Xqk" secondAttribute="bottom" id="jEc-kW-eMm"/>
                             <constraint firstItem="aio-NQ-bIi" firstAttribute="top" secondItem="TCF-ai-Vyc" secondAttribute="bottom" constant="10" id="jWg-Us-OIL"/>
-                            <constraint firstItem="ifM-Er-Xqk" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" id="lfd-rZ-Pf3"/>
                             <constraint firstItem="Sbe-gA-1cX" firstAttribute="leading" secondItem="rdJ-HX-9i7" secondAttribute="leading" constant="10" id="oYr-P4-zbe"/>
                             <constraint firstItem="EUc-Ds-26F" firstAttribute="top" secondItem="leR-4d-bfa" secondAttribute="bottom" constant="10" id="p2w-bB-Lg3"/>
                             <constraint firstItem="4Va-nc-hYG" firstAttribute="top" secondItem="N5N-aB-X7z" secondAttribute="bottom" constant="10" id="r28-rv-5xU"/>
@@ -952,19 +967,16 @@ Meal Recommender</string>
             <objects>
                 <viewController id="yCT-6y-ngv" userLabel="History" customClass="HistoryViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4ax-la-zAI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="qXV-ek-0JQ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pq0-op-EH7" userLabel="Date Field" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pq0-op-EH7" userLabel="Date Field" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="15" y="35" width="345" height="40"/>
-                                <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="lTF-mH-rSM"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <userDefinedRuntimeAttributes>
@@ -975,12 +987,12 @@ Meal Recommender</string>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-8c-PwU">
                                 <rect key="frame" x="15" y="83" width="345" height="29"/>
-                                <color key="backgroundColor" red="0.49289417270000002" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <segments>
                                     <segment title="Name"/>
                                     <segment title="Time"/>
                                 </segments>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="orderTypeChanged:" destination="yCT-6y-ngv" eventType="valueChanged" id="uPR-C1-1v9"/>
                                 </connections>
@@ -1005,7 +1017,7 @@ Meal Recommender</string>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="value" red="1" green="0.63" blue="0.42999999999999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                             <real key="value" value="3"/>
@@ -1020,9 +1032,9 @@ Meal Recommender</string>
                                                         <constraint firstAttribute="height" constant="38" id="3u6-ae-Qyn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <size key="shadowOffset" width="2" height="2"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="2FG-zD-pif">
@@ -1032,9 +1044,9 @@ Meal Recommender</string>
                                                         <constraint firstAttribute="height" constant="62" id="84b-sn-rCN"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <size key="shadowOffset" width="2" height="2"/>
                                                 </label>
                                             </subviews>
@@ -1084,9 +1096,9 @@ Meal Recommender</string>
                                                         <constraint firstAttribute="height" constant="62" id="93X-6N-1J4"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <size key="shadowOffset" width="2" height="2"/>
                                                 </label>
                                             </subviews>
@@ -1104,18 +1116,24 @@ Meal Recommender</string>
                                 </prototypes>
                                 <sections/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHF-om-Rg2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="jqH-Jg-8vn"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Mte-8c-PwU" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" constant="15" id="5xS-MB-NTd"/>
-                            <constraint firstAttribute="bottom" secondItem="qXV-ek-0JQ" secondAttribute="bottom" id="9jN-dd-XZD"/>
                             <constraint firstItem="jmg-Mf-3fN" firstAttribute="bottom" secondItem="aqk-R3-vFh" secondAttribute="bottom" constant="15" id="CMV-IQ-Apz"/>
                             <constraint firstItem="Pq0-op-EH7" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" constant="15" id="DG3-Wf-mQQ"/>
-                            <constraint firstItem="qXV-ek-0JQ" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" id="DR6-8l-qts"/>
+                            <constraint firstAttribute="trailing" secondItem="fHF-om-Rg2" secondAttribute="trailing" id="HRv-HV-H7U"/>
                             <constraint firstItem="jmg-Mf-3fN" firstAttribute="trailing" secondItem="Mte-8c-PwU" secondAttribute="trailing" constant="15" id="JAd-hn-gUg"/>
                             <constraint firstItem="aqk-R3-vFh" firstAttribute="leading" secondItem="jmg-Mf-3fN" secondAttribute="leading" constant="15" id="PBo-dj-8N0"/>
-                            <constraint firstItem="qXV-ek-0JQ" firstAttribute="top" secondItem="4ax-la-zAI" secondAttribute="top" id="deJ-nJ-BD4"/>
-                            <constraint firstItem="qXV-ek-0JQ" firstAttribute="trailing" secondItem="jmg-Mf-3fN" secondAttribute="trailing" id="eJI-LY-GDH"/>
+                            <constraint firstItem="fHF-om-Rg2" firstAttribute="top" secondItem="4ax-la-zAI" secondAttribute="top" id="RRN-Yf-EP5"/>
+                            <constraint firstItem="fHF-om-Rg2" firstAttribute="leading" secondItem="4ax-la-zAI" secondAttribute="leading" id="daw-CJ-7Ye"/>
                             <constraint firstItem="jmg-Mf-3fN" firstAttribute="trailing" secondItem="Pq0-op-EH7" secondAttribute="trailing" constant="15" id="flQ-sc-cVJ"/>
                             <constraint firstItem="aqk-R3-vFh" firstAttribute="top" secondItem="Mte-8c-PwU" secondAttribute="bottom" constant="8" id="lJE-jo-neU"/>
                             <constraint firstItem="Mte-8c-PwU" firstAttribute="top" secondItem="Pq0-op-EH7" secondAttribute="bottom" constant="8" id="lS4-ZU-xbm"/>
@@ -1144,18 +1162,15 @@ Meal Recommender</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gray-background-texture-2" translatesAutoresizingMaskIntoConstraints="NO" id="FKL-Qx-3dY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="9Sp-5Q-pEA">
                                 <rect key="frame" x="16" y="151" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OjT-Fe-rcK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="lno-CB-55M">
@@ -1164,28 +1179,28 @@ Meal Recommender</string>
                                     <constraint firstAttribute="height" constant="30" id="PUf-2D-IJI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G54-uc-xcm" customClass="SearchTextField" customModule="NeVA" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G54-uc-xcm" customClass="SearchTextField" customModule="NeVA" customModuleProvider="target">
                                 <rect key="frame" x="16" y="113" width="343" height="30"/>
-                                <color key="backgroundColor" red="0.49411764705882355" green="0.53314536809921265" blue="0.55408120155334473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="m3d-vu-dtg"/>
                                 </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9l-Ev-hKM">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9l-Ev-hKM">
                                 <rect key="frame" x="16" y="227" width="343" height="30"/>
-                                <color key="backgroundColor" red="0.4941176471" green="0.53314536810000002" blue="0.55408120159999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="nhK-w7-5VI"/>
                                 </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
@@ -1209,10 +1224,10 @@ Meal Recommender</string>
                                 <state key="normal" title="Add History Entry"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.97999999999999998" green="0.91000000000000003" blue="0.91000000000000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.34000000000000002" blue="0.13" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -1225,29 +1240,35 @@ Meal Recommender</string>
                                     <constraint firstAttribute="height" constant="30" id="SdF-fx-i4f"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y21-Rh-3z3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="5RF-V7-KZK"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="FKL-Qx-3dY" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" id="396-Wv-TNN"/>
+                            <constraint firstAttribute="trailing" secondItem="Y21-Rh-3z3" secondAttribute="trailing" id="10P-Y6-ryW"/>
                             <constraint firstItem="bBp-Lz-M3W" firstAttribute="top" secondItem="fbi-ge-65z" secondAttribute="top" constant="14" id="6oS-fS-dd6"/>
                             <constraint firstItem="T9l-Ev-hKM" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="BEb-T0-GaZ"/>
-                            <constraint firstItem="FKL-Qx-3dY" firstAttribute="top" secondItem="m0C-uv-KZd" secondAttribute="top" id="CRK-DS-HlI"/>
                             <constraint firstItem="4xL-al-M85" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="FG4-s6-pof"/>
                             <constraint firstItem="bBp-Lz-M3W" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="HBp-ar-rWs"/>
                             <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="4xL-al-M85" secondAttribute="trailing" constant="16" id="HyE-Jc-eXd"/>
                             <constraint firstItem="G54-uc-xcm" firstAttribute="top" secondItem="lno-CB-55M" secondAttribute="bottom" constant="8" id="LVw-p2-yMK"/>
-                            <constraint firstItem="FKL-Qx-3dY" firstAttribute="bottom" secondItem="fbi-ge-65z" secondAttribute="bottom" id="MVU-vx-LbD"/>
-                            <constraint firstItem="FKL-Qx-3dY" firstAttribute="trailing" secondItem="fbi-ge-65z" secondAttribute="trailing" id="Pev-CK-1cP"/>
                             <constraint firstItem="lno-CB-55M" firstAttribute="top" secondItem="bBp-Lz-M3W" secondAttribute="bottom" constant="8" id="SaD-C7-mMj"/>
                             <constraint firstItem="QRZ-Ek-EPI" firstAttribute="top" secondItem="T9l-Ev-hKM" secondAttribute="bottom" constant="40" id="XwF-TA-d9P"/>
                             <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="lno-CB-55M" secondAttribute="trailing" constant="16" id="Zvi-be-6jD"/>
+                            <constraint firstItem="Y21-Rh-3z3" firstAttribute="leading" secondItem="m0C-uv-KZd" secondAttribute="leading" id="aTV-UY-kBN"/>
                             <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="QRZ-Ek-EPI" secondAttribute="trailing" constant="16" id="add-1k-t4R"/>
                             <constraint firstItem="fbi-ge-65z" firstAttribute="trailing" secondItem="G54-uc-xcm" secondAttribute="trailing" constant="16" id="cF2-oT-pbS"/>
+                            <constraint firstItem="Y21-Rh-3z3" firstAttribute="top" secondItem="m0C-uv-KZd" secondAttribute="top" id="chw-wn-e8i"/>
                             <constraint firstItem="4xL-al-M85" firstAttribute="top" secondItem="9Sp-5Q-pEA" secondAttribute="bottom" constant="8" id="ctL-Wd-9I5"/>
                             <constraint firstItem="QRZ-Ek-EPI" firstAttribute="leading" secondItem="fbi-ge-65z" secondAttribute="leading" constant="16" id="dBB-LQ-hka"/>
                             <constraint firstItem="9Sp-5Q-pEA" firstAttribute="top" secondItem="G54-uc-xcm" secondAttribute="bottom" constant="8" id="fZv-aD-BMN"/>
@@ -1277,9 +1298,8 @@ Meal Recommender</string>
         <image name="back" width="100" height="67"/>
         <image name="clock" width="30" height="30"/>
         <image name="gift" width="30" height="30"/>
-        <image name="gray-background-texture-2" width="810" height="1440"/>
-        <image name="ic_like" width="38" height="34"/>
-        <image name="ic_skip" width="34" height="34"/>
+        <image name="ic_like_primary" width="38" height="34"/>
+        <image name="ic_skip_primary" width="34" height="34"/>
         <image name="idea" width="30" height="30"/>
         <image name="loginRegisterViewBackground" width="1070" height="1902"/>
         <image name="settings" width="30" height="30"/>

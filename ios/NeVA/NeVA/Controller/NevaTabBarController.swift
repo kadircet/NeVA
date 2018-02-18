@@ -12,6 +12,10 @@ class NevaTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 10.0, *) {
+            //self.tabBar.tintColor = NeVAUtils.hexStringToUIColor(hex: "#BF360C")
+            self.tabBar.unselectedItemTintColor = NeVAUtils.hexStringToUIColor(hex: "#FFCCBC")
+        }
         getTagsFromServer()
         getMealsFromServer()
         fetchEntriesFromServer()
@@ -234,5 +238,5 @@ class NevaTabBarController: UITabBarController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

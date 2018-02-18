@@ -23,14 +23,16 @@ class CustomInputField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.backgroundColor = UIColor.clear.cgColor
-        layer.borderColor = UIColor.white.cgColor
+        layer.borderColor = NeVAColors.primaryColor.cgColor
+        //layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1.0
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         layer.backgroundColor = UIColor.clear.cgColor
-        layer.borderColor = UIColor.white.cgColor
+        layer.borderColor = NeVAColors.primaryColor.cgColor
+        //layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1.0
     }
     // Only override draw() if you perform custom drawing.
