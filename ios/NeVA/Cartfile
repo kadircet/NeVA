@@ -1,4 +1,4 @@
-github "apple/swift-protobuf" >= 1.0.2
+github "apple/swift-protobuf" == 1.0.2
 github "bilalyaylak/grpc-swift" "master"
 github "facebook/Facebook-SDK-Swift" == 0.3.0
 github "evgenyneu/keychain-swift" ~> 10.0
