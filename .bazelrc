@@ -1,8 +1,8 @@
 common --color=yes
 build --verbose_failures
 build --show_timestamps
-build --copt=-fparse-all-comments
-build --client_env=CC=clang
+#build --copt=-fparse-all-comments
+#build --client_env=CC=clang
 build --copt=-I/usr/include/mysql++/
 build --copt=-I/usr/include/mysql/
 build --linkopt=-lmysqlpp
