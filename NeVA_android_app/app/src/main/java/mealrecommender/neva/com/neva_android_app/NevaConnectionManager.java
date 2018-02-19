@@ -53,7 +53,7 @@ public class NevaConnectionManager {
 
   private final String TAG = this.getClass().getSimpleName();
   private final String serverAddress = "neva.0xdeffbeef.com";
-  private final int serverPort = 50051;
+  private final int serverPort = 50055;
   private static NevaConnectionManager instance = null;
 
   private ManagedChannel managedChannel;
@@ -289,6 +289,13 @@ public class NevaConnectionManager {
       RecordFeedbackRequest request = RecordFeedbackRequest.newBuilder()
           .setToken(NevaLoginManager.getInstance().getByteStringToken())
           .setUserFeedback(feedback).build();
+      
+      Log.d(TAG, "Suggestee Id: "+ Integer.toString(suggesteeId));
+      Log.d(TAG, "Last Meal Choice Id: "+ Integer.toString(lastChoiceId));
+      Log.d(TAG, "Timestamp: "+ Integer.toString(timestamp));
+      Log.d(TAG, "Latitude: "+ Long.toString(latitude));
+      Log.d(TAG, "Longiture: "+ Long.toString(longitude));
+      Log.d(TAG, "Like:" + Boolean.toString(like));
       GenericReply reply = blockingStub.recordFeedback(request);
       return true;
     } catch (Exception e) {

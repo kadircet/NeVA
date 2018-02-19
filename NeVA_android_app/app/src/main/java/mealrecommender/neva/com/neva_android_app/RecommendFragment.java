@@ -120,11 +120,7 @@ public class RecommendFragment extends Fragment {
         latitude = 0;
         longitude = 0;
         boolean like = booleans[0];
-        Log.e(TAG, "Suggestee Id: "+ Integer.toString(suggesteeId));
-        Log.e(TAG, "Last Meal Choice Id: "+ Integer.toString(lastChoiceId));
-        Log.e(TAG, "Timestamp: "+ Integer.toString(timestamp));
-        Log.e(TAG, "lat: "+ Long.toString(latitude));
-        Log.e(TAG, "lon: "+ Long.toString(longitude));
+
         return connectionManager
             .sendFeedback(like, lastChoiceId, suggesteeId, timestamp, latitude, longitude);
       } catch (Exception e) {
