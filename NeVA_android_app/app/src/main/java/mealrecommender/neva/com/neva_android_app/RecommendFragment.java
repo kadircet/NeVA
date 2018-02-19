@@ -82,16 +82,20 @@ public class RecommendFragment extends Fragment {
     likeButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        SendFeedbackTask feedbackTask = new SendFeedbackTask();
-        feedbackTask.execute(true);
+        if(recommendedView.getText().length() > 0) {
+          SendFeedbackTask feedbackTask = new SendFeedbackTask();
+          feedbackTask.execute(true);
+        }
       }
     });
 
     dislikeButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        SendFeedbackTask feedbackTask = new SendFeedbackTask();
-        feedbackTask.execute(false);
+        if(recommendedView.getText().length() > 0) {
+          SendFeedbackTask feedbackTask = new SendFeedbackTask();
+          feedbackTask.execute(false);
+        }
       }
     });
   }

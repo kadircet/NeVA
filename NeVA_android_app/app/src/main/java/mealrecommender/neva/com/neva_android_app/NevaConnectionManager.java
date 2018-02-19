@@ -53,7 +53,7 @@ public class NevaConnectionManager {
 
   private final String TAG = this.getClass().getSimpleName();
   private final String serverAddress = "neva.0xdeffbeef.com";
-  private final int serverPort = 50055;
+  private final int serverPort = 50051;
   private static NevaConnectionManager instance = null;
 
   private ManagedChannel managedChannel;
