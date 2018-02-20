@@ -48,7 +48,7 @@ public class RecommendFragment extends Fragment {
   Button likeButton;
   Button dislikeButton;
 
-  List<Suggestion> suggestionList;
+  LinkedList<Suggestion> suggestionList;
   private int lastDisplayIndex;
 
   @Override
@@ -105,33 +105,34 @@ public class RecommendFragment extends Fragment {
   }
 
   public void displayNextSuggestion() {
-    if(suggestionList.size() == lastDisplayIndex) {
+    if(suggestionList.isEmpty()) {
       suggestionList = getSuggestionsBlocking();
-      lastDisplayIndex = 0;
     }
-    if(suggestionList.size() > 0){
-      flexboxLayout.removeAllViews();
-      Suggestion suggestion = suggestionList.get(lastDisplayIndex);
-      lastDisplayIndex++;
-      List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();
-      int[] tagIds = new int[tagList.size()];
-      for (int i = 0; i < tagIds.length; i++) {
-        tagIds[i] = tagList.get(i).getId();
-      }
-      ArrayList<String> tagNames = (ArrayList<String>) db.nevaDao().getTagNames(tagIds);
-      recommendedView.setText(suggestion.getName());
-      for (int i = 0; i < tagNames.size(); i++) {
-        TextView tagHolder = new TextView(getContext());
-        tagHolder.setText(tagNames.get(i));
-        tagHolder.setTextSize(16);
-        tagHolder.setTextColor(getResources().getColor(R.color.textPrimaryColor));
-        tagHolder.setPadding(16, 0, 16, 0);
-        tagHolder.setBackground(getResources()
-            .getDrawable(R.drawable.rounded_tagview_background, getContext().getTheme()));
-        flexboxLayout.addView(tagHolder);
-      }
+    flexboxLayout.removeAllViews();
+    Suggestion suggestion = suggestionList.pop();//get(lastDisplayIndex);
+    if(suggestionList.size() == 1) {
+      GetSuggestionsTask getSuggestionsTask = new GetSuggestionsTask();
+      getSuggestionsTask.execute();
+    }
+    List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();
+    int[] tagIds = new int[tagList.size()];
+    for (int i = 0; i < tagIds.length; i++) {
+      tagIds[i] = tagList.get(i).getId();
+    }
+    ArrayList<String> tagNames = (ArrayList<String>) db.nevaDao().getTagNames(tagIds);
+    recommendedView.setText(suggestion.getName());
+    for (int i = 0; i < tagNames.size(); i++) {
+      TextView tagHolder = new TextView(getContext());
+      tagHolder.setText(tagNames.get(i));
+      tagHolder.setTextSize(16);
+      tagHolder.setTextColor(getResources().getColor(R.color.textPrimaryColor));
+      tagHolder.setPadding(16, 0, 16, 0);
+      tagHolder.setBackground(getResources()
+          .getDrawable(R.drawable.rounded_tagview_background, getContext().getTheme()));
+      flexboxLayout.addView(tagHolder);
     }
   }
+
 
   class SendFeedbackTask extends AsyncTask<Boolean, Void, Boolean> {
 
@@ -184,7 +185,9 @@ public class RecommendFragment extends Fragment {
     @Override
     protected Void doInBackground(Void... voids) {
       try {
-        suggestionList = connectionManager.getMultipleSuggestions();
+        for(Suggestion sug : connectionManager.getMultipleSuggestions()) {
+          suggestionList.add(sug);
+        };
       } catch (Exception e) {
         Log.e(TAG, e.getMessage());
       }
@@ -193,12 +196,21 @@ public class RecommendFragment extends Fragment {
 
   }
 
-  public List<Suggestion> getSuggestionsBlocking() {
+  public LinkedList<Suggestion> getSuggestionsBlocking() {
+    Log.e(TAG, "GOT");
     try {
-      return connectionManager.getMultipleSuggestions();
+      Log.e(TAG, "2");
+      LinkedList<Suggestion> res = new LinkedList<>();
+      for (Suggestion sug: connectionManager.getMultipleSuggestions()) {
+        Log.e(TAG, sug.getName());
+        res.add(sug);
+      }
+
+      return res;
     } catch (Exception e) {
       Log.e(TAG, e.getMessage());
     }
+    Log.e(TAG, "YARRAK");
     return null;
   }
 
