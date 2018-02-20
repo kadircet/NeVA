@@ -1,6 +1,5 @@
 package mealrecommender.neva.com.neva_android_app;
 
-import android.content.res.Resources.Theme;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,21 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.protobuf.ByteString;
-import io.grpc.ManagedChannel;
-import io.grpc.StatusRuntimeException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
-import mealrecommender.neva.com.neva_android_app.database.Tag;
-import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass.GetMultipleSuggestionsReply;
-import neva.backend.BackendOuterClass.GetMultipleSuggestionsRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
-import neva.backend.SuggestionOuterClass.Suggestion.Builder;
-import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 
 
 public class RecommendFragment extends Fragment {

@@ -25,9 +25,7 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.protobuf.ByteString;
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 import org.json.JSONObject;
 

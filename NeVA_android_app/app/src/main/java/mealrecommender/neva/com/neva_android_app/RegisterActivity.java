@@ -17,8 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Locale;
-import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
 import neva.backend.UserOuterClass;
 import neva.backend.util.Util;
 

@@ -12,21 +12,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import java.util.ArrayList;
+import mealrecommender.neva.com.neva_android_app.customviews.NiceAutoCompleteTextView;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
-import neva.backend.BackendOuterClass.GenericReply;
-import neva.backend.BackendOuterClass.TagPropositionRequest;
-import neva.backend.BackendOuterClass.TagValuePropositionRequest;
-import neva.backend.SuggestionOuterClass;
 
 
 /**
@@ -45,8 +40,8 @@ public class ProposeFragment extends Fragment {
   Button fragment_proposal_button;
   Button fragment_tag_proposal_button;
 
-  AutoCompleteTextView meal_for_tag_field;
-  AutoCompleteTextView tag_of_meal_field;
+  NiceAutoCompleteTextView meal_for_tag_field;
+  NiceAutoCompleteTextView tag_of_meal_field;
   Button propose_tag_for_meal;
   NevaDatabase db;
   NevaConnectionManager connectionManager;
@@ -207,8 +202,17 @@ public class ProposeFragment extends Fragment {
     propose_tag_for_meal.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        MealTagProposalTask mealTagProposalTask = new MealTagProposalTask();
-        mealTagProposalTask.execute();
+        if(meal_for_tag_field.isSelectionFromPopUp()) {
+          if(tag_of_meal_field.isSelectionFromPopUp()) {
+            MealTagProposalTask mealTagProposalTask = new MealTagProposalTask();
+            mealTagProposalTask.execute();
+          } else {
+           tag_of_meal_field.setError("Please select tag from pop-up list");
+          }
+        } else {
+          meal_for_tag_field.setError("Please select meal from pop-up list");
+        }
+
       }
     });
 
