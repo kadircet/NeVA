@@ -1,10 +1,10 @@
 package mealrecommender.neva.com.neva_android_app;
 
-import android.content.res.Resources.Theme;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,25 +13,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.protobuf.ByteString;
-import io.grpc.ManagedChannel;
-import io.grpc.StatusRuntimeException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
-import mealrecommender.neva.com.neva_android_app.database.Tag;
-import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass.GetMultipleSuggestionsReply;
-import neva.backend.BackendOuterClass.GetMultipleSuggestionsRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
-import neva.backend.SuggestionOuterClass.Suggestion.Builder;
-import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 
 
 public class RecommendFragment extends Fragment {
@@ -81,7 +71,7 @@ public class RecommendFragment extends Fragment {
       @Override
       public void onClick(View view) {
         likeButton.setEnabled(false);
-        if(recommendedView.getText().length() > 0) {
+        if (recommendedView.getText().length() > 0) {
           SendFeedbackTask feedbackTask = new SendFeedbackTask();
           feedbackTask.execute(true);
           displayNextSuggestion();
@@ -94,7 +84,7 @@ public class RecommendFragment extends Fragment {
       @Override
       public void onClick(View view) {
         dislikeButton.setEnabled(false);
-        if(recommendedView.getText().length() > 0) {
+        if (recommendedView.getText().length() > 0) {
           SendFeedbackTask feedbackTask = new SendFeedbackTask();
           feedbackTask.execute(false);
           displayNextSuggestion();
@@ -105,12 +95,12 @@ public class RecommendFragment extends Fragment {
   }
 
   public void displayNextSuggestion() {
-    if(suggestionList.isEmpty()) {
+    if (suggestionList.isEmpty()) {
       suggestionList = getSuggestionsBlocking();
     }
     flexboxLayout.removeAllViews();
     Suggestion suggestion = suggestionList.pop();//get(lastDisplayIndex);
-    if(suggestionList.size() == 1) {
+    if (suggestionList.size() == 1) {
       GetSuggestionsTask getSuggestionsTask = new GetSuggestionsTask();
       getSuggestionsTask.execute();
     }
@@ -133,6 +123,19 @@ public class RecommendFragment extends Fragment {
     }
   }
 
+  public LinkedList<Suggestion> getSuggestionsBlocking() {
+    try {
+      LinkedList<Suggestion> res = new LinkedList<>();
+      for (Suggestion sug : connectionManager.getMultipleSuggestions()) {
+        res.add(sug);
+      }
+
+      return res;
+    } catch (Exception e) {
+      Log.e(TAG, e.getMessage());
+    }
+    return null;
+  }
 
   class SendFeedbackTask extends AsyncTask<Boolean, Void, Boolean> {
 
@@ -169,11 +172,10 @@ public class RecommendFragment extends Fragment {
 
     @Override
     protected void onPostExecute(Boolean success) {
-      if(success) {
-        Toast.makeText(getContext(), "Feedback Success", Toast.LENGTH_SHORT).show();
-      }
-      else {
-        Toast.makeText(getContext(), "Problem sending Feedback", Toast.LENGTH_SHORT).show();
+      if (success) {
+        Snackbar.make(getView(), "Thanks for the feedback!", Snackbar.LENGTH_SHORT).show();
+      } else {
+        Snackbar.make(getView(), "Problem sending Feedback", Snackbar.LENGTH_LONG).show();
       }
       likeButton.setEnabled(true);
       dislikeButton.setEnabled(true);
@@ -185,30 +187,16 @@ public class RecommendFragment extends Fragment {
     @Override
     protected Void doInBackground(Void... voids) {
       try {
-        for(Suggestion sug : connectionManager.getMultipleSuggestions()) {
+        for (Suggestion sug : connectionManager.getMultipleSuggestions()) {
           suggestionList.add(sug);
-        };
+        }
+        ;
       } catch (Exception e) {
         Log.e(TAG, e.getMessage());
       }
       return null;
     }
 
-  }
-
-  public LinkedList<Suggestion> getSuggestionsBlocking() {
-    try {
-      LinkedList<Suggestion> res = new LinkedList<>();
-      for (Suggestion sug: connectionManager.getMultipleSuggestions()) {
-        Log.e(TAG, sug.getName());
-        res.add(sug);
-      }
-
-      return res;
-    } catch (Exception e) {
-      Log.e(TAG, e.getMessage());
-    }
-    return null;
   }
 
 }
