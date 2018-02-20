@@ -197,9 +197,7 @@ public class RecommendFragment extends Fragment {
   }
 
   public LinkedList<Suggestion> getSuggestionsBlocking() {
-    Log.e(TAG, "GOT");
     try {
-      Log.e(TAG, "2");
       LinkedList<Suggestion> res = new LinkedList<>();
       for (Suggestion sug: connectionManager.getMultipleSuggestions()) {
         Log.e(TAG, sug.getName());
@@ -210,7 +208,6 @@ public class RecommendFragment extends Fragment {
     } catch (Exception e) {
       Log.e(TAG, e.getMessage());
     }
-    Log.e(TAG, "YARRAK");
     return null;
   }
 
