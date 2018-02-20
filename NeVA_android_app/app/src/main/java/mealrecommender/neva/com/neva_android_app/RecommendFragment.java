@@ -20,6 +20,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.StatusRuntimeException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
@@ -44,9 +45,11 @@ public class RecommendFragment extends Fragment {
   NevaConnectionManager connectionManager;
 
   TextView recommendedView;
-  Button recommendButton;
   Button likeButton;
   Button dislikeButton;
+
+  List<Suggestion> suggestionList;
+  private int lastDisplayIndex;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,8 +62,9 @@ public class RecommendFragment extends Fragment {
     db = mainActivity.db;
     connectionManager = NevaConnectionManager.getInstance();
     flexboxLayout = view.findViewById(R.id.flexbox_layout);
+    suggestionList = new LinkedList<Suggestion>();
+    lastDisplayIndex = 0;
 
-    recommendButton = view.findViewById(R.id.fragment_recommend_button);
     likeButton = view.findViewById(R.id.like_button);
     dislikeButton = view.findViewById(R.id.dislike_button);
     recommendedView = view.findViewById(R.id.fragment_recommendation_field);
@@ -71,33 +75,62 @@ public class RecommendFragment extends Fragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    recommendButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        GetSuggestionsTask getSuggestionsTask = new GetSuggestionsTask();
-        getSuggestionsTask.execute();
-      }
-    });
+    displayNextSuggestion();
 
     likeButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
+        likeButton.setEnabled(false);
         if(recommendedView.getText().length() > 0) {
           SendFeedbackTask feedbackTask = new SendFeedbackTask();
           feedbackTask.execute(true);
+          displayNextSuggestion();
         }
+        likeButton.setEnabled(true);
       }
     });
 
     dislikeButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
+        dislikeButton.setEnabled(false);
         if(recommendedView.getText().length() > 0) {
           SendFeedbackTask feedbackTask = new SendFeedbackTask();
           feedbackTask.execute(false);
+          displayNextSuggestion();
         }
+        dislikeButton.setEnabled(true);
       }
     });
+  }
+
+  public void displayNextSuggestion() {
+    if(suggestionList.size() == lastDisplayIndex) {
+      suggestionList = getSuggestionsBlocking();
+      lastDisplayIndex = 0;
+    }
+    if(suggestionList.size() > 0){
+      flexboxLayout.removeAllViews();
+      Suggestion suggestion = suggestionList.get(lastDisplayIndex);
+      lastDisplayIndex++;
+      List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();
+      int[] tagIds = new int[tagList.size()];
+      for (int i = 0; i < tagIds.length; i++) {
+        tagIds[i] = tagList.get(i).getId();
+      }
+      ArrayList<String> tagNames = (ArrayList<String>) db.nevaDao().getTagNames(tagIds);
+      recommendedView.setText(suggestion.getName());
+      for (int i = 0; i < tagNames.size(); i++) {
+        TextView tagHolder = new TextView(getContext());
+        tagHolder.setText(tagNames.get(i));
+        tagHolder.setTextSize(16);
+        tagHolder.setTextColor(getResources().getColor(R.color.textPrimaryColor));
+        tagHolder.setPadding(16, 0, 16, 0);
+        tagHolder.setBackground(getResources()
+            .getDrawable(R.drawable.rounded_tagview_background, getContext().getTheme()));
+        flexboxLayout.addView(tagHolder);
+      }
+    }
   }
 
   class SendFeedbackTask extends AsyncTask<Boolean, Void, Boolean> {
@@ -147,51 +180,26 @@ public class RecommendFragment extends Fragment {
   }
 
   class GetSuggestionsTask extends AsyncTask<Void, Void, Void> {
-    String suggestionName;
-    ArrayList<String> tagNames;
-
-    @Override
-    protected void onPreExecute() {
-      flexboxLayout.removeAllViews();
-      recommendButton.setEnabled(false);
-      recommendedView.setText("");
-    }
 
     @Override
     protected Void doInBackground(Void... voids) {
       try {
-        List<Suggestion> suggestionList = connectionManager.getMultipleSuggestions();
-        Random r = new Random();
-        Suggestion suggestion = suggestionList.get(r.nextInt(suggestionList.size()));
-        List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();
-        int[] tagIdList = new int[tagList.size()];
-        for(int i=0; i<tagIdList.length; i++) {
-          tagIdList[i] = tagList.get(i).getId();
-        }
-        List<String> tagNames = db.nevaDao().getTagNames(tagIdList);
-        Log.i(TAG, Integer.toString(tagNames.size()));
-        suggestionName = suggestion.getName();
-        this.tagNames = (ArrayList<String>) tagNames;
+        suggestionList = connectionManager.getMultipleSuggestions();
       } catch (Exception e) {
         Log.e(TAG, e.getMessage());
       }
       return null;
     }
 
-    @Override
-    protected void onPostExecute(Void aVoid) {
-      recommendedView.setText(suggestionName);
-      for (int i = 0; i < tagNames.size(); i++) {
-        TextView textView = new TextView(getContext());
-        textView.setText(tagNames.get(i));
-        textView.setTextSize(16);
-        textView.setTextColor(getResources().getColor(R.color.textPrimaryColor));
-        textView.setPadding(16, 0, 16, 0);
-        textView.setBackground(getResources().getDrawable(R.drawable.rounded_tagview_background, getContext().getTheme()));
-        flexboxLayout.addView(textView);
-      }
-      recommendButton.setEnabled(true);
+  }
+
+  public List<Suggestion> getSuggestionsBlocking() {
+    try {
+      return connectionManager.getMultipleSuggestions();
+    } catch (Exception e) {
+      Log.e(TAG, e.getMessage());
     }
+    return null;
   }
 
 }
