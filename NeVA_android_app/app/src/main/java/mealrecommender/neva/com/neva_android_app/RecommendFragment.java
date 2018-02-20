@@ -39,6 +39,7 @@ public class RecommendFragment extends Fragment {
   Button dislikeButton;
 
   ConcurrentLinkedQueue<Suggestion> suggestionList;
+
   private int lastDisplayIndex;
 
   @Override
@@ -100,7 +101,7 @@ public class RecommendFragment extends Fragment {
     }
     flexboxLayout.removeAllViews();
     Suggestion suggestion = suggestionList.poll();
-    if (suggestionList.size() == 1) {
+    if(suggestionList.size() == 1) {
       GetSuggestionsTask getSuggestionsTask = new GetSuggestionsTask();
       getSuggestionsTask.execute();
     }
@@ -129,13 +130,13 @@ public class RecommendFragment extends Fragment {
       for (Suggestion sug : connectionManager.getMultipleSuggestions()) {
         res.offer(sug);
       }
-
       return res;
     } catch (Exception e) {
       Log.e(TAG, e.getMessage());
     }
     return null;
   }
+
 
   class SendFeedbackTask extends AsyncTask<Boolean, Void, Boolean> {
 
