@@ -17,8 +17,8 @@ import com.google.android.flexbox.FlexboxLayout;
 import com.google.protobuf.ByteString;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
@@ -38,7 +38,7 @@ public class RecommendFragment extends Fragment {
   Button likeButton;
   Button dislikeButton;
 
-  LinkedList<Suggestion> suggestionList;
+  ConcurrentLinkedQueue<Suggestion> suggestionList;
   private int lastDisplayIndex;
 
   @Override
@@ -52,7 +52,7 @@ public class RecommendFragment extends Fragment {
     db = mainActivity.db;
     connectionManager = NevaConnectionManager.getInstance();
     flexboxLayout = view.findViewById(R.id.flexbox_layout);
-    suggestionList = new LinkedList<Suggestion>();
+    suggestionList = new ConcurrentLinkedQueue<Suggestion>();
     lastDisplayIndex = 0;
 
     likeButton = view.findViewById(R.id.like_button);
@@ -99,7 +99,7 @@ public class RecommendFragment extends Fragment {
       suggestionList = getSuggestionsBlocking();
     }
     flexboxLayout.removeAllViews();
-    Suggestion suggestion = suggestionList.pop();//get(lastDisplayIndex);
+    Suggestion suggestion = suggestionList.poll();
     if (suggestionList.size() == 1) {
       GetSuggestionsTask getSuggestionsTask = new GetSuggestionsTask();
       getSuggestionsTask.execute();
@@ -123,11 +123,11 @@ public class RecommendFragment extends Fragment {
     }
   }
 
-  public LinkedList<Suggestion> getSuggestionsBlocking() {
+  public ConcurrentLinkedQueue<Suggestion> getSuggestionsBlocking() {
     try {
-      LinkedList<Suggestion> res = new LinkedList<>();
+      ConcurrentLinkedQueue<Suggestion> res = new ConcurrentLinkedQueue<>();
       for (Suggestion sug : connectionManager.getMultipleSuggestions()) {
-        res.add(sug);
+        res.offer(sug);
       }
 
       return res;
@@ -188,15 +188,12 @@ public class RecommendFragment extends Fragment {
     protected Void doInBackground(Void... voids) {
       try {
         for (Suggestion sug : connectionManager.getMultipleSuggestions()) {
-          suggestionList.add(sug);
+          suggestionList.offer(sug);
         }
-        ;
       } catch (Exception e) {
         Log.e(TAG, e.getMessage());
       }
       return null;
     }
-
   }
-
 }
