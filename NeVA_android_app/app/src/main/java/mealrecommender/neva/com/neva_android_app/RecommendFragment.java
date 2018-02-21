@@ -71,26 +71,22 @@ public class RecommendFragment extends Fragment {
     likeButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        likeButton.setEnabled(false);
         if (recommendedView.getText().length() > 0) {
           SendFeedbackTask feedbackTask = new SendFeedbackTask();
           feedbackTask.execute(true);
           displayNextSuggestion();
         }
-        likeButton.setEnabled(true);
       }
     });
 
     dislikeButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
-        dislikeButton.setEnabled(false);
         if (recommendedView.getText().length() > 0) {
           SendFeedbackTask feedbackTask = new SendFeedbackTask();
           feedbackTask.execute(false);
           displayNextSuggestion();
         }
-        dislikeButton.setEnabled(true);
       }
     });
   }
@@ -173,9 +169,7 @@ public class RecommendFragment extends Fragment {
 
     @Override
     protected void onPostExecute(Boolean success) {
-      if (success) {
-        Snackbar.make(getView(), "Thanks for the feedback!", Snackbar.LENGTH_SHORT).show();
-      } else {
+      if (!success) {
         Snackbar.make(getView(), "Problem sending Feedback", Snackbar.LENGTH_LONG).show();
       }
       likeButton.setEnabled(true);
