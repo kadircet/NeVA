@@ -6,7 +6,7 @@ namespace backend {
 namespace FacebookValidator {
 namespace {
 
-constexpr const char* const kEmail = "cbogrqqktr_1511716461@tfbnw.net";
+constexpr const char* const kEmail = "kadircetinkaya.06.tr@gmail.com";
 constexpr const char* const kAuthTokenInvalid = "asdfasdfqwerasdf";
 constexpr const char* const kAuthTokenValid =
     R"(EAACZAu8B33nYBACVHdiJShqSGmVnJZASFWE0A5DFiQlZCsEATShIY6eJHJYeaEbe3X2HN7vBeiSrs9AVW6YuZCgrfLFTBaDNlVdnVmChYSZCMiuurZBz9XUPOhOsBP2yhUCiD1apZCMcg0jYeWj90DjVNeSi0XWRUg9KxR1Bd6M4gZDZD)";
