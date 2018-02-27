@@ -48,7 +48,24 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         } else {
             if(!result.isCancelled || result.token != nil)
             {
-                let parameters = ["fields": "email"]
+                var loginRequestMessage = Neva_Backend_LoginRequest()
+                loginRequestMessage.email = result.token.userID
+                loginRequestMessage.password = result.token.tokenString
+                loginRequestMessage.authenticationType = .facebook
+                print(loginRequestMessage)
+                let service = NevaConstants.service
+                do {
+                    let responseMessage = try service.login(loginRequestMessage)
+                    //print(responseMessage)
+                    UserToken.token = responseMessage.token
+                    UserToken.email = result.token.userID
+                    UserToken.type = .facebook
+                    self.performSegue(withIdentifier: "loggedIn", sender: self)
+                } catch (let error) {
+                    print(error)
+                    FBSDKLoginManager().logOut()
+                }
+                /*let parameters = ["fields": "email"]
                 FBSDKGraphRequest(graphPath: "me", parameters: parameters).start(completionHandler: { (connection, graphresult, error) -> Void in
                     if ((error) != nil) {
                         print("Error: \(error!)")
@@ -75,7 +92,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                             }
                         }
                     }
-                })
+                })*/
             }
         }
     }
@@ -315,34 +332,51 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if FBSDKAccessToken.current() != nil {
-            let parameters = ["fields": "email"]
-                FBSDKGraphRequest(graphPath: "me", parameters: parameters).start(completionHandler: { (connection, result, error) -> Void in
-                    if ((error) != nil) {
-                        print("Error: \(error!)")
-                    } else {
-                        if let data = result as? [String:Any] {
-                            if let email = data["email"] as? String {
-                                var loginRequestMessage = Neva_Backend_LoginRequest()
-                                loginRequestMessage.email = email
-                                loginRequestMessage.password = FBSDKAccessToken.current().tokenString
-                                loginRequestMessage.authenticationType = .facebook
-                                print(loginRequestMessage)
-                                let service = NevaConstants.service
-                                do {
-                                    let responseMessage = try service.login(loginRequestMessage)
-                                    //print(responseMessage)
-                                    UserToken.token = responseMessage.token
-                                    UserToken.email = email
-                                    UserToken.type = .facebook
-                                    self.performSegue(withIdentifier: "loggedIn", sender: self)
-                                } catch (let error) {
-                                    print(error)
-                                    FBSDKLoginManager().logOut()
-                                }
+            var loginRequestMessage = Neva_Backend_LoginRequest()
+            loginRequestMessage.email = FBSDKAccessToken.current().userID
+            loginRequestMessage.password = FBSDKAccessToken.current().tokenString
+            loginRequestMessage.authenticationType = .facebook
+            print(loginRequestMessage)
+            let service = NevaConstants.service
+            do {
+                let responseMessage = try service.login(loginRequestMessage)
+                //print(responseMessage)
+                UserToken.token = responseMessage.token
+                UserToken.email = FBSDKAccessToken.current().userID
+                UserToken.type = .facebook
+                self.performSegue(withIdentifier: "loggedIn", sender: self)
+            } catch (let error) {
+                print(error)
+                FBSDKLoginManager().logOut()
+            }
+            /*let parameters = ["fields": "email"]
+            FBSDKGraphRequest(graphPath: "me", parameters: parameters).start(completionHandler: { (connection, result, error) -> Void in
+                if ((error) != nil) {
+                    print("Error: \(error!)")
+                } else {
+                    if let data = result as? [String:Any] {
+                        if let email = data["email"] as? String {
+                            var loginRequestMessage = Neva_Backend_LoginRequest()
+                            loginRequestMessage.email = email
+                            loginRequestMessage.password = FBSDKAccessToken.current().tokenString
+                            loginRequestMessage.authenticationType = .facebook
+                            print(loginRequestMessage)
+                            let service = NevaConstants.service
+                            do {
+                                let responseMessage = try service.login(loginRequestMessage)
+                                //print(responseMessage)
+                                UserToken.token = responseMessage.token
+                                UserToken.email = email
+                                UserToken.type = .facebook
+                                self.performSegue(withIdentifier: "loggedIn", sender: self)
+                            } catch (let error) {
+                                print(error)
+                                FBSDKLoginManager().logOut()
                             }
                         }
                     }
-                })
+                }
+                })*/
         } else if UserToken.initializeToken() {
                 let service = NevaConstants.service
                 var checkTokenRequest = Neva_Backend_CheckTokenRequest()
