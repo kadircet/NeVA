@@ -93,3 +93,22 @@ def GetRecommendation(user_history, possible_elements):
     #TODO(kadircet): Introduce diversity to possible elements after implementing
     #food similarity.
     return np.random.choice(possible_elements)
+
+
+def GetSuggesteeMapping(dataset_file="dataset.csv"):
+    fields = {"suggestee_id": 0, "name": 1}
+    field_ids = [0] * len(fields)
+
+    mapping = dict()
+    with open(dataset_file, "r") as raw_data_file:
+        headers = raw_data_file.readline().split(',')
+        for idx, header in enumerate(headers):
+            if header in fields:
+                field_ids[fields[header]] = idx
+
+        for raw_line in raw_data_file:
+            line = np.array(raw_line.split(','))
+            line = line[field_ids]
+            suggestee_id = int(line[0])
+            mapping[suggestee_id] = line[1]
+    return mapping
