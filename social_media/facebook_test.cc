@@ -6,10 +6,10 @@ namespace backend {
 namespace FacebookValidator {
 namespace {
 
-constexpr const char* const kEmail = "kadircetinkaya.06.tr@gmail.com";
+constexpr const char* const kEmail = "10156039002563534";
 constexpr const char* const kAuthTokenInvalid = "asdfasdfqwerasdf";
 constexpr const char* const kAuthTokenValid =
-    R"(EAACZAu8B33nYBACVHdiJShqSGmVnJZASFWE0A5DFiQlZCsEATShIY6eJHJYeaEbe3X2HN7vBeiSrs9AVW6YuZCgrfLFTBaDNlVdnVmChYSZCMiuurZBz9XUPOhOsBP2yhUCiD1apZCMcg0jYeWj90DjVNeSi0XWRUg9KxR1Bd6M4gZDZD)";
+    R"(EAACZAu8B33nYBAL5YYjoDWqRCXoCpbeyEayoEU6xiUqfX289YqMkdns9p73ZAsoSFouS2jOZAoSGBrXNi2dqJddYaZAN9ymiYEM2bEZCZCB7pZAJyvOIYN9X1ZACKul8zNhrYZAaPSfkdZBBAE8jGMRZBaakNVUxttGg6sZD)";
 
 TEST(Validate, Valid) { EXPECT_TRUE(Validate(kEmail, kAuthTokenValid)); }
 
