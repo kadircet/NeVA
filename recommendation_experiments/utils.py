@@ -25,7 +25,7 @@ def ParseFeature(feature_value, feature_type):
         feature_value = datetime.datetime.utcfromtimestamp(feature_value)
         hour, minute = feature_value.hour, feature_value.minute
         return hour * 60 + minute
-    raise Exception("Unknown feature type")
+    raise Exception("Unknown feature type:", feature_type)
 
 
 def ExtractFeatures(for_user_id, dataset_file="dataset.csv"):
@@ -55,7 +55,7 @@ def ExtractFeatures(for_user_id, dataset_file="dataset.csv"):
             features = line[1:1 + NUM_FEATURES]
             for field in fields:
                 idx = fields[field] - 1
-                if idx < NUM_FEATURES:
+                if idx < NUM_FEATURES and idx >= 0:
                     features[idx] = ParseFeature(features[idx], field)
             inputs = np.vstack((inputs, features))
     return inputs
@@ -82,7 +82,7 @@ def GetNearestElements(user_history, current_context, k=10):
             heapq.heappush(neighbours, (-dist, entry[0]))
         elif dist < -neighbours[0][0]:
             heapq.heappushpop(neighbours, (-dist, entry[0]))
-    return neighbours
+    return tuple(map(lambda x: int(x[1]), neighbours))
 
 
 def GetRecommendation(user_history, possible_elements):
