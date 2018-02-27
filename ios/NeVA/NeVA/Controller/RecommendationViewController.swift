@@ -39,7 +39,7 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
             //Background is white
             textColor = UIColor.black
         }
-        let font = UIFont.systemFont(ofSize: 50.0)
+        let font = UIFont.systemFont(ofSize: 64.0)
         let initials = foods[index].name!.initials
         let index = initials.index(after: initials.startIndex)
         let firstLetter = String(initials[..<index])
