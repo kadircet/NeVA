@@ -1,5 +1,6 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
+import mealrecommender.neva.com.neva_android_app.util.ColorGenerator;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
 
@@ -114,8 +116,10 @@ public class RecommendFragment extends Fragment {
       tagHolder.setTextSize(16);
       tagHolder.setTextColor(getResources().getColor(R.color.textPrimaryColor));
       tagHolder.setPadding(16, 0, 16, 0);
-      tagHolder.setBackground(getResources()
-          .getDrawable(R.drawable.rounded_tagview_background, getContext().getTheme()));
+      GradientDrawable bg = (GradientDrawable) getResources().getDrawable(R.drawable.rounded_tagview_background, getContext().getTheme());
+      bg.setColor(ColorGenerator.getColor(tagNames.get(i)));
+      tagHolder.setBackground(bg);
+
       flexboxLayout.addView(tagHolder);
     }
   }

@@ -6,15 +6,13 @@
     android:theme="@style/AppTheme">
 
     <ImageView
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
+        android:id="@+id/meal_icon"
+        android:layout_width="50dp"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dip"
-        android:layout_marginLeft="10dp"
-        android:contentDescription="TODO"
-        android:src="@drawable/messenger_button_send_round_shadow" />
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/firstLine"

@@ -15,6 +15,8 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:divider="@color/textHintColor"
+    android:dividerHeight="0.2dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="mealrecommender.neva.com.neva_android_app.HistoryFragment"
     tools:listitem="@layout/fragment_history" >
