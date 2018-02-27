@@ -48,12 +48,11 @@ public class MainActivity extends AppCompatActivity
   private final String TAG = this.getClass().getSimpleName();
 
   public ByteString loginToken;
-  public ManagedChannel mChannel;
-  public BackendGrpc.BackendBlockingStub blockingStub;
   public FloatingActionButton fab;
   public NevaDatabase db;
   public SharedPreferences sharedPreferences;
   public NevaConnectionManager connectionManager;
+  TextView navdrawUsername;
   HistoryCursorAdapter adapter;
 
 
@@ -74,9 +73,9 @@ public class MainActivity extends AppCompatActivity
 
     NavigationView navigationView = findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
-    TextView navdrawUsername = navigationView.getHeaderView(0)
-        .findViewById(R.id.nav_header_username);
-    navdrawUsername.setText(NevaLoginManager.getInstance().getEmail());
+    navdrawUsername = navigationView.getHeaderView(0).findViewById(R.id.nav_header_username);
+    (new GetUserNameTask()).execute();
+    //navdrawUsername.setText(NevaLoginManager.getInstance().getEmail());
 
     loginToken = NevaLoginManager.getInstance().getByteStringToken();
 
@@ -102,6 +101,27 @@ public class MainActivity extends AppCompatActivity
     item.setChecked(true);
     setTitle(item.getTitle());
 
+  }
+
+  class GetUserNameTask extends AsyncTask<Void, Void, String> {
+    @Override
+    protected String doInBackground(Void... voids) {
+      try {
+        return NevaConnectionManager.getInstance().getUser().getName();
+      } catch (Exception e)
+      {
+        Log.e(TAG, e.getMessage());
+        return null;
+      }
+    }
+
+    protected void onPostExecute(String username) {
+      if(username != null || username.length()>0) {
+        navdrawUsername.setText(username);
+      } else {
+        navdrawUsername.setText("Mr.Nobody?");
+      }
+    }
   }
 
   class FillDatabaseTask extends AsyncTask<Void, Void, Void> {

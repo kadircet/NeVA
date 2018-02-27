@@ -151,38 +151,18 @@ public class LoginActivity extends AppCompatActivity {
       Log.i(TAG, "Facebook Access Token: " + accessToken);
       Toast.makeText(getBaseContext(), getResources().getString(R.string.success_facebook_login),
           Toast.LENGTH_SHORT).show();
-      GraphRequest graphReq = GraphRequest
-          .newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-              Log.i(TAG, "Response: " + response.toString());
-              if (response.getError() != null) {
-                Log.e(TAG, response.getError().getErrorMessage());
-              } else {
-                String email = object.optString("email");
-                String name = object.optString("name");
-
-                Log.i(TAG, "Email: " + email);
-                Log.i(TAG, "Name: " + name);
-                try {
-                  // Facebook login
-                  LoginTask loginTask = new LoginTask(email, accessToken,
-                      AuthenticationType.FACEBOOK, loginResult.getAccessToken());
-                  loginTask.execute();
-                  // submit(email, accessToken, AuthenticationType.FACEBOOK, loginResult.getAccessToken());
-                } catch (Exception e) {
-                  Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                  LoginManager.getInstance().logOut();
-                }
-              }
-            }
-          });
-      Bundle parameters = new Bundle();
-      parameters.putString("fields", "id,name,email");
-      graphReq.setParameters(parameters);
-      progressBar.setVisibility(View.VISIBLE);
-      graphReq.executeAsync();
-      progressBar.setVisibility(View.GONE);
+      String userId = loginResult.getAccessToken().getUserId();
+      try {
+        progressBar.setVisibility(View.VISIBLE);
+        LoginTask loginTask = new LoginTask(userId, accessToken, AuthenticationType.FACEBOOK, loginResult.getAccessToken());
+        loginTask.execute();
+        progressBar.setVisibility(View.GONE);
+      } catch (Exception e) {
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        LoginManager.getInstance().logOut();
+        NevaLoginManager.getInstance().logOut();
+      }
     }
 
     @Override
@@ -260,6 +240,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onPostExecute(Integer result) {
       loginButton.setEnabled(true);
       progressBar.setVisibility(View.GONE);
+      Log.i(TAG, "Login Task Return Value: " + result);
       submit(result);
     }
   }

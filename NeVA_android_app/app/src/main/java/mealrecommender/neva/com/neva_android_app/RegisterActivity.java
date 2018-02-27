@@ -1,6 +1,7 @@
 package mealrecommender.neva.com.neva_android_app;
 
 import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -52,24 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
     pb = findViewById(R.id.progress_bar);
     connectionManager = NevaConnectionManager.getInstance();
 
-    mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-      @Override
-      public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DAY_OF_MONTH, day);
-        cal.set(Calendar.HOUR, 0);
-        cal.set(Calendar.SECOND, 0);
-        String monthName = cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH);
-        String date =
-            cal.get(Calendar.DAY_OF_MONTH) + " / " + monthName + " / " + cal.get(Calendar.YEAR);
-        birthdate_field.setText(date);
-        birthday_time = (int) (cal.getTimeInMillis() / 1000);
-        Log.d("BDay: ", Integer.toString(birthday_time));
-
-      }
-    };
   }
 
   public void onGenderButton(View view) {
@@ -80,18 +63,33 @@ public class RegisterActivity extends AppCompatActivity {
   }
 
   public void onBirthdayButton(View view) {
-    Calendar cal = Calendar.getInstance();
-    int year = cal.get(Calendar.YEAR);
-    int month = cal.get(Calendar.MONTH);
-    int day = cal.get(Calendar.DAY_OF_MONTH);
+    final Calendar currentTime = Calendar.getInstance();
+    int year = currentTime.get(Calendar.YEAR);
+    int month = currentTime.get(Calendar.MONTH);
+    int day = currentTime.get(Calendar.DAY_OF_MONTH);
 
-    DatePickerDialog dialog = new DatePickerDialog(
-        RegisterActivity.this,
-        android.R.style.Theme_DeviceDefault_Dialog_MinWidth,
-        mDateSetListener,
-        year, month, day);
-    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-    dialog.show();
+    mDateSetListener = new OnDateSetListener() {
+      @Override
+      public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.clear(Calendar.YEAR);
+        cal.clear(Calendar.MONTH);
+        cal.clear(Calendar.DAY_OF_MONTH);
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        String monthName = cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH);
+        String date =
+            cal.get(Calendar.DAY_OF_MONTH) + " / " + monthName + " / " + cal.get(Calendar.YEAR);
+        birthdate_field.setText(date);
+        birthday_time = (int) (cal.getTimeInMillis() / 1000);
+        Log.d("BDay: ", Integer.toString(birthday_time));
+      }
+    };
+
+    DatePickerDialog dpDialog = new DatePickerDialog(RegisterActivity.this, mDateSetListener, year, month, day);
+    dpDialog.show();
+
   }
 
   public UserOuterClass.User.Gender getGenderOfButton(RadioButton button) {

@@ -190,10 +190,20 @@ public class UserFragment extends Fragment {
           case R.id.profile_email:
             updatedUser = User.newBuilder().setEmail(newTextField.getText().toString()).build();
           case R.id.profile_weight:
-            String weightText = newTextField.getText().toString();
-            weightText = weightText.substring(0, weightText.indexOf(" kg"));
-            updatedUser = User.newBuilder().setWeight(Float.valueOf(weightText)).build();
-            break;
+            String weightText = newTextField.getText().toString().trim();
+            if (weightText.matches("^[0-9.]+\\s*(kg)?$"))
+            {
+              if (weightText.contains("kg")) {
+                weightText = weightText.substring(0, weightText.indexOf("kg")).trim();
+              }
+              try {
+                updatedUser = User.newBuilder().setWeight(Float.valueOf(weightText)).build();
+              } catch (Exception e){
+                Log.i(TAG, "Cannot convert weight to Float");
+                return;
+              }
+              break;
+            }
           default:
             updatedUser = User.newBuilder().build();
             break;
