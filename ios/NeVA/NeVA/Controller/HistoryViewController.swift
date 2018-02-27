@@ -37,9 +37,10 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ("historyCell")) as? HistoryTableViewCell {
                 let meal = historyEntries[index].meal!
-                if let picture = meal.picture as? UIImage {
+                /*if let picture = meal.picture as? UIImage {
                     cell.setFoodPicture(picture: picture )
-                }
+                }*/
+                cell.setFoodPicture(name: meal.name!)
                 cell.setName(name: meal.name!)
                 cell.setTime(time: historyEntries[indexPath.row].date!)
                 return cell

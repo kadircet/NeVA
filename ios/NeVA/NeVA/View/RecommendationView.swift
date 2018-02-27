@@ -28,9 +28,9 @@ class RecommendationView: UIView {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         //TODO: It seems good because xib and view in mainboard have same size find some way to do it better
-        image.layer.cornerRadius = image.frame.height / 2
-        image.layer.borderColor = NeVAColors.primaryDarkColor.cgColor
-        image.layer.borderWidth = 3.0
+        //image.layer.cornerRadius = image.frame.height / 2
+        //image.layer.borderColor = NeVAColors.primaryDarkColor.cgColor
+        //image.layer.borderWidth = 3.0
         contentView.layer.borderColor = NeVAColors.primaryColor.cgColor
         contentView.layer.cornerRadius = image.frame.height / 5
         contentView.layer.borderWidth = 4.0

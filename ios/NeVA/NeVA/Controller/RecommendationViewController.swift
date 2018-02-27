@@ -25,7 +25,26 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         let view = RecommendationView()
         view.name.text = foods[index].name
-        view.image.image = UIImage(named: "loginRegisterViewBackground")
+        let color = UIColor.colorHash(name: foods[index].name)
+        let componentColors = color.cgColor.components
+        let colorBrightness = ((componentColors![0] * 299) + (componentColors![1] * 587) + (componentColors![2] * 114)) / 1000
+        var textColor: UIColor? = nil
+        if (colorBrightness < 0.5)
+        {
+            //Background is dark
+            textColor = UIColor.white
+        }
+        else
+        {
+            //Background is white
+            textColor = UIColor.black
+        }
+        let font = UIFont.systemFont(ofSize: 50.0)
+        let initials = foods[index].name!.initials
+        let index = initials.index(after: initials.startIndex)
+        let firstLetter = String(initials[..<index])
+        view.image.setImage(string: firstLetter, color: color, circular: true, textAttributes: [NSAttributedStringKey.font: font, NSAttributedStringKey.foregroundColor: textColor!])
+        //view.image.image = UIImage(named: "loginRegisterViewBackground")
         return view
     }
     
