@@ -112,16 +112,25 @@ Status UserOrm::CheckCredentials(
     }
   }
   query.reset();
+
+  query << "SELECT `user_id` FROM `user_session` WHERE `token`=%0q";
+  query.parse();
+
+  do {
+    *session_token = util::GenerateRandomKeySecure();
+    res = query.store(*session_token)
+  } while(!res.empty())
+
   // TODO(kadircet): Implement token expiration.
   query << "INSERT INTO `user_session` (`user_id`, `token`, `expire`) VALUES "
            "(%0, %1q, %2)";
   query.parse();
 
-  *session_token = util::GenerateRandomKeySecure();
-  while (!query.execute(user_id, *session_token, 0)) {
+  if(!query.execute(user_id, *session_token, 0))
+  {
     VLOG(1) << "Query failed with:" << query.error();
-    *session_token = util::GenerateRandomKey();
   }
+  
   VLOG(1) << email << " has been authenticated successfully.";
   return Status::OK;
 }
