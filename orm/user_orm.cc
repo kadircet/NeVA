@@ -119,7 +119,7 @@ Status UserOrm::CheckCredentials(
   do {
     *session_token = util::GenerateRandomKeySecure();
     res = query.store(*session_token);
-  } while(!res.empty())
+  } while(!res.empty());
 
   // TODO(kadircet): Implement token expiration.
   query << "INSERT INTO `user_session` (`user_id`, `token`, `expire`) VALUES "
