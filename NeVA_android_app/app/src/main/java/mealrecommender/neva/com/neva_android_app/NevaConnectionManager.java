@@ -3,7 +3,6 @@ package mealrecommender.neva.com.neva_android_app;
 import static neva.backend.BackendGrpc.newBlockingStub;
 
 import android.util.Log;
-import android.widget.ProgressBar;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

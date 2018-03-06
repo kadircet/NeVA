@@ -12,6 +12,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,28 +23,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.facebook.login.LoginManager;
 import com.google.protobuf.ByteString;
-import io.grpc.ManagedChannel;
 import java.util.ArrayList;
 import java.util.List;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.MealTagRelation;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import mealrecommender.neva.com.neva_android_app.database.Tag;
-import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
 import neva.backend.BackendOuterClass.GetSuggestionItemListReply;
 import neva.backend.BackendOuterClass.GetSuggestionItemListRequest;
-import neva.backend.BackendOuterClass.GetTagsReply;
 import neva.backend.BackendOuterClass.GetTagsRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
 import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener, OnBackStackChangedListener {
 
   private final String TAG = this.getClass().getSimpleName();
 
@@ -89,8 +85,8 @@ public class MainActivity extends AppCompatActivity
 
     Fragment fragment = new RecommendFragment();
     FragmentManager fragmentManager = getSupportFragmentManager();
-    fragmentManager.beginTransaction().replace(R.id.content_view, fragment)
-        .addToBackStack(fragment.getTag()).commit();
+    fragmentManager.addOnBackStackChangedListener(MainActivity.this);
+    fragmentManager.beginTransaction().replace(R.id.content_view, fragment).addToBackStack(fragment.getClass().getSimpleName()).commit();
 
     FillDatabaseTask fillDatabaseTask = new FillDatabaseTask();
     fillDatabaseTask.execute();
@@ -101,6 +97,17 @@ public class MainActivity extends AppCompatActivity
     item.setChecked(true);
     setTitle(item.getTitle());
 
+  }
+
+  @Override
+  public void onBackStackChanged() {
+
+    FragmentManager fm = getSupportFragmentManager();
+    int count = fm.getBackStackEntryCount();
+    Log.e("BACKSTACK CHANGED", ""+count);
+    for(int i =0; i<count; i++) {
+      Log.d("BACKSTACK", ""+fm.getBackStackEntryAt(i).getName());
+    }
   }
 
   class GetUserNameTask extends AsyncTask<Void, Void, String> {
@@ -226,17 +233,19 @@ public class MainActivity extends AppCompatActivity
     }
   }
 
-
   @Override
   public void onBackPressed() {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     FragmentManager fragmentManager = getSupportFragmentManager();
     if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
-    } else if (fragmentManager.getBackStackEntryCount() > 0) {
+    } else if (fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1).getName().equals(RecommendFragment.class.getSimpleName())) {
+      finish();
+    } else if (fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1).getName().equals(AddHistoryItemFragment.class.getSimpleName())) {
       fragmentManager.popBackStack();
     } else {
-      super.onBackPressed();
+      fragmentManager.popBackStack(RecommendFragment.class.getSimpleName(), 0);
+      setTitle("Recommendation");
     }
   }
 
@@ -261,12 +270,13 @@ public class MainActivity extends AppCompatActivity
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     // Handle navigation view item clicks here.
+    FragmentManager fragmentManager = getSupportFragmentManager();
     int id = item.getItemId();
     Fragment fragment = null;
     Class fragmentClass = null;
 
     if (id == R.id.nav_recommend) {
-      fragmentClass = RecommendFragment.class;
+      fragmentManager.popBackStack("RecommendFragment", 0);
     } else if (id == R.id.nav_propose) {
       fragmentClass = ProposeFragment.class;
     } else if (id == R.id.nav_history) {
@@ -286,15 +296,15 @@ public class MainActivity extends AppCompatActivity
       startActivity(loginActivity);
       return true;
     }
-    try {
-      fragment = (Fragment) fragmentClass.newInstance();
-    } catch (Exception e) {
-      e.printStackTrace();
+    if(fragmentClass != null) {
+      try {
+        fragment = (Fragment) fragmentClass.newInstance();
+      } catch (Exception e) {
+        Log.e(TAG, e.getMessage());
+      }
+      fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in_up, R.anim.fast_fade_out, R.anim.fade_in_up, R.anim.fast_fade_out).replace(R.id.content_view, fragment)
+          .addToBackStack(fragmentClass.getSimpleName()).commit();
     }
-
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in_up, R.anim.fast_fade_out, R.anim.fade_in_up, R.anim.fast_fade_out).replace(R.id.content_view, fragment)
-        .addToBackStack(fragment.getTag()).commit();
 
     // Highlight the selected item has been done by NavigationView
     item.setChecked(true);
@@ -311,6 +321,6 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager = getSupportFragmentManager();
     Fragment fragment = new AddHistoryItemFragment();
     fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_left_fast, R.anim.fast_fade_out, R.anim.slide_in_left_fast, R.anim.fast_fade_out).add(R.id.content_view, fragment)
-        .addToBackStack(fragment.getTag()).commit();
+        .addToBackStack(fragment.getClass().getSimpleName()).commit();
   }
 }

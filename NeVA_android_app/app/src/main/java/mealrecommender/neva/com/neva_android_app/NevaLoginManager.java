@@ -1,22 +1,10 @@
 package mealrecommender.neva.com.neva_android_app;
 
-import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
 import com.google.protobuf.ByteString;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import java.util.List;
-import neva.backend.BackendGrpc;
-import neva.backend.BackendGrpc.BackendBlockingStub;
 import neva.backend.BackendOuterClass;
-import neva.backend.BackendOuterClass.CheckTokenRequest;
-import neva.backend.BackendOuterClass.GenericReply;
-import neva.backend.BackendOuterClass.GetTagsReply;
-import neva.backend.BackendOuterClass.GetTagsRequest;
 import neva.backend.BackendOuterClass.LoginReply;
-import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
-import neva.backend.SuggestionOuterClass.Tag;
 
 /**
  * Created by hakan on 12/12/17.

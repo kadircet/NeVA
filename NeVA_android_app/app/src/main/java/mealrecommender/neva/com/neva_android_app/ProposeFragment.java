@@ -22,11 +22,6 @@ import java.util.ArrayList;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
-import neva.backend.BackendOuterClass.GenericReply;
-import neva.backend.BackendOuterClass.TagPropositionRequest;
-import neva.backend.BackendOuterClass.TagValuePropositionRequest;
-import neva.backend.SuggestionOuterClass;
 
 
 /**
@@ -59,7 +54,6 @@ public class ProposeFragment extends Fragment {
   public ProposeFragment() {
     // Required empty public constructor
   }
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,

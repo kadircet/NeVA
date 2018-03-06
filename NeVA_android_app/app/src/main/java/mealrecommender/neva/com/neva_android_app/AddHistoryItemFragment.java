@@ -28,7 +28,6 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import com.google.protobuf.ByteString;
-import io.grpc.ManagedChannel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,11 +35,7 @@ import java.util.Date;
 import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
-import neva.backend.BackendGrpc.BackendBlockingStub;
 import neva.backend.BackendOuterClass.InformUserChoiceReply;
-import neva.backend.BackendOuterClass.InformUserChoiceRequest;
-import neva.backend.UserHistoryOuterClass.Choice;
-import neva.backend.util.Util.Timestamp;
 
 ;
 
@@ -72,7 +67,6 @@ public class AddHistoryItemFragment extends Fragment {
   public AddHistoryItemFragment() {
     // Required empty public constructor
   }
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -132,6 +126,12 @@ public class AddHistoryItemFragment extends Fragment {
     protected void onPreExecute() {
       addHistoryButton.setEnabled(false);
       locationEnabled = checkLocationPermissions();
+      if(mealNameField.getText().toString() == "" || mealNameField.getText() == null){
+        mealNameField.setError("Error with mealname");
+      }
+      if(date == null) {
+        timeField.setError("Error with time");
+      }
     }
 
     @Override

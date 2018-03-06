@@ -2,8 +2,6 @@ package mealrecommender.neva.com.neva_android_app;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,8 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Locale;
-import neva.backend.BackendGrpc;
-import neva.backend.BackendOuterClass;
 import neva.backend.UserOuterClass;
 import neva.backend.util.Util;
 

@@ -16,7 +16,7 @@ android {
         applicationId "mealrecommender.neva.com.neva_android_app"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 5
+        versionCode 7
         versionName "0.9.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true

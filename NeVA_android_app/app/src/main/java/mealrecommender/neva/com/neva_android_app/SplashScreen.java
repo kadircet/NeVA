@@ -105,7 +105,7 @@ public class SplashScreen extends AppCompatActivity {
     } else {
       Log.e(TAG, "TOKEN AUTH INVALID");
       Toast.makeText(getBaseContext(), getResources().getString(R.string.error_authtoken), Toast.LENGTH_LONG).show();
-      finishAndRemoveTask();
+      finish();
     }
   }
 
