@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import os
 
 class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     var user : Neva_Backend_User? = nil
@@ -64,14 +65,23 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate, UIText
         request.user = user!
         let service = NevaConstants.service
         do {
-            let response = try service.updateuser(request)
-            print(response)
+            _ = try service.updateuser(request)
+            if #available(iOS 10.0, *) {
+                os_log("Profile of user %@ is successfully updated.", log: NevaConstants.logger, type: .info, String(describing: UserToken.email))
+            } else {
+                print("Profile of user \(String(describing: UserToken.email)) is successfully logged in.")
+            }
         } catch (let error) {
             user!.dateOfBirth = oldDate
             user!.name = oldName
             user!.gender = oldGender
             user!.weight = oldWeight
-            print(error)
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+                // Fallback on earlier versions
+                print("Error: \(error)")
+            }
         }
     }
     func getUserData() {
@@ -81,6 +91,11 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate, UIText
         do {
             let response = try service.getuser(request)
             user = response.user
+            if #available(iOS 10.0, *) {
+                os_log("Profile of user %@ is received.", log: NevaConstants.logger, type: .info, String(describing: UserToken.email))
+            } else {
+                print("Profile of user \(String(describing: UserToken.email)) is received.")
+            }
             nameField.text = user!.name
             weightField.text = "\(user!.weight)"
             let birthdate = user!.dateOfBirth
@@ -96,7 +111,12 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate, UIText
                 print("error")
             }
         } catch (let error) {
-            print(error)
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+                // Fallback on earlier versions
+                print("Error: \(error)")
+            }
         }
     }
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {

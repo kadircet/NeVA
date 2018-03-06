@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import os
 class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
     //UITextFieldDelegate functions Start
@@ -44,7 +45,12 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
     //FBDKLoginButtonDelegate Functions Start
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if ((error) != nil) {
-            print("Error: \(error!)")
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+                // Fallback on earlier versions
+                print("Error: \(error!)")
+            }
         } else {
             if(!result.isCancelled || result.token != nil)
             {
@@ -52,47 +58,27 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                 loginRequestMessage.email = result.token.userID
                 loginRequestMessage.password = result.token.tokenString
                 loginRequestMessage.authenticationType = .facebook
-                print(loginRequestMessage)
                 let service = NevaConstants.service
                 do {
                     let responseMessage = try service.login(loginRequestMessage)
-                    //print(responseMessage)
                     UserToken.token = responseMessage.token
                     UserToken.email = result.token.userID
                     UserToken.type = .facebook
+                    if #available(iOS 10.0, *) {
+                        os_log("User %@ successfully logged in.", log: NevaConstants.logger, type: .info, String(describing: UserToken.email))
+                    } else {
+                        print("User \(String(describing: UserToken.email)) successfully logged in.")
+                    }
                     self.performSegue(withIdentifier: "loggedIn", sender: self)
                 } catch (let error) {
-                    print(error)
+                    if #available(iOS 10.0, *) {
+                        os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+                    } else {
+                        // Fallback on earlier versions
+                        print("Error: \(error)")
+                    }
                     FBSDKLoginManager().logOut()
                 }
-                /*let parameters = ["fields": "email"]
-                FBSDKGraphRequest(graphPath: "me", parameters: parameters).start(completionHandler: { (connection, graphresult, error) -> Void in
-                    if ((error) != nil) {
-                        print("Error: \(error!)")
-                    } else {
-                        if let data = graphresult as? [String:Any] {
-                            if let email = data["email"] as? String {
-                                var loginRequestMessage = Neva_Backend_LoginRequest()
-                                loginRequestMessage.email = email
-                                loginRequestMessage.password = result.token.tokenString
-                                loginRequestMessage.authenticationType = .facebook
-                                print(loginRequestMessage)
-                                let service = NevaConstants.service
-                                do {
-                                    let responseMessage = try service.login(loginRequestMessage)
-                                    //print(responseMessage)
-                                    UserToken.token = responseMessage.token
-                                    UserToken.email = email
-                                    UserToken.type = .facebook
-                                    self.performSegue(withIdentifier: "loggedIn", sender: self)
-                                } catch (let error) {
-                                    print(error)
-                                    FBSDKLoginManager().logOut()
-                                }
-                            }
-                        }
-                    }
-                })*/
             }
         }
     }
@@ -155,11 +141,10 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         var requestMessage = Neva_Backend_RegisterRequest()
         requestMessage.user = user
     
-        print(user)
-        print(requestMessage)
+        
         let service = NevaConstants.service
         do {
-            let responseMessage = try service.register(requestMessage)
+            _ = try service.register(requestMessage)
             loginView.isHidden = false
             registerView.isHidden = true
             registerEmail = ""
@@ -174,11 +159,19 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
             registerConfirmPassword = ""
             registerConfirmPasswordField.text = ""
             registerConfirmPasswordField.layer.borderColor = UIColor.white.cgColor
-            print(responseMessage)
+            if #available(iOS 10.0, *) {
+                os_log("User %@ successfully registered.", log: NevaConstants.logger, type: .info, String(describing: user.email))
+            } else {
+                print("User \(String(describing: user.email)) successfully registered.")
+            }
         } catch(let error) {
-            print("ERROROROROR")
             registerEmailField.shake()
-            print(error)
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+                // Fallback on earlier versions
+                print("Error: \(error)")
+            }
         }
         
         
@@ -210,19 +203,27 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
         loginRequestMessage.email = loginEmail!
         loginRequestMessage.password = loginPassword!
         loginRequestMessage.authenticationType = .default
-        print(loginRequestMessage)
         let service = NevaConstants.service
         do {
             let responseMessage = try service.login(loginRequestMessage)
-            print(responseMessage)
             UserToken.setUserToken(email: loginRequestMessage.email, token: responseMessage.token)
+            if #available(iOS 10.0, *) {
+                os_log("User %@ successfully logged in.", log: NevaConstants.logger, type: .info, String(describing: UserToken.email))
+            } else {
+                print("User \(String(describing: UserToken.email)) successfully logged in.")
+            }
             loginEmail = ""
             loginEmailField.text = ""
             loginPassword = ""
             loginPasswordField.text = ""
             performSegue(withIdentifier: "loggedIn", sender: self)
         } catch (let error) {
-            print(error)
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+                // Fallback on earlier versions
+                print("Error: \(error)")
+            }
             loginEmailField.shake()
             loginPasswordField.shake()
         }
@@ -336,47 +337,27 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
             loginRequestMessage.email = FBSDKAccessToken.current().userID
             loginRequestMessage.password = FBSDKAccessToken.current().tokenString
             loginRequestMessage.authenticationType = .facebook
-            print(loginRequestMessage)
             let service = NevaConstants.service
             do {
                 let responseMessage = try service.login(loginRequestMessage)
-                //print(responseMessage)
                 UserToken.token = responseMessage.token
                 UserToken.email = FBSDKAccessToken.current().userID
                 UserToken.type = .facebook
+                if #available(iOS 10.0, *) {
+                    os_log("User %@ successfully logged in.", log: NevaConstants.logger, type: .info, String(describing: UserToken.email))
+                } else {
+                    print("User \(String(describing: UserToken.email)) successfully logged in.")
+                }
                 self.performSegue(withIdentifier: "loggedIn", sender: self)
             } catch (let error) {
-                print(error)
+                if #available(iOS 10.0, *) {
+                    os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+                } else {
+                    // Fallback on earlier versions
+                    print("Error: \(error)")
+                }
                 FBSDKLoginManager().logOut()
             }
-            /*let parameters = ["fields": "email"]
-            FBSDKGraphRequest(graphPath: "me", parameters: parameters).start(completionHandler: { (connection, result, error) -> Void in
-                if ((error) != nil) {
-                    print("Error: \(error!)")
-                } else {
-                    if let data = result as? [String:Any] {
-                        if let email = data["email"] as? String {
-                            var loginRequestMessage = Neva_Backend_LoginRequest()
-                            loginRequestMessage.email = email
-                            loginRequestMessage.password = FBSDKAccessToken.current().tokenString
-                            loginRequestMessage.authenticationType = .facebook
-                            print(loginRequestMessage)
-                            let service = NevaConstants.service
-                            do {
-                                let responseMessage = try service.login(loginRequestMessage)
-                                //print(responseMessage)
-                                UserToken.token = responseMessage.token
-                                UserToken.email = email
-                                UserToken.type = .facebook
-                                self.performSegue(withIdentifier: "loggedIn", sender: self)
-                            } catch (let error) {
-                                print(error)
-                                FBSDKLoginManager().logOut()
-                            }
-                        }
-                    }
-                }
-                })*/
         } else if UserToken.initializeToken() {
                 let service = NevaConstants.service
                 var checkTokenRequest = Neva_Backend_CheckTokenRequest()
@@ -385,7 +366,12 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                     let _ = try service.checktoken(checkTokenRequest)
                     self.performSegue(withIdentifier: "loggedIn", sender: self)
                 } catch (let error) {
-                    print(error)
+                    if #available(iOS 10.0, *) {
+                        os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+                    } else {
+                        // Fallback on earlier versions
+                        print("Error: \(error)")
+                    }
                     UserToken.clearUserToken()
                 }
         }

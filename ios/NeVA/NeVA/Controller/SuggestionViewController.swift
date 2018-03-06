@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import os
 
 class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -57,15 +58,19 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
             request.token = UserToken.token!
             request.tag = tag
             do {
-                let responseMessage = try service.tagproposition(request)
-                print(responseMessage)
+                _ = try service.tagproposition(request)
                 if let button = sender as? UIButton {
                     button.shake()
                 }
                 tagSuggestionField.text = ""
                 tagSuggestionField.placeholder = "Successful"
             } catch (let error) {
-                print(error)
+                if #available(iOS 10.0, *) {
+                    os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+                } else {
+                    // Fallback on earlier versions
+                    print("Error: \(error)")
+                }
                 tagSuggestionField.text = ""
                 tagSuggestionField.placeholder = "Failed"
                 tagSuggestionField.shake()
@@ -85,15 +90,19 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
             request.suggestion.suggestionCategory = .meal
             request.token = UserToken.token!
             do {
-                let responseMessage = try service.suggestionitemproposition(request)
-                print(responseMessage)
+                _ = try service.suggestionitemproposition(request)
                 if let button = sender as? UIButton {
                     button.shake()
                 }
                 foodSuggestionField.text = ""
                 foodSuggestionField.placeholder = "Successful"
             } catch (let error) {
-                print(error)
+                if #available(iOS 10.0, *) {
+                    os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+                } else {
+                    // Fallback on earlier versions
+                    print("Error: \(error)")
+                }
                 foodSuggestionField.text = ""
                 foodSuggestionField.placeholder = "Failed"
                 foodSuggestionField.shake()
@@ -143,6 +152,9 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
                 foodList = meals
             }
         } catch (let error){
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+            }
             fatalError("Failed to fetch: \(error)")
         }
     }

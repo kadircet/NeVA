@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Koloda
+import os
 
 class RecommendationViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSource {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -86,21 +87,30 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
         choice.suggesteeID = UInt32(foods[index].id)
         feedback.choice = choice
         request.userFeedback = feedback
-        print(request)
         let service = NevaConstants.service
         do {
             let call = try service.recordfeedback(request) {responseMessage, callResult in
-                //print("recordfeedback callback start")
-                if let responseMessage = responseMessage {
-                    print(responseMessage)
+                if responseMessage != nil {
+                    if #available(iOS 10.0, *) {
+                        os_log("Feedback is registered.", log: NevaConstants.logger, type: .info)
+                    } else {
+                        print("Feedback is registered.")
+                    }
                 } else  {
-                    print("No message received. \(callResult)")
+                    if #available(iOS 10.0, *) {
+                        os_log("No message received, %@", log: NevaConstants.logger, type: .error, String(describing: callResult))
+                    } else {
+                        print("No message received \(callResult)")
+                    }
                 }
-                //print("recordfeedback callback end")
             }
-            //print(call)
         } catch (let error) {
-            print(error)
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+                // Fallback on earlier versions
+                print("Error: \(error)")
+            }
         }
     }
     func koloda(_ koloda: KolodaView, allowedDirectionsForIndex index: Int) -> [SwipeResultDirection] {
@@ -124,10 +134,14 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
         let service = NevaConstants.service
         do {
             let call = try service.getmultiplesuggestions(request) {responseMessage, callResult in
-                //print("getmultiplesuggestion callback start")
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     if let responseMessage = responseMessage {
+                        if #available(iOS 10.0, *) {
+                            os_log("Recommendation list is received %@ ", log: NevaConstants.logger, type: .info, String(describing: responseMessage.suggestion.suggestionList.map({$0.suggesteeID})))
+                        } else {
+                            print("Recommendation list is received \(responseMessage.suggestion.suggestionList.map({$0.suggesteeID}))")
+                        }
                         for suggestedItem in responseMessage.suggestion.suggestionList {
                             if let meal = self.getMeal(with: Int(suggestedItem.suggesteeID)) {
                                 self.foods.append(meal)
@@ -135,14 +149,21 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
                         }
                         koloda?.resetCurrentCardIndex()
                     } else  {
-                        print("No message received. \(callResult)")
+                        if #available(iOS 10.0, *) {
+                            os_log("No message received, %@", log: NevaConstants.logger, type: .error, String(describing: callResult))
+                        } else {
+                            print("No message received \(callResult)")
+                        }
                     }
                 }
-                //print("getmultiplesuggestion callback end")
             }
-            //print(call)
         } catch (let error){
-            print(error)
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+                // Fallback on earlier versions
+                print("Error: \(error)")
+            }
         }
     }
     
@@ -175,6 +196,9 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
             }
             return nil
         } catch {
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+            }
             fatalError("Failed to fetch: \(error)")
         }
     }
@@ -193,7 +217,10 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
                 return UInt32(fetchedEntries[0].choice_id)
            }
         } catch (let error) {
-           fatalError("Failed to fetch: \(error)")
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+            }
+            fatalError("Failed to fetch: \(error)")
         }
         return 0
     }

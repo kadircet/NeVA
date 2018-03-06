@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import os
 class AddHistoryEntryViewController: UIViewController {
 
     var date: Date?
@@ -75,6 +75,9 @@ class AddHistoryEntryViewController: UIViewController {
                 self.meals = meals
             }
         } catch (let error){
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+            }
             fatalError("Failed to fetch: \(error)")
         }
         //
@@ -140,7 +143,12 @@ class AddHistoryEntryViewController: UIViewController {
                     request.choice = choice
                     do {
                         let response = try service.informuserchoice(request)
-                        print(response)
+                        if #available(iOS 10.0, *) {
+                            os_log("History Entry is registered", log: NevaConstants.logger, type: .info)
+                        } else {
+                            // Fallback on earlier versions
+                            print("History Entry is registered")
+                        }
                         let historyEntry = NSEntityDescription.insertNewObject(forEntityName: "HistoryEntry", into: managedObjectContext) as! HistoryEntry
                         historyEntry.choice_id = Int64(response.choiceID)
                         historyEntry.meal = meal
@@ -151,10 +159,18 @@ class AddHistoryEntryViewController: UIViewController {
                             NotificationCenter.default.post(name: Notification.Name("reloadHistoryTable"), object: nil)
                             dismiss(animated: true, completion: nil)
                         } catch (let error){
+                            if #available(iOS 10.0, *) {
+                                os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+                            }
                             fatalError("Failed to fetch: \(error)")
                         }
                     } catch (let error) {
-                        print(error)
+                        if #available(iOS 10.0, *) {
+                            os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+                        } else {
+                            // Fallback on earlier versions
+                            print("Error: \(error)")
+                        }
                         mealField.shake()
                         return
                     }
@@ -163,6 +179,9 @@ class AddHistoryEntryViewController: UIViewController {
                     return
                 }
             } catch {
+                if #available(iOS 10.0, *) {
+                    os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+                }
                 fatalError("Failed to fetch: \(error)")
             }
         } else {

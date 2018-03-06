@@ -8,7 +8,10 @@
 
 import Foundation
 import gRPC
+import os
 
 class NevaConstants {
     static var service = Neva_Backend_BackendService.init(address: "neva.0xdeffbeef.com:50051", secure: true)
+    @available(iOS 10.0, *)
+    static let logger = OSLog(subsystem: "com.mealrecommender.nevaios" , category: "neva")
 }

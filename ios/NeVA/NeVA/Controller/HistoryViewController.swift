@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import os
 
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -128,7 +129,15 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         do {
             let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as! [HistoryEntry]
             historyEntries = fetchedEntries
+            if #available(iOS 10.0, *) {
+                os_log("History entries are reloaded.", log: NevaConstants.logger, type: .info)
+            } else {
+                print("History entries are reloaded.")
+            }
         } catch (let error) {
+            if #available(iOS 10.0, *) {
+                os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+            }
             fatalError("Failed to fetch: \(error)")
         }
     }
