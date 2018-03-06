@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
   public void onLoginButton(View view) {
     Log.i(TAG, "Login Button Pressed");
-    String email = emailField.getText().toString();
+    String email = emailField.getText().toString().trim();
     String password = passwordField.getText().toString();
     if (validateEmail(email) && validatePassword(password)) {
       Toast.makeText(getBaseContext(), "Logging In", Toast.LENGTH_SHORT).show();

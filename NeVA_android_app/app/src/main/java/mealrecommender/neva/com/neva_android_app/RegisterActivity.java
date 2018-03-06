@@ -114,8 +114,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     signup_button.setEnabled(false);
     pb.setVisibility(View.VISIBLE);
-    String email = email_field.getText().toString();
-    String username = username_field.getText().toString();
+    String email = email_field.getText().toString().trim();
+    String username = username_field.getText().toString().trim();
     gender = getGenderOfButton(gender_field);
     Util.Timestamp bdate = Util.Timestamp.newBuilder().setSeconds(birthday_time).build();
     String password = password_field.getText().toString();
