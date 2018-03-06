@@ -112,3 +112,38 @@ def GetSuggesteeMapping(dataset_file="dataset.csv"):
             suggestee_id = int(line[0])
             mapping[suggestee_id] = line[1]
     return mapping
+
+
+def ExtractFeaturesForAll(dataset_file="dataset.csv"):
+    """
+    Extracts history information of all users.
+
+    Return value is a dictionary keyed with user_id and a matrix containing
+    N-many rows, with each row in the format:
+    [suggestee_id, feature_1, feature_2, ...]
+    as values.
+    """
+
+    field_ids = [0] * len(fields)
+
+    result = dict()
+    with open(dataset_file, "r") as raw_data_file:
+        headers = raw_data_file.readline().split(',')
+        for idx, header in enumerate(headers):
+            if header in fields:
+                field_ids[fields[header]] = idx
+
+        for raw_line in raw_data_file:
+            line = np.array(raw_line.split(','))
+            line = line[field_ids].astype(np.float)
+            user_id = int(line[0])
+            if user_id not in result:
+                result[user_id] = np.ndarray([0, NUM_FEATURES])
+
+            features = line[1:1 + NUM_FEATURES]
+            for field in fields:
+                idx = fields[field] - 1
+                if idx < NUM_FEATURES and idx >= 0:
+                    features[idx] = ParseFeature(features[idx], field)
+            result[user_id] = np.vstack((result[user_id], features))
+    return result
