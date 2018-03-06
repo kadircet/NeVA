@@ -27,7 +27,8 @@ void InitializeRandom();
 // Please note that, this function is designed to be cryptograpihacally secure.
 // Therefore it is a lot slower when entropy is low compared to insecure
 // version. Make sure you use it whenever security is a real concern.
-const std::string GenerateRandomKeySecure(const int length = 128);
+const std::string GenerateRandomKeySecure(const unsigned seed = 5489u,
+                                          const int length = 128);
 
 }  // namespace util
 }  // namespace backend

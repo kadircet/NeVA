@@ -37,7 +37,7 @@ const std::string GenerateRandomKey(const unsigned seed, const int length) {
   return random_bytes;
 }
 
-const std::string GenerateRandomKeySecure(const int length) {
+const std::string GenerateRandomKeySecure(const unsigned seed, const int length) {
   CHECK_LE(length, kMaxLength) << "Key length cannot be more than "
                                << kMaxLength << " bytes. Length: " << length;
   CHECK_EQ(length % kQwordSizeInBytes, 0)
@@ -47,7 +47,7 @@ const std::string GenerateRandomKeySecure(const int length) {
   static std::independent_bits_engine<std::random_device, kQwordSizeInBits,
                                       uint64_t>* random_qword =
       new std::independent_bits_engine<std::random_device, kQwordSizeInBits,
-                                       uint64_t>();
+                                       uint64_t>(seed);
   std::string random_bytes;
   random_bytes.resize(length);
   std::generate(random_bytes.begin(), random_bytes.end(),
@@ -79,6 +79,7 @@ uint32_t GetRandom(const uint32_t n) {
 void InitializeRandom() {
   std::random_device random_device;
   GenerateRandomKey(random_device());
+  GenerateRandomKeySecure(random_device());
 }
 
 }  // namespace util
