@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity
     Class fragmentClass = null;
 
     if (id == R.id.nav_recommend) {
-      fragmentManager.popBackStack("RecommendFragment", 0);
+      fragmentManager.popBackStack(RecommendFragment.class.getSimpleName(), 0);
     } else if (id == R.id.nav_propose) {
       fragmentClass = ProposeFragment.class;
     } else if (id == R.id.nav_history) {
