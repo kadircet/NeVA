@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     FragmentManager fragmentManager = getSupportFragmentManager();
-    fragmentManager.beginTransaction().replace(R.id.content_view, fragment)
+    fragmentManager.beginTransaction().setCustomAnimations(R.anim.fade_in_up, R.anim.fast_fade_out, R.anim.fade_in_up, R.anim.fast_fade_out).replace(R.id.content_view, fragment)
         .addToBackStack(fragment.getTag()).commit();
 
     // Highlight the selected item has been done by NavigationView
@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity
   public void addHistoryFabClick(View view) {
     FragmentManager fragmentManager = getSupportFragmentManager();
     Fragment fragment = new AddHistoryItemFragment();
-    fragmentManager.beginTransaction().add(R.id.content_view, fragment)
+    fragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_left_fast, R.anim.fast_fade_out, R.anim.slide_in_left_fast, R.anim.fast_fade_out).add(R.id.content_view, fragment)
         .addToBackStack(fragment.getTag()).commit();
   }
 }
