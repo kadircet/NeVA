@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Koloda
+import TTGSnackbar
 import os
 
 class RecommendationViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSource {
@@ -102,6 +103,10 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
                     } else {
                         print("No message received \(callResult)")
                     }
+                    let snackbar = TTGSnackbar(message: callResult.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                    snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                    snackbar.shouldDismissOnSwipe = true
+                    snackbar.show()
                 }
             }
         } catch (let error) {
@@ -110,6 +115,12 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
             } else {
                 // Fallback on earlier versions
                 print("Error: \(error)")
+            }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
             }
         }
     }
@@ -154,6 +165,10 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
                         } else {
                             print("No message received \(callResult)")
                         }
+                        let snackbar = TTGSnackbar(message: callResult.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                        snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                        snackbar.shouldDismissOnSwipe = true
+                        snackbar.show()
                     }
                 }
             }
@@ -163,6 +178,12 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
             } else {
                 // Fallback on earlier versions
                 print("Error: \(error)")
+            }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
             }
         }
     }

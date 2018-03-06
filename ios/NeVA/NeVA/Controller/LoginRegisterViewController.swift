@@ -8,7 +8,9 @@
 
 import UIKit
 import FBSDKLoginKit
+import TTGSnackbar
 import os
+
 class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
     //UITextFieldDelegate functions Start
@@ -76,6 +78,12 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                     } else {
                         // Fallback on earlier versions
                         print("Error: \(error)")
+                    }
+                    if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                        let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                        snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                        snackbar.shouldDismissOnSwipe = true
+                        snackbar.show()
                     }
                     FBSDKLoginManager().logOut()
                 }
@@ -172,9 +180,13 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                 // Fallback on earlier versions
                 print("Error: \(error)")
             }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
+            }
         }
-        
-        
     }
     
     
@@ -223,6 +235,12 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
             } else {
                 // Fallback on earlier versions
                 print("Error: \(error)")
+            }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
             }
             loginEmailField.shake()
             loginPasswordField.shake()
@@ -356,6 +374,12 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                     // Fallback on earlier versions
                     print("Error: \(error)")
                 }
+                if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                    let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                    snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                    snackbar.shouldDismissOnSwipe = true
+                    snackbar.show()
+                }
                 FBSDKLoginManager().logOut()
             }
         } else if UserToken.initializeToken() {
@@ -371,6 +395,12 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                     } else {
                         // Fallback on earlier versions
                         print("Error: \(error)")
+                    }
+                    if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                        let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                        snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                        snackbar.shouldDismissOnSwipe = true
+                        snackbar.show()
                     }
                     UserToken.clearUserToken()
                 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC063B711FF0397A002BE829 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC063B701FF0397A002BE829 /* KeychainSwift.framework */; };
+		AC590F14204F2D8C00AEC8AD /* TTGSnackbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC590F13204F2D8C00AEC8AD /* TTGSnackbar.framework */; };
 		AC69435B1FD4A3C2002C817D /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */; };
 		AC69AFD11FEF0F9000A6884B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */; };
 		AC69AFD21FEF0F9000A6884B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFC91FEF0F8F00A6884B /* FBSDKLoginKit.framework */; };
@@ -90,6 +91,7 @@
 
 /* Begin PBXFileReference section */
 		AC063B701FF0397A002BE829 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
+		AC590F13204F2D8C00AEC8AD /* TTGSnackbar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTGSnackbar.framework; path = Carthage/Build/iOS/TTGSnackbar.framework; sourceTree = "<group>"; };
 		AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		AC69AFC91FEF0F8F00A6884B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				AC69AFD71FEF0F9000A6884B /* Bolts.framework in Frameworks */,
 				AC69AFD81FEF0F9000A6884B /* gRPC.framework in Frameworks */,
 				AC69AFD91FEF0F9000A6884B /* SwiftProtobuf.framework in Frameworks */,
+				AC590F14204F2D8C00AEC8AD /* TTGSnackbar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +316,7 @@
 		ACBC4C471FBA67E600E8D61F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC590F13204F2D8C00AEC8AD /* TTGSnackbar.framework */,
 				ACE528491FFBFD210069287E /* Koloda.framework */,
 				ACE528481FFBFD210069287E /* pop.framework */,
 				AC063B701FF0397A002BE829 /* KeychainSwift.framework */,
@@ -492,6 +496,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/pop.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Koloda.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TTGSnackbar.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
@@ -507,6 +512,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/KeychainSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/pop.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Koloda.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TTGSnackbar.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import TTGSnackbar
 import os
 
 class NevaTabBarController: UITabBarController {
@@ -114,6 +115,12 @@ class NevaTabBarController: UITabBarController {
                 // Fallback on earlier versions
                 print("Error: \(error)")
             }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
+            }
         }
     }
     func getTagsFromServer() {
@@ -152,6 +159,12 @@ class NevaTabBarController: UITabBarController {
             } else {
                 // Fallback on earlier versions
                 print("Error: \(error)")
+            }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
             }
         }
         
@@ -230,6 +243,12 @@ class NevaTabBarController: UITabBarController {
             } else {
                 // Fallback on earlier versions
                 print("Error: \(error)")
+            }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
             }
         }
         //

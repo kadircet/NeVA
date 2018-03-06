@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import TTGSnackbar
 import os
 
 class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
@@ -82,6 +83,12 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate, UIText
                 // Fallback on earlier versions
                 print("Error: \(error)")
             }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
+            }
         }
     }
     func getUserData() {
@@ -116,6 +123,12 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate, UIText
             } else {
                 // Fallback on earlier versions
                 print("Error: \(error)")
+            }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                snackbar.shouldDismissOnSwipe = true
+                snackbar.show()
             }
         }
     }

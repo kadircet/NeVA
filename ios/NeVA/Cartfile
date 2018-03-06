@@ -3,4 +3,5 @@ github "bilalyaylak/grpc-swift" "master"
 github "facebook/Facebook-SDK-Swift" == 0.3.0
 github "evgenyneu/keychain-swift" ~> 10.0
 github "Yalantis/Koloda" == 4.3.1
+github "zekunyan/TTGSnackbar"
 

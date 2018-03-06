@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import TTGSnackbar
 import os
 
 class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -71,6 +72,12 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
                     // Fallback on earlier versions
                     print("Error: \(error)")
                 }
+                if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                    let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                    snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                    snackbar.shouldDismissOnSwipe = true
+                    snackbar.show()
+                }
                 tagSuggestionField.text = ""
                 tagSuggestionField.placeholder = "Failed"
                 tagSuggestionField.shake()
@@ -102,6 +109,12 @@ class SuggestionViewController: UIViewController, UIPickerViewDataSource, UIPick
                 } else {
                     // Fallback on earlier versions
                     print("Error: \(error)")
+                }
+                if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                    let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                    snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                    snackbar.shouldDismissOnSwipe = true
+                    snackbar.show()
                 }
                 foodSuggestionField.text = ""
                 foodSuggestionField.placeholder = "Failed"
