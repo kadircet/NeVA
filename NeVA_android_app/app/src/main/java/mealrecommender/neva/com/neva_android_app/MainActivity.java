@@ -39,7 +39,7 @@ import neva.backend.SuggestionOuterClass.Suggestion;
 import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, OnBackStackChangedListener {
+    implements NavigationView.OnNavigationItemSelectedListener {
 
   private final String TAG = this.getClass().getSimpleName();
 
@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity
 
     Fragment fragment = new RecommendFragment();
     FragmentManager fragmentManager = getSupportFragmentManager();
-    fragmentManager.addOnBackStackChangedListener(MainActivity.this);
     fragmentManager.beginTransaction().replace(R.id.content_view, fragment).addToBackStack(fragment.getClass().getSimpleName()).commit();
 
     FillDatabaseTask fillDatabaseTask = new FillDatabaseTask();
@@ -97,17 +96,6 @@ public class MainActivity extends AppCompatActivity
     item.setChecked(true);
     setTitle(item.getTitle());
 
-  }
-
-  @Override
-  public void onBackStackChanged() {
-
-    FragmentManager fm = getSupportFragmentManager();
-    int count = fm.getBackStackEntryCount();
-    Log.e("BACKSTACK CHANGED", ""+count);
-    for(int i =0; i<count; i++) {
-      Log.d("BACKSTACK", ""+fm.getBackStackEntryAt(i).getName());
-    }
   }
 
   class GetUserNameTask extends AsyncTask<Void, Void, String> {
