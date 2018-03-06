@@ -4,7 +4,7 @@ from recommendation_experiments import utils
 
 
 def main():
-    cacher = Cacher()
+    _cacher = cacher.Cacher()
     now = datetime.datetime.now()
     time = now.hour * 60 + now.minute
     current_context = [time]
@@ -15,7 +15,7 @@ def main():
     for user_id in dataset:
         nearest_elements = utils.GetNearestElements(
             dataset[user_id], current_context, k=10)
-        cacher.UpdateUserCache(user_id, nearest_elements)
+        _cacher.UpdateUserCache(user_id, nearest_elements)
 
 
 if __name__ == "__main__":
