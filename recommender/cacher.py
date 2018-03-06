@@ -10,11 +10,12 @@ class Cacher:
         cur = self.db.cursor()
         try:
             cur.execute("DELETE FROM `recommender_cache` WHERE `user_id` = %s",
-                        user_id)
+                        (user_id, ))
             for suggestee_id in suggestee_ids:
                 cur.execute(
                     "INSERT INTO `recommender_cache` (`user_id`, `suggestee_id`) VALUES (%s, %s)",
                     (user_id, suggestee_id))
             self.db.commit()
-        except:
+        except Exception as e:
+            print(e)
             self.db.rollback()
