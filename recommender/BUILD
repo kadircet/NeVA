@@ -5,6 +5,7 @@ cc_library(
     srcs = ["recommender.cc"],
     hdrs = ["recommender.h"],
     deps = [
+        ":mysql_cache_fetcher",
         "//protos:suggestion_proto",
         "//protos:user_history_proto",
         "//util:hmac",
@@ -19,5 +20,19 @@ cc_test(
         ":recommender",
         "@com_google_protobuf//:protobuf",
         "@googletest//:gtest_main",
+    ],
+)
+
+cc_library(
+    name = "mysql_cache_fetcher",
+    srcs = ["mysql_cache_fetcher.cc"],
+    hdrs = [
+        "cache_fetcher.h",
+        "mysql_cache_fetcher.h",
+    ],
+    deps = [
+        "//orm:connectionpool",
+        "//protos:suggestion_proto",
+        "@glog//:glog",
     ],
 )
