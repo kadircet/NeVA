@@ -14,6 +14,7 @@
 #include "orm/user_history_orm.h"
 #include "orm/user_orm.h"
 #include "protos/backend.grpc.pb.h"
+#include "recommender/mysql_cache_fetcher.h"
 #include "social_media/facebook.h"
 #include "util/error.h"
 #include "util/file.h"
@@ -33,6 +34,8 @@ using orm::SuggestionOrm;
 using orm::TagOrm;
 using orm::UserHistoryOrm;
 using orm::UserOrm;
+using recommender::CacheFetcer;
+using recommender::MySQLCacheFetcher;
 
 DEFINE_string(database_name, "", "Name of the database to connect to.");
 DEFINE_string(database_server, "", "Domain of the database server.");
@@ -119,11 +122,8 @@ class BackendServiceImpl final : public Backend::Service {
             << request->DebugString();
     int user_id;
     RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
-    UserHistory user_history;
-    user_history_orm_->FetchUserHistory(user_id, 0, &user_history);
     RETURN_IF_ERROR(suggestion_orm_->GetMultipleSuggestions(
-        user_history, request->suggestion_category(),
-        reply->mutable_suggestion()));
+        user_id, request->suggestion_category(), reply->mutable_suggestion()));
     return Status::OK;
   }
 
@@ -211,11 +211,13 @@ class BackendServiceImpl final : public Backend::Service {
         FLAGS_database_name, FLAGS_database_server, FLAGS_database_user,
         FLAGS_database_password);
 
+    cache_fetcher_ =
+        std::unique_ptr<CacheFetcer>(new MySQLCacheFetcher(conn_pool_));
     user_orm_ = std::unique_ptr<UserOrm>(new UserOrm(conn_pool_));
     proposition_orm_ =
         std::unique_ptr<PropositionOrm>(new PropositionOrm(conn_pool_));
-    suggestion_orm_ =
-        std::unique_ptr<SuggestionOrm>(new SuggestionOrm(conn_pool_));
+    suggestion_orm_ = std::unique_ptr<SuggestionOrm>(
+        new SuggestionOrm(conn_pool_, cache_fetcher_.get()));
     user_history_orm_ =
         std::unique_ptr<UserHistoryOrm>(new UserHistoryOrm(conn_pool_));
     tag_orm_ = std::unique_ptr<TagOrm>(new TagOrm(conn_pool_));
@@ -223,6 +225,7 @@ class BackendServiceImpl final : public Backend::Service {
 
  private:
   std::shared_ptr<NevaConnectionPool> conn_pool_;
+  std::unique_ptr<CacheFetcer> cache_fetcher_;
   std::unique_ptr<UserOrm> user_orm_;
   std::unique_ptr<PropositionOrm> proposition_orm_;
   std::unique_ptr<SuggestionOrm> suggestion_orm_;
