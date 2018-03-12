@@ -73,7 +73,7 @@ Status SuggestionOrm::GetSuggestion(
 }
 
 Status SuggestionOrm::GetMultipleSuggestions(
-    const UserHistory& user_history,
+    const uint32_t user_id,
     const Suggestion::SuggestionCategory suggestion_category,
     SuggestionList* suggestion_list) {
   SuggestionList all_suggestees;
@@ -86,8 +86,8 @@ Status SuggestionOrm::GetMultipleSuggestions(
                   "No items to suggest in that category.");
   }
 
-  *suggestion_list =
-      recommender::GetMultipleSuggestions(user_history, all_suggestees);
+  *suggestion_list = recommender::GetMultipleSuggestions(
+      user_id, all_suggestees, cache_fetcher_);
   VLOG(1) << "Returning:\n" << suggestion_list->ShortDebugString();
   return Status::OK;
 }
