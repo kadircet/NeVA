@@ -119,18 +119,19 @@ Status UserOrm::CheckCredentials(
   do {
     *session_token = util::GenerateRandomKeySecure();
     res = query.store(*session_token);
-  } while(!res.empty());
+  } while (!res.empty());
+  query.reset();
 
   // TODO(kadircet): Implement token expiration.
   query << "INSERT INTO `user_session` (`user_id`, `token`, `expire`) VALUES "
            "(%0, %1q, %2)";
   query.parse();
 
-  if(!query.execute(user_id, *session_token, 0))
-  {
+  if (!query.execute(user_id, *session_token, 0)) {
     VLOG(1) << "Query failed with:" << query.error();
+    return Status(StatusCode::INTERNAL, "Internal server error.");
   }
-  
+
   VLOG(1) << email << " has been authenticated successfully.";
   return Status::OK;
 }
