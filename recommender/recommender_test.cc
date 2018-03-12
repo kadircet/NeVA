@@ -14,7 +14,7 @@ using ::testing::Pointwise;
 using ::testing::get;
 using google::protobuf::TextFormat;
 
-TEST(GetSuggestion, SanityTest) {
+/*TEST(GetSuggestion, SanityTest) {
   constexpr const char* kUserHistory = R"(
     history {
       suggestee_id: 1
@@ -84,7 +84,7 @@ TEST(GetMultipleSuggestions, SanityTest) {
               Contains(SuggestionEq(all_suggestees.suggestion_list(0))));
   EXPECT_THAT(suggestion_list.suggestion_list(),
               Contains(SuggestionEq(all_suggestees.suggestion_list(1))));
-}
+}*/
 
 }  // namespace
 }  // namespace recommender
