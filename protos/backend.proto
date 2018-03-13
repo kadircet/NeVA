@@ -23,9 +23,6 @@ service Backend {
       returns (GenericReply) {
   }
 
-  rpc GetSuggestion(GetSuggestionRequest) returns (GetSuggestionReply) {
-  }
-
   rpc GetMultipleSuggestions(GetMultipleSuggestionsRequest)
       returns (GetMultipleSuggestionsReply) {
   }
@@ -107,19 +104,6 @@ message SuggestionItemPropositionRequest {
 
   // Holds information on propositions category and name.
   Suggestion suggestion = 2;
-}
-
-message GetSuggestionRequest {
-  // Session key for the user requesting a suggestion.
-  bytes token = 1;
-
-  // Category for which the user requests a suggestion.
-  Suggestion.SuggestionCategory suggestion_category = 2;
-}
-
-message GetSuggestionReply {
-  // Name of the suggested item.
-  string name = 1;
 }
 
 message GetMultipleSuggestionsRequest {

@@ -53,25 +53,6 @@ Status SuggestionOrm::GetSuggestees(
   return Status::OK;
 }
 
-Status SuggestionOrm::GetSuggestion(
-    const UserHistory& user_history,
-    const Suggestion::SuggestionCategory suggestion_category,
-    Suggestion* suggestion) {
-  SuggestionList suggestion_list;
-  GetSuggestees(suggestion_category, 0, &suggestion_list);
-
-  if (suggestion_list.suggestion_list_size() == 0) {
-    VLOG(1) << "Requested a suggestion from an empty category: "
-            << suggestion_category;
-    return Status(StatusCode::INVALID_ARGUMENT,
-                  "No items to suggest in that category.");
-  }
-
-  *suggestion = recommender::GetSuggestion(user_history, suggestion_list);
-  VLOG(1) << "Returning:\n" << suggestion->ShortDebugString();
-  return Status::OK;
-}
-
 Status SuggestionOrm::GetMultipleSuggestions(
     const uint32_t user_id,
     const Suggestion::SuggestionCategory suggestion_category,

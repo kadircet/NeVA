@@ -14,22 +14,6 @@ namespace {
 constexpr const int32_t kLeastSuggestionSize = 10;
 }
 
-Suggestion GetSuggestion(const UserHistory& history,
-                         const SuggestionList& suggestion_list) {
-  const size_t suggestion_list_size = suggestion_list.suggestion_list_size();
-  CHECK(suggestion_list_size > 0) << "Empty suggestion list.";
-
-  SuggestionList suggested_list =
-      GetMultipleSuggestions(history.user_id(), suggestion_list, nullptr);
-
-  // Pick one random element randomly from most frequent ones.
-  const uint32_t element_idx =
-      util::GetRandom(suggested_list.suggestion_list_size());
-  CHECK(element_idx < suggestion_list_size && element_idx >= 0)
-      << "element_idx: " << element_idx << " out of scope.";
-  return suggested_list.suggestion_list(element_idx);
-}
-
 SuggestionList GetMultipleSuggestions(const uint32_t user_id,
                                       const SuggestionList& suggestion_list,
                                       const CacheFetcer* cache_fetcher) {

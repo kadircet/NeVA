@@ -27,11 +27,6 @@ class SuggestionOrm {
       const uint32_t start_index, SuggestionList* suggestion_list,
       uint32_t* last_updated = nullptr);
 
-  grpc::Status GetSuggestion(
-      const UserHistory& user_history,
-      const Suggestion::SuggestionCategory suggestion_category,
-      Suggestion* suggestion);
-
   grpc::Status GetMultipleSuggestions(
       const uint32_t user_id,
       const Suggestion::SuggestionCategory suggestion_category,
