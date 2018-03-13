@@ -88,6 +88,7 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
         choice.suggesteeID = UInt32(foods[index].id)
         feedback.choice = choice
         request.userFeedback = feedback
+        let mealName = foods[index].name
         let service = NevaConstants.service
         do {
             let call = try service.recordfeedback(request) {responseMessage, callResult in
@@ -96,6 +97,45 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
                         os_log("Feedback is registered.", log: NevaConstants.logger, type: .info)
                     } else {
                         print("Feedback is registered.")
+                    }
+                    if(direction == .right) {
+                        DispatchQueue.main.async {
+                            let snackbar = TTGSnackbar(message: "You liked " + String(describing: mealName ?? "unknown meal") + ", would you want to add it to your history?", duration: TTGSnackbarDuration.forever, actionText: "Yes", actionBlock: { snackbar in
+                                self.quickAddLikedMealToHistory(mealName: mealName)
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+                                    snackbar.dismiss()
+                                    let arrayOfTabBarItems = self.tabBarController!.tabBar.items
+                                    if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                                        for barItem in barItems {
+                                            barItem.isEnabled = true
+                                        }
+                                    }
+                                }
+                            })
+                            snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                            snackbar.secondActionText = "No"
+                            snackbar.secondActionBlock = {snackbar in
+                                snackbar.dismiss()
+                                let arrayOfTabBarItems = self.tabBarController!.tabBar.items
+                                if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                                    for barItem in barItems {
+                                        barItem.isEnabled = true
+                                    }
+                                }
+                            }
+                        
+                            let arrayOfTabBarItems = self.tabBarController!.tabBar.items
+                            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                                for barItem in barItems {
+                                    barItem.isEnabled = false
+                                }
+                            }
+                            snackbar.rightMargin = 0
+                            snackbar.leftMargin = 0
+                            snackbar.bottomMargin = 49
+                            snackbar.shouldDismissOnSwipe = false
+                            snackbar.show()
+                        }
                     }
                 } else  {
                     if #available(iOS 10.0, *) {
@@ -121,6 +161,77 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
                 snackbar.backgroundColor = NeVAColors.primaryDarkColor
                 snackbar.shouldDismissOnSwipe = true
                 snackbar.show()
+            }
+        }
+    }
+    
+    func quickAddLikedMealToHistory(mealName: String?)
+    {
+        if mealName != nil {
+            guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+                    return
+            }
+            let managedObjectContext =
+                appDelegate.databaseContext
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Meal")
+            fetchRequest.predicate = NSPredicate(format: "name==%@", argumentArray: [mealName!])
+            do {
+                let fetchedEntries = try managedObjectContext.fetch(fetchRequest) as? [Meal]
+                if let mealAte = fetchedEntries, !mealAte.isEmpty {
+                    let meal = mealAte[0]
+                    let service = NevaConstants.service
+                    var request = Neva_Backend_InformUserChoiceRequest()
+                    request.token = UserToken.token!
+                    var choice = Neva_Backend_Choice()
+                    //TODO GPS
+                    let date = Date().addingTimeInterval(TimeInterval(TimeZone.current.secondsFromGMT()))
+                    choice.timestamp.seconds = UInt64(date.timeIntervalSince1970)
+                    choice.timestamp.nanos = 0
+                    choice.suggesteeID = UInt32(meal.id)
+                    request.choice = choice
+                    do {
+                        let response = try service.informuserchoice(request)
+                        if #available(iOS 10.0, *) {
+                            os_log("History Entry is registered", log: NevaConstants.logger, type: .info)
+                        } else {
+                            // Fallback on earlier versions
+                            print("History Entry is registered")
+                        }
+                        let historyEntry = NSEntityDescription.insertNewObject(forEntityName: "HistoryEntry", into: managedObjectContext) as! HistoryEntry
+                        historyEntry.choice_id = Int64(response.choiceID)
+                        historyEntry.meal = meal
+                        historyEntry.date = date
+                        historyEntry.userMail = UserToken.email!
+                        do {
+                            try managedObjectContext.save()
+                            NotificationCenter.default.post(name: Notification.Name("reloadHistoryTable"), object: nil)
+                        } catch (let error){
+                            if #available(iOS 10.0, *) {
+                                os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+                            }
+                            fatalError("Failed to fetch: \(error)")
+                        }
+                    } catch (let error) {
+                        if #available(iOS 10.0, *) {
+                            os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+                        } else {
+                            // Fallback on earlier versions
+                            print("Error: \(error)")
+                        }
+                        if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+                            let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+                            snackbar.backgroundColor = NeVAColors.primaryDarkColor
+                            snackbar.shouldDismissOnSwipe = true
+                            snackbar.show()
+                        }
+                    }
+                }
+            } catch {
+                if #available(iOS 10.0, *) {
+                    os_log("Error: %@", log: NevaConstants.logger, type: .fault, String(describing: error))
+                }
+                fatalError("Failed to fetch: \(error)")
             }
         }
     }

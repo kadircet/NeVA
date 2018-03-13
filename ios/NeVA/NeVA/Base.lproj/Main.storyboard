@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -22,11 +22,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LoginRegisterViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Welcome" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3w-9M-ioS" userLabel="Welcome">
-                                <rect key="frame" x="0.0" y="70" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="70" width="414" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -37,7 +37,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqU-Gc-J0N" userLabel="Neva">
-                                <rect key="frame" x="0.0" y="120" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="120" width="414" height="65"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -50,10 +50,10 @@ Meal Recommender</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tmP-Bo-ZbU" userLabel="Register View">
-                                <rect key="frame" x="0.0" y="185" width="375" height="482"/>
+                                <rect key="frame" x="0.0" y="185" width="414" height="551"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Register your account" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGC-rx-uIo" userLabel="Register Text">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -64,13 +64,13 @@ Meal Recommender</string>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkf-dz-mou" userLabel="Register Scroll View">
-                                        <rect key="frame" x="0.0" y="40" width="375" height="342"/>
+                                        <rect key="frame" x="0.0" y="40" width="414" height="411"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86G-Dy-7Y2" userLabel="Container View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aY7-VG-7UN" userLabel="Register Email" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                                        <rect key="frame" x="15" y="0.0" width="345" height="50"/>
+                                                        <rect key="frame" x="15" y="0.0" width="384" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="bL6-ab-RwL"/>
                                                         </constraints>
@@ -85,7 +85,7 @@ Meal Recommender</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PSe-zv-2IS" userLabel="Register Name" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                                        <rect key="frame" x="15" y="60" width="345" height="50"/>
+                                                        <rect key="frame" x="15" y="60" width="384" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="FZf-zF-iP3"/>
                                                         </constraints>
@@ -100,10 +100,10 @@ Meal Recommender</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6HO-Cc-tb8" userLabel="Date Picker Background" customClass="RoundedView" customModule="NeVA" customModuleProvider="target">
-                                                        <rect key="frame" x="15" y="120" width="345" height="50"/>
+                                                        <rect key="frame" x="15" y="120" width="384" height="50"/>
                                                         <subviews>
                                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yyL-54-Dhj">
-                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="384" height="50"/>
                                                                 <date key="date" timeIntervalSinceReferenceDate="532889319.27842897">
                                                                     <!--2017-11-20 16:48:39 +0000-->
                                                                 </date>
@@ -125,10 +125,10 @@ Meal Recommender</string>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EqJ-0k-hMS" userLabel="Gender Picker Background" customClass="RoundedView" customModule="NeVA" customModuleProvider="target">
-                                                        <rect key="frame" x="15" y="180" width="345" height="50"/>
+                                                        <rect key="frame" x="15" y="180" width="384" height="50"/>
                                                         <subviews>
                                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wZC-F8-gOk">
-                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="51"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="384" height="51"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <segments>
                                                                     <segment title="Male"/>
@@ -150,7 +150,7 @@ Meal Recommender</string>
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V6N-oj-Gad" userLabel="Register Password" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                                        <rect key="frame" x="15" y="240" width="345" height="50"/>
+                                                        <rect key="frame" x="15" y="240" width="384" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="7HB-Do-LSj"/>
                                                         </constraints>
@@ -165,7 +165,7 @@ Meal Recommender</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uxx-dq-Ttp" userLabel="Register Confirm Password" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                                        <rect key="frame" x="15" y="300" width="345" height="50"/>
+                                                        <rect key="frame" x="15" y="300" width="384" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="yMW-ds-NLZ"/>
                                                         </constraints>
@@ -215,7 +215,7 @@ Meal Recommender</string>
                                         </constraints>
                                     </scrollView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piZ-ho-vdx" customClass="LoginButton" customModule="NeVA" customModuleProvider="target">
-                                        <rect key="frame" x="60" y="437" width="255" height="30"/>
+                                        <rect key="frame" x="60" y="506" width="294" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="3Lt-LU-gdY"/>
                                         </constraints>
@@ -228,7 +228,7 @@ Meal Recommender</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX7-US-lfV" customClass="LoginButton" customModule="NeVA" customModuleProvider="target">
-                                        <rect key="frame" x="60" y="397" width="255" height="30"/>
+                                        <rect key="frame" x="60" y="466" width="294" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="ATo-Ic-U2T"/>
                                         </constraints>
@@ -260,10 +260,10 @@ Meal Recommender</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" restorationIdentifier="Login View" translatesAutoresizingMaskIntoConstraints="NO" id="oEU-A9-37c" userLabel="Login View">
-                                <rect key="frame" x="0.0" y="185" width="375" height="482"/>
+                                <rect key="frame" x="0.0" y="185" width="414" height="551"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="To access all features of the NeVA app, you need to login first." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdu-oa-eAl" userLabel="Login Text">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -274,7 +274,7 @@ Meal Recommender</string>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wMl-dU-p6w" customClass="LoginButton" customModule="NeVA" customModuleProvider="target">
-                                        <rect key="frame" x="60" y="120" width="255" height="30"/>
+                                        <rect key="frame" x="60" y="120" width="294" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="pZ2-dL-h3g"/>
                                         </constraints>
@@ -287,7 +287,7 @@ Meal Recommender</string>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-Jf-qin" userLabel="Login Email" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                        <rect key="frame" x="60" y="40" width="255" height="30"/>
+                                        <rect key="frame" x="60" y="40" width="294" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="HO6-4k-eYs"/>
                                         </constraints>
@@ -302,7 +302,7 @@ Meal Recommender</string>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KrZ-iS-wvb" userLabel="Login Password" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                        <rect key="frame" x="60" y="80" width="255" height="30"/>
+                                        <rect key="frame" x="60" y="80" width="294" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="BcC-Ra-p5g"/>
                                         </constraints>
@@ -317,17 +317,17 @@ Meal Recommender</string>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" restorationIdentifier="passwordRegisterStack" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="OQe-A2-7tF">
-                                        <rect key="frame" x="60" y="150" width="255" height="30"/>
+                                        <rect key="frame" x="60" y="150" width="294" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqN-xT-uv9">
-                                                <rect key="frame" x="0.0" y="0.0" width="127.5" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="147" height="30"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <state key="normal" title="Forgot Password?">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 </state>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vhp-JM-guG">
-                                                <rect key="frame" x="127.5" y="0.0" width="127.5" height="30"/>
+                                                <rect key="frame" x="147" y="0.0" width="147" height="30"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                 <state key="normal" title="Register">
                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -363,7 +363,7 @@ Meal Recommender</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lX1-2O-nEj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                                 <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="YG8-t8-RKV"/>
@@ -415,17 +415,17 @@ Meal Recommender</string>
             <objects>
                 <viewController id="x5X-eu-dXy" customClass="SettingsViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cou-pC-S7N">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiQ-Qh-Xb7" userLabel="Profile">
-                                <rect key="frame" x="0.0" y="38" width="375" height="518"/>
+                                <rect key="frame" x="0.0" y="38" width="414" height="587"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ze7-Pv-DnK">
-                                        <rect key="frame" x="10" y="20" width="355" height="45"/>
+                                        <rect key="frame" x="10" y="20" width="394" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4du-iw-saX">
-                                                <rect key="frame" x="0.0" y="0.0" width="75.5" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="75.333333333333329" height="45"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
@@ -433,7 +433,7 @@ Meal Recommender</string>
                                                 <size key="shadowOffset" width="2" height="2"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="bb6-Wv-h1z" userLabel="Name Field" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                                <rect key="frame" x="85.5" y="0.0" width="269.5" height="45"/>
+                                                <rect key="frame" x="85.333333333333343" y="0.0" width="308.66666666666663" height="45"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -445,7 +445,7 @@ Meal Recommender</string>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Th1-ic-CKY">
-                                        <rect key="frame" x="10" y="75" width="355" height="45"/>
+                                        <rect key="frame" x="10" y="75" width="394" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="IRa-2F-dW8">
                                                 <rect key="frame" x="0.0" y="0.0" width="92" height="45"/>
@@ -456,7 +456,7 @@ Meal Recommender</string>
                                                 <size key="shadowOffset" width="2" height="2"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QcK-lm-uQA">
-                                                <rect key="frame" x="102" y="0.0" width="253" height="46"/>
+                                                <rect key="frame" x="102" y="0.0" width="292" height="46"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <segments>
                                                     <segment title="Male"/>
@@ -470,7 +470,7 @@ Meal Recommender</string>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VTL-WA-ZTy">
-                                        <rect key="frame" x="10" y="130" width="355" height="45"/>
+                                        <rect key="frame" x="10" y="130" width="394" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="tPe-gh-AfO">
                                                 <rect key="frame" x="0.0" y="0.0" width="86" height="45"/>
@@ -481,7 +481,7 @@ Meal Recommender</string>
                                                 <size key="shadowOffset" width="2" height="2"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="tvD-yZ-Inq" userLabel="Weight Field" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                                <rect key="frame" x="96" y="0.0" width="259" height="45"/>
+                                                <rect key="frame" x="96" y="0.0" width="298" height="45"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -493,10 +493,10 @@ Meal Recommender</string>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="d4n-iL-5oi">
-                                        <rect key="frame" x="10" y="185" width="355" height="90"/>
+                                        <rect key="frame" x="10" y="185" width="394" height="90"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthdate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cll-8z-wGt">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="45"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
@@ -504,10 +504,10 @@ Meal Recommender</string>
                                                 <size key="shadowOffset" width="2" height="2"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-zD-oNU" userLabel="Date Picker Background" customClass="RoundedView" customModule="NeVA" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="45" width="355" height="45"/>
+                                                <rect key="frame" x="0.0" y="45" width="394" height="45"/>
                                                 <subviews>
                                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3W2-Eh-DaL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="394" height="45"/>
                                                         <date key="date" timeIntervalSinceReferenceDate="532889319.27842897">
                                                             <!--2017-11-20 16:48:39 +0000-->
                                                         </date>
@@ -530,7 +530,7 @@ Meal Recommender</string>
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXU-ge-PTT" userLabel="UPDATE" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
-                                        <rect key="frame" x="100" y="285" width="175" height="30"/>
+                                        <rect key="frame" x="100" y="285" width="214" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="1ap-gS-bOd"/>
                                         </constraints>
@@ -572,7 +572,7 @@ Meal Recommender</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rbs-qe-oBC" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="100" y="572" width="175" height="30"/>
+                                <rect key="frame" x="100" y="641" width="214" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="LOGOUT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -591,7 +591,7 @@ Meal Recommender</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f6X-yG-zSC">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                                 <color key="backgroundColor" red="0.76862745098039209" green="0.10980392156862745" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="fDB-qa-cFe"/>
@@ -632,11 +632,11 @@ Meal Recommender</string>
             <objects>
                 <viewController id="BWU-M1-OCj" customClass="RecommendationViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IXI-21-wmd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsb-2B-Bm0" userLabel="Recommendation View" customClass="KolodaView" customModule="Koloda">
-                                <rect key="frame" x="67.5" y="159" width="240" height="300"/>
+                                <rect key="frame" x="87" y="193.66666666666663" width="240" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="RiF-FA-MQX"/>
@@ -644,7 +644,7 @@ Meal Recommender</string>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNr-22-KEa" userLabel="Dislike Button">
-                                <rect key="frame" x="95" y="484.5" width="45" height="45"/>
+                                <rect key="frame" x="114.66666666666669" y="519" width="45" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="E1n-4G-S1F"/>
@@ -659,7 +659,7 @@ Meal Recommender</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2E-ae-CR2" userLabel="Like Button">
-                                <rect key="frame" x="235" y="484.5" width="45" height="45"/>
+                                <rect key="frame" x="254.66666666666663" y="519" width="45" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="DHd-C1-syS"/>
@@ -674,14 +674,14 @@ Meal Recommender</string>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yMV-Bn-qfI">
-                                <rect key="frame" x="169" y="571" width="37" height="37"/>
+                                <rect key="frame" x="188.66666666666666" y="640" width="37" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="GLf-XU-iIJ"/>
                                     <constraint firstAttribute="width" constant="37" id="ka3-xY-ic0"/>
                                 </constraints>
                             </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHN-EF-lak">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                                 <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="2cz-rB-vfx"/>
@@ -741,11 +741,11 @@ Meal Recommender</string>
             <objects>
                 <viewController id="J0b-vb-epx" userLabel="Suggestion" customClass="SuggestionViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lk8-8d-a9j">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggest Tag Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Sbe-gA-1cX">
-                                <rect key="frame" x="10" y="25" width="355" height="30"/>
+                                <rect key="frame" x="10" y="25" width="394" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="cUc-nP-cel"/>
                                     <constraint firstAttribute="height" constant="30" id="mfE-1k-jSd"/>
@@ -757,7 +757,7 @@ Meal Recommender</string>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggest Tag For Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4Va-nc-hYG">
-                                <rect key="frame" x="10" y="205" width="355" height="30"/>
+                                <rect key="frame" x="10" y="205" width="394" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="oir-ZZ-jzi"/>
                                 </constraints>
@@ -768,7 +768,7 @@ Meal Recommender</string>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-4b-aYh" userLabel="Tag Name" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="10" y="70" width="225" height="35"/>
+                                <rect key="frame" x="10" y="70" width="264" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="eOt-XF-eYJ"/>
@@ -783,7 +783,7 @@ Meal Recommender</string>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCF-ai-Vyc" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="245" y="70" width="120" height="35"/>
+                                <rect key="frame" x="284" y="70" width="120" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="VrS-Dx-OUI"/>
                                     <constraint firstAttribute="height" constant="35" id="boH-xw-dfy"/>
@@ -806,7 +806,7 @@ Meal Recommender</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggest Food Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="aio-NQ-bIi">
-                                <rect key="frame" x="10" y="115" width="355" height="30"/>
+                                <rect key="frame" x="10" y="115" width="394" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="lVW-dF-aR4"/>
                                 </constraints>
@@ -817,7 +817,7 @@ Meal Recommender</string>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N5N-aB-X7z" userLabel="Food Name" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="10" y="160" width="225" height="35"/>
+                                <rect key="frame" x="10" y="160" width="264" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="vPf-kC-Fep"/>
@@ -832,7 +832,7 @@ Meal Recommender</string>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tag" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="leR-4d-bfa" userLabel="Tag" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="10" y="250" width="355" height="35"/>
+                                <rect key="frame" x="10" y="250" width="394" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="DSg-dU-n5F"/>
@@ -847,7 +847,7 @@ Meal Recommender</string>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Food" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUc-Ds-26F" userLabel="Food" customClass="CustomInputField" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="10" y="295" width="355" height="35"/>
+                                <rect key="frame" x="10" y="295" width="394" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="uDJ-TS-Vl9"/>
@@ -862,7 +862,7 @@ Meal Recommender</string>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mn2-FJ-3Ah" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="245" y="160" width="120" height="35"/>
+                                <rect key="frame" x="284" y="160" width="120" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="EPw-Sc-gf9"/>
                                     <constraint firstAttribute="height" constant="35" id="RYu-2n-q0F"/>
@@ -885,7 +885,7 @@ Meal Recommender</string>
                                 </connections>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4E-eE-8HN" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="245" y="340" width="120" height="35"/>
+                                <rect key="frame" x="284" y="340" width="120" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="ys3-fO-Z6t"/>
                                     <constraint firstAttribute="width" constant="120" id="zT0-rV-CnX"/>
@@ -905,7 +905,7 @@ Meal Recommender</string>
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9o6-84-hNL">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                                 <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="L0W-ei-kxP"/>
@@ -967,11 +967,11 @@ Meal Recommender</string>
             <objects>
                 <viewController id="yCT-6y-ngv" userLabel="History" customClass="HistoryViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4ax-la-zAI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pq0-op-EH7" userLabel="Date Field" customClass="LoginRegisterInputField" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="15" y="35" width="345" height="40"/>
+                                <rect key="frame" x="15" y="35" width="384" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="lTF-mH-rSM"/>
@@ -986,7 +986,7 @@ Meal Recommender</string>
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-8c-PwU">
-                                <rect key="frame" x="15" y="83" width="345" height="29"/>
+                                <rect key="frame" x="15" y="83" width="384" height="29"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <segments>
                                     <segment title="Name"/>
@@ -998,15 +998,15 @@ Meal Recommender</string>
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="128" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aqk-R3-vFh" userLabel="History Table">
-                                <rect key="frame" x="15" y="119" width="345" height="484"/>
+                                <rect key="frame" x="15" y="119" width="384" height="553"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" rowHeight="128" id="nnd-eO-QB7" customClass="HistoryTableViewCell" customModule="NeVA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="345" height="128"/>
+                                        <rect key="frame" x="0.0" y="28" width="384" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nnd-eO-QB7" id="sPG-7b-Zh2">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="127.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384" height="127.66666666666667"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mq2-Xr-r59" userLabel="foodPicture">
@@ -1069,10 +1069,10 @@ Meal Recommender</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addHistoryEntryCell" rowHeight="128" id="6lj-Yn-fuM">
-                                        <rect key="frame" x="0.0" y="156" width="345" height="128"/>
+                                        <rect key="frame" x="0.0" y="156" width="384" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6lj-Yn-fuM" id="RHh-4k-ZHv">
-                                            <rect key="frame" x="0.0" y="0.0" width="345" height="127.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384" height="127.66666666666667"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lez-FE-wdk">
@@ -1117,7 +1117,7 @@ Meal Recommender</string>
                                 <sections/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHF-om-Rg2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                                 <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="jqH-Jg-8vn"/>
@@ -1159,11 +1159,11 @@ Meal Recommender</string>
             <objects>
                 <viewController id="3yE-5c-UXv" customClass="AddHistoryEntryViewController" customModule="NeVA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m0C-uv-KZd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="9Sp-5Q-pEA">
-                                <rect key="frame" x="16" y="151" width="343" height="30"/>
+                                <rect key="frame" x="16" y="151" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OjT-Fe-rcK"/>
                                 </constraints>
@@ -1174,7 +1174,7 @@ Meal Recommender</string>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="lno-CB-55M">
-                                <rect key="frame" x="16" y="75" width="343" height="30"/>
+                                <rect key="frame" x="16" y="75" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="PUf-2D-IJI"/>
                                 </constraints>
@@ -1185,7 +1185,7 @@ Meal Recommender</string>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G54-uc-xcm" customClass="SearchTextField" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="16" y="113" width="343" height="30"/>
+                                <rect key="frame" x="16" y="113" width="382" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="m3d-vu-dtg"/>
@@ -1195,7 +1195,7 @@ Meal Recommender</string>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9l-Ev-hKM">
-                                <rect key="frame" x="16" y="227" width="343" height="30"/>
+                                <rect key="frame" x="16" y="227" width="382" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="nhK-w7-5VI"/>
@@ -1216,7 +1216,7 @@ Meal Recommender</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRZ-Ek-EPI" customClass="GenericButton" customModule="NeVA" customModuleProvider="target">
-                                <rect key="frame" x="16" y="297" width="343" height="30"/>
+                                <rect key="frame" x="16" y="297" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ZQi-5E-HhU"/>
                                 </constraints>
@@ -1235,7 +1235,7 @@ Meal Recommender</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="4xL-al-M85">
-                                <rect key="frame" x="16" y="189" width="343" height="30"/>
+                                <rect key="frame" x="16" y="189" width="382" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="SdF-fx-i4f"/>
                                 </constraints>
@@ -1246,7 +1246,7 @@ Meal Recommender</string>
                                 <size key="shadowOffset" width="2" height="2"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y21-Rh-3z3">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                                 <color key="backgroundColor" red="0.77000000000000002" green="0.11" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="5RF-V7-KZK"/>
