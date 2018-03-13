@@ -100,6 +100,7 @@ public class SplashScreen extends AppCompatActivity {
       Log.i(TAG, "TOKEN VALID");
       Log.i(TAG, "Launching MainActivity");
       Intent intent = new Intent(getBaseContext(), MainActivity.class);
+      //Intent intent = new Intent(getBaseContext(), ColdStartActivity.class);
       startActivity(intent);
       finish();
     } else {
