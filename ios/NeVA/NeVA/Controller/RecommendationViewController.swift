@@ -15,6 +15,7 @@ import os
 class RecommendationViewController: UIViewController, KolodaViewDelegate, KolodaViewDataSource {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var snackbarStackCount = 0
     var foods: [Meal] = []
     
     @IBAction func pressedDislike(_ sender: Any) {
@@ -104,10 +105,13 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
                                 self.quickAddLikedMealToHistory(mealName: mealName)
                                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
                                     snackbar.dismiss()
-                                    let arrayOfTabBarItems = self.tabBarController!.tabBar.items
-                                    if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                                        for barItem in barItems {
-                                            barItem.isEnabled = true
+                                    self.snackbarStackCount -= 1
+                                    if self.snackbarStackCount == 0 {
+                                        let arrayOfTabBarItems = self.tabBarController!.tabBar.items
+                                        if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                                            for barItem in barItems {
+                                                barItem.isEnabled = true
+                                            }
                                         }
                                     }
                                 }
@@ -116,24 +120,31 @@ class RecommendationViewController: UIViewController, KolodaViewDelegate, Koloda
                             snackbar.secondActionText = "No"
                             snackbar.secondActionBlock = {snackbar in
                                 snackbar.dismiss()
-                                let arrayOfTabBarItems = self.tabBarController!.tabBar.items
-                                if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                                    for barItem in barItems {
-                                        barItem.isEnabled = true
+                                self.snackbarStackCount -= 1
+                                if self.snackbarStackCount == 0 {
+                                    let arrayOfTabBarItems = self.tabBarController!.tabBar.items
+                                    if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                                        for barItem in barItems {
+                                            barItem.isEnabled = true
+                                        }
                                     }
                                 }
                             }
                         
-                            let arrayOfTabBarItems = self.tabBarController!.tabBar.items
-                            if let barItems = arrayOfTabBarItems, barItems.count > 0 {
-                                for barItem in barItems {
-                                    barItem.isEnabled = false
-                                }
-                            }
+                            
                             snackbar.rightMargin = 0
                             snackbar.leftMargin = 0
                             snackbar.bottomMargin = 49
                             snackbar.shouldDismissOnSwipe = false
+                            self.snackbarStackCount += 1
+                            if self.snackbarStackCount > 0 {
+                                let arrayOfTabBarItems = self.tabBarController!.tabBar.items
+                                if let barItems = arrayOfTabBarItems, barItems.count > 0 {
+                                    for barItem in barItems {
+                                        barItem.isEnabled = false
+                                    }
+                                }
+                            }
                             snackbar.show()
                         }
                     }
