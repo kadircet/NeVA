@@ -67,6 +67,9 @@ public interface NevaDao {
   @Query("SELECT COUNT(*) FROM meal_tag_relations WHERE mealId = :mealId AND tagId = :tagId")
   public int mealTagRelationExists(int mealId, int tagId);
 
+  @Query("SELECT tagId  FROM meal_tag_relations WHERE mealId = :mealId")
+  public int[] getMealTags(int mealId);
+
   @Query("SELECT name FROM tags WHERE id IN (:tagIds)")
   public List<String> getTagNames(int[] tagIds);
 

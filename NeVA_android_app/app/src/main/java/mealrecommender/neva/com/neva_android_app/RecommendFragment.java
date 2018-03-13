@@ -103,11 +103,9 @@ public class RecommendFragment extends Fragment {
       GetSuggestionsTask getSuggestionsTask = new GetSuggestionsTask();
       getSuggestionsTask.execute();
     }
-    List<SuggestionOuterClass.Tag> tagList = suggestion.getTagsList();
-    int[] tagIds = new int[tagList.size()];
-    for (int i = 0; i < tagIds.length; i++) {
-      tagIds[i] = tagList.get(i).getId();
-    }
+
+    int[] tagIds = db.nevaDao().getMealTags(suggestion.getSuggesteeId());
+
     ArrayList<String> tagNames = (ArrayList<String>) db.nevaDao().getTagNames(tagIds);
     recommendedView.setText(suggestion.getName());
     for (int i = 0; i < tagNames.size(); i++) {
