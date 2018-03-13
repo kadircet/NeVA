@@ -1,6 +1,10 @@
 package mealrecommender.neva.com.neva_android_app;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.protobuf.ByteString;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -43,8 +49,9 @@ public class RecommendFragment extends Fragment {
   TextView recommendedView;
   Button likeButton;
   Button dislikeButton;
+  Button orderButton;
 
-
+  String mealName;
 
   ConcurrentLinkedQueue<Suggestion> suggestionList;
 
@@ -63,12 +70,12 @@ public class RecommendFragment extends Fragment {
     flexboxLayout = view.findViewById(R.id.flexbox_layout);
     suggestionList = new ConcurrentLinkedQueue<Suggestion>();
     lastDisplayIndex = 0;
+    mealName = null;
 
     likeButton = view.findViewById(R.id.like_button);
     dislikeButton = view.findViewById(R.id.dislike_button);
+    orderButton = view.findViewById(R.id.orderButton);
     recommendedView = view.findViewById(R.id.fragment_recommendation_field);
-
-
 
     return view;
   }
@@ -85,7 +92,6 @@ public class RecommendFragment extends Fragment {
         if (recommendedView.getText().length() > 0) {
           SendFeedbackTask feedbackTask = new SendFeedbackTask();
           feedbackTask.execute(true);
-          String mealName = recommendedView.getText().toString();
           Snackbar addHistorySnackbar = Snackbar.make(getView(), "Add \""+mealName+"\" to history?", Snackbar.LENGTH_INDEFINITE);
           addHistorySnackbar.setAction("ADD", new SnackbarAddHistoryListener());
           addHistorySnackbar.show();
@@ -104,6 +110,8 @@ public class RecommendFragment extends Fragment {
         }
       }
     });
+
+    orderButton.setOnClickListener(new OrderButtonHandler());
   }
 
   public void displayNextSuggestion() {
@@ -121,6 +129,7 @@ public class RecommendFragment extends Fragment {
 
     ArrayList<String> tagNames = (ArrayList<String>) db.nevaDao().getTagNames(tagIds);
     recommendedView.setText(suggestion.getName());
+    mealName = suggestion.getName();
     for (int i = 0; i < tagNames.size(); i++) {
       TextView tagHolder = new TextView(getContext());
       tagHolder.setText(tagNames.get(i));
@@ -227,6 +236,32 @@ public class RecommendFragment extends Fragment {
             Calendar.getInstance().getTimeInMillis()));
       } catch (Exception e) {
         Log.e(TAG, e.getMessage());
+      }
+    }
+  }
+
+  class OrderButtonHandler implements OnClickListener {
+    @Override
+    public void onClick(View view) {
+      String query;
+      try {
+        query = URLEncoder.encode(mealName + " Sipariş", "UTF-8");
+      } catch (UnsupportedEncodingException e) {
+        query = "";
+        Log.e(TAG, e.getMessage());
+      }
+      String urlString="http://www.gooogle.com/#q=" + query;
+      Context context = getContext();
+      Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      intent.setPackage("com.android.chrome");
+
+      try {
+        context.startActivity(intent);
+      } catch (ActivityNotFoundException ex) {
+        // Chrome browser presumably not installed so allow user to choose instead
+        intent.setPackage(null);
+        context.startActivity(intent);
       }
     }
   }
