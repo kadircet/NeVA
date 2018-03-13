@@ -20,10 +20,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
 import mealrecommender.neva.com.neva_android_app.util.ColorGenerator;
+import neva.backend.BackendOuterClass.InformUserChoiceReply;
+import neva.backend.BackendOuterClass.InformUserChoiceRequest;
 import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
+import neva.backend.UserHistoryOuterClass.Choice;
 
 
 public class RecommendFragment extends Fragment {
@@ -39,6 +43,8 @@ public class RecommendFragment extends Fragment {
   TextView recommendedView;
   Button likeButton;
   Button dislikeButton;
+
+
 
   ConcurrentLinkedQueue<Suggestion> suggestionList;
 
@@ -62,12 +68,15 @@ public class RecommendFragment extends Fragment {
     dislikeButton = view.findViewById(R.id.dislike_button);
     recommendedView = view.findViewById(R.id.fragment_recommendation_field);
 
+
+
     return view;
   }
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+
     displayNextSuggestion();
 
     likeButton.setOnClickListener(new OnClickListener() {
@@ -76,6 +85,10 @@ public class RecommendFragment extends Fragment {
         if (recommendedView.getText().length() > 0) {
           SendFeedbackTask feedbackTask = new SendFeedbackTask();
           feedbackTask.execute(true);
+          String mealName = recommendedView.getText().toString();
+          Snackbar addHistorySnackbar = Snackbar.make(getView(), "Add \""+mealName+"\" to history?", Snackbar.LENGTH_INDEFINITE);
+          addHistorySnackbar.setAction("ADD", new SnackbarAddHistoryListener());
+          addHistorySnackbar.show();
           displayNextSuggestion();
         }
       }
@@ -191,6 +204,30 @@ public class RecommendFragment extends Fragment {
         Log.e(TAG, e.getMessage());
       }
       return null;
+    }
+  }
+
+  class SnackbarAddHistoryListener implements OnClickListener {
+
+    @Override
+    public void onClick(View view) {
+      try {
+        int suggesteeId = db.nevaDao().getMealId(recommendedView.getText().toString());
+        int timestamp = (int) (Calendar.getInstance().getTimeInMillis() / 1000);
+        long latitude = 0;
+        long longitude = 0;
+
+        InformUserChoiceReply reply = connectionManager.informUserChoice(suggesteeId, timestamp, latitude, longitude);
+
+        Log.d(TAG, "Adding \"Choice\" to database (choiceId = "+reply.getChoiceId()+" )");
+        db.nevaDao().addHistoryEntry(new HistoryEntry(
+            reply.getChoiceId(),
+            NevaLoginManager.getInstance().getEmail(),
+            suggesteeId,
+            Calendar.getInstance().getTimeInMillis()));
+      } catch (Exception e) {
+        Log.e(TAG, e.getMessage());
+      }
     }
   }
 }
