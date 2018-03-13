@@ -3,10 +3,16 @@
 #include "util/hmac.h"
 
 #include <unordered_map>
+#include <unordered_set>
 
 namespace neva {
 namespace backend {
 namespace recommender {
+
+namespace {
+
+constexpr const int32_t kLeastSuggestionSize = 10;
+}
 
 Suggestion GetSuggestion(const UserHistory& history,
                          const SuggestionList& suggestion_list) {
@@ -40,10 +46,22 @@ SuggestionList GetMultipleSuggestions(const uint32_t user_id,
     id_to_suggestee[suggestee_id] = &suggestion;
   }
 
-  // TODO(kadircet): Insert different elements for diversity.
+  std::unordered_set<uint32_t> suggested_ids;
   for (Suggestion& suggestion : *suggested_list.mutable_suggestion_list()) {
-    suggestion = *id_to_suggestee[suggestion.suggestee_id()];
+    const uint32_t suggestee_id = suggestion.suggestee_id();
+    suggestion = *id_to_suggestee[suggestee_id];
+    suggested_ids.insert(suggestee_id);
     VLOG(1) << suggestion.ShortDebugString() << " has been added to list.";
+  }
+  // TODO(kadircet): Improve additional element selection.
+  int32_t elements_to_insert = kLeastSuggestionSize - suggested_ids.size();
+  while (elements_to_insert > 0) {
+    const uint32_t random_id = util::GetRandom(suggestion_list_size);
+    const uint32_t suggestee_id =
+        suggestion_list.suggestion_list(random_id).suggestee_id();
+    if (suggested_ids.find(suggestee_id) != suggested_ids.end()) continue;
+    *suggested_list.add_suggestion_list() = *id_to_suggestee[suggestee_id];
+    elements_to_insert--;
   }
   VLOG(1) << "Exiting GetMultipleSuggestions";
 
