@@ -73,7 +73,7 @@ class NevaTabBarController: UITabBarController {
             let response = try service.fetchuserhistory(request)
             let history = response.userHistory
             if #available(iOS 10.0, *) {
-                os_log("%@ entries were fetched from server", log: NevaConstants.logger, type: .info, history.history.count)
+                os_log("%@ entries were fetched from server", log: NevaConstants.logger, type: .info, String(describing: history.history.count))
             } else {
                 // Fallback on earlier versions
                 print("\(history.history.count) entries were fetched from server")
@@ -177,7 +177,7 @@ class NevaTabBarController: UITabBarController {
                 if let tags = fetchedEntries, !tags.isEmpty {
                     print("Updating tag \(tagAcquired.id)")
                     if #available(iOS 10.0, *) {
-                        os_log("Updating tag %@", log: NevaConstants.logger, type: .info, tagAcquired.id)
+                        os_log("Updating tag %@", log: NevaConstants.logger, type: .info, String(describing: tagAcquired.id))
                     } else {
                         // Fallback on earlier versions
                         print("Updating tag \(tagAcquired.id)")
@@ -186,7 +186,7 @@ class NevaTabBarController: UITabBarController {
                     tag.name = tagAcquired.name
                 } else {
                     if #available(iOS 10.0, *) {
-                        os_log("Creating tag %@", log: NevaConstants.logger, type: .info, tagAcquired.id)
+                        os_log("Creating tag %@", log: NevaConstants.logger, type: .info, String(describing: tagAcquired.id))
                     } else {
                         // Fallback on earlier versions
                         print("Creating tag \(tagAcquired.id)")
@@ -263,7 +263,7 @@ class NevaTabBarController: UITabBarController {
                 var meal: Meal? = nil
                 if let meals = fetchedEntries, !meals.isEmpty {
                     if #available(iOS 10.0, *) {
-                        os_log("Updating meal %@", log: NevaConstants.logger, type: .info, mealAcquired.suggesteeID)
+                        os_log("Updating meal %@", log: NevaConstants.logger, type: .info, String(describing: mealAcquired.suggesteeID))
                     } else {
                         // Fallback on earlier versions
                         print("Updating meal \(mealAcquired.suggesteeID)")
@@ -272,7 +272,7 @@ class NevaTabBarController: UITabBarController {
                     meal!.name = mealAcquired.name
                 } else {
                     if #available(iOS 10.0, *) {
-                        os_log("Creating meal %@", log: NevaConstants.logger, type: .info, mealAcquired.suggesteeID)
+                        os_log("Creating meal %@", log: NevaConstants.logger, type: .info, String(describing: mealAcquired.suggesteeID))
                     } else {
                         // Fallback on earlier versions
                         print("Creating meal \(mealAcquired.suggesteeID)")
