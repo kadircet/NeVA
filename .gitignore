@@ -1,4 +1,5 @@
 bazel-*
+__pycache__
 compile_commands.json
 builds/
 .vscode/
