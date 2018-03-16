@@ -27,6 +27,7 @@ def ParseFeature(feature_value, feature_type):
     raise Exception("Unknown feature type:", feature_type)
 
 
+# TODO(kadircet): Introduce likes/dislikes into cluster.
 def ExtractFeatures(for_user_id):
     """
     Extracts history information of user @for_user_id.
