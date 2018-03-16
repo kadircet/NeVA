@@ -5,7 +5,6 @@ kWaitInteval = 10 * 60  # 10 mins.
 
 
 def main():
-    sys.path.append(sys.path[0] + "/..")
     import clustering
 
     while True:
