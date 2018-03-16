@@ -4,7 +4,7 @@ FLAGFILE_NAME="stage.flags"
 APK_NAME="android_staging.apk"
 SERVICE_NAME="neva_staging"
 
-if [ "production" == $1 ]; then
+if [ "production" == "$1" ]; then
   BINARY_NAME="neva_backend"
   FLAGFILE_NAME="prod.flags"
   APK_NAME="android.apk"
