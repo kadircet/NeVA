@@ -1,0 +1,48 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          neva
+# Required-Start:    $remote_fs $syslog $network $local_fs $time
+# Required-Stop:    $remote_fs $syslog $network $local_fs $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start and stop the NeVA backend server.
+# Description:       Controls the NeVA backend server.
+#   This script will manage NeVA backend server.
+### END INIT INFO
+
+PIDFILE="/var/run/neva_recommender.pid"
+BINARY="python3.5 /var/NeVA/recommender/driver.py"
+
+if [ -f /etc/default/rcS ]; then
+  . /etc/default/rcS
+fi
+. /lib/lsb/init-functions
+
+case "${1:-''}" in
+  'start')
+    $BINARY $ARGS &
+    echo -n $! > $PIDFILE
+    log_daemon_msg "Started recommender."
+    ;;
+
+  'stop')
+    if [ -f $PIDFILE ];
+    then
+      pid=$(cat $PIDFILE)
+      kill -0 $pid && kill -9 $pid && echo "Stopped recommender."
+    fi
+    ;;
+
+  'restart')
+    if [ -f $PIDFILE ];
+    then
+      pid=$(cat $PIDFILE)
+      kill -0 $pid && kill -9 $pid && echo "Killed recommender."
+    fi
+    $BINARY $ARGS &
+    echo -n $! > $PIDFILE
+    log_daemon_msg "Restarted recommender."
+    ;;
+esac
+
+exit 0
