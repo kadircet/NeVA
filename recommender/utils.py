@@ -8,6 +8,7 @@ fields = (
     "suggestee_id",
     "timestamp",
 )
+db = None
 
 
 def ParseFeature(feature_value, feature_type):
@@ -35,7 +36,9 @@ def ExtractFeatures(for_user_id):
     [suggestee_id, feature_1, feature_2, ...]
     """
 
-    db = MySQLdb.connect("localhost", "neva", "", "neva")
+    global db
+    if db == None:
+        db = MySQLdb.connect("localhost", "neva", "", "neva")
     inputs = np.ndarray([0, NUM_FEATURES])
     sql = "SELECT {} FROM `user_choice_history` WHERE `user_id` = %s".format(
         ",".join(map(lambda x: '`' + x + '`', fields)))
@@ -56,13 +59,15 @@ def GetDist(feature_1, feature_2):
     return np.linalg.norm(feature_1 - feature_2)
 
 
-def GetNearestElements(user_history, current_context, k=10):
+def GetNearestElements(user_id, current_context, k=10):
     """
     Returns k nearest neighbours of current_context in user_history.
 
     user_history is the output of ExtractFeatures.
     current_context is a feature vector with NUM_FEATURES elements.
     """
+
+    user_history = ExtractFeatures(user_id)
     neighbours = []
     for entry in user_history:
         dist = GetDist(entry[1:], current_context)
@@ -71,3 +76,14 @@ def GetNearestElements(user_history, current_context, k=10):
         elif dist < -neighbours[0][0]:
             heapq.heappushpop(neighbours, (-dist, entry[0]))
     return tuple(map(lambda x: int(x[1]), neighbours))
+
+
+def GetUserIDs():
+    global db
+    if db == None:
+        db = MySQLdb.connect("localhost", "neva", "", "neva")
+    sql = "SELECT `id` FROM `user`"
+    with db.cursor() as cur:
+        cur.execute(sql)
+        ids = (row[0] for row in cur)
+    return ids
