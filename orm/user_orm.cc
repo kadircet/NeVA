@@ -75,34 +75,35 @@ Status UserOrm::CheckCredentials(
   query.parse();
 
   mysqlpp::StoreQueryResult res = query.store(email);
-  if (!is_facebook && res.empty()) {
-    VLOG(1) << email << " doesn't exists in database.";
-    return Status(StatusCode::UNKNOWN, "Wrong credentials.");
-  }
+  if (res.empty()) {
+    if (!is_facebook) {
+      LOG(INFO) << email << " doesn't exists in database.";
+      return Status(StatusCode::UNKNOWN, "Wrong credentials.");
+    }
 
+    LOG(INFO) << email << " first login using facebook.";
+    const User user = FacebookValidator::FetchInfo(email, password);
+    InsertUser(user, authentication_type, nullptr);
+    res = query.store(email);
+  }
   // TODO(kadircet): Implement Status::ACTIVE check after sending verification
   // emails.
   // TODO(kadircet): In future deduce user_id from credentials table instead.
-  const int user_id = res.empty() ? 0 : res[0]["id"];
-  const mysqlpp::String sql_salt =
-      res.empty() ? mysqlpp::String() : res[0]["salt"];
-  query.reset();
-  query << "SELECT `credential` FROM `user_credentials` WHERE `user_id`=%0 AND "
+  const int user_id = res[0]["id"];
+  if (!is_facebook) {
+    const mysqlpp::String sql_salt = res[0]["salt"];
+
+    query.reset();
+    query
+        << "SELECT `credential` FROM `user_credentials` WHERE `user_id`=%0 AND "
            "`type`=%1";
-  query.parse();
-  res = query.store(user_id, authentication_type);
-  if (res.empty()) {
-    if (is_facebook) {
-      VLOG(1) << email << " first login using facebook.";
-      const User user = FacebookValidator::FetchInfo(email, password);
-      InsertUser(user, authentication_type, nullptr);
-    } else {
+    query.parse();
+    res = query.store(user_id, authentication_type);
+    if (res.empty()) {
       VLOG(1) << "No credential of type: " << authentication_type
               << " for user: " << email;
       return Status(StatusCode::UNKNOWN, "Wrong credentials.");
     }
-  }
-  if (!is_facebook) {
     const mysqlpp::String sql_password = res[0]["credential"];
     const std::string hash(sql_password.data(), sql_password.size());
     const std::string salt(sql_salt.data(), sql_salt.size());
@@ -111,8 +112,8 @@ Status UserOrm::CheckCredentials(
       return Status(StatusCode::INVALID_ARGUMENT, "Wrong credentials.");
     }
   }
-  query.reset();
 
+  query.reset();
   query << "SELECT `user_id` FROM `user_session` WHERE `token`=%0q";
   query.parse();
 
