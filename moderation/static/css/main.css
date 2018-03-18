@@ -75,7 +75,13 @@ textarea:focus, input:focus {
 button {
 	outline: none !important;
 	border: none;
-	background: transparent;
+  background: #76B3FA;
+  border-radius: 100px;
+  padding: 10px 20px;
+  color: #fff;
+}
+.reject-button{
+  background: rgb(250, 118, 118);
 }
 
 button:hover {
