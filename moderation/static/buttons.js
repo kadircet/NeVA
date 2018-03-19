@@ -85,7 +85,7 @@ $(document).ready(function() {
 
 function sendPostReq(table_id, name, act) {
   req = $.ajax({
-    url: '/process',
+    url: 'process',
     type: 'POST',
     data: {id: table_id, suggestion: name, action: act}
   });
@@ -94,7 +94,7 @@ function sendPostReq(table_id, name, act) {
 
 function sendPostReqTagValue(table_id, meal_id, tag_id, action) {
   req = $.ajax({
-    url: '/processTagValue',
+    url: 'processTagValue',
     type: 'POST',
     data: {id: table_id, meal_id: meal_id, tag_id: tag_id, action: action}
   });
