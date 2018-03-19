@@ -48,6 +48,27 @@ def levenshtein(source, target):
     return previous_row[-1]
 
 
+def getClosestElements(element, elements):
+    minimums = []
+    min_lev = levenshtein(element, elements[0])
+    min_name = elements[0]
+    minimums.append((min_name, min_lev))
+
+    for elem in elements:
+        dl = levenshtein(element, elem)
+        if (len(minimums) < 5):
+            minimums.append((elem, dl))
+        else:
+            for (x, y) in minimums:
+                if y > dl:
+                    minimums.remove((x, y))
+                    minimums.append((elem, dl))
+                    break
+
+    minimums.sort(key=lambda x: x[1])
+    return minimums
+
+
 def processMeals():
     meal_names = []
     suggestion_names = []
@@ -61,27 +82,11 @@ def processMeals():
     cur.execute("SELECT * FROM item_suggestion")
     data = cur.fetchall()
     for row in data:
-        suggestion_names.append((row['id'], row['suggestion'].lower()))
+        suggestion_names.append((row['id'], row['suggestion']))
     cur.close()
 
     for table_id, name in suggestion_names:
-        minimums = []
-        min_lev = levenshtein(name, meal_names[0])
-        min_name = meal_names[0]
-        minimums.append((min_name, min_lev))
-
-        for meal in meal_names:
-            dl = levenshtein(name, meal)
-            if (len(minimums) < 5):
-                minimums.append((meal, dl))
-            else:
-                for (x, y) in minimums:
-                    if y > dl:
-                        minimums.remove((x, y))
-                        minimums.append((meal, dl))
-                        break
-
-        minimums.sort(key=lambda x: x[1])
+        minimums = getClosestElements(name.lower(), meal_names)
         results.append({'meal': name, 'mins': minimums, 'table_id': table_id})
 
     results.sort(key=lambda x: x['meal'])
@@ -100,27 +105,11 @@ def processTags():
     cur.execute("SELECT * FROM tag_suggestion")
     data = cur.fetchall()
     for row in data:
-        suggestion_names.append((row['id'], row['tag'].lower()))
+        suggestion_names.append((row['id'], row['tag']))
     cur.close()
 
     for table_id, tag in suggestion_names:
-        minimums = []
-        min_lev = levenshtein(tag, tag_names[0])
-        min_name = tag_names[0]
-        minimums.append((min_name, min_lev))
-
-        for existing_tag in tag_names:
-            dl = levenshtein(tag, existing_tag)
-            if (len(minimums) < 5):
-                minimums.append((existing_tag, dl))
-            else:
-                for (x, y) in minimums:
-                    if y > dl:
-                        minimums.remove((x, y))
-                        minimums.append((existing_tag, dl))
-                        break
-
-        minimums.sort(key=lambda x: x[1])
+        minimums = getClosestElements(tag.lower(), tag_names)
         results.append({'tag': tag, 'mins': minimums, 'table_id': table_id})
 
     results.sort(key=lambda x: x['tag'])
