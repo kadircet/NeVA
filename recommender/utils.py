@@ -77,8 +77,6 @@ def GetNearestElements(user_id, current_context, k=10):
     neighbours = []
     counts = {}
     for entry in user_history:
-        if entry[0] in user_interest and user_interest[entry[0]] < 0:
-            continue
         dist = GetDist(entry[1:], current_context)
         if dist > kMaxDistThreshold:
             continue
