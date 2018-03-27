@@ -131,7 +131,8 @@ def GetUserInterest(user_id, current_context):
     interest = {}
     with db.cursor() as cur:
         cur.execute(sql, (user_id, ))
-        for features in cur:
+        for raw_features in cur:
+            features = np.array(raw_features).astype(np.float)
             for idx, field in enumerate(fields):
                 features[idx] = ParseFeature(features[idx], field)
             suggestee_id, timestamp, feedback = features
