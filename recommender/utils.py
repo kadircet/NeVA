@@ -2,6 +2,7 @@ import datetime
 import heapq
 import numpy as np
 import MySQLdb
+from random import shuffle
 
 NUM_FEATURES = 2
 fields = (
@@ -12,6 +13,7 @@ db = None
 kMaxDistThreshold = 60.  # in minutes
 kLIKE = 2
 kHistoryCoef = 2
+kColdStartThreshold = 30
 
 
 def ParseFeature(feature_value, feature_type):
@@ -63,7 +65,7 @@ def GetDist(feature_1, feature_2):
     return np.linalg.norm(feature_1 - feature_2)
 
 
-def GetNearestElements(user_id, current_context, k=10):
+def GetNearestElements(user_id, current_context, suggestees, k=10):
     """
     Returns k nearest neighbours of current_context in user_history.
 
@@ -72,7 +74,7 @@ def GetNearestElements(user_id, current_context, k=10):
     """
 
     user_history = ExtractFeatures(user_id)
-    user_interest = GetUserInterest(user_id, current_context)
+    user_interest = GetUserInterest(user_id, current_context, suggestees)
 
     neighbours = []
     counts = {}
@@ -95,6 +97,9 @@ def GetNearestElements(user_id, current_context, k=10):
     neighbours = []
     for suggestee_id, count in user_interest.items():
         history_count = counts.get(suggestee_id, 0)
+        # If user simply disliked and never eaten it, abandon the choice.
+        if history_count == 0 and count < 0:
+            continue
         counts.pop(suggestee_id, 0)
         neighbours.append((history_count * kHistoryCoef + count, suggestee_id))
     for suggestee_id, history_count in counts.items():
@@ -115,7 +120,7 @@ def GetUserIDs():
     return ids
 
 
-def GetUserInterest(user_id, current_context):
+def GetUserInterest(user_id, current_context, suggestees):
     """
     Gets user interests in suggestions related to a context, using feedbacks.
 
@@ -142,4 +147,31 @@ def GetUserInterest(user_id, current_context):
             else:
                 interest[suggestee_id] += feedback
 
+    if len(interest) < kColdStartThreshold:
+        suggestees_shuffled = list(suggestees)
+        shuffle(suggestees_shuffled)
+        delta = kColdStartThreshold - len(interest) + 5
+        if delta > len(suggestees_shuffled):
+            delta = len(suggestees_shuffled)
+        for suggestee_id in suggestees_shuffled[:delta]:
+            if suggestee_id in interest:
+                continue
+            interest[suggestee_id] = 0
+            if len(interest) >= kColdStartThreshold:
+                break
+
     return interest
+
+
+def GetSuggesteeIDs(category=1):
+    """
+    Gets all ids for all suggestees in the database.
+    """
+    global db
+    if db == None:
+        db = MySQLdb.connect("localhost", "neva", "", "neva")
+    sql = "SELECT `id` FROM `suggestee`"
+    with db.cursor() as cur:
+        cur.execute(sql)
+        suggestee_ids = (x[0] for x in cur.fetchall())
+    return tuple(suggestee_ids)
