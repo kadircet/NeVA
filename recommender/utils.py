@@ -11,6 +11,7 @@ fields = (
 db = None
 kMaxDistThreshold = 60.  # in minutes
 kLIKE = 2
+kHistoryCoef = 2
 
 
 def ParseFeature(feature_value, feature_type):
@@ -71,9 +72,13 @@ def GetNearestElements(user_id, current_context, k=10):
     """
 
     user_history = ExtractFeatures(user_id)
+    user_interest = GetUserInterest(user_id, current_context)
+
     neighbours = []
     counts = {}
     for entry in user_history:
+        if entry[0] in user_interest and user_interest[entry[0]] < 0:
+            continue
         dist = GetDist(entry[1:], current_context)
         if dist > kMaxDistThreshold:
             continue
@@ -88,6 +93,16 @@ def GetNearestElements(user_id, current_context, k=10):
             counts[smallest] -= 1
             if counts[smallest] == 0:
                 del counts[smallest]
+
+    neighbours = []
+    for suggestee_id, count in user_interest.items():
+        history_count = counts.get(suggestee_id, 0)
+        counts.pop(suggestee_id, 0)
+        neighbours.append((history_count * kHistoryCoef + count, suggestee_id))
+    for suggestee_id, history_count in counts.items():
+        neighbours.append((history_count * kHistoryCoef, suggestee_id))
+    neighbours.sort()
+
     return tuple(map(lambda x: int(x[1]), neighbours))
 
 
