@@ -1,7 +1,7 @@
 import sys
 import traceback
 import time
-kWaitInteval = 10 * 60  # 10 mins.
+kWaitInteval = 1.  # 1 second.
 
 
 def main():
