@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from protos import util_pb2 as protos_dot_util__pb2
+from . import util_pb2 as protos_dot_util__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(

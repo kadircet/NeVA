@@ -13,9 +13,9 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from protos import user_pb2 as protos_dot_user__pb2
-from protos import suggestion_pb2 as protos_dot_suggestion__pb2
-from protos import user_history_pb2 as protos_dot_user__history__pb2
+from . import user_pb2 as protos_dot_user__pb2
+from . import suggestion_pb2 as protos_dot_suggestion__pb2
+from . import user_history_pb2 as protos_dot_user__history__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
