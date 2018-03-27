@@ -72,12 +72,22 @@ def GetNearestElements(user_id, current_context, k=10):
 
     user_history = ExtractFeatures(user_id)
     neighbours = []
+    counts = {}
     for entry in user_history:
         dist = GetDist(entry[1:], current_context)
-        if len(neighbours) < k:
+        if dist > kMaxDistThreshold:
+            continue
+        if len(counts) < k:
             heapq.heappush(neighbours, (-dist, entry[0]))
+            if entry[0] not in counts:
+                counts[entry[0]] = 1
+            else:
+                counts[entry[0]] += 1
         elif dist < -neighbours[0][0]:
-            heapq.heappushpop(neighbours, (-dist, entry[0]))
+            _, smallest = heapq.heappushpop(neighbours, (-dist, entry[0]))
+            counts[smallest] -= 1
+            if counts[smallest] == 0:
+                del counts[smallest]
     return tuple(map(lambda x: int(x[1]), neighbours))
 
 
