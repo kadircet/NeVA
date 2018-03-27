@@ -9,6 +9,8 @@ fields = (
     "timestamp",
 )
 db = None
+kMaxDistThreshold = 60.  # in minutes
+kLIKE = 2
 
 
 def ParseFeature(feature_value, feature_type):
@@ -88,3 +90,32 @@ def GetUserIDs():
         cur.execute(sql)
         ids = (row[0] for row in cur)
     return ids
+
+
+def GetUserInterest(user_id, current_context):
+    """
+    Gets user interests in suggestions related to a context, using feedbacks.
+
+    Returns an interest map from suggestee_ids to interest values.
+    """
+    global db
+    if db == None:
+        db = MySQLdb.connect("localhost", "neva", "", "neva")
+    sql = "SELECT `suggestee_id`, `timestamp`, `feedback` FROM " + \
+            "`user_recommendation_feedback` WHERE `user_id` = %s"
+    interest = {}
+    with db.cursor() as cur:
+        cur.execute(sql, (user_id, ))
+        for features in cur:
+            for idx, field in enumerate(fields):
+                features[idx] = ParseFeature(features[idx], field)
+            suggestee_id, timestamp, feedback = features
+            feedback = 1 if feedback == kLIKE else -1
+            if GetDist([timestamp], current_context) > kMaxDistThreshold:
+                continue
+            if suggestee_id not in interest:
+                interest[suggestee_id] = feedback
+            else:
+                interest[suggestee_id] += feedback
+
+    return interest
