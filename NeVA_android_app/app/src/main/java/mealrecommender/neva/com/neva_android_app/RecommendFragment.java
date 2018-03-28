@@ -178,7 +178,10 @@ public class RecommendFragment extends Fragment {
         suggesteeId = db.nevaDao().getMealId(recommendedView.getText().toString());
         lastChoiceId = db.nevaDao()
             .getLastChoiceIdOfUser(NevaLoginManager.getInstance().getEmail());
-        timestamp = (int) (Calendar.getInstance().getTimeInMillis() / 1000);
+        Calendar cal = Calendar.getInstance();
+        long timezoneOffset = cal.getTimeZone().getRawOffset();
+        long dateEpoch = (cal.getTimeInMillis() + timezoneOffset) / 1000;
+        timestamp = (int)(dateEpoch);
         latitude = 0;
         longitude = 0;
         boolean like = booleans[0];
@@ -222,7 +225,10 @@ public class RecommendFragment extends Fragment {
     public void onClick(View view) {
       try {
         int suggesteeId = db.nevaDao().getMealId(recommendedView.getText().toString());
-        int timestamp = (int) (Calendar.getInstance().getTimeInMillis() / 1000);
+        Calendar cal = Calendar.getInstance();
+        long timezoneOffset = cal.getTimeZone().getRawOffset();
+        long dateEpoch = (cal.getTimeInMillis() + timezoneOffset) / 1000;
+        int timestamp = (int)(dateEpoch);
         long latitude = 0;
         long longitude = 0;
 
