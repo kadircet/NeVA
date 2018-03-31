@@ -126,7 +126,7 @@
         <android.support.design.widget.TextInputLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content">
-          <AutoCompleteTextView
+          <mealrecommender.neva.com.neva_android_app.customviews.NiceAutoCompleteTextView
             android:id="@+id/fragment_proposal_meal_for_tag"
             android:layout_width="250sp"
             android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
         <android.support.design.widget.TextInputLayout
           android:layout_width="wrap_content"
           android:layout_height="wrap_content">
-          <AutoCompleteTextView
+          <mealrecommender.neva.com.neva_android_app.customviews.NiceAutoCompleteTextView
             android:id="@+id/fragment_proposal_tag_of_meal"
             android:layout_width="250sp"
             android:layout_height="wrap_content"

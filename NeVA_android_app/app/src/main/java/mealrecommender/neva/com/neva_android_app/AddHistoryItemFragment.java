@@ -21,7 +21,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -32,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import mealrecommender.neva.com.neva_android_app.customviews.NiceAutoCompleteTextView;
 import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
@@ -51,7 +51,7 @@ public class AddHistoryItemFragment extends Fragment {
   String[] mealNames;
   ArrayAdapter<String> adapter;
 
-  AutoCompleteTextView mealNameField;
+  NiceAutoCompleteTextView mealNameField;
   EditText timeField;
   Button addHistoryButton;
 
@@ -111,8 +111,12 @@ public class AddHistoryItemFragment extends Fragment {
     addHistoryButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        AddHistoryTask addHistoryTask = new AddHistoryTask();
-        addHistoryTask.execute();
+        if(mealNameField.isSelectionFromPopUp()) {
+          AddHistoryTask addHistoryTask = new AddHistoryTask();
+          addHistoryTask.execute();
+        } else {
+          mealNameField.setError("Please select the item from the list.");
+        }
       }
     });
   }
