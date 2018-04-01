@@ -5,7 +5,7 @@ import numpy as np
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'neva'
+app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'neva'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
@@ -198,6 +198,19 @@ def postReqHandler():
             return jsonify({'result': 'fail'})
         return jsonify({'result': 'success'})
 
+@app.route('/processDbUpdate', methods=['POST'])
+def updateDBHandler():
+    if request.method == 'POST':
+        id = request.form['id']
+        name = request.form['name']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT MAX(`last_updated`) as la_up FROM `suggestee`")
+        last_updated = cur.fetchone()['la_up'] + 1
+        cur.execute("UPDATE `suggestee` SET `last_updated`=%s, `name`=%s WHERE `id`=%s", (last_updated, name, id))
+        mysql.connection.commit()
+        cur.close()
+        return jsonify({'result':'success'})
+    return jsonify({'result':'fail'})
 
 @app.route('/')
 def main():
@@ -208,6 +221,27 @@ def main():
     return render_template(
         "meals.html", meal_rec=meals, tag_rec=tags, tvs_rec=tvs)
 
+@app.route('/db')
+def show_db():
+    cur = mysql.connect.cursor()
+    cur.execute("SELECT * FROM suggestee")
+    meals = cur.fetchall()
+    cur.execute("SELECT * FROM tag")
+    tags = cur.fetchall()
+    cur.execute("SELECT * FROM suggestee_tags")
+    suggestee_tags = cur.fetchall()
+    data = []
+    for meal in meals:
+        meal_id = meal['id']
+        meal_name = meal['name']
+        meal_tags = []
+        for r in  suggestee_tags:
+            if(r['suggestee_id'] == meal_id):
+                for tag in tags:
+                    if(tag['id'] == r['tag_id']):
+                        meal_tags.append(tag['key'])
+        data.append({'id': meal_id, 'name':meal_name, 'tags':meal_tags})
+    return render_template("database_view.html", db_values=data)
 
 if __name__ == "__main__":
     app.run()

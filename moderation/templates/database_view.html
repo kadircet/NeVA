@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Neva Moderation</title>
+    <script src="{{url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='buttons.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.css') }}">
+  </head>
+  <body>
+    <div class="table100 ver1 MEALS">
+      <div class="table100-head">
+        <table>
+          <thead>
+            <tr class="row100 head">
+              <th class="cell100 column1">DATABASE</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="table100-body js-pscroll">
+        <table>
+          <tbody>
+            {% for item in db_values %}
+            <tr class="row100 body" id="db_row_id{{item.id}}">
+              <td class="cell100 db_col1" align="center">{{loop.index}}. </td>
+              <td class="cell100 db_col2" align="left">
+                <input type="text" id="meal_name{{item.id}}" value="{{item.name}}">
+              </td>
+              <td class="cell100 db_col3" align="left">
+                <button class="updateMealName" table_id={{item.id}}>Update</button>
+              </td>
+              <td class="cell100 db_col4">
+                <table>
+                  <tr>
+                    {% for tag in item.tags %}
+                    <td>{{tag}}</td>
+                    {% endfor %}
+                  </tr>
+                  </table>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

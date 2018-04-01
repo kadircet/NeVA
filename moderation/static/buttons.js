@@ -79,9 +79,23 @@ $(document).ready(function() {
     })
   });
 
+  $('.updateMealName').on('click', function() {
+    var table_id = $(this).attr('table_id');
+    var meal_name = $('#meal_name'+table_id).val();
+    req = sendPostReqUpdateMeal(table_id, meal_name);
+  })
+
 
 });
 
+function sendPostReqUpdateMeal(table_id, meal_name) {
+  req = $.ajax({
+    url: 'processDbUpdate',
+    type: 'POST',
+    data: {id: table_id, name: meal_name}
+  });
+  return req;
+}
 
 function sendPostReq(table_id, name, act) {
   req = $.ajax({
