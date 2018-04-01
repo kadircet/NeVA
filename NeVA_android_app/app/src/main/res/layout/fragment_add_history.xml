@@ -9,7 +9,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
     <mealrecommender.neva.com.neva_android_app.customviews.NiceAutoCompleteTextView
         android:id="@+id/eaten_meal_field"
         android:layout_width="0dp"
@@ -22,6 +21,7 @@
         android:fontFamily="@font/latoregular"
         android:hint="@string/meal_name"
         android:textAlignment="center"
+        android:completionThreshold="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

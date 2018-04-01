@@ -19,6 +19,8 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +37,7 @@ import mealrecommender.neva.com.neva_android_app.customviews.NiceAutoCompleteTex
 import mealrecommender.neva.com.neva_android_app.database.HistoryEntry;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
+import mealrecommender.neva.com.neva_android_app.util.IgnoreAccentsArrayAdapter;
 import neva.backend.BackendOuterClass.InformUserChoiceReply;
 
 ;
@@ -49,7 +52,7 @@ public class AddHistoryItemFragment extends Fragment {
   HistoryCursorAdapter cursorAdapter;
 
   String[] mealNames;
-  ArrayAdapter<String> adapter;
+  IgnoreAccentsArrayAdapter<String> adapter;
 
   NiceAutoCompleteTextView mealNameField;
   EditText timeField;
@@ -84,7 +87,7 @@ public class AddHistoryItemFragment extends Fragment {
     timeField = view.findViewById(R.id.time_field);
     addHistoryButton = view.findViewById(R.id.sendMealHistory);
     mealNames = getSuggestionNames();
-    adapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
+    adapter = new IgnoreAccentsArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, mealNames);
     mealNameField.setAdapter(adapter);
     locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
@@ -105,6 +108,17 @@ public class AddHistoryItemFragment extends Fragment {
       public void onClick(View view) {
         Log.d(TAG, "TimeSelector");
         datePickerDialog();
+      }
+    });
+
+    mealNameField.setOnFocusChangeListener(new OnFocusChangeListener() {
+      @Override
+      public void onFocusChange(View v, boolean hasFocus) {
+        if(hasFocus) {
+          mealNameField.showDropDown();
+        } else {
+          mealNameField.dismissDropDown();
+        }
       }
     });
 

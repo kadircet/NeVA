@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import mealrecommender.neva.com.neva_android_app.customviews.NiceAutoCompleteTextView;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.NevaDatabase;
+import mealrecommender.neva.com.neva_android_app.util.IgnoreAccentsArrayAdapter;
 import neva.backend.BackendGrpc;
 
 
@@ -47,8 +48,9 @@ public class ProposeFragment extends Fragment {
   NevaDatabase db;
   NevaConnectionManager connectionManager;
 
-  ArrayAdapter<String> mealAutocompleteAdapter;
-  ArrayAdapter<String> tagAutocompleteAdapter;
+  IgnoreAccentsArrayAdapter<String> mealAutoCompleteAdapter;
+  IgnoreAccentsArrayAdapter<String> tagAutoCompleteAdapter;
+
   String[] mealNames;
   String[] tagNames;
 
@@ -79,12 +81,12 @@ public class ProposeFragment extends Fragment {
     mealNames = getMealNames();
     tagNames = db.nevaDao().getTagNames();
 
-    mealAutocompleteAdapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item,
-        mealNames);
-    meal_for_tag_field.setAdapter(mealAutocompleteAdapter);
 
-    tagAutocompleteAdapter = new ArrayAdapter<>(getContext(), R.layout.textview_autocomplete_item, tagNames);
-    tag_of_meal_field.setAdapter(tagAutocompleteAdapter);
+    mealAutoCompleteAdapter = new IgnoreAccentsArrayAdapter(getContext(),  R.layout.textview_autocomplete_item, mealNames);
+    meal_for_tag_field.setAdapter(mealAutoCompleteAdapter);
+
+    tagAutoCompleteAdapter = new IgnoreAccentsArrayAdapter(getContext(),  R.layout.textview_autocomplete_item, mealNames);
+    tag_of_meal_field.setAdapter(tagAutoCompleteAdapter);
 
     return view;
   }
