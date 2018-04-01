@@ -49,7 +49,7 @@ public class RecommendFragment extends Fragment {
   TextView recommendedView;
   Button likeButton;
   Button dislikeButton;
-  Button orderButton;
+  //Button orderButton;
 
   String mealName;
 
@@ -74,7 +74,7 @@ public class RecommendFragment extends Fragment {
 
     likeButton = view.findViewById(R.id.like_button);
     dislikeButton = view.findViewById(R.id.dislike_button);
-    orderButton = view.findViewById(R.id.orderButton);
+    //orderButton = view.findViewById(R.id.orderButton);
     recommendedView = view.findViewById(R.id.fragment_recommendation_field);
 
     return view;
@@ -111,7 +111,7 @@ public class RecommendFragment extends Fragment {
       }
     });
 
-    orderButton.setOnClickListener(new OrderButtonHandler());
+    //orderButton.setOnClickListener(new OrderButtonHandler());
   }
 
   public void displayNextSuggestion() {
@@ -246,29 +246,28 @@ public class RecommendFragment extends Fragment {
     }
   }
 
-  class OrderButtonHandler implements OnClickListener {
-    @Override
-    public void onClick(View view) {
-      String query;
-      try {
-        query = URLEncoder.encode(mealName + " Sipariş", "UTF-8");
-      } catch (UnsupportedEncodingException e) {
-        query = "";
-        Log.e(TAG, e.getMessage());
-      }
-      String urlString="http://www.gooogle.com/#q=" + query;
-      Context context = getContext();
-      Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
-      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-      intent.setPackage("com.android.chrome");
-
-      try {
-        context.startActivity(intent);
-      } catch (ActivityNotFoundException ex) {
-        // Chrome browser presumably not installed so allow user to choose instead
-        intent.setPackage(null);
-        context.startActivity(intent);
-      }
-    }
-  }
+  //class OrderButtonHandler implements OnClickListener {
+  //  @Override
+  //  public void onClick(View view) {
+  //    String query;
+  //    try {
+  //      query = URLEncoder.encode(mealName + " Sipariş", "UTF-8");
+  //    } catch (UnsupportedEncodingException e) {
+  //      query = "";
+  //      Log.e(TAG, e.getMessage());
+  //    }
+  //    String urlString="http://www.gooogle.com/#q=" + query;
+  //    Context context = getContext();
+  //    Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+  //    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  //    intent.setPackage("com.android.chrome");
+  //    try {
+  //      context.startActivity(intent);
+  //    } catch (ActivityNotFoundException ex) {
+  //      // Chrome browser presumably not installed so allow user to choose instead
+  //      intent.setPackage(null);
+  //      context.startActivity(intent);
+  //    }
+  //  }
+  //}
 }
