@@ -74,7 +74,10 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
     current_context is a feature vector with NUM_FEATURES elements.
     """
 
-    user_history = ExtractFeatures(user_id)
+    if user_id is int:
+        user_history = ExtractFeatures(user_id)
+    else:
+        user_history = user_id
     user_interest = GetUserInterest(user_id, current_context, suggestees)
 
     neighbours = []
@@ -91,6 +94,10 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
                 counts[entry[0]] += 1
         elif dist < -neighbours[0][0]:
             _, smallest = heapq.heappushpop(neighbours, (-dist, entry[0]))
+            if entry[0] not in counts:
+                counts[entry[0]] = 1
+            else:
+                counts[entry[0]] += 1
             counts[smallest] -= 1
             if counts[smallest] == 0:
                 del counts[smallest]
@@ -231,3 +238,35 @@ def GetSimilarSuggestees(suggestee_id, k=5):
     similar_suggestees.sort()
     similar_suggestees.reverse()
     return tuple(similar_suggestees)
+
+
+def MeasureAccuracy(user_id, k=10):
+    """
+    Measures user accuracy over time by introducing more of user's history and 
+    likes into the pipeline.
+
+    Returns an array of tuples, first one containing maximum similarity between
+    user's choice and what we've recommended. Second, the order of user's choice
+    in suggestion list, if exists, -1 otherwise.
+    """
+    suggestees = GetSuggesteeIDs()
+    user_features = ExtractFeatures(user_id)
+    results = []
+
+    for idx in range(len(user_features)):
+        suggestee_id, current_context = user_features[idx]
+        nearest_elements = GetNearestElements(
+            user_features[:idx], current_context, suggestees, k=k)
+        suggestee_tags = GetTagsForSuggestee(suggestee_id)
+        found_idx = -1
+        avg_similarity = .0
+        for idx, suggestion_id in enumerate(nearest_elements):
+            if suggestee_id == suggestion_id:
+                found_idx = idx
+            suggestion_tags = GetTagsForSuggestee(suggestion_id)
+            if idx < k:
+                avg_similarity += GetSuggesteeSimilarity(
+                    suggestee_tags, suggestion_tags)
+        avg_similarity /= k
+        results.append((found_idx, avg_similarity))
+    return results
