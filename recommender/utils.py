@@ -175,3 +175,20 @@ def GetSuggesteeIDs(category=1):
         cur.execute(sql)
         suggestee_ids = (x[0] for x in cur.fetchall())
     return tuple(suggestee_ids)
+
+
+def GetSuggesteeSimilarity(suggestee1_tags, suggestee2_tags):
+    """
+    Calculates Jaccard similarity between two sets.
+    """
+    total_size = len(suggestee1_tags) + len(suggestee2_tags)
+    if total_size == 0:
+        return 1.
+    size_of_intersection = 0
+    elems_in_first = {}
+    for tag in suggestee1_tags:
+        elems_in_first[tag] = True
+    for tag in suggestee2_tags:
+        if tag in elems_in_first:
+            size_of_intersection += 1
+    return size_of_intersection / (total_size - size_of_intersection)
