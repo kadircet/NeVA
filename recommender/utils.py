@@ -14,6 +14,7 @@ kMaxDistThreshold = 60.  # in minutes
 kLIKE = 2
 kHistoryCoef = 2
 kColdStartThreshold = 30
+kMinSimilarityThreshold = 0.5
 
 
 def ParseFeature(feature_value, feature_type):
@@ -192,3 +193,41 @@ def GetSuggesteeSimilarity(suggestee1_tags, suggestee2_tags):
         if tag in elems_in_first:
             size_of_intersection += 1
     return size_of_intersection / (total_size - size_of_intersection)
+
+
+def GetTagsForSuggestee(suggestee_id):
+    """
+    Returns tags for a suggestee as a tuple.
+    """
+    global db
+    if db == None:
+        db = MySQLdb.connect("localhost", "neva", "", "neva")
+    sql = "SELECT `tag_id` FROM `suggestee_tags` WHERE `suggestee_id`=%s"
+    with db.cursor() as cur:
+        cur.execute(sql, (suggestee_id, ))
+        tag_ids = (x[0] for x in cur.fetchall())
+    return tuple(tag_ids)
+
+
+def GetSimilarSuggestees(suggestee_id, k=5):
+    """
+    Returns similar suggestion items to suggestee_id.
+    """
+    base_tags = GetTagsForSuggestee(suggestee_id)
+    suggestee_ids = GetSuggesteeIDs()
+    similar_suggestees = []
+    for id in suggestee_ids:
+        if id == suggestee_id:
+            continue
+        item_tags = GetTagsForSuggestee(id)
+        similarity = GetSuggesteeSimilarity(base_tags, item_tags)
+        if similarity < kMinSimilarityThreshold:
+            continue
+        if len(similar_suggestees) < k:
+            heapq.heappush(similar_suggestees, (similarity, id))
+        elif similarity > neighbours[0][0]:
+            heapq.heappushpop(neighbours, (similarity, id))
+
+    similar_suggestees.sort()
+    similar_suggestees.reverse()
+    return tuple(similar_suggestees)
