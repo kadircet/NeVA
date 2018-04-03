@@ -80,6 +80,15 @@
               </td>
             </tr>
             {% endif %} {% endif %} {% endfor %}
+            <tr>
+              <td class="cell100 column5" align="center">New</td>
+              <td class="cell100 column1" align="center">
+                <input type="text" id="new_meal_name" value="">
+              </td>
+              <td class="cell100 column2" align="center">
+                <button class="addNewMeal">Add New</button>
+              </td>
+            </tr>
         </tbody>
       </table>
     </div>
@@ -112,8 +121,8 @@
             </td>
             <td class="cell100 column4" align="center"></td>
           </tr>
-          {% else %} {% if item.mins[0][1]
-          < 3 %} <tr class="row100 body" id="tag_row_id{{item.table_id}}" style="background: rgb(233, 217, 72);">
+          {% else %} {% if item.mins[0][1] < 3 %}
+          <tr class="row100 body" id="tag_row_id{{item.table_id}}" style="background: rgb(233, 217, 72);">
             <td class="cell100 column5" align="center">{{loop.index}}. </td>
             <td class="cell100 column1" align="center">
               <input type="text" id="tag_name{{item.table_id}}" value="{{item.tag}}">
@@ -155,6 +164,17 @@
               </td>
             </tr>
             {% endif %} {% endif %} {% endfor %}
+            <tr>
+              <td class="cell100 column5" align="center">New</td>
+              <td class="cell100 column1" align="center">
+                <input type="text" id="new_tag_name" value="">
+              </td>
+              <td class="cell100 column2" align="center">
+                <button class="addNewTag">Add New</button>
+              </td>
+              <td class="cell100 column3" align="center"></td>
+              <td class="cell100 column4" align="center"></td>
+            </tr>
         </tbody>
       </table>
     </div>
@@ -192,6 +212,19 @@
             <td class="cell100 column4"></td>
           </tr>
           {% endfor %}
+          <tr>
+            <td class="cell100 column5" align="center">New</td>
+            <td class="cell100 column1" align="center">
+              <input type="text" id="new_tvs_meal" value="">
+            </td>
+            <td class="cell100 column2">
+              <input type="text" id="new_tvs_tag" value="">
+            </td>
+            <td class="cell100 column3" align="center">
+              <button class="addNewTVS">Add New</button>
+            </td>
+            <td class="cell100 column4" align="center"></td>
+          </tr>
         </tbody>
       </table>
     </div>

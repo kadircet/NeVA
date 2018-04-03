@@ -157,6 +157,7 @@ def tvsPostReqHandler():
             cur.close()
             return jsonify({'result': 'fail'})
         return jsonify({'result': 'success'})
+    return jsonify({'result': 'fail'})
 
 
 @app.route('/process', methods=['POST'])
@@ -197,6 +198,7 @@ def postReqHandler():
             cur.close()
             return jsonify({'result': 'fail'})
         return jsonify({'result': 'success'})
+    return jsonify({'result': 'fail'})
 
 @app.route('/processDbUpdate', methods=['POST'])
 def updateDBHandler():
@@ -211,6 +213,36 @@ def updateDBHandler():
         cur.close()
         return jsonify({'result':'success'})
     return jsonify({'result':'fail'})
+
+@app.route('/processAdd', methods=['POST'])
+def addNewStuff():
+    if request.method == 'POST':
+        action = request.form['action']
+        cur = mysql.connection.cursor()
+        if action == 'meal':
+            meal_name = request.form['name']
+            cur.execute("SELECT MAX(`last_updated`) as la_up FROM `suggestee`")
+            last_updated = cur.fetchone()['la_up'] + 1
+            cur.execute("INSERT INTO suggestee (`category_id`, `name`, `last_updated`) values ( 1, %s, %s)", (meal_name, last_updated))
+        elif action == 'tag':
+            tag_name = request.form['name']
+            cur.execute("INSERT INTO `tag` (`key`) VALUES (%s)", (tag_name, ))
+        elif action == 'tvs':
+            meal_name = request.form['meal_name']
+            tag_name = request.form['tag_name']
+            cur.execute("INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`)\
+                         SELECT `suggestee`.`id`, `tag`.`id` FROM `suggestee`, `tag`\
+                         WHERE `name`=%s AND `key`=%s", (meal_name, tag_name))
+            cur.execute("SELECT MAX(`last_updated`) as la_up FROM `suggestee`")
+            last_updated = cur.fetchone()['la_up'] + 1
+            cur.execute("UPDATE `suggestee` SET `last_updated`=%s WHERE `name`=%s", (last_updated, meal_name))
+        else:
+            return jsonify({'result':'fail'})
+        mysql.connection.commit()
+        cur.close()
+        return jsonify({'result':'success'})
+    return jsonify({'result': 'fail'})
+        
 
 @app.route('/')
 def main():
