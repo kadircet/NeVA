@@ -120,7 +120,6 @@ public class IgnoreAccentsArrayAdapter<T> extends BaseAdapter implements Filtera
   @Override
   public void notifyDataSetChanged() {
     super.notifyDataSetChanged();
-    mNotifyOnChange = true;
   }
 
   public void setNotifyOnChange(boolean notifyOnChange) {
