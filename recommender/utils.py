@@ -3,6 +3,7 @@ import heapq
 import numpy as np
 import MySQLdb
 from random import shuffle
+from functools import reduce
 
 NUM_FEATURES = 2
 fields = (
@@ -183,6 +184,29 @@ def GetSuggesteeIDs(category=1):
         cur.execute(sql)
         suggestee_ids = (x[0] for x in cur.fetchall())
     return tuple(suggestee_ids)
+
+
+def WeightedJaccardSimilarity(set1, set2):
+    """
+    Calculates Jaccard similarity between two sets with weighted elements.
+    So both parameters are tuple of pairs, (element, weight).
+    """
+    if len(set1) + len(set2) == 0:
+        return 1.
+    total_size = reduce(lambda x, y: x + y[1], set1 + set2, 0)
+    elems_in_first = {k: v for (k, v) in set1}
+
+    def ReduceToIntersection(x, y):
+        """
+        x is current intersection size.
+        y is the next element in set2.
+        """
+        if y[0] in elems_in_first:
+            x += min(y[1], elems_in_first[y[0]])
+        return x
+
+    size_of_intersection = reduce(ReduceToIntersection, set2, 0)
+    return size_of_intersection / (total_size - size_of_intersection)
 
 
 def GetSuggesteeSimilarity(suggestee1_tags, suggestee2_tags):
