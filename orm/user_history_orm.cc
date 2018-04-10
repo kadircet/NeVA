@@ -129,19 +129,19 @@ Status UserHistoryOrm::FetchColdStartItemList(
         mysqlpp::Query query = conn->query(
             "SELECT `tag_id` FROM `suggestee_tags` WHERE `suggestee_id`=%0");
         query.parse();
-        const mysqlpp::StoreQueryResult res = query.store(suggestion->suggestee_id());
+        const mysqlpp::StoreQueryResult res = query.store(suggestion.suggestee_id());
         for (const auto row : res) {
-          Tag* tag = suggestion->add_tags();
+          Tag* tag = suggestion.add_tags();
           tag->set_id(row["tag_id"]);
         }
       }
-      *all_available_items->add_suggestion_list() = suggestion;
+      *all_available_items.add_suggestion_list() = suggestion;
     }
   }
 
   if (all_available_items.suggestion_list_size() == 0) {
     VLOG(1) << "Requested a coldstart_item_list from an empty category: "
-            << suggestion_category;
+            << coldstart_item_category;
     return Status(StatusCode::INVALID_ARGUMENT,
                   "No items to suggest in that category.");
   }
@@ -162,9 +162,9 @@ Status UserHistoryOrm::FetchColdStartItemList(
   while (elements_to_insert > 0) {
     const uint32_t random_id = util::GetRandom(all_available_items_size);
     const uint32_t suggestee_id =
-        all_available_items_size.suggestion_list(random_id).suggestee_id();
+        all_available_items.suggestion_list(random_id).suggestee_id();
     if (added_ids.find(suggestee_id) != added_ids.end()) continue;
-    *coldstart_item_list.add_suggestion_list() = all_available_items.suggestion_list(random_id);
+    *coldstart_item_list->add_suggestion_list() = all_available_items.suggestion_list(random_id);
     added_ids.insert(suggestee_id);
     elements_to_insert--;
   }
@@ -182,7 +182,7 @@ Status UserHistoryOrm::RecordColdStartItem(
       "`feedback`) VALUES (%0, %1, %2)");
   query.parse();
 
-  if (!query.execute(user_id, coldstart_item.suggestee_id(), feedback)) {
+  if (!query.execute(user_id, coldstart_item->suggestee_id(), feedback)) {
     return Status(StatusCode::INTERNAL, query.error());
   }
 

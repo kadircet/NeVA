@@ -49,6 +49,7 @@ cc_library(
         "//protos:suggestion_proto",
         "//protos:user_history_proto",
         "//protos:user_proto",
+        "//util:hmac",
         "@glog//:glog",
     ],
 )
