@@ -265,18 +265,23 @@ def GetTagsForSuggestee(suggestee_id):
     return tuple(tag_ids)
 
 
-def GetSimilarSuggestees(suggestee_id, k=5):
+def GetSimilarSuggestees(suggestee_id,
+                         k=5,
+                         base_tags=None,
+                         similarity_metric=GetSuggesteeSimilarity):
     """
-    Returns similar suggestion items to suggestee_id.
+    Returns similar suggestion items to suggestee_id as a tuple of pairs,
+    (similarity, suggestee_id).
     """
-    base_tags = GetTagsForSuggestee(suggestee_id)
+    if base_tags == None:
+        base_tags = GetTagsForSuggestee(suggestee_id)
     suggestee_ids = GetSuggesteeIDs()
     similar_suggestees = []
     for id in suggestee_ids:
         if id == suggestee_id:
             continue
         item_tags = GetTagsForSuggestee(id)
-        similarity = GetSuggesteeSimilarity(base_tags, item_tags)
+        similarity = similarity_metric(base_tags, item_tags)
         if similarity < kMinSimilarityThreshold:
             continue
         if len(similar_suggestees) < k:
