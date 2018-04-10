@@ -281,8 +281,8 @@ def GetSimilarSuggestees(suggestee_id, k=5):
             continue
         if len(similar_suggestees) < k:
             heapq.heappush(similar_suggestees, (similarity, id))
-        elif similarity > neighbours[0][0]:
-            heapq.heappushpop(neighbours, (similarity, id))
+        elif similarity > similar_suggestees[0][0]:
+            heapq.heappushpop(similar_suggestees, (similarity, id))
 
     similar_suggestees.sort()
     similar_suggestees.reverse()
