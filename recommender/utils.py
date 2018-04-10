@@ -67,6 +67,18 @@ def GetDist(feature_1, feature_2):
     return np.linalg.norm(feature_1 - feature_2)
 
 
+def GetTagWeights(suggestees):
+    tag_counts = {}
+    for suggestee in suggestees:
+        tags = GetTagsForSuggestee(suggestee)
+        for tag in tags:
+            if tag not in tag_counts:
+                tag_counts[tag] = 1
+            else:
+                tag_counts[tag] += 1
+    return tuple((k, v) for k, v in tag_counts.items())
+
+
 def GetNearestElements(user_id, current_context, suggestees, k=10):
     """
     Returns k nearest neighbours of current_context in user_history.
