@@ -100,7 +100,7 @@ Status UserHistoryOrm::FetchColdStartCompletionStatus(const uint32_t user_id,
                   "More than one user matches this user_id.");
   }
 
-  *completion_status = res[0]['status'];
+  *completion_status = res[0]["status"];
   return Status::OK;
 }
 Status UserHistoryOrm::FetchColdStartItemList(
