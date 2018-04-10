@@ -197,7 +197,7 @@ class BackendServiceImpl final : public Backend::Service {
     int user_id;
     RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
     bool completion_status;
-    RETURN_IF_ERROR(user_history_orm_->FetchColdStartCompletionStatus(&user_id,&completion_status));
+    RETURN_IF_ERROR(user_history_orm_->FetchColdStartCompletionStatus(user_id,&completion_status));
     reply->set_completion_status(completion_status);
     return Status::OK;
   }
@@ -220,7 +220,7 @@ class BackendServiceImpl final : public Backend::Service {
     VLOG(1) << "Received ColdColdStartChoice:" << request->DebugString();
     int user_id;
     RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
-    return user_history_orm_->RecordColdStartItem(user_id, request->coldstart_item(), request->feedback());
+    return user_history_orm_->RecordColdStartItem(user_id, &(request->coldstart_item()), request->feedback());
   }
 
   BackendServiceImpl() {
