@@ -1,4 +1,5 @@
 #include "user_history_orm.h"
+#include "util/hmac.h"
 #include "glog/logging.h"
 
 namespace neva {
