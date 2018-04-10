@@ -46,6 +46,7 @@ cc_library(
     hdrs = ["user_history_orm.h"],
     deps = [
         ":connectionpool",
+        "//protos:suggestion_proto",
         "//protos:user_history_proto",
         "//protos:user_proto",
         "@glog//:glog",
