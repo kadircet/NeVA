@@ -220,7 +220,7 @@ message GetTagsRequest {
   uint32 start_index = 2;
 }
 
-message GetTagsReply {z
+message GetTagsReply {
   // Tags in the database both id and names.
   repeated Tag tag_list = 1;
 }
