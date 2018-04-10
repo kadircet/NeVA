@@ -115,6 +115,11 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
             if counts[smallest] == 0:
                 del counts[smallest]
 
+    # TODO(kadircet): Add data coming from cold start or maybe most liked N
+    # elements into the base tags too.
+    base_tags = GetTagWeights(counts.keys())
+    similar_suggestees = GetSimilarSuggestees(
+        None, base_tags=base_tags, similarity_metric=WeightedJaccardSimilarity)
     neighbours = []
     for suggestee_id, count in user_interest.items():
         history_count = counts.get(suggestee_id, 0)
@@ -125,9 +130,17 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
         neighbours.append((history_count * kHistoryCoef + count, suggestee_id))
     for suggestee_id, history_count in counts.items():
         neighbours.append((history_count * kHistoryCoef, suggestee_id))
-    neighbours.sort()
+    max_count = max(max(neighbours)[0], 1)
 
-    return tuple(map(lambda x: int(x[1]), neighbours))
+    def CountsToProb(x):
+        return (x[0] / max_count, x[1])
+
+    neighbours = list(map(CountsToProb, neighbours))
+    neighbours.extend(base_tags)
+    neighbours.sort()
+    neighbours.reverse()
+
+    return tuple(map(lambda x: int(x[1]), neighbours))[:20]
 
 
 def GetUserIDs():
