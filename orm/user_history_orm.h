@@ -30,6 +30,19 @@ class UserHistoryOrm {
   grpc::Status RecordFeedback(const uint32_t user_id,
                               const UserFeedback& user_feedback);
 
+  // TODO: move them to user_coldstart_status_orm and user_coldstart_history_orm
+  grpc::Status FetchColdStartCompletionStatus(const uint32_t user_id,
+                                              bool* completion_status);
+
+  grpc::Status FetchColdStartItemList(
+    const uint32_t user_id,
+    const Suggestion::SuggestionCategory coldstart_item_category,
+    SuggestionList* coldstart_item_list);
+
+  grpc::Status RecordColdStartItem(
+    const uint32_t user_id,
+    const Suggestion* coldstart_item,
+    const UserFeedback::Feedback feedback);
  private:
   std::shared_ptr<NevaConnectionPool> conn_pool_;
 };

@@ -39,7 +39,36 @@ CREATE TABLE IF NOT EXISTS `user_recommendation_feedback` (
   `feedback` INTEGER NOT NULL,
   FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
   FOREIGN KEY(`suggestee_id`) REFERENCES `suggestee`(`id`) ON DELETE CASCADE,
-  FOREIGN KEY(`last_choice_id`) REFERENCES `user_choice_history`(`id`) 
+  FOREIGN KEY(`last_choice_id`) REFERENCES `user_choice_history`(`id`)
     ON DELETE CASCADE,
+  PRIMARY KEY(`id`)
+);
+
+/* Contains users' coldstart completion_status
+ * id is the unique identifier.
+ * user_id shows to which user choice belongs to.
+ * status shows the completion_status
+ */
+CREATE TABLE IF NOT EXISTS `user_coldstart_status` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `user_id` INTEGER NOT NULL,
+  `status` BOOLEAN NOT NULL,
+  FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+  PRIMARY KEY(`id`)
+);
+
+/* Contains users' coldstart feedbacks
+ * id is the unique identifier.
+ * user_id shows to which user choice belongs to.
+ * feedback_id shows to which suggestee is related
+ * feedback shows the feedback type
+ */
+CREATE TABLE IF NOT EXISTS `user_coldstart_history` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `user_id` INTEGER NOT NULL,
+  `feedback_id` INTEGER NOT NULL,
+  `feedback` INTEGER NOT NULL,
+  FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY(`feedback_id`) REFERENCES `suggestee`(`id`) ON DELETE CASCADE,
   PRIMARY KEY(`id`)
 );

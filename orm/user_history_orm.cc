@@ -76,6 +76,156 @@ Status UserHistoryOrm::RecordFeedback(const uint32_t user_id,
   return Status::OK;
 }
 
+Status UserHistoryOrm::FetchColdStartCompletionStatus(const uint32_t user_id,
+                                                      bool* completion_status) {
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query(
+      "SELECT `status` FROM "
+      "`user_coldstart_status` WHERE `user_id`=%0");
+  query.parse();
+  const mysqlpp::StoreQueryResult res = query.store(user_id);
+  if (res.empty()) {
+    query.reset();
+    query << "INSERT INTO `user_coldstart_status` (`user_id`, `status`) VALUES "
+             "(%0, %1)";
+    query.parse();
+    if (!query.execute(user_id, false)) {
+      VLOG(1) << "Query failed with:" << query.error();
+      return Status(StatusCode::INTERNAL, "Internal server error.");
+    }
+    completion_status = false;
+    return Status::OK;
+  } else if (res.num_rows() != 1) {
+    return Status(StatusCode::UNKNOWN,
+                  "More than one user matches this user_id.");
+  }
+
+  completion_status = res[0]['status'];
+  return Status::OK;
+}
+Status UserHistoryOrm::FetchColdStartItemList(
+  const uint32_t user_id,
+  const Suggestion::SuggestionCategory coldstart_item_category,
+  SuggestionList* coldstart_item_list) {
+
+  const uint32_t maximum_item_number = 30;
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+
+  SuggestionList all_available_items;
+  {
+    mysqlpp::Query query = conn->query(
+        "SELECT `id`, `name` FROM `suggestee` WHERE "
+        "`category_id`=%0 AND `id` NOT IN("
+        " SELECT `feedback_id` FROM `user_coldstart_history` WHERE `user_id`=%1)");
+    query.parse();
+
+    const mysqlpp::StoreQueryResult res =
+        query.store(coldstart_item_category, user_id);
+    for (const auto row : res) {
+      Suggestion suggestion;
+      suggestion.set_suggestee_id(row["id"]);
+      suggestion.set_name(row["name"]);
+      {
+        mysqlpp::Query query = conn->query(
+            "SELECT `tag_id` FROM `suggestee_tags` WHERE `suggestee_id`=%0");
+        query.parse();
+        const mysqlpp::StoreQueryResult res = query.store(suggestion->suggestee_id());
+        for (const auto row : res) {
+          Tag* tag = suggestion->add_tags();
+          tag->set_id(row["tag_id"]);
+        }
+      }
+      *all_available_items->add_suggestion_list() = suggestion;
+    }
+  }
+
+  if (all_available_items.suggestion_list_size() == 0) {
+    VLOG(1) << "Requested a coldstart_item_list from an empty category: "
+            << suggestion_category;
+    return Status(StatusCode::INVALID_ARGUMENT,
+                  "No items to suggest in that category.");
+  }
+
+  uint32_t recorded_items_count = 0;
+  {
+    mysqlpp::Query query = conn->query(
+        "SELECT `feedback_id` FROM `user_coldstart_history` WHERE `user_id`=%0");
+    query.parse();
+
+    const mysqlpp::StoreQueryResult res = query.store(user_id);
+    recorded_items_count = res.num_rows;
+  }
+
+  uint32_t elements_to_insert = maximum_item_number - recorded_items_count;
+  std::unordered_set<uint32_t> added_ids;
+  const size_t all_available_items_size = all_available_items.suggestion_list_size();
+  while (elements_to_insert > 0) {
+    const uint32_t random_id = util::GetRandom(all_available_items_size);
+    const uint32_t suggestee_id =
+        all_available_items_size.suggestion_list(random_id).suggestee_id();
+    if (added_ids.find(suggestee_id) != added_ids.end()) continue;
+    *coldstart_item_list.add_suggestion_list() = all_available_items.suggestion_list(random_id);
+    added_ids.insert(suggestee_id);
+    elements_to_insert--;
+  }
+  return Status::OK;
+}
+
+Status UserHistoryOrm::RecordColdStartItem(
+    const uint32_t user_id,
+    const Suggestion* coldstart_item,
+    const UserFeedback::Feedback feedback) {
+
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query(
+      "INSERT INTO `user_coldstart_history` (`user_id`, `feedback_id`, "
+      "`feedback`) VALUES (%0, %1, %2)");
+  query.parse();
+
+  if (!query.execute(user_id, coldstart_item.suggestee_id(), feedback)) {
+    return Status(StatusCode::INTERNAL, query.error());
+  }
+
+  const uint32_t maximum_item_number = 30;
+  bool completed_coldstart;
+
+  {
+    mysqlpp::Query query = conn->query(
+        "SELECT `feedback_id` FROM `user_coldstart_history` WHERE `user_id`=%0");
+    query.parse();
+
+    const mysqlpp::StoreQueryResult res = query.store(user_id);
+    completed_coldstart = res.num_rows == maximum_item_number;
+  }
+
+  if(completed_coldstart) {
+    mysqlpp::Query query = conn->query(
+        "SELECT `status` FROM "
+        "`user_coldstart_status` WHERE `user_id`=%0");
+    query.parse();
+    const mysqlpp::StoreQueryResult res = query.store(user_id);
+    if (res.empty()) {
+      query.reset();
+      query << "INSERT INTO `user_coldstart_status` (`user_id`, `status`) VALUES "
+               "(%0, %1)";
+      query.parse();
+      if (!query.execute(user_id, false)) {
+        VLOG(1) << "Query failed with:" << query.error();
+        return Status(StatusCode::INTERNAL, "Internal server error.");
+      }
+    } else {
+      query.reset();
+      query << "UPDATE `user_coldstart_status` SET `status` = %0 WHERE `user_id` = %1";
+      query.parse();
+      if (!query.execute(true, user_id)) {
+        VLOG(1) << "Query failed with:" << query.error();
+        return Status(StatusCode::INTERNAL, "Internal server error.");
+      }
+    }
+  }
+  return Status::OK;
+}
+
 }  // namespace orm
 }  // namespace backend
 }  // namespace neva

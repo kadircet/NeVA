@@ -190,6 +190,39 @@ class BackendServiceImpl final : public Backend::Service {
     return tag_orm_->GetTags(request->start_index(), reply->mutable_tag_list());
   }
 
+  Status GetColdStartCompletionStatus(ServerContext* context,
+                                      const GetColdStartCompletionStatusRequest* request,
+                                      GetColdStartCompletionStatusReply* reply) override {
+    VLOG(1) << "Received GetColdStartCompletionStatus:" << request->DebugString();
+    int user_id;
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    bool completion_status;
+    RETURN_IF_ERROR(user_history_orm_->FetchColdStartCompletionStatus(&user_id,&completion_status));
+    reply->set_completion_status(completion_status);
+    return Status::OK;
+  }
+
+  Status GetColdStartItemList(ServerContext* context,
+                              const GetColdStartItemListRequest* request,
+                              GetColdStartItemListReply* reply) override {
+    VLOG(1) << "Received GetColdStartItemList:" << request->DebugString();
+    int user_id;
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    return user_history_orm_->FetchColdStartItemList(
+      user_id,
+      request->coldstart_item_category(),
+      reply->mutable_coldstart_item_list());
+  }
+
+  Status RecordColdStartChoice(ServerContext* context,
+                               const RecordColdStartChoiceRequest* request,
+                               GenericReply* reply) override {
+    VLOG(1) << "Received ColdColdStartChoice:" << request->DebugString();
+    int user_id;
+    RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
+    return user_history_orm_->RecordColdStartItem(user_id, request->coldstart_item(), request->feedback());
+  }
+
   BackendServiceImpl() {
     conn_pool_ = std::make_shared<NevaConnectionPool>(
         FLAGS_database_name, FLAGS_database_server, FLAGS_database_user,
