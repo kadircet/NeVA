@@ -93,14 +93,14 @@ Status UserHistoryOrm::FetchColdStartCompletionStatus(const uint32_t user_id,
       VLOG(1) << "Query failed with:" << query.error();
       return Status(StatusCode::INTERNAL, "Internal server error.");
     }
-    completion_status = false;
+    *completion_status = false;
     return Status::OK;
   } else if (res.num_rows() != 1) {
     return Status(StatusCode::UNKNOWN,
                   "More than one user matches this user_id.");
   }
 
-  completion_status = res[0]['status'];
+  *completion_status = res[0]['status'];
   return Status::OK;
 }
 Status UserHistoryOrm::FetchColdStartItemList(
@@ -153,7 +153,7 @@ Status UserHistoryOrm::FetchColdStartItemList(
     query.parse();
 
     const mysqlpp::StoreQueryResult res = query.store(user_id);
-    recorded_items_count = res.num_rows;
+    recorded_items_count = res.num_rows();
   }
 
   uint32_t elements_to_insert = maximum_item_number - recorded_items_count;
@@ -195,7 +195,7 @@ Status UserHistoryOrm::RecordColdStartItem(
     query.parse();
 
     const mysqlpp::StoreQueryResult res = query.store(user_id);
-    completed_coldstart = res.num_rows == maximum_item_number;
+    completed_coldstart = res.num_rows() == maximum_item_number;
   }
 
   if(completed_coldstart) {

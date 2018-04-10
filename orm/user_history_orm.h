@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <memory>
 #include "orm/connectionpool.h"
+#include "protos/suggestion.pb.h"
 #include "protos/user_history.pb.h"
 
 namespace neva {
