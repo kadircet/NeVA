@@ -24,13 +24,13 @@ mysqlpp::Connection* NevaConnectionPool::grab() {
   std::unique_lock<std::mutex> lock(conn_count_mutex_);
   ++conns_in_use_;
   mysqlpp::Connection* conn = mysqlpp::ConnectionPool::grab();
-  CHECK(conn->ping()) << "SQL server connection faded away.";
+  CHECK(conn->ping()) << "SQL server connection faded away.\n" << conn->error();
   return conn;
 }
 
 void NevaConnectionPool::release(const mysqlpp::Connection* conn) {
-  mysqlpp::ConnectionPool::release(conn);
   std::unique_lock<std::mutex> lock(conn_count_mutex_);
+  mysqlpp::ConnectionPool::release(conn);
   --conns_in_use_;
 }
 
