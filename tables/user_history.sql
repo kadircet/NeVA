@@ -1,5 +1,3 @@
-USE `neva`;
-
 /* Contains choice histories for users.
  * id is the unique identifier.
  * user_id shows to which user choice belongs to.

@@ -1,5 +1,3 @@
-USE `neva`;
-
 /* Contains information on items suggested by users.
  * id is the unique identifier of the suggestion.
  * user_id is the id of the user who suggested given food.

@@ -1,5 +1,3 @@
-USE `neva`;
-
 CREATE TABLE IF NOT EXISTS `recommender_cache` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `user_id` INTEGER NOT NULL,

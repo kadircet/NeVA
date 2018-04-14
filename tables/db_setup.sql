@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS `neva`
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_unicode_ci;
+USE `neva`;
+
+CREATE USER IF NOT EXISTS 'neva'@'localhost';
+GRANT ALL PRIVILEGES ON `neva`.* to 'neva'@'localhost';
+FLUSH PRIVILEGES;
+
+

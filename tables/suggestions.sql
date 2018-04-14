@@ -1,5 +1,3 @@
-USE `neva`;
-
 /* Contains suggestion categories like food, wear, technology, etc.
  * It aims to provide flexibility to suggest different types of products in the
  * future.
