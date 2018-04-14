@@ -71,3 +71,21 @@ cc_library(
         "@glog//:glog",
     ],
 )
+
+cc_test(
+    name = "proposition_orm_test",
+    srcs = ["proposition_orm_test.cc"],
+    data = [
+        ":proposition_orm_test.sql",
+        "//tables:suggestions.sql",
+        "//tables:user.sql",
+        "//tables:user_based_suggestion.sql",
+    ],
+    deps = [
+        ":proposition_orm",
+        "//orm/testing:mock_orm_fixture",
+        "//protos:suggestion_proto",
+    ],
+)
+
+exports_files(glob(["*_test.sql"]))
