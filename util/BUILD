@@ -33,3 +33,8 @@ cc_library(
     srcs = ["file.cc"],
     hdrs = ["file.h"],
 )
+
+sh_binary(
+    name = "kcov",
+    srcs = ["kcov.sh"],
+)
