@@ -8,3 +8,11 @@ build --copt=-I/usr/include/mysql/
 build --linkopt=-lmysqlpp
 test --test_output=all
 coverage --linkopt=--coverage
+
+build:kcov -c dbg
+build:kcov --copt -O0
+test:kcov --spawn_strategy=standalone
+test:kcov --run_under //util:kcov
+test:kcov --local_test_jobs=1
+test:kcov --test_tag_filters=-cpplint,-pycodestyle,-gurobi,-mosek,-snopt,-no_kcov
+test:kcov --nocache_test_results
