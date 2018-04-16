@@ -15,9 +15,10 @@ test_backend:
   script: "bazel test --config=kcov ..."
   after_script: 
    - "/bin/bash coverage_report.sh" 
+   - "mv bazel-kcov/ public/"
   artifacts:
     paths:
-      - "bazel-kcov/"
+      - "public/"
   except:
     - /^.*android.*$/
     - /^.*ios-.*$/
