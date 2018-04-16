@@ -1,11 +1,13 @@
 #!/bin/bash
 RECOMMENDER_SERVICE_NAME="neva_recommender"
+RECOMMENDER_DIR="recommender_staging/"
 BINARY_NAME="neva_backend_staging"
 FLAGFILE_NAME="stage.flags"
 APK_NAME="android_staging.apk"
 SERVICE_NAME="neva_staging"
 
 if [ "production" == "$1" ]; then
+  RECOMMENDER_DIR="recommender/"
   BINARY_NAME="neva_backend"
   FLAGFILE_NAME="prod.flags"
   APK_NAME="android.apk"
@@ -15,7 +17,7 @@ fi
 bazel build -c opt :neva_backend
 cp -f bazel-bin/neva_backend /var/NeVA/$BINARY_NAME
 cp -f flags.file /var/NeVA/$FLAGFILE_NAME
-cp -r recommender/*.py /var/NeVA/recommender/
+cp -r recommender/*.py /var/NeVA/$RECOMMENDER_DIR
 
 sudo cp -f $SERVICE_NAME /etc/init.d/$SERVICE_NAME
 sudo cp -f $RECOMMENDER_SERVICE_NAME /etc/init.d/$RECOMMENDER_SERVICE_NAME
