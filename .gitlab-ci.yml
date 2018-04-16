@@ -12,7 +12,8 @@ build_backend:
 
 test_backend:
   stage: test
-  script: "bazel test ..."
+  script: "bazel test --config=kcov ..."
+  after_script: "/bin/bash coverage_report.sh" 
   except:
     - /^.*android.*$/
     - /^.*ios-.*$/
