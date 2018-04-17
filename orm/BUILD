@@ -78,7 +78,7 @@ cc_library(
 
 cc_library(
     name = "utils",
-    hdrs = ["utils.h"]
+    hdrs = ["utils.h"],
     deps = [
       @glog//:glog",
     ],
