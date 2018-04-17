@@ -80,7 +80,7 @@ cc_library(
     name = "utils",
     hdrs = ["utils.h"],
     deps = [
-      @glog//:glog",
+      "@glog//:glog",
     ],
 )
 
