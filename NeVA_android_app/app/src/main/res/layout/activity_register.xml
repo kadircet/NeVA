@@ -44,96 +44,105 @@
                     android:textColor="@color/textPrimaryColor"
                     android:textSize="15sp" />
 
-                <EditText
+                <android.support.design.widget.TextInputLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+                  <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:layout_margin="10dp"
-                    android:background="@drawable/rounded_text_box"
-                    android:gravity="center"
                     android:hint="@string/email"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:singleLine="false"
                     android:textColor="@color/textPrimaryColor"
-                    android:textColorHint="@color/textHintColor" />
+                    android:textColorHint="@color/textHintColor"/>
+                </android.support.design.widget.TextInputLayout>
 
-                <EditText
+                <android.support.design.widget.TextInputLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+                  <EditText
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:layout_margin="10dp"
-                    android:background="@drawable/rounded_text_box"
-                    android:gravity="center"
                     android:hint="@string/name"
                     android:inputType="text"
                     android:singleLine="false"
                     android:textColor="@color/textPrimaryColor"
-                    android:textColorHint="@color/textHintColor" />
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:weightSum="5">
+                    android:textColorHint="@color/textHintColor"/>
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
 
-                    <RadioButton
-                        android:id="@+id/gender_male"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:buttonTint="@color/primaryColor"
-                        android:duplicateParentState="false"
-                        android:onClick="onGenderButton"
-                        android:text="@string/gender_male"
-                        android:textColor="@color/textPrimaryColor"
-                        android:textSize="18sp" />
-
-                    <RadioButton
-                        android:id="@+id/gender_female"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0"
-                        android:buttonTint="@color/primaryColor"
-                        android:duplicateParentState="false"
-                        android:onClick="onGenderButton"
-                        android:text="@string/gender_female"
-                        android:textColor="@color/textPrimaryColor"
-                        android:textSize="18sp" />
-
-                </RadioGroup>
-
-                <TextView
-                    android:id="@+id/birthdate"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/rounded_text_box"
-                    android:fontFamily="sans-serif"
-                    android:gravity="center"
-                    android:hint="@string/birthdate"
-                    android:inputType="text"
-                    android:onClick="onBirthdayButton"
-                    android:singleLine="false"
-                    android:textColor="@color/textPrimaryColor"
-                    android:textColorHint="@color/textHintColor"
-                    android:textSize="18sp" />
-
-                <EditText
+                  <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_weight="1"
                     android:layout_margin="10dp"
-                    android:background="@drawable/rounded_text_box"
-                    android:gravity="center"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:textColor="@color/textPrimaryColor"
-                    android:textColorHint="@color/textHintColor" />
+                    android:textColorHint="@color/textHintColor"/>
+                </android.support.design.widget.TextInputLayout>
 
 
+              <EditText
+                android:id="@+id/birthdate"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:focusable="false"
+                android:hint="@string/birthdate"
+                android:inputType="text"
+                android:onClick="onBirthdayButton"
+                android:singleLine="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/textPrimaryColor"
+                android:textColorHint="@color/textHintColor"
+                android:textSize="18sp"/>
+              <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <RadioButton
+                  android:id="@+id/gender_male"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:layout_gravity="center"
+                  android:buttonTint="@color/primaryColor"
+                  android:duplicateParentState="false"
+                  android:onClick="onGenderButton"
+                  android:text="@string/gender_male"
+                  android:textColor="@color/textPrimaryColor"
+                  android:textSize="18sp"/>
+
+                <RadioButton
+                  android:id="@+id/gender_female"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="0"
+                  android:layout_gravity="center"
+                  android:buttonTint="@color/primaryColor"
+                  android:duplicateParentState="false"
+                  android:onClick="onGenderButton"
+                  android:text="@string/gender_female"
+                  android:textColor="@color/textPrimaryColor"
+                  android:textSize="18sp"/>
+
+              </RadioGroup>
                 <Button
                     android:id="@+id/signup_button"
                     android:layout_width="match_parent"

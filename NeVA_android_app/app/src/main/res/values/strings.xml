@@ -34,7 +34,7 @@
   <string name="title_activity_cold_start">Cold Start</string>
   <string name="title_fragment_recommend">Recommendation</string>
   <string name="title_fragment_propose">Proposal</string>
-  <string name="title_fragment_history">History</string>
+  <string name="title_fragment_history">Previous Meals</string>
 
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>

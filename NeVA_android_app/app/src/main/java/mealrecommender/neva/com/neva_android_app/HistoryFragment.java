@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.widget.TextView;
 import com.google.protobuf.ByteString;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +35,8 @@ public class HistoryFragment extends ListFragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_history_list, container, false);
+    TextView emptyText;
+
 
     MainActivity mainActivity = (MainActivity) getActivity();
     nevaLoginManager = NevaLoginManager.getInstance();
@@ -41,6 +44,7 @@ public class HistoryFragment extends ListFragment {
     loginToken = nevaLoginManager.getByteStringToken();
     db = mainActivity.db;
     adapter = mainActivity.adapter;
+    emptyText = view.findViewById(R.id.empty_text);
 
     Log.d(TAG, "Getting the last stored \"choiceId\" in database");
     int lastChoiceId = db.nevaDao().getLastChoiceIdOfUser(nevaLoginManager.getEmail());
@@ -55,10 +59,17 @@ public class HistoryFragment extends ListFragment {
     } catch (Exception e) {
       Toast.makeText(getContext(), getResources().getString(R.string.error_fetch_userhistory), Toast.LENGTH_LONG).show();
     }
+
     Log.d(TAG, "Getting meal names for HistoryEntries");
     //Cursor cursor = db.nevaDao().getHistoryEntriesWithMealName();
     Cursor cursor = db.nevaDao().getUserHistoryMeals(nevaLoginManager.getEmail());
     cursor.moveToFirst();
+    emptyText.setVisibility(View.GONE);
+    if(cursor.getCount() < 1)
+    {
+      emptyText.setVisibility(View.VISIBLE);
+    }
+
     adapter = new HistoryCursorAdapter(getContext(), cursor, 0);
     mainActivity.adapter = adapter;
     setListAdapter(mainActivity.adapter);
