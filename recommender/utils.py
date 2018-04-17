@@ -136,7 +136,7 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
         return (x[0] / max_count, x[1])
 
     neighbours = list(map(CountsToProb, neighbours))
-    neighbours.extend(base_tags)
+    neighbours.extend(similar_suggestees)
     neighbours.sort()
     neighbours.reverse()
 
