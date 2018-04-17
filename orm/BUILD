@@ -81,6 +81,7 @@ cc_library(
     srcs = ["utils.cc"],
     hdrs = ["utils.h"],
     deps = [
+      "//protos:suggestion_proto",
       "@glog//:glog",
     ],
 )
