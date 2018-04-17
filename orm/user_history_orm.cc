@@ -1,7 +1,7 @@
 #include "user_history_orm.h"
 #include "util/hmac.h"
 #include "glog/logging.h"
-#include "orm/util.h"
+#include "orm/utils.h"
 namespace neva {
 namespace backend {
 namespace orm {
