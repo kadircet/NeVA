@@ -102,4 +102,32 @@ cc_test(
     ],
 )
 
+cc_test(
+    name = "tag_orm_test",
+    srcs = ["tag_orm_test.cc"],
+    data = [
+        ":tag_orm_test.sql",
+        "//tables:suggestions.sql",
+    ],
+    deps = [
+        ":tag_orm",
+        "//orm/testing:mock_orm_fixture",
+    ],
+)
+
+cc_test(
+    name = "user_orm_test",
+    srcs = ["user_orm_test.cc"],
+    data = [
+        ":user_orm_test.sql",
+        "//tables:user.sql",
+    ],
+    deps = [
+        ":user_orm",
+        "//orm/testing:mock_orm_fixture",
+        "//protos:user_proto",
+    ],
+)
+
+
 exports_files(glob(["*_test.sql"]))

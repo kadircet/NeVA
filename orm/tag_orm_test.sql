@@ -1,0 +1,1 @@
+INSERT INTO `tag` (`key`) VALUES ("test_tag");
