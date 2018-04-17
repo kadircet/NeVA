@@ -87,7 +87,7 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
     current_context is a feature vector with NUM_FEATURES elements.
     """
 
-    if user_id is int:
+    if type(user_id) is int:
         user_history = ExtractFeatures(user_id)
     else:
         user_history = user_id
