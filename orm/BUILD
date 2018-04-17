@@ -33,6 +33,7 @@ cc_library(
     hdrs = ["suggestion_orm.h"],
     deps = [
         ":connectionpool",
+        ":utils",
         "//protos:suggestion_proto",
         "//protos:user_history_proto",
         "//recommender",
@@ -46,6 +47,7 @@ cc_library(
     hdrs = ["user_history_orm.h"],
     deps = [
         ":connectionpool",
+        ":utils",
         "//protos:suggestion_proto",
         "//protos:user_history_proto",
         "//protos:user_proto",
@@ -71,6 +73,15 @@ cc_library(
     hdrs = ["connectionpool.h"],
     deps = [
         "@glog//:glog",
+    ],
+)
+
+cc_library(
+    name = "utils",
+    srcs = [],
+    hdrs = ["utils.h"]
+    deps = [
+      @glog//:glog",
     ],
 )
 

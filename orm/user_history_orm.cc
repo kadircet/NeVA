@@ -1,7 +1,7 @@
 #include "user_history_orm.h"
 #include "util/hmac.h"
 #include "glog/logging.h"
-
+#include "orm/util.h"
 namespace neva {
 namespace backend {
 namespace orm {
@@ -10,7 +10,7 @@ namespace {
 
 using grpc::Status;
 using grpc::StatusCode;
-
+constexpr uint32_t kMaximumItemNumber = 30;
 }  // namespace
 
 Status UserHistoryOrm::InsertChoice(const uint32_t user_id,
@@ -72,6 +72,7 @@ Status UserHistoryOrm::RecordFeedback(const uint32_t user_id,
   if (!query.execute(user_id, choice.suggestee_id(), choice.choice_id(),
                      choice.timestamp().seconds(), choice.latitude(),
                      choice.longitude(), user_feedback.feedback())) {
+    VLOG(1) << "Query failed with:" << query.error();
     return Status(StatusCode::INTERNAL, query.error());
   }
   return Status::OK;
@@ -109,7 +110,6 @@ Status UserHistoryOrm::FetchColdStartItemList(
   const Suggestion::SuggestionCategory coldstart_item_category,
   SuggestionList* coldstart_item_list) {
 
-  const uint32_t maximum_item_number = 30;
   mysqlpp::ScopedConnection conn(*conn_pool_);
 
   SuggestionList all_available_items;
@@ -126,16 +126,7 @@ Status UserHistoryOrm::FetchColdStartItemList(
       Suggestion suggestion;
       suggestion.set_suggestee_id(row["id"]);
       suggestion.set_name(row["name"]);
-      {
-        mysqlpp::Query query = conn->query(
-            "SELECT `tag_id` FROM `suggestee_tags` WHERE `suggestee_id`=%0");
-        query.parse();
-        const mysqlpp::StoreQueryResult res = query.store(suggestion.suggestee_id());
-        for (const auto row : res) {
-          Tag* tag = suggestion.add_tags();
-          tag->set_id(row["tag_id"]);
-        }
-      }
+      GetTags(conn, &suggestion);
       *all_available_items.add_suggestion_list() = suggestion;
     }
   }
@@ -157,7 +148,7 @@ Status UserHistoryOrm::FetchColdStartItemList(
     recorded_items_count = res.num_rows();
   }
 
-  uint32_t elements_to_insert = maximum_item_number - recorded_items_count;
+  uint32_t elements_to_insert = kMaximumItemNumber - recorded_items_count;
   std::unordered_set<uint32_t> added_ids;
   const size_t all_available_items_size = all_available_items.suggestion_list_size();
   while (elements_to_insert > 0) {
@@ -184,10 +175,10 @@ Status UserHistoryOrm::RecordColdStartItem(
   query.parse();
 
   if (!query.execute(user_id, coldstart_item->suggestee_id(), feedback)) {
+    VLOG(1) << "Query failed with:" << query.error();
     return Status(StatusCode::INTERNAL, query.error());
   }
 
-  const uint32_t maximum_item_number = 30;
   bool completed_coldstart;
 
   {
@@ -196,7 +187,7 @@ Status UserHistoryOrm::RecordColdStartItem(
     query.parse();
 
     const mysqlpp::StoreQueryResult res = query.store(user_id);
-    completed_coldstart = res.num_rows() == maximum_item_number;
+    completed_coldstart = res.num_rows() == kMaximumItemNumber;
   }
 
   if(completed_coldstart) {
@@ -210,7 +201,7 @@ Status UserHistoryOrm::RecordColdStartItem(
       query << "INSERT INTO `user_coldstart_status` (`user_id`, `status`) VALUES "
                "(%0, %1)";
       query.parse();
-      if (!query.execute(user_id, false)) {
+      if (!query.execute(user_id, true)) {
         VLOG(1) << "Query failed with:" << query.error();
         return Status(StatusCode::INTERNAL, "Internal server error.");
       }
