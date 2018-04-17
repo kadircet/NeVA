@@ -9,7 +9,7 @@ namespace {
 constexpr const char* const kEmail = "10156039002563534";
 constexpr const char* const kAuthTokenInvalid = "asdfasdfqwerasdf";
 constexpr const char* const kAuthTokenValid =
-    R"(EAACZAu8B33nYBAL5YYjoDWqRCXoCpbeyEayoEU6xiUqfX289YqMkdns9p73ZAsoSFouS2jOZAoSGBrXNi2dqJddYaZAN9ymiYEM2bEZCZCB7pZAJyvOIYN9X1ZACKul8zNhrYZAaPSfkdZBBAE8jGMRZBaakNVUxttGg6sZD)";
+    R"(EAACZAu8B33nYBAIPugzwpxa39utKEi4kpWAqYv6UZAZAXiH1qpC7BMCU7kWFa3quXtda3XO8kulxzgketefLfN1Ku9fSxN5XMxR2EKw931oWY1sVIiGKkBJLwMwHy6052sdWwP6ZB6NuJvlFMF2qvYcN2S440LNVKYrtawGSyZCYZAmcyWtZBjk)";
 
 TEST(Validate, Valid) { EXPECT_TRUE(Validate(kEmail, kAuthTokenValid)); }
 
