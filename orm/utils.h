@@ -6,9 +6,12 @@
 namespace neva {
 namespace backend {
 namespace orm {
+namespace {
   
   using grpc::Status;
   using grpc::StatusCode;
+  
+} // namespace
   
   // Fetches tags associated with given suggestee and stores them into it.
   // Assumes suggestee->suggestee_id is set.
