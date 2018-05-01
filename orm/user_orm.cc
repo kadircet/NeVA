@@ -333,6 +333,21 @@ Status UserOrm::CheckToken(const std::string& token, int* user_id) {
   return Status::OK;
 }
 
+Status UserOrm::UserNeedsUpdate(const uint32_t user_id) {
+  mysqlpp::ScopedConnection conn(*conn_pool_);
+  mysqlpp::Query query = conn->query();
+  query << "INSERT INTO `user_needs_update` (`user_id`, `needs_update`) VALUES "
+           "(%0, 1) ON DUPLICATE UPDATE `needs_update`=1";
+  query.parse();
+
+  if (!query.execute(user_id)) {
+    LOG(WARNING) << "User needs update failed on query:" << query.str(user_id)
+                 << "\nWith error:" << query.error();
+    return Status(StatusCode::INTERNAL, query.error());
+  }
+  return Status::OK;
+}
+
 }  // namespace orm
 }  // namespace backend
 }  // namespace neva

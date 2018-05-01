@@ -55,6 +55,10 @@ class UserOrm {
   // bearing the token.
   grpc::Status CheckToken(const std::string& token, int* user_id);
 
+  // Marks the user as updated so that recommendation pipeline can process
+  // immediately.
+  grpc::Status UserNeedsUpdate(const uint32_t user_id);
+
  private:
   grpc::Status AddCredential(
       const uint32_t user_id, const std::string& salt, const User& user,
