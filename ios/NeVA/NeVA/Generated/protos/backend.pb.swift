@@ -19,33 +19,20 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-struct Neva_Backend_GenericReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GenericReply"
+struct Neva_Backend_GenericReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_RegisterRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".RegisterRequest"
+struct Neva_Backend_RegisterRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var user: Neva_Backend_User {
     get {return _storage._user ?? Neva_Backend_User()}
@@ -60,40 +47,13 @@ struct Neva_Backend_RegisterRequest: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularMessageField(value: &_storage._user)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._user {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_LoginRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".LoginRequest"
+struct Neva_Backend_LoginRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var email: String = String()
 
@@ -135,42 +95,12 @@ struct Neva_Backend_LoginRequest: SwiftProtobuf.Message {
   }
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.email)
-      case 2: try decoder.decodeSingularStringField(value: &self.password)
-      case 3: try decoder.decodeSingularEnumField(value: &self.authenticationType)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.email.isEmpty {
-      try visitor.visitSingularStringField(value: self.email, fieldNumber: 1)
-    }
-    if !self.password.isEmpty {
-      try visitor.visitSingularStringField(value: self.password, fieldNumber: 2)
-    }
-    if self.authenticationType != .invalid {
-      try visitor.visitSingularEnumField(value: self.authenticationType, fieldNumber: 3)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_LoginReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".LoginReply"
+struct Neva_Backend_LoginReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Authentication token to be used in upcoming requests.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -178,34 +108,12 @@ struct Neva_Backend_LoginReply: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_UpdateUserRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".UpdateUserRequest"
+struct Neva_Backend_UpdateUserRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user sending request.
   var token: Data {
@@ -227,44 +135,13 @@ struct Neva_Backend_UpdateUserRequest: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
-        case 2: try decoder.decodeSingularMessageField(value: &_storage._user)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._token.isEmpty {
-        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
-      }
-      if let v = _storage._user {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_GetUserRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetUserRequest"
+struct Neva_Backend_GetUserRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user sending request.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -272,34 +149,12 @@ struct Neva_Backend_GetUserRequest: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_GetUserReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetUserReply"
+struct Neva_Backend_GetUserReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// User data of the requested user.
   var user: Neva_Backend_User {
@@ -315,40 +170,13 @@ struct Neva_Backend_GetUserReply: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularMessageField(value: &_storage._user)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._user {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".SuggestionItemPropositionRequest"
+struct Neva_Backend_SuggestionItemPropositionRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user proposing the item.
   var token: Data {
@@ -370,44 +198,13 @@ struct Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
-        case 2: try decoder.decodeSingularMessageField(value: &_storage._suggestion)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._token.isEmpty {
-        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
-      }
-      if let v = _storage._suggestion {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_GetSuggestionRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetSuggestionRequest"
+struct Neva_Backend_GetMultipleSuggestionsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user requesting a suggestion.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -418,115 +215,12 @@ struct Neva_Backend_GetSuggestionRequest: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      case 2: try decoder.decodeSingularEnumField(value: &self.suggestionCategory)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    if self.suggestionCategory != .invalidSuggestionCategory {
-      try visitor.visitSingularEnumField(value: self.suggestionCategory, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_GetSuggestionReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetSuggestionReply"
-
-  /// Name of the suggested item.
-  var name: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.name)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.name.isEmpty {
-      try visitor.visitSingularStringField(value: self.name, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-}
-
-struct Neva_Backend_GetMultipleSuggestionsRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetMultipleSuggestionsRequest"
-
-  /// Session key for the user requesting a suggestion.
-  var token: Data = SwiftProtobuf.Internal.emptyData
-
-  /// Category for which the user requests a suggestion.
-  var suggestionCategory: Neva_Backend_Suggestion.SuggestionCategory = .invalidSuggestionCategory
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      case 2: try decoder.decodeSingularEnumField(value: &self.suggestionCategory)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    if self.suggestionCategory != .invalidSuggestionCategory {
-      try visitor.visitSingularEnumField(value: self.suggestionCategory, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-}
-
-struct Neva_Backend_GetMultipleSuggestionsReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetMultipleSuggestionsReply"
+struct Neva_Backend_GetMultipleSuggestionsReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// List of suggested items.
   var suggestion: Neva_Backend_SuggestionList {
@@ -542,40 +236,13 @@ struct Neva_Backend_GetMultipleSuggestionsReply: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularMessageField(value: &_storage._suggestion)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._suggestion {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_TagPropositionRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".TagPropositionRequest"
+struct Neva_Backend_TagPropositionRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user proposing the tag.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -586,38 +253,12 @@ struct Neva_Backend_TagPropositionRequest: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      case 2: try decoder.decodeSingularStringField(value: &self.tag)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    if !self.tag.isEmpty {
-      try visitor.visitSingularStringField(value: self.tag, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_TagValuePropositionRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".TagValuePropositionRequest"
+struct Neva_Backend_TagValuePropositionRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user proposing the tag.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -634,46 +275,12 @@ struct Neva_Backend_TagValuePropositionRequest: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.tagID)
-      case 3: try decoder.decodeSingularUInt32Field(value: &self.suggesteeID)
-      case 4: try decoder.decodeSingularStringField(value: &self.value)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    if self.tagID != 0 {
-      try visitor.visitSingularUInt32Field(value: self.tagID, fieldNumber: 2)
-    }
-    if self.suggesteeID != 0 {
-      try visitor.visitSingularUInt32Field(value: self.suggesteeID, fieldNumber: 3)
-    }
-    if !self.value.isEmpty {
-      try visitor.visitSingularStringField(value: self.value, fieldNumber: 4)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_GetSuggestionItemListRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetSuggestionItemListRequest"
+struct Neva_Backend_GetSuggestionItemListRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user requesting item list.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -688,42 +295,12 @@ struct Neva_Backend_GetSuggestionItemListRequest: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      case 2: try decoder.decodeSingularEnumField(value: &self.suggestionCategory)
-      case 3: try decoder.decodeSingularUInt32Field(value: &self.startIndex)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    if self.suggestionCategory != .invalidSuggestionCategory {
-      try visitor.visitSingularEnumField(value: self.suggestionCategory, fieldNumber: 2)
-    }
-    if self.startIndex != 0 {
-      try visitor.visitSingularUInt32Field(value: self.startIndex, fieldNumber: 3)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_GetSuggestionItemListReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetSuggestionItemListReply"
+struct Neva_Backend_GetSuggestionItemListReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Item names in the database.
   var items: Neva_Backend_SuggestionList {
@@ -745,44 +322,13 @@ struct Neva_Backend_GetSuggestionItemListReply: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularMessageField(value: &_storage._items)
-        case 2: try decoder.decodeSingularUInt32Field(value: &_storage._lastUpdated)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._items {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
-      if _storage._lastUpdated != 0 {
-        try visitor.visitSingularUInt32Field(value: _storage._lastUpdated, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_InformUserChoiceRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".InformUserChoiceRequest"
+struct Neva_Backend_InformUserChoiceRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user informing about request.
   var token: Data {
@@ -804,44 +350,13 @@ struct Neva_Backend_InformUserChoiceRequest: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
-        case 2: try decoder.decodeSingularMessageField(value: &_storage._choice)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._token.isEmpty {
-        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
-      }
-      if let v = _storage._choice {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_InformUserChoiceReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".InformUserChoiceReply"
+struct Neva_Backend_InformUserChoiceReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Database id of the user choice.
   var choiceID: UInt32 = 0
@@ -849,34 +364,12 @@ struct Neva_Backend_InformUserChoiceReply: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.choiceID)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.choiceID != 0 {
-      try visitor.visitSingularUInt32Field(value: self.choiceID, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_FetchUserHistoryRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".FetchUserHistoryRequest"
+struct Neva_Backend_FetchUserHistoryRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session key for the user requesting the fetch.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -887,38 +380,12 @@ struct Neva_Backend_FetchUserHistoryRequest: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.startIndex)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    if self.startIndex != 0 {
-      try visitor.visitSingularUInt32Field(value: self.startIndex, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_FetchUserHistoryReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".FetchUserHistoryReply"
+struct Neva_Backend_FetchUserHistoryReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// User history object.
   var userHistory: Neva_Backend_UserHistory {
@@ -934,40 +401,13 @@ struct Neva_Backend_FetchUserHistoryReply: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularMessageField(value: &_storage._userHistory)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if let v = _storage._userHistory {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_CheckTokenRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".CheckTokenRequest"
+struct Neva_Backend_CheckTokenRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session token to be checked.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -975,34 +415,12 @@ struct Neva_Backend_CheckTokenRequest: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_RecordFeedbackRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".RecordFeedbackRequest"
+struct Neva_Backend_RecordFeedbackRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Session token of the user sending the feedback.
   var token: Data {
@@ -1024,44 +442,13 @@ struct Neva_Backend_RecordFeedbackRequest: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
-        case 2: try decoder.decodeSingularMessageField(value: &_storage._userFeedback)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._token.isEmpty {
-        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
-      }
-      if let v = _storage._userFeedback {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Neva_Backend_GetTagsRequest: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetTagsRequest"
+struct Neva_Backend_GetTagsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Token of the user making request.
   var token: Data = SwiftProtobuf.Internal.emptyData
@@ -1072,38 +459,12 @@ struct Neva_Backend_GetTagsRequest: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.token)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.startIndex)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
-    }
-    if self.startIndex != 0 {
-      try visitor.visitSingularUInt32Field(value: self.startIndex, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_GetTagsReply: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".GetTagsReply"
+struct Neva_Backend_GetTagsReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   /// Tags in the database both id and names.
   var tagList: [Neva_Backend_Tag] = []
@@ -1111,38 +472,121 @@ struct Neva_Backend_GetTagsReply: SwiftProtobuf.Message {
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
+}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeRepeatedMessageField(value: &self.tagList)
-      default: break
-      }
-    }
+struct Neva_Backend_GetColdStartCompletionStatusRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Token of the user making request.
+  var token: Data = SwiftProtobuf.Internal.emptyData
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Neva_Backend_GetColdStartCompletionStatusReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var completionStatus: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Neva_Backend_GetColdStartItemListRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Token of the user making request.
+  var token: Data = SwiftProtobuf.Internal.emptyData
+
+  /// Category for which the user requests GetColdStartItemList.
+  var coldstartItemCategory: Neva_Backend_Suggestion.SuggestionCategory = .invalidSuggestionCategory
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Neva_Backend_GetColdStartItemListReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// List of cold start items.
+  var coldstartItemList: Neva_Backend_SuggestionList {
+    get {return _storage._coldstartItemList ?? Neva_Backend_SuggestionList()}
+    set {_uniqueStorage()._coldstartItemList = newValue}
+  }
+  /// Returns true if `coldstartItemList` has been explicitly set.
+  var hasColdstartItemList: Bool {return _storage._coldstartItemList != nil}
+  /// Clears the value of `coldstartItemList`. Subsequent reads from it will return its default value.
+  mutating func clearColdstartItemList() {_storage._coldstartItemList = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+struct Neva_Backend_RecordColdStartChoiceRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// Token of the user making request.
+  var token: Data {
+    get {return _storage._token}
+    set {_uniqueStorage()._token = newValue}
   }
 
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.tagList.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.tagList, fieldNumber: 1)
-    }
-    try unknownFields.traverse(visitor: &visitor)
+  /// Cold Start item
+  var coldstartItem: Neva_Backend_Suggestion {
+    get {return _storage._coldstartItem ?? Neva_Backend_Suggestion()}
+    set {_uniqueStorage()._coldstartItem = newValue}
   }
+  /// Returns true if `coldstartItem` has been explicitly set.
+  var hasColdstartItem: Bool {return _storage._coldstartItem != nil}
+  /// Clears the value of `coldstartItem`. Subsequent reads from it will return its default value.
+  mutating func clearColdstartItem() {_storage._coldstartItem = nil}
+
+  /// Feedback for coldstart_item
+  var feedback: Neva_Backend_UserFeedback.Feedback {
+    get {return _storage._feedback}
+    set {_uniqueStorage()._feedback = newValue}
+  }
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "neva.backend"
 
-extension Neva_Backend_GenericReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GenericReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GenericReply"
   static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GenericReply) -> Bool {
     if unknownFields != other.unknownFields {return false}
@@ -1150,7 +594,8 @@ extension Neva_Backend_GenericReply: SwiftProtobuf._MessageImplementationBase, S
   }
 }
 
-extension Neva_Backend_RegisterRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_RegisterRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".RegisterRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "user"),
   ]
@@ -1174,6 +619,27 @@ extension Neva_Backend_RegisterRequest: SwiftProtobuf._MessageImplementationBase
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._user)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._user {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_RegisterRequest) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1189,12 +655,37 @@ extension Neva_Backend_RegisterRequest: SwiftProtobuf._MessageImplementationBase
   }
 }
 
-extension Neva_Backend_LoginRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_LoginRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".LoginRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "email"),
     2: .same(proto: "password"),
     3: .standard(proto: "authentication_type"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.email)
+      case 2: try decoder.decodeSingularStringField(value: &self.password)
+      case 3: try decoder.decodeSingularEnumField(value: &self.authenticationType)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.email.isEmpty {
+      try visitor.visitSingularStringField(value: self.email, fieldNumber: 1)
+    }
+    if !self.password.isEmpty {
+      try visitor.visitSingularStringField(value: self.password, fieldNumber: 2)
+    }
+    if self.authenticationType != .invalid {
+      try visitor.visitSingularEnumField(value: self.authenticationType, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_LoginRequest) -> Bool {
     if self.email != other.email {return false}
@@ -1213,10 +704,27 @@ extension Neva_Backend_LoginRequest.AuthenticationType: SwiftProtobuf._ProtoName
   ]
 }
 
-extension Neva_Backend_LoginReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_LoginReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".LoginReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_LoginReply) -> Bool {
     if self.token != other.token {return false}
@@ -1225,7 +733,8 @@ extension Neva_Backend_LoginReply: SwiftProtobuf._MessageImplementationBase, Swi
   }
 }
 
-extension Neva_Backend_UpdateUserRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_UpdateUserRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".UpdateUserRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .same(proto: "user"),
@@ -1252,6 +761,31 @@ extension Neva_Backend_UpdateUserRequest: SwiftProtobuf._MessageImplementationBa
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._user)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._token.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
+      }
+      if let v = _storage._user {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_UpdateUserRequest) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1268,10 +802,27 @@ extension Neva_Backend_UpdateUserRequest: SwiftProtobuf._MessageImplementationBa
   }
 }
 
-extension Neva_Backend_GetUserRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetUserRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetUserRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GetUserRequest) -> Bool {
     if self.token != other.token {return false}
@@ -1280,7 +831,8 @@ extension Neva_Backend_GetUserRequest: SwiftProtobuf._MessageImplementationBase,
   }
 }
 
-extension Neva_Backend_GetUserReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetUserReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetUserReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "user"),
   ]
@@ -1304,6 +856,27 @@ extension Neva_Backend_GetUserReply: SwiftProtobuf._MessageImplementationBase, S
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._user)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._user {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GetUserReply) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1319,7 +892,8 @@ extension Neva_Backend_GetUserReply: SwiftProtobuf._MessageImplementationBase, S
   }
 }
 
-extension Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".SuggestionItemPropositionRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .same(proto: "suggestion"),
@@ -1346,6 +920,31 @@ extension Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf._MessageI
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._suggestion)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._token.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
+      }
+      if let v = _storage._suggestion {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_SuggestionItemPropositionRequest) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1362,37 +961,32 @@ extension Neva_Backend_SuggestionItemPropositionRequest: SwiftProtobuf._MessageI
   }
 }
 
-extension Neva_Backend_GetSuggestionRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetMultipleSuggestionsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetMultipleSuggestionsRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .standard(proto: "suggestion_category"),
   ]
 
-  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetSuggestionRequest) -> Bool {
-    if self.token != other.token {return false}
-    if self.suggestionCategory != other.suggestionCategory {return false}
-    if unknownFields != other.unknownFields {return false}
-    return true
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      case 2: try decoder.decodeSingularEnumField(value: &self.suggestionCategory)
+      default: break
+      }
+    }
   }
-}
 
-extension Neva_Backend_GetSuggestionReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "name"),
-  ]
-
-  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetSuggestionReply) -> Bool {
-    if self.name != other.name {return false}
-    if unknownFields != other.unknownFields {return false}
-    return true
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    if self.suggestionCategory != .invalidSuggestionCategory {
+      try visitor.visitSingularEnumField(value: self.suggestionCategory, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
   }
-}
-
-extension Neva_Backend_GetMultipleSuggestionsRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "token"),
-    2: .standard(proto: "suggestion_category"),
-  ]
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GetMultipleSuggestionsRequest) -> Bool {
     if self.token != other.token {return false}
@@ -1402,7 +996,8 @@ extension Neva_Backend_GetMultipleSuggestionsRequest: SwiftProtobuf._MessageImpl
   }
 }
 
-extension Neva_Backend_GetMultipleSuggestionsReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetMultipleSuggestionsReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetMultipleSuggestionsReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "suggestion"),
   ]
@@ -1426,6 +1021,27 @@ extension Neva_Backend_GetMultipleSuggestionsReply: SwiftProtobuf._MessageImplem
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._suggestion)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._suggestion {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GetMultipleSuggestionsReply) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1441,11 +1057,32 @@ extension Neva_Backend_GetMultipleSuggestionsReply: SwiftProtobuf._MessageImplem
   }
 }
 
-extension Neva_Backend_TagPropositionRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_TagPropositionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".TagPropositionRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .same(proto: "tag"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      case 2: try decoder.decodeSingularStringField(value: &self.tag)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    if !self.tag.isEmpty {
+      try visitor.visitSingularStringField(value: self.tag, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_TagPropositionRequest) -> Bool {
     if self.token != other.token {return false}
@@ -1455,13 +1092,42 @@ extension Neva_Backend_TagPropositionRequest: SwiftProtobuf._MessageImplementati
   }
 }
 
-extension Neva_Backend_TagValuePropositionRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_TagValuePropositionRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".TagValuePropositionRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .standard(proto: "tag_id"),
     3: .standard(proto: "suggestee_id"),
     4: .same(proto: "value"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      case 2: try decoder.decodeSingularUInt32Field(value: &self.tagID)
+      case 3: try decoder.decodeSingularUInt32Field(value: &self.suggesteeID)
+      case 4: try decoder.decodeSingularStringField(value: &self.value)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    if self.tagID != 0 {
+      try visitor.visitSingularUInt32Field(value: self.tagID, fieldNumber: 2)
+    }
+    if self.suggesteeID != 0 {
+      try visitor.visitSingularUInt32Field(value: self.suggesteeID, fieldNumber: 3)
+    }
+    if !self.value.isEmpty {
+      try visitor.visitSingularStringField(value: self.value, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_TagValuePropositionRequest) -> Bool {
     if self.token != other.token {return false}
@@ -1473,12 +1139,37 @@ extension Neva_Backend_TagValuePropositionRequest: SwiftProtobuf._MessageImpleme
   }
 }
 
-extension Neva_Backend_GetSuggestionItemListRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetSuggestionItemListRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetSuggestionItemListRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .standard(proto: "suggestion_category"),
     3: .standard(proto: "start_index"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      case 2: try decoder.decodeSingularEnumField(value: &self.suggestionCategory)
+      case 3: try decoder.decodeSingularUInt32Field(value: &self.startIndex)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    if self.suggestionCategory != .invalidSuggestionCategory {
+      try visitor.visitSingularEnumField(value: self.suggestionCategory, fieldNumber: 2)
+    }
+    if self.startIndex != 0 {
+      try visitor.visitSingularUInt32Field(value: self.startIndex, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GetSuggestionItemListRequest) -> Bool {
     if self.token != other.token {return false}
@@ -1489,7 +1180,8 @@ extension Neva_Backend_GetSuggestionItemListRequest: SwiftProtobuf._MessageImple
   }
 }
 
-extension Neva_Backend_GetSuggestionItemListReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetSuggestionItemListReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetSuggestionItemListReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "items"),
     2: .standard(proto: "last_updated"),
@@ -1516,6 +1208,31 @@ extension Neva_Backend_GetSuggestionItemListReply: SwiftProtobuf._MessageImpleme
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._items)
+        case 2: try decoder.decodeSingularUInt32Field(value: &_storage._lastUpdated)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._items {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+      if _storage._lastUpdated != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._lastUpdated, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GetSuggestionItemListReply) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1532,7 +1249,8 @@ extension Neva_Backend_GetSuggestionItemListReply: SwiftProtobuf._MessageImpleme
   }
 }
 
-extension Neva_Backend_InformUserChoiceRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_InformUserChoiceRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".InformUserChoiceRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .same(proto: "choice"),
@@ -1559,6 +1277,31 @@ extension Neva_Backend_InformUserChoiceRequest: SwiftProtobuf._MessageImplementa
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._choice)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._token.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
+      }
+      if let v = _storage._choice {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_InformUserChoiceRequest) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1575,10 +1318,27 @@ extension Neva_Backend_InformUserChoiceRequest: SwiftProtobuf._MessageImplementa
   }
 }
 
-extension Neva_Backend_InformUserChoiceReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_InformUserChoiceReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".InformUserChoiceReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "choice_id"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularUInt32Field(value: &self.choiceID)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.choiceID != 0 {
+      try visitor.visitSingularUInt32Field(value: self.choiceID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_InformUserChoiceReply) -> Bool {
     if self.choiceID != other.choiceID {return false}
@@ -1587,11 +1347,32 @@ extension Neva_Backend_InformUserChoiceReply: SwiftProtobuf._MessageImplementati
   }
 }
 
-extension Neva_Backend_FetchUserHistoryRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_FetchUserHistoryRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".FetchUserHistoryRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .standard(proto: "start_index"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      case 2: try decoder.decodeSingularUInt32Field(value: &self.startIndex)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    if self.startIndex != 0 {
+      try visitor.visitSingularUInt32Field(value: self.startIndex, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_FetchUserHistoryRequest) -> Bool {
     if self.token != other.token {return false}
@@ -1601,7 +1382,8 @@ extension Neva_Backend_FetchUserHistoryRequest: SwiftProtobuf._MessageImplementa
   }
 }
 
-extension Neva_Backend_FetchUserHistoryReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_FetchUserHistoryReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".FetchUserHistoryReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "user_history"),
   ]
@@ -1625,6 +1407,27 @@ extension Neva_Backend_FetchUserHistoryReply: SwiftProtobuf._MessageImplementati
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._userHistory)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._userHistory {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_FetchUserHistoryReply) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1640,10 +1443,27 @@ extension Neva_Backend_FetchUserHistoryReply: SwiftProtobuf._MessageImplementati
   }
 }
 
-extension Neva_Backend_CheckTokenRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_CheckTokenRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".CheckTokenRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_CheckTokenRequest) -> Bool {
     if self.token != other.token {return false}
@@ -1652,7 +1472,8 @@ extension Neva_Backend_CheckTokenRequest: SwiftProtobuf._MessageImplementationBa
   }
 }
 
-extension Neva_Backend_RecordFeedbackRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_RecordFeedbackRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".RecordFeedbackRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .standard(proto: "user_feedback"),
@@ -1679,6 +1500,31 @@ extension Neva_Backend_RecordFeedbackRequest: SwiftProtobuf._MessageImplementati
     return _storage
   }
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._userFeedback)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._token.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
+      }
+      if let v = _storage._userFeedback {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_RecordFeedbackRequest) -> Bool {
     if _storage !== other._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
@@ -1695,11 +1541,32 @@ extension Neva_Backend_RecordFeedbackRequest: SwiftProtobuf._MessageImplementati
   }
 }
 
-extension Neva_Backend_GetTagsRequest: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetTagsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetTagsRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .standard(proto: "start_index"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      case 2: try decoder.decodeSingularUInt32Field(value: &self.startIndex)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    if self.startIndex != 0 {
+      try visitor.visitSingularUInt32Field(value: self.startIndex, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GetTagsRequest) -> Bool {
     if self.token != other.token {return false}
@@ -1709,13 +1576,261 @@ extension Neva_Backend_GetTagsRequest: SwiftProtobuf._MessageImplementationBase,
   }
 }
 
-extension Neva_Backend_GetTagsReply: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_GetTagsReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetTagsReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "tag_list"),
   ]
 
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeRepeatedMessageField(value: &self.tagList)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.tagList.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.tagList, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
   func _protobuf_generated_isEqualTo(other: Neva_Backend_GetTagsReply) -> Bool {
     if self.tagList != other.tagList {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_GetColdStartCompletionStatusRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetColdStartCompletionStatusRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "token"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetColdStartCompletionStatusRequest) -> Bool {
+    if self.token != other.token {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_GetColdStartCompletionStatusReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetColdStartCompletionStatusReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "completion_status"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBoolField(value: &self.completionStatus)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.completionStatus != false {
+      try visitor.visitSingularBoolField(value: self.completionStatus, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetColdStartCompletionStatusReply) -> Bool {
+    if self.completionStatus != other.completionStatus {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_GetColdStartItemListRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetColdStartItemListRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "token"),
+    2: .standard(proto: "coldstart_item_category"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.token)
+      case 2: try decoder.decodeSingularEnumField(value: &self.coldstartItemCategory)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularBytesField(value: self.token, fieldNumber: 1)
+    }
+    if self.coldstartItemCategory != .invalidSuggestionCategory {
+      try visitor.visitSingularEnumField(value: self.coldstartItemCategory, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetColdStartItemListRequest) -> Bool {
+    if self.token != other.token {return false}
+    if self.coldstartItemCategory != other.coldstartItemCategory {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_GetColdStartItemListReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetColdStartItemListReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "coldstart_item_list"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _coldstartItemList: Neva_Backend_SuggestionList? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _coldstartItemList = source._coldstartItemList
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularMessageField(value: &_storage._coldstartItemList)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if let v = _storage._coldstartItemList {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_GetColdStartItemListReply) -> Bool {
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._coldstartItemList != other_storage._coldstartItemList {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension Neva_Backend_RecordColdStartChoiceRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".RecordColdStartChoiceRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "token"),
+    2: .standard(proto: "coldstart_item"),
+    3: .same(proto: "feedback"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _token: Data = SwiftProtobuf.Internal.emptyData
+    var _coldstartItem: Neva_Backend_Suggestion? = nil
+    var _feedback: Neva_Backend_UserFeedback.Feedback = .unknown
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _token = source._token
+      _coldstartItem = source._coldstartItem
+      _feedback = source._feedback
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularBytesField(value: &_storage._token)
+        case 2: try decoder.decodeSingularMessageField(value: &_storage._coldstartItem)
+        case 3: try decoder.decodeSingularEnumField(value: &_storage._feedback)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._token.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._token, fieldNumber: 1)
+      }
+      if let v = _storage._coldstartItem {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+      if _storage._feedback != .unknown {
+        try visitor.visitSingularEnumField(value: _storage._feedback, fieldNumber: 3)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: Neva_Backend_RecordColdStartChoiceRequest) -> Bool {
+    if _storage !== other._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((_storage, other._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let other_storage = _args.1
+        if _storage._token != other_storage._token {return false}
+        if _storage._coldstartItem != other_storage._coldstartItem {return false}
+        if _storage._feedback != other_storage._feedback {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if unknownFields != other.unknownFields {return false}
     return true
   }

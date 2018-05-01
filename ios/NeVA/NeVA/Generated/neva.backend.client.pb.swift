@@ -308,61 +308,6 @@ internal class Neva_Backend_BackendSuggestionItemPropositionCall {
   }
 }
 
-/// GetSuggestion (Unary)
-internal class Neva_Backend_BackendGetSuggestionCall {
-  private var call : Call
-
-  /// Create a call.
-  fileprivate init(_ channel: Channel) {
-    self.call = channel.makeCall("/neva.backend.Backend/GetSuggestion")
-  }
-
-  /// Run the call. Blocks until the reply is received.
-  fileprivate func run(request: Neva_Backend_GetSuggestionRequest,
-                       metadata: Metadata) throws -> Neva_Backend_GetSuggestionReply {
-    let sem = DispatchSemaphore(value: 0)
-    var returnCallResult : CallResult!
-    var returnResponse : Neva_Backend_GetSuggestionReply?
-    _ = try start(request:request, metadata:metadata) {response, callResult in
-      returnResponse = response
-      returnCallResult = callResult
-      sem.signal()
-    }
-    _ = sem.wait(timeout: DispatchTime.distantFuture)
-    if let returnResponse = returnResponse {
-      return returnResponse
-    } else {
-      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
-    }
-  }
-
-  /// Start the call. Nonblocking.
-  fileprivate func start(request: Neva_Backend_GetSuggestionRequest,
-                         metadata: Metadata,
-                         completion: @escaping (Neva_Backend_GetSuggestionReply?, CallResult)->())
-    throws -> Neva_Backend_BackendGetSuggestionCall {
-
-      let requestData = try request.serializedData()
-      try call.start(.unary,
-                     metadata:metadata,
-                     message:requestData)
-      {(callResult) in
-        if let responseData = callResult.resultData,
-          let response = try? Neva_Backend_GetSuggestionReply(serializedData:responseData) {
-          completion(response, callResult)
-        } else {
-          completion(nil, callResult)
-        }
-      }
-      return self
-  }
-
-  /// Cancel the call.
-  internal func cancel() {
-    call.cancel()
-  }
-}
-
 /// GetMultipleSuggestions (Unary)
 internal class Neva_Backend_BackendGetMultipleSuggestionsCall {
   private var call : Call
@@ -858,6 +803,171 @@ internal class Neva_Backend_BackendGetTagsCall {
   }
 }
 
+/// GetColdStartCompletionStatus (Unary)
+internal class Neva_Backend_BackendGetColdStartCompletionStatusCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/GetColdStartCompletionStatus")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_GetColdStartCompletionStatusRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GetColdStartCompletionStatusReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GetColdStartCompletionStatusReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_GetColdStartCompletionStatusRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GetColdStartCompletionStatusReply?, CallResult)->())
+    throws -> Neva_Backend_BackendGetColdStartCompletionStatusCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GetColdStartCompletionStatusReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
+/// GetColdStartItemList (Unary)
+internal class Neva_Backend_BackendGetColdStartItemListCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/GetColdStartItemList")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_GetColdStartItemListRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GetColdStartItemListReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GetColdStartItemListReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_GetColdStartItemListRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GetColdStartItemListReply?, CallResult)->())
+    throws -> Neva_Backend_BackendGetColdStartItemListCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GetColdStartItemListReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
+/// RecordColdStartChoice (Unary)
+internal class Neva_Backend_BackendRecordColdStartChoiceCall {
+  private var call : Call
+
+  /// Create a call.
+  fileprivate init(_ channel: Channel) {
+    self.call = channel.makeCall("/neva.backend.Backend/RecordColdStartChoice")
+  }
+
+  /// Run the call. Blocks until the reply is received.
+  fileprivate func run(request: Neva_Backend_RecordColdStartChoiceRequest,
+                       metadata: Metadata) throws -> Neva_Backend_GenericReply {
+    let sem = DispatchSemaphore(value: 0)
+    var returnCallResult : CallResult!
+    var returnResponse : Neva_Backend_GenericReply?
+    _ = try start(request:request, metadata:metadata) {response, callResult in
+      returnResponse = response
+      returnCallResult = callResult
+      sem.signal()
+    }
+    _ = sem.wait(timeout: DispatchTime.distantFuture)
+    if let returnResponse = returnResponse {
+      return returnResponse
+    } else {
+      throw Neva_Backend_BackendClientError.error(c: returnCallResult)
+    }
+  }
+
+  /// Start the call. Nonblocking.
+  fileprivate func start(request: Neva_Backend_RecordColdStartChoiceRequest,
+                         metadata: Metadata,
+                         completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws -> Neva_Backend_BackendRecordColdStartChoiceCall {
+
+      let requestData = try request.serializedData()
+      try call.start(.unary,
+                     metadata:metadata,
+                     message:requestData)
+      {(callResult) in
+        if let responseData = callResult.resultData,
+          let response = try? Neva_Backend_GenericReply(serializedData:responseData) {
+          completion(response, callResult)
+        } else {
+          completion(nil, callResult)
+        }
+      }
+      return self
+  }
+
+  /// Cancel the call.
+  internal func cancel() {
+    call.cancel()
+  }
+}
+
 /// Call methods of this class to make API calls.
 internal class Neva_Backend_BackendService {
   private var channel: Channel
@@ -963,21 +1073,6 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendSuggestionItemPropositionCall {
       return try Neva_Backend_BackendSuggestionItemPropositionCall(channel).start(request:request,
-                                                 metadata:metadata,
-                                                 completion:completion)
-  }
-  /// Synchronous. Unary.
-  internal func getsuggestion(_ request: Neva_Backend_GetSuggestionRequest)
-    throws
-    -> Neva_Backend_GetSuggestionReply {
-      return try Neva_Backend_BackendGetSuggestionCall(channel).run(request:request, metadata:metadata)
-  }
-  /// Asynchronous. Unary.
-  internal func getsuggestion(_ request: Neva_Backend_GetSuggestionRequest,
-                  completion: @escaping (Neva_Backend_GetSuggestionReply?, CallResult)->())
-    throws
-    -> Neva_Backend_BackendGetSuggestionCall {
-      return try Neva_Backend_BackendGetSuggestionCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }
@@ -1113,6 +1208,51 @@ internal class Neva_Backend_BackendService {
     throws
     -> Neva_Backend_BackendGetTagsCall {
       return try Neva_Backend_BackendGetTagsCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func getcoldstartcompletionstatus(_ request: Neva_Backend_GetColdStartCompletionStatusRequest)
+    throws
+    -> Neva_Backend_GetColdStartCompletionStatusReply {
+      return try Neva_Backend_BackendGetColdStartCompletionStatusCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func getcoldstartcompletionstatus(_ request: Neva_Backend_GetColdStartCompletionStatusRequest,
+                  completion: @escaping (Neva_Backend_GetColdStartCompletionStatusReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendGetColdStartCompletionStatusCall {
+      return try Neva_Backend_BackendGetColdStartCompletionStatusCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func getcoldstartitemlist(_ request: Neva_Backend_GetColdStartItemListRequest)
+    throws
+    -> Neva_Backend_GetColdStartItemListReply {
+      return try Neva_Backend_BackendGetColdStartItemListCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func getcoldstartitemlist(_ request: Neva_Backend_GetColdStartItemListRequest,
+                  completion: @escaping (Neva_Backend_GetColdStartItemListReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendGetColdStartItemListCall {
+      return try Neva_Backend_BackendGetColdStartItemListCall(channel).start(request:request,
+                                                 metadata:metadata,
+                                                 completion:completion)
+  }
+  /// Synchronous. Unary.
+  internal func recordcoldstartchoice(_ request: Neva_Backend_RecordColdStartChoiceRequest)
+    throws
+    -> Neva_Backend_GenericReply {
+      return try Neva_Backend_BackendRecordColdStartChoiceCall(channel).run(request:request, metadata:metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func recordcoldstartchoice(_ request: Neva_Backend_RecordColdStartChoiceRequest,
+                  completion: @escaping (Neva_Backend_GenericReply?, CallResult)->())
+    throws
+    -> Neva_Backend_BackendRecordColdStartChoiceCall {
+      return try Neva_Backend_BackendRecordColdStartChoiceCall(channel).start(request:request,
                                                  metadata:metadata,
                                                  completion:completion)
   }

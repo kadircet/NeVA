@@ -19,8 +19,10 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-struct Neva_Backend_LinkedAccount: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".LinkedAccount"
+struct Neva_Backend_LinkedAccount {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var token: String = String()
 
@@ -57,38 +59,12 @@ struct Neva_Backend_LinkedAccount: SwiftProtobuf.Message {
   }
 
   init() {}
-
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.token)
-      case 2: try decoder.decodeSingularEnumField(value: &self.socialMediaType)
-      default: break
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.token.isEmpty {
-      try visitor.visitSingularStringField(value: self.token, fieldNumber: 1)
-    }
-    if self.socialMediaType != .invalidSocialMediaType {
-      try visitor.visitSingularEnumField(value: self.socialMediaType, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
 }
 
-struct Neva_Backend_User: SwiftProtobuf.Message {
-  static let protoMessageName: String = _protobuf_package + ".User"
+struct Neva_Backend_User {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
 
   var userID: UInt32 {
     get {return _storage._userID}
@@ -220,75 +196,6 @@ struct Neva_Backend_User: SwiftProtobuf.Message {
 
   init() {}
 
-  /// Used by the decoding initializers in the SwiftProtobuf library, not generally
-  /// used directly. `init(serializedData:)`, `init(jsonUTF8Data:)`, and other decoding
-  /// initializers are defined in the SwiftProtobuf library. See the Message and
-  /// Message+*Additions` files.
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularUInt32Field(value: &_storage._userID)
-        case 2: try decoder.decodeSingularStringField(value: &_storage._email)
-        case 3: try decoder.decodeSingularStringField(value: &_storage._password)
-        case 4: try decoder.decodeSingularStringField(value: &_storage._name)
-        case 5: try decoder.decodeSingularMessageField(value: &_storage._dateOfBirth)
-        case 6: try decoder.decodeSingularEnumField(value: &_storage._gender)
-        case 7: try decoder.decodeSingularFloatField(value: &_storage._weight)
-        case 8: try decoder.decodeSingularStringField(value: &_storage._photo)
-        case 9: try decoder.decodeSingularEnumField(value: &_storage._status)
-        case 10: try decoder.decodeSingularMessageField(value: &_storage._registerDate)
-        case 11: try decoder.decodeRepeatedMessageField(value: &_storage._linkedAccounts)
-        default: break
-        }
-      }
-    }
-  }
-
-  /// Used by the encoding methods of the SwiftProtobuf library, not generally
-  /// used directly. `Message.serializedData()`, `Message.jsonUTF8Data()`, and
-  /// other serializer methods are defined in the SwiftProtobuf library. See the
-  /// `Message` and `Message+*Additions` files.
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if _storage._userID != 0 {
-        try visitor.visitSingularUInt32Field(value: _storage._userID, fieldNumber: 1)
-      }
-      if !_storage._email.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._email, fieldNumber: 2)
-      }
-      if !_storage._password.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._password, fieldNumber: 3)
-      }
-      if !_storage._name.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._name, fieldNumber: 4)
-      }
-      if let v = _storage._dateOfBirth {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-      }
-      if _storage._gender != .invalidGender {
-        try visitor.visitSingularEnumField(value: _storage._gender, fieldNumber: 6)
-      }
-      if _storage._weight != 0 {
-        try visitor.visitSingularFloatField(value: _storage._weight, fieldNumber: 7)
-      }
-      if !_storage._photo.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._photo, fieldNumber: 8)
-      }
-      if _storage._status != .invalidStatus {
-        try visitor.visitSingularEnumField(value: _storage._status, fieldNumber: 9)
-      }
-      if let v = _storage._registerDate {
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-      }
-      if !_storage._linkedAccounts.isEmpty {
-        try visitor.visitRepeatedMessageField(value: _storage._linkedAccounts, fieldNumber: 11)
-      }
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
@@ -296,11 +203,32 @@ struct Neva_Backend_User: SwiftProtobuf.Message {
 
 fileprivate let _protobuf_package = "neva.backend"
 
-extension Neva_Backend_LinkedAccount: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_LinkedAccount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".LinkedAccount"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "token"),
     2: .standard(proto: "social_media_type"),
   ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.token)
+      case 2: try decoder.decodeSingularEnumField(value: &self.socialMediaType)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.token.isEmpty {
+      try visitor.visitSingularStringField(value: self.token, fieldNumber: 1)
+    }
+    if self.socialMediaType != .invalidSocialMediaType {
+      try visitor.visitSingularEnumField(value: self.socialMediaType, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_LinkedAccount) -> Bool {
     if self.token != other.token {return false}
@@ -317,7 +245,8 @@ extension Neva_Backend_LinkedAccount.SocialMediaType: SwiftProtobuf._ProtoNamePr
   ]
 }
 
-extension Neva_Backend_User: SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Neva_Backend_User: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".User"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "user_id"),
     2: .same(proto: "email"),
@@ -369,6 +298,67 @@ extension Neva_Backend_User: SwiftProtobuf._MessageImplementationBase, SwiftProt
       _storage = _StorageClass(copying: _storage)
     }
     return _storage
+  }
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        switch fieldNumber {
+        case 1: try decoder.decodeSingularUInt32Field(value: &_storage._userID)
+        case 2: try decoder.decodeSingularStringField(value: &_storage._email)
+        case 3: try decoder.decodeSingularStringField(value: &_storage._password)
+        case 4: try decoder.decodeSingularStringField(value: &_storage._name)
+        case 5: try decoder.decodeSingularMessageField(value: &_storage._dateOfBirth)
+        case 6: try decoder.decodeSingularEnumField(value: &_storage._gender)
+        case 7: try decoder.decodeSingularFloatField(value: &_storage._weight)
+        case 8: try decoder.decodeSingularStringField(value: &_storage._photo)
+        case 9: try decoder.decodeSingularEnumField(value: &_storage._status)
+        case 10: try decoder.decodeSingularMessageField(value: &_storage._registerDate)
+        case 11: try decoder.decodeRepeatedMessageField(value: &_storage._linkedAccounts)
+        default: break
+        }
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if _storage._userID != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._userID, fieldNumber: 1)
+      }
+      if !_storage._email.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._email, fieldNumber: 2)
+      }
+      if !_storage._password.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._password, fieldNumber: 3)
+      }
+      if !_storage._name.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._name, fieldNumber: 4)
+      }
+      if let v = _storage._dateOfBirth {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      }
+      if _storage._gender != .invalidGender {
+        try visitor.visitSingularEnumField(value: _storage._gender, fieldNumber: 6)
+      }
+      if _storage._weight != 0 {
+        try visitor.visitSingularFloatField(value: _storage._weight, fieldNumber: 7)
+      }
+      if !_storage._photo.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._photo, fieldNumber: 8)
+      }
+      if _storage._status != .invalidStatus {
+        try visitor.visitSingularEnumField(value: _storage._status, fieldNumber: 9)
+      }
+      if let v = _storage._registerDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      }
+      if !_storage._linkedAccounts.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._linkedAccounts, fieldNumber: 11)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
   }
 
   func _protobuf_generated_isEqualTo(other: Neva_Backend_User) -> Bool {

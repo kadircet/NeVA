@@ -38,7 +38,6 @@ internal protocol Neva_Backend_BackendProvider {
   func updateuser(request : Neva_Backend_UpdateUserRequest, session : Neva_Backend_BackendUpdateUserSession) throws -> Neva_Backend_GenericReply
   func getuser(request : Neva_Backend_GetUserRequest, session : Neva_Backend_BackendGetUserSession) throws -> Neva_Backend_GetUserReply
   func suggestionitemproposition(request : Neva_Backend_SuggestionItemPropositionRequest, session : Neva_Backend_BackendSuggestionItemPropositionSession) throws -> Neva_Backend_GenericReply
-  func getsuggestion(request : Neva_Backend_GetSuggestionRequest, session : Neva_Backend_BackendGetSuggestionSession) throws -> Neva_Backend_GetSuggestionReply
   func getmultiplesuggestions(request : Neva_Backend_GetMultipleSuggestionsRequest, session : Neva_Backend_BackendGetMultipleSuggestionsSession) throws -> Neva_Backend_GetMultipleSuggestionsReply
   func tagproposition(request : Neva_Backend_TagPropositionRequest, session : Neva_Backend_BackendTagPropositionSession) throws -> Neva_Backend_GenericReply
   func tagvalueproposition(request : Neva_Backend_TagValuePropositionRequest, session : Neva_Backend_BackendTagValuePropositionSession) throws -> Neva_Backend_GenericReply
@@ -48,6 +47,9 @@ internal protocol Neva_Backend_BackendProvider {
   func checktoken(request : Neva_Backend_CheckTokenRequest, session : Neva_Backend_BackendCheckTokenSession) throws -> Neva_Backend_GenericReply
   func recordfeedback(request : Neva_Backend_RecordFeedbackRequest, session : Neva_Backend_BackendRecordFeedbackSession) throws -> Neva_Backend_GenericReply
   func gettags(request : Neva_Backend_GetTagsRequest, session : Neva_Backend_BackendGetTagsSession) throws -> Neva_Backend_GetTagsReply
+  func getcoldstartcompletionstatus(request : Neva_Backend_GetColdStartCompletionStatusRequest, session : Neva_Backend_BackendGetColdStartCompletionStatusSession) throws -> Neva_Backend_GetColdStartCompletionStatusReply
+  func getcoldstartitemlist(request : Neva_Backend_GetColdStartItemListRequest, session : Neva_Backend_BackendGetColdStartItemListSession) throws -> Neva_Backend_GetColdStartItemListReply
+  func recordcoldstartchoice(request : Neva_Backend_RecordColdStartChoiceRequest, session : Neva_Backend_BackendRecordColdStartChoiceSession) throws -> Neva_Backend_GenericReply
 }
 
 /// Common properties available in each service session.
@@ -181,31 +183,6 @@ internal class Neva_Backend_BackendSuggestionItemPropositionSession : Neva_Backe
       if let requestData = requestData {
         let requestMessage = try Neva_Backend_SuggestionItemPropositionRequest(serializedData:requestData)
         let replyMessage = try self.provider.suggestionitemproposition(request:requestMessage, session: self)
-        try self.handler.sendResponse(message:replyMessage.serializedData(),
-                                      statusCode:self.statusCode,
-                                      statusMessage:self.statusMessage,
-                                      trailingMetadata:self.trailingMetadata)
-      }
-    }
-  }
-}
-
-// GetSuggestion (Unary)
-internal class Neva_Backend_BackendGetSuggestionSession : Neva_Backend_BackendSession {
-  private var provider : Neva_Backend_BackendProvider
-
-  /// Create a session.
-  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
-    self.provider = provider
-    super.init(handler:handler)
-  }
-
-  /// Run the session. Internal.
-  fileprivate func run(queue:DispatchQueue) throws {
-    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
-      if let requestData = requestData {
-        let requestMessage = try Neva_Backend_GetSuggestionRequest(serializedData:requestData)
-        let replyMessage = try self.provider.getsuggestion(request:requestMessage, session: self)
         try self.handler.sendResponse(message:replyMessage.serializedData(),
                                       statusCode:self.statusCode,
                                       statusMessage:self.statusMessage,
@@ -440,6 +417,81 @@ internal class Neva_Backend_BackendGetTagsSession : Neva_Backend_BackendSession 
   }
 }
 
+// GetColdStartCompletionStatus (Unary)
+internal class Neva_Backend_BackendGetColdStartCompletionStatusSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_GetColdStartCompletionStatusRequest(serializedData:requestData)
+        let replyMessage = try self.provider.getcoldstartcompletionstatus(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// GetColdStartItemList (Unary)
+internal class Neva_Backend_BackendGetColdStartItemListSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_GetColdStartItemListRequest(serializedData:requestData)
+        let replyMessage = try self.provider.getcoldstartitemlist(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
+// RecordColdStartChoice (Unary)
+internal class Neva_Backend_BackendRecordColdStartChoiceSession : Neva_Backend_BackendSession {
+  private var provider : Neva_Backend_BackendProvider
+
+  /// Create a session.
+  fileprivate init(handler:gRPC.Handler, provider: Neva_Backend_BackendProvider) {
+    self.provider = provider
+    super.init(handler:handler)
+  }
+
+  /// Run the session. Internal.
+  fileprivate func run(queue:DispatchQueue) throws {
+    try handler.receiveMessage(initialMetadata:initialMetadata) {(requestData) in
+      if let requestData = requestData {
+        let requestMessage = try Neva_Backend_RecordColdStartChoiceRequest(serializedData:requestData)
+        let replyMessage = try self.provider.recordcoldstartchoice(request:requestMessage, session: self)
+        try self.handler.sendResponse(message:replyMessage.serializedData(),
+                                      statusCode:self.statusCode,
+                                      statusMessage:self.statusMessage,
+                                      trailingMetadata:self.trailingMetadata)
+      }
+    }
+  }
+}
+
 
 /// Main server for generated service
 internal class Neva_Backend_BackendServer {
@@ -496,8 +548,6 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendGetUserSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/SuggestionItemProposition":
           try Neva_Backend_BackendSuggestionItemPropositionSession(handler:handler, provider:provider).run(queue:queue)
-        case "/neva.backend.Backend/GetSuggestion":
-          try Neva_Backend_BackendGetSuggestionSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/GetMultipleSuggestions":
           try Neva_Backend_BackendGetMultipleSuggestionsSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/TagProposition":
@@ -516,6 +566,12 @@ internal class Neva_Backend_BackendServer {
           try Neva_Backend_BackendRecordFeedbackSession(handler:handler, provider:provider).run(queue:queue)
         case "/neva.backend.Backend/GetTags":
           try Neva_Backend_BackendGetTagsSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/GetColdStartCompletionStatus":
+          try Neva_Backend_BackendGetColdStartCompletionStatusSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/GetColdStartItemList":
+          try Neva_Backend_BackendGetColdStartItemListSession(handler:handler, provider:provider).run(queue:queue)
+        case "/neva.backend.Backend/RecordColdStartChoice":
+          try Neva_Backend_BackendRecordColdStartChoiceSession(handler:handler, provider:provider).run(queue:queue)
         default:
           break // handle unknown requests
         }
