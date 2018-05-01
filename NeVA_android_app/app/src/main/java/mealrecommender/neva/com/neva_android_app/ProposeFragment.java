@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
@@ -42,6 +44,13 @@ public class ProposeFragment extends Fragment {
   Button fragment_proposal_button;
   Button fragment_tag_proposal_button;
 
+
+  TabLayout tabLayout;
+  LinearLayout mealNameLayout;
+  LinearLayout tagNameLayout;
+  LinearLayout tagForFoodLayout;
+
+
   NiceAutoCompleteTextView meal_for_tag_field;
   NiceAutoCompleteTextView tag_of_meal_field;
   Button propose_tag_for_meal;
@@ -68,6 +77,11 @@ public class ProposeFragment extends Fragment {
     loginToken = NevaLoginManager.getInstance().getByteStringToken();
     db = mainActivity.db;
     connectionManager = NevaConnectionManager.getInstance();
+
+    tabLayout = view.findViewById(R.id.tabLayout);
+    mealNameLayout = view.findViewById(R.id.mealNameLayout);
+    tagNameLayout = view.findViewById(R.id.tagNameLayout);
+    tagForFoodLayout = view.findViewById(R.id.tagForFoodLayout);
 
     fragment_proposal_field = view.findViewById(R.id.fragment_proposal_field);
     fragment_tag_proposal_field = view.findViewById(R.id.fragment_tag_proposal_field);
@@ -217,6 +231,41 @@ public class ProposeFragment extends Fragment {
       }
     });
 
+    mealNameLayout.setVisibility(View.VISIBLE);
+    tagNameLayout.setVisibility(View.INVISIBLE);
+    tagForFoodLayout.setVisibility(View.INVISIBLE);
+
+    tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+      @Override            public void onTabSelected(TabLayout.Tab tab) {
+
+        Log.e("tab ","onTabSelected ===>"+tab.getPosition());
+
+        if(tab.getPosition()==0) {
+          mealNameLayout.setVisibility(View.VISIBLE);
+        }
+        else if(tab.getPosition()==1) {
+          tagNameLayout.setVisibility(View.VISIBLE);
+        }
+        else if(tab.getPosition()==2) {
+          tagForFoodLayout.setVisibility(View.VISIBLE);
+        }
+      }
+      @Override            public void onTabUnselected(TabLayout.Tab tab) {
+        Log.e("tab ","onTabUnselected ===>"+tab.getPosition());
+        if(tab.getPosition()==0) {
+          mealNameLayout.setVisibility(View.INVISIBLE);
+        }
+        else if(tab.getPosition()==1) {
+          tagNameLayout.setVisibility(View.INVISIBLE);
+        }
+        else if(tab.getPosition()==2) {
+          tagForFoodLayout.setVisibility(View.INVISIBLE);
+        }
+      }
+      @Override            public void onTabReselected(TabLayout.Tab tab) {
+        Log.e("tab ","onTabReselected ===>"+tab.getPosition());
+      }
+    });
   }
 
   public String[] getMealNames() {

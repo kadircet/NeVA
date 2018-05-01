@@ -7,9 +7,9 @@
     android:theme="@style/AppTheme">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
 
         <LinearLayout
           android:id="@+id/linearLayout4"
@@ -48,37 +48,41 @@
 
         <LinearLayout
           android:id="@+id/linearLayout"
-          android:layout_width="0dp"
+          android:layout_width="236dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="88dp"
+          android:layout_marginTop="128dp"
           android:layout_marginStart="64dp"
           android:layout_marginEnd="64dp"
           android:layout_gravity="center"
           android:paddingLeft="10dp"
           android:paddingRight="10dp"
+          android:orientation="vertical"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
             <Button
-              android:id="@+id/dislike_button"
-              android:layout_width="wrap_content"
+              android:id="@+id/like_button"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:layout_margin="10dp"
+              android:layout_gravity="center"
               android:background="@drawable/rounded_button"
-              android:text="Dislike"
+              android:text="MAYBE, GIVE ME ANOTHER"
               android:textColor="@color/textSecondaryColor"/>
             <Button
-              android:id="@+id/like_button"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
+              android:id="@+id/dislike_button"
+              android:layout_width="124dp"
+              android:layout_height="38dp"
               android:layout_weight="1"
               android:layout_margin="10dp"
+              android:layout_gravity="center"
               android:background="@drawable/rounded_button"
-              android:text="Like"
+              android:elevation="0dp"
+              android:text="I DON'T WANT IT"
               android:textColor="@color/textSecondaryColor"/>
         </LinearLayout>
-Lhi
+        Lhi
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
