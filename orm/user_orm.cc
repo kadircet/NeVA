@@ -22,7 +22,7 @@ constexpr const uint64_t kVerficationTokenExpireTime = 24 * 60 * 60;
 Status UserOrm::GetUserById(const uint32_t user_id, User* user) {
   mysqlpp::ScopedConnection conn(*conn_pool_);
   mysqlpp::Query query =
-      conn->query("SELECT `email`, `status` FROM `user` WHERE `id`=:%0");
+      conn->query("SELECT `email`, `status` FROM `user` WHERE `id`=%0");
   query.parse();
 
   const mysqlpp::StoreQueryResult res = query.store(user_id);
@@ -41,7 +41,7 @@ Status UserOrm::GetUserById(const uint32_t user_id, User* user) {
 Status UserOrm::GetUserByEmail(const std::string& email, User* user) {
   mysqlpp::ScopedConnection conn(*conn_pool_);
   mysqlpp::Query query =
-      conn->query("SELECT `id`, `status` FROM `user` WHERE `email`=:%0q");
+      conn->query("SELECT `id`, `status` FROM `user` WHERE `email`=%0q");
   query.parse();
 
   const mysqlpp::StoreQueryResult res = query.store(email);
@@ -230,6 +230,7 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
     query.execute(user.date_of_birth().seconds(), user_id);
     query.reset();
   }
+  LOG(INFO) << "date";
   if (!user.name().empty()) {
     query << "UPDATE `user_info` "
              "SET `name`=%0q "
@@ -238,6 +239,7 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
     query.execute(user.name(), user_id);
     query.reset();
   }
+  LOG(INFO)  << "name";
   if (user.gender() != 0) {
     query << "UPDATE `user_info` "
              "SET `gender`=%0 "
@@ -246,6 +248,7 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
     query.execute(user.gender(), user_id);
     query.reset();
   }
+  LOG(INFO)  << "gender";
   if (user.weight() != 0) {
     query << "UPDATE `user_info` "
              "SET `weight`=%0 "
@@ -254,6 +257,7 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
     query.execute(user.weight(), user_id);
     query.reset();
   }
+  LOG(INFO)  << "weight";
   if (!user.photo().empty()) {
     query << "UPDATE `user_info` "
              "SET `photo`=%0q "
@@ -262,9 +266,11 @@ Status UserOrm::UpdateUserData(const int user_id, const User& user) {
     query.execute(user.photo(), user_id);
     query.reset();
   }
+  LOG(INFO)  << "photo";
 
   VLOG(1) << "User data for user with id: " << user_id
           << " has been successfully updated.";
+  LOG(INFO) << "ok.";
   return Status::OK;
 }
 
