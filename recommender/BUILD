@@ -38,3 +38,23 @@ cc_library(
         "@glog//:glog",
     ],
 )
+
+cc_test(
+    name = "mysql_cache_fetcher_test",
+    srcs = ["mysql_cache_fetcher_test.cc"],
+    data = [
+        ":mysql_cache_fetcher_test.sql",
+        "//tables:recommender.sql",
+        "//tables:suggestions.sql",
+        "//tables:user.sql",
+    ],
+    deps = [
+        ":mysql_cache_fetcher",
+        "//orm/testing:mock_orm_fixture",
+        "//protos:suggestion_proto",
+        "@com_google_protobuf//:protobuf",
+        "@googletest//:gtest_main",
+    ],
+)
+
+exports_files(glob(["*_test.sql"]))
