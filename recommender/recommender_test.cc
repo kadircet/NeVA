@@ -3,88 +3,99 @@
 #include "glog/logging.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "mysql_cache_fetcher.h"
+#include "orm/testing/mock_orm_fixture.h"
 
 namespace neva {
 namespace backend {
 namespace recommender {
 namespace {
 
-using ::testing::Contains;
-using ::testing::Pointwise;
-using ::testing::get;
 using google::protobuf::TextFormat;
+using neva::backend::orm::testing::MockOrmFixture;
 
-/*TEST(GetSuggestion, SanityTest) {
-  constexpr const char* kUserHistory = R"(
-    history {
-      suggestee_id: 1
-    }
-    history {
-      suggestee_id: 1
-    }
-    history {
-      suggestee_id: 1
-    }
-    history {
-      suggestee_id: 1
-    })";
+constexpr const uint32_t kUserId = 1;
+constexpr const int32_t kLeastSuggestionSize = 10;
+
+class RecommenderFixture : public MockOrmFixture {
+ public:
+  RecommenderFixture() : cache_fetcher_(new MySQLCacheFetcher(conn_pool_)) {}
+
+ protected:
+  std::unique_ptr<CacheFetcer> cache_fetcher_;
+};
+
+TEST_F(RecommenderFixture, SanityTest) {
   constexpr const char* kSuggestionList = R"(
     suggestion_list {
       suggestee_id: 1
-      name: "test"
-    }
-  )";
-  constexpr const uint32_t kExpectedSuggesteeId = 1;
-  constexpr const char* kExpectedSuggesteeName = "test";
-
-  UserHistory user_history;
-  TextFormat::ParseFromString(kUserHistory, &user_history);
-  SuggestionList suggestion_list;
-  TextFormat::ParseFromString(kSuggestionList, &suggestion_list);
-
-  const Suggestion suggestion = GetSuggestion(user_history, suggestion_list);
-  EXPECT_EQ(suggestion.suggestee_id(), kExpectedSuggesteeId);
-  EXPECT_EQ(suggestion.name(), kExpectedSuggesteeName);
-}
-
-MATCHER_P(SuggestionEq, elem, "Checks equality between Suggestion items.") {
-  return arg.suggestee_id() == elem.suggestee_id() && arg.name() == elem.name();
-}
-
-TEST(GetMultipleSuggestions, SanityTest) {
-  constexpr const char* kUserHistory = R"(
-    history {
-      suggestee_id: 1
-    }
-    history {
-      suggestee_id: 1
-    })";
-  constexpr const char* kSuggestionList = R"(
-    suggestion_list {
-      suggestee_id: 1
-      name: "test1"
     }
     suggestion_list {
       suggestee_id: 2
-      name: "test2"
+    }
+    suggestion_list {
+      suggestee_id: 3
+    }
+    suggestion_list {
+      suggestee_id: 4
+    }
+    suggestion_list {
+      suggestee_id: 5
+    }
+    suggestion_list {
+      suggestee_id: 6
+    }
+    suggestion_list {
+      suggestee_id: 7
+    }
+    suggestion_list {
+      suggestee_id: 8
+    }
+    suggestion_list {
+      suggestee_id: 9
+    }
+    suggestion_list {
+      suggestee_id: 10
+    }
+    suggestion_list {
+      suggestee_id: 11
+    }
+    suggestion_list {
+      suggestee_id: 12
+    }
+    suggestion_list {
+      suggestee_id: 13
+    }
+    suggestion_list {
+      suggestee_id: 14
+    }
+    suggestion_list {
+      suggestee_id: 15
+    }
+    suggestion_list {
+      suggestee_id: 16
+    }
+    suggestion_list {
+      suggestee_id: 17
     }
   )";
+  SuggestionList suggestion_list;
+  TextFormat::ParseFromString(kSuggestionList, &suggestion_list);
 
-  constexpr const uint32_t kExpectedSuggesteeCount = 2;
+  const SuggestionList recommendation =
+      GetMultipleSuggestions(kUserId, suggestion_list, cache_fetcher_.get());
 
-  UserHistory user_history;
-  TextFormat::ParseFromString(kUserHistory, &user_history);
-  SuggestionList all_suggestees;
-  TextFormat::ParseFromString(kSuggestionList, &all_suggestees);
+  // Check for minimum list size.
+  EXPECT_GE(recommendation.suggestion_list_size(), kLeastSuggestionSize);
 
-  const SuggestionList suggestion_list =
-      GetMultipleSuggestions(user_history, all_suggestees);
-  EXPECT_EQ(suggestion_list.suggestion_list_size(), kExpectedSuggesteeCount);
-  EXPECT_THAT(suggestion_list.suggestion_list(),
-              Contains(SuggestionEq(all_suggestees.suggestion_list(0))));
-  EXPECT_THAT(suggestion_list.suggestion_list(),
-              Contains(SuggestionEq(all_suggestees.suggestion_list(1))));
-}*/
+  // Make sure all elements are unique.
+  std::unordered_set<uint32_t> suggestee_ids;
+  for (const Suggestion& suggestion : recommendation.suggestion_list()) {
+    EXPECT_EQ(suggestee_ids.find(suggestion.suggestee_id()),
+              suggestee_ids.end());
+    suggestee_ids.insert(suggestion.suggestee_id());
+  }
+}
 
 }  // namespace
 }  // namespace recommender
