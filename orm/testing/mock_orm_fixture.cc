@@ -16,6 +16,7 @@ MockOrmFixture::MockOrmFixture() {
   conn_pool_ =
       std::make_shared<NevaConnectionPool>("", "localhost", "neva_test", "");
   mysqlpp::ScopedConnection conn(*conn_pool_);
+  conn->drop_db(kTestDbName);
   CHECK(!conn->select_db(kTestDbName))
       << "Test databas already exists, last run might not be clean. Check "
          "Manually for artifacts and drop the database!";
