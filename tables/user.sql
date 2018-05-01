@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `user_verification` (
  */
 CREATE TABLE IF NOT EXISTS `user_needs_update` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `user_id` INTEGER NOT NULL,
+  `user_id` INTEGER NOT NULL UNIQUE,
   `needs_update` TINYINT UNSIGNED NOT NULL,
   FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
   PRIMARY KEY(`id`)
