@@ -153,6 +153,7 @@ class BackendServiceImpl final : public Backend::Service {
     int choice_id;
     RETURN_IF_ERROR(user_history_orm_->InsertChoice(user_id, request->choice(),
                                                     &choice_id));
+    RETURN_IF_ERROR(user_orm_->UserNeedsUpdate(user_id));
     reply->set_choice_id(choice_id);
 
     return Status::OK;
@@ -180,7 +181,10 @@ class BackendServiceImpl final : public Backend::Service {
                         GenericReply* reply) override {
     int user_id;
     RETURN_IF_ERROR(user_orm_->CheckToken(request->token(), &user_id));
-    return user_history_orm_->RecordFeedback(user_id, request->user_feedback());
+    RETURN_IF_ERROR(
+        user_history_orm_->RecordFeedback(user_id, request->user_feedback()));
+    RETURN_IF_ERROR(user_orm_->UserNeedsUpdate(user_id));
+    return Status::OK;
   }
 
   Status GetTags(ServerContext* context, const GetTagsRequest* request,
