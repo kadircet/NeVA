@@ -1,7 +1,7 @@
 #include "orm/suggestion_orm.h"
 #include "glog/logging.h"
-#include "recommender/recommender.h"
 #include "orm/utils.h"
+#include "recommender/recommender.h"
 
 namespace neva {
 namespace backend {

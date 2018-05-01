@@ -1,7 +1,7 @@
 #include "user_history_orm.h"
-#include "util/hmac.h"
 #include "glog/logging.h"
 #include "orm/utils.h"
+#include "util/hmac.h"
 namespace neva {
 namespace backend {
 namespace orm {
@@ -106,10 +106,9 @@ Status UserHistoryOrm::FetchColdStartCompletionStatus(const uint32_t user_id,
   return Status::OK;
 }
 Status UserHistoryOrm::FetchColdStartItemList(
-  const uint32_t user_id,
-  const Suggestion::SuggestionCategory coldstart_item_category,
-  SuggestionList* coldstart_item_list) {
-
+    const uint32_t user_id,
+    const Suggestion::SuggestionCategory coldstart_item_category,
+    SuggestionList* coldstart_item_list) {
   mysqlpp::ScopedConnection conn(*conn_pool_);
 
   SuggestionList all_available_items;
@@ -117,7 +116,8 @@ Status UserHistoryOrm::FetchColdStartItemList(
     mysqlpp::Query query = conn->query(
         "SELECT `id`, `name` FROM `suggestee` WHERE "
         "`category_id`=%0 AND `id` NOT IN("
-        " SELECT `feedback_id` FROM `user_coldstart_history` WHERE `user_id`=%1)");
+        " SELECT `feedback_id` FROM `user_coldstart_history` WHERE "
+        "`user_id`=%1)");
     query.parse();
 
     const mysqlpp::StoreQueryResult res =
@@ -141,7 +141,8 @@ Status UserHistoryOrm::FetchColdStartItemList(
   uint32_t recorded_items_count = 0;
   {
     mysqlpp::Query query = conn->query(
-        "SELECT `feedback_id` FROM `user_coldstart_history` WHERE `user_id`=%0");
+        "SELECT `feedback_id` FROM `user_coldstart_history` WHERE "
+        "`user_id`=%0");
     query.parse();
 
     const mysqlpp::StoreQueryResult res = query.store(user_id);
@@ -150,13 +151,15 @@ Status UserHistoryOrm::FetchColdStartItemList(
 
   uint32_t elements_to_insert = kMaximumItemNumber - recorded_items_count;
   std::unordered_set<uint32_t> added_ids;
-  const size_t all_available_items_size = all_available_items.suggestion_list_size();
+  const size_t all_available_items_size =
+      all_available_items.suggestion_list_size();
   while (elements_to_insert > 0) {
     const uint32_t random_id = util::GetRandom(all_available_items_size);
     const uint32_t suggestee_id =
         all_available_items.suggestion_list(random_id).suggestee_id();
     if (added_ids.find(suggestee_id) != added_ids.end()) continue;
-    *coldstart_item_list->add_suggestion_list() = all_available_items.suggestion_list(random_id);
+    *coldstart_item_list->add_suggestion_list() =
+        all_available_items.suggestion_list(random_id);
     added_ids.insert(suggestee_id);
     elements_to_insert--;
   }
@@ -164,10 +167,8 @@ Status UserHistoryOrm::FetchColdStartItemList(
 }
 
 Status UserHistoryOrm::RecordColdStartItem(
-    const uint32_t user_id,
-    const Suggestion* coldstart_item,
+    const uint32_t user_id, const Suggestion* coldstart_item,
     const UserFeedback::Feedback feedback) {
-
   mysqlpp::ScopedConnection conn(*conn_pool_);
   mysqlpp::Query query = conn->query(
       "INSERT INTO `user_coldstart_history` (`user_id`, `feedback_id`, "
@@ -183,14 +184,15 @@ Status UserHistoryOrm::RecordColdStartItem(
 
   {
     mysqlpp::Query query = conn->query(
-        "SELECT `feedback_id` FROM `user_coldstart_history` WHERE `user_id`=%0");
+        "SELECT `feedback_id` FROM `user_coldstart_history` WHERE "
+        "`user_id`=%0");
     query.parse();
 
     const mysqlpp::StoreQueryResult res = query.store(user_id);
     completed_coldstart = res.num_rows() == kMaximumItemNumber;
   }
 
-  if(completed_coldstart) {
+  if (completed_coldstart) {
     mysqlpp::Query query = conn->query(
         "SELECT `status` FROM "
         "`user_coldstart_status` WHERE `user_id`=%0");
@@ -198,8 +200,9 @@ Status UserHistoryOrm::RecordColdStartItem(
     const mysqlpp::StoreQueryResult res = query.store(user_id);
     if (res.empty()) {
       query.reset();
-      query << "INSERT INTO `user_coldstart_status` (`user_id`, `status`) VALUES "
-               "(%0, %1)";
+      query
+          << "INSERT INTO `user_coldstart_status` (`user_id`, `status`) VALUES "
+             "(%0, %1)";
       query.parse();
       if (!query.execute(user_id, true)) {
         VLOG(1) << "Query failed with:" << query.error();
@@ -207,7 +210,8 @@ Status UserHistoryOrm::RecordColdStartItem(
       }
     } else {
       query.reset();
-      query << "UPDATE `user_coldstart_status` SET `status` = %0 WHERE `user_id` = %1";
+      query << "UPDATE `user_coldstart_status` SET `status` = %0 WHERE "
+               "`user_id` = %1";
       query.parse();
       if (!query.execute(true, user_id)) {
         VLOG(1) << "Query failed with:" << query.error();

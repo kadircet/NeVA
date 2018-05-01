@@ -56,15 +56,18 @@ service Backend {
   }
 
   // Returns cold start completion status for the user.
-  rpc GetColdStartCompletionStatus(GetColdStartCompletionStatusRequest) returns (GetColdStartCompletionStatusReply) {
+  rpc GetColdStartCompletionStatus(GetColdStartCompletionStatusRequest)
+      returns (GetColdStartCompletionStatusReply) {
   }
 
   // Returns SuggestionList for cold start
-  rpc GetColdStartItemList(GetColdStartItemListRequest) returns (GetColdStartItemListReply) {
+  rpc GetColdStartItemList(GetColdStartItemListRequest)
+      returns (GetColdStartItemListReply) {
   }
 
   // Inform user choice for cold start
-  rpc RecordColdStartChoice(RecordColdStartChoiceRequest) returns (GenericReply) {
+  rpc RecordColdStartChoice(RecordColdStartChoiceRequest)
+      returns (GenericReply) {
   }
 }
 
