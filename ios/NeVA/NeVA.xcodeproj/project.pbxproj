@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC063B711FF0397A002BE829 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC063B701FF0397A002BE829 /* KeychainSwift.framework */; };
+		AC3A6DFA20990F1900210497 /* ColdstartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A6DF920990F1900210497 /* ColdstartViewController.swift */; };
 		AC590F14204F2D8C00AEC8AD /* TTGSnackbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC590F13204F2D8C00AEC8AD /* TTGSnackbar.framework */; };
 		AC69435B1FD4A3C2002C817D /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */; };
 		AC69AFD11FEF0F9000A6884B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */; };
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		AC063B701FF0397A002BE829 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
+		AC3A6DF920990F1900210497 /* ColdstartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColdstartViewController.swift; sourceTree = "<group>"; };
 		AC590F13204F2D8C00AEC8AD /* TTGSnackbar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTGSnackbar.framework; path = Carthage/Build/iOS/TTGSnackbar.framework; sourceTree = "<group>"; };
 		AC69435A1FD4A3C2002C817D /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		AC69AFC81FEF0F8F00A6884B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				ACB6D4061FCE035B00D8C06D /* SuggestionViewController.swift */,
 				AC6D2DEC1FD58F2D00B14A72 /* AddHistoryEntryViewController.swift */,
 				ACE528461FFBF4890069287E /* NevaTabBarController.swift */,
+				AC3A6DF920990F1900210497 /* ColdstartViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				ACB174DC1FD4CDAF00EE5D98 /* NevaConstants.swift in Sources */,
 				AC9B0FE12039F17300831006 /* Utils.swift in Sources */,
 				ACE528471FFBF4890069287E /* NevaTabBarController.swift in Sources */,
+				AC3A6DFA20990F1900210497 /* ColdstartViewController.swift in Sources */,
 				AC8EF6321FC211C900CFABBE /* user.pb.swift in Sources */,
 				AC8EF6311FC211C900CFABBE /* util.pb.swift in Sources */,
 				AC8EF6301FC211C900CFABBE /* backend.pb.swift in Sources */,

@@ -71,7 +71,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
                     } else {
                         print("User \(String(describing: UserToken.email)) successfully logged in.")
                     }
-                    self.performSegue(withIdentifier: "loggedIn", sender: self)
+                    loginAndCheckColdstartStatus()
                 } catch (let error) {
                     if #available(iOS 10.0, *) {
                         os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
@@ -228,7 +228,7 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
             loginEmailField.text = ""
             loginPassword = ""
             loginPasswordField.text = ""
-            performSegue(withIdentifier: "loggedIn", sender: self)
+            loginAndCheckColdstartStatus()
         } catch (let error) {
             if #available(iOS 10.0, *) {
                 os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
@@ -351,67 +351,93 @@ class LoginRegisterViewController: UIViewController, FBSDKLoginButtonDelegate, U
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if FBSDKAccessToken.current() != nil {
-            var loginRequestMessage = Neva_Backend_LoginRequest()
-            loginRequestMessage.email = FBSDKAccessToken.current().userID
-            loginRequestMessage.password = FBSDKAccessToken.current().tokenString
-            loginRequestMessage.authenticationType = .facebook
-            let service = NevaConstants.service
-            do {
-                let responseMessage = try service.login(loginRequestMessage)
-                UserToken.token = responseMessage.token
-                UserToken.email = FBSDKAccessToken.current().userID
-                UserToken.type = .facebook
-                if #available(iOS 10.0, *) {
-                    os_log("User %@ successfully logged in.", log: NevaConstants.logger, type: .info, String(describing: UserToken.email))
-                } else {
-                    print("User \(String(describing: UserToken.email)) successfully logged in.")
-                }
-                self.performSegue(withIdentifier: "loggedIn", sender: self)
-            } catch (let error) {
-                if #available(iOS 10.0, *) {
-                    os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
-                } else {
-                    // Fallback on earlier versions
-                    print("Error: \(error)")
-                }
-                if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
-                    let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
-                    snackbar.backgroundColor = NeVAColors.primaryDarkColor
-                    snackbar.shouldDismissOnSwipe = true
-                    snackbar.show()
-                }
-                FBSDKLoginManager().logOut()
+          var loginRequestMessage = Neva_Backend_LoginRequest()
+          loginRequestMessage.email = FBSDKAccessToken.current().userID
+          loginRequestMessage.password = FBSDKAccessToken.current().tokenString
+          loginRequestMessage.authenticationType = .facebook
+          let service = NevaConstants.service
+          do {
+            let responseMessage = try service.login(loginRequestMessage)
+            UserToken.token = responseMessage.token
+            UserToken.email = FBSDKAccessToken.current().userID
+            UserToken.type = .facebook
+            if #available(iOS 10.0, *) {
+              os_log("User %@ successfully logged in.", log: NevaConstants.logger, type: .info, String(describing: UserToken.email))
+            } else {
+              print("User \(String(describing: UserToken.email)) successfully logged in.")
             }
+            loginAndCheckColdstartStatus()
+          } catch (let error) {
+            if #available(iOS 10.0, *) {
+              os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+              // Fallback on earlier versions
+              print("Error: \(error)")
+            }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+              let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+              snackbar.backgroundColor = NeVAColors.primaryDarkColor
+              snackbar.shouldDismissOnSwipe = true
+              snackbar.show()
+            }
+            FBSDKLoginManager().logOut()
+          }
         } else if UserToken.initializeToken() {
-                let service = NevaConstants.service
-                var checkTokenRequest = Neva_Backend_CheckTokenRequest()
-                checkTokenRequest.token = UserToken.token!
-                do {
-                    let _ = try service.checktoken(checkTokenRequest)
-                    self.performSegue(withIdentifier: "loggedIn", sender: self)
-                } catch (let error) {
-                    if #available(iOS 10.0, *) {
-                        os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
-                    } else {
-                        // Fallback on earlier versions
-                        print("Error: \(error)")
-                    }
-                    if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
-                        let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
-                        snackbar.backgroundColor = NeVAColors.primaryDarkColor
-                        snackbar.shouldDismissOnSwipe = true
-                        snackbar.show()
-                    }
-                    UserToken.clearUserToken()
-                }
+          let service = NevaConstants.service
+          var checkTokenRequest = Neva_Backend_CheckTokenRequest()
+          checkTokenRequest.token = UserToken.token!
+          do {
+            let _ = try service.checktoken(checkTokenRequest)
+            loginAndCheckColdstartStatus()
+          } catch (let error) {
+            if #available(iOS 10.0, *) {
+              os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+            } else {
+              // Fallback on earlier versions
+              print("Error: \(error)")
+            }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+              let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+              snackbar.backgroundColor = NeVAColors.primaryDarkColor
+              snackbar.shouldDismissOnSwipe = true
+              snackbar.show()
+            }
+            UserToken.clearUserToken()
+          }
+        }
+      }
+  
+      func loginAndCheckColdstartStatus() {
+        let service = NevaConstants.service
+        var getColdstartCompletionStatusRequest = Neva_Backend_GetColdStartCompletionStatusRequest()
+        getColdstartCompletionStatusRequest.token = UserToken.token!
+        do {
+          let response = try service.getcoldstartcompletionstatus(getColdstartCompletionStatusRequest)
+          if(response.completionStatus) {
+            performSegue(withIdentifier: "loggedInCompletedColdstart", sender: self)
+          } else {
+            performSegue(withIdentifier: "loggedInWithoutColdstart", sender: self)
+          }
+        } catch (let error) {
+          if #available(iOS 10.0, *) {
+            os_log("Error: %@", log: NevaConstants.logger, type: .error, String(describing: error))
+          } else {
+            // Fallback on earlier versions
+            print("Error: \(error)")
+          }
+            if let clientError = error as? Neva_Backend_BackendClientError, case let .error(e) = clientError {
+              let snackbar = TTGSnackbar(message: e.statusMessage ?? "UNDEFINED ERROR", duration: .middle)
+              snackbar.backgroundColor = NeVAColors.primaryDarkColor
+              snackbar.shouldDismissOnSwipe = true
+              snackbar.show()
+            }
+            UserToken.clearUserToken()
         }
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
