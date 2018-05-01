@@ -337,3 +337,14 @@ def MeasureAccuracy(user_id, k=10):
         avg_similarity /= k
         results.append((found_idx, avg_similarity))
     return results
+
+
+def GetUpdatedUserIDs():
+    global db
+    if db == None:
+        db = MySQLdb.connect("localhost", "neva", "", "neva")
+    sql = "SELECT `user_id` FROM `user_needs_update` WHERE `needs_update` = 1"
+    with db.cursor() as cur:
+        cur.execute(sql)
+        ids = (row[0] for row in cur)
+    return ids
