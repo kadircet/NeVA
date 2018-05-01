@@ -26,7 +26,7 @@ Status UserHistoryOrm::InsertChoice(const uint32_t user_id,
   if (!res) {
     VLOG(1) << "Something went wrong while inserting:\n"
             << choice.DebugString() << "\nInfo:" << query.info();
-    return Status(StatusCode::INTERNAL, "Internal server error.");
+    return Status(StatusCode::INTERNAL, query.error());//"Internal server error.");
   }
   *choice_id = res.insert_id();
   VLOG(1) << choice.DebugString()

@@ -129,5 +129,38 @@ cc_test(
     ],
 )
 
+cc_test(
+    name = "user_history_orm_test",
+    srcs = ["user_history_orm_test.cc"],
+    data = [
+        ":user_history_orm_test.sql",
+        "//tables:user.sql",
+        "//tables:suggestions.sql",
+        "//tables:user_history.sql"
+    ],
+    deps = [
+        ":user_history_orm",
+        "//orm/testing:mock_orm_fixture",
+        "//protos:user_history_proto",
+    ],
+)
+
+#cc_test(
+#    name = "suggestion_orm_test",
+#    srcs = ["suggestion_orm_test.cc"],
+#    data = [
+#        ":suggestion_orm_test.sql",
+#        "//tables:user.sql",
+#        "//tables:suggestions.sql",
+#        "//tables:recommender.sql"
+#    ],
+#    deps = [
+#        ":suggestion_orm",
+#        "//orm/testing:mock_orm_fixture",
+#        "//protos:suggestion_proto",
+#    ],
+#)
+
+
 
 exports_files(glob(["*_test.sql"]))

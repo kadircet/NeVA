@@ -1,0 +1,22 @@
+INSERT INTO `user` (`email`, `salt`) VALUES ("history_user@neva.com", "salt");
+INSERT INTO `suggestion_category` (`name`) VALUES ("test_category");
+INSERT INTO `suggestee` (`category_id`, `name`, `last_updated`) VALUES (1, "test_suggestee_1", 0);
+INSERT INTO `suggestee` (`category_id`, `name`, `last_updated`) VALUES (1, "test_suggestee_2", 0);
+INSERT INTO `suggestee` (`category_id`, `name`, `last_updated`) VALUES (1, "test_suggestee_3", 0);
+INSERT INTO `suggestee` (`category_id`, `name`, `last_updated`) VALUES (1, "test_suggestee_4", 0);
+INSERT INTO `suggestee` (`category_id`, `name`, `last_updated`) VALUES (1, "test_suggestee_5", 0);
+INSERT INTO `tag` (`key`) VALUES ("test_tag_1");
+INSERT INTO `tag` (`key`) VALUES ("test_tag_2");
+INSERT INTO `tag` (`key`) VALUES ("test_tag_3");
+INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`, `value`) VALUES (1, 1, "");
+INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`, `value`) VALUES (2, 2, "");
+INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`, `value`) VALUES (2, 3, "");
+INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`, `value`) VALUES (3, 1, "");
+INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`, `value`) VALUES (3, 2, "");
+INSERT INTO `suggestee_tags` (`suggestee_id`, `tag_id`, `value`) VALUES (3, 3, "");
+
+INSERT INTO `recommender_cahce` (`user_id`, `suggestee_id`) VALUES (1, 1);
+INSERT INTO `recommender_cahce` (`user_id`, `suggestee_id`) VALUES (1, 2);
+INSERT INTO `recommender_cahce` (`user_id`, `suggestee_id`) VALUES (1, 3);
+INSERT INTO `recommender_cahce` (`user_id`, `suggestee_id`) VALUES (1, 4);
+INSERT INTO `recommender_cahce` (`user_id`, `suggestee_id`) VALUES (1, 5);
