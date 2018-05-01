@@ -343,8 +343,17 @@ def GetUpdatedUserIDs():
     global db
     if db == None:
         db = MySQLdb.connect("localhost", "neva", "", "neva")
-    sql = "SELECT `user_id` FROM `user_needs_update` WHERE `needs_update` = 1"
+    sql = "SELECT `user_id` FROM `user_needs_update` WHERE `needs_update` = 0"
     with db.cursor() as cur:
         cur.execute(sql)
         ids = (row[0] for row in cur)
     return ids
+
+
+def MarkUserAsProcessed(user_id):
+    global db
+    if db == None:
+        db = MySQLdb.connect("localhost", "neva", "", "neva")
+    sql = "UPDATE `user_needs_update` SET `needs_update` = 0 WHERE `user_id` = %s"
+    with db.cursor() as cur:
+        cur.execute(sql, (user_id, ))
