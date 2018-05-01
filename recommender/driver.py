@@ -4,7 +4,7 @@ import datetime
 import logging
 import traceback
 import time
-kWaitInteval = 1.  # 1 second.
+kWaitInteval = .1  # 100 ms
 
 
 def main():
