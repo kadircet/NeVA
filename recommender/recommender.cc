@@ -37,13 +37,14 @@ SuggestionList GetMultipleSuggestions(const uint32_t user_id,
     suggested_ids.insert(suggestee_id);
     VLOG(1) << suggestion.ShortDebugString() << " has been added to list.";
   }
-  // TODO(kadircet): Improve additional element selection.
+
   int32_t elements_to_insert = kLeastSuggestionSize - suggested_ids.size();
   while (elements_to_insert > 0) {
     const uint32_t random_id = util::GetRandom(suggestion_list_size);
     const uint32_t suggestee_id =
         suggestion_list.suggestion_list(random_id).suggestee_id();
     if (suggested_ids.find(suggestee_id) != suggested_ids.end()) continue;
+    suggested_ids.insert(suggestee_id);
     *suggested_list.add_suggestion_list() = *id_to_suggestee[suggestee_id];
     elements_to_insert--;
   }
