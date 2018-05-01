@@ -96,3 +96,16 @@ CREATE TABLE IF NOT EXISTS `user_verification` (
   FOREIGN KEY(`id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
   PRIMARY KEY(`id`)
 );
+
+/* Contains update status of users for recommendation pipeline.
+ * When a user performs an action that provides new information to pipeline it
+ * gets marked as 'needs to be updated'. Later on pipeline focuses more on these
+ * users.
+ */
+CREATE TABLE IF NOT EXISTS `user_needs_update` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `user_id` INTEGER NOT NULL,
+  `needs_update` TINYINT UNSIGNED NOT NULL,
+  FOREIGN KEY(`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+  PRIMARY KEY(`id`)
+);
