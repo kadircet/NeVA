@@ -128,6 +128,9 @@ class ColdstartViewController: UIViewController, KolodaViewDelegate, KolodaViewD
       coldstartKolodaView.delegate = self
       coldstartKolodaView.dataSource = self
       if(!completedColdstart) {
+        NeVAUtils.getTagsFromServer()
+        NeVAUtils.getMealsFromServer()
+        NeVAUtils.fetchEntriesFromServer()
         getColdstartList(coldstartKolodaView)
       }
       // Do any additional setup after loading the view.
