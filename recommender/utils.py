@@ -205,9 +205,13 @@ def GetSuggesteeIDs(category=1):
     if db == None:
         db = MySQLdb.connect("localhost", "neva", "", "neva")
     sql = "SELECT `id` FROM `suggestee`"
+    suggestee_ids = []
     with db.cursor() as cur:
         cur.execute(sql)
-        suggestee_ids = (x[0] for x in cur.fetchall())
+        for (suggestee_id, ) in cur:
+            if len(GetTagsForSuggestee(suggestee_id)) == 0:
+                continue
+            suggestee_ids.append(suggestee_id)
     return tuple(suggestee_ids)
 
 
