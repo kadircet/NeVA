@@ -2,6 +2,7 @@
 #include "glog/logging.h"
 #include "orm/utils.h"
 #include "util/hmac.h"
+
 namespace neva {
 namespace backend {
 namespace orm {
@@ -11,6 +12,7 @@ namespace {
 using grpc::Status;
 using grpc::StatusCode;
 constexpr uint32_t kMaximumItemNumber = 30;
+
 }  // namespace
 
 Status UserHistoryOrm::InsertChoice(const uint32_t user_id,
@@ -105,40 +107,39 @@ Status UserHistoryOrm::FetchColdStartCompletionStatus(const uint32_t user_id,
   *completion_status = res[0]["status"];
   return Status::OK;
 }
+
 Status UserHistoryOrm::FetchColdStartItemList(
     const uint32_t user_id,
     const Suggestion::SuggestionCategory coldstart_item_category,
     SuggestionList* coldstart_item_list) {
   mysqlpp::ScopedConnection conn(*conn_pool_);
 
-  SuggestionList all_available_items;
+  SuggestionList most_diverse_items;
   {
     mysqlpp::Query query = conn->query(
-        "SELECT `id`, `name` FROM `suggestee` WHERE "
-        "`category_id`=%0 AND `id` NOT IN("
-        " SELECT `feedback_id` FROM `user_coldstart_history` WHERE "
-        "`user_id`=%1)");
+        "SELECT `diverse_item_cache`.`suggestee_id`, `suggestee`.`name` FROM "
+        "`diverse_item_cache` INNER JOIN `suggestee` ON "
+        "`suggestee`.`id`=`diverse_item_cache`.`suggestee_id`");
     query.parse();
 
     const mysqlpp::StoreQueryResult res =
         query.store(coldstart_item_category, user_id);
-    for (const auto row : res) {
-      Suggestion suggestion;
-      suggestion.set_suggestee_id(row["id"]);
-      suggestion.set_name(row["name"]);
-      GetTags(conn, &suggestion);
-      *all_available_items.add_suggestion_list() = suggestion;
+    for (const auto& row : res) {
+      Suggestion* suggestion = most_diverse_items.add_suggestion_list();
+      suggestion->set_suggestee_id(row["suggestee_id"]);
+      suggestion->set_name(row["name"]);
+      GetTags(conn, suggestion);
     }
   }
 
-  if (all_available_items.suggestion_list_size() == 0) {
+  if (most_diverse_items.suggestion_list_size() == 0) {
     VLOG(1) << "Requested a coldstart_item_list from an empty category: "
             << coldstart_item_category;
     return Status(StatusCode::INVALID_ARGUMENT,
                   "No items to suggest in that category.");
   }
 
-  uint32_t recorded_items_count = 0;
+  std::unordered_set<uint32_t> added_ids;
   {
     mysqlpp::Query query = conn->query(
         "SELECT `feedback_id` FROM `user_coldstart_history` WHERE "
@@ -146,23 +147,19 @@ Status UserHistoryOrm::FetchColdStartItemList(
     query.parse();
 
     const mysqlpp::StoreQueryResult res = query.store(user_id);
-    recorded_items_count = res.num_rows();
+    for (const auto& row : res) {
+      const uint32_t item_id = row["feedback_id"];
+      added_ids.insert(item_id);
+    }
   }
 
-  uint32_t elements_to_insert = kMaximumItemNumber - recorded_items_count;
-  std::unordered_set<uint32_t> added_ids;
-  const size_t all_available_items_size =
-      all_available_items.suggestion_list_size();
-  while (elements_to_insert > 0) {
-    const uint32_t random_id = util::GetRandom(all_available_items_size);
-    const uint32_t suggestee_id =
-        all_available_items.suggestion_list(random_id).suggestee_id();
-    if (added_ids.find(suggestee_id) != added_ids.end()) continue;
-    *coldstart_item_list->add_suggestion_list() =
-        all_available_items.suggestion_list(random_id);
-    added_ids.insert(suggestee_id);
-    elements_to_insert--;
+  for (const auto& item : most_diverse_items.suggestion_list()) {
+    const uint32_t item_id = item.suggestee_id();
+    if (added_ids.find(item_id) == added_ids.end()) {
+      *coldstart_item_list->add_suggestion_list() = item;
+    }
   }
+
   return Status::OK;
 }
 
