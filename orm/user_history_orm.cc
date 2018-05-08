@@ -122,8 +122,7 @@ Status UserHistoryOrm::FetchColdStartItemList(
         "`suggestee`.`id`=`diverse_item_cache`.`suggestee_id`");
     query.parse();
 
-    const mysqlpp::StoreQueryResult res =
-        query.store(coldstart_item_category, user_id);
+    const mysqlpp::StoreQueryResult res = query.store();
     for (const auto& row : res) {
       Suggestion* suggestion = most_diverse_items.add_suggestion_list();
       suggestion->set_suggestee_id(row["suggestee_id"]);
