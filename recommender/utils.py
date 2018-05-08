@@ -400,3 +400,18 @@ def GetMostDiverseItems(k=30):
                 diverse_tags[tag_position][1] += 1
 
     return diverse_items
+
+
+def UpdateMostDiverseItems():
+    global db
+    if db == None:
+        db = MySQLdb.connect("localhost", "neva", "", "neva")
+
+    delete_query = "DELETE FROM `diverse_item_cache`"
+    insert_query = "INSERT INTO `diverse_item_cache` (`suggestee_id`) VALUES (%s)"
+
+    most_diverse_items = GetMostDiverseItems()
+    with db.cursor() as cur:
+        cur.execute(delete_query)
+        for item_id in most_diverse_items:
+            cur.execute(insert_query, (item_id, ))
