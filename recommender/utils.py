@@ -361,6 +361,7 @@ def MarkUserAsProcessed(user_id):
     sql = "UPDATE `user_needs_update` SET `needs_update` = 0 WHERE `user_id` = %s"
     with db.cursor() as cur:
         cur.execute(sql, (user_id, ))
+    db.commit()
 
 
 def GetMostDiverseItem(current_tags, item_list, items_in_list):
@@ -415,3 +416,4 @@ def UpdateMostDiverseItems():
         cur.execute(delete_query)
         for item_id in most_diverse_items:
             cur.execute(insert_query, (item_id, ))
+    db.commit()
