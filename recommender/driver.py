@@ -4,15 +4,23 @@ import datetime
 import logging
 import traceback
 import time
+import utils
 kWaitInteval = .1  # 100 ms
+kDiverseItemUpdateInterval = 60  # 60 seconds
 
 
 def main():
     import clustering
 
+    start = time.time()
     while True:
         try:
+            now = time.time()
             clustering.main()
+            if now - start > kDiverseItemUpdateInterval:
+                logging.log(logging.INFO, "Updating most diverse items.")
+                utils.UpdateMostDiverseItems()
+                start = now
         except Exception as e:
             logging.log(logging.WARN, e, exc_info=1)
         time.sleep(kWaitInteval)

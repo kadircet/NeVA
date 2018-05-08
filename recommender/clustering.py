@@ -27,7 +27,7 @@ def main():
         main.last_called = now
 
     users = []
-    if now - main.last_called > kWholeUpdatePeriod:
+    if (now - main.last_called).seconds > kWholeUpdatePeriod:
         users = utils.GetUserIDs()
     else:
         users = utils.GetUpdatedUserIDs()
