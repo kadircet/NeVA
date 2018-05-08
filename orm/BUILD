@@ -81,11 +81,12 @@ cc_library(
     srcs = ["utils.cc"],
     hdrs = ["utils.h"],
     deps = [
-      "//protos:suggestion_proto",
-      "@glog//:glog",
+        "//protos:suggestion_proto",
+        "@glog//:glog",
     ],
 )
 
+"""
 cc_test(
     name = "proposition_orm_test",
     srcs = ["proposition_orm_test.cc"],
@@ -101,5 +102,6 @@ cc_test(
         "//protos:suggestion_proto",
     ],
 )
+"""
 
 exports_files(glob(["*_test.sql"]))
