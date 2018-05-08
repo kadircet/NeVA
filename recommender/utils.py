@@ -361,3 +361,19 @@ def MarkUserAsProcessed(user_id):
     sql = "UPDATE `user_needs_update` SET `needs_update` = 0 WHERE `user_id` = %s"
     with db.cursor() as cur:
         cur.execute(sql, (user_id, ))
+
+
+def GetMostDiverseItem(current_tags, item_list, items_in_list):
+    result = None
+    min_similarity = None
+    result_tags = None
+    for item_id in item_list:
+        if item_id in items_in_list:
+            continue
+        item_tags = GetTagsForSuggestee(item_id)
+        current_similarity = WeightedJaccardSimilarity(current_tags, item_tags)
+        if min_similarity == None or min_similarity > current_similarity:
+            min_similarity = current_similarity
+            result = item_id
+            result_tags = item_tags
+    return result, result_tags
