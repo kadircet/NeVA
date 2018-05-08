@@ -377,3 +377,26 @@ def GetMostDiverseItem(current_tags, item_list, items_in_list):
             result = item_id
             result_tags = item_tags
     return result, result_tags
+
+
+def GetMostDiverseItems(k=30):
+    diverse_items = []
+    diverse_tags = []
+    position_in_tag_list = {}
+    items_in_list = {}
+
+    suggestees = GetSuggesteeIDs()
+    while len(diverse_items) < k:
+        item_id, item_tags = GetMostDiverseItem(diverse_tags, suggestees,
+                                                items_in_list)
+        items_in_list[item_id] = True
+        diverse_items.append(item_id)
+        for tag_id in item_tags:
+            tag_position = position_in_tag_list.get(tag_id, -1)
+            if tag_position == -1:
+                position_in_tag_list[tag_id] = len(diverse_tags)
+                diverse_tags.append([tag_id, 1])
+            else:
+                diverse_tags[tag_position][1] += 1
+
+    return diverse_items
