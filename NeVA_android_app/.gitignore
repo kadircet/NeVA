@@ -1,6 +1,14 @@
 *.iml
-.gradle
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+.gradle/
 /local.properties
+/.idea/
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store

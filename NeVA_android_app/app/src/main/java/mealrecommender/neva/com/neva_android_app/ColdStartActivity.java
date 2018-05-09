@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -34,11 +35,11 @@ import neva.backend.SuggestionOuterClass;
 import neva.backend.SuggestionOuterClass.Suggestion;
 import neva.backend.SuggestionOuterClass.Suggestion.SuggestionCategory;
 import neva.backend.SuggestionOuterClass.Tag;
+import neva.backend.UserHistoryOuterClass.UserFeedback.Feedback;
 
 public class ColdStartActivity extends AppCompatActivity {
 
   private final String TAG = this.getClass().getSimpleName();
-  final int kQuestionNumber = 10;
   FlexboxLayout flexboxLayout;
 
   ByteString loginToken;
@@ -79,18 +80,19 @@ public class ColdStartActivity extends AppCompatActivity {
     FillDatabaseTask fillDatabaseTask = new FillDatabaseTask();
     fillDatabaseTask.execute();
 
-    progressBar.setVisibility(View.VISIBLE);
-    progressBar.setMax(kQuestionNumber);
     likeButton.setVisibility(View.GONE);
     dislikeButton.setVisibility(View.GONE);
 
-    ArrayList<Meal> meals = (ArrayList<Meal>) db.nevaDao().getAllMeals();
-    int mealCount = meals.size();
-    Random rnd = new Random();
-
-    for(int i=0; i<kQuestionNumber; i++) {
-      suggestionList.offer(meals.get(rnd.nextInt(mealCount)));
+    ArrayList<Meal> meals = new ArrayList<>();
+    for(Suggestion s: NevaConnectionManager.getInstance().getColdStartMealList()) {
+      meals.add(db.nevaDao().getMeal(s.getSuggesteeId()));
     }
+    for(int i=0; i<meals.size(); i++) {
+      suggestionList.offer(meals.get(i));
+    }
+
+    progressBar.setVisibility(View.VISIBLE);
+    progressBar.setMax(suggestionList.size());
     likeButton.setVisibility(View.VISIBLE);
     dislikeButton.setVisibility(View.VISIBLE);
     displayNextMeal();
@@ -98,7 +100,7 @@ public class ColdStartActivity extends AppCompatActivity {
 
 
   void displayNextMeal() {
-    Log.e(TAG, ""+suggestionList.isEmpty()+" "+suggestionList.size());
+    Log.d(TAG, "Suggestion list size: "+suggestionList.size());
     if(suggestionList.isEmpty()) {
       Intent intent = new Intent(getBaseContext(), MainActivity.class);
       startActivity(intent);
@@ -126,19 +128,21 @@ public class ColdStartActivity extends AppCompatActivity {
   }
 
   public void likeButtonClick(View view) {
-    SendFeedbackTask sendFeedbackTask = new SendFeedbackTask();
+    Log.d(TAG, "Like");
+    SendColdStartFeedbackTask sendFeedbackTask = new SendColdStartFeedbackTask();
     sendFeedbackTask.execute(true);
     displayNextMeal();
   }
 
   public void dislikeButtonClick(View view) {
-    SendFeedbackTask sendFeedbackTask = new SendFeedbackTask();
+    Log.d(TAG, "Disike");
+    SendColdStartFeedbackTask sendFeedbackTask = new SendColdStartFeedbackTask();
     sendFeedbackTask.execute(false);
     displayNextMeal();
   }
 
 
-  class SendFeedbackTask extends AsyncTask<Boolean, Void, Boolean> {
+  class SendColdStartFeedbackTask extends AsyncTask<Boolean, Void, Boolean> {
     int suggesteeId;
 
     @Override
@@ -151,11 +155,10 @@ public class ColdStartActivity extends AppCompatActivity {
     protected Boolean doInBackground(Boolean... booleans) {
       try {
         suggesteeId = db.nevaDao().getMealId(recommendedView.getText().toString());
+        Suggestion s = Suggestion.newBuilder().setSuggesteeId(suggesteeId).build();
+        Feedback f = booleans[0]?Feedback.LIKE:Feedback.DISLIKE;
 
-        boolean like = booleans[0];
-
-        return connectionManager
-            .sendFeedback(like, 0, suggesteeId, 0, 0, 0);
+        return connectionManager.recordColdStartFeedback(s, f);
       } catch (Exception e) {
         Log.e(TAG, e.getMessage());
         return false;

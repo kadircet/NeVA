@@ -98,9 +98,15 @@ public class SplashScreen extends AppCompatActivity {
 
     if(NevaLoginManager.getInstance().validateToken()){
       Log.i(TAG, "TOKEN VALID");
-      Log.i(TAG, "Launching MainActivity");
-      Intent intent = new Intent(getBaseContext(), MainActivity.class);
-      //Intent intent = new Intent(getBaseContext(), ColdStartActivity.class);
+      Log.d(TAG, "Checking cold start status");
+      Intent intent;
+      if(NevaConnectionManager.getInstance().getColdStartStatus()) {
+        Log.i(TAG, "Launching MainActivity");
+        intent = new Intent(getBaseContext(), MainActivity.class);
+      } else {
+        Log.i(TAG, "Launching ColdStartActivity");
+        intent = new Intent(getBaseContext(), ColdStartActivity.class);
+      }
       startActivity(intent);
       finish();
     } else {

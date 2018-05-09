@@ -23,9 +23,6 @@ service Backend {
       returns (GenericReply) {
   }
 
-  rpc GetSuggestion(GetSuggestionRequest) returns (GetSuggestionReply) {
-  }
-
   rpc GetMultipleSuggestions(GetMultipleSuggestionsRequest)
       returns (GetMultipleSuggestionsReply) {
   }
@@ -56,6 +53,21 @@ service Backend {
 
   // Returns all tags in the database.
   rpc GetTags(GetTagsRequest) returns (GetTagsReply) {
+  }
+
+  // Returns cold start completion status for the user.
+  rpc GetColdStartCompletionStatus(GetColdStartCompletionStatusRequest)
+      returns (GetColdStartCompletionStatusReply) {
+  }
+
+  // Returns SuggestionList for cold start
+  rpc GetColdStartItemList(GetColdStartItemListRequest)
+      returns (GetColdStartItemListReply) {
+  }
+
+  // Inform user choice for cold start
+  rpc RecordColdStartChoice(RecordColdStartChoiceRequest)
+      returns (GenericReply) {
   }
 }
 
@@ -107,19 +119,6 @@ message SuggestionItemPropositionRequest {
 
   // Holds information on propositions category and name.
   Suggestion suggestion = 2;
-}
-
-message GetSuggestionRequest {
-  // Session key for the user requesting a suggestion.
-  bytes token = 1;
-
-  // Category for which the user requests a suggestion.
-  Suggestion.SuggestionCategory suggestion_category = 2;
-}
-
-message GetSuggestionReply {
-  // Name of the suggested item.
-  string name = 1;
 }
 
 message GetMultipleSuggestionsRequest {
@@ -227,4 +226,34 @@ message GetTagsRequest {
 message GetTagsReply {
   // Tags in the database both id and names.
   repeated Tag tag_list = 1;
+}
+
+message GetColdStartCompletionStatusRequest {
+  // Token of the user making request.
+  bytes token = 1;
+}
+
+message GetColdStartCompletionStatusReply {
+  bool completion_status = 1;
+}
+
+message GetColdStartItemListRequest {
+  // Token of the user making request.
+  bytes token = 1;
+  // Category for which the user requests GetColdStartItemList.
+  Suggestion.SuggestionCategory coldstart_item_category = 2;
+}
+
+message GetColdStartItemListReply {
+  // List of cold start items.
+  SuggestionList coldstart_item_list = 1;
+}
+
+message RecordColdStartChoiceRequest {
+  // Token of the user making request.
+  bytes token = 1;
+  // Cold Start item
+  Suggestion coldstart_item = 2;
+  // Feedback for coldstart_item
+  UserFeedback.Feedback feedback = 3;
 }

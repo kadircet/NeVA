@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity
         return NevaConnectionManager.getInstance().getUser().getName();
       } catch (Exception e)
       {
-        Log.e(TAG, e.getMessage());
+        Log.e(TAG, " aaa"+e.getMessage());
         return null;
       }
     }

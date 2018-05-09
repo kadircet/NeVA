@@ -13,6 +13,10 @@ import neva.backend.BackendOuterClass.CheckTokenRequest;
 import neva.backend.BackendOuterClass.FetchUserHistoryReply;
 import neva.backend.BackendOuterClass.FetchUserHistoryRequest;
 import neva.backend.BackendOuterClass.GenericReply;
+import neva.backend.BackendOuterClass.GetColdStartCompletionStatusReply;
+import neva.backend.BackendOuterClass.GetColdStartCompletionStatusRequest;
+import neva.backend.BackendOuterClass.GetColdStartItemListReply;
+import neva.backend.BackendOuterClass.GetColdStartItemListRequest;
 import neva.backend.BackendOuterClass.GetMultipleSuggestionsReply;
 import neva.backend.BackendOuterClass.GetMultipleSuggestionsRequest;
 import neva.backend.BackendOuterClass.GetSuggestionItemListReply;
@@ -26,6 +30,7 @@ import neva.backend.BackendOuterClass.InformUserChoiceRequest;
 import neva.backend.BackendOuterClass.LoginReply;
 import neva.backend.BackendOuterClass.LoginRequest;
 import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
+import neva.backend.BackendOuterClass.RecordColdStartChoiceRequest;
 import neva.backend.BackendOuterClass.RecordFeedbackRequest;
 import neva.backend.BackendOuterClass.RegisterRequest;
 import neva.backend.BackendOuterClass.SuggestionItemPropositionRequest;
@@ -296,6 +301,51 @@ public class NevaConnectionManager {
       Log.d(TAG, "Longiture: "+ Long.toString(longitude));
       Log.d(TAG, "Like:" + Boolean.toString(like));
       GenericReply reply = blockingStub.recordFeedback(request);
+      return true;
+    } catch (Exception e) {
+      Log.e(TAG, e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean getColdStartStatus() {
+    try {
+      GetColdStartCompletionStatusRequest request = GetColdStartCompletionStatusRequest.newBuilder()
+          .setToken(NevaLoginManager.getInstance().getByteStringToken()).build();
+      Log.d(TAG, "Getting cold start completion status...");
+      GetColdStartCompletionStatusReply reply = blockingStub.getColdStartCompletionStatus(request);
+      if(reply.getCompletionStatus()) {
+        Log.d(TAG, "Cold Start complete.");
+      } else {
+        Log.d(TAG, "Cold Start incomplete.");
+      }
+      return reply.getCompletionStatus();
+    } catch (Exception e) {
+      Log.e(TAG, e.getMessage());
+      return false;
+    }
+  }
+
+  public List<Suggestion> getColdStartMealList() {
+    try {
+      GetColdStartItemListRequest request = GetColdStartItemListRequest.newBuilder()
+          .setToken(NevaLoginManager.getInstance().getByteStringToken())
+          .setColdstartItemCategory(SuggestionCategory.MEAL).build();
+      Log.d(TAG, "Getting Cold Start Item List");
+      GetColdStartItemListReply reply = blockingStub.getColdStartItemList(request);
+      return reply.getColdstartItemList().getSuggestionListList();
+    } catch (Exception e) {
+      Log.e(TAG, e.getMessage());
+      return null;
+    }
+  }
+
+  public boolean recordColdStartFeedback(Suggestion s, Feedback f) {
+    try {
+      RecordColdStartChoiceRequest request = RecordColdStartChoiceRequest.newBuilder()
+          .setToken(NevaLoginManager.getInstance().getByteStringToken())
+          .setColdstartItem(s).setFeedback(f).build();
+      GenericReply reply = blockingStub.recordColdStartChoice(request);
       return true;
     } catch (Exception e) {
       Log.e(TAG, e.getMessage());
