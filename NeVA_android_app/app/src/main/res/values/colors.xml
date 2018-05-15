@@ -1,6 +1,7 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
     <color name="primaryColor">#ff5722</color>
+    <color name="oppositeColor">#3F51B5</color>
     <!--<color name="primaryColor">#ff5722</color> -->
     <color name="primaryLightColor">#ff8a50</color>
     <color name="primaryDarkColor">#c41c00</color>
@@ -10,6 +11,7 @@
     <color name="iconBackground">#ff5722</color>
     <color name="textPrimaryColor">#000000</color>
     <color name="textSecondaryColor">#ffffff</color>
+    <color name="textAlternativeColor">#e8eaf6</color>
     <color name="textHintColor">#a3a4a5</color>
     <color name="ic_launcher_background">#F8B04C</color>
     <color name="backgroundWhite">#dddddd</color>

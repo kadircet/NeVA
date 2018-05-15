@@ -17,6 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
@@ -49,6 +50,7 @@ public class ProposeFragment extends Fragment {
   LinearLayout mealNameLayout;
   LinearLayout tagNameLayout;
   LinearLayout tagForFoodLayout;
+  TextView descriptionText;
 
 
   NiceAutoCompleteTextView meal_for_tag_field;
@@ -82,6 +84,7 @@ public class ProposeFragment extends Fragment {
     mealNameLayout = view.findViewById(R.id.mealNameLayout);
     tagNameLayout = view.findViewById(R.id.tagNameLayout);
     tagForFoodLayout = view.findViewById(R.id.tagForFoodLayout);
+    descriptionText = view.findViewById(R.id.descriptionText);
 
     fragment_proposal_field = view.findViewById(R.id.fragment_proposal_field);
     fragment_tag_proposal_field = view.findViewById(R.id.fragment_tag_proposal_field);
@@ -232,8 +235,10 @@ public class ProposeFragment extends Fragment {
     });
 
     mealNameLayout.setVisibility(View.VISIBLE);
-    tagNameLayout.setVisibility(View.INVISIBLE);
-    tagForFoodLayout.setVisibility(View.INVISIBLE);
+    tagNameLayout.setVisibility(View.GONE);
+    tagForFoodLayout.setVisibility(View.GONE);
+
+    descriptionText.setText("Propose us new meals if you can't find it in our list");
 
     tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
       @Override            public void onTabSelected(TabLayout.Tab tab) {
@@ -242,24 +247,27 @@ public class ProposeFragment extends Fragment {
 
         if(tab.getPosition()==0) {
           mealNameLayout.setVisibility(View.VISIBLE);
+          descriptionText.setText("Propose us new meals if you can't find it in our list");
         }
         else if(tab.getPosition()==1) {
           tagNameLayout.setVisibility(View.VISIBLE);
+          descriptionText.setText("Propose us new tags if you can't find it in our list");
         }
         else if(tab.getPosition()==2) {
           tagForFoodLayout.setVisibility(View.VISIBLE);
+          descriptionText.setText("Add a new tag for an already existing item");
         }
       }
       @Override            public void onTabUnselected(TabLayout.Tab tab) {
         Log.e("tab ","onTabUnselected ===>"+tab.getPosition());
         if(tab.getPosition()==0) {
-          mealNameLayout.setVisibility(View.INVISIBLE);
+          mealNameLayout.setVisibility(View.GONE);
         }
         else if(tab.getPosition()==1) {
-          tagNameLayout.setVisibility(View.INVISIBLE);
+          tagNameLayout.setVisibility(View.GONE);
         }
         else if(tab.getPosition()==2) {
-          tagForFoodLayout.setVisibility(View.INVISIBLE);
+          tagForFoodLayout.setVisibility(View.GONE);
         }
       }
       @Override            public void onTabReselected(TabLayout.Tab tab) {

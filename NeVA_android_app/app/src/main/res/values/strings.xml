@@ -31,7 +31,7 @@
   <string name="specific_tag_description">Suggest Tag For Specific Food</string>
 
   <string name="title_activity_main">MainActivity</string>
-  <string name="title_activity_cold_start">Cold Start</string>
+  <string name="title_activity_cold_start">Meal Preferences</string>
   <string name="title_fragment_recommend">Recommendation</string>
   <string name="title_fragment_propose">Proposal</string>
   <string name="title_fragment_history">Previous Meals</string>

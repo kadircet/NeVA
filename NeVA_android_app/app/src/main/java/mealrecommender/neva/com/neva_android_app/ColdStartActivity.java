@@ -58,7 +58,7 @@ public class ColdStartActivity extends AppCompatActivity {
     setContentView(R.layout.activity_cold_start);
     Toolbar toolbar = findViewById(R.id.cold_start_toolbar);
     setSupportActionBar(toolbar);
-    setTitle("Cold Start");
+    setTitle("Meal Preferences");
     db = Room.databaseBuilder(getBaseContext(), NevaDatabase.class, getResources().getString(R.string.database_name))
         .allowMainThreadQueries()
         .fallbackToDestructiveMigration()

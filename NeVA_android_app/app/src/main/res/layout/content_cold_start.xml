@@ -19,6 +19,7 @@
     android:theme="@style/AppTheme">
 
     <android.support.constraint.ConstraintLayout
+      android:id="@+id/Constraint"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical">
@@ -42,40 +43,60 @@
         android:layout_width="0dp"
         android:layout_height="112dp"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <TextView
-          android:id="@+id/cold_start_recommendation_field"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:fontFamily="@font/latoregular"
-          android:gravity="center"
-          android:text=""
-          android:textSize="30sp"
-          app:layout_constraintLeft_toLeftOf="parent"
-          app:layout_constraintRight_toRightOf="parent"/>
-
-        <com.google.android.flexbox.FlexboxLayout
-          android:id="@+id/cold_start_flexbox_layout"
+        app:layout_constraintEnd_toEndOf="@+id/Constraint"
+        app:layout_constraintStart_toStartOf="@+id/Constraint"
+        app:layout_constraintTop_toTopOf="@+id/Constraint">
+        <android.support.v7.widget.CardView
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          app:alignItems="center"
-          app:flexWrap="wrap"
-          app:justifyContent="center">
+          android:layout_marginTop="8dp"
+          android:layout_marginBottom="8dp"
+          app:cardBackgroundColor="@color/oppositeColor"
+          app:cardCornerRadius="0dp"
+          app:cardElevation="3dp"
+          app:layout_constraintBottom_toBottomOf="@+id/cold_start_linear_layout"
+          app:layout_constraintTop_toTopOf="@+id/cold_start_linear_layout">
+          <TextView
+            android:id="@+id/cold_start_recommendation_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/latoregular"
+            android:gravity="center"
+            android:text=""
+            android:textSize="30sp"
+            android:textColor="@color/textAlternativeColor"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintLeft_toLeftOf="@+id/cold_start_linear_layout"
+            app:layout_constraintRight_toRightOf="@+id/cold_start_linear_layout"/>
+        </android.support.v7.widget.CardView>
 
-        </com.google.android.flexbox.FlexboxLayout>
       </LinearLayout>
+      <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/cold_start_flexbox_layout"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:layout_marginBottom="27dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        app:alignItems="flex_start"
+        app:flexWrap="wrap"
+        app:justifyContent="center"
+        app:layout_constraintBottom_toTopOf="@+id/cold_start_button_linear_layout2"
+        app:layout_constraintTop_toBottomOf="@+id/cold_start_linear_layout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp">
+
+      </com.google.android.flexbox.FlexboxLayout>
 
       <LinearLayout
         android:id="@+id/cold_start_button_linear_layout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="128dp"
         android:layout_marginStart="64dp"
         android:layout_marginEnd="64dp"
         android:layout_gravity="center"
