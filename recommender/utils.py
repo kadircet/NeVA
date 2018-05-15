@@ -198,7 +198,7 @@ def GetUserInterest(user_id, current_context, suggestees):
     with db.cursor() as cur:
         cur.execute(sql, (user_id, ))
         for suggestee_id, feedback in cur:
-            suggestee_id = int(suggestee_id)
+            suggestee_id, feedback = int(suggestee_id), int(feedback)
             feedback = 1 if feedback == kLIKE else -1
             if suggestee_id not in interest:
                 interest[suggestee_id] = feedback
