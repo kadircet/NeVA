@@ -92,6 +92,7 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
     else:
         user_history = user_id
     user_interest = GetUserInterest(user_id, current_context, suggestees)
+    user_preference = GetUserColdStartInfo(user_id)
 
     neighbours = []
     counts = {}
@@ -115,9 +116,7 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
             if counts[smallest] == 0:
                 del counts[smallest]
 
-    # TODO(kadircet): Add data coming from cold start or maybe most liked N
-    # elements into the base tags too.
-    base_tags = GetTagWeights(counts.keys())
+    base_tags = GetTagWeights(counts.keys() + user_preference)
     similar_suggestees = GetSimilarSuggestees(
         None, base_tags=base_tags, similarity_metric=WeightedJaccardSimilarity)
     neighbours = []
