@@ -12,6 +12,7 @@ def UpdateUsers(users, suggestees, _cacher, current_context):
             user_id, current_context, suggestees, k=10)
         _cacher.UpdateUserCache(user_id, nearest_elements)
         utils.MarkUserAsProcessed(user_id)
+        logging.log(logging.INFO, 'Updated user:{}'.format(user_id))
 
 
 # TODO(kadircet): Implement support for event based updating after a user's
