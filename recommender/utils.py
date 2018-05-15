@@ -120,10 +120,7 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
     similar_suggestees = GetSimilarSuggestees(
         None, base_tags=base_tags, similarity_metric=WeightedJaccardSimilarity)
     neighbours = []
-
-    for suggestee_id in similar_suggestees:
-        if suggestee_id not in counts:
-            counts[suggestee_id] = 0
+    in_neighbours = {}
 
     for suggestee_id, count in user_interest.items():
         history_count = counts.get(suggestee_id, 0)
@@ -132,14 +129,22 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
             continue
         counts.pop(suggestee_id, 0)
         neighbours.append((history_count * kHistoryCoef + count, suggestee_id))
+        in_neighbours[suggestee_id] = True
     for suggestee_id, history_count in counts.items():
         neighbours.append((history_count * kHistoryCoef, suggestee_id))
+        in_neighbours[suggestee_id] = True
     max_count = max(max(neighbours)[0], 1)
 
     def CountsToProb(x):
         return (x[0] / max_count, x[1])
 
     neighbours = list(map(CountsToProb, neighbours))
+
+    for score, suggestee_id in similar_suggestees:
+        if suggestee_id not in in_neighbours:
+            neighbours.append((score, suggestee_id))
+            counts[suggestee_id] = 0
+
     neighbours.sort()
     neighbours.reverse()
 
