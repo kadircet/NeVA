@@ -153,6 +153,19 @@ def GetUserIDs():
     return ids
 
 
+def GetUserColdStartInfo(user_id):
+    sql = "SELECT `feedback_id`, `feedback` FROM `user_coldstart_history` " + \
+            "WHERE `user_id` = %s"
+
+    liked_items = []
+    with db.cursor() as cur:
+        cur.execute(sql, (user_id, ))
+        for suggestee_id, feedback in cur:
+            if int(feedback) == kLIKE:
+                liked_items.append(int(suggestee_id))
+    return liked_items
+
+
 def GetUserInterest(user_id, current_context, suggestees):
     """
     Gets user interests in suggestions related to a context, using feedbacks.
