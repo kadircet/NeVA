@@ -22,6 +22,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical">
+
       <ProgressBar
         android:id="@+id/cold_start_progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -71,7 +72,7 @@
       </LinearLayout>
 
       <LinearLayout
-        android:id="@+id/cold_start_button_linear_layout"
+        android:id="@+id/cold_start_button_linear_layout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
@@ -104,8 +105,21 @@
           android:text="Like"
           android:textColor="@color/textSecondaryColor"/>
       </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
 
+      <Button
+        android:id="@+id/cold_start_skip_button"
+        style="@android:style/Widget.Material.Light.Button.Toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:onClick="skipButtonClick"
+        android:text="SKIP >"
+        android:textColor="@color/textSecondaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cold_start_button_linear_layout2"/>
+
+    </android.support.constraint.ConstraintLayout>
   </FrameLayout>
 
 

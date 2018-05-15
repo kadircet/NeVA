@@ -46,6 +46,7 @@ public class ColdStartActivity extends AppCompatActivity {
   TextView recommendedView;
   Button likeButton;
   Button dislikeButton;
+  Button skipButton;
 
   ProgressBar progressBar;
 
@@ -70,6 +71,7 @@ public class ColdStartActivity extends AppCompatActivity {
     suggestionList = new ConcurrentLinkedQueue<Meal>();
     likeButton = findViewById(R.id.cold_start_like_button);
     dislikeButton = findViewById(R.id.cold_start_dislike_button);
+    skipButton = findViewById(R.id.cold_start_skip_button);
     recommendedView = findViewById(R.id.cold_start_recommendation_field);
     progressBar = findViewById(R.id.cold_start_progress_bar);
 
@@ -136,6 +138,12 @@ public class ColdStartActivity extends AppCompatActivity {
     SendColdStartFeedbackTask sendFeedbackTask = new SendColdStartFeedbackTask();
     sendFeedbackTask.execute(false);
     displayNextMeal();
+  }
+
+  public void skipButtonClick(View view) {
+    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+    startActivity(intent);
+    finish();
   }
 
 
