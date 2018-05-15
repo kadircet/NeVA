@@ -2,6 +2,7 @@ import cacher
 import datetime
 import utils
 import numpy as np
+import logging
 
 kWholeUpdatePeriod = 10 * 60  # 10 mins.
 
