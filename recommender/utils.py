@@ -120,6 +120,11 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
     similar_suggestees = GetSimilarSuggestees(
         None, base_tags=base_tags, similarity_metric=WeightedJaccardSimilarity)
     neighbours = []
+
+    for suggestee_id in similar_suggestees:
+        if suggestee_id not in counts:
+            counts[suggestee_id] = 0
+
     for suggestee_id, count in user_interest.items():
         history_count = counts.get(suggestee_id, 0)
         # If user simply disliked and never eaten it, abandon the choice.
@@ -135,7 +140,6 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
         return (x[0] / max_count, x[1])
 
     neighbours = list(map(CountsToProb, neighbours))
-    neighbours.extend(similar_suggestees)
     neighbours.sort()
     neighbours.reverse()
 
