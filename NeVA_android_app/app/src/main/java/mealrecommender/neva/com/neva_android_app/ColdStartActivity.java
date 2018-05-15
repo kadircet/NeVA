@@ -6,13 +6,10 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -20,9 +17,7 @@ import android.widget.TextView;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.protobuf.ByteString;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import mealrecommender.neva.com.neva_android_app.database.Meal;
 import mealrecommender.neva.com.neva_android_app.database.MealTagRelation;
@@ -40,6 +35,7 @@ import neva.backend.UserHistoryOuterClass.UserFeedback.Feedback;
 public class ColdStartActivity extends AppCompatActivity {
 
   private final String TAG = this.getClass().getSimpleName();
+  private final int kColdStartItemPoolSize = 30;
   FlexboxLayout flexboxLayout;
 
   ByteString loginToken;
@@ -92,7 +88,8 @@ public class ColdStartActivity extends AppCompatActivity {
     }
 
     progressBar.setVisibility(View.VISIBLE);
-    progressBar.setMax(suggestionList.size());
+    progressBar.setMax(kColdStartItemPoolSize);
+    progressBar.setProgress(kColdStartItemPoolSize-suggestionList.size(), true);
     likeButton.setVisibility(View.VISIBLE);
     dislikeButton.setVisibility(View.VISIBLE);
     displayNextMeal();
@@ -172,7 +169,7 @@ public class ColdStartActivity extends AppCompatActivity {
       }
       likeButton.setEnabled(true);
       dislikeButton.setEnabled(true);
-      progressBar.setProgress(progressBar.getProgress()+1);
+      progressBar.setProgress(progressBar.getProgress()+1, true);
     }
   }
 
