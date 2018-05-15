@@ -116,7 +116,7 @@ def GetNearestElements(user_id, current_context, suggestees, k=10):
             if counts[smallest] == 0:
                 del counts[smallest]
 
-    base_tags = GetTagWeights(counts.keys() + user_preference)
+    base_tags = GetTagWeights(list(counts) + user_preference)
     similar_suggestees = GetSimilarSuggestees(
         None, base_tags=base_tags, similarity_metric=WeightedJaccardSimilarity)
     neighbours = []
