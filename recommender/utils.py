@@ -181,6 +181,18 @@ def GetUserInterest(user_id, current_context, suggestees):
             else:
                 interest[suggestee_id] += feedback
 
+    sql = "SELECT `feedback_id`, `feedback` FROM `user_coldstart_history` " + \
+            "WHERE `user_id` = %s"
+    with db.cursor() as cur:
+        cur.execute(sql, (user_id, ))
+        for suggestee_id, feedback in cur:
+            suggestee_id = int(suggestee_id)
+            feedback = 1 if feedback == kLIKE else -1
+            if suggestee_id not in interest:
+                interest[suggestee_id] = feedback
+            else:
+                interest[suggestee_id] += feedback
+
     if len(interest) < kColdStartThreshold:
         suggestees_shuffled = list(suggestees)
         shuffle(suggestees_shuffled)
