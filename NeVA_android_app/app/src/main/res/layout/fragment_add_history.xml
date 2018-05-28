@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mealrecommender.neva.com.neva_android_app.AddHistoryItemFragment"
+    tools:context="mealrecommender.neva.com.neva_android_app.fragments.AddHistoryItemFragment"
     android:theme="@style/AppTheme"
     android:background="@color/backgroundWhite">
 

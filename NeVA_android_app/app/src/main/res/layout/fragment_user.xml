@@ -3,7 +3,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  tools:context="mealrecommender.neva.com.neva_android_app.UserFragment">
+  tools:context="mealrecommender.neva.com.neva_android_app.fragments.UserFragment">
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

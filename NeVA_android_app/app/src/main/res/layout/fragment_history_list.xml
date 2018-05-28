@@ -20,7 +20,7 @@
 
     <ListView
     android:id="@android:id/list"
-    android:name="mealrecommender.neva.com.neva_android_app.HistoryFragment"
+    android:name="mealrecommender.neva.com.neva_android_app.fragments.HistoryFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
@@ -28,7 +28,7 @@
     android:divider="@color/textHintColor"
     android:dividerHeight="0.2dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="mealrecommender.neva.com.neva_android_app.HistoryFragment"
+    tools:context="mealrecommender.neva.com.neva_android_app.fragments.HistoryFragment"
     tools:listitem="@layout/fragment_history" >
     </ListView>
 

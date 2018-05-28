@@ -13,9 +13,9 @@ import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import com.facebook.AccessToken;
-import mealrecommender.neva.com.neva_android_app.LoginActivity;
-import mealrecommender.neva.com.neva_android_app.NevaLoginManager;
-import mealrecommender.neva.com.neva_android_app.RegisterActivity;
+import mealrecommender.neva.com.neva_android_app.activities.LoginActivity;
+import mealrecommender.neva.com.neva_android_app.util.NevaLoginManager;
+import mealrecommender.neva.com.neva_android_app.activities.RegisterActivity;
 import neva.backend.BackendOuterClass.LoginRequest.AuthenticationType;
 
 /**

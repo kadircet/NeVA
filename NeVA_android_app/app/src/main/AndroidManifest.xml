@@ -29,7 +29,7 @@
       android:value="@string/facebook_app_id"/>
 
     <activity
-      android:name=".LoginActivity"
+      android:name=".activities.LoginActivity"
       android:theme="@style/AppTheme">
     </activity>
     <activity
@@ -49,12 +49,12 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".RegisterActivity"
-      android:parentActivityName=".LoginActivity"
+      android:name=".activities.RegisterActivity"
+      android:parentActivityName=".activities.LoginActivity"
       android:theme="@style/AppTheme"/>
     <activity
       android:label="@string/title_activity_main"
-      android:name=".MainActivity"
+      android:name=".activities.MainActivity"
       android:theme="@style/AppTheme.NoActionBar"/>
 
     <service android:name=".authenticator.NevaAuthenticatorService">
@@ -68,7 +68,7 @@
     </service>
 
     <activity
-      android:name=".SplashScreen"
+      android:name=".activities.SplashScreen"
       android:theme="@style/Splash_Screen">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -78,7 +78,7 @@
     </activity>
     <activity
       android:label="@string/title_activity_cold_start"
-      android:name=".ColdStartActivity"
+      android:name=".activities.ColdStartActivity"
       android:theme="@style/AppTheme.NoActionBar">
     </activity>
   </application>
