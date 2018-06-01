@@ -104,7 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
   public void onSignupButton(View view) {
 
     if (!validate()) {
-      Toast.makeText(getBaseContext(), getResources().getString(R.string.error_fix_credentials), Toast.LENGTH_LONG).show();
       signup_button.setEnabled(true);
       return;
     }
@@ -162,6 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
   public boolean validatePassword() {
     String password = password_field.getText().toString();
     if (password.isEmpty()) {
+      Toast.makeText(this, getResources().getString(R.string.error_fix_credentials), Toast.LENGTH_LONG).show();
       return false;
     } else {
       password_field.setError(null);
