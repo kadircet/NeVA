@@ -12,7 +12,7 @@ build_backend:
 
 test_backend:
   stage: test
-  script: "bazel test --config=kcov ..."
+  script: "bazel test ..."
   after_script: 
    - "/bin/bash coverage_report.sh" 
    - "mv bazel-kcov/ public/"
