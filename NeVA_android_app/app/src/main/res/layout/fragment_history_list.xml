@@ -18,7 +18,7 @@
       />
 
 
-    <android.support.v7.widget.ListViewCompat
+    <android.support.v4.widget.ListViewCompat
 
     android:id="@android:id/list"
     android:name="mealrecommender.neva.com.neva_android_app.HistoryFragment"
@@ -30,10 +30,7 @@
     android:dividerHeight="0.2dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="mealrecommender.neva.com.neva_android_app.HistoryFragment"
-    tools:listitem="@layout/fragment_history" >
-
-
-</android.support.v7.widget.ListViewCompat>
+    tools:listitem="@layout/fragment_history" />
 
   <android.support.design.widget.FloatingActionButton
     android:id="@+id/fab"
