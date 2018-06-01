@@ -102,7 +102,7 @@ public class ProposeFragment extends Fragment {
     mealAutoCompleteAdapter = new IgnoreAccentsArrayAdapter(getContext(),  R.layout.textview_autocomplete_item, mealNames);
     meal_for_tag_field.setAdapter(mealAutoCompleteAdapter);
 
-    tagAutoCompleteAdapter = new IgnoreAccentsArrayAdapter(getContext(),  R.layout.textview_autocomplete_item, mealNames);
+    tagAutoCompleteAdapter = new IgnoreAccentsArrayAdapter(getContext(),  R.layout.textview_autocomplete_item, tagNames);
     tag_of_meal_field.setAdapter(tagAutoCompleteAdapter);
 
     return view;
