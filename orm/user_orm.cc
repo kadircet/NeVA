@@ -337,7 +337,7 @@ Status UserOrm::UserNeedsUpdate(const uint32_t user_id) {
   mysqlpp::ScopedConnection conn(*conn_pool_);
   mysqlpp::Query query = conn->query();
   query << "INSERT INTO `user_needs_update` (`user_id`, `needs_update`) VALUES "
-           "(%0, 1) ON DUPLICATE UPDATE `needs_update`=1";
+           "(%0, 1) ON DUPLICATE KEY UPDATE `needs_update`=1";
   query.parse();
 
   if (!query.execute(user_id)) {
